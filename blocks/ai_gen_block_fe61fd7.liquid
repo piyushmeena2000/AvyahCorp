@@ -141,14 +141,16 @@
   .ai-product-card-{{ ai_gen_id }} {
     flex: 0 0 calc((100% - ({{ block.settings.desktop_cards_visible | minus: 1 }} * {{ block.settings.card_gap }}px)) / {{ block.settings.desktop_cards_visible }});
     max-width: {{ block.settings.desktop_card_max_width }}px;
-    background-color: transparent;
-    border-radius: 0px;
-    box-shadow: none;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     overflow: visible;
     position: relative;
-    padding-bottom: 10px;
+    padding: 16px;
     margin-bottom: 30px;
     transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
   }
 
   .ai-product-card-image-{{ ai_gen_id }} {
@@ -192,6 +194,9 @@
   .ai-product-card-content-{{ ai_gen_id }} {
     padding: 12px 0 0;
     text-align: left;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   .ai-product-card-reviews-{{ ai_gen_id }} {
@@ -199,9 +204,6 @@
     align-items: center;
     gap: 4px;
     margin-bottom: 6px;
-    font-size: 13px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
   }
 
   .ai-product-card-reviews-{{ ai_gen_id }} .stars {
@@ -217,7 +219,7 @@
   .ai-product-card-title-{{ ai_gen_id }} {
     font-size: 16px;
     font-weight: 700;
-    color: {{ block.settings.title_color }};
+    color: #000000 !important;
     margin: 0 0 4px;
     line-height: 1.3;
     min-height: calc(16px * 1.3 * 2);
@@ -229,15 +231,25 @@
     text-align: left;
   }
 
+  .ai-product-card-title-{{ ai_gen_id }} a {
+    color: #000000 !important;
+    text-decoration: none;
+  }
+
+  .ai-product-card-title-{{ ai_gen_id }} a:hover {
+    color: #d52528 !important;
+  }
+
   .ai-product-card-specs-{{ ai_gen_id }} {
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.7);
-    margin: 0 0 12px;
+    color: #555555 !important;
+    margin: 12px 0 12px;
     font-family: 'Inter', sans-serif;
     text-align: left;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-top: auto;
   }
 
   .ai-product-card-button-{{ ai_gen_id }} {
@@ -360,7 +372,13 @@
     .ai-product-card-{{ ai_gen_id }} {
       flex: 0 0 75%;
       max-width: none;
+      background-color: #ffffff;
+      border-radius: 16px;
+      padding: 12px;
       margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
     }
 
     .ai-product-slider-dots-{{ ai_gen_id }} {
