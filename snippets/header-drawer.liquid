@@ -103,7 +103,7 @@
             {% assign animation_index = 0 %}
             {%- for link in linklist.links -%}
               {% assign downcased_title = link.title | downcase %}
-              {% if downcased_title contains 'store locator' or downcased_title contains 'bulk order' %}
+              {% if downcased_title contains 'store' or downcased_title contains 'locator' or downcased_title contains 'bulk' %}
                 {% continue %}
               {% endif %}
               {% assign animation_index = animation_index | plus: 1 %}
@@ -253,7 +253,7 @@
             {% assign animation_index = 0 %}
             {%- for link in linklist.links -%}
               {% assign downcased_title = link.title | downcase %}
-              {% if downcased_title contains 'store locator' or downcased_title contains 'bulk order' %}
+              {% if downcased_title contains 'store' or downcased_title contains 'locator' or downcased_title contains 'bulk' %}
                 {% continue %}
               {% endif %}
               {% assign animation_index = animation_index | plus: 1 %}

@@ -56,7 +56,7 @@
           <ul class="list-unstyled">
             {% for link in menu.links %}
               {% assign downcased_title = link.title | downcase %}
-              {% if downcased_title contains 'store locator' or downcased_title contains 'bulk order' %}
+              {% if downcased_title contains 'store' or downcased_title contains 'locator' or downcased_title contains 'bulk' %}
                 {% continue %}
               {% endif %}
               <li class="menu__item {{ block_settings.link_preset }}">
