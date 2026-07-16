@@ -160,7 +160,7 @@ export class OverflowList extends DeclarativeShadowElement {
     this.addEventListener(
       'reflow',
       /** @param {ReflowEvent} event */ (event) => {
-        this.#reflowItems(event.detail.lastVisibleElement);
+        this.#reflowItems(event.detail?.lastVisibleElement);
       }
     );
 
@@ -422,6 +422,23 @@ export class OverflowList extends DeclarativeShadowElement {
 if (!customElements.get('overflow-list')) {
   customElements.define('overflow-list', OverflowList);
 }
+
+// Ensure overflow lists reflow correctly on page restore (bfcache) or when dialogs/drawers close
+window.addEventListener('pageshow', (event) => {
+  setTimeout(() => {
+    document.querySelectorAll('overflow-list').forEach((el) => {
+      el.dispatchEvent(new CustomEvent('reflow'));
+    });
+  }, 100);
+});
+
+document.addEventListener('dialog:close', () => {
+  setTimeout(() => {
+    document.querySelectorAll('overflow-list').forEach((el) => {
+      el.dispatchEvent(new CustomEvent('reflow'));
+    });
+  }, 150); // allow body style scroll reset to finish
+});
 
 // Function to calculate total height of header group children
 export function calculateHeaderGroupHeight(
