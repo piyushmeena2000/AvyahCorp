@@ -236,10 +236,11 @@ export class OverflowList extends DeclarativeShadowElement {
 
     this.#scheduled = true;
 
-    this.schedule(() => {
+    // Use a timeout to allow layout shifts and body position modifications to fully settle
+    setTimeout(() => {
       this.#reflowItems();
       this.#scheduled = false;
-    });
+    }, 100);
   };
 
   /**
@@ -423,7 +424,7 @@ if (!customElements.get('overflow-list')) {
   customElements.define('overflow-list', OverflowList);
 }
 
-// Ensure overflow lists reflow correctly on page restore (bfcache) or when dialogs/drawers close
+// Ensure overflow lists reflow correctly on page restore (bfcache) or when dialogs/drawers open/close
 window.addEventListener('pageshow', (event) => {
   setTimeout(() => {
     document.querySelectorAll('overflow-list').forEach((el) => {
@@ -432,12 +433,20 @@ window.addEventListener('pageshow', (event) => {
   }, 100);
 });
 
+document.addEventListener('dialog:open', () => {
+  setTimeout(() => {
+    document.querySelectorAll('overflow-list').forEach((el) => {
+      el.dispatchEvent(new CustomEvent('reflow'));
+    });
+  }, 200);
+});
+
 document.addEventListener('dialog:close', () => {
   setTimeout(() => {
     document.querySelectorAll('overflow-list').forEach((el) => {
       el.dispatchEvent(new CustomEvent('reflow'));
     });
-  }, 150); // allow body style scroll reset to finish
+  }, 200); // allow body style scroll reset to finish
 });
 
 // Function to calculate total height of header group children
