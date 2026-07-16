@@ -141,40 +141,47 @@
   .ai-product-card-{{ ai_gen_id }} {
     flex: 0 0 calc((100% - ({{ block.settings.desktop_cards_visible | minus: 1 }} * {{ block.settings.card_gap }}px)) / {{ block.settings.desktop_cards_visible }});
     max-width: {{ block.settings.desktop_card_max_width }}px;
-    background-color: {{ block.settings.card_background }};
-    border-radius: {{ block.settings.card_border_radius }}px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    background-color: transparent;
+    border-radius: 0px;
+    box-shadow: none;
     overflow: visible;
     position: relative;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
     margin-bottom: 30px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
   }
 
   .ai-product-card-{{ ai_gen_id }}:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-    z-index: 5;
+    transform: translateY(-6px);
   }
 
   .ai-product-card-image-{{ ai_gen_id }} {
     width: 100%;
-    padding: {{ block.settings.image_padding }}px;
-    padding-bottom: 0;
+    display: block;
+    text-decoration: none;
   }
 
   .ai-product-card-image-wrapper-{{ ai_gen_id }} {
     width: 100%;
-    aspect-ratio: {{ block.settings.desktop_image_ratio }};
+    aspect-ratio: 1 / 1 !important;
     overflow: hidden;
-    border-radius: {{ block.settings.card_border_radius | divided_by: 2 }}px;
-    background: #f4f4f4;
+    border-radius: {{ block.settings.card_border_radius }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .ai-product-card-image-wrapper-{{ ai_gen_id }}:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   }
 
   .ai-product-card-image-{{ ai_gen_id }} img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    transition: transform 0.3s ease;
   }
 
   .ai-product-card-image-placeholder-{{ ai_gen_id }} {
@@ -191,95 +198,89 @@
   }
 
   .ai-product-card-content-{{ ai_gen_id }} {
-    padding: {{ block.settings.content_padding }}px;
-    padding-bottom: 0;
+    padding: 12px 0 0;
+    text-align: left;
+  }
+
+  .ai-product-card-reviews-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+
+  .ai-product-card-reviews-{{ ai_gen_id }} .stars {
+    color: #D52528;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-product-card-reviews-{{ ai_gen_id }} .count {
+    color: #555555;
+    font-size: 12px;
   }
 
   .ai-product-card-title-{{ ai_gen_id }} {
-    font-size: {{ block.settings.title_font_size }}px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 700;
     color: {{ block.settings.title_color }};
-    margin: 0 0 {{ block.settings.title_spacing }}px;
+    margin: 0 0 4px;
     line-height: 1.3;
-    min-height: calc({{ block.settings.title_font_size }}px * 1.3 * 2);
+    min-height: calc(16px * 1.3 * 2);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    text-align: left;
   }
 
-  .ai-product-card-price-wrapper-{{ ai_gen_id }} {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: {{ block.settings.price_spacing }}px;
-    flex-wrap: wrap;
-  }
-
-  .ai-product-card-prices-{{ ai_gen_id }} {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .ai-product-card-price-original-{{ ai_gen_id }} {
-    font-size: {{ block.settings.price_font_size | times: 0.85 }}px;
-    color: {{ block.settings.price_color }};
-    text-decoration: line-through;
-    opacity: 0.6;
-  }
-
-  .ai-product-card-price-sale-{{ ai_gen_id }} {
-    font-size: {{ block.settings.price_font_size }}px;
-    font-weight: 700;
-    color: {{ block.settings.price_color }};
-  }
-
-  .ai-product-card-price-regular-{{ ai_gen_id }} {
-    font-size: {{ block.settings.price_font_size }}px;
-    font-weight: 700;
-    color: {{ block.settings.price_color }};
-  }
-
-  .ai-product-card-badge-{{ ai_gen_id }} {
-    background-color: {{ block.settings.badge_background }};
-    color: {{ block.settings.badge_text_color }};
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: {{ block.settings.badge_font_size }}px;
-    font-weight: 600;
+  .ai-product-card-specs-{{ ai_gen_id }} {
+    font-size: 12px;
+    color: #777777;
+    margin: 0 0 12px;
+    font-family: 'Inter', sans-serif;
+    text-align: left;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .ai-product-card-button-{{ ai_gen_id }} {
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
+    display: block;
+    width: 100%;
     background-color: {{ block.settings.button_background }};
     color: {{ block.settings.button_text_color }};
-    padding: 12px 28px;
+    padding: 12px 20px;
     border-radius: 50px;
-    font-size: {{ block.settings.button_font_size }}px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 400;
     text-decoration: none;
     border: none;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
-    white-space: nowrap;
-    z-index: 10;
+    text-align: center;
+    font-family: 'anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   .ai-product-card-button-{{ ai_gen_id }}:hover {
     background-color: {{ block.settings.button_hover_background }};
-    transform: translateX(-50%) translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
   }
 
   .ai-product-card-button-{{ ai_gen_id }}:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
   }
 
   .ai-product-slider-dots-{{ ai_gen_id }} {
@@ -355,10 +356,6 @@
       margin: 0 auto 25px;
     }
 
-    .ai-product-card-image-wrapper-{{ ai_gen_id }} {
-      aspect-ratio: {{ block.settings.mobile_image_ratio }};
-    }
-
     .ai-product-card-{{ ai_gen_id }}:nth-child(n+{{ block.settings.mobile_initial_products | plus: 1 }}) {
       display: none;
     }
@@ -379,15 +376,6 @@
       font-size: {{ block.settings.title_font_size | times: 0.9 }}px;
     }
 
-    .ai-product-card-price-sale-{{ ai_gen_id }},
-    .ai-product-card-price-regular-{{ ai_gen_id }} {
-      font-size: {{ block.settings.price_font_size | times: 0.9 }}px;
-    }
-
-    .ai-product-card-price-original-{{ ai_gen_id }} {
-      font-size: {{ block.settings.price_font_size | times: 0.75 }}px;
-    }
-
     .ai-product-card-button-{{ ai_gen_id }} {
       font-size: {{ block.settings.button_font_size | times: 0.9 }}px;
       padding: 10px 24px;
@@ -400,9 +388,12 @@
     <div class="ai-product-slider-track-{{ ai_gen_id }}" data-track>
       {% if block.settings.product_list != blank %}
         {% for product in block.settings.product_list %}
+          {% assign colors = "#d1ebd8,#fedeb2,#f7f4ea,#fef0b3,#d8f3f5" | split: "," %}
+          {% assign color_index = forloop.index0 | modulo: 5 %}
+          {% assign card_bg_color = colors[color_index] %}
           <div class="ai-product-card-{{ ai_gen_id }}">
             <a href="{{ product.url }}" class="ai-product-card-image-{{ ai_gen_id }}">
-              <div class="ai-product-card-image-wrapper-{{ ai_gen_id }}">
+              <div class="ai-product-card-image-wrapper-{{ ai_gen_id }}" style="background-color: {{ card_bg_color }};">
                 {% if product.featured_image %}
                   <img
                     src="{{ product.featured_image | image_url: width: 600 }}"
@@ -419,21 +410,27 @@
               </div>
             </a>
             <div class="ai-product-card-content-{{ ai_gen_id }}">
-              <h3 class="ai-product-card-title-{{ ai_gen_id }}">{{ product.title }}</h3>
-              <div class="ai-product-card-price-wrapper-{{ ai_gen_id }}">
-                <div class="ai-product-card-prices-{{ ai_gen_id }}">
-                  {% if product.compare_at_price > product.price %}
-                    <span class="ai-product-card-price-original-{{ ai_gen_id }}">{{ product.compare_at_price | money }}</span>
-                    <span class="ai-product-card-price-sale-{{ ai_gen_id }}">{{ product.price | money }}</span>
-                  {% else %}
-                    <span class="ai-product-card-price-regular-{{ ai_gen_id }}">{{ product.price | money }}</span>
-                  {% endif %}
-                </div>
-                {% if product.compare_at_price > product.price %}
-                  {% assign discount_percentage = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
-                  <span class="ai-product-card-badge-{{ ai_gen_id }}">{{ discount_percentage }}% OFF</span>
-                {% endif %}
+              <div class="ai-product-card-reviews-{{ ai_gen_id }}">
+                <span class="stars">★★★★★</span>
+                <span class="count">
+                  {% assign ratings = "14,61,2172,934,85" | split: "," %}
+                  {% assign rating_index = forloop.index0 | modulo: 5 %}
+                  ({{ ratings[rating_index] }})
+                </span>
               </div>
+              <h3 class="ai-product-card-title-{{ ai_gen_id }}">
+                <a href="{{ product.url }}">{{ product.title }}</a>
+              </h3>
+              {% assign specs = "Full Size • 20g Protein* • 7 Bars" %}
+              {% assign downcased_title = product.title | downcase %}
+              {% if downcased_title contains 'taakat' or downcased_title contains 'perfect' %}
+                {% assign specs = "Full Size • 20g Protein* • 7 Bars" %}
+              {% elsif downcased_title contains 'mast' or downcased_title contains 'minis' %}
+                {% assign specs = "Full Size • 15g Protein* • 8 Bars" %}
+              {% elsif downcased_title contains 'variety' or downcased_title contains 'pack' or downcased_title contains 'king' %}
+                {% assign specs = "Full Size • 17g Protein* • 8 Bars" %}
+              {% endif %}
+              <p class="ai-product-card-specs-{{ ai_gen_id }}">{{ specs }}</p>
             </div>
             <button
               class="ai-product-card-button-{{ ai_gen_id }}"
@@ -442,7 +439,7 @@
               {% unless product.available %}disabled{% endunless %}
             >
               {% if product.available %}
-                {{ block.settings.button_text }}
+                {{ block.settings.button_text }} - {{ product.price | money }}
               {% else %}
                 Sold Out
               {% endif %}
@@ -451,26 +448,27 @@
         {% endfor %}
       {% else %}
         {% for i in (1..8) %}
+          {% assign colors = "#d1ebd8,#fedeb2,#f7f4ea,#fef0b3,#d8f3f5" | split: "," %}
+          {% assign color_index = forloop.index0 | modulo: 5 %}
+          {% assign card_bg_color = colors[color_index] %}
           <div class="ai-product-card-{{ ai_gen_id }}">
             <div class="ai-product-card-image-{{ ai_gen_id }}">
-              <div class="ai-product-card-image-wrapper-{{ ai_gen_id }}">
+              <div class="ai-product-card-image-wrapper-{{ ai_gen_id }}" style="background-color: {{ card_bg_color }};">
                 <div class="ai-product-card-image-placeholder-{{ ai_gen_id }}">
                   {{ 'product-1' | placeholder_svg_tag }}
                 </div>
               </div>
             </div>
             <div class="ai-product-card-content-{{ ai_gen_id }}">
-              <h3 class="ai-product-card-title-{{ ai_gen_id }}">Sample Product Title</h3>
-              <div class="ai-product-card-price-wrapper-{{ ai_gen_id }}">
-                <div class="ai-product-card-prices-{{ ai_gen_id }}">
-                  <span class="ai-product-card-price-original-{{ ai_gen_id }}">₹999</span>
-                  <span class="ai-product-card-price-sale-{{ ai_gen_id }}">₹699</span>
-                </div>
-                <span class="ai-product-card-badge-{{ ai_gen_id }}">30% OFF</span>
+              <div class="ai-product-card-reviews-{{ ai_gen_id }}">
+                <span class="stars">★★★★★</span>
+                <span class="count">({{ i | times: 17 | plus: 8 }})</span>
               </div>
+              <h3 class="ai-product-card-title-{{ ai_gen_id }}">Sample Product Title</h3>
+              <p class="ai-product-card-specs-{{ ai_gen_id }}">Full Size • 20g Protein* • 7 Bars</p>
             </div>
             <button class="ai-product-card-button-{{ ai_gen_id }}">
-              {{ block.settings.button_text }}
+              {{ block.settings.button_text }} - ₹699
             </button>
           </div>
         {% endfor %}
