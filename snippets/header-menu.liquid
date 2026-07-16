@@ -25,6 +25,10 @@
 
 {% capture children %}
   {% for link in block_settings.menu.links %}
+    {% assign downcased_title = link.title | downcase %}
+    {% if downcased_title contains 'store locator' or downcased_title contains 'bulk order' %}
+      {% continue %}
+    {% endif %}
     <li
       role="presentation"
       class="menu-list__list-item"
