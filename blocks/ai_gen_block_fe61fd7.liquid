@@ -286,7 +286,7 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(0, 0, 0, 0.2);
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -294,7 +294,7 @@
   }
 
   .ai-product-slider-dot-{{ ai_gen_id }}.active {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: #000000;
     width: 24px;
     border-radius: 4px;
   }
@@ -338,49 +338,38 @@
 
   @media screen and (max-width: 749px) {
     .ai-product-slider-container-{{ ai_gen_id }} {
-      padding: 30px 0 15px;
+      padding: 0 0 15px;
     }
 
     .ai-product-slider-heading-{{ ai_gen_id }} {
-      font-size: 40px;
-      margin: 20px auto 30px;
+      font-size: 48px;
+      margin: 20px auto 20px;
       letter-spacing: -1px;
       line-height: 0.95;
     }
 
     .ai-product-slider-track-{{ ai_gen_id }} {
-      display: grid;
-      {% if block.settings.mobile_columns == '1' %}
-        grid-template-columns: 1fr;
-      {% else %}
-        grid-template-columns: repeat(2, 1fr);
-      {% endif %}
+      display: flex;
+      flex-wrap: nowrap;
       gap: {{ block.settings.card_gap | times: 0.7 }}px;
       padding: 0 15px;
-      cursor: default;
+      cursor: grab;
+      transition: transform 0.3s ease;
     }
 
     .ai-product-card-{{ ai_gen_id }} {
-      flex: none;
-      width: 100%;
-      max-width: {{ block.settings.mobile_card_max_width }}px;
-      margin: 0 auto 25px;
-    }
-
-    .ai-product-card-{{ ai_gen_id }}:nth-child(n+{{ block.settings.mobile_initial_products | plus: 1 }}) {
-      display: none;
-    }
-
-    .ai-product-card-{{ ai_gen_id }}.show-more {
-      display: block;
+      flex: 0 0 75%;
+      max-width: none;
+      margin-bottom: 15px;
     }
 
     .ai-product-slider-dots-{{ ai_gen_id }} {
-      display: none;
+      display: flex;
+      margin-top: 20px;
     }
 
     .ai-product-slider-mobile-more-{{ ai_gen_id }} {
-      display: block;
+      display: none !important;
     }
 
     .ai-product-card-title-{{ ai_gen_id }} {
@@ -514,27 +503,25 @@
         this.currentTranslate = 0;
         this.prevTranslate = 0;
         this.currentIndex = 0;
-        this.cardsVisible = {{ block.settings.desktop_cards_visible }};
         this.totalCards = this.cards.length;
-        this.maxIndex = Math.max(0, this.totalCards - this.cardsVisible);
       }
 
       connectedCallback() {
-        if (window.innerWidth > 749) {
-          this.initDesktopSlider();
-        } else {
-          this.initMobileView();
-        }
-
+        this.updateSliderSettings();
+        this.initSlider();
         this.initAddToCart();
 
         window.addEventListener('resize', () => {
-          if (window.innerWidth > 749) {
-            this.initDesktopSlider();
-          } else {
-            this.initMobileView();
-          }
+          this.updateSliderSettings();
+          this.setPositionByIndex();
+          this.createDots();
         });
+      }
+
+      updateSliderSettings() {
+        this.cardsVisible = window.innerWidth > 749 ? {{ block.settings.desktop_cards_visible }} : 1.33;
+        this.maxIndex = Math.max(0, this.totalCards - Math.ceil(this.cardsVisible));
+        this.currentIndex = Math.min(this.currentIndex, this.maxIndex);
       }
 
       initAddToCart() {
@@ -616,34 +603,23 @@
         });
       }
 
-      initDesktopSlider() {
+      initSlider() {
         if (!this.track) return;
 
         this.track.addEventListener('mousedown', this.dragStart.bind(this));
-        this.track.addEventListener('touchstart', this.dragStart.bind(this));
+        this.track.addEventListener('touchstart', this.dragStart.bind(this), { passive: true });
         this.track.addEventListener('mouseup', this.dragEnd.bind(this));
         this.track.addEventListener('touchend', this.dragEnd.bind(this));
         this.track.addEventListener('mousemove', this.drag.bind(this));
-        this.track.addEventListener('touchmove', this.drag.bind(this));
+        this.track.addEventListener('touchmove', this.drag.bind(this), { passive: false });
         this.track.addEventListener('mouseleave', this.dragEnd.bind(this));
 
-        if (this.dotsContainer && {{ block.settings.show_dots | json }}) {
-          this.createDots();
-        }
-      }
-
-      initMobileView() {
-        if (!this.moreButton) return;
-
-        this.moreButton.addEventListener('click', () => {
-          this.cards.forEach(card => {
-            card.classList.add('show-more');
-          });
-          this.moreButton.style.display = 'none';
-        });
+        this.createDots();
+        this.setPositionByIndex();
       }
 
       createDots() {
+        if (!this.dotsContainer) return;
         this.dotsContainer.innerHTML = '';
         const dotsCount = this.maxIndex + 1;
 
@@ -686,9 +662,14 @@
 
       drag(event) {
         if (!this.isDragging) return;
-        event.preventDefault();
+        
+        if (event.type.includes('touch')) {
+          event.preventDefault();
+        }
+        
         const currentPosition = this.getPositionX(event);
         this.currentTranslate = this.prevTranslate + currentPosition - this.startPos;
+        this.track.style.transform = `translateX(${this.currentTranslate}px)`;
       }
 
       dragEnd() {
@@ -697,13 +678,11 @@
         this.track.classList.remove('dragging');
 
         const movedBy = this.currentTranslate - this.prevTranslate;
-        const cardWidth = this.track.offsetWidth / this.cardsVisible;
+        const cardWidth = this.cards[0] ? this.cards[0].offsetWidth : (this.track.offsetWidth / this.cardsVisible);
 
-        if (movedBy < -cardWidth / 3 && this.currentIndex < this.maxIndex) {
+        if (movedBy < -cardWidth / 5 && this.currentIndex < this.maxIndex) {
           this.currentIndex += 1;
-        }
-
-        if (movedBy > cardWidth / 3 && this.currentIndex > 0) {
+        } else if (movedBy > cardWidth / 5 && this.currentIndex > 0) {
           this.currentIndex -= 1;
         }
 
@@ -716,8 +695,9 @@
       }
 
       setPositionByIndex() {
-        const cardWidth = this.track.offsetWidth / this.cardsVisible;
-        const gap = {{ block.settings.card_gap }};
+        if (!this.track) return;
+        const cardWidth = this.cards[0] ? this.cards[0].offsetWidth : (this.track.offsetWidth / this.cardsVisible);
+        const gap = window.innerWidth > 749 ? {{ block.settings.card_gap }} : {{ block.settings.card_gap | times: 0.7 }};
         this.currentTranslate = -(this.currentIndex * (cardWidth + gap));
         this.prevTranslate = this.currentTranslate;
         this.track.style.transform = `translateX(${this.currentTranslate}px)`;
