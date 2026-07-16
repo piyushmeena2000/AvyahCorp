@@ -324,9 +324,25 @@
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   }
 
+  .ai-product-slider-heading-{{ ai_gen_id }} {
+    font-family: 'anton', sans-serif;
+    font-size: 48px;
+    font-weight: 400;
+    color: #d52528;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0 auto 30px;
+    letter-spacing: 0.5px;
+  }
+
   @media screen and (max-width: 749px) {
     .ai-product-slider-container-{{ ai_gen_id }} {
       padding: 15px 0 15px;
+    }
+
+    .ai-product-slider-heading-{{ ai_gen_id }} {
+      font-size: 32px;
+      margin-bottom: 20px;
     }
 
     .ai-product-slider-track-{{ ai_gen_id }} {
@@ -377,6 +393,7 @@
 
 <product-slider-{{ ai_gen_id }} class="ai-product-slider-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
   <div class="ai-product-slider-container-{{ ai_gen_id }}">
+    <h2 class="ai-product-slider-heading-{{ ai_gen_id }}">BEST SELLER</h2>
     <div class="ai-product-slider-track-{{ ai_gen_id }}" data-track>
       {% if block.settings.product_list != blank %}
         {% for product in block.settings.product_list %}
