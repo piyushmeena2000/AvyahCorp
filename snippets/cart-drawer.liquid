@@ -45,6 +45,9 @@
       >
         {%- if cart.empty? -%}
           <div class="cart-drawer__header">
+            <h2 class="cart-drawer__heading h3" id="cart-drawer-heading-empty">
+              Your Cart (0)
+            </h2>
             <button
               ref="closeButton"
               on:click="cart-drawer-component/close"
@@ -61,15 +64,42 @@
             class="cart-drawer__content motion-reduce"
             aria-label="{{ 'accessibility.cart' | t }}"
           >
-            <h2
-              class="cart-drawer__heading h3 cart-drawer__heading--empty"
-              id="cart-drawer-heading-empty"
-            >
-              {{ 'content.your_cart_is_empty' | t }}
-            </h2>
-
-            <div class="cart-drawer__items">
-              {% render 'cart-products' %}
+            <div class="empty-cart-custom">
+              <h3 class="empty-cart-custom__title">An Empty Cart<br>Full Of Cravings</h3>
+              
+              <div class="empty-cart-custom__grid">
+                <a href="/collections/perfect-bars" class="empty-cart-custom__item">
+                  <div class="empty-cart-custom__image-wrapper">
+                    <img src="{{ 'cart_perfect_bars.png' | asset_url }}" alt="Perfect Bars" loading="lazy">
+                  </div>
+                  <span class="empty-cart-custom__item-title">PERFECT BARS</span>
+                </a>
+                
+                <a href="/collections/minis" class="empty-cart-custom__item">
+                  <div class="empty-cart-custom__image-wrapper">
+                    <img src="{{ 'cart_minis.png' | asset_url }}" alt="Minis" loading="lazy">
+                  </div>
+                  <span class="empty-cart-custom__item-title">MINIS</span>
+                </a>
+                
+                <a href="/collections/variety-pack" class="empty-cart-custom__item">
+                  <div class="empty-cart-custom__image-wrapper">
+                    <img src="{{ 'cart_variety_pack.png' | asset_url }}" alt="Variety Pack" loading="lazy">
+                  </div>
+                  <span class="empty-cart-custom__item-title">VARIETY PACK</span>
+                </a>
+                
+                <a href="/collections/build-a-bundle" class="empty-cart-custom__item">
+                  <div class="empty-cart-custom__image-wrapper">
+                    <img src="{{ 'cart_build_a_bundle.png' | asset_url }}" alt="Build A Bundle" loading="lazy">
+                  </div>
+                  <span class="empty-cart-custom__item-title">BUILD A BUNDLE</span>
+                </a>
+              </div>
+              
+              <a href="{{ routes.all_products_collection_url }}" class="empty-cart-custom__shop-all-btn button">
+                SHOP ALL
+              </a>
             </div>
           </div>
         {%- else -%}
@@ -159,6 +189,115 @@
 
   .cart-drawer__dialog {
     overflow: hidden;
+  }
+
+  .cart-drawer__dialog.cart-drawer__dialog {
+    --color-background: #ffffff;
+    --color-foreground: #000000;
+    --color-foreground-rgb: 0 0 0;
+    --color-heading: #000000;
+    --color-heading-rgb: 0 0 0;
+    --color-border: #e6e6e6;
+    --color-primary: #000000;
+    --color-primary-hover: #333333;
+    background-color: #ffffff;
+  }
+
+  .cart-drawer__heading.h3 {
+    font-family: var(--font-h3--family), 'Anton', sans-serif !important;
+    font-weight: 400 !important;
+    text-transform: capitalize;
+    font-size: 1.8rem;
+    color: #000000;
+  }
+
+  .empty-cart-custom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--padding-md);
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .empty-cart-custom__title {
+    font-family: var(--font-h2--family), 'Anton', sans-serif !important;
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-block: 0 var(--margin-lg);
+    color: #333333;
+    font-weight: 400 !important;
+    max-width: 90%;
+  }
+
+  .empty-cart-custom__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap-md);
+    width: 100%;
+    margin-bottom: var(--margin-xl);
+  }
+
+  .empty-cart-custom__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+  }
+
+  .empty-cart-custom__item:hover {
+    transform: scale(1.02);
+  }
+
+  .empty-cart-custom__image-wrapper {
+    width: 100%;
+    aspect-ratio: 1.2;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: var(--margin-xs);
+    background-color: #f7f7f7;
+  }
+
+  .empty-cart-custom__image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .empty-cart-custom__item-title {
+    font-family: var(--font-paragraph--family), 'Inter', sans-serif !important;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #2b2b2b;
+    text-transform: uppercase;
+  }
+
+  .empty-cart-custom__shop-all-btn.button {
+    font-family: var(--font-paragraph--family), 'Inter', sans-serif !important;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    background-color: #005a70 !important;
+    color: #ffffff !important;
+    border-radius: 50px !important;
+    width: 90% !important;
+    padding-block: var(--padding-md) !important;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    margin-inline: auto;
+    transition: background-color 0.2s ease;
+    box-shadow: none !important;
+  }
+
+  .empty-cart-custom__shop-all-btn.button:hover {
+    background-color: #004758 !important;
   }
 
   .cart-drawer__inner {
