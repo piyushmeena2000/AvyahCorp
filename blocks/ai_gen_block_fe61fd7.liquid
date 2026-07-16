@@ -542,22 +542,34 @@
             button.textContent = 'Adding...';
 
             try {
+              const cartItemsComponents = document.querySelectorAll('cart-items-component');
+              const cartItemComponentsSectionIds = [];
+              cartItemsComponents.forEach((item) => {
+                if (item instanceof HTMLElement && item.dataset.sectionId) {
+                  cartItemComponentsSectionIds.push(item.dataset.sectionId);
+                }
+              });
+
               const response = await fetch('/cart/add.js', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
+                  'Accept': 'application/json'
                 },
                 body: JSON.stringify({
                   items: [{
                     id: variantId,
                     quantity: 1
-                  }]
+                  }],
+                  sections: cartItemComponentsSectionIds.join(',')
                 })
               });
 
               if (!response.ok) {
                 throw new Error('Failed to add to cart');
               }
+
+              const responseData = await response.json();
 
               button.textContent = 'Added!';
 
@@ -566,16 +578,21 @@
                 button.disabled = false;
               }, 2000);
 
-              const cartResponse = await fetch('/cart.js');
-              const cart = await cartResponse.json();
-
-              if (window.theme && window.theme.cart) {
-                window.theme.cart.refresh();
-              }
-
-              document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
-                bubbles: true
-              }));
+              const cartEvent = new CustomEvent('cart:update', {
+                bubbles: true,
+                detail: {
+                  resource: responseData,
+                  sourceId: variantId,
+                  data: {
+                    source: 'product-form-component',
+                    itemCount: 1,
+                    productId: button.dataset.productId,
+                    sections: responseData.sections,
+                  }
+                }
+              });
+              
+              document.dispatchEvent(cartEvent);
 
             } catch (error) {
               console.error('Error adding to cart:', error);

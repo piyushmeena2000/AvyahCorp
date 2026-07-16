@@ -489,23 +489,48 @@
             button.disabled = true;
 
             try {
+              const cartItemsComponents = document.querySelectorAll('cart-items-component');
+              const cartItemComponentsSectionIds = [];
+              cartItemsComponents.forEach((item) => {
+                if (item instanceof HTMLElement && item.dataset.sectionId) {
+                  cartItemComponentsSectionIds.push(item.dataset.sectionId);
+                }
+              });
+
               const response = await fetch('/cart/add.js', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
+                  'Accept': 'application/json'
                 },
                 body: JSON.stringify({
                   items: [{
                     id: variantId,
                     quantity: 1
-                  }]
+                  }],
+                  sections: cartItemComponentsSectionIds.join(',')
                 })
               });
 
               if (response.ok) {
+                const responseData = await response.json();
                 button.textContent = 'Added!';
                 
-                document.dispatchEvent(new CustomEvent('cart:refresh'));
+                const cartEvent = new CustomEvent('cart:update', {
+                  bubbles: true,
+                  detail: {
+                    resource: responseData,
+                    sourceId: variantId,
+                    data: {
+                      source: 'product-form-component',
+                      itemCount: 1,
+                      productId: button.dataset.productId,
+                      sections: responseData.sections,
+                    }
+                  }
+                });
+                
+                document.dispatchEvent(cartEvent);
                 
                 setTimeout(() => {
                   button.textContent = originalText;
