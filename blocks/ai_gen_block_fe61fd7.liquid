@@ -121,7 +121,7 @@
     width: 100%;
     overflow: hidden;
     position: relative;
-    padding: 20px 0 20px;
+    padding: 0 0 20px;
   }
 
   .ai-product-slider-track-{{ ai_gen_id }} {
@@ -326,23 +326,26 @@
 
   .ai-product-slider-heading-{{ ai_gen_id }} {
     font-family: 'anton', sans-serif;
-    font-size: 48px;
+    font-size: 120px;
     font-weight: 400;
     color: #d52528;
     text-align: center;
     text-transform: uppercase;
     margin: 0 auto 30px;
-    letter-spacing: 0.5px;
+    letter-spacing: -2px;
+    line-height: 0.9;
   }
 
   @media screen and (max-width: 749px) {
     .ai-product-slider-container-{{ ai_gen_id }} {
-      padding: 15px 0 15px;
+      padding: 0 0 15px;
     }
 
     .ai-product-slider-heading-{{ ai_gen_id }} {
-      font-size: 32px;
+      font-size: 48px;
       margin-bottom: 20px;
+      letter-spacing: -1px;
+      line-height: 0.95;
     }
 
     .ai-product-slider-track-{{ ai_gen_id }} {
