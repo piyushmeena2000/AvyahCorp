@@ -68,32 +68,25 @@
               <h3 class="empty-cart-custom__title">An Empty Cart<br>Full Of Cravings</h3>
               
               <div class="empty-cart-custom__grid">
-                <a href="/collections/perfect-bars" class="empty-cart-custom__item">
+                <a href="/collections/taakat-hunger-bar" class="empty-cart-custom__item">
                   <div class="empty-cart-custom__image-wrapper">
-                    <img src="{{ 'cart_perfect_bars.png' | asset_url }}" alt="Perfect Bars" loading="lazy">
+                    <img src="{{ 'cart_taakat_hunger_bar.png' | asset_url }}" alt="Taakat Hunger Bar" loading="lazy">
                   </div>
-                  <span class="empty-cart-custom__item-title">PERFECT BARS</span>
+                  <span class="empty-cart-custom__item-title">TAAKAT HUNGER BAR</span>
                 </a>
                 
-                <a href="/collections/minis" class="empty-cart-custom__item">
+                <a href="/collections/mast-mix" class="empty-cart-custom__item">
                   <div class="empty-cart-custom__image-wrapper">
-                    <img src="{{ 'cart_minis.png' | asset_url }}" alt="Minis" loading="lazy">
+                    <img src="{{ 'cart_mast_mix.png' | asset_url }}" alt="Mast Mix" loading="lazy">
                   </div>
-                  <span class="empty-cart-custom__item-title">MINIS</span>
+                  <span class="empty-cart-custom__item-title">MAST MIX</span>
                 </a>
                 
-                <a href="/collections/variety-pack" class="empty-cart-custom__item">
+                <a href="/collections/king" class="empty-cart-custom__item">
                   <div class="empty-cart-custom__image-wrapper">
-                    <img src="{{ 'cart_variety_pack.png' | asset_url }}" alt="Variety Pack" loading="lazy">
+                    <img src="{{ 'cart_king.png' | asset_url }}" alt="King" loading="lazy">
                   </div>
-                  <span class="empty-cart-custom__item-title">VARIETY PACK</span>
-                </a>
-                
-                <a href="/collections/build-a-bundle" class="empty-cart-custom__item">
-                  <div class="empty-cart-custom__image-wrapper">
-                    <img src="{{ 'cart_build_a_bundle.png' | asset_url }}" alt="Build A Bundle" loading="lazy">
-                  </div>
-                  <span class="empty-cart-custom__item-title">BUILD A BUNDLE</span>
+                  <span class="empty-cart-custom__item-title">KING</span>
                 </a>
               </div>
               
@@ -187,8 +180,17 @@
     }
   }
 
-  .cart-drawer__dialog {
-    overflow: hidden;
+  .cart-drawer--empty .cart-drawer__header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    border-bottom: 1px solid #e6e6e6 !important;
+    padding-bottom: var(--padding-md) !important;
+  }
+
+  .cart-drawer--empty .cart-drawer__heading {
+    text-align: left !important;
+    margin-bottom: 0 !important;
   }
 
   .cart-drawer__dialog.cart-drawer__dialog {
@@ -254,6 +256,12 @@
     transform: scale(1.02);
   }
 
+  .empty-cart-custom__item:last-child {
+    grid-column: span 2;
+    width: calc(50% - var(--gap-md) / 2);
+    margin-inline: auto;
+  }
+
   .empty-cart-custom__image-wrapper {
     width: 100%;
     aspect-ratio: 1.2;
@@ -279,11 +287,11 @@
   }
 
   .empty-cart-custom__shop-all-btn.button {
-    font-family: var(--font-paragraph--family), 'Inter', sans-serif !important;
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-family: var(--font-h2--family), 'Anton', sans-serif !important;
+    font-weight: 400 !important;
+    font-size: 1.5rem;
     letter-spacing: 0.05em;
-    background-color: #005a70 !important;
+    background-color: #d52528 !important;
     color: #ffffff !important;
     border-radius: 50px !important;
     width: 90% !important;
@@ -297,7 +305,7 @@
   }
 
   .empty-cart-custom__shop-all-btn.button:hover {
-    background-color: #004758 !important;
+    background-color: #a72023 !important;
   }
 
   .cart-drawer__inner {
