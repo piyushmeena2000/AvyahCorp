@@ -17,8 +17,9 @@ class CartDrawerComponent extends DialogComponent {
     document.removeEventListener(CartAddEvent.eventName, this.#handleCartAdd);
   }
 
-  #handleCartAdd = () => {
-    if (this.hasAttribute('auto-open')) {
+  #handleCartAdd = (event) => {
+    const comingFromProductForm = event.detail.data?.source === 'product-form-component';
+    if (comingFromProductForm || this.hasAttribute('auto-open')) {
       this.showDialog();
     }
   };
