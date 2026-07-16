@@ -1,0 +1,615 @@
+{% doc %}
+  @prompt
+    Create a modern responsive feature cards section with 4 cards in a row on desktop and stacked layout on mobile.
+    
+    Each card should include:
+    
+    A rounded square icon container at the top
+    Below it a bold heading (title)
+    Below that a short paragraph (description)
+    
+    Design requirements:
+    
+    Background color: deep crimson red
+    Card background: slightly lighter red with soft contrast
+    Cards should have rounded corners (border-radius 16px–20px)
+    Add subtle padding inside each card (24px–32px)
+    Maintain equal spacing between cards
+    Text color: off-white / cream for premium look
+    Icons should be centered and inside a soft rounded box
+    
+    Typography:
+    
+    Title: bold, large, clean (like Anton or similar)
+    Description: smaller, readable, medium weight
+    
+    Responsive behavior:
+    
+    Desktop (1200px+): 4 cards in one row
+    Tablet (768px–1199px): 2 cards per row
+    Mobile (<768px): 1 card per row
+    
+    Add customization controls:
+    
+    Control for number of cards (max 6)
+    Control icon size (desktop & mobile separately)
+    Control title font size (desktop & mobile separately)
+    Control description font size (desktop & mobile separately)
+    Control card padding (desktop & mobile)
+    Control spacing between cards
+    Control border radius
+    Control background colors (section + card)
+    Control text alignment (center/left)
+    
+    Add hover effect:
+    
+    Slight upward movement (translateY)
+    Soft shadow or glow effect
+    
+    Make sure layout uses flexbox or grid and is fully responsive without breaking., add control to select icons also, bro i want to upload a upload icon instead of this premade ones, remove the preset icon control , remove icon background i will upload the icons directly so it is not needed , give me an opacity option for the card only the text and icon should be not included , ALSO GIVE ME FONT SELECTOR FOR TITLE AND TEXT BELOW, also give me font family controller for both heading and subheadling, change the font of heading to anton bold and the below text to inter regular, remove the url error on top bro what are you doing, remove the text at the top remove every text other then the text in the card, change the font of heading to anton and inter for the bottom text other then that dont change anything
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-feature-cards-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.section_bg_color }};
+    padding: {{ block.settings.section_padding_desktop }}px 20px;
+  }
+
+  .ai-feature-cards-container-{{ ai_gen_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .ai-feature-cards-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: {{ block.settings.card_spacing }}px;
+  }
+
+  .ai-feature-card-{{ ai_gen_id }} {
+    position: relative;
+    border-radius: {{ block.settings.border_radius }}px;
+    padding: {{ block.settings.card_padding_desktop }}px;
+    text-align: {{ block.settings.text_alignment }};
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+  }
+
+  .ai-feature-card-{{ ai_gen_id }}::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: {{ block.settings.card_bg_color }};
+    opacity: {{ block.settings.card_bg_opacity | divided_by: 100.0 }};
+    border-radius: {{ block.settings.border_radius }}px;
+    z-index: 0;
+  }
+
+  .ai-feature-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-feature-card-icon-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 1;
+    width: {{ block.settings.icon_size_desktop }}px;
+    height: {{ block.settings.icon_size_desktop }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto {{ block.settings.icon_spacing }}px;
+    overflow: hidden;
+  }
+
+  .ai-feature-card-icon-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .ai-feature-card-icon-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-feature-card-icon-placeholder-{{ ai_gen_id }} svg {
+    width: 50%;
+    height: 50%;
+    opacity: 0.3;
+  }
+
+  .ai-feature-card-title-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 1;
+    font-family: 'Anton', sans-serif;
+    font-size: {{ block.settings.title_size_desktop }}px;
+    font-weight: 400;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 {{ block.settings.title_spacing }}px;
+    line-height: 1.2;
+  }
+
+  .ai-feature-card-description-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 1;
+    font-family: 'Inter', sans-serif;
+    font-size: {{ block.settings.description_size_desktop }}px;
+    font-weight: 400;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+    line-height: 1.5;
+    opacity: 0.9;
+  }
+
+  @media screen and (max-width: 1199px) {
+    .ai-feature-cards-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .ai-feature-cards-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_mobile }}px 16px;
+    }
+
+    .ai-feature-cards-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+
+    .ai-feature-card-{{ ai_gen_id }} {
+      padding: {{ block.settings.card_padding_mobile }}px;
+    }
+
+    .ai-feature-card-icon-{{ ai_gen_id }} {
+      width: {{ block.settings.icon_size_mobile }}px;
+      height: {{ block.settings.icon_size_mobile }}px;
+    }
+
+    .ai-feature-card-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size_mobile }}px;
+    }
+
+    .ai-feature-card-description-{{ ai_gen_id }} {
+      font-size: {{ block.settings.description_size_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400&display=swap" rel="stylesheet">
+
+<feature-cards-{{ ai_gen_id }} class="ai-feature-cards-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-feature-cards-container-{{ ai_gen_id }}">
+    <div class="ai-feature-cards-grid-{{ ai_gen_id }}">
+      {% for i in (1..block.settings.number_of_cards) %}
+        {% liquid
+          assign title_key = 'card_' | append: i | append: '_title'
+          assign description_key = 'card_' | append: i | append: '_description'
+          assign icon_key = 'card_' | append: i | append: '_icon'
+          assign card_title = block.settings[title_key]
+          assign card_description = block.settings[description_key]
+          assign card_icon = block.settings[icon_key]
+        %}
+        
+        <div class="ai-feature-card-{{ ai_gen_id }}">
+          <div class="ai-feature-card-icon-{{ ai_gen_id }}">
+            {% if card_icon != blank %}
+              <img
+                src="{{ card_icon | image_url: width: 200 }}"
+                alt="{{ card_title | escape }}"
+                loading="lazy"
+                width="200"
+                height="200"
+              >
+            {% else %}
+              <div class="ai-feature-card-icon-placeholder-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+          
+          {% if card_title != blank %}
+            <h3 class="ai-feature-card-title-{{ ai_gen_id }}">{{ card_title }}</h3>
+          {% endif %}
+          
+          {% if card_description != blank %}
+            <p class="ai-feature-card-description-{{ ai_gen_id }}">{{ card_description }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</feature-cards-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class FeatureCards{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.cards = this.querySelectorAll('.ai-feature-card-{{ ai_gen_id }}');
+      }
+    }
+
+    customElements.define('feature-cards-{{ ai_gen_id }}', FeatureCards{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Feature cards",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "number_of_cards",
+      "label": "Number of cards",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Background color",
+      "default": "#8B1A1D"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_desktop",
+      "label": "Desktop padding",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_mobile",
+      "label": "Mobile padding",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card background",
+      "default": "#A72023"
+    },
+    {
+      "type": "range",
+      "id": "card_bg_opacity",
+      "label": "Card background opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#F5F5DC"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "card_padding_desktop",
+      "label": "Desktop padding",
+      "min": 16,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "card_padding_mobile",
+      "label": "Mobile padding",
+      "min": 16,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_spacing",
+      "label": "Spacing between cards",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Icon style"
+    },
+    {
+      "type": "range",
+      "id": "icon_size_desktop",
+      "label": "Desktop size",
+      "min": 40,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "label": "Mobile size",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "icon_spacing",
+      "label": "Spacing below icon",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Title style"
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "label": "Desktop size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Mobile size",
+      "min": 14,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "title_spacing",
+      "label": "Spacing below title",
+      "min": 8,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Description style"
+    },
+    {
+      "type": "range",
+      "id": "description_size_desktop",
+      "label": "Desktop size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "description_size_mobile",
+      "label": "Mobile size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Card 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_1_icon",
+      "label": "Icon image"
+    },
+    {
+      "type": "text",
+      "id": "card_1_title",
+      "label": "Title",
+      "default": "Premium Quality"
+    },
+    {
+      "type": "textarea",
+      "id": "card_1_description",
+      "label": "Description",
+      "default": "Crafted with the finest ingredients for exceptional taste and nutrition"
+    },
+    {
+      "type": "header",
+      "content": "Card 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_2_icon",
+      "label": "Icon image"
+    },
+    {
+      "type": "text",
+      "id": "card_2_title",
+      "label": "Title",
+      "default": "Healthy Choice"
+    },
+    {
+      "type": "textarea",
+      "id": "card_2_description",
+      "label": "Description",
+      "default": "High protein, low sugar options perfect for your wellness journey"
+    },
+    {
+      "type": "header",
+      "content": "Card 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_3_icon",
+      "label": "Icon image"
+    },
+    {
+      "type": "text",
+      "id": "card_3_title",
+      "label": "Title",
+      "default": "Fast Delivery"
+    },
+    {
+      "type": "textarea",
+      "id": "card_3_description",
+      "label": "Description",
+      "default": "Quick nationwide shipping to bring freshness right to your door"
+    },
+    {
+      "type": "header",
+      "content": "Card 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_4_icon",
+      "label": "Icon image"
+    },
+    {
+      "type": "text",
+      "id": "card_4_title",
+      "label": "Title",
+      "default": "Trusted Brand"
+    },
+    {
+      "type": "textarea",
+      "id": "card_4_description",
+      "label": "Description",
+      "default": "Loved by thousands of customers across India for quality and taste"
+    },
+    {
+      "type": "header",
+      "content": "Card 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_5_icon",
+      "label": "Icon image"
+    },
+    {
+      "type": "text",
+      "id": "card_5_title",
+      "label": "Title",
+      "default": "Natural Ingredients"
+    },
+    {
+      "type": "textarea",
+      "id": "card_5_description",
+      "label": "Description",
+      "default": "Made with wholesome natural ingredients you can trust"
+    },
+    {
+      "type": "header",
+      "content": "Card 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_6_icon",
+      "label": "Icon image"
+    },
+    {
+      "type": "text",
+      "id": "card_6_title",
+      "label": "Title",
+      "default": "Great Value"
+    },
+    {
+      "type": "textarea",
+      "id": "card_6_description",
+      "label": "Description",
+      "default": "Premium quality at prices that make healthy eating accessible"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature cards"
+    }
+  ]
+}
+{% endschema %}

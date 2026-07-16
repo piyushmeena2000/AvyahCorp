@@ -1,0 +1,910 @@
+{% doc %}
+  @prompt
+    Create a custom Shopify section named "Reel Showcase".
+    
+    Requirements:
+    - The section should only appear when at least one video (reel) is uploaded.
+    - Allow multiple video uploads (MP4 format).
+    - Display reels in a clean grid layout (2–4 columns on desktop, 1–2 on mobile).
+    - Each reel should show as a thumbnail preview (auto-generated or first frame).
+    
+    Interaction:
+    - No visible video controls on the grid.
+    - When a user clicks on a reel, open it in a fullscreen modal popup.
+    - The video should autoplay in the modal.
+    - Include a close (X) button at the top-right corner of the screen.
+    - Clicking outside the video or pressing ESC should also close the modal.
+    
+    Design:
+    - Minimal, premium, modern look (similar to Instagram reels UI but cleaner).
+    - Rounded corners (12–16px), subtle shadow, smooth hover scale effect.
+    - Maintain aspect ratio (9:16 vertical reels).
+    - Add smooth transition animation when opening modal.
+    
+    Responsiveness:
+    - Fully responsive for mobile and desktop.
+    - Mobile: single column, full-width reels.
+    - Desktop: grid layout with spacing.
+    - Ensure fast loading and optimized performance.
+    
+    Technical:
+    - Use Shopify Liquid, HTML, CSS, and minimal JavaScript.
+    - Lazy load videos for performance.
+    - Ensure no layout shift.
+    - Section should be reusable and customizable from Shopify editor.
+    
+    Optional Enhancements:
+    - Add play icon overlay on thumbnails.
+    - Add slight hover animation.
+    - Preload only active video in modal.
+    
+    Important:
+    - Do NOT show video controls in grid view.
+    - ONLY play video inside fullscreen modal after click., remove the text at the top and the videos should auto play and when i click on it it should open in full screen and the background shlould go black with the opacity of 60% and also put all next video and previous ones too so that the user can navigate , remove the play icon from the videos , make controller for the size of the reel for both mobile and desktp both, the section should be in horizontal at a time there should be 4 reels should be shown and the others should be hidden and add drag controller in the section to navigate between videos and in the section , the section should be in horizontal at a time there should be 4 reels should be shown and the others should be hidden and add drag controller in the section to navigate between videos and in the section 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-reel-showcase-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
+    overflow: hidden;
+  }
+
+  .ai-reel-container-{{ ai_gen_id }} {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-reel-container-{{ ai_gen_id }} {
+      padding: 0 50px;
+    }
+  }
+
+  .ai-reel-scroll-wrapper-{{ ai_gen_id }} {
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+  }
+
+  .ai-reel-scroll-wrapper-{{ ai_gen_id }}.dragging {
+    cursor: grabbing;
+  }
+
+  .ai-reel-grid-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.grid_gap }}px;
+    transition: transform 0.3s ease;
+    will-change: transform;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-reel-grid-{{ ai_gen_id }} {
+      gap: {{ block.settings.grid_gap_mobile }}px;
+    }
+  }
+
+  .ai-reel-item-{{ ai_gen_id }} {
+    position: relative;
+    flex: 0 0 calc((100% - ({{ block.settings.visible_reels_desktop | minus: 1 }} * {{ block.settings.grid_gap }}px)) / {{ block.settings.visible_reels_desktop }});
+    aspect-ratio: 9 / 16;
+    border-radius: {{ block.settings.border_radius }}px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-reel-item-{{ ai_gen_id }} {
+      flex: 0 0 calc((100% - ({{ block.settings.visible_reels_mobile | minus: 1 }} * {{ block.settings.grid_gap_mobile }}px)) / {{ block.settings.visible_reels_mobile }});
+    }
+  }
+
+  .ai-reel-item-{{ ai_gen_id }}:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-reel-item-{{ ai_gen_id }} video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+  }
+
+  .ai-reel-nav-arrow-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-reel-nav-arrow-{{ ai_gen_id }}:hover {
+    background-color: rgba(255, 255, 255, 1);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .ai-reel-nav-arrow-{{ ai_gen_id }}.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .ai-reel-nav-arrow-{{ ai_gen_id }}.prev {
+    left: 10px;
+  }
+
+  .ai-reel-nav-arrow-{{ ai_gen_id }}.next {
+    right: 10px;
+  }
+
+  .ai-reel-nav-arrow-{{ ai_gen_id }} svg {
+    width: 20px;
+    height: 20px;
+    stroke: #000000;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-reel-nav-arrow-{{ ai_gen_id }} {
+      width: 36px;
+      height: 36px;
+    }
+
+    .ai-reel-nav-arrow-{{ ai_gen_id }} svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .ai-reel-modal-{{ ai_gen_id }} {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, {{ block.settings.modal_overlay_opacity }});
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-reel-modal-{{ ai_gen_id }}.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .ai-reel-modal-content-{{ ai_gen_id }} {
+    position: relative;
+    width: {{ block.settings.modal_width_desktop }}%;
+    max-width: {{ block.settings.modal_max_width_desktop }}px;
+    height: auto;
+    max-height: 90vh;
+    aspect-ratio: 9 / 16;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+
+  .ai-reel-modal-{{ ai_gen_id }}.active .ai-reel-modal-content-{{ ai_gen_id }} {
+    transform: scale(1);
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-reel-modal-content-{{ ai_gen_id }} {
+      width: {{ block.settings.modal_width_mobile }}%;
+      max-width: {{ block.settings.modal_max_width_mobile }}px;
+    }
+  }
+
+  .ai-reel-modal-video-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-reel-close-btn-{{ ai_gen_id }} {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .ai-reel-close-btn-{{ ai_gen_id }}:hover {
+    background-color: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+  }
+
+  .ai-reel-close-btn-{{ ai_gen_id }} svg {
+    width: 20px;
+    height: 20px;
+    stroke: #000000;
+  }
+
+  .ai-reel-nav-btn-{{ ai_gen_id }} {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .ai-reel-nav-btn-{{ ai_gen_id }}:hover {
+    background-color: rgba(255, 255, 255, 1);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .ai-reel-nav-btn-{{ ai_gen_id }}.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .ai-reel-nav-btn-{{ ai_gen_id }}.disabled:hover {
+    transform: translateY(-50%) scale(1);
+  }
+
+  .ai-reel-nav-btn-{{ ai_gen_id }}.prev {
+    left: 20px;
+  }
+
+  .ai-reel-nav-btn-{{ ai_gen_id }}.next {
+    right: 20px;
+  }
+
+  .ai-reel-nav-btn-{{ ai_gen_id }} svg {
+    width: 24px;
+    height: 24px;
+    stroke: #000000;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-reel-close-btn-{{ ai_gen_id }} {
+      top: 10px;
+      right: 10px;
+      width: 36px;
+      height: 36px;
+    }
+
+    .ai-reel-nav-btn-{{ ai_gen_id }} {
+      width: 40px;
+      height: 40px;
+    }
+
+    .ai-reel-nav-btn-{{ ai_gen_id }}.prev {
+      left: 10px;
+    }
+
+    .ai-reel-nav-btn-{{ ai_gen_id }}.next {
+      right: 10px;
+    }
+  }
+{% endstyle %}
+
+<reel-showcase-{{ ai_gen_id }} class="ai-reel-showcase-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% assign video_count = 0 %}
+  {% for i in (1..10) %}
+    {% assign video_key = 'video_' | append: i %}
+    {% if block.settings[video_key] != blank %}
+      {% assign video_count = video_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+
+  {% if video_count > 0 %}
+    <div class="ai-reel-container-{{ ai_gen_id }}">
+      <button class="ai-reel-nav-arrow-{{ ai_gen_id }} prev" aria-label="Previous reels">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="ai-reel-scroll-wrapper-{{ ai_gen_id }}">
+        <div class="ai-reel-grid-{{ ai_gen_id }}">
+          {% for i in (1..10) %}
+            {% assign video_key = 'video_' | append: i %}
+            {% assign video = block.settings[video_key] %}
+            
+            {% if video != blank %}
+              <div class="ai-reel-item-{{ ai_gen_id }}" data-video-index="{{ forloop.index0 }}">
+                <video
+                  preload="metadata"
+                  muted
+                  playsinline
+                  loop
+                >
+                  {% for source in video.sources %}
+                    <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                  {% endfor %}
+                </video>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <button class="ai-reel-nav-arrow-{{ ai_gen_id }} next" aria-label="Next reels">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <div class="ai-reel-modal-{{ ai_gen_id }}" data-modal>
+      <button class="ai-reel-close-btn-{{ ai_gen_id }}" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <button class="ai-reel-nav-btn-{{ ai_gen_id }} prev" aria-label="Previous video">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="ai-reel-modal-content-{{ ai_gen_id }}">
+        <video
+          class="ai-reel-modal-video-{{ ai_gen_id }}"
+          controls
+          playsinline
+          loop
+          data-modal-video
+        ></video>
+      </div>
+
+      <button class="ai-reel-nav-btn-{{ ai_gen_id }} next" aria-label="Next video">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  {% endif %}
+</reel-showcase-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ReelShowcase{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.videos = [];
+        this.currentIndex = 0;
+        this.currentScrollIndex = 0;
+        this.modal = null;
+        this.modalVideo = null;
+        this.isDragging = false;
+        this.startX = 0;
+        this.scrollLeft = 0;
+        this.visibleReels = {{ block.settings.visible_reels_desktop }};
+      }
+
+      connectedCallback() {
+        this.modal = this.querySelector('[data-modal]');
+        this.modalVideo = this.querySelector('[data-modal-video]');
+        this.closeBtn = this.querySelector('.ai-reel-close-btn-{{ ai_gen_id }}');
+        this.modalPrevBtn = this.querySelector('.ai-reel-modal-{{ ai_gen_id }} .ai-reel-nav-btn-{{ ai_gen_id }}.prev');
+        this.modalNextBtn = this.querySelector('.ai-reel-modal-{{ ai_gen_id }} .ai-reel-nav-btn-{{ ai_gen_id }}.next');
+        this.scrollWrapper = this.querySelector('.ai-reel-scroll-wrapper-{{ ai_gen_id }}');
+        this.grid = this.querySelector('.ai-reel-grid-{{ ai_gen_id }}');
+        this.prevArrow = this.querySelector('.ai-reel-nav-arrow-{{ ai_gen_id }}.prev');
+        this.nextArrow = this.querySelector('.ai-reel-nav-arrow-{{ ai_gen_id }}.next');
+        
+        const reelItems = this.querySelectorAll('.ai-reel-item-{{ ai_gen_id }}');
+        
+        if (window.innerWidth <= 749) {
+          this.visibleReels = {{ block.settings.visible_reels_mobile }};
+        }
+
+        reelItems.forEach((item, index) => {
+          const video = item.querySelector('video');
+          if (video) {
+            this.videos.push(video);
+            
+            item.addEventListener('click', () => {
+              if (!this.isDragging) {
+                this.openModal(index);
+              }
+            });
+          }
+        });
+
+        this.setupDragScroll();
+        this.setupArrowNavigation();
+        this.setupModalControls();
+        this.updateArrowButtons();
+
+        window.addEventListener('resize', () => {
+          if (window.innerWidth <= 749) {
+            this.visibleReels = {{ block.settings.visible_reels_mobile }};
+          } else {
+            this.visibleReels = {{ block.settings.visible_reels_desktop }};
+          }
+          this.updateScrollPosition();
+          this.updateArrowButtons();
+        });
+      }
+
+      setupDragScroll() {
+        if (!this.scrollWrapper || !this.grid) return;
+
+        this.scrollWrapper.addEventListener('mousedown', (e) => {
+          this.isDragging = true;
+          this.startX = e.pageX;
+          this.scrollLeft = this.currentScrollIndex;
+          this.scrollWrapper.classList.add('dragging');
+        });
+
+        this.scrollWrapper.addEventListener('touchstart', (e) => {
+          this.isDragging = true;
+          this.startX = e.touches[0].pageX;
+          this.scrollLeft = this.currentScrollIndex;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+          if (!this.isDragging) return;
+          e.preventDefault();
+          const x = e.pageX;
+          const walk = (this.startX - x) * 0.5;
+          
+          if (Math.abs(walk) > 50) {
+            if (walk > 0) {
+              this.scrollNext();
+            } else {
+              this.scrollPrev();
+            }
+            this.isDragging = false;
+            this.scrollWrapper.classList.remove('dragging');
+          }
+        });
+
+        document.addEventListener('touchmove', (e) => {
+          if (!this.isDragging) return;
+          const x = e.touches[0].pageX;
+          const walk = (this.startX - x) * 0.5;
+          
+          if (Math.abs(walk) > 50) {
+            if (walk > 0) {
+              this.scrollNext();
+            } else {
+              this.scrollPrev();
+            }
+            this.isDragging = false;
+          }
+        });
+
+        document.addEventListener('mouseup', () => {
+          setTimeout(() => {
+            this.isDragging = false;
+            this.scrollWrapper.classList.remove('dragging');
+          }, 100);
+        });
+
+        document.addEventListener('touchend', () => {
+          setTimeout(() => {
+            this.isDragging = false;
+          }, 100);
+        });
+      }
+
+      setupArrowNavigation() {
+        if (this.prevArrow) {
+          this.prevArrow.addEventListener('click', () => this.scrollPrev());
+        }
+
+        if (this.nextArrow) {
+          this.nextArrow.addEventListener('click', () => this.scrollNext());
+        }
+      }
+
+      scrollPrev() {
+        if (this.currentScrollIndex > 0) {
+          this.currentScrollIndex--;
+          this.updateScrollPosition();
+          this.updateArrowButtons();
+        }
+      }
+
+      scrollNext() {
+        const maxScroll = Math.max(0, this.videos.length - this.visibleReels);
+        if (this.currentScrollIndex < maxScroll) {
+          this.currentScrollIndex++;
+          this.updateScrollPosition();
+          this.updateArrowButtons();
+        }
+      }
+
+      updateScrollPosition() {
+        if (!this.grid) return;
+        
+        const gap = window.innerWidth <= 749 ? {{ block.settings.grid_gap_mobile }} : {{ block.settings.grid_gap }};
+        const itemWidth = this.grid.querySelector('.ai-reel-item-{{ ai_gen_id }}').offsetWidth;
+        const translateX = -(this.currentScrollIndex * (itemWidth + gap));
+        
+        this.grid.style.transform = `translateX(${translateX}px)`;
+      }
+
+      updateArrowButtons() {
+        const maxScroll = Math.max(0, this.videos.length - this.visibleReels);
+        
+        if (this.prevArrow) {
+          if (this.currentScrollIndex === 0) {
+            this.prevArrow.classList.add('disabled');
+          } else {
+            this.prevArrow.classList.remove('disabled');
+          }
+        }
+
+        if (this.nextArrow) {
+          if (this.currentScrollIndex >= maxScroll) {
+            this.nextArrow.classList.add('disabled');
+          } else {
+            this.nextArrow.classList.remove('disabled');
+          }
+        }
+      }
+
+      setupModalControls() {
+        if (this.closeBtn) {
+          this.closeBtn.addEventListener('click', () => this.closeModal());
+        }
+
+        if (this.modalPrevBtn) {
+          this.modalPrevBtn.addEventListener('click', () => this.navigatePrev());
+        }
+
+        if (this.modalNextBtn) {
+          this.modalNextBtn.addEventListener('click', () => this.navigateNext());
+        }
+
+        if (this.modal) {
+          this.modal.addEventListener('click', (e) => {
+            if (e.target === this.modal) {
+              this.closeModal();
+            }
+          });
+        }
+
+        document.addEventListener('keydown', (e) => {
+          if (this.modal && this.modal.classList.contains('active')) {
+            if (e.key === 'Escape') {
+              this.closeModal();
+            } else if (e.key === 'ArrowLeft') {
+              this.navigatePrev();
+            } else if (e.key === 'ArrowRight') {
+              this.navigateNext();
+            }
+          }
+        });
+      }
+
+      openModal(index) {
+        this.currentIndex = index;
+        const sourceVideo = this.videos[index];
+        
+        if (this.modalVideo && sourceVideo) {
+          this.modalVideo.innerHTML = '';
+          
+          const sources = sourceVideo.querySelectorAll('source');
+          sources.forEach(source => {
+            const newSource = document.createElement('source');
+            newSource.src = source.src;
+            newSource.type = source.type;
+            this.modalVideo.appendChild(newSource);
+          });
+          
+          this.modalVideo.load();
+          
+          this.modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          
+          setTimeout(() => {
+            this.modalVideo.play().catch(err => {
+              console.log('Autoplay prevented:', err);
+            });
+          }, 100);
+          
+          this.updateModalNavButtons();
+        }
+      }
+
+      closeModal() {
+        if (this.modal) {
+          this.modal.classList.remove('active');
+          document.body.style.overflow = '';
+          
+          if (this.modalVideo) {
+            this.modalVideo.pause();
+            this.modalVideo.currentTime = 0;
+          }
+        }
+      }
+
+      navigatePrev() {
+        if (this.currentIndex > 0) {
+          this.currentIndex--;
+          this.loadVideo(this.currentIndex);
+        }
+      }
+
+      navigateNext() {
+        if (this.currentIndex < this.videos.length - 1) {
+          this.currentIndex++;
+          this.loadVideo(this.currentIndex);
+        }
+      }
+
+      loadVideo(index) {
+        const sourceVideo = this.videos[index];
+        
+        if (this.modalVideo && sourceVideo) {
+          this.modalVideo.pause();
+          this.modalVideo.innerHTML = '';
+          
+          const sources = sourceVideo.querySelectorAll('source');
+          sources.forEach(source => {
+            const newSource = document.createElement('source');
+            newSource.src = source.src;
+            newSource.type = source.type;
+            this.modalVideo.appendChild(newSource);
+          });
+          
+          this.modalVideo.load();
+          this.modalVideo.play().catch(err => {
+            console.log('Autoplay prevented:', err);
+          });
+          
+          this.updateModalNavButtons();
+        }
+      }
+
+      updateModalNavButtons() {
+        if (this.modalPrevBtn) {
+          if (this.currentIndex === 0) {
+            this.modalPrevBtn.classList.add('disabled');
+          } else {
+            this.modalPrevBtn.classList.remove('disabled');
+          }
+        }
+
+        if (this.modalNextBtn) {
+          if (this.currentIndex === this.videos.length - 1) {
+            this.modalNextBtn.classList.add('disabled');
+          } else {
+            this.modalNextBtn.classList.remove('disabled');
+          }
+        }
+      }
+    }
+
+    customElements.define('reel-showcase-{{ ai_gen_id }}', ReelShowcase{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Reel showcase",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "visible_reels_desktop",
+      "label": "Visible reels on desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "visible_reels_mobile",
+      "label": "Visible reels on mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap desktop",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "grid_gap_mobile",
+      "label": "Grid gap mobile",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Modal settings"
+    },
+    {
+      "type": "range",
+      "id": "modal_width_desktop",
+      "label": "Modal width desktop",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "%",
+      "default": 35
+    },
+    {
+      "type": "range",
+      "id": "modal_max_width_desktop",
+      "label": "Modal max width desktop",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "modal_width_mobile",
+      "label": "Modal width mobile",
+      "min": 60,
+      "max": 95,
+      "step": 5,
+      "unit": "%",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "modal_max_width_mobile",
+      "label": "Modal max width mobile",
+      "min": 250,
+      "max": 500,
+      "step": 50,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "modal_overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.6
+    },
+    {
+      "type": "header",
+      "content": "Videos"
+    },
+    {
+      "type": "video",
+      "id": "video_1",
+      "label": "Video 1"
+    },
+    {
+      "type": "video",
+      "id": "video_2",
+      "label": "Video 2"
+    },
+    {
+      "type": "video",
+      "id": "video_3",
+      "label": "Video 3"
+    },
+    {
+      "type": "video",
+      "id": "video_4",
+      "label": "Video 4"
+    },
+    {
+      "type": "video",
+      "id": "video_5",
+      "label": "Video 5"
+    },
+    {
+      "type": "video",
+      "id": "video_6",
+      "label": "Video 6"
+    },
+    {
+      "type": "video",
+      "id": "video_7",
+      "label": "Video 7"
+    },
+    {
+      "type": "video",
+      "id": "video_8",
+      "label": "Video 8"
+    },
+    {
+      "type": "video",
+      "id": "video_9",
+      "label": "Video 9"
+    },
+    {
+      "type": "video",
+      "id": "video_10",
+      "label": "Video 10"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reel showcase"
+    }
+  ]
+}
+{% endschema %}

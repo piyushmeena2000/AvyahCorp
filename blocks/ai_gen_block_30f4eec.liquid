@@ -1,0 +1,654 @@
+{% doc %}
+  @prompt
+    make a slideshow cards in which there is image at the left side with rounded corners and in the right there is text where there is heading and subheading text and there is a buttion on the both sides for nnext and previos and i want atlest 8 card there like this something like a slide show with text and buttions it should also auto scroll and only when i put text when only i want it to show the card otherwise it should be hidden, change the subheading font to inter regular
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-slideshow-container-{{ ai_gen_id }} {
+    position: relative;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    overflow: hidden;
+    display: block;
+  }
+
+  .ai-slideshow-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+  }
+
+  .ai-slideshow-track-{{ ai_gen_id }} {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .ai-slideshow-slide-{{ ai_gen_id }} {
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    gap: {{ block.settings.content_gap }}px;
+    padding: {{ block.settings.slide_padding }}px;
+    background-color: {{ block.settings.slide_background_color }};
+    border-radius: {{ block.settings.slide_border_radius }}px;
+  }
+
+  .ai-slideshow-image-wrapper-{{ ai_gen_id }} {
+    flex: 0 0 {{ block.settings.image_width_percent }}%;
+    max-width: {{ block.settings.image_width_percent }}%;
+  }
+
+  .ai-slideshow-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    object-fit: cover;
+  }
+
+  .ai-slideshow-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: #f4f4f4;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-slideshow-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .ai-slideshow-content-{{ ai_gen_id }} {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ai-slideshow-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .ai-slideshow-subheading-{{ ai_gen_id }} {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: {{ block.settings.subheading_size }}px;
+    color: {{ block.settings.subheading_color }};
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .ai-slideshow-nav-button-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: {{ block.settings.button_background_color }};
+    color: {{ block.settings.button_icon_color }};
+    border: none;
+    width: {{ block.settings.button_size }}px;
+    height: {{ block.settings.button_size }}px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-slideshow-nav-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background_color }};
+  }
+
+  .ai-slideshow-nav-button-{{ ai_gen_id }}--prev {
+    left: {{ block.settings.button_offset }}px;
+  }
+
+  .ai-slideshow-nav-button-{{ ai_gen_id }}--next {
+    right: {{ block.settings.button_offset }}px;
+  }
+
+  .ai-slideshow-nav-button-{{ ai_gen_id }} svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-slideshow-slide-{{ ai_gen_id }} {
+      flex-direction: column;
+    }
+
+    .ai-slideshow-image-wrapper-{{ ai_gen_id }} {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+
+    .ai-slideshow-heading-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.8);
+    }
+
+    .ai-slideshow-subheading-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.subheading_size }}px * 0.9);
+    }
+  }
+{% endstyle %}
+
+<slideshow-carousel-{{ ai_gen_id }}
+  class="ai-slideshow-container-{{ ai_gen_id }}"
+  data-autoplay="{{ block.settings.autoplay }}"
+  data-autoplay-speed="{{ block.settings.autoplay_speed }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-slideshow-wrapper-{{ ai_gen_id }}">
+    <div class="ai-slideshow-track-{{ ai_gen_id }}">
+      {% for i in (1..8) %}
+        {% liquid
+          assign heading_key = 'slide_' | append: i | append: '_heading'
+          assign subheading_key = 'slide_' | append: i | append: '_subheading'
+          assign image_key = 'slide_' | append: i | append: '_image'
+
+          assign heading = block.settings[heading_key]
+          assign subheading = block.settings[subheading_key]
+          assign image = block.settings[image_key]
+        %}
+
+        {% if heading != blank or subheading != blank %}
+          <div class="ai-slideshow-slide-{{ ai_gen_id }}" data-slide-index="{{ forloop.index0 }}">
+            <div class="ai-slideshow-image-wrapper-{{ ai_gen_id }}">
+              {% if image %}
+                <img
+                  src="{{ image | image_url: width: 800 }}"
+                  alt="{{ image.alt | escape }}"
+                  loading="lazy"
+                  width="{{ image.width }}"
+                  height="{{ image.height }}"
+                  class="ai-slideshow-image-{{ ai_gen_id }}"
+                >
+              {% else %}
+                <div class="ai-slideshow-image-placeholder-{{ ai_gen_id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="ai-slideshow-content-{{ ai_gen_id }}">
+              {% if heading != blank %}
+                <h3 class="ai-slideshow-heading-{{ ai_gen_id }}">{{ heading }}</h3>
+              {% endif %}
+              {% if subheading != blank %}
+                <p class="ai-slideshow-subheading-{{ ai_gen_id }}">{{ subheading }}</p>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <button
+      class="ai-slideshow-nav-button-{{ ai_gen_id }} ai-slideshow-nav-button-{{ ai_gen_id }}--prev"
+      aria-label="Previous slide"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+
+    <button
+      class="ai-slideshow-nav-button-{{ ai_gen_id }} ai-slideshow-nav-button-{{ ai_gen_id }}--next"
+      aria-label="Next slide"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </div>
+</slideshow-carousel-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class SlideshowCarousel{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentIndex = 0;
+        this.autoplayInterval = null;
+      }
+
+      connectedCallback() {
+        this.track = this.querySelector('.ai-slideshow-track-{{ ai_gen_id }}');
+        this.slides = this.querySelectorAll('.ai-slideshow-slide-{{ ai_gen_id }}');
+        this.prevButton = this.querySelector('.ai-slideshow-nav-button-{{ ai_gen_id }}--prev');
+        this.nextButton = this.querySelector('.ai-slideshow-nav-button-{{ ai_gen_id }}--next');
+        this.autoplay = this.dataset.autoplay === 'true';
+        this.autoplaySpeed = parseInt(this.dataset.autoplaySpeed) || 5000;
+
+        if (this.slides.length === 0) {
+          return;
+        }
+
+        this.setupEventListeners();
+        this.updateSlidePosition();
+
+        if (this.autoplay) {
+          this.startAutoplay();
+        }
+      }
+
+      setupEventListeners() {
+        this.prevButton.addEventListener('click', () => {
+          this.goToPrevSlide();
+          if (this.autoplay) {
+            this.resetAutoplay();
+          }
+        });
+
+        this.nextButton.addEventListener('click', () => {
+          this.goToNextSlide();
+          if (this.autoplay) {
+            this.resetAutoplay();
+          }
+        });
+      }
+
+      goToPrevSlide() {
+        this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+        this.updateSlidePosition();
+      }
+
+      goToNextSlide() {
+        this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+        this.updateSlidePosition();
+      }
+
+      updateSlidePosition() {
+        const offset = -this.currentIndex * 100;
+        this.track.style.transform = `translateX(${offset}%)`;
+      }
+
+      startAutoplay() {
+        this.autoplayInterval = setInterval(() => {
+          this.goToNextSlide();
+        }, this.autoplaySpeed);
+      }
+
+      resetAutoplay() {
+        clearInterval(this.autoplayInterval);
+        this.startAutoplay();
+      }
+
+      disconnectedCallback() {
+        if (this.autoplayInterval) {
+          clearInterval(this.autoplayInterval);
+        }
+      }
+    }
+
+    customElements.define('slideshow-carousel-{{ ai_gen_id }}', SlideshowCarousel{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Slideshow cards",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "image_width_percent",
+      "label": "Image width",
+      "min": 30,
+      "max": 60,
+      "step": 5,
+      "unit": "%",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "label": "Content gap",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "slide_padding",
+      "label": "Slide padding",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Autoplay"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay speed",
+      "min": 2000,
+      "max": 9000,
+      "step": 500,
+      "unit": "ms",
+      "default": 5000
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "slide_background_color",
+      "label": "Slide background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "slide_border_radius",
+      "label": "Slide border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Navigation buttons"
+    },
+    {
+      "type": "range",
+      "id": "button_size",
+      "label": "Button size",
+      "min": 30,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "button_offset",
+      "label": "Button offset",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background_color",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_icon_color",
+      "label": "Button icon color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Slide 1"
+    },
+    {
+      "type": "text",
+      "id": "slide_1_heading",
+      "label": "Heading",
+      "default": "Premium Healthy Snacks"
+    },
+    {
+      "type": "textarea",
+      "id": "slide_1_subheading",
+      "label": "Subheading",
+      "default": "Discover our range of nutritious and delicious snacks crafted for your wellness journey."
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Slide 2"
+    },
+    {
+      "type": "text",
+      "id": "slide_2_heading",
+      "label": "Heading",
+      "default": "Taakat Hunger Bar"
+    },
+    {
+      "type": "textarea",
+      "id": "slide_2_subheading",
+      "label": "Subheading",
+      "default": "Power-packed energy bars designed to fuel your active lifestyle with natural ingredients."
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Slide 3"
+    },
+    {
+      "type": "text",
+      "id": "slide_3_heading",
+      "label": "Heading",
+      "default": "Great Indian Snack Box"
+    },
+    {
+      "type": "textarea",
+      "id": "slide_3_subheading",
+      "label": "Subheading",
+      "default": "Curated multi-pack assortments featuring the best of Indian flavors and healthy choices."
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Slide 4"
+    },
+    {
+      "type": "text",
+      "id": "slide_4_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "slide_4_subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Slide 5"
+    },
+    {
+      "type": "text",
+      "id": "slide_5_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "slide_5_subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_5_image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Slide 6"
+    },
+    {
+      "type": "text",
+      "id": "slide_6_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "slide_6_subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_6_image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Slide 7"
+    },
+    {
+      "type": "text",
+      "id": "slide_7_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "slide_7_subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_7_image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Slide 8"
+    },
+    {
+      "type": "text",
+      "id": "slide_8_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "slide_8_subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_8_image",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slideshow cards"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,851 @@
+{% doc %}
+  @prompt
+    make a product listing section with all the nesasary thing in it make the view product button at the bottom where it should be placed half on the card of product and the half should be outside so that it looks cool and first the image will go then i want the title give proper space bewteen both so that title could fit in then the price then then the discounted price and then there put a red rounded box and in white there will be the percentage how much discount we are giving to the people make sure that the whole thing should feel responsive and it should look clean like the reel section we just made , increase the size of this so that it touches the both ends of the canvas also make it responsive for mobile device and at a time i want 5 product cards and others should be next to it like the reel section we created with same drag option and also add dots at bottom , you did not add the drag option and the background should be same crimson red in the background the cards are also been cut at the bottom and give me space between the product title and the prices so that long title also fit there
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-product-carousel-{{ ai_gen_id }} {
+    width: 100%;
+    display: block;
+    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-product-carousel-container-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ai-product-carousel-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.card_gap }}px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 0 {{ block.settings.horizontal_padding }}px {{ block.settings.wrapper_padding_bottom }}px;
+    cursor: grab;
+    user-select: none;
+  }
+
+  .ai-product-carousel-wrapper-{{ ai_gen_id }}:active {
+    cursor: grabbing;
+  }
+
+  .ai-product-carousel-wrapper-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-product-card-{{ ai_gen_id }} {
+    flex: 0 0 calc((100% - ({{ block.settings.cards_per_view | minus: 1 }} * {{ block.settings.card_gap }}px) - (2 * {{ block.settings.horizontal_padding }}px)) / {{ block.settings.cards_per_view }});
+    min-width: calc((100% - ({{ block.settings.cards_per_view | minus: 1 }} * {{ block.settings.card_gap }}px) - (2 * {{ block.settings.horizontal_padding }}px)) / {{ block.settings.cards_per_view }});
+    background-color: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    overflow: visible;
+    position: relative;
+    padding-bottom: {{ block.settings.button_overlap }}px;
+    box-shadow: {{ block.settings.card_shadow_horizontal }}px {{ block.settings.card_shadow_vertical }}px {{ block.settings.card_shadow_blur }}px {{ block.settings.card_shadow_color }};
+  }
+
+  .ai-product-card-image-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: {{ block.settings.image_aspect_ratio }};
+    overflow: hidden;
+    border-radius: {{ block.settings.card_border_radius }}px {{ block.settings.card_border_radius }}px 0 0;
+    position: relative;
+  }
+
+  .ai-product-card-image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  .ai-product-card-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-product-card-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-product-card-content-{{ ai_gen_id }} {
+    padding: {{ block.settings.card_padding }}px;
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.content_gap }}px;
+  }
+
+  .ai-product-card-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_font_size }}px;
+    font-weight: {{ block.settings.title_font_weight }};
+    color: {{ block.settings.title_color }};
+    margin: 0;
+    line-height: 1.4;
+    min-height: {{ block.settings.title_min_height }}px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: {{ block.settings.title_line_clamp }};
+    -webkit-box-orient: vertical;
+  }
+
+  .ai-product-card-price-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .ai-product-card-price-{{ ai_gen_id }} {
+    font-size: {{ block.settings.price_font_size }}px;
+    font-weight: {{ block.settings.price_font_weight }};
+    color: {{ block.settings.price_color }};
+  }
+
+  .ai-product-card-compare-price-{{ ai_gen_id }} {
+    font-size: {{ block.settings.compare_price_font_size }}px;
+    color: {{ block.settings.compare_price_color }};
+    text-decoration: line-through;
+    opacity: 0.7;
+  }
+
+  .ai-product-card-discount-badge-{{ ai_gen_id }} {
+    background-color: {{ block.settings.discount_badge_bg }};
+    color: {{ block.settings.discount_badge_text }};
+    padding: 4px 10px;
+    border-radius: {{ block.settings.discount_badge_radius }}px;
+    font-size: {{ block.settings.discount_badge_font_size }}px;
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  .ai-product-card-button-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: calc(-1 * {{ block.settings.button_overlap }}px / 2);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    padding: 12px 24px;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    text-decoration: none;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: {{ block.settings.button_font_weight }};
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+
+  .ai-product-card-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg }};
+    color: {{ block.settings.button_hover_text }};
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .ai-carousel-dots-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: {{ block.settings.dots_margin_top }}px;
+    padding: 0 {{ block.settings.horizontal_padding }}px;
+  }
+
+  .ai-carousel-dot-{{ ai_gen_id }} {
+    width: {{ block.settings.dot_size }}px;
+    height: {{ block.settings.dot_size }}px;
+    border-radius: 50%;
+    background-color: {{ block.settings.dot_inactive_color }};
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .ai-carousel-dot-{{ ai_gen_id }}.active {
+    background-color: {{ block.settings.dot_active_color }};
+    transform: scale(1.2);
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-product-card-{{ ai_gen_id }} {
+      flex: 0 0 calc((100% - ({{ block.settings.cards_per_view_mobile | minus: 1 }} * {{ block.settings.card_gap }}px) - (2 * {{ block.settings.horizontal_padding }}px)) / {{ block.settings.cards_per_view_mobile }});
+      min-width: calc((100% - ({{ block.settings.cards_per_view_mobile | minus: 1 }} * {{ block.settings.card_gap }}px) - (2 * {{ block.settings.horizontal_padding }}px)) / {{ block.settings.cards_per_view_mobile }});
+    }
+
+    .ai-product-card-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_font_size | times: 0.9 }}px;
+    }
+
+    .ai-product-card-price-{{ ai_gen_id }} {
+      font-size: {{ block.settings.price_font_size | times: 0.9 }}px;
+    }
+
+    .ai-product-card-button-{{ ai_gen_id }} {
+      font-size: {{ block.settings.button_font_size | times: 0.9 }}px;
+      padding: 10px 20px;
+    }
+  }
+{% endstyle %}
+
+<product-carousel-{{ ai_gen_id }} class="ai-product-carousel-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-product-carousel-container-{{ ai_gen_id }}">
+    <div class="ai-product-carousel-wrapper-{{ ai_gen_id }}" data-carousel-wrapper>
+      {% if block.settings.product_list != blank %}
+        {% for product in block.settings.product_list %}
+          <div class="ai-product-card-{{ ai_gen_id }}">
+            <div class="ai-product-card-image-{{ ai_gen_id }}">
+              {% if product.featured_image %}
+                <img
+                  src="{{ product.featured_image | image_url: width: 800 }}"
+                  alt="{{ product.featured_image.alt | escape }}"
+                  loading="lazy"
+                  width="800"
+                  height="800"
+                >
+              {% else %}
+                <div class="ai-product-card-image-placeholder-{{ ai_gen_id }}">
+                  {{ 'product-1' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="ai-product-card-content-{{ ai_gen_id }}">
+              <h3 class="ai-product-card-title-{{ ai_gen_id }}">{{ product.title }}</h3>
+
+              <div class="ai-product-card-price-wrapper-{{ ai_gen_id }}">
+                <span class="ai-product-card-price-{{ ai_gen_id }}">
+                  {{ product.price | money }}
+                </span>
+
+                {% if product.compare_at_price > product.price %}
+                  <span class="ai-product-card-compare-price-{{ ai_gen_id }}">
+                    {{ product.compare_at_price | money }}
+                  </span>
+
+                  {% assign discount_percentage = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
+                  <span class="ai-product-card-discount-badge-{{ ai_gen_id }}">
+                    -{{ discount_percentage }}%
+                  </span>
+                {% endif %}
+              </div>
+            </div>
+
+            <a href="{{ product.url }}" class="ai-product-card-button-{{ ai_gen_id }}">
+              {{ block.settings.button_text }}
+            </a>
+          </div>
+        {% endfor %}
+      {% else %}
+        {% for i in (1..8) %}
+          <div class="ai-product-card-{{ ai_gen_id }}">
+            <div class="ai-product-card-image-{{ ai_gen_id }}">
+              <div class="ai-product-card-image-placeholder-{{ ai_gen_id }}">
+                {{ 'product-1' | placeholder_svg_tag }}
+              </div>
+            </div>
+
+            <div class="ai-product-card-content-{{ ai_gen_id }}">
+              <h3 class="ai-product-card-title-{{ ai_gen_id }}">Product title</h3>
+
+              <div class="ai-product-card-price-wrapper-{{ ai_gen_id }}">
+                <span class="ai-product-card-price-{{ ai_gen_id }}">₹999</span>
+                <span class="ai-product-card-compare-price-{{ ai_gen_id }}">₹1,299</span>
+                <span class="ai-product-card-discount-badge-{{ ai_gen_id }}">-23%</span>
+              </div>
+            </div>
+
+            <a href="#" class="ai-product-card-button-{{ ai_gen_id }}">
+              {{ block.settings.button_text }}
+            </a>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <div class="ai-carousel-dots-{{ ai_gen_id }}" data-dots-container></div>
+  </div>
+</product-carousel-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ProductCarousel{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.wrapper = this.querySelector('[data-carousel-wrapper]');
+        this.dotsContainer = this.querySelector('[data-dots-container]');
+        this.cards = this.querySelectorAll('.ai-product-card-{{ ai_gen_id }}');
+        this.currentIndex = 0;
+        this.cardsPerView = {{ block.settings.cards_per_view }};
+        this.cardsPerViewMobile = {{ block.settings.cards_per_view_mobile }};
+        this.isDragging = false;
+        this.startX = 0;
+        this.scrollLeft = 0;
+      }
+
+      connectedCallback() {
+        this.createDots();
+        this.setupScrollListener();
+        this.setupDragScroll();
+        this.updateActiveDot();
+      }
+
+      getCardsPerView() {
+        return window.innerWidth <= 749 ? this.cardsPerViewMobile : this.cardsPerView;
+      }
+
+      createDots() {
+        if (!this.dotsContainer || this.cards.length === 0) return;
+
+        const totalDots = Math.ceil(this.cards.length / this.getCardsPerView());
+        this.dotsContainer.innerHTML = '';
+
+        for (let i = 0; i < totalDots; i++) {
+          const dot = document.createElement('button');
+          dot.classList.add('ai-carousel-dot-{{ ai_gen_id }}');
+          dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+          dot.addEventListener('click', () => this.scrollToIndex(i));
+          this.dotsContainer.appendChild(dot);
+        }
+      }
+
+      scrollToIndex(index) {
+        const cardsPerView = this.getCardsPerView();
+        const cardWidth = this.cards[0].offsetWidth;
+        const gap = {{ block.settings.card_gap }};
+        const scrollPosition = index * cardsPerView * (cardWidth + gap);
+        
+        this.wrapper.scrollTo({
+          left: scrollPosition,
+          behavior: 'smooth'
+        });
+      }
+
+      setupDragScroll() {
+        this.wrapper.addEventListener('mousedown', (e) => {
+          this.isDragging = true;
+          this.startX = e.pageX - this.wrapper.offsetLeft;
+          this.scrollLeft = this.wrapper.scrollLeft;
+        });
+
+        this.wrapper.addEventListener('mouseleave', () => {
+          this.isDragging = false;
+        });
+
+        this.wrapper.addEventListener('mouseup', () => {
+          this.isDragging = false;
+        });
+
+        this.wrapper.addEventListener('mousemove', (e) => {
+          if (!this.isDragging) return;
+          e.preventDefault();
+          const x = e.pageX - this.wrapper.offsetLeft;
+          const walk = (x - this.startX) * 2;
+          this.wrapper.scrollLeft = this.scrollLeft - walk;
+        });
+
+        this.wrapper.addEventListener('touchstart', (e) => {
+          this.startX = e.touches[0].pageX - this.wrapper.offsetLeft;
+          this.scrollLeft = this.wrapper.scrollLeft;
+        }, { passive: true });
+
+        this.wrapper.addEventListener('touchmove', (e) => {
+          const x = e.touches[0].pageX - this.wrapper.offsetLeft;
+          const walk = (x - this.startX) * 2;
+          this.wrapper.scrollLeft = this.scrollLeft - walk;
+        }, { passive: true });
+      }
+
+      setupScrollListener() {
+        let scrollTimeout;
+        this.wrapper.addEventListener('scroll', () => {
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            this.updateActiveDot();
+          }, 100);
+        });
+
+        window.addEventListener('resize', () => {
+          this.createDots();
+          this.updateActiveDot();
+        });
+      }
+
+      updateActiveDot() {
+        const cardsPerView = this.getCardsPerView();
+        const cardWidth = this.cards[0].offsetWidth;
+        const gap = {{ block.settings.card_gap }};
+        const scrollLeft = this.wrapper.scrollLeft;
+        const index = Math.round(scrollLeft / ((cardWidth + gap) * cardsPerView));
+
+        const dots = this.dotsContainer.querySelectorAll('.ai-carousel-dot-{{ ai_gen_id }}');
+        dots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+
+        this.currentIndex = index;
+      }
+    }
+
+    customElements.define('product-carousel-{{ ai_gen_id }}', ProductCarousel{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product carousel",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Products"
+    },
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "Products",
+      "limit": 20
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "View Product"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "cards_per_view",
+      "label": "Cards per view (desktop)",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "cards_per_view_mobile",
+      "label": "Cards per view (mobile)",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Gap between cards",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "horizontal_padding",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "wrapper_padding_bottom",
+      "label": "Wrapper padding bottom",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "4/5",
+          "label": "Portrait (4:5)"
+        },
+        {
+          "value": "3/4",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "16/9",
+          "label": "Landscape (16:9)"
+        }
+      ],
+      "default": "1/1"
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#dc143c"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Card padding",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "label": "Content gap",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_horizontal",
+      "label": "Shadow horizontal offset",
+      "min": -10,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_vertical",
+      "label": "Shadow vertical offset",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_blur",
+      "label": "Shadow blur",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "card_shadow_color",
+      "label": "Shadow color",
+      "default": "rgba(0, 0, 0, 0.1)"
+    },
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "title_font_weight",
+      "label": "Font weight",
+      "min": 400,
+      "max": 700,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "title_min_height",
+      "label": "Minimum height",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "title_line_clamp",
+      "label": "Maximum lines",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "header",
+      "content": "Price"
+    },
+    {
+      "type": "range",
+      "id": "price_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "price_font_weight",
+      "label": "Font weight",
+      "min": 400,
+      "max": 700,
+      "step": 100,
+      "default": 700
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "compare_price_font_size",
+      "label": "Compare price font size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "compare_price_color",
+      "label": "Compare price color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Discount badge"
+    },
+    {
+      "type": "color",
+      "id": "discount_badge_bg",
+      "label": "Background",
+      "default": "#ff0000"
+    },
+    {
+      "type": "color",
+      "id": "discount_badge_text",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "discount_badge_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "discount_badge_font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg",
+      "label": "Hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text",
+      "label": "Hover text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_font_weight",
+      "label": "Font weight",
+      "min": 400,
+      "max": 700,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "button_overlap",
+      "label": "Button overlap",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Navigation dots"
+    },
+    {
+      "type": "range",
+      "id": "dot_size",
+      "label": "Dot size",
+      "min": 6,
+      "max": 16,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "color",
+      "id": "dot_active_color",
+      "label": "Active dot color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "dot_inactive_color",
+      "label": "Inactive dot color",
+      "default": "rgba(255, 255, 255, 0.5)"
+    },
+    {
+      "type": "range",
+      "id": "dots_margin_top",
+      "label": "Dots margin top",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product carousel"
+    }
+  ]
+}
+{% endschema %}

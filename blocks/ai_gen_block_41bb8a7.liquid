@@ -1,0 +1,700 @@
+{% doc %}
+  @prompt
+    instagram image carousel
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-instagram-carousel-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.padding }}px 0;
+  }
+
+  .ai-instagram-carousel__header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 32px;
+    padding: 0 20px;
+  }
+
+  .ai-instagram-carousel__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 8px;
+  }
+
+  .ai-instagram-carousel__subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.8;
+  }
+
+  .ai-instagram-carousel__container-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+  }
+
+  .ai-instagram-carousel__track-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.gap }}px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 0 20px;
+  }
+
+  .ai-instagram-carousel__track-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-instagram-carousel__slide-{{ ai_gen_id }} {
+    flex: 0 0 auto;
+    width: {{ block.settings.slide_width }}px;
+    position: relative;
+    border-radius: {{ block.settings.border_radius }}px;
+    overflow: hidden;
+    background-color: #f4f4f4;
+  }
+
+  .ai-instagram-carousel__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+  }
+
+  .ai-instagram-carousel__image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-instagram-carousel__placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+  }
+
+  .ai-instagram-carousel__placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-instagram-carousel__overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+  }
+
+  .ai-instagram-carousel__slide-{{ ai_gen_id }}:hover .ai-instagram-carousel__overlay-{{ ai_gen_id }} {
+    opacity: 1;
+  }
+
+  .ai-instagram-carousel__caption-{{ ai_gen_id }} {
+    color: #ffffff;
+    font-size: 14px;
+    line-height: 1.4;
+    width: 100%;
+  }
+
+  .ai-instagram-carousel__nav-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    background-color: {{ block.settings.nav_button_color }};
+    color: {{ block.settings.nav_icon_color }};
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .ai-instagram-carousel__nav-{{ ai_gen_id }}:hover {
+    opacity: 0.8;
+  }
+
+  .ai-instagram-carousel__nav-{{ ai_gen_id }}:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .ai-instagram-carousel__nav--prev-{{ ai_gen_id }} {
+    left: 10px;
+  }
+
+  .ai-instagram-carousel__nav--next-{{ ai_gen_id }} {
+    right: 10px;
+  }
+
+  .ai-instagram-carousel__nav-{{ ai_gen_id }} svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .ai-instagram-carousel__dots-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+    padding: 0 20px;
+  }
+
+  .ai-instagram-carousel__dot-{{ ai_gen_id }} {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: {{ block.settings.text_color }};
+    opacity: 0.3;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-instagram-carousel__dot-{{ ai_gen_id }}.active {
+    opacity: 1;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-instagram-carousel__slide-{{ ai_gen_id }} {
+      width: {{ block.settings.slide_width_mobile }}px;
+    }
+
+    .ai-instagram-carousel__nav-{{ ai_gen_id }} {
+      display: none;
+    }
+  }
+{% endstyle %}
+
+<instagram-carousel-{{ ai_gen_id }}
+  class="ai-instagram-carousel-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  {% if block.settings.title != blank or block.settings.subtitle != blank %}
+    <div class="ai-instagram-carousel__header-{{ ai_gen_id }}">
+      {% if block.settings.title != blank %}
+        <h2 class="ai-instagram-carousel__title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+      {% endif %}
+      {% if block.settings.subtitle != blank %}
+        <p class="ai-instagram-carousel__subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="ai-instagram-carousel__container-{{ ai_gen_id }}">
+    {% if block.settings.show_navigation %}
+      <button
+        class="ai-instagram-carousel__nav-{{ ai_gen_id }} ai-instagram-carousel__nav--prev-{{ ai_gen_id }}"
+        aria-label="Previous slide"
+        data-nav="prev"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+    {% endif %}
+
+    <div class="ai-instagram-carousel__track-{{ ai_gen_id }}" data-track>
+      {% for i in (1..8) %}
+        {% liquid
+          assign image_key = 'image_' | append: i
+          assign caption_key = 'caption_' | append: i
+          assign link_key = 'link_' | append: i
+          
+          assign image = block.settings[image_key]
+          assign caption = block.settings[caption_key]
+          assign link = block.settings[link_key]
+        %}
+
+        <div class="ai-instagram-carousel__slide-{{ ai_gen_id }}" data-slide="{{ i }}">
+          {% if link != blank %}
+            <a href="{{ link }}" class="ai-instagram-carousel__image-wrapper-{{ ai_gen_id }}">
+          {% else %}
+            <div class="ai-instagram-carousel__image-wrapper-{{ ai_gen_id }}">
+          {% endif %}
+            
+            {% if image %}
+              <img
+                src="{{ image | image_url: width: 800 }}"
+                alt="{{ image.alt | escape }}"
+                loading="lazy"
+                width="800"
+                height="800"
+                class="ai-instagram-carousel__image-{{ ai_gen_id }}"
+              >
+            {% else %}
+              <div class="ai-instagram-carousel__placeholder-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+
+            {% if caption != blank and block.settings.show_captions %}
+              <div class="ai-instagram-carousel__overlay-{{ ai_gen_id }}">
+                <div class="ai-instagram-carousel__caption-{{ ai_gen_id }}">{{ caption }}</div>
+              </div>
+            {% endif %}
+
+          {% if link != blank %}
+            </a>
+          {% else %}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if block.settings.show_navigation %}
+      <button
+        class="ai-instagram-carousel__nav-{{ ai_gen_id }} ai-instagram-carousel__nav--next-{{ ai_gen_id }}"
+        aria-label="Next slide"
+        data-nav="next"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    {% endif %}
+  </div>
+
+  {% if block.settings.show_dots %}
+    <div class="ai-instagram-carousel__dots-{{ ai_gen_id }}" data-dots></div>
+  {% endif %}
+</instagram-carousel-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class InstagramCarousel{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.track = this.querySelector('[data-track]');
+        this.slides = this.querySelectorAll('[data-slide]');
+        this.prevButton = this.querySelector('[data-nav="prev"]');
+        this.nextButton = this.querySelector('[data-nav="next"]');
+        this.dotsContainer = this.querySelector('[data-dots]');
+        this.currentIndex = 0;
+        this.slideWidth = {{ block.settings.slide_width }};
+        this.gap = {{ block.settings.gap }};
+      }
+
+      connectedCallback() {
+        this.setupDots();
+        this.setupNavigation();
+        this.updateNavButtons();
+        this.track.addEventListener('scroll', this.handleScroll.bind(this));
+      }
+
+      setupDots() {
+        if (!this.dotsContainer) return;
+        
+        this.slides.forEach((slide, index) => {
+          const dot = document.createElement('button');
+          dot.className = 'ai-instagram-carousel__dot-{{ ai_gen_id }}';
+          dot.setAttribute('aria-label', 'Go to slide ' + (index + 1));
+          dot.addEventListener('click', () => this.goToSlide(index));
+          this.dotsContainer.appendChild(dot);
+        });
+
+        this.updateDots();
+      }
+
+      setupNavigation() {
+        if (this.prevButton) {
+          this.prevButton.addEventListener('click', () => this.navigate('prev'));
+        }
+        if (this.nextButton) {
+          this.nextButton.addEventListener('click', () => this.navigate('next'));
+        }
+      }
+
+      navigate(direction) {
+        const scrollAmount = this.slideWidth + this.gap;
+        if (direction === 'prev') {
+          this.track.scrollLeft -= scrollAmount;
+        } else {
+          this.track.scrollLeft += scrollAmount;
+        }
+      }
+
+      goToSlide(index) {
+        const scrollAmount = (this.slideWidth + this.gap) * index;
+        this.track.scrollLeft = scrollAmount;
+      }
+
+      handleScroll() {
+        const scrollLeft = this.track.scrollLeft;
+        const slideWidth = this.slideWidth + this.gap;
+        this.currentIndex = Math.round(scrollLeft / slideWidth);
+        this.updateDots();
+        this.updateNavButtons();
+      }
+
+      updateDots() {
+        if (!this.dotsContainer) return;
+        
+        const dots = this.dotsContainer.querySelectorAll('.ai-instagram-carousel__dot-{{ ai_gen_id }}');
+        dots.forEach((dot, index) => {
+          if (index === this.currentIndex) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+      }
+
+      updateNavButtons() {
+        if (!this.prevButton || !this.nextButton) return;
+
+        const maxScroll = this.track.scrollWidth - this.track.clientWidth;
+        
+        if (this.track.scrollLeft <= 0) {
+          this.prevButton.disabled = true;
+        } else {
+          this.prevButton.disabled = false;
+        }
+
+        if (this.track.scrollLeft >= maxScroll - 1) {
+          this.nextButton.disabled = true;
+        } else {
+          this.nextButton.disabled = false;
+        }
+      }
+    }
+
+    customElements.define('instagram-carousel-{{ ai_gen_id }}', InstagramCarousel{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Instagram carousel",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Follow us on Instagram"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "@yourhandle"
+    },
+    {
+      "type": "header",
+      "content": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "caption_1",
+      "label": "Caption"
+    },
+    {
+      "type": "url",
+      "id": "link_1",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "caption_2",
+      "label": "Caption"
+    },
+    {
+      "type": "url",
+      "id": "link_2",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "caption_3",
+      "label": "Caption"
+    },
+    {
+      "type": "url",
+      "id": "link_3",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "caption_4",
+      "label": "Caption"
+    },
+    {
+      "type": "url",
+      "id": "link_4",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Image 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "caption_5",
+      "label": "Caption"
+    },
+    {
+      "type": "url",
+      "id": "link_5",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Image 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_6",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "caption_6",
+      "label": "Caption"
+    },
+    {
+      "type": "url",
+      "id": "link_6",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Image 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_7",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "caption_7",
+      "label": "Caption"
+    },
+    {
+      "type": "url",
+      "id": "link_7",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Image 8"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_8",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "caption_8",
+      "label": "Caption"
+    },
+    {
+      "type": "url",
+      "id": "link_8",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "slide_width",
+      "min": 200,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Slide width (desktop)",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "slide_width_mobile",
+      "min": 150,
+      "max": 350,
+      "step": 10,
+      "unit": "px",
+      "label": "Slide width (mobile)",
+      "default": 250
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap between slides",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_captions",
+      "label": "Show captions on hover",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "Show navigation arrows",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Show dots",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "nav_button_color",
+      "label": "Navigation button",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "nav_icon_color",
+      "label": "Navigation icon",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram carousel"
+    }
+  ]
+}
+{% endschema %}

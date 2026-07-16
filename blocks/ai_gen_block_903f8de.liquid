@@ -1,0 +1,1146 @@
+{% doc %}
+  @prompt
+    Create an ultra-premium professional Shopify reels/video showcase section compatible with Shopify Liquid.
+    
+    IMPORTANT:
+    - This is for SHOPIFY
+    - Must work as a Shopify custom section
+    - Use Shopify Liquid schema
+    - Merchant should be able to upload/manage videos directly from Shopify Theme Customizer
+    - NO headings
+    - NO titles
+    - NO captions
+    - NO extra text
+    - ONLY the reel/video section itself
+    
+    SHOPIFY REQUIREMENTS:
+    - Create a fully functional Shopify section
+    - Use:
+      - Liquid
+      - HTML
+      - CSS
+      - JavaScript
+    - Include complete Shopify schema
+    - Add support for at least 15 video blocks
+    - Merchant uploads videos from Theme Editor
+    - Empty blocks should remain hidden automatically
+    - Entire section hidden if no videos uploaded
+    - Fully customizable through Shopify editor
+    
+    LAYOUT:
+    - Horizontal draggable reels carousel
+    - Show:
+      - 4 videos on desktop
+      - 2 videos on tablet
+      - 1 video on mobile
+    - Remaining videos hidden outside viewport
+    - Smooth draggable/swipe interaction
+    - Mouse drag support
+    - Touch swipe support
+    - Snap scrolling
+    - Momentum/inertia movement
+    - Premium cinematic spacing
+    
+    VIDEO CARDS:
+    - Vertical 9:16 reel cards
+    - Auto-play immediately
+    - Muted
+    - Loop infinitely
+    - NO controls visible in carousel
+    - Videos should use object-fit: cover
+    - No black bars
+    - Lazy loading enabled
+    - Smooth hover interactions
+    
+    CARD EFFECTS:
+    - Hover scale animation
+    - Soft premium shadow glow
+    - Slight lift effect
+    - Smooth border highlight
+    - Premium glassmorphism feel
+    - Cursor changes to grabbing while dragging
+    - Subtle cinematic gradient overlay
+    
+    FULLSCREEN EXPERIENCE:
+    When user clicks any reel:
+    - Open fullscreen modal overlay
+    - Dark blurred cinematic background
+    - Large centered responsive video player
+    - Prevent background scrolling while modal open
+    
+    FULLSCREEN CONTROLS:
+    - Play/Pause
+    - Timeline/progress bar
+    - Draggable scrubber like VLC/media player
+    - Click timeline to jump timestamp
+    - Current time and total duration
+    - Volume control
+    - Fullscreen toggle
+    - Auto-hide controls when inactive
+    
+    VIDEO NAVIGATION:
+    - Previous/Next arrows
+    - Seamless transitions
+    - Preload adjacent videos
+    - Keyboard support:
+      - Left arrow = previous
+      - Right arrow = next
+      - Space = play/pause
+      - ESC = close
+    - Mobile swipe navigation in fullscreen
+    
+    ANIMATIONS:
+    - Extremely smooth premium animations
+    - Framer Motion / GSAP style smoothness
+    - GPU accelerated transitions
+    - Fade + slide animations
+    - Elastic dragging feel
+    - Cinematic easing
+    - Smooth modal open/close
+    
+    RESPONSIVE:
+    DESKTOP:
+    - 4 visible reels
+    
+    TABLET:
+    - 2 visible reels
+    
+    MOBILE:
+    - 1 visible reel
+    - Fully touch optimized
+    
+    PERFORMANCE:
+    - Optimized for Shopify storefront performance
+    - Lazy loaded videos
+    - Minimal DOM usage
+    - Smooth playback
+    - Hardware accelerated animations
+    - Mobile optimized
+    
+    TECHNICAL:
+    - Shopify section compatible
+    - No external dependencies unless CDN based
+    - Clean scalable code
+    - Easy to customize later
+    - Cross-browser compatible
+    - Modern premium UI
+    
+    FINAL LOOK:
+    The section should feel like a luxury cinematic media showcase inspired by Netflix previews, Apple product pages, and Instagram Reels — extremely polished, interactive, responsive, immersive, and professional., when in full screen mode the background should not be pure black make the opacity of that to 70%. and make it responsive for mobile i want that 4 videos should be seen when in mobile too, give me controls for size and gap betweens cards for both mobile and desktop, bro when in full scrreen mode in mobile the faq are visible and the full screen mode is not responsive make it responsive it is shown in all over the screen i dont want it to show all over the scrreen decrease the size of it
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-video-showcase-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.desktop_padding }}px 0;
+    overflow: hidden;
+  }
+
+  .ai-video-showcase-container-{{ ai_gen_id }} {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 {{ block.settings.desktop_side_padding }}px;
+  }
+
+  .ai-video-carousel-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+  }
+
+  .ai-video-carousel-wrapper-{{ ai_gen_id }}.dragging {
+    cursor: grabbing;
+  }
+
+  .ai-video-carousel-track-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.desktop_card_gap }}px;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+  }
+
+  .ai-video-carousel-wrapper-{{ ai_gen_id }}.dragging .ai-video-carousel-track-{{ ai_gen_id }} {
+    transition: none;
+  }
+
+  .ai-video-card-{{ ai_gen_id }} {
+    flex: 0 0 calc((100% - ({{ block.settings.desktop_cards_visible | minus: 1 }} * {{ block.settings.desktop_card_gap }}px)) / {{ block.settings.desktop_cards_visible }});
+    aspect-ratio: 9 / 16;
+    border-radius: {{ block.settings.card_border_radius }}px;
+    overflow: hidden;
+    position: relative;
+    background: {{ block.settings.card_background }};
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+    will-change: transform;
+  }
+
+  .ai-video-card-{{ ai_gen_id }}:hover {
+    transform: scale(1.05) translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, {{ block.settings.shadow_intensity }});
+  }
+
+  .ai-video-card-{{ ai_gen_id }}::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.1) 50%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+    opacity: {{ block.settings.overlay_opacity }};
+  }
+
+  .ai-video-card-{{ ai_gen_id }} video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-video-modal-{{ ai_gen_id }} {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(20px);
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .ai-video-modal-{{ ai_gen_id }}.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .ai-video-modal-content-{{ ai_gen_id }} {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    aspect-ratio: 9 / 16;
+    background: #000;
+    border-radius: {{ block.settings.modal_border_radius }}px;
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .ai-video-modal-{{ ai_gen_id }}.active .ai-video-modal-content-{{ ai_gen_id }} {
+    transform: scale(1);
+  }
+
+  .ai-video-modal-video-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-video-controls-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+  }
+
+  .ai-video-modal-content-{{ ai_gen_id }}:hover .ai-video-controls-{{ ai_gen_id }},
+  .ai-video-controls-{{ ai_gen_id }}.show {
+    opacity: 1;
+  }
+
+  .ai-video-progress-{{ ai_gen_id }} {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .ai-video-progress-bar-{{ ai_gen_id }} {
+    height: 100%;
+    background: {{ block.settings.accent_color }};
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+
+  .ai-video-controls-bottom-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .ai-video-control-btn-{{ ai_gen_id }} {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+  }
+
+  .ai-video-control-btn-{{ ai_gen_id }}:hover {
+    transform: scale(1.1);
+  }
+
+  .ai-video-control-btn-{{ ai_gen_id }} svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ai-video-time-{{ ai_gen_id }} {
+    color: #fff;
+    font-size: 14px;
+    font-family: monospace;
+  }
+
+  .ai-video-volume-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ai-video-volume-slider-{{ ai_gen_id }} {
+    width: 80px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .ai-video-volume-bar-{{ ai_gen_id }} {
+    height: 100%;
+    background: {{ block.settings.accent_color }};
+    border-radius: 2px;
+    width: 100%;
+  }
+
+  .ai-video-spacer-{{ ai_gen_id }} {
+    flex: 1;
+  }
+
+  .ai-video-nav-btn-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: none;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 11;
+    transition: all 0.3s ease;
+  }
+
+  .ai-video-nav-btn-{{ ai_gen_id }}:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .ai-video-nav-btn-{{ ai_gen_id }}.prev {
+    left: 20px;
+  }
+
+  .ai-video-nav-btn-{{ ai_gen_id }}.next {
+    right: 20px;
+  }
+
+  .ai-video-nav-btn-{{ ai_gen_id }} svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ai-video-close-btn-{{ ai_gen_id }} {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: none;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 11;
+    transition: all 0.3s ease;
+  }
+
+  .ai-video-close-btn-{{ ai_gen_id }}:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+  }
+
+  .ai-video-close-btn-{{ ai_gen_id }} svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .ai-video-card-{{ ai_gen_id }} {
+      flex: 0 0 calc((100% - (1 * {{ block.settings.desktop_card_gap }}px)) / 2);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-video-showcase-{{ ai_gen_id }} {
+      padding: {{ block.settings.mobile_padding }}px 0;
+    }
+
+    .ai-video-showcase-container-{{ ai_gen_id }} {
+      padding: 0 {{ block.settings.mobile_side_padding }}px;
+    }
+
+    .ai-video-carousel-track-{{ ai_gen_id }} {
+      gap: {{ block.settings.mobile_card_gap }}px;
+    }
+
+    .ai-video-card-{{ ai_gen_id }} {
+      flex: 0 0 calc((100% - ({{ block.settings.mobile_cards_visible | minus: 1 }} * {{ block.settings.mobile_card_gap }}px)) / {{ block.settings.mobile_cards_visible }});
+    }
+
+    .ai-video-modal-content-{{ ai_gen_id }} {
+      width: 85%;
+      max-width: 400px;
+      max-height: 80vh;
+      aspect-ratio: 9 / 16;
+    }
+
+    .ai-video-nav-btn-{{ ai_gen_id }} {
+      width: 40px;
+      height: 40px;
+    }
+
+    .ai-video-nav-btn-{{ ai_gen_id }}.prev {
+      left: 10px;
+    }
+
+    .ai-video-nav-btn-{{ ai_gen_id }}.next {
+      right: 10px;
+    }
+
+    .ai-video-close-btn-{{ ai_gen_id }} {
+      top: 10px;
+      right: 10px;
+      width: 36px;
+      height: 36px;
+    }
+
+    .ai-video-controls-{{ ai_gen_id }} {
+      padding: 12px;
+    }
+
+    .ai-video-volume-wrapper-{{ ai_gen_id }} {
+      display: none;
+    }
+
+    .ai-video-time-{{ ai_gen_id }} {
+      font-size: 12px;
+    }
+
+    .ai-video-control-btn-{{ ai_gen_id }} svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .ai-video-progress-{{ ai_gen_id }} {
+      height: 4px;
+      margin-bottom: 8px;
+    }
+  }
+{% endstyle %}
+
+<video-showcase-{{ ai_gen_id }} class="ai-video-showcase-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% assign has_videos = false %}
+  {% for i in (1..15) %}
+    {% assign video_key = 'video_' | append: i %}
+    {% if block.settings[video_key] != blank %}
+      {% assign has_videos = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% if has_videos %}
+    <div class="ai-video-showcase-container-{{ ai_gen_id }}">
+      <div class="ai-video-carousel-wrapper-{{ ai_gen_id }}">
+        <div class="ai-video-carousel-track-{{ ai_gen_id }}">
+          {% for i in (1..15) %}
+            {% assign video_key = 'video_' | append: i %}
+            {% assign video = block.settings[video_key] %}
+            {% if video != blank %}
+              <div class="ai-video-card-{{ ai_gen_id }}" data-video-index="{{ forloop.index0 }}">
+                <video
+                  src="{{ video.sources[1].url }}"
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  data-carousel-video
+                ></video>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-video-modal-{{ ai_gen_id }}">
+      <button class="ai-video-close-btn-{{ ai_gen_id }}" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <button class="ai-video-nav-btn-{{ ai_gen_id }} prev" aria-label="Previous video">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <button class="ai-video-nav-btn-{{ ai_gen_id }} next" aria-label="Next video">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="ai-video-modal-content-{{ ai_gen_id }}">
+        <video
+          class="ai-video-modal-video-{{ ai_gen_id }}"
+          playsinline
+          preload="metadata"
+        ></video>
+
+        <div class="ai-video-controls-{{ ai_gen_id }}">
+          <div class="ai-video-progress-{{ ai_gen_id }}">
+            <div class="ai-video-progress-bar-{{ ai_gen_id }}"></div>
+          </div>
+          <div class="ai-video-controls-bottom-{{ ai_gen_id }}">
+            <button class="ai-video-control-btn-{{ ai_gen_id }} play-pause" aria-label="Play/Pause">
+              <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <svg class="pause-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
+              </svg>
+            </button>
+            <div class="ai-video-time-{{ ai_gen_id }}">
+              <span class="current-time">0:00</span> / <span class="duration">0:00</span>
+            </div>
+            <div class="ai-video-spacer-{{ ai_gen_id }}"></div>
+            <div class="ai-video-volume-wrapper-{{ ai_gen_id }}">
+              <button class="ai-video-control-btn-{{ ai_gen_id }} volume-btn" aria-label="Mute/Unmute">
+                <svg class="volume-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                </svg>
+                <svg class="mute-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                  <line x1="23" y1="9" x2="17" y2="15"></line>
+                  <line x1="17" y1="9" x2="23" y2="15"></line>
+                </svg>
+              </button>
+              <div class="ai-video-volume-slider-{{ ai_gen_id }}">
+                <div class="ai-video-volume-bar-{{ ai_gen_id }}"></div>
+              </div>
+            </div>
+            <button class="ai-video-control-btn-{{ ai_gen_id }} fullscreen-btn" aria-label="Fullscreen">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</video-showcase-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class VideoShowcase{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.videos = [];
+        this.currentIndex = 0;
+        this.isDragging = false;
+        this.startX = 0;
+        this.currentTranslate = 0;
+        this.prevTranslate = 0;
+        this.animationID = 0;
+        this.controlsTimeout = null;
+      }
+
+      connectedCallback() {
+        this.carousel = this.querySelector('.ai-video-carousel-wrapper-{{ ai_gen_id }}');
+        this.track = this.querySelector('.ai-video-carousel-track-{{ ai_gen_id }}');
+        this.cards = this.querySelectorAll('.ai-video-card-{{ ai_gen_id }}');
+        this.modal = this.querySelector('.ai-video-modal-{{ ai_gen_id }}');
+        this.modalVideo = this.querySelector('.ai-video-modal-video-{{ ai_gen_id }}');
+        this.closeBtn = this.querySelector('.ai-video-close-btn-{{ ai_gen_id }}');
+        this.prevBtn = this.querySelector('.ai-video-nav-btn-{{ ai_gen_id }}.prev');
+        this.nextBtn = this.querySelector('.ai-video-nav-btn-{{ ai_gen_id }}.next');
+        this.playPauseBtn = this.querySelector('.play-pause');
+        this.volumeBtn = this.querySelector('.volume-btn');
+        this.fullscreenBtn = this.querySelector('.fullscreen-btn');
+        this.progressBar = this.querySelector('.ai-video-progress-{{ ai_gen_id }}');
+        this.progressFill = this.querySelector('.ai-video-progress-bar-{{ ai_gen_id }}');
+        this.volumeSlider = this.querySelector('.ai-video-volume-slider-{{ ai_gen_id }}');
+        this.volumeBar = this.querySelector('.ai-video-volume-bar-{{ ai_gen_id }}');
+        this.currentTimeEl = this.querySelector('.current-time');
+        this.durationEl = this.querySelector('.duration');
+        this.controls = this.querySelector('.ai-video-controls-{{ ai_gen_id }}');
+
+        this.collectVideos();
+        this.setupCarousel();
+        this.setupModal();
+        this.observeVideos();
+      }
+
+      collectVideos() {
+        this.cards.forEach((card, index) => {
+          const video = card.querySelector('video');
+          if (video) {
+            this.videos.push({
+              element: video,
+              src: video.src,
+              index: index
+            });
+          }
+        });
+      }
+
+      setupCarousel() {
+        if (!this.carousel) return;
+
+        this.carousel.addEventListener('mousedown', this.dragStart.bind(this));
+        this.carousel.addEventListener('touchstart', this.dragStart.bind(this));
+        this.carousel.addEventListener('mouseup', this.dragEnd.bind(this));
+        this.carousel.addEventListener('touchend', this.dragEnd.bind(this));
+        this.carousel.addEventListener('mousemove', this.drag.bind(this));
+        this.carousel.addEventListener('touchmove', this.drag.bind(this));
+        this.carousel.addEventListener('mouseleave', this.dragEnd.bind(this));
+
+        this.cards.forEach((card, index) => {
+          card.addEventListener('click', (e) => {
+            if (!this.isDragging) {
+              this.openModal(index);
+            }
+          });
+        });
+      }
+
+      dragStart(e) {
+        this.isDragging = true;
+        this.startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        this.animationID = requestAnimationFrame(this.animation.bind(this));
+        this.carousel.classList.add('dragging');
+      }
+
+      drag(e) {
+        if (!this.isDragging) return;
+        e.preventDefault();
+        const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        const diff = currentX - this.startX;
+        this.currentTranslate = this.prevTranslate + diff;
+      }
+
+      dragEnd() {
+        if (!this.isDragging) return;
+        this.isDragging = false;
+        cancelAnimationFrame(this.animationID);
+        this.prevTranslate = this.currentTranslate;
+        this.carousel.classList.remove('dragging');
+      }
+
+      animation() {
+        this.track.style.transform = `translateX(${this.currentTranslate}px)`;
+        if (this.isDragging) {
+          requestAnimationFrame(this.animation.bind(this));
+        }
+      }
+
+      observeVideos() {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            const video = entry.target;
+            if (entry.isIntersecting) {
+              video.play().catch(() => {});
+            } else {
+              video.pause();
+            }
+          });
+        }, { threshold: 0.5 });
+
+        this.videos.forEach(v => observer.observe(v.element));
+      }
+
+      openModal(index) {
+        this.currentIndex = index;
+        const videoData = this.videos[index];
+        this.modalVideo.src = videoData.src;
+        this.modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        this.modalVideo.play().then(() => {
+          this.updatePlayPauseIcon(true);
+        }).catch(() => {});
+
+        this.modalVideo.volume = 1;
+        this.updateVolumeIcon(false);
+        this.updateVolumeBar(1);
+      }
+
+      closeModal() {
+        this.modal.classList.remove('active');
+        this.modalVideo.pause();
+        this.modalVideo.src = '';
+        document.body.style.overflow = '';
+      }
+
+      navigateVideo(direction) {
+        this.currentIndex += direction;
+        if (this.currentIndex < 0) this.currentIndex = this.videos.length - 1;
+        if (this.currentIndex >= this.videos.length) this.currentIndex = 0;
+        
+        const videoData = this.videos[this.currentIndex];
+        this.modalVideo.src = videoData.src;
+        this.modalVideo.play().catch(() => {});
+      }
+
+      togglePlayPause() {
+        if (this.modalVideo.paused) {
+          this.modalVideo.play();
+          this.updatePlayPauseIcon(true);
+        } else {
+          this.modalVideo.pause();
+          this.updatePlayPauseIcon(false);
+        }
+      }
+
+      updatePlayPauseIcon(isPlaying) {
+        const playIcon = this.playPauseBtn.querySelector('.play-icon');
+        const pauseIcon = this.playPauseBtn.querySelector('.pause-icon');
+        if (isPlaying) {
+          playIcon.style.display = 'none';
+          pauseIcon.style.display = 'block';
+        } else {
+          playIcon.style.display = 'block';
+          pauseIcon.style.display = 'none';
+        }
+      }
+
+      toggleMute() {
+        this.modalVideo.muted = !this.modalVideo.muted;
+        this.updateVolumeIcon(this.modalVideo.muted);
+        if (!this.modalVideo.muted) {
+          this.updateVolumeBar(this.modalVideo.volume);
+        }
+      }
+
+      updateVolumeIcon(isMuted) {
+        const volumeIcon = this.volumeBtn.querySelector('.volume-icon');
+        const muteIcon = this.volumeBtn.querySelector('.mute-icon');
+        if (isMuted) {
+          volumeIcon.style.display = 'none';
+          muteIcon.style.display = 'block';
+        } else {
+          volumeIcon.style.display = 'block';
+          muteIcon.style.display = 'none';
+        }
+      }
+
+      updateVolumeBar(volume) {
+        this.volumeBar.style.width = `${volume * 100}%`;
+      }
+
+      toggleFullscreen() {
+        const modalContent = this.querySelector('.ai-video-modal-content-{{ ai_gen_id }}');
+        if (!document.fullscreenElement) {
+          modalContent.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen();
+        }
+      }
+
+      formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+      }
+
+      showControls() {
+        this.controls.classList.add('show');
+        clearTimeout(this.controlsTimeout);
+        this.controlsTimeout = setTimeout(() => {
+          if (!this.modalVideo.paused) {
+            this.controls.classList.remove('show');
+          }
+        }, 3000);
+      }
+
+      setupModal() {
+        this.closeBtn.addEventListener('click', () => this.closeModal());
+        this.prevBtn.addEventListener('click', () => this.navigateVideo(-1));
+        this.nextBtn.addEventListener('click', () => this.navigateVideo(1));
+        this.playPauseBtn.addEventListener('click', () => this.togglePlayPause());
+        this.volumeBtn.addEventListener('click', () => this.toggleMute());
+        this.fullscreenBtn.addEventListener('click', () => this.toggleFullscreen());
+
+        this.modal.addEventListener('click', (e) => {
+          if (e.target === this.modal) {
+            this.closeModal();
+          }
+        });
+
+        this.modalVideo.addEventListener('timeupdate', () => {
+          const progress = (this.modalVideo.currentTime / this.modalVideo.duration) * 100;
+          this.progressFill.style.width = `${progress}%`;
+          this.currentTimeEl.textContent = this.formatTime(this.modalVideo.currentTime);
+        });
+
+        this.modalVideo.addEventListener('loadedmetadata', () => {
+          this.durationEl.textContent = this.formatTime(this.modalVideo.duration);
+        });
+
+        this.modalVideo.addEventListener('click', () => {
+          this.togglePlayPause();
+        });
+
+        this.modalVideo.addEventListener('mousemove', () => {
+          this.showControls();
+        });
+
+        this.modalVideo.addEventListener('touchstart', () => {
+          this.showControls();
+        });
+
+        this.progressBar.addEventListener('click', (e) => {
+          const rect = this.progressBar.getBoundingClientRect();
+          const pos = (e.clientX - rect.left) / rect.width;
+          this.modalVideo.currentTime = pos * this.modalVideo.duration;
+        });
+
+        this.volumeSlider.addEventListener('click', (e) => {
+          const rect = this.volumeSlider.getBoundingClientRect();
+          const pos = (e.clientX - rect.left) / rect.width;
+          this.modalVideo.volume = pos;
+          this.modalVideo.muted = false;
+          this.updateVolumeBar(pos);
+          this.updateVolumeIcon(false);
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (!this.modal.classList.contains('active')) return;
+          
+          if (e.key === 'Escape') {
+            this.closeModal();
+          } else if (e.key === 'ArrowLeft') {
+            this.navigateVideo(-1);
+          } else if (e.key === 'ArrowRight') {
+            this.navigateVideo(1);
+          } else if (e.key === ' ') {
+            e.preventDefault();
+            this.togglePlayPause();
+          }
+        });
+
+        let touchStartX = 0;
+        let touchStartY = 0;
+        this.modal.addEventListener('touchstart', (e) => {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+        });
+
+        this.modal.addEventListener('touchend', (e) => {
+          const touchEndX = e.changedTouches[0].clientX;
+          const touchEndY = e.changedTouches[0].clientY;
+          const diffX = touchStartX - touchEndX;
+          const diffY = touchStartY - touchEndY;
+          
+          if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+              this.navigateVideo(1);
+            } else {
+              this.navigateVideo(-1);
+            }
+          }
+        });
+      }
+    }
+
+    customElements.define('video-showcase-{{ ai_gen_id }}', VideoShowcase{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Video showcase",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Videos"
+    },
+    {
+      "type": "video",
+      "id": "video_1",
+      "label": "Video 1"
+    },
+    {
+      "type": "video",
+      "id": "video_2",
+      "label": "Video 2"
+    },
+    {
+      "type": "video",
+      "id": "video_3",
+      "label": "Video 3"
+    },
+    {
+      "type": "video",
+      "id": "video_4",
+      "label": "Video 4"
+    },
+    {
+      "type": "video",
+      "id": "video_5",
+      "label": "Video 5"
+    },
+    {
+      "type": "video",
+      "id": "video_6",
+      "label": "Video 6"
+    },
+    {
+      "type": "video",
+      "id": "video_7",
+      "label": "Video 7"
+    },
+    {
+      "type": "video",
+      "id": "video_8",
+      "label": "Video 8"
+    },
+    {
+      "type": "video",
+      "id": "video_9",
+      "label": "Video 9"
+    },
+    {
+      "type": "video",
+      "id": "video_10",
+      "label": "Video 10"
+    },
+    {
+      "type": "video",
+      "id": "video_11",
+      "label": "Video 11"
+    },
+    {
+      "type": "video",
+      "id": "video_12",
+      "label": "Video 12"
+    },
+    {
+      "type": "video",
+      "id": "video_13",
+      "label": "Video 13"
+    },
+    {
+      "type": "video",
+      "id": "video_14",
+      "label": "Video 14"
+    },
+    {
+      "type": "video",
+      "id": "video_15",
+      "label": "Video 15"
+    },
+    {
+      "type": "header",
+      "content": "Desktop layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_cards_visible",
+      "label": "Cards visible",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "desktop_card_gap",
+      "label": "Gap between cards",
+      "min": 5,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding",
+      "label": "Top and bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "desktop_side_padding",
+      "label": "Left and right padding",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Mobile layout"
+    },
+    {
+      "type": "range",
+      "id": "mobile_cards_visible",
+      "label": "Cards visible",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "mobile_card_gap",
+      "label": "Gap between cards",
+      "min": 5,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding",
+      "label": "Top and bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_side_padding",
+      "label": "Left and right padding",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "shadow_intensity",
+      "label": "Shadow intensity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.3
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Gradient overlay",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.6
+    },
+    {
+      "type": "header",
+      "content": "Modal style"
+    },
+    {
+      "type": "range",
+      "id": "modal_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#d52528"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video showcase"
+    }
+  ]
+}
+{% endschema %}

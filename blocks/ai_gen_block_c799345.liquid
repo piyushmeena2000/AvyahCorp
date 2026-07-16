@@ -1,0 +1,399 @@
+{% doc %}
+  @prompt
+    Add ticker with multiple texts and icon images, add 5 more text with image
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-ticker-{{ ai_gen_id }} {
+    width: 100%;
+    overflow: hidden;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.padding }}px 0;
+  }
+
+  .ai-ticker-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    width: fit-content;
+    animation: ai-ticker-scroll-{{ ai_gen_id }} {{ block.settings.speed }}s linear infinite;
+  }
+
+  .ai-ticker-content-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: {{ block.settings.item_spacing }}px;
+    white-space: nowrap;
+    margin-left: 100px;
+  }
+
+  .ai-ticker-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: {{ block.settings.icon_text_spacing }}px;
+  }
+
+  .ai-ticker-icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    flex-shrink: 0;
+  }
+
+  .ai-ticker-icon-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .ai-ticker-icon-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: {{ block.settings.text_color }};
+    opacity: 0.2;
+    border-radius: 50%;
+  }
+
+  .ai-ticker-text-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size }}px;
+    font-weight: {{ block.settings.text_weight }};
+  }
+
+  @keyframes ai-ticker-scroll-{{ ai_gen_id }} {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .ai-ticker-wrapper-{{ ai_gen_id }}:hover {
+    animation-play-state: {% if block.settings.pause_on_hover %}paused{% else %}running{% endif %};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-ticker-icon-{{ ai_gen_id }} {
+      width: {{ block.settings.icon_size | times: 0.8 }}px;
+      height: {{ block.settings.icon_size | times: 0.8 }}px;
+    }
+
+    .ai-ticker-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-ticker-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-ticker-wrapper-{{ ai_gen_id }}">
+    <div class="ai-ticker-content-{{ ai_gen_id }}">
+      {% for i in (1..10) %}
+        {% liquid
+          assign text_key = 'text_' | append: i
+          assign icon_key = 'icon_' | append: i
+          assign text_value = block.settings[text_key]
+          assign icon_value = block.settings[icon_key]
+        %}
+
+        {% if text_value != blank %}
+          <div class="ai-ticker-item-{{ ai_gen_id }}">
+            {% if icon_value != blank %}
+              <div class="ai-ticker-icon-{{ ai_gen_id }}">
+                <img
+                  src="{{ icon_value | image_url: width: 100 }}"
+                  alt="{{ text_value | escape }}"
+                  loading="lazy"
+                  width="100"
+                  height="100"
+                >
+              </div>
+            {% elsif block.settings.show_placeholder_icons %}
+              <div class="ai-ticker-icon-{{ ai_gen_id }}">
+                <div class="ai-ticker-icon-placeholder-{{ ai_gen_id }}"></div>
+              </div>
+            {% endif %}
+            <span class="ai-ticker-text-{{ ai_gen_id }}">{{ text_value }}</span>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="ai-ticker-content-{{ ai_gen_id }}" aria-hidden="true">
+      {% for i in (1..10) %}
+        {% liquid
+          assign text_key = 'text_' | append: i
+          assign icon_key = 'icon_' | append: i
+          assign text_value = block.settings[text_key]
+          assign icon_value = block.settings[icon_key]
+        %}
+
+        {% if text_value != blank %}
+          <div class="ai-ticker-item-{{ ai_gen_id }}">
+            {% if icon_value != blank %}
+              <div class="ai-ticker-icon-{{ ai_gen_id }}">
+                <img
+                  src="{{ icon_value | image_url: width: 100 }}"
+                  alt="{{ text_value | escape }}"
+                  loading="lazy"
+                  width="100"
+                  height="100"
+                >
+              </div>
+            {% elsif block.settings.show_placeholder_icons %}
+              <div class="ai-ticker-icon-{{ ai_gen_id }}">
+                <div class="ai-ticker-icon-placeholder-{{ ai_gen_id }}"></div>
+              </div>
+            {% endif %}
+            <span class="ai-ticker-text-{{ ai_gen_id }}">{{ text_value }}</span>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ticker",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Ticker items"
+    },
+    {
+      "type": "text",
+      "id": "text_1",
+      "label": "Text 1",
+      "default": "Free shipping on orders over ₹500"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_1",
+      "label": "Icon 1"
+    },
+    {
+      "type": "text",
+      "id": "text_2",
+      "label": "Text 2",
+      "default": "30-day returns"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_2",
+      "label": "Icon 2"
+    },
+    {
+      "type": "text",
+      "id": "text_3",
+      "label": "Text 3",
+      "default": "Secure checkout"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_3",
+      "label": "Icon 3"
+    },
+    {
+      "type": "text",
+      "id": "text_4",
+      "label": "Text 4",
+      "default": "24/7 customer support"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_4",
+      "label": "Icon 4"
+    },
+    {
+      "type": "text",
+      "id": "text_5",
+      "label": "Text 5",
+      "default": "Eco-friendly packaging"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_5",
+      "label": "Icon 5"
+    },
+    {
+      "type": "text",
+      "id": "text_6",
+      "label": "Text 6",
+      "default": "Quality guaranteed"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_6",
+      "label": "Icon 6"
+    },
+    {
+      "type": "text",
+      "id": "text_7",
+      "label": "Text 7",
+      "default": "Fast delivery"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_7",
+      "label": "Icon 7"
+    },
+    {
+      "type": "text",
+      "id": "text_8",
+      "label": "Text 8",
+      "default": "Trusted by thousands"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_8",
+      "label": "Icon 8"
+    },
+    {
+      "type": "text",
+      "id": "text_9",
+      "label": "Text 9",
+      "default": "Made with love"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_9",
+      "label": "Icon 9"
+    },
+    {
+      "type": "text",
+      "id": "text_10",
+      "label": "Text 10",
+      "default": "Shop now, pay later"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_10",
+      "label": "Icon 10"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "text_weight",
+      "label": "Text weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "show_placeholder_icons",
+      "label": "Show placeholder for missing icons",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "item_spacing",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Space between items",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "icon_text_spacing",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Space between icon and text",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Animation speed",
+      "default": 30
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ticker"
+    }
+  ]
+}
+{% endschema %}

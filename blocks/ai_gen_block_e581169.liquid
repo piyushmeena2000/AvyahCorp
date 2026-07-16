@@ -1,0 +1,468 @@
+{% doc %}
+  @prompt
+    Add ticker with multiple texts and icon images, add 10 text and also make mobile responsive
+    
+    
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-ticker-{{ ai_gen_id }} {
+    width: 100%;
+    overflow: hidden;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.padding_vertical }}px 0;
+    position: relative;
+  }
+
+  .ai-ticker-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    width: max-content;
+    animation: ai-ticker-scroll-{{ ai_gen_id }} {{ block.settings.animation_speed }}s linear infinite;
+  }
+
+  .ai-ticker-{{ ai_gen_id }}:hover .ai-ticker-wrapper-{{ ai_gen_id }} {
+    animation-play-state: {% if block.settings.pause_on_hover %}paused{% else %}running{% endif %};
+  }
+
+  .ai-ticker-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: {{ block.settings.icon_text_gap }}px;
+    padding: 0 {{ block.settings.item_spacing }}px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .ai-ticker-icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-ticker-icon-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .ai-ticker-icon-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: {{ block.settings.text_color }};
+    opacity: 0.2;
+    border-radius: 50%;
+  }
+
+  .ai-ticker-text-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size }}px;
+    font-weight: {{ block.settings.text_weight }};
+    font-family: anton;
+    text-transform: {{ block.settings.text_transform }};
+  }
+
+  @keyframes ai-ticker-scroll-{{ ai_gen_id }} {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-ticker-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding_vertical_mobile }}px 0;
+    }
+
+    .ai-ticker-icon-{{ ai_gen_id }} {
+      width: {{ block.settings.icon_size_mobile }}px;
+      height: {{ block.settings.icon_size_mobile }}px;
+    }
+
+    .ai-ticker-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_size_mobile }}px;
+    }
+
+    .ai-ticker-item-{{ ai_gen_id }} {
+      gap: {{ block.settings.icon_text_gap_mobile }}px;
+      padding: 0 {{ block.settings.item_spacing_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<ticker-component-{{ ai_gen_id }} class="ai-ticker-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-ticker-wrapper-{{ ai_gen_id }}">
+    {% for i in (1..2) %}
+      {% for j in (1..10) %}
+        {% liquid
+          assign text_key = 'text_' | append: j
+          assign icon_key = 'icon_' | append: j
+          assign text_value = block.settings[text_key]
+          assign icon_value = block.settings[icon_key]
+        %}
+        
+        {% if text_value != blank %}
+          <div class="ai-ticker-item-{{ ai_gen_id }}">
+            {% if icon_value != blank %}
+              <div class="ai-ticker-icon-{{ ai_gen_id }}">
+                <img
+                  src="{{ icon_value | image_url: width: 100 }}"
+                  alt="{{ text_value | escape }}"
+                  loading="lazy"
+                  width="100"
+                  height="100"
+                >
+              </div>
+            {% endif %}
+            <span class="ai-ticker-text-{{ ai_gen_id }}">{{ text_value }}</span>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+</ticker-component-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TickerComponent{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.adjustAnimation();
+      }
+
+      adjustAnimation() {
+        const wrapper = this.querySelector('.ai-ticker-wrapper-{{ ai_gen_id }}');
+        if (!wrapper) return;
+
+        const firstItem = wrapper.querySelector('.ai-ticker-item-{{ ai_gen_id }}');
+        if (!firstItem) return;
+
+        const itemCount = wrapper.querySelectorAll('.ai-ticker-item-{{ ai_gen_id }}').length / 2;
+        
+        if (itemCount === 0) return;
+      }
+    }
+
+    customElements.define('ticker-component-{{ ai_gen_id }}', TickerComponent{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Ticker with icons",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Ticker items"
+    },
+    {
+      "type": "text",
+      "id": "text_1",
+      "label": "Text 1",
+      "default": "Free shipping on orders over $50"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_1",
+      "label": "Icon 1"
+    },
+    {
+      "type": "text",
+      "id": "text_2",
+      "label": "Text 2",
+      "default": "30-day money back guarantee"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_2",
+      "label": "Icon 2"
+    },
+    {
+      "type": "text",
+      "id": "text_3",
+      "label": "Text 3",
+      "default": "Secure checkout"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_3",
+      "label": "Icon 3"
+    },
+    {
+      "type": "text",
+      "id": "text_4",
+      "label": "Text 4",
+      "default": "24/7 customer support"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_4",
+      "label": "Icon 4"
+    },
+    {
+      "type": "text",
+      "id": "text_5",
+      "label": "Text 5",
+      "default": "Eco-friendly packaging"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_5",
+      "label": "Icon 5"
+    },
+    {
+      "type": "text",
+      "id": "text_6",
+      "label": "Text 6",
+      "default": "Fast delivery worldwide"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_6",
+      "label": "Icon 6"
+    },
+    {
+      "type": "text",
+      "id": "text_7",
+      "label": "Text 7",
+      "default": "Premium quality products"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_7",
+      "label": "Icon 7"
+    },
+    {
+      "type": "text",
+      "id": "text_8",
+      "label": "Text 8",
+      "default": "Trusted by thousands"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_8",
+      "label": "Icon 8"
+    },
+    {
+      "type": "text",
+      "id": "text_9",
+      "label": "Text 9",
+      "default": "Easy returns"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_9",
+      "label": "Icon 9"
+    },
+    {
+      "type": "text",
+      "id": "text_10",
+      "label": "Text 10",
+      "default": "Exclusive deals"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_10",
+      "label": "Icon 10"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size mobile",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "text_weight",
+      "label": "Text weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "select",
+      "id": "text_transform",
+      "label": "Text case",
+      "options": [
+        {
+          "value": "none",
+          "label": "Default"
+        },
+        {
+          "value": "uppercase",
+          "label": "Uppercase"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "header",
+      "content": "Icons"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon size mobile",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "icon_text_gap",
+      "min": 4,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon to text gap",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "icon_text_gap_mobile",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon to text gap mobile",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical_mobile",
+      "min": 6,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical padding mobile",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "item_spacing",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Item spacing",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "item_spacing_mobile",
+      "min": 15,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Item spacing mobile",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Speed",
+      "default": 30
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ticker with icons"
+    }
+  ]
+}
+{% endschema %}

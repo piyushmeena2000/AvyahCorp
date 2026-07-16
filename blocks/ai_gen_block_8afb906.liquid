@@ -1,0 +1,583 @@
+{% doc %}
+  @prompt
+    Create a custom Shopify section named "Reel Showcase".
+    
+    Requirements:
+    - The section should only appear when at least one video (reel) is uploaded.
+    - Allow multiple video uploads (MP4 format).
+    - Display reels in a clean grid layout (2–4 columns on desktop, 1–2 on mobile).
+    - Each reel should show as a thumbnail preview (auto-generated or first frame).
+    
+    Interaction:
+    - No visible video controls on the grid.
+    - When a user clicks on a reel, open it in a fullscreen modal popup.
+    - The video should autoplay in the modal.
+    - Include a close (X) button at the top-right corner of the screen.
+    - Clicking outside the video or pressing ESC should also close the modal.
+    
+    Design:
+    - Minimal, premium, modern look (similar to Instagram reels UI but cleaner).
+    - Rounded corners (12–16px), subtle shadow, smooth hover scale effect.
+    - Maintain aspect ratio (9:16 vertical reels).
+    - Add smooth transition animation when opening modal.
+    
+    Responsiveness:
+    - Fully responsive for mobile and desktop.
+    - Mobile: single column, full-width reels.
+    - Desktop: grid layout with spacing.
+    - Ensure fast loading and optimized performance.
+    
+    Technical:
+    - Use Shopify Liquid, HTML, CSS, and minimal JavaScript.
+    - Lazy load videos for performance.
+    - Ensure no layout shift.
+    - Section should be reusable and customizable from Shopify editor.
+    
+    Optional Enhancements:
+    - Add play icon overlay on thumbnails.
+    - Add slight hover animation.
+    - Preload only active video in modal.
+    
+    Important:
+    - Do NOT show video controls in grid view.
+    - ONLY play video inside fullscreen modal after click., remove the text at the top and the videos should auto play and when i click on it it should open in full screen and the background shlould go black with the opacity of 60% and also put all next video and previous ones too so that the user can navigate , remove the play icon from the videos , make controller for the size of the reel for both mobile and desktp both
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-reel-showcase-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
+  }
+
+  .ai-reel-showcase-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-reel-showcase-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-reel-showcase-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+    }
+  }
+
+  .ai-reel-showcase-item-{{ ai_gen_id }} {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    border-radius: {{ block.settings.border_radius }}px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-reel-showcase-item-{{ ai_gen_id }}:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-reel-showcase-thumbnail-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-reel-showcase-modal-{{ ai_gen_id }} {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-reel-showcase-modal-{{ ai_gen_id }}.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .ai-reel-showcase-modal-content-{{ ai_gen_id }} {
+    position: relative;
+    width: 90%;
+    max-width: {{ block.settings.modal_max_width_desktop }}px;
+    aspect-ratio: 9 / 16;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+
+  .ai-reel-showcase-modal-{{ ai_gen_id }}.active .ai-reel-showcase-modal-content-{{ ai_gen_id }} {
+    transform: scale(1);
+  }
+
+  .ai-reel-showcase-modal-video-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-reel-showcase-close-btn-{{ ai_gen_id }} {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    z-index: 10;
+  }
+
+  .ai-reel-showcase-close-btn-{{ ai_gen_id }}:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .ai-reel-showcase-close-btn-{{ ai_gen_id }} svg {
+    width: 20px;
+    height: 20px;
+    stroke: #ffffff;
+  }
+
+  .ai-reel-showcase-nav-btn-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    z-index: 10;
+  }
+
+  .ai-reel-showcase-nav-btn-{{ ai_gen_id }}:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .ai-reel-showcase-nav-btn-{{ ai_gen_id }}:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .ai-reel-showcase-nav-btn-{{ ai_gen_id }} svg {
+    width: 24px;
+    height: 24px;
+    stroke: #ffffff;
+  }
+
+  .ai-reel-showcase-prev-btn-{{ ai_gen_id }} {
+    left: -70px;
+  }
+
+  .ai-reel-showcase-next-btn-{{ ai_gen_id }} {
+    right: -70px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-reel-showcase-modal-content-{{ ai_gen_id }} {
+      width: 95%;
+      max-width: {{ block.settings.modal_max_width_mobile }}px;
+    }
+
+    .ai-reel-showcase-close-btn-{{ ai_gen_id }} {
+      top: -45px;
+      width: 36px;
+      height: 36px;
+    }
+
+    .ai-reel-showcase-prev-btn-{{ ai_gen_id }} {
+      left: 10px;
+    }
+
+    .ai-reel-showcase-next-btn-{{ ai_gen_id }} {
+      right: 10px;
+    }
+
+    .ai-reel-showcase-nav-btn-{{ ai_gen_id }} {
+      width: 40px;
+      height: 40px;
+    }
+
+    .ai-reel-showcase-nav-btn-{{ ai_gen_id }} svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+{% endstyle %}
+
+<reel-showcase-{{ ai_gen_id }} class="ai-reel-showcase-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% assign has_videos = false %}
+  {% for i in (1..8) %}
+    {% assign video_key = 'video_' | append: i %}
+    {% if block.settings[video_key] != blank %}
+      {% assign has_videos = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% if has_videos %}
+    <div class="ai-reel-showcase-container-{{ ai_gen_id }}">
+      <div class="ai-reel-showcase-grid-{{ ai_gen_id }}">
+        {% for i in (1..8) %}
+          {% assign video_key = 'video_' | append: i %}
+          {% assign video = block.settings[video_key] %}
+          
+          {% if video != blank %}
+            <div class="ai-reel-showcase-item-{{ ai_gen_id }}" data-video-index="{{ i }}">
+              <video
+                class="ai-reel-showcase-thumbnail-{{ ai_gen_id }}"
+                preload="metadata"
+                muted
+                loop
+                autoplay
+                playsinline
+              >
+                <source src="{{ video.sources[1].url }}" type="{{ video.sources[1].mime_type }}">
+              </video>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="ai-reel-showcase-modal-{{ ai_gen_id }}" data-modal>
+      <div class="ai-reel-showcase-modal-content-{{ ai_gen_id }}">
+        <button class="ai-reel-showcase-close-btn-{{ ai_gen_id }}" aria-label="Close video">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <button class="ai-reel-showcase-nav-btn-{{ ai_gen_id }} ai-reel-showcase-prev-btn-{{ ai_gen_id }}" aria-label="Previous video">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <button class="ai-reel-showcase-nav-btn-{{ ai_gen_id }} ai-reel-showcase-next-btn-{{ ai_gen_id }}" aria-label="Next video">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+
+        <video
+          class="ai-reel-showcase-modal-video-{{ ai_gen_id }}"
+          controls
+          playsinline
+          preload="none"
+        >
+        </video>
+      </div>
+    </div>
+  {% endif %}
+</reel-showcase-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ReelShowcase{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.items = this.querySelectorAll('.ai-reel-showcase-item-{{ ai_gen_id }}');
+        this.modal = this.querySelector('.ai-reel-showcase-modal-{{ ai_gen_id }}');
+        this.modalVideo = this.querySelector('.ai-reel-showcase-modal-video-{{ ai_gen_id }}');
+        this.closeBtn = this.querySelector('.ai-reel-showcase-close-btn-{{ ai_gen_id }}');
+        this.prevBtn = this.querySelector('.ai-reel-showcase-prev-btn-{{ ai_gen_id }}');
+        this.nextBtn = this.querySelector('.ai-reel-showcase-next-btn-{{ ai_gen_id }}');
+        this.videos = {};
+        this.videoIndices = [];
+        this.currentIndex = 0;
+      }
+
+      connectedCallback() {
+        this.setupEventListeners();
+        this.cacheVideoSources();
+      }
+
+      cacheVideoSources() {
+        this.items.forEach((item) => {
+          const index = parseInt(item.dataset.videoIndex);
+          const thumbnail = item.querySelector('.ai-reel-showcase-thumbnail-{{ ai_gen_id }}');
+          if (thumbnail && thumbnail.querySelector('source')) {
+            this.videos[index] = thumbnail.querySelector('source').src;
+            this.videoIndices.push(index);
+          }
+        });
+      }
+
+      setupEventListeners() {
+        this.items.forEach((item) => {
+          item.addEventListener('click', () => {
+            const index = parseInt(item.dataset.videoIndex);
+            this.openModal(index);
+          });
+        });
+
+        this.closeBtn.addEventListener('click', () => {
+          this.closeModal();
+        });
+
+        this.prevBtn.addEventListener('click', () => {
+          this.navigateVideo(-1);
+        });
+
+        this.nextBtn.addEventListener('click', () => {
+          this.navigateVideo(1);
+        });
+
+        this.modal.addEventListener('click', (e) => {
+          if (e.target === this.modal) {
+            this.closeModal();
+          }
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (this.modal.classList.contains('active')) {
+            if (e.key === 'Escape') {
+              this.closeModal();
+            } else if (e.key === 'ArrowLeft') {
+              this.navigateVideo(-1);
+            } else if (e.key === 'ArrowRight') {
+              this.navigateVideo(1);
+            }
+          }
+        });
+      }
+
+      openModal(index) {
+        const videoSrc = this.videos[index];
+        if (!videoSrc) return;
+
+        this.currentIndex = this.videoIndices.indexOf(index);
+        this.modalVideo.src = videoSrc;
+        this.modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        this.updateNavigationButtons();
+
+        setTimeout(() => {
+          this.modalVideo.play();
+        }, 100);
+      }
+
+      navigateVideo(direction) {
+        const newIndex = this.currentIndex + direction;
+        
+        if (newIndex >= 0 && newIndex < this.videoIndices.length) {
+          this.currentIndex = newIndex;
+          const videoIndex = this.videoIndices[this.currentIndex];
+          const videoSrc = this.videos[videoIndex];
+          
+          this.modalVideo.src = videoSrc;
+          this.updateNavigationButtons();
+          
+          setTimeout(() => {
+            this.modalVideo.play();
+          }, 100);
+        }
+      }
+
+      updateNavigationButtons() {
+        this.prevBtn.disabled = this.currentIndex === 0;
+        this.nextBtn.disabled = this.currentIndex === this.videoIndices.length - 1;
+      }
+
+      closeModal() {
+        this.modal.classList.remove('active');
+        this.modalVideo.pause();
+        this.modalVideo.src = '';
+        document.body.style.overflow = '';
+      }
+    }
+
+    customElements.define('reel-showcase-{{ ai_gen_id }}', ReelShowcase{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Reel showcase",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 600,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Grid layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Desktop columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Mobile columns",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Modal size"
+    },
+    {
+      "type": "range",
+      "id": "modal_max_width_desktop",
+      "label": "Desktop max width",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "modal_max_width_mobile",
+      "label": "Mobile max width",
+      "min": 200,
+      "max": 500,
+      "step": 50,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "header",
+      "content": "Videos"
+    },
+    {
+      "type": "video",
+      "id": "video_1",
+      "label": "Video 1"
+    },
+    {
+      "type": "video",
+      "id": "video_2",
+      "label": "Video 2"
+    },
+    {
+      "type": "video",
+      "id": "video_3",
+      "label": "Video 3"
+    },
+    {
+      "type": "video",
+      "id": "video_4",
+      "label": "Video 4"
+    },
+    {
+      "type": "video",
+      "id": "video_5",
+      "label": "Video 5"
+    },
+    {
+      "type": "video",
+      "id": "video_6",
+      "label": "Video 6"
+    },
+    {
+      "type": "video",
+      "id": "video_7",
+      "label": "Video 7"
+    },
+    {
+      "type": "video",
+      "id": "video_8",
+      "label": "Video 8"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reel showcase"
+    }
+  ]
+}
+{% endschema %}

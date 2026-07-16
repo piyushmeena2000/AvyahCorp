@@ -1,0 +1,429 @@
+{% doc %}
+  @prompt
+    make me a reel section where as we make the user see products i want to people to see videos there the video should loop automaticaly and dont add any control on the videos it should be like the we are aviliable at , it should have animation where the videos are on loop going from right to left auomatically and the videos should loop, it should also have drag option with that the user can direct to perticular video too for desktop with the mouse and for mobile with touch and make 6 block of video shown, remove the white background there is no need for it and also remove the heading there is no need for that and add a option for me so that i could add at to 15 videos on the website right now the limit is 6 increase it to 15 and also decrease the size of the block for video 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-video-reel-{{ ai_gen_id }} {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: {{ block.settings.section_padding }}px 0;
+    display: block;
+  }
+
+  .ai-video-reel-container-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .ai-video-reel-track-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    cursor: grab;
+    user-select: none;
+  }
+
+  .ai-video-reel-track-wrapper-{{ ai_gen_id }}:active {
+    cursor: grabbing;
+  }
+
+  .ai-video-reel-track-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.video_gap }}px;
+    will-change: transform;
+  }
+
+  .ai-video-reel-item-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: {{ block.settings.video_width }}px;
+    height: {{ block.settings.video_height }}px;
+    border-radius: {{ block.settings.video_border_radius }}px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ai-video-reel-item-{{ ai_gen_id }} video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-video-reel-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-video-reel-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-video-reel-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 16px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    font-size: 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-video-reel-item-{{ ai_gen_id }} {
+      width: {{ block.settings.video_width | times: 0.7 }}px;
+      height: {{ block.settings.video_height | times: 0.7 }}px;
+    }
+  }
+{% endstyle %}
+
+<video-reel-{{ ai_gen_id }}
+  class="ai-video-reel-{{ ai_gen_id }}"
+  data-speed="{{ block.settings.scroll_speed }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-video-reel-container-{{ ai_gen_id }}">
+    <div class="ai-video-reel-track-wrapper-{{ ai_gen_id }}">
+      <div class="ai-video-reel-track-{{ ai_gen_id }}">
+        {% for i in (1..15) %}
+          {% liquid
+            assign video_key = 'video_' | append: i
+            assign video = block.settings[video_key]
+          %}
+
+          <div class="ai-video-reel-item-{{ ai_gen_id }}">
+            {% if video != blank %}
+              <video
+                src="{{ video.sources[1].url }}"
+                playsinline
+                muted
+                loop
+                autoplay
+                preload="metadata"
+              ></video>
+            {% else %}
+              <div class="ai-video-reel-placeholder-{{ ai_gen_id }}">
+                {{ 'product-1' | placeholder_svg_tag }}
+                <div class="ai-video-reel-empty-state-{{ ai_gen_id }}">
+                  Add video {{ i }}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+
+        {% for i in (1..15) %}
+          {% liquid
+            assign video_key = 'video_' | append: i
+            assign video = block.settings[video_key]
+          %}
+
+          <div class="ai-video-reel-item-{{ ai_gen_id }}">
+            {% if video != blank %}
+              <video
+                src="{{ video.sources[1].url }}"
+                playsinline
+                muted
+                loop
+                autoplay
+                preload="metadata"
+              ></video>
+            {% else %}
+              <div class="ai-video-reel-placeholder-{{ ai_gen_id }}">
+                {{ 'product-1' | placeholder_svg_tag }}
+                <div class="ai-video-reel-empty-state-{{ ai_gen_id }}">
+                  Add video {{ i }}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</video-reel-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class VideoReel{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.trackWrapper = null;
+        this.track = null;
+        this.isDragging = false;
+        this.startX = 0;
+        this.scrollLeft = 0;
+        this.animationId = null;
+        this.currentTranslate = 0;
+        this.speed = 0;
+      }
+
+      connectedCallback() {
+        this.trackWrapper = this.querySelector('.ai-video-reel-track-wrapper-{{ ai_gen_id }}');
+        this.track = this.querySelector('.ai-video-reel-track-{{ ai_gen_id }}');
+        this.speed = parseFloat(this.dataset.speed) || 0.5;
+
+        this.setupDragScroll();
+        this.startAutoScroll();
+      }
+
+      disconnectedCallback() {
+        this.stopAutoScroll();
+      }
+
+      setupDragScroll() {
+        this.trackWrapper.addEventListener('mousedown', this.handleDragStart.bind(this));
+        this.trackWrapper.addEventListener('touchstart', this.handleDragStart.bind(this), { passive: true });
+        
+        document.addEventListener('mousemove', this.handleDragMove.bind(this));
+        document.addEventListener('touchmove', this.handleDragMove.bind(this), { passive: true });
+        
+        document.addEventListener('mouseup', this.handleDragEnd.bind(this));
+        document.addEventListener('touchend', this.handleDragEnd.bind(this));
+      }
+
+      handleDragStart(e) {
+        this.isDragging = true;
+        this.stopAutoScroll();
+        
+        const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+        this.startX = clientX;
+        this.scrollLeft = this.currentTranslate;
+      }
+
+      handleDragMove(e) {
+        if (!this.isDragging) return;
+        
+        const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+        const diff = clientX - this.startX;
+        this.currentTranslate = this.scrollLeft + diff;
+        this.updateTrackPosition();
+      }
+
+      handleDragEnd() {
+        if (!this.isDragging) return;
+        this.isDragging = false;
+        this.startAutoScroll();
+      }
+
+      startAutoScroll() {
+        const animate = () => {
+          if (!this.isDragging) {
+            this.currentTranslate -= this.speed;
+            
+            const trackWidth = this.track.scrollWidth / 2;
+            
+            if (Math.abs(this.currentTranslate) >= trackWidth) {
+              this.currentTranslate = 0;
+            }
+            
+            this.updateTrackPosition();
+          }
+          
+          this.animationId = requestAnimationFrame(animate);
+        };
+        
+        this.animationId = requestAnimationFrame(animate);
+      }
+
+      stopAutoScroll() {
+        if (this.animationId) {
+          cancelAnimationFrame(this.animationId);
+          this.animationId = null;
+        }
+      }
+
+      updateTrackPosition() {
+        this.track.style.transform = `translateX(${this.currentTranslate}px)`;
+      }
+    }
+
+    customElements.define('video-reel-{{ ai_gen_id }}', VideoReel{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Video reel",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Videos"
+    },
+    {
+      "type": "video",
+      "id": "video_1",
+      "label": "Video 1"
+    },
+    {
+      "type": "video",
+      "id": "video_2",
+      "label": "Video 2"
+    },
+    {
+      "type": "video",
+      "id": "video_3",
+      "label": "Video 3"
+    },
+    {
+      "type": "video",
+      "id": "video_4",
+      "label": "Video 4"
+    },
+    {
+      "type": "video",
+      "id": "video_5",
+      "label": "Video 5"
+    },
+    {
+      "type": "video",
+      "id": "video_6",
+      "label": "Video 6"
+    },
+    {
+      "type": "video",
+      "id": "video_7",
+      "label": "Video 7"
+    },
+    {
+      "type": "video",
+      "id": "video_8",
+      "label": "Video 8"
+    },
+    {
+      "type": "video",
+      "id": "video_9",
+      "label": "Video 9"
+    },
+    {
+      "type": "video",
+      "id": "video_10",
+      "label": "Video 10"
+    },
+    {
+      "type": "video",
+      "id": "video_11",
+      "label": "Video 11"
+    },
+    {
+      "type": "video",
+      "id": "video_12",
+      "label": "Video 12"
+    },
+    {
+      "type": "video",
+      "id": "video_13",
+      "label": "Video 13"
+    },
+    {
+      "type": "video",
+      "id": "video_14",
+      "label": "Video 14"
+    },
+    {
+      "type": "video",
+      "id": "video_15",
+      "label": "Video 15"
+    },
+    {
+      "type": "header",
+      "content": "Video style"
+    },
+    {
+      "type": "range",
+      "id": "video_width",
+      "label": "Video width",
+      "min": 150,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "video_height",
+      "label": "Video height",
+      "min": 200,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "default": 350
+    },
+    {
+      "type": "range",
+      "id": "video_gap",
+      "label": "Gap between videos",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "video_border_radius",
+      "label": "Video border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "label": "Scroll speed",
+      "min": 0.1,
+      "max": 2,
+      "step": 0.1,
+      "default": 0.5
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video reel"
+    }
+  ]
+}
+{% endschema %}

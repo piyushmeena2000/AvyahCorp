@@ -1,0 +1,258 @@
+{% doc %}
+  @prompt
+    create 4 circular image links of product category for mobile version, in single row, with full width, image should visible by width. also generate image for 4th image which is for combo category, need full width container, revert to first change, in one row
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-category-links-{{ ai_gen_id }} {
+    padding: 20px 16px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-category-links__container-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.spacing }}px;
+    max-width: 100%;
+  }
+
+  .ai-category-links__item-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ai-category-links__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    transition: transform 0.3s ease;
+  }
+
+  .ai-category-links__item-{{ ai_gen_id }}:hover .ai-category-links__image-wrapper-{{ ai_gen_id }} {
+    transform: scale(1.05);
+  }
+
+  .ai-category-links__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    {% comment %} object-fit: cover; {% endcomment %}
+    object-fit: 100% 100%;
+  }
+
+  .ai-category-links__placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-category-links__placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-category-links__label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.label_size }}px;
+    color: {{ block.settings.label_color }};
+    text-align: center;
+    font-weight: 500;
+    word-break: break-word;
+  }
+{% endstyle %}
+
+<div class="ai-category-links-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-category-links__container-{{ ai_gen_id }}">
+    {% for i in (1..4) %}
+      {% liquid
+        assign image_key = 'category_' | append: i | append: '_image'
+        assign label_key = 'category_' | append: i | append: '_label'
+        assign link_key = 'category_' | append: i | append: '_link'
+        
+        assign category_image = block.settings[image_key]
+        assign category_label = block.settings[label_key]
+        assign category_link = block.settings[link_key]
+      %}
+      
+      <a 
+        href="{{ category_link }}" 
+        class="ai-category-links__item-{{ ai_gen_id }}"
+      >
+        <div class="ai-category-links__image-wrapper-{{ ai_gen_id }}">
+          {% if category_image %}
+            <img
+              src="{{ category_image | image_url: width: 400 }}"
+              alt="{{ category_label | escape }}"
+              loading="lazy"
+              width="400"
+              height="400"
+              class="ai-category-links__image-{{ ai_gen_id }}"
+            >
+          {% else %}
+            <div class="ai-category-links__placeholder-{{ ai_gen_id }}">
+              {{ 'collection-apparel-1' | placeholder_svg_tag }}
+            </div>
+          {% endif %}
+        </div>
+        {% if category_label != blank %}
+          <span class="ai-category-links__label-{{ ai_gen_id }}">{{ category_label }}</span>
+        {% endif %}
+      </a>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Category links",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Category 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "category_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "category_1_label",
+      "label": "Label",
+      "default": "Category 1"
+    },
+    {
+      "type": "url",
+      "id": "category_1_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "category_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "category_2_label",
+      "label": "Label",
+      "default": "Category 2"
+    },
+    {
+      "type": "url",
+      "id": "category_2_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "category_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "category_3_label",
+      "label": "Label",
+      "default": "Category 3"
+    },
+    {
+      "type": "url",
+      "id": "category_3_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "category_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "category_4_label",
+      "label": "Label",
+      "default": "Category 4"
+    },
+    {
+      "type": "url",
+      "id": "category_4_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "min": 4,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Spacing",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "range",
+      "id": "label_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Label size",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category links"
+    }
+  ]
+}
+{% endschema %}

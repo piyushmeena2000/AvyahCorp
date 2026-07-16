@@ -1,0 +1,612 @@
+{% doc %}
+  @prompt
+    create vertical tabs with tab headings as image and section with left image and right hand side text, need horizontal tabs and not vertical, tab heading alignment in center
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-horizontal-tabs-{{ ai_gen_id }} {
+    padding: {{ block.settings.padding }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-horizontal-tabs__nav-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    gap: {{ block.settings.tab_gap }}px;
+    margin-bottom: {{ block.settings.content_margin_top }}px;
+    overflow-x: auto;
+    border-bottom: {{ block.settings.nav_border_width }}px solid {{ block.settings.nav_border_color }};
+    padding-bottom: {{ block.settings.tab_gap }}px;
+  }
+
+  .ai-horizontal-tabs__tab-button-{{ ai_gen_id }} {
+    background: none;
+    border: {{ block.settings.tab_border_width }}px solid {{ block.settings.tab_border_color }};
+    border-radius: {{ block.settings.tab_border_radius }}px;
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    opacity: 0.6;
+    flex-shrink: 0;
+  }
+
+  .ai-horizontal-tabs__tab-button-{{ ai_gen_id }}:hover {
+    opacity: 0.8;
+    transform: translateY(-4px);
+  }
+
+  .ai-horizontal-tabs__tab-button-{{ ai_gen_id }}.active {
+    opacity: 1;
+    border-color: {{ block.settings.active_tab_border_color }};
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-horizontal-tabs__tab-image-{{ ai_gen_id }} {
+    width: {{ block.settings.tab_image_width }}px;
+    height: {{ block.settings.tab_image_height }}px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-horizontal-tabs__tab-placeholder-{{ ai_gen_id }} {
+    width: {{ block.settings.tab_image_width }}px;
+    height: {{ block.settings.tab_image_height }}px;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-horizontal-tabs__tab-placeholder-{{ ai_gen_id }} svg {
+    width: 50%;
+    height: 50%;
+    opacity: 0.3;
+  }
+
+  .ai-horizontal-tabs__content-{{ ai_gen_id }} {
+    width: 100%;
+  }
+
+  .ai-horizontal-tabs__panel-{{ ai_gen_id }} {
+    display: none;
+    opacity: 0;
+  }
+
+  .ai-horizontal-tabs__panel-{{ ai_gen_id }}.active {
+    display: flex;
+    gap: {{ block.settings.content_gap }}px;
+    opacity: 1;
+  }
+
+  .ai-horizontal-tabs__image-wrapper-{{ ai_gen_id }} {
+    flex: 0 0 {{ block.settings.image_width }}%;
+    max-width: {{ block.settings.image_width }}%;
+  }
+
+  .ai-horizontal-tabs__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    border-radius: {{ block.settings.content_image_radius }}px;
+    object-fit: cover;
+  }
+
+  .ai-horizontal-tabs__image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: #f4f4f4;
+    border-radius: {{ block.settings.content_image_radius }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-horizontal-tabs__image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-horizontal-tabs__text-wrapper-{{ ai_gen_id }} {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.text_gap }}px;
+    
+  }
+
+  .ai-horizontal-tabs__text-wrapper-{{ ai_gen_id }} a {
+        color: #000;
+    background: #E2C39C;
+    padding: 13px 25px;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-top: 10px;
+    position: absolute;
+  }
+
+  .ai-horizontal-tabs__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0;
+    margin-bottom: 30px;
+  }
+
+  .ai-horizontal-tabs__description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    color: {{ block.settings.description_color }};
+    line-height: 1.6;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-horizontal-tabs__panel-{{ ai_gen_id }}.active {
+      flex-direction: column;
+    }
+
+    .ai-horizontal-tabs__image-wrapper-{{ ai_gen_id }} {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+{% endstyle %}
+
+<horizontal-tabs-{{ ai_gen_id }} class="ai-horizontal-tabs-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-horizontal-tabs__nav-{{ ai_gen_id }}">
+    {% for i in (1..4) %}
+      {% liquid
+        assign tab_enabled_key = 'tab_' | append: i | append: '_enabled'
+        assign tab_image_key = 'tab_' | append: i | append: '_image'
+        assign tab_enabled = block.settings[tab_enabled_key]
+        assign tab_image = block.settings[tab_image_key]
+      %}
+
+      {% if tab_enabled %}
+        <button
+          class="ai-horizontal-tabs__tab-button-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}"
+          data-tab="{{ i }}"
+          aria-label="Tab {{ i }}"
+          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+        >
+          {% if tab_image %}
+            <img
+              src="{{ tab_image | image_url: width: 400 }}"
+              alt="{{ tab_image.alt | escape }}"
+              class="ai-horizontal-tabs__tab-image-{{ ai_gen_id }}"
+              loading="lazy"
+              width="{{ block.settings.tab_image_width }}"
+              height="{{ block.settings.tab_image_height }}"
+            >
+          {% else %}
+            <div class="ai-horizontal-tabs__tab-placeholder-{{ ai_gen_id }}">
+              {{ 'image' | placeholder_svg_tag }}
+            </div>
+          {% endif %}
+        </button>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="ai-horizontal-tabs__content-{{ ai_gen_id }}">
+    {% for i in (1..4) %}
+      {% liquid
+        assign tab_enabled_key = 'tab_' | append: i | append: '_enabled'
+        assign content_image_key = 'tab_' | append: i | append: '_content_image'
+        assign content_title_key = 'tab_' | append: i | append: '_title'
+        assign content_description_key = 'tab_' | append: i | append: '_description'
+        
+        assign tab_enabled = block.settings[tab_enabled_key]
+        assign content_image = block.settings[content_image_key]
+        assign content_title = block.settings[content_title_key]
+        assign content_description = block.settings[content_description_key]
+      %}
+
+      {% if tab_enabled %}
+        <div
+          class="ai-horizontal-tabs__panel-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}"
+          data-panel="{{ i }}"
+          role="tabpanel"
+        >
+          <div class="ai-horizontal-tabs__image-wrapper-{{ ai_gen_id }}">
+            {% if content_image %}
+              <img
+                src="{{ content_image | image_url: width: 1000 }}"
+                alt="{{ content_image.alt | escape }}"
+                class="ai-horizontal-tabs__image-{{ ai_gen_id }}"
+                loading="lazy"
+                width="{{ content_image.width }}"
+                height="{{ content_image.height }}"
+              >
+            {% else %}
+              <div class="ai-horizontal-tabs__image-placeholder-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="ai-horizontal-tabs__text-wrapper-{{ ai_gen_id }}">
+            {% if content_title != blank %}
+              <h3 class="ai-horizontal-tabs__title-{{ ai_gen_id }}">{{ content_title }}</h3>
+            {% endif %}
+
+            {% if content_description != blank %}
+              <div class="ai-horizontal-tabs__description-{{ ai_gen_id }}">
+                {{ content_description }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</horizontal-tabs-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class HorizontalTabs{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.tabs = this.querySelectorAll('.ai-horizontal-tabs__tab-button-{{ ai_gen_id }}');
+        this.panels = this.querySelectorAll('.ai-horizontal-tabs__panel-{{ ai_gen_id }}');
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            const tabId = tab.getAttribute('data-tab');
+            this.switchTab(tabId);
+          });
+        });
+      }
+
+      switchTab(tabId) {
+        this.tabs.forEach((tab) => {
+          const isActive = tab.getAttribute('data-tab') === tabId;
+          tab.classList.toggle('active', isActive);
+          tab.setAttribute('aria-selected', isActive);
+        });
+
+        this.panels.forEach((panel) => {
+          const isActive = panel.getAttribute('data-panel') === tabId;
+          panel.classList.toggle('active', isActive);
+        });
+      }
+    }
+
+    customElements.define('horizontal-tabs-{{ ai_gen_id }}', HorizontalTabs{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Horizontal tabs",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Tab navigation"
+    },
+    {
+      "type": "range",
+      "id": "tab_image_width",
+      "min": 80,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Tab image width",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "tab_image_height",
+      "min": 60,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Tab image height",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "tab_gap",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "label": "Gap between tabs",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "tab_border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Tab border width",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "tab_border_color",
+      "label": "Tab border color",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "color",
+      "id": "active_tab_border_color",
+      "label": "Active tab border color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "tab_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Tab border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "nav_border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Navigation border width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "nav_border_color",
+      "label": "Navigation border color",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "range",
+      "id": "content_margin_top",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Content top spacing",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Content area"
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Gap between image and text",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 30,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "label": "Image width",
+      "default": 45
+    },
+    {
+      "type": "range",
+      "id": "content_image_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "text_gap",
+      "min": 5,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Gap between title and text",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 28
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Tab 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_1_enabled",
+      "label": "Enable tab 1",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_1_image",
+      "label": "Tab image"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_1_content_image",
+      "label": "Content image"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_title",
+      "label": "Title",
+      "default": "Feature One"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_description",
+      "label": "Description",
+      "default": "<p>Describe your first feature here. Add details about what makes this special and why customers should care.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Tab 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_2_enabled",
+      "label": "Enable tab 2",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_2_image",
+      "label": "Tab image"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_2_content_image",
+      "label": "Content image"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_title",
+      "label": "Title",
+      "default": "Feature Two"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_description",
+      "label": "Description",
+      "default": "<p>Describe your second feature here. Highlight the benefits and unique aspects of this offering.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Tab 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_3_enabled",
+      "label": "Enable tab 3",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_3_image",
+      "label": "Tab image"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_3_content_image",
+      "label": "Content image"
+    },
+    {
+      "type": "text",
+      "id": "tab_3_title",
+      "label": "Title",
+      "default": "Feature Three"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_3_description",
+      "label": "Description",
+      "default": "<p>Describe your third feature here. Explain what sets this apart and how it adds value.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Tab 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_4_enabled",
+      "label": "Enable tab 4",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_4_image",
+      "label": "Tab image"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_4_content_image",
+      "label": "Content image"
+    },
+    {
+      "type": "text",
+      "id": "tab_4_title",
+      "label": "Title",
+      "default": "Feature Four"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_4_description",
+      "label": "Description",
+      "default": "<p>Describe your fourth feature here. Share the key points that make this feature valuable.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Horizontal tabs"
+    }
+  ],
+  "tag": null
+}
+{% endschema %}

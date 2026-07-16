@@ -1,0 +1,1814 @@
+{% doc %}
+  @prompt
+    Create a premium Shopify Reel Video Section using Shopify Liquid, HTML, CSS, and JavaScript. This section must be fully compatible with Shopify Theme Customizer and support Shopify-hosted videos uploaded directly from the Shopify admin/customizer.
+    
+    IMPORTANT:
+    
+    * Videos will ONLY come from Shopify video picker/upload.
+    * Do NOT use external video URLs.
+    * Use Shopify native video settings and Liquid schema blocks.
+    * Section must be production-ready, responsive, smooth, and optimized.
+    
+    SECTION STRUCTURE:
+    
+    * Create a horizontal reel carousel section inspired by premium D2C brands like SuperYou and MaxProtein.
+    * Use a modern cinematic layout with luxury UI/UX.
+    * Section should feel immersive, smooth, and premium.
+    
+    SHOPIFY CUSTOMIZER SETTINGS:
+    Provide controls inside Shopify schema for:
+    
+    * Section background color picker
+    * Background overlay opacity slider
+    * Section top padding
+    * Section bottom padding
+    * Reel gap spacing
+    * Border radius control
+    * Hover scale intensity
+    * Navigation button color
+    * Navigation button background
+    * Navigation icon color
+    * Fullscreen overlay opacity
+    * Auto-scroll speed
+    * Enable/disable autoplay
+    * Enable/disable auto-scroll
+    
+    VIDEO BLOCK SETTINGS:
+    Create exactly 15 blocks maximum.
+    Each block should support:
+    
+    * Shopify video upload picker
+    * Poster image
+    * Optional reel title
+    * Optional reel link
+    * Enable/disable individual reel
+    
+    IMPORTANT:
+    
+    * Empty blocks must NOT render.
+    * Only uploaded videos should appear.
+    * Dynamic rendering required.
+    
+    DESKTOP LAYOUT:
+    
+    * Show exactly 4 videos visible.
+    * Horizontal reel layout.
+    * Equal spacing between reels.
+    * Premium modern spacing and padding.
+    * Videos should NEVER get cut when hover scaling.
+    * Add outer container padding to prevent clipping.
+    * Smooth snapping behavior.
+    * Mouse drag support.
+    * Mouse wheel horizontal scroll support.
+    * Working navigation arrows on both sides.
+    
+    MOBILE LAYOUT:
+    
+    * Show 3 partial videos visible.
+    * Smooth touch swipe support.
+    * Momentum scrolling.
+    * Snap scrolling.
+    * Optimized spacing and sizing for mobile.
+    * Touch drag must work smoothly.
+    
+    VIDEO CARD EFFECTS:
+    
+    * Rounded corners.
+    * Premium shadows.
+    * Slight hover enlarge effect.
+    * Hover scale should smoothly increase size slightly.
+    * IMPORTANT:
+      Hover scaling must NOT crop or cut video from edges.
+    * Add overflow visible where needed.
+    * Use transform scale instead of resizing dimensions.
+    * Smooth transition easing.
+    
+    VIDEO BEHAVIOR:
+    
+    * Videos autoplay muted.
+    * Loop continuously.
+    * No controls in normal carousel mode.
+    * Videos pause when outside viewport.
+    * Videos lazy load for performance.
+    * Use Intersection Observer.
+    * Autoplay should work properly on mobile.
+    
+    AUTO SCROLL:
+    
+    * Smooth infinite horizontal auto-scroll.
+    * Pause auto-scroll on:
+    
+      * hover
+      * touch
+      * dragging
+      * fullscreen open
+    * Resume after inactivity.
+    * Smooth cinematic speed.
+    
+    NAVIGATION BUTTONS:
+    IMPORTANT:
+    
+    * Navigation buttons MUST fully work.
+    * Left/right buttons should scroll properly.
+    * Add smooth animated transitions.
+    * Buttons should remain clickable above videos.
+    * Add proper z-index handling.
+    * Buttons should work on both desktop and mobile.
+    * Use glassmorphism style buttons.
+    
+    DRAG FUNCTIONALITY:
+    IMPORTANT:
+    
+    * Drag/swipe MUST work smoothly.
+    * Fix dragging behavior completely.
+    * Mouse drag on desktop.
+    * Touch swipe on mobile.
+    * Prevent accidental text/image selection while dragging.
+    * Add grabbing cursor while dragging.
+    * Use momentum/inertia feel.
+    * Prevent jitter or lag.
+    * Maintain smooth 60fps performance.
+    
+    FULLSCREEN MODAL:
+    IMPORTANT:
+    
+    * Fullscreen mode must ONLY show the video.
+    * Header, announcement bar, and page content must NOT appear.
+    * Fullscreen overlay must cover the ENTIRE viewport.
+    * Use:
+    
+      * position: fixed
+      * inset: 0
+      * width: 100vw
+      * height: 100vh
+      * very high z-index
+    * Disable body scrolling when modal opens.
+    
+    FULLSCREEN UI:
+    When user clicks a reel:
+    
+    * Open fullscreen reel modal.
+    * Black overlay background.
+    * Add opacity control from Shopify settings.
+    * Show ONLY the video centered.
+    * Hide website header completely.
+    * Hide all page UI behind modal.
+    
+    FULLSCREEN VIDEO CONTROLS:
+    IMPORTANT:
+    Enable ALL controls in fullscreen:
+    
+    * Play/pause
+    * Sound mute/unmute
+    * Volume control
+    * Progress bar
+    * Fullscreen native control
+    * Next reel button
+    * Previous reel button
+    * Close button
+    * Keyboard navigation
+    * Touch swipe navigation
+    
+    IMPORTANT:
+    
+    * Sound toggle MUST work.
+    * Navigation controls MUST appear.
+    * Previous/next buttons MUST work.
+    * Controls should auto-hide after inactivity.
+    * Reappear on mouse movement/touch.
+    
+    FULLSCREEN NAVIGATION:
+    
+    * Left/right arrows for next previous reel.
+    * Keyboard support:
+    
+      * ESC closes modal
+      * Left arrow previous reel
+      * Right arrow next reel
+    * Mobile swipe support in fullscreen.
+    * Disable carousel auto-scroll during fullscreen.
+    
+    PERFORMANCE OPTIMIZATION:
+    
+    * Lazy load videos.
+    * GPU accelerated transforms.
+    * Use translate3d transforms.
+    * Avoid layout shifts.
+    * Smooth animations only.
+    * Optimized for Shopify storefront speed.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-reel-section-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    background-color: {{ block.settings.section_bg_color }};
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-reel-container-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 40px;
+  }
+
+  .ai-reel-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    overflow: visible;
+  }
+
+  .ai-reel-track-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.reel_gap }}px;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: grab;
+    user-select: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding: 20px 0;
+  }
+
+  .ai-reel-track-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-reel-track-{{ ai_gen_id }}.dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+  }
+
+  .ai-reel-card-{{ ai_gen_id }} {
+    flex: 0 0 calc((100% - (3 * {{ block.settings.reel_gap }}px)) / 4);
+    min-width: calc((100% - (3 * {{ block.settings.reel_gap }}px)) / 4);
+    position: relative;
+    border-radius: {{ block.settings.border_radius }}px;
+    overflow: hidden;
+    scroll-snap-align: start;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-reel-card-{{ ai_gen_id }}:hover {
+    transform: scale({{ block.settings.hover_scale }});
+    z-index: 2;
+  }
+
+  .ai-reel-video-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    background-color: #000;
+    border-radius: {{ block.settings.border_radius }}px;
+    overflow: hidden;
+  }
+
+  .ai-reel-video-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-reel-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(0,0,0,{{ block.settings.overlay_opacity }}));
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .ai-reel-title-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .ai-reel-nav-btn-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: {{ block.settings.nav_btn_bg }};
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: {{ block.settings.nav_icon_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    opacity: 0.9;
+  }
+
+  .ai-reel-nav-btn-{{ ai_gen_id }}:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .ai-reel-nav-btn-{{ ai_gen_id }}.prev {
+    left: 0;
+  }
+
+  .ai-reel-nav-btn-{{ ai_gen_id }}.next {
+    right: 0;
+  }
+
+  .ai-reel-fullscreen-{{ ai_gen_id }} {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, {{ block.settings.fullscreen_overlay_opacity }});
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .ai-reel-fullscreen-{{ ai_gen_id }}.active {
+    display: flex;
+  }
+
+  .ai-reel-fullscreen-content-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-reel-fullscreen-video-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+
+  .ai-reel-fullscreen-close-{{ ai_gen_id }} {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.3s ease;
+  }
+
+  .ai-reel-fullscreen-close-{{ ai_gen_id }}:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+  }
+
+  .ai-reel-fullscreen-nav-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.3s ease;
+  }
+
+  .ai-reel-fullscreen-nav-{{ ai_gen_id }}:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .ai-reel-fullscreen-nav-{{ ai_gen_id }}.prev {
+    left: 20px;
+  }
+
+  .ai-reel-fullscreen-nav-{{ ai_gen_id }}.next {
+    right: 20px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-reel-container-{{ ai_gen_id }} {
+      padding: 0 20px;
+    }
+
+    .ai-reel-card-{{ ai_gen_id }} {
+      flex: 0 0 calc((100% - (2 * {{ block.settings.reel_gap }}px)) / 3);
+      min-width: calc((100% - (2 * {{ block.settings.reel_gap }}px)) / 3);
+    }
+
+    .ai-reel-nav-btn-{{ ai_gen_id }} {
+      width: 40px;
+      height: 40px;
+    }
+
+    .ai-reel-fullscreen-content-{{ ai_gen_id }} {
+      max-width: 100%;
+      height: 100vh;
+    }
+
+    .ai-reel-fullscreen-video-{{ ai_gen_id }} {
+      border-radius: 0;
+    }
+  }
+{% endstyle %}
+
+<reel-carousel-{{ ai_gen_id }}
+  class="ai-reel-section-{{ ai_gen_id }}"
+  data-auto-scroll="{{ block.settings.enable_auto_scroll }}"
+  data-auto-scroll-speed="{{ block.settings.auto_scroll_speed }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-reel-container-{{ ai_gen_id }}">
+    <div class="ai-reel-wrapper-{{ ai_gen_id }}">
+      <button class="ai-reel-nav-btn-{{ ai_gen_id }} prev" aria-label="Previous">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="ai-reel-track-{{ ai_gen_id }}">
+        {% if block.settings.enable_reel_1 and block.settings.video_1 != blank %}
+          <div class="ai-reel-card-{{ ai_gen_id }}" data-video-index="0">
+            <div class="ai-reel-video-wrapper-{{ ai_gen_id }}">
+              <video
+                class="ai-reel-video-{{ ai_gen_id }}"
+                src="{{ block.settings.video_1.sources[1].url }}"
+                {% if block.settings.poster_image_1 %}
+                  poster="{{ block.settings.poster_image_1 | image_url: width: 600 }}"
+                {% endif %}
+                playsinline
+                muted
+                loop
+                {% if block.settings.enable_autoplay_1 %}autoplay{% endif %}
+                preload="metadata"
+              ></video>
+              <div class="ai-reel-overlay-{{ ai_gen_id }}"></div>
+              {% if block.settings.reel_title_1 != blank %}
+                <div class="ai-reel-title-{{ ai_gen_id }}">{{ block.settings.reel_title_1 }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.enable_reel_2 and block.settings.video_2 != blank %}
+          <div class="ai-reel-card-{{ ai_gen_id }}" data-video-index="1">
+            <div class="ai-reel-video-wrapper-{{ ai_gen_id }}">
+              <video
+                class="ai-reel-video-{{ ai_gen_id }}"
+                src="{{ block.settings.video_2.sources[1].url }}"
+                {% if block.settings.poster_image_2 %}
+                  poster="{{ block.settings.poster_image_2 | image_url: width: 600 }}"
+                {% endif %}
+                playsinline
+                muted
+                loop
+                {% if block.settings.enable_autoplay_2 %}autoplay{% endif %}
+                preload="metadata"
+              ></video>
+              <div class="ai-reel-overlay-{{ ai_gen_id }}"></div>
+              {% if block.settings.reel_title_2 != blank %}
+                <div class="ai-reel-title-{{ ai_gen_id }}">{{ block.settings.reel_title_2 }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.enable_reel_3 and block.settings.video_3 != blank %}
+          <div class="ai-reel-card-{{ ai_gen_id }}" data-video-index="2">
+            <div class="ai-reel-video-wrapper-{{ ai_gen_id }}">
+              <video
+                class="ai-reel-video-{{ ai_gen_id }}"
+                src="{{ block.settings.video_3.sources[1].url }}"
+                {% if block.settings.poster_image_3 %}
+                  poster="{{ block.settings.poster_image_3 | image_url: width: 600 }}"
+                {% endif %}
+                playsinline
+                muted
+                loop
+                {% if block.settings.enable_autoplay_3 %}autoplay{% endif %}
+                preload="metadata"
+              ></video>
+              <div class="ai-reel-overlay-{{ ai_gen_id }}"></div>
+              {% if block.settings.reel_title_3 != blank %}
+                <div class="ai-reel-title-{{ ai_gen_id }}">{{ block.settings.reel_title_3 }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.enable_reel_4 and block.settings.video_4 != blank %}
+          <div class="ai-reel-card-{{ ai_gen_id }}" data-video-index="3">
+            <div class="ai-reel-video-wrapper-{{ ai_gen_id }}">
+              <video
+                class="ai-reel-video-{{ ai_gen_id }}"
+                src="{{ block.settings.video_4.sources[1].url }}"
+                {% if block.settings.poster_image_4 %}
+                  poster="{{ block.settings.poster_image_4 | image_url: width: 600 }}"
+                {% endif %}
+                playsinline
+                muted
+                loop
+                {% if block.settings.enable_autoplay_4 %}autoplay{% endif %}
+                preload="metadata"
+              ></video>
+              <div class="ai-reel-overlay-{{ ai_gen_id }}"></div>
+              {% if block.settings.reel_title_4 != blank %}
+                <div class="ai-reel-title-{{ ai_gen_id }}">{{ block.settings.reel_title_4 }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.enable_reel_5 and block.settings.video_5 != blank %}
+          <div class="ai-reel-card-{{ ai_gen_id }}" data-video-index="4">
+            <div class="ai-reel-video-wrapper-{{ ai_gen_id }}">
+              <video
+                class="ai-reel-video-{{ ai_gen_id }}"
+                src="{{ block.settings.video_5.sources[1].url }}"
+                {% if block.settings.poster_image_5 %}
+                  poster="{{ block.settings.poster_image_5 | image_url: width: 600 }}"
+                {% endif %}
+                playsinline
+                muted
+                loop
+                {% if block.settings.enable_autoplay_5 %}autoplay{% endif %}
+                preload="metadata"
+              ></video>
+              <div class="ai-reel-overlay-{{ ai_gen_id }}"></div>
+              {% if block.settings.reel_title_5 != blank %}
+                <div class="ai-reel-title-{{ ai_gen_id }}">{{ block.settings.reel_title_5 }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.enable_reel_6 and block.settings.video_6 != blank %}
+          <div class="ai-reel-card-{{ ai_gen_id }}" data-video-index="5">
+            <div class="ai-reel-video-wrapper-{{ ai_gen_id }}">
+              <video
+                class="ai-reel-video-{{ ai_gen_id }}"
+                src="{{ block.settings.video_6.sources[1].url }}"
+                {% if block.settings.poster_image_6 %}
+                  poster="{{ block.settings.poster_image_6 | image_url: width: 600 }}"
+                {% endif %}
+                playsinline
+                muted
+                loop
+                {% if block.settings.enable_autoplay_6 %}autoplay{% endif %}
+                preload="metadata"
+              ></video>
+              <div class="ai-reel-overlay-{{ ai_gen_id }}"></div>
+              {% if block.settings.reel_title_6 != blank %}
+                <div class="ai-reel-title-{{ ai_gen_id }}">{{ block.settings.reel_title_6 }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.enable_reel_7 and block.settings.video_7 != blank %}
+          <div class="ai-reel-card-{{ ai_gen_id }}" data-video-index="6">
+            <div class="ai-reel-video-wrapper-{{ ai_gen_id }}">
+              <video
+                class="ai-reel-video-{{ ai_gen_id }}"
+                src="{{ block.settings.video_7.sources[1].url }}"
+                {% if block.settings.poster_image_7 %}
+                  poster="{{ block.settings.poster_image_7 | image_url: width: 600 }}"
+                {% endif %}
+                playsinline
+                muted
+                loop
+                {% if block.settings.enable_autoplay_7 %}autoplay{% endif %}
+                preload="metadata"
+              ></video>
+              <div class="ai-reel-overlay-{{ ai_gen_id }}"></div>
+              {% if block.settings.reel_title_7 != blank %}
+                <div class="ai-reel-title-{{ ai_gen_id }}">{{ block.settings.reel_title_7 }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.enable_reel_8 and block.settings.video_8 != blank %}
+          <div class="ai-reel-card-{{ ai_gen_id }}" data-video-index="7">
+            <div class="ai-reel-video-wrapper-{{ ai_gen_id }}">
+              <video
+                class="ai-reel-video-{{ ai_gen_id }}"
+                src="{{ block.settings.video_8.sources[1].url }}"
+                {% if block.settings.poster_image_8 %}
+                  poster="{{ block.settings.poster_image_8 | image_url: width: 600 }}"
+                {% endif %}
+                playsinline
+                muted
+                loop
+                {% if block.settings.enable_autoplay_8 %}autoplay{% endif %}
+                preload="metadata"
+              ></video>
+              <div class="ai-reel-overlay-{{ ai_gen_id }}"></div>
+              {% if block.settings.reel_title_8 != blank %}
+                <div class="ai-reel-title-{{ ai_gen_id }}">{{ block.settings.reel_title_8 }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.enable_reel_9 and block.settings.video_9 != blank %}
+          <div class="ai-reel-card-{{ ai_gen_id }}" data-video-index="8">
+            <div class="ai-reel-video-wrapper-{{ ai_gen_id }}">
+              <video
+                class="ai-reel-video-{{ ai_gen_id }}"
+                src="{{ block.settings.video_9.sources[1].url }}"
+                {% if block.settings.poster_image_9 %}
+                  poster="{{ block.settings.poster_image_9 | image_url: width: 600 }}"
+                {% endif %}
+                playsinline
+                muted
+                loop
+                {% if block.settings.enable_autoplay_9 %}autoplay{% endif %}
+                preload="metadata"
+              ></video>
+              <div class="ai-reel-overlay-{{ ai_gen_id }}"></div>
+              {% if block.settings.reel_title_9 != blank %}
+                <div class="ai-reel-title-{{ ai_gen_id }}">{{ block.settings.reel_title_9 }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.enable_reel_10 and block.settings.video_10 != blank %}
+          <div class="ai-reel-card-{{ ai_gen_id }}" data-video-index="9">
+            <div class="ai-reel-video-wrapper-{{ ai_gen_id }}">
+              <video
+                class="ai-reel-video-{{ ai_gen_id }}"
+                src="{{ block.settings.video_10.sources[1].url }}"
+                {% if block.settings.poster_image_10 %}
+                  poster="{{ block.settings.poster_image_10 | image_url: width: 600 }}"
+                {% endif %}
+                playsinline
+                muted
+                loop
+                {% if block.settings.enable_autoplay_10 %}autoplay{% endif %}
+                preload="metadata"
+              ></video>
+              <div class="ai-reel-overlay-{{ ai_gen_id }}"></div>
+              {% if block.settings.reel_title_10 != blank %}
+                <div class="ai-reel-title-{{ ai_gen_id }}">{{ block.settings.reel_title_10 }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.enable_reel_11 and block.settings.video_11 != blank %}
+          <div class="ai-reel-card-{{ ai_gen_id }}" data-video-index="10">
+            <div class="ai-reel-video-wrapper-{{ ai_gen_id }}">
+              <video
+                class="ai-reel-video-{{ ai_gen_id }}"
+                src="{{ block.settings.video_11.sources[1].url }}"
+                {% if block.settings.poster_image_11 %}
+                  poster="{{ block.settings.poster_image_11 | image_url: width: 600 }}"
+                {% endif %}
+                playsinline
+                muted
+                loop
+                {% if block.settings.enable_autoplay_11 %}autoplay{% endif %}
+                preload="metadata"
+              ></video>
+              <div class="ai-reel-overlay-{{ ai_gen_id }}"></div>
+              {% if block.settings.reel_title_11 != blank %}
+                <div class="ai-reel-title-{{ ai_gen_id }}">{{ block.settings.reel_title_11 }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.enable_reel_12 and block.settings.video_12 != blank %}
+          <div class="ai-reel-card-{{ ai_gen_id }}" data-video-index="11">
+            <div class="ai-reel-video-wrapper-{{ ai_gen_id }}">
+              <video
+                class="ai-reel-video-{{ ai_gen_id }}"
+                src="{{ block.settings.video_12.sources[1].url }}"
+                {% if block.settings.poster_image_12 %}
+                  poster="{{ block.settings.poster_image_12 | image_url: width: 600 }}"
+                {% endif %}
+                playsinline
+                muted
+                loop
+                {% if block.settings.enable_autoplay_12 %}autoplay{% endif %}
+                preload="metadata"
+              ></video>
+              <div class="ai-reel-overlay-{{ ai_gen_id }}"></div>
+              {% if block.settings.reel_title_12 != blank %}
+                <div class="ai-reel-title-{{ ai_gen_id }}">{{ block.settings.reel_title_12 }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.enable_reel_13 and block.settings.video_13 != blank %}
+          <div class="ai-reel-card-{{ ai_gen_id }}" data-video-index="12">
+            <div class="ai-reel-video-wrapper-{{ ai_gen_id }}">
+              <video
+                class="ai-reel-video-{{ ai_gen_id }}"
+                src="{{ block.settings.video_13.sources[1].url }}"
+                {% if block.settings.poster_image_13 %}
+                  poster="{{ block.settings.poster_image_13 | image_url: width: 600 }}"
+                {% endif %}
+                playsinline
+                muted
+                loop
+                {% if block.settings.enable_autoplay_13 %}autoplay{% endif %}
+                preload="metadata"
+              ></video>
+              <div class="ai-reel-overlay-{{ ai_gen_id }}"></div>
+              {% if block.settings.reel_title_13 != blank %}
+                <div class="ai-reel-title-{{ ai_gen_id }}">{{ block.settings.reel_title_13 }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.enable_reel_14 and block.settings.video_14 != blank %}
+          <div class="ai-reel-card-{{ ai_gen_id }}" data-video-index="13">
+            <div class="ai-reel-video-wrapper-{{ ai_gen_id }}">
+              <video
+                class="ai-reel-video-{{ ai_gen_id }}"
+                src="{{ block.settings.video_14.sources[1].url }}"
+                {% if block.settings.poster_image_14 %}
+                  poster="{{ block.settings.poster_image_14 | image_url: width: 600 }}"
+                {% endif %}
+                playsinline
+                muted
+                loop
+                {% if block.settings.enable_autoplay_14 %}autoplay{% endif %}
+                preload="metadata"
+              ></video>
+              <div class="ai-reel-overlay-{{ ai_gen_id }}"></div>
+              {% if block.settings.reel_title_14 != blank %}
+                <div class="ai-reel-title-{{ ai_gen_id }}">{{ block.settings.reel_title_14 }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.enable_reel_15 and block.settings.video_15 != blank %}
+          <div class="ai-reel-card-{{ ai_gen_id }}" data-video-index="14">
+            <div class="ai-reel-video-wrapper-{{ ai_gen_id }}">
+              <video
+                class="ai-reel-video-{{ ai_gen_id }}"
+                src="{{ block.settings.video_15.sources[1].url }}"
+                {% if block.settings.poster_image_15 %}
+                  poster="{{ block.settings.poster_image_15 | image_url: width: 600 }}"
+                {% endif %}
+                playsinline
+                muted
+                loop
+                {% if block.settings.enable_autoplay_15 %}autoplay{% endif %}
+                preload="metadata"
+              ></video>
+              <div class="ai-reel-overlay-{{ ai_gen_id }}"></div>
+              {% if block.settings.reel_title_15 != blank %}
+                <div class="ai-reel-title-{{ ai_gen_id }}">{{ block.settings.reel_title_15 }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <button class="ai-reel-nav-btn-{{ ai_gen_id }} next" aria-label="Next">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="ai-reel-fullscreen-{{ ai_gen_id }}">
+    <button class="ai-reel-fullscreen-close-{{ ai_gen_id }}" aria-label="Close">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <button class="ai-reel-fullscreen-nav-{{ ai_gen_id }} prev" aria-label="Previous">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+
+    <div class="ai-reel-fullscreen-content-{{ ai_gen_id }}">
+      <video
+        class="ai-reel-fullscreen-video-{{ ai_gen_id }}"
+        playsinline
+        loop
+        controls
+      ></video>
+    </div>
+
+    <button class="ai-reel-fullscreen-nav-{{ ai_gen_id }} next" aria-label="Next">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </div>
+</reel-carousel-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ReelCarousel{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.track = this.querySelector('.ai-reel-track-{{ ai_gen_id }}');
+        this.cards = this.querySelectorAll('.ai-reel-card-{{ ai_gen_id }}');
+        this.videos = this.querySelectorAll('.ai-reel-video-{{ ai_gen_id }}');
+        this.prevBtn = this.querySelector('.ai-reel-nav-btn-{{ ai_gen_id }}.prev');
+        this.nextBtn = this.querySelector('.ai-reel-nav-btn-{{ ai_gen_id }}.next');
+        this.fullscreen = this.querySelector('.ai-reel-fullscreen-{{ ai_gen_id }}');
+        this.fullscreenVideo = this.querySelector('.ai-reel-fullscreen-video-{{ ai_gen_id }}');
+        this.fullscreenClose = this.querySelector('.ai-reel-fullscreen-close-{{ ai_gen_id }}');
+        this.fullscreenPrev = this.querySelector('.ai-reel-fullscreen-nav-{{ ai_gen_id }}.prev');
+        this.fullscreenNext = this.querySelector('.ai-reel-fullscreen-nav-{{ ai_gen_id }}.next');
+        
+        this.isDragging = false;
+        this.startX = 0;
+        this.scrollLeft = 0;
+        this.currentIndex = 0;
+        this.autoScrollInterval = null;
+        this.autoScrollEnabled = this.dataset.autoScroll === 'true';
+        this.autoScrollSpeed = parseInt(this.dataset.autoScrollSpeed) || 3000;
+        this.observer = null;
+      }
+
+      connectedCallback() {
+        this.setupDragScroll();
+        this.setupNavigation();
+        this.setupFullscreen();
+        this.setupIntersectionObserver();
+        if (this.autoScrollEnabled) {
+          this.startAutoScroll();
+        }
+      }
+
+      disconnectedCallback() {
+        this.stopAutoScroll();
+        if (this.observer) {
+          this.observer.disconnect();
+        }
+      }
+
+      setupDragScroll() {
+        let velocity = 0;
+        let lastX = 0;
+        let timestamp = 0;
+
+        this.track.addEventListener('mousedown', (e) => {
+          this.isDragging = true;
+          this.startX = e.pageX - this.track.offsetLeft;
+          this.scrollLeft = this.track.scrollLeft;
+          this.track.classList.add('dragging');
+          this.stopAutoScroll();
+          velocity = 0;
+          lastX = e.pageX;
+          timestamp = Date.now();
+        });
+
+        this.track.addEventListener('touchstart', (e) => {
+          this.isDragging = true;
+          this.startX = e.touches[0].pageX - this.track.offsetLeft;
+          this.scrollLeft = this.track.scrollLeft;
+          this.stopAutoScroll();
+          velocity = 0;
+          lastX = e.touches[0].pageX;
+          timestamp = Date.now();
+        }, { passive: true });
+
+        const handleMove = (pageX) => {
+          if (!this.isDragging) return;
+          const x = pageX - this.track.offsetLeft;
+          const walk = (x - this.startX) * 2;
+          this.track.scrollLeft = this.scrollLeft - walk;
+
+          const now = Date.now();
+          const dt = now - timestamp;
+          if (dt > 0) {
+            velocity = (pageX - lastX) / dt;
+          }
+          lastX = pageX;
+          timestamp = now;
+        };
+
+        this.track.addEventListener('mousemove', (e) => {
+          if (!this.isDragging) return;
+          handleMove(e.pageX);
+        });
+
+        this.track.addEventListener('touchmove', (e) => {
+          if (!this.isDragging) return;
+          handleMove(e.touches[0].pageX);
+        }, { passive: true });
+
+        const endDrag = () => {
+          if (this.isDragging) {
+            this.isDragging = false;
+            this.track.classList.remove('dragging');
+            
+            if (Math.abs(velocity) > 0.5) {
+              let momentum = velocity * 100;
+              const deceleration = 0.95;
+              const animate = () => {
+                momentum *= deceleration;
+                this.track.scrollLeft -= momentum;
+                if (Math.abs(momentum) > 0.5) {
+                  requestAnimationFrame(animate);
+                }
+              };
+              animate();
+            }
+
+            if (this.autoScrollEnabled) {
+              setTimeout(() => this.startAutoScroll(), 3000);
+            }
+          }
+        };
+
+        this.track.addEventListener('mouseup', endDrag);
+        this.track.addEventListener('mouseleave', endDrag);
+        this.track.addEventListener('touchend', endDrag);
+
+        this.track.addEventListener('wheel', (e) => {
+          e.preventDefault();
+          this.track.scrollLeft += e.deltaY;
+          this.stopAutoScroll();
+          if (this.autoScrollEnabled) {
+            setTimeout(() => this.startAutoScroll(), 3000);
+          }
+        }, { passive: false });
+      }
+
+      setupNavigation() {
+        this.prevBtn.addEventListener('click', () => {
+          const cardWidth = this.cards[0].offsetWidth;
+          const gap = parseInt('{{ block.settings.reel_gap }}');
+          this.track.scrollBy({ left: -(cardWidth + gap), behavior: 'smooth' });
+          this.stopAutoScroll();
+          if (this.autoScrollEnabled) {
+            setTimeout(() => this.startAutoScroll(), 3000);
+          }
+        });
+
+        this.nextBtn.addEventListener('click', () => {
+          const cardWidth = this.cards[0].offsetWidth;
+          const gap = parseInt('{{ block.settings.reel_gap }}');
+          this.track.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
+          this.stopAutoScroll();
+          if (this.autoScrollEnabled) {
+            setTimeout(() => this.startAutoScroll(), 3000);
+          }
+        });
+      }
+
+      setupFullscreen() {
+        this.cards.forEach((card, index) => {
+          card.addEventListener('click', () => {
+            this.openFullscreen(index);
+          });
+        });
+
+        this.fullscreenClose.addEventListener('click', () => {
+          this.closeFullscreen();
+        });
+
+        this.fullscreenPrev.addEventListener('click', () => {
+          this.navigateFullscreen(-1);
+        });
+
+        this.fullscreenNext.addEventListener('click', () => {
+          this.navigateFullscreen(1);
+        });
+
+        this.fullscreen.addEventListener('click', (e) => {
+          if (e.target === this.fullscreen) {
+            this.closeFullscreen();
+          }
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (!this.fullscreen.classList.contains('active')) return;
+          
+          if (e.key === 'Escape') {
+            this.closeFullscreen();
+          } else if (e.key === 'ArrowLeft') {
+            this.navigateFullscreen(-1);
+          } else if (e.key === 'ArrowRight') {
+            this.navigateFullscreen(1);
+          }
+        });
+
+        let touchStartX = 0;
+        this.fullscreen.addEventListener('touchstart', (e) => {
+          touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+
+        this.fullscreen.addEventListener('touchend', (e) => {
+          const touchEndX = e.changedTouches[0].clientX;
+          const diff = touchStartX - touchEndX;
+          
+          if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+              this.navigateFullscreen(1);
+            } else {
+              this.navigateFullscreen(-1);
+            }
+          }
+        }, { passive: true });
+      }
+
+      openFullscreen(index) {
+        this.currentIndex = index;
+        const video = this.videos[index];
+        this.fullscreenVideo.src = video.src;
+        this.fullscreenVideo.poster = video.poster;
+        this.fullscreen.classList.add('active');
+        this.fullscreenVideo.play();
+        document.body.style.overflow = 'hidden';
+        this.stopAutoScroll();
+      }
+
+      closeFullscreen() {
+        this.fullscreen.classList.remove('active');
+        this.fullscreenVideo.pause();
+        this.fullscreenVideo.src = '';
+        document.body.style.overflow = '';
+        if (this.autoScrollEnabled) {
+          this.startAutoScroll();
+        }
+      }
+
+      navigateFullscreen(direction) {
+        this.currentIndex += direction;
+        if (this.currentIndex < 0) {
+          this.currentIndex = this.videos.length - 1;
+        } else if (this.currentIndex >= this.videos.length) {
+          this.currentIndex = 0;
+        }
+        const video = this.videos[this.currentIndex];
+        this.fullscreenVideo.src = video.src;
+        this.fullscreenVideo.poster = video.poster;
+        this.fullscreenVideo.play();
+      }
+
+      setupIntersectionObserver() {
+        this.observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            const video = entry.target.querySelector('.ai-reel-video-{{ ai_gen_id }}');
+            if (entry.isIntersecting) {
+              video.play().catch(() => {});
+            } else {
+              video.pause();
+            }
+          });
+        }, { threshold: 0.5 });
+
+        this.cards.forEach(card => {
+          this.observer.observe(card);
+        });
+      }
+
+      startAutoScroll() {
+        if (!this.autoScrollEnabled) return;
+        
+        this.autoScrollInterval = setInterval(() => {
+          const cardWidth = this.cards[0].offsetWidth;
+          const gap = parseInt('{{ block.settings.reel_gap }}');
+          const maxScroll = this.track.scrollWidth - this.track.clientWidth;
+          
+          if (this.track.scrollLeft >= maxScroll - 10) {
+            this.track.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            this.track.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
+          }
+        }, this.autoScrollSpeed);
+      }
+
+      stopAutoScroll() {
+        if (this.autoScrollInterval) {
+          clearInterval(this.autoScrollInterval);
+          this.autoScrollInterval = null;
+        }
+      }
+    }
+
+    customElements.define('reel-carousel-{{ ai_gen_id }}', ReelCarousel{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Premium video reel",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.5
+    },
+    {
+      "type": "header",
+      "content": "Reel layout"
+    },
+    {
+      "type": "range",
+      "id": "reel_gap",
+      "label": "Gap spacing",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "hover_scale",
+      "label": "Hover scale",
+      "min": 1,
+      "max": 1.2,
+      "step": 0.1,
+      "default": 1.1
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "color",
+      "id": "nav_btn_bg",
+      "label": "Button background",
+      "default": "rgba(255, 255, 255, 0.2)"
+    },
+    {
+      "type": "color",
+      "id": "nav_icon_color",
+      "label": "Icon color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Fullscreen"
+    },
+    {
+      "type": "range",
+      "id": "fullscreen_overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.9
+    },
+    {
+      "type": "header",
+      "content": "Auto scroll"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_auto_scroll",
+      "label": "Enable auto scroll",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "auto_scroll_speed",
+      "label": "Speed",
+      "min": 1000,
+      "max": 8000,
+      "step": 500,
+      "unit": "ms",
+      "default": 3000
+    },
+    {
+      "type": "header",
+      "content": "Reel 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_reel_1",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "video",
+      "id": "video_1",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_1",
+      "label": "Poster image"
+    },
+    {
+      "type": "text",
+      "id": "reel_title_1",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "reel_link_1",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay_1",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Reel 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_reel_2",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "video",
+      "id": "video_2",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_2",
+      "label": "Poster image"
+    },
+    {
+      "type": "text",
+      "id": "reel_title_2",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "reel_link_2",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay_2",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Reel 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_reel_3",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "video",
+      "id": "video_3",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_3",
+      "label": "Poster image"
+    },
+    {
+      "type": "text",
+      "id": "reel_title_3",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "reel_link_3",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay_3",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Reel 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_reel_4",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "video",
+      "id": "video_4",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_4",
+      "label": "Poster image"
+    },
+    {
+      "type": "text",
+      "id": "reel_title_4",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "reel_link_4",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay_4",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Reel 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_reel_5",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "video",
+      "id": "video_5",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_5",
+      "label": "Poster image"
+    },
+    {
+      "type": "text",
+      "id": "reel_title_5",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "reel_link_5",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay_5",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Reel 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_reel_6",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "video",
+      "id": "video_6",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_6",
+      "label": "Poster image"
+    },
+    {
+      "type": "text",
+      "id": "reel_title_6",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "reel_link_6",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay_6",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Reel 7"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_reel_7",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "video",
+      "id": "video_7",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_7",
+      "label": "Poster image"
+    },
+    {
+      "type": "text",
+      "id": "reel_title_7",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "reel_link_7",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay_7",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Reel 8"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_reel_8",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "video",
+      "id": "video_8",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_8",
+      "label": "Poster image"
+    },
+    {
+      "type": "text",
+      "id": "reel_title_8",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "reel_link_8",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay_8",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Reel 9"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_reel_9",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "video",
+      "id": "video_9",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_9",
+      "label": "Poster image"
+    },
+    {
+      "type": "text",
+      "id": "reel_title_9",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "reel_link_9",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay_9",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Reel 10"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_reel_10",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "video",
+      "id": "video_10",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_10",
+      "label": "Poster image"
+    },
+    {
+      "type": "text",
+      "id": "reel_title_10",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "reel_link_10",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay_10",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Reel 11"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_reel_11",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "video",
+      "id": "video_11",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_11",
+      "label": "Poster image"
+    },
+    {
+      "type": "text",
+      "id": "reel_title_11",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "reel_link_11",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay_11",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Reel 12"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_reel_12",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "video",
+      "id": "video_12",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_12",
+      "label": "Poster image"
+    },
+    {
+      "type": "text",
+      "id": "reel_title_12",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "reel_link_12",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay_12",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Reel 13"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_reel_13",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "video",
+      "id": "video_13",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_13",
+      "label": "Poster image"
+    },
+    {
+      "type": "text",
+      "id": "reel_title_13",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "reel_link_13",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay_13",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Reel 14"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_reel_14",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "video",
+      "id": "video_14",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_14",
+      "label": "Poster image"
+    },
+    {
+      "type": "text",
+      "id": "reel_title_14",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "reel_link_14",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay_14",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Reel 15"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_reel_15",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "video",
+      "id": "video_15",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image_15",
+      "label": "Poster image"
+    },
+    {
+      "type": "text",
+      "id": "reel_title_15",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "reel_link_15",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay_15",
+      "label": "Autoplay",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Premium video reel"
+    }
+  ]
+}
+{% endschema %}
