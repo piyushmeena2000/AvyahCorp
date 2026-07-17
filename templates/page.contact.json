@@ -3,12 +3,18 @@
     "custom_contact": {
       "type": "custom-contact",
       "settings": {
-        "heading": "Get in Touch",
-        "subtext": "Have a question about our products, an order, or interested in carrying our brand? We'd love to hear from you.",
-        "support_email": "hello@avyahcorp.com",
-        "wholesale_email": "wholesale@avyahcorp.com",
-        "address": "Avyah Corp HQ\nMumbai, Maharashtra",
-        "accent_color": "#a72023"
+        "top_bg_color": "#fdf7ee",
+        "top_heading": "Contact Us",
+        "top_text": "<p>Our customer service team is all about you. Just as we strive for every bite to be delicious, we want to ensure every interaction is Perfect.</p>",
+        "top_links_text": "<p>Check out our <a href=\"/pages/faq\">FAQ page</a> for common questions.</p>",
+        "bottom_bg_color": "#daf1ee",
+        "bottom_heading": "Want to chat?",
+        "office_hours": "Office Hours: Mon-Fri. 9AM-5PM IST",
+        "phone_number": "Phone: +91 98765 43210",
+        "email_link_text": "SEND US AN EMAIL",
+        "email_url": "mailto:hello@avyahcorp.com",
+        "chat_link_text": "CHAT WITH AN AGENT",
+        "text_color": "#39302c"
       }
     }
   },
