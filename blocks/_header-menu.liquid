@@ -350,24 +350,6 @@
     display: flex;
     min-height: var(--minimum-touch-target);
     align-items: center;
-    position: relative;
-    padding-bottom: 4px;
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background-color: var(--menu-top-level-font-color, #fff);
-      transition: width 0.25s ease;
-    }
-
-    &:hover::after,
-    &:focus::after {
-      width: 100%;
-    }
 
     &:hover,
     &:focus {
