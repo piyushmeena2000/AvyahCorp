@@ -620,12 +620,12 @@
           "name": "t:names.spacer",
           "settings": {
             "size": "percent",
-            "percent_size": 100,
-            "pixel_size": 120,
+            "percent_size": 80,
+            "pixel_size": 96,
             "custom_mobile_size": false,
             "size_mobile": "percent",
-            "percent_size_mobile": 100,
-            "pixel_size_mobile": 120
+            "percent_size_mobile": 80,
+            "pixel_size_mobile": 96
           },
           "blocks": {}
         }
@@ -671,8 +671,8 @@
           "settings": {
             "heading": "What our customers say",
             "subheading": "Trusted by thousands of happy customers",
-            "section_padding_top": 60,
-            "section_padding_bottom": 60,
+            "section_padding_top": 48,
+            "section_padding_bottom": 48,
             "background_color": "#d52528",
             "heading_color": "#ffffff",
             "text_color": "#ffffff",
