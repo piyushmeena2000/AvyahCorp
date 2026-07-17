@@ -213,7 +213,8 @@
           const tabContents = document.querySelectorAll('.avyah-tab-content');
 
           tabLinks.forEach(link => {
-            link.addEventListener('mouseenter', function() {
+            link.addEventListener('click', function(e) {
+              e.preventDefault();
               const targetTab = this.getAttribute('data-tab');
 
               tabLinks.forEach(l => l.classList.remove('active'));
@@ -223,12 +224,6 @@
               const targetElement = document.getElementById(targetTab);
               if(targetElement) {
                  targetElement.classList.add('active');
-              }
-            });
-            
-            link.addEventListener('click', function(e) {
-              if (this.getAttribute('data-tab') !== 'tab-all') {
-                  // Allow the click if they really want to navigate to the collection page
               }
             });
           });
@@ -928,6 +923,14 @@
     color: #111;
     letter-spacing: 0.5px;
     text-align: center;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+    padding: 0 4px;
   }
 {% endstylesheet %}
 
