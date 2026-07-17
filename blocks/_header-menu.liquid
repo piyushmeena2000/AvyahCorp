@@ -78,8 +78,80 @@
                 {%- if _dt == 'home' or _dt contains 'store' or _dt contains 'locator' or _dt contains 'find' or _dt contains 'ingredient' or _dt contains 'explore' -%}
                   {%- continue -%}
                 {%- endif -%}
-                <li role="presentation" class="menu-list__list-item">
-                  {%- if link.links != blank -%}
+
+                {%- assign _is_catalog = false -%}
+                {%- if _dt contains 'catalog' or _dt == 'shop' -%}
+                  {%- assign _is_catalog = true -%}
+                {%- endif -%}
+
+                <li role="presentation" class="menu-list__list-item{% if _is_catalog %} avyah-catalog-item{% endif %}">
+                  {%- if _is_catalog -%}
+                    {%- comment -%} CATALOG with mega-menu {%- endcomment -%}
+                    <a
+                      href="{{ link.url }}"
+                      class="menu-list__link{% if link.current %} menu-list__link--active{% endif %}"
+                      id="avyah-megamenu-trigger"
+                      {% if link.current %}aria-current="page"{% endif %}
+                    >
+                      <span class="menu-list__link-title">{{ link.title | escape }}</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none" aria-hidden="true" class="avyah-mega-chevron">
+                        <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </a>
+                    <div class="avyah-megamenu" id="avyah-megamenu-panel">
+                      <div class="avyah-megamenu__inner">
+                        <div class="avyah-megamenu__sidebar">
+                          <a href="/collections/all" class="avyah-megamenu__sidebar-link avyah-megamenu__sidebar-link--bold">SHOP ALL</a>
+                          {%- for childlink in link.links -%}
+                            <a href="{{ childlink.url }}" class="avyah-megamenu__sidebar-link">{{ childlink.title | upcase }}</a>
+                          {%- endfor -%}
+                        </div>
+                        <div class="avyah-megamenu__grid">
+                          {%- for childlink in link.links -%}
+                            <a href="{{ childlink.url }}" class="avyah-megamenu__card">
+                              <div class="avyah-megamenu__card-img">
+                                {%- if childlink.type == 'collection_link' and childlink.object.image -%}
+                                  <img
+                                    src="{{ childlink.object.image | image_url: width: 400 }}"
+                                    alt="{{ childlink.title | escape }}"
+                                    loading="lazy"
+                                    width="400"
+                                    height="400"
+                                  >
+                                {%- elsif childlink.type == 'collection_link' and childlink.object.products.first.featured_image -%}
+                                  <img
+                                    src="{{ childlink.object.products.first.featured_image | image_url: width: 400 }}"
+                                    alt="{{ childlink.title | escape }}"
+                                    loading="lazy"
+                                    width="400"
+                                    height="400"
+                                  >
+                                {%- else -%}
+                                  <div class="avyah-megamenu__card-placeholder">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1">
+                                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                                      <polyline points="21 15 16 10 5 21"/>
+                                    </svg>
+                                  </div>
+                                {%- endif -%}
+                              </div>
+                              <span class="avyah-megamenu__card-title">{{ childlink.title | upcase }}</span>
+                            </a>
+                          {%- endfor -%}
+                          <a href="/collections/all" class="avyah-megamenu__card">
+                            <div class="avyah-megamenu__card-img">
+                              <div class="avyah-megamenu__card-placeholder avyah-megamenu__card-placeholder--all">
+                                <span>→</span>
+                              </div>
+                            </div>
+                            <span class="avyah-megamenu__card-title">ALL PRODUCTS</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  {%- elsif link.links != blank -%}
+                    {%- comment -%} Other links with children {%- endcomment -%}
                     <a
                       href="{{ link.url }}"
                       class="menu-list__link{% if link.current %} menu-list__link--active{% endif %}"
@@ -106,6 +178,7 @@
                       </div>
                     </div>
                   {%- else -%}
+                    {%- comment -%} Simple links {%- endcomment -%}
                     <a
                       href="{{ link.url }}"
                       class="menu-list__link{% if link.current %} menu-list__link--active{% endif %}"
@@ -232,15 +305,33 @@
     font-family: var(--menu-top-level-font-family);
     font-style: var(--menu-top-level-font-style);
     font-weight: var(--menu-top-level-font-weight);
-    font-size: var(--menu-top-level-font-size);
+    font-size: calc(var(--menu-top-level-font-size) * 1.1);
     line-height: var(--menu-top-level-font-line-height);
     text-transform: var(--menu-top-level-font-case);
     color: var(--menu-top-level-font-color);
-    transition: color var(--animation-speed) var(--animation-easing);
+    transition: all 0.2s ease;
     text-decoration: none;
     display: flex;
     min-height: var(--minimum-touch-target);
     align-items: center;
+    position: relative;
+    padding-bottom: 4px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--menu-top-level-font-color, #fff);
+      transition: width 0.25s ease;
+    }
+
+    &:hover::after,
+    &:focus::after {
+      width: 100%;
+    }
 
     &:hover,
     &:focus {
@@ -248,23 +339,19 @@
     }
 
     @media screen and (min-width: 750px) {
-      font-size: var(--menu-top-level-font-size-desktop);
+      font-size: calc(var(--menu-top-level-font-size-desktop) * 1.1);
     }
   }
 
-  /*
-      High specificity selectors to subdue non-hovered links without javascript.
-      If the need for js-generated `hovered` and `focused` classes arises for another reason we can simplify these.
-    */
+  /* Disable the default color-fading hover behavior */
   .menu-list:where(:has(.menu-list__list-item:hover)),
   .menu-list:where(:has(.menu-list__list-item:focus-within)),
   .menu-list:where(:has(.menu-list__list-item:not([aria-hidden='true']) .menu-list__link--active)) {
     .menu-list__link {
-      color: rgb(var(--menu-top-level-font-color-rgb) / var(--opacity-subdued-text));
+      color: var(--menu-top-level-font-color);
     }
   }
 
-  /* stylelint-disable-next-line selector-max-specificity */
   .menu-list:not(:has(.menu-list__list-item:hover)) .menu-list__link--active,
   .menu-list .menu-list__list-item:where(:hover, :focus-within) .menu-list__link,
   .menu-list .menu-list__list-item[slot='overflow'] .menu-list__link[aria-expanded='true'] {
@@ -643,6 +730,142 @@
   .mega-menu__submenu {
     /* preserves the inherited grid layout when this submenu wrapper is used */
     display: contents;
+  }
+
+  /* =============================================
+     AVYAH MEGA-MENU (Catalog Dropdown)
+  ============================================= */
+  .avyah-mega-chevron {
+    margin-left: 4px;
+    vertical-align: middle;
+    transition: transform 0.2s ease;
+  }
+
+  .avyah-catalog-item:hover .avyah-mega-chevron {
+    transform: rotate(180deg);
+  }
+
+  .avyah-megamenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 680px;
+    background: #ffffff;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    border-radius: 0 0 16px 16px;
+    border-top: 3px solid #d52528;
+    z-index: 10000;
+    animation: avyahMegaIn 0.2s ease;
+    padding: 32px 36px;
+  }
+
+  @keyframes avyahMegaIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+
+  .avyah-catalog-item:hover .avyah-megamenu {
+    display: block;
+  }
+
+  .avyah-megamenu__inner {
+    display: flex;
+    gap: 36px;
+  }
+
+  .avyah-megamenu__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 140px;
+    border-right: 1px solid #eee;
+    padding-right: 28px;
+  }
+
+  .avyah-megamenu__sidebar-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    text-decoration: none;
+    padding: 8px 0;
+    transition: color 0.15s ease;
+    letter-spacing: 0.3px;
+  }
+
+  .avyah-megamenu__sidebar-link:hover {
+    color: #d52528;
+  }
+
+  .avyah-megamenu__sidebar-link--bold {
+    font-weight: 700;
+    color: #111;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .avyah-megamenu__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 20px;
+    flex: 1;
+  }
+
+  .avyah-megamenu__card {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.2s ease;
+  }
+
+  .avyah-megamenu__card:hover {
+    transform: translateY(-4px);
+  }
+
+  .avyah-megamenu__card-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f5f5f5;
+  }
+
+  .avyah-megamenu__card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .avyah-megamenu__card:hover .avyah-megamenu__card-img img {
+    transform: scale(1.06);
+  }
+
+  .avyah-megamenu__card-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+  }
+
+  .avyah-megamenu__card-placeholder--all {
+    background: #fef5f5;
+    font-size: 32px;
+    color: #d52528;
+  }
+
+  .avyah-megamenu__card-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #111;
+    letter-spacing: 0.5px;
+    text-align: center;
   }
 {% endstylesheet %}
 
