@@ -1,1 +1,66 @@
-{"type":"footer","name":"Footer","sections":{"17765101796607d495":{"type":"_blocks","blocks":{"ai_gen_block_d0f5774_p7BTFj":{"type":"ai_gen_block_d0f5774","settings":{"padding_top":60,"padding_bottom":40,"background_color":"#a72023","text_color":"#ffffff","heading_color":"#ffffff","link_color":"#ffffff","link_hover_color":"#d52528","divider_color":"#ffffff","heading_font":"anton_n4","heading_size_desktop":16,"heading_size_tablet":15,"heading_size_mobile":14,"heading_transform":"uppercase","text_font":"inter_n5","text_size_desktop":14,"text_size_tablet":13,"text_size_mobile":13,"link_size_desktop":14,"link_size_tablet":13,"link_size_mobile":13,"show_about":true,"about_heading":"About us","about_text":"Premium healthy snacks crafted with care for your wellness journey.","show_quick_links":true,"quick_links_heading":"Quick links","link_1_text":"Shop","link_1_url":"shopify:\/\/collections\/all","link_2_text":"About","link_2_url":"shopify:\/\/pages\/our-story","link_3_text":"Blog","link_3_url":"shopify:\/\/blogs\/blogs","link_4_text":"Contact","link_4_url":"shopify:\/\/pages\/contact","show_customer_care":true,"customer_care_heading":"Customer care","care_link_1_text":"Shipping policy","care_link_1_url":"","care_link_2_text":"Return policy","care_link_2_url":"","care_link_3_text":"Privacy policy","care_link_3_url":"","care_link_4_text":"Terms of service","care_link_4_url":"","show_newsletter":true,"newsletter_heading":"Newsletter","newsletter_text":"Subscribe for exclusive offers and updates","newsletter_placeholder":"Enter your email","newsletter_button_text":"Subscribe","success_message":"Thanks for subscribing!","success_color":"#4caf50","input_background":"#ffffff","input_text_color":"#000000","input_placeholder_color":"#999999","input_border_color":"#ffffff","input_border_radius":4,"button_background":"#d52528","button_text_color":"#ffffff","button_hover_background":"#ff0000","button_border_radius":4,"show_social":true,"social_heading":"Follow us","facebook_url":"https:\/\/www.facebook.com\/p\/AvyahCorp-61552910162902\/","instagram_url":"https:\/\/www.instagram.com\/avyahcorp\/","twitter_url":"","youtube_url":"https:\/\/www.youtube.com\/@AvyahCorp","linkedin_url":"https:\/\/www.linkedin.com\/company\/avyahcorp-private-limited\/posts\/?feedView=all","social_icon_color":"#ffffff","social_icon_hover_color":"#d52528","social_icon_size":24,"copyright_text":"© 2026 AvyahCorp. All rights reserved.","copyright_color":"#ffffff","copyright_size_desktop":12,"copyright_size_tablet":11,"copyright_size_mobile":11},"blocks":{}}},"block_order":["ai_gen_block_d0f5774_p7BTFj"],"custom_css":[".footer {width: 100% !important; max-width: 100% !important;}"],"settings":{"content_direction":"column","vertical_on_mobile":true,"horizontal_alignment":"space-between","vertical_alignment":"center","align_baseline":false,"horizontal_alignment_flex_direction_column":"center","vertical_alignment_flex_direction_column":"center","gap":0,"section_width":"full-width","section_height":"","section_height_custom":0,"color_scheme":"","background_media":"none","video_position":"cover","background_image_position":"cover","border":"none","border_width":1,"border_opacity":100,"border_radius":0,"toggle_overlay":false,"overlay_color":"#00000026","overlay_style":"solid","gradient_direction":"to top","padding-block-start":0,"padding-block-end":0}},"footer_m9NzUG":{"type":"footer","blocks":{"group_H6VpwJ":{"type":"group","settings":{"content_direction":"column","vertical_on_mobile":true,"horizontal_alignment":"flex-start","vertical_alignment":"center","align_baseline":false,"horizontal_alignment_flex_direction_column":"flex-start","vertical_alignment_flex_direction_column":"center","gap":6,"width":"fill","custom_width":100,"width_mobile":"fill","custom_width_mobile":100,"height":"fit","custom_height":100,"inherit_color_scheme":true,"color_scheme":"","background_media":"none","video_position":"cover","background_image_position":"cover","border":"none","border_width":1,"border_opacity":100,"border_radius":0,"toggle_overlay":false,"overlay_color":"#00000026","overlay_style":"solid","gradient_direction":"to top","link":"","open_in_new_tab":false,"placeholder":"","padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{"text_LWt8Pz":{"type":"text","settings":{"text":"<h2>Join our email list<\/h2>","width":"100%","max_width":"normal","alignment":"left","type_preset":"h4","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"pretty","color":"var(--color-foreground)","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"text_f9CFLH":{"type":"text","settings":{"text":"<p>Get exclusive deals and early access to new products.<\/p>","width":"100%","max_width":"normal","alignment":"left","type_preset":"rte","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"pretty","color":"var(--color-foreground)","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}}},"block_order":["text_LWt8Pz","text_f9CFLH"]},"email_signup_crihX7":{"type":"email-signup","settings":{"width":"fill","custom_width":100,"inherit_color_scheme":true,"heading":"","heading_preset":"h3","color_scheme":"","border_style":"all","border_width":1,"border_radius":100,"input_type_preset":"paragraph","style_class":"button-unstyled","display_type":"arrow","label":"Sign up","integrated_button":true,"button_type_preset":"paragraph","padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}}},"block_order":["group_H6VpwJ","email_signup_crihX7"],"disabled":true,"custom_css":[],"name":"t:names.footer","settings":{"section_width":"full-width","gap":20,"color_scheme":"scheme-1","padding-block-start":30,"padding-block-end":30}},"footer_utilities_jLGE8U":{"type":"footer-utilities","blocks":{"footer_copyright_jweRK8":{"type":"footer-copyright","settings":{"show_powered_by":false,"font_size":"0.75rem","case":"none"},"blocks":{}},"footer_policy_list_VCdnpa":{"type":"footer-policy-list","settings":{"font_size":"0.75rem","case":"none"},"blocks":{}},"social_links_Ew63Kq":{"type":"social-links","settings":{"facebook_url":"https:\/\/www.facebook.com\/profile.php?id=61552910162902","instagram_url":"https:\/\/www.instagram.com\/avyahcorp\/","youtube_url":"","tiktok_url":"","twitter_url":"","threads_url":"","linkedin_url":"","bluesky_url":"","snapchat_url":"","pinterest_url":"","tumblr_url":"","vimeo_url":"","custom_url":""},"blocks":{}}},"block_order":["footer_copyright_jweRK8","footer_policy_list_VCdnpa","social_links_Ew63Kq"],"disabled":true,"name":"t:names.utilities","settings":{"section_width":"full-width","gap":24,"divider_thickness":0,"color_scheme":"","padding-block-start":10,"padding-block-end":10}}},"order":["17765101796607d495","footer_m9NzUG","footer_utilities_jLGE8U"]}
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "custom_footer": {
+      "type": "custom-footer",
+      "blocks": {
+        "menu_1": {
+          "type": "menu",
+          "settings": {
+            "title": "SHOP",
+            "menu": ""
+          }
+        },
+        "menu_2": {
+          "type": "menu",
+          "settings": {
+            "title": "DISCOVER",
+            "menu": ""
+          }
+        },
+        "menu_3": {
+          "type": "menu",
+          "settings": {
+            "title": "LEARN",
+            "menu": ""
+          }
+        },
+        "menu_4": {
+          "type": "menu",
+          "settings": {
+            "title": "SUPPORT",
+            "menu": ""
+          }
+        },
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "title": "LET'S CHAT",
+            "text": "<p>Mon-Fri. 7-5PM PST &bull; (866) 628-8548</p>"
+          }
+        }
+      },
+      "block_order": [
+        "menu_1",
+        "menu_2",
+        "menu_3",
+        "menu_4",
+        "text_1"
+      ],
+      "settings": {
+        "tiktok_link": "https://tiktok.com/@avyahcorp",
+        "instagram_link": "https://www.instagram.com/avyahcorp/",
+        "pinterest_link": "https://pinterest.com/avyahcorp",
+        "facebook_link": "https://www.facebook.com/p/AvyahCorp-61552910162902/",
+        "privacy_link": "shopify://pages/privacy-policy",
+        "terms_link": "shopify://pages/terms-and-conditions",
+        "accessibility_link": "",
+        "fineprint": "*See nutrition information on package for fat and saturated fat content. For full details on discounts, promotions, and shipping policies (free shipping excludes Hawaii & Alaska), reference our Terms & Conditions."
+      }
+    }
+  },
+  "order": [
+    "custom_footer"
+  ]
+}
