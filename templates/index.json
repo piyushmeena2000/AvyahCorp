@@ -908,22 +908,22 @@
         "faq_1": {
           "type": "faq_item",
           "settings": {
-            "question": "WHY DID YOU USE MAIDA IN YOUR WAFERS?",
-            "answer": "<p>It gives the perfect crunch! We balance it with high protein for health.</p>"
+            "question": "ARE AVYAH SNACKS HEALTHY?",
+            "answer": "<p>Absolutely! Our snacks are crafted with high-quality ingredients, offering a perfect balance of protein and taste without the guilt.</p>"
           }
         },
         "faq_2": {
           "type": "faq_item",
           "settings": {
-            "question": "IS FERMENTED YEAST PROTEIN ACTUALLY GOOD?",
-            "answer": "<p>Yes, it's highly bioavailable and easily digested by the body.</p>"
+            "question": "DO YOUR SNACKS CONTAIN ADDED SUGAR?",
+            "answer": "<p>No! We believe in keeping it clean. Our products are formulated to be delicious without relying on added sugars.</p>"
           }
         },
         "faq_3": {
           "type": "faq_item",
           "settings": {
-            "question": "HOW DO YOU GET THE SWEETNESS WITHOUT ADDED SUGAR?",
-            "answer": "<p>We use natural Stevia and monk fruit extract for a perfectly clean sweetness.</p>"
+            "question": "WHEN WILL MY ORDER ARRIVE?",
+            "answer": "<p>We hustle to get your snacks to you! Orders are processed quickly, and you'll receive tracking details once your package ships.</p>"
           }
         }
       },
