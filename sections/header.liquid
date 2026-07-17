@@ -282,6 +282,32 @@
     --transparent-header-offset-boolean: 0; /* stylelint-disable-line declaration-property-value-disallowed-list */
   }
 
+  /* =============================================
+     AVYAH SPLIT HEADER — Right column alignment
+     Shows: [right-nav links] [search] [cart]
+  ============================================= */
+  .header__column--right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: nowrap;
+  }
+
+  /* Ensure right-nav and header-actions sit inline */
+  .header__column--right .avyah-right-nav {
+    order: 0;
+  }
+
+  .header__column--right header-actions {
+    order: 1;
+    margin-inline-start: 0 !important;
+  }
+
+  /* Center column logo alignment */
+  .header__column--center .header-logo {
+    justify-content: center;
+  }
+
   body:has(> #header-group > header) {
     --header-height: 60px;
   }

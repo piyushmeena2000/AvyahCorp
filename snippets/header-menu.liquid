@@ -23,54 +23,127 @@
   endif
 %}
 
+{% comment %} Render the catalog mega-menu panel (hidden by default) {% endcomment %}
+{% render 'catalog-mega-menu' %}
+
 {% capture children %}
   {% for link in block_settings.menu.links %}
     {% assign downcased_title = link.title | downcase %}
-    {% if downcased_title contains 'store' or downcased_title contains 'locator' or downcased_title contains 'bulk' %}
+
+    {% comment %} Filter out Store Locator and Bulk Order from nav {% endcomment %}
+    {% if downcased_title contains 'store' or downcased_title contains 'locator' %}
       {% continue %}
     {% endif %}
-    <li
-      role="presentation"
-      class="menu-list__list-item"
-      on:focus="/activate"
-      on:blur="/deactivate"
-      on:pointerenter="/activate"
-      on:pointerleave="/deactivate"
-    >
-      <a
-        href="{{ link.url }}"
-        data-skip-node-update="true"
-        class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
-        {%- if link.links != blank -%}
-          aria-controls="submenu-{{ forloop.index }}"
+
+    {% comment %} Check if this is the Catalog link — render custom mega-menu trigger {% endcomment %}
+    {% if downcased_title contains 'catalog' %}
+      <li
+        role="presentation"
+        class="menu-list__list-item avyah-catalog-trigger"
+        id="avyah-catalog-trigger-li"
+      >
+        <a
+          href="{{ link.url }}"
+          class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
+          id="avyah-catalog-trigger"
           aria-haspopup="true"
           aria-expanded="false"
-        {%- endif -%}
-        ref="menuitem"
+        >
+          <span class="menu-list__link-title">{{ link.title }}</span>
+          <svg class="avyah-catalog-chevron" xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none" aria-hidden="true">
+            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </li>
+
+    {% comment %} Check if this is the Explore link — render standard dropdown {% endcomment %}
+    {% elsif downcased_title contains 'explore' %}
+      <li
+        role="presentation"
+        class="menu-list__list-item avyah-explore-trigger"
+        on:focus="/activate"
+        on:blur="/deactivate"
+        on:pointerenter="/activate"
+        on:pointerleave="/deactivate"
       >
-        <span class="menu-list__link-title">{{- link.title -}}</span>
-      </a>
-      {%- if link.links != blank -%}
-        <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">
-          <div
-            id="submenu-{{ forloop.index }}"
-            class="menu-list__submenu-inner"
-            style="{% render 'submenu-font-styles', settings: block_settings %}"
-          >
-            {% assign list_id = 'MegaMenuList-' | append: forloop.index %}
-            {% render 'mega-menu',
-              section: section,
-              parent_link: link,
-              id: list_id,
-              menu_content_type: menu_content_type,
-              content_aspect_ratio: ratio,
-              image_border_radius: image_border_radius
-            %}
+        <a
+          href="{{ link.url }}"
+          data-skip-node-update="true"
+          class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
+          aria-haspopup="true"
+          aria-expanded="false"
+          ref="menuitem"
+        >
+          <span class="menu-list__link-title">{{ link.title }}</span>
+          <svg class="avyah-catalog-chevron" xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none" aria-hidden="true">
+            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <div class="menu-list__submenu avyah-explore-dropdown{{ color_scheme_classes }}" ref="submenu[]">
+          <div class="menu-list__submenu-inner avyah-explore-dropdown__inner">
+            <ul class="list-unstyled avyah-explore-links">
+              {% for child in link.links %}
+                <li>
+                  <a href="{{ child.url }}" class="avyah-explore-link">{{ child.title }}</a>
+                </li>
+              {% endfor %}
+              {% comment %} Fallback static links if no children defined {% endcomment %}
+              {% if link.links.size == 0 %}
+                <li><a href="/pages/our-story" class="avyah-explore-link">Our Story</a></li>
+                <li><a href="/blogs/news" class="avyah-explore-link">Blog</a></li>
+                <li><a href="/pages/about" class="avyah-explore-link">About Us</a></li>
+              {% endif %}
+            </ul>
           </div>
         </div>
-      {%- endif -%}
-    </li>
+      </li>
+
+    {% comment %} All other standard links {% endcomment %}
+    {% else %}
+      <li
+        role="presentation"
+        class="menu-list__list-item"
+        on:focus="/activate"
+        on:blur="/deactivate"
+        on:pointerenter="/activate"
+        on:pointerleave="/deactivate"
+      >
+        <a
+          href="{{ link.url }}"
+          data-skip-node-update="true"
+          class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
+          {%- if link.links != blank -%}
+            aria-controls="submenu-{{ forloop.index }}"
+            aria-haspopup="true"
+            aria-expanded="false"
+          {%- endif -%}
+          ref="menuitem"
+        >
+          <span class="menu-list__link-title">{{- link.title -}}</span>
+        </a>
+        {%- if link.links != blank -%}
+          <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">
+            <div
+              id="submenu-{{ forloop.index }}"
+              class="menu-list__submenu-inner"
+              style="{% render 'submenu-font-styles', settings: block_settings %}"
+            >
+              {% assign list_id = 'MegaMenuList-' | append: forloop.index %}
+              {% render 'mega-menu',
+                section: section,
+                parent_link: link,
+                id: list_id,
+                menu_content_type: menu_content_type,
+                content_aspect_ratio: ratio,
+                image_border_radius: image_border_radius
+              %}
+            </div>
+          </div>
+        {%- endif -%}
+      </li>
+    {% endif %}
   {% endfor %}
+
   <li
     class="menu-list__list-item"
     role="presentation"
@@ -95,3 +168,125 @@
     {% render 'overflow-list', class: class, ref: 'overflowMenu', children: children, minimum-items: 2, defer: true %}
   </div>
 </nav>
+
+{% stylesheet %}
+  /* =========================================
+     AVYAH CATALOG TRIGGER & CHEVRON
+  ========================================= */
+  .avyah-catalog-chevron {
+    display: inline-block;
+    margin-left: 4px;
+    vertical-align: middle;
+    transition: transform 0.2s ease;
+  }
+
+  .avyah-catalog-trigger[aria-expanded="true"] .avyah-catalog-chevron,
+  .avyah-explore-trigger:hover .avyah-catalog-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* =========================================
+     AVYAH EXPLORE DROPDOWN
+  ========================================= */
+  .avyah-explore-dropdown {
+    min-width: 200px;
+  }
+
+  .avyah-explore-dropdown__inner {
+    padding: 12px 0;
+  }
+
+  .avyah-explore-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .avyah-explore-link {
+    display: block;
+    padding: 10px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #111111;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: color 0.2s ease, background 0.2s ease;
+  }
+
+  .avyah-explore-link:hover {
+    color: #d52528;
+    background: #fef5f5;
+  }
+{% endstylesheet %}
+
+<script>
+(function() {
+  'use strict';
+
+  function initCatalogMenu() {
+    var trigger = document.getElementById('avyah-catalog-trigger');
+    var panel = document.getElementById('avyah-catalog-panel');
+
+    if (!trigger || !panel) return;
+
+    var triggerLi = document.getElementById('avyah-catalog-trigger-li');
+    var closeTimer = null;
+
+    function openMenu() {
+      clearTimeout(closeTimer);
+      positionPanel();
+      panel.classList.add('avyah-catalog-megamenu--visible');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMenu() {
+      closeTimer = setTimeout(function() {
+        panel.classList.remove('avyah-catalog-megamenu--visible');
+        trigger.setAttribute('aria-expanded', 'false');
+      }, 120);
+    }
+
+    function positionPanel() {
+      var headerEl = document.querySelector('header-component') || document.querySelector('.header');
+      if (headerEl) {
+        var rect = headerEl.getBoundingClientRect();
+        panel.style.top = (rect.bottom) + 'px';
+      }
+    }
+
+    // Trigger li hover
+    if (triggerLi) {
+      triggerLi.addEventListener('mouseenter', openMenu);
+      triggerLi.addEventListener('mouseleave', closeMenu);
+    }
+
+    // Panel hover — keep open while cursor is inside
+    panel.addEventListener('mouseenter', function() {
+      clearTimeout(closeTimer);
+    });
+    panel.addEventListener('mouseleave', closeMenu);
+
+    // Click outside to close
+    document.addEventListener('click', function(e) {
+      if (!panel.contains(e.target) && !trigger.contains(e.target)) {
+        panel.classList.remove('avyah-catalog-megamenu--visible');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Reposition on scroll/resize
+    window.addEventListener('scroll', positionPanel, { passive: true });
+    window.addEventListener('resize', positionPanel, { passive: true });
+
+    // Initial position
+    positionPanel();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCatalogMenu);
+  } else {
+    initCatalogMenu();
+  }
+})();
+</script>

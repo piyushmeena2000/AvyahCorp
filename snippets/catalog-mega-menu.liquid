@@ -1,0 +1,252 @@
+{% comment %}
+  Catalog Mega-Menu Dropdown
+  Renders a full-width panel with left text links + right collection image cards
+  Inspired by PerfectBar.com reference layout
+{% endcomment %}
+
+<div class="avyah-catalog-megamenu" id="avyah-catalog-panel">
+  <div class="avyah-catalog-megamenu__inner">
+
+    {%- comment -%} LEFT: Text nav links {%- endcomment -%}
+    <div class="avyah-catalog-megamenu__left">
+      <p class="avyah-catalog-megamenu__eyebrow">OUR RANGE</p>
+      <ul class="avyah-catalog-megamenu__links list-unstyled">
+        <li><a href="/collections/all" class="avyah-catalog-megamenu__link avyah-catalog-megamenu__link--bold">SHOP ALL</a></li>
+        <li><a href="/collections/range" class="avyah-catalog-megamenu__link">FULL SIZE BARS</a></li>
+        <li><a href="/collections/snackbox" class="avyah-catalog-megamenu__link">SNACK BOXES</a></li>
+        <li><a href="/collections/combo" class="avyah-catalog-megamenu__link">COMBO PACKS</a></li>
+        <li><a href="/collections/variety" class="avyah-catalog-megamenu__link">VARIETY PACKS</a></li>
+      </ul>
+    </div>
+
+    {%- comment -%} RIGHT: Collection image cards {%- endcomment -%}
+    <div class="avyah-catalog-megamenu__cards">
+
+      {%- assign catalog_collections = 'range,snackbox,combo,all' | split: ',' -%}
+      {%- assign catalog_labels = 'Full Size Bars,Snack Boxes,Combo Packs,All Products' | split: ',' -%}
+      {%- assign catalog_urls = '/collections/range,/collections/snackbox,/collections/combo,/collections/all' | split: ',' -%}
+
+      {%- for i in (0..3) -%}
+        {%- assign col_handle = catalog_collections[i] -%}
+        {%- assign col_label = catalog_labels[i] -%}
+        {%- assign col_url = catalog_urls[i] -%}
+
+        {%- if col_handle == 'all' -%}
+          {%- assign col_object = collections.all -%}
+        {%- else -%}
+          {%- assign col_object = collections[col_handle] -%}
+        {%- endif -%}
+
+        <a href="{{ col_url }}" class="avyah-catalog-megamenu__card">
+          <div class="avyah-catalog-megamenu__card-image-wrapper">
+            {%- if col_object and col_object.image -%}
+              <img
+                src="{{ col_object.image | image_url: width: 400 }}"
+                alt="{{ col_label | escape }}"
+                width="400"
+                height="300"
+                loading="lazy"
+                class="avyah-catalog-megamenu__card-image"
+              >
+            {%- elsif col_object and col_object.products.first and col_object.products.first.featured_image -%}
+              <img
+                src="{{ col_object.products.first.featured_image | image_url: width: 400 }}"
+                alt="{{ col_label | escape }}"
+                width="400"
+                height="300"
+                loading="lazy"
+                class="avyah-catalog-megamenu__card-image"
+              >
+            {%- else -%}
+              <div class="avyah-catalog-megamenu__card-placeholder">
+                <span>{{ col_label | slice: 0 }}</span>
+              </div>
+            {%- endif -%}
+          </div>
+          <p class="avyah-catalog-megamenu__card-label">{{ col_label | upcase }}</p>
+        </a>
+      {%- endfor -%}
+
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  /* =========================================
+     AVYAH CATALOG MEGA-MENU PANEL
+  ========================================= */
+
+  .avyah-catalog-megamenu {
+    display: none;
+    position: fixed;
+    top: 0; /* will be offset by JS/CSS from header height */
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: #ffffff;
+    border-top: 3px solid #d52528;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    z-index: 9999;
+    padding: 36px 60px 40px;
+    animation: avyahMenuFadeIn 0.2s ease;
+  }
+
+  @keyframes avyahMenuFadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .avyah-catalog-megamenu.avyah-catalog-megamenu--visible {
+    display: block;
+  }
+
+  .avyah-catalog-megamenu__inner {
+    display: flex;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: flex-start;
+  }
+
+  /* LEFT PANEL */
+  .avyah-catalog-megamenu__left {
+    flex: 0 0 200px;
+    min-width: 180px;
+    border-right: 1px solid #f0f0f0;
+    padding-right: 40px;
+  }
+
+  .avyah-catalog-megamenu__eyebrow {
+    font-family: 'Anton', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #d52528;
+    margin: 0 0 20px;
+  }
+
+  .avyah-catalog-megamenu__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .avyah-catalog-megamenu__link {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #111111;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: color 0.2s ease;
+    display: block;
+  }
+
+  .avyah-catalog-megamenu__link--bold {
+    font-family: 'Anton', sans-serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: #d52528;
+    margin-bottom: 4px;
+  }
+
+  .avyah-catalog-megamenu__link:hover {
+    color: #d52528;
+  }
+
+  /* RIGHT CARDS */
+  .avyah-catalog-megamenu__cards {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .avyah-catalog-megamenu__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    gap: 12px;
+    transition: transform 0.2s ease;
+  }
+
+  .avyah-catalog-megamenu__card:hover {
+    transform: translateY(-4px);
+  }
+
+  .avyah-catalog-megamenu__card-image-wrapper {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f7f4ea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .avyah-catalog-megamenu__card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+  }
+
+  .avyah-catalog-megamenu__card:hover .avyah-catalog-megamenu__card-image {
+    transform: scale(1.04);
+  }
+
+  .avyah-catalog-megamenu__card-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f7f4ea, #fde8b0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Anton', sans-serif;
+    font-size: 40px;
+    color: #d52528;
+  }
+
+  .avyah-catalog-megamenu__card-label {
+    font-family: 'Anton', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #111111;
+    margin: 0;
+    text-align: center;
+  }
+
+  .avyah-catalog-megamenu__card:hover .avyah-catalog-megamenu__card-label {
+    color: #d52528;
+  }
+
+  /* Hide on mobile */
+  @media (max-width: 749px) {
+    .avyah-catalog-megamenu {
+      display: none !important;
+    }
+  }
+{% endstylesheet %}
+
+<script>
+  (function() {
+    // Position the mega menu below the header dynamically
+    function positionCatalogMenu() {
+      var header = document.querySelector('#header-component') || document.querySelector('header-component');
+      var menu = document.getElementById('avyah-catalog-panel');
+      if (!header || !menu) return;
+      var headerBottom = header.getBoundingClientRect().bottom + window.scrollY;
+      menu.style.top = headerBottom + 'px';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      positionCatalogMenu();
+      window.addEventListener('scroll', positionCatalogMenu);
+      window.addEventListener('resize', positionCatalogMenu);
+    });
+  })();
+</script>

@@ -1,0 +1,202 @@
+{% comment %}
+  Avyah Right-side Navigation: Explore (dropdown) + How It's Made
+  Injected into the header right column alongside cart/search icons
+{% endcomment %}
+
+<nav class="avyah-right-nav" aria-label="Secondary navigation">
+  <ul class="avyah-right-nav__list list-unstyled">
+
+    {%- comment -%} EXPLORE dropdown {%- endcomment -%}
+    <li class="avyah-right-nav__item avyah-right-nav__item--has-dropdown" id="avyah-explore-item">
+      <button
+        class="avyah-right-nav__link avyah-right-nav__link--button"
+        aria-haspopup="true"
+        aria-expanded="false"
+        id="avyah-explore-btn"
+      >
+        EXPLORE
+        <svg class="avyah-right-nav__chevron" xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none" aria-hidden="true">
+          <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="avyah-right-nav__dropdown" id="avyah-explore-dropdown" role="region" aria-labelledby="avyah-explore-btn">
+        <ul class="avyah-right-nav__dropdown-list list-unstyled">
+          <li><a href="/pages/our-story" class="avyah-right-nav__dropdown-link">Our Story</a></li>
+          <li><a href="/blogs/news" class="avyah-right-nav__dropdown-link">Blog</a></li>
+          <li><a href="/pages/about" class="avyah-right-nav__dropdown-link">About Us</a></li>
+          <li><a href="/pages/sustainability" class="avyah-right-nav__dropdown-link">Sustainability</a></li>
+        </ul>
+      </div>
+    </li>
+
+    {%- comment -%} HOW IT'S MADE direct link {%- endcomment -%}
+    <li class="avyah-right-nav__item">
+      <a href="/pages/how-its-made" class="avyah-right-nav__link">HOW IT'S MADE</a>
+    </li>
+
+  </ul>
+</nav>
+
+{% stylesheet %}
+  /* =========================================
+     AVYAH RIGHT NAV
+  ========================================= */
+  .avyah-right-nav {
+    display: none;
+
+    @media screen and (min-width: 750px) {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .avyah-right-nav__list {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .avyah-right-nav__item {
+    position: relative;
+  }
+
+  .avyah-right-nav__link {
+    font-family: var(--font-heading--family, 'Anton', sans-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--color-foreground);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-transform: uppercase;
+  }
+
+  .avyah-right-nav__link--button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    color: inherit;
+  }
+
+  .avyah-right-nav__link:hover,
+  .avyah-right-nav__link--button:hover {
+    color: #d52528;
+  }
+
+  .avyah-right-nav__chevron {
+    transition: transform 0.2s ease;
+  }
+
+  .avyah-right-nav__item--has-dropdown:hover .avyah-right-nav__chevron,
+  #avyah-explore-btn[aria-expanded="true"] .avyah-right-nav__chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown panel */
+  .avyah-right-nav__dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 14px);
+    right: 0;
+    min-width: 200px;
+    background: #ffffff;
+    border-top: 2px solid #d52528;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 10px 10px;
+    padding: 8px 0;
+    z-index: 10000;
+    animation: avyahRightDropIn 0.18s ease;
+  }
+
+  @keyframes avyahRightDropIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .avyah-right-nav__item--has-dropdown:hover .avyah-right-nav__dropdown,
+  .avyah-right-nav__dropdown.avyah-right-nav__dropdown--open {
+    display: block;
+  }
+
+  .avyah-right-nav__dropdown-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .avyah-right-nav__dropdown-link {
+    display: block;
+    padding: 11px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #111111;
+    text-decoration: none;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .avyah-right-nav__dropdown-link:hover {
+    color: #d52528;
+    background: #fef5f5;
+  }
+{% endstylesheet %}
+
+<script>
+(function() {
+  'use strict';
+
+  function initExploreDropdown() {
+    var btn = document.getElementById('avyah-explore-btn');
+    var dropdown = document.getElementById('avyah-explore-dropdown');
+    var item = document.getElementById('avyah-explore-item');
+
+    if (!btn || !dropdown || !item) return;
+
+    var closeTimer;
+
+    function open() {
+      clearTimeout(closeTimer);
+      dropdown.classList.add('avyah-right-nav__dropdown--open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+
+    function close() {
+      closeTimer = setTimeout(function() {
+        dropdown.classList.remove('avyah-right-nav__dropdown--open');
+        btn.setAttribute('aria-expanded', 'false');
+      }, 100);
+    }
+
+    item.addEventListener('mouseenter', open);
+    item.addEventListener('mouseleave', close);
+    dropdown.addEventListener('mouseenter', function() { clearTimeout(closeTimer); });
+
+    // Close on click outside
+    document.addEventListener('click', function(e) {
+      if (!item.contains(e.target)) {
+        dropdown.classList.remove('avyah-right-nav__dropdown--open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initExploreDropdown);
+  } else {
+    initExploreDropdown();
+  }
+})();
+</script>
