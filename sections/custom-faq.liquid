@@ -8,7 +8,7 @@
   .superyou-faq-left {
     flex: 1;
     min-width: 50%;
-    background-color: #7b1616; /* Darker red text shade */
+    background-color: #a31f1f; /* Lighter dark-red text shade */
     padding: 80px 10%;
     display: flex;
     flex-direction: column;
@@ -45,7 +45,7 @@
   }
 
   .superyou-accordion-item {
-    background-color: #ffffff; /* White boxes */
+    background-color: #d52528; /* Crimson red by default */
     margin-bottom: 12px;
     padding: 16px 24px;
     cursor: pointer;
@@ -53,7 +53,11 @@
   }
 
   .superyou-accordion-item:hover {
-    background-color: #f5f5f5;
+    background-color: #c02124;
+  }
+
+  .superyou-accordion-item.active {
+    background-color: #ffffff;
   }
 
   .superyou-accordion-header {
@@ -66,8 +70,13 @@
     font-family: 'Anton', sans-serif;
     font-size: 20px;
     text-transform: uppercase;
-    color: #d52528; /* Crimson red */
+    color: #ffffff; /* White text by default */
     margin: 0;
+    transition: color 0.2s;
+  }
+
+  .superyou-accordion-item.active .superyou-accordion-title {
+    color: #d52528; /* Crimson red when active/open */
   }
 
   .superyou-accordion-icon {
@@ -75,7 +84,7 @@
     height: 24px;
     background-color: #000;
     border-radius: 50%;
-    color: #eed7b1;
+    color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -102,23 +111,24 @@
     display: inline-block;
     margin-top: 32px;
     padding: 14px 24px;
-    background-color: #111111; /* Dark button on red bg */
-    color: #ffffff;
+    background-color: #ffffff; /* White button */
+    color: #d52528; /* Crimson red text */
     font-family: 'Anton', sans-serif;
     font-size: 18px;
     text-transform: uppercase;
     text-decoration: none;
-    border: 2px solid #ffffff; /* White border for contrast */
+    border: 2px solid transparent; /* Remove outline but keep layout */
     border-radius: 6px;
-    transition: background-color 0.1s;
+    transition: background-color 0.2s, color 0.2s;
   }
 
   .superyou-btn:hover {
-    background-color: #333333;
+    background-color: #d52528; /* Crimson red bg */
+    color: #ffffff; /* White text */
   }
 
   .superyou-btn:active {
-    background-color: #000000;
+    background-color: #c02124;
   }
 
   @media screen and (max-width: 768px) {
@@ -167,12 +177,15 @@
   function toggleFaq(el) {
     const content = el.querySelector('.superyou-accordion-content');
     const icon = el.querySelector('.superyou-accordion-icon');
+    
     if (content.style.maxHeight) {
       content.style.maxHeight = null;
       icon.innerHTML = '+';
+      el.classList.remove('active');
     } else {
       content.style.maxHeight = content.scrollHeight + "px";
       icon.innerHTML = '-';
+      el.classList.add('active');
     }
   }
 </script>
