@@ -141,6 +141,7 @@
   .ai-product-card-{{ ai_gen_id }} {
     flex: 0 0 calc((100% - ({{ block.settings.desktop_cards_visible | minus: 1 }} * {{ block.settings.card_gap }}px)) / {{ block.settings.desktop_cards_visible }});
     max-width: 420px !important;
+    min-width: 320px !important;
     min-height: 520px !important;
     background-color: #ffffff;
     border-radius: 16px;
