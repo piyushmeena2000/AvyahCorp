@@ -13,25 +13,29 @@
     margin-left: -50vw;
     margin-right: -50vw;
     padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px !important;
-    background-color: #ffffff !important;
+    background-color: #d52528 !important; /* Crimson Red background */
     overflow: hidden;
   }
 
   .ai-testimonial-carousel__container-{{ ai_gen_id }} {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   .ai-testimonial-carousel__header-{{ ai_gen_id }} {
     text-align: center;
     margin-bottom: 50px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
   }
 
   .ai-testimonial-carousel__title-{{ ai_gen_id }} {
     font-family: 'Anton', sans-serif;
     font-size: {{ block.settings.heading_size }}px;
-    color: #d52528 !important;
+    color: #ffffff !important; /* White heading */
     margin: 0 0 12px;
     text-transform: uppercase;
     letter-spacing: -1px;
@@ -41,15 +45,16 @@
   .ai-testimonial-carousel__subtitle-{{ ai_gen_id }} {
     font-family: 'Inter', sans-serif;
     font-size: {{ block.settings.subheading_size }}px;
-    color: #555555 !important;
+    color: rgba(255, 255, 255, 0.8) !important; /* White subtitle */
     margin: 0;
   }
 
   .ai-testimonial-carousel__track-wrapper-{{ ai_gen_id }} {
     position: relative;
     overflow: hidden;
-    padding: 20px 20px 60px 20px; /* increased spacing to prevent hover shadow clipping */
-    margin: -20px -20px -60px -20px;
+    padding: 20px 0 60px 0; /* padding top/bottom only to prevent side clipping */
+    margin: -20px 0 -60px 0;
+    width: 100%;
   }
 
   .ai-testimonial-carousel__track-{{ ai_gen_id }} {
@@ -79,10 +84,10 @@
   }
 
   .ai-testimonial-carousel__card-{{ ai_gen_id }} {
-    background-color: #d52528 !important;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #ffffff !important; /* White card background */
+    border: 1px solid rgba(0, 0, 0, 0.05);
     border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(213, 37, 40, 0.15);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05); /* subtle shadow */
     padding: 32px;
     height: 100%;
     display: flex;
@@ -92,7 +97,7 @@
 
   .ai-testimonial-carousel__card-{{ ai_gen_id }}:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 45px rgba(213, 37, 40, 0.25);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.12); /* darker shadow on hover */
   }
 
   .ai-testimonial-carousel__stars-{{ ai_gen_id }} {
@@ -110,7 +115,7 @@
   .ai-testimonial-carousel__quote-{{ ai_gen_id }} {
     font-family: 'Inter', sans-serif;
     font-size: {{ block.settings.quote_size }}px;
-    color: #ffffff !important;
+    color: #333333 !important; /* Dark charcoal quote text for white cards */
     line-height: 1.6;
     margin: 0 0 28px;
     flex-grow: 1;
@@ -120,7 +125,7 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(0, 0, 0, 0.08); /* Dark divider line */
     padding-top: 20px;
   }
 
@@ -131,7 +136,7 @@
     overflow: hidden;
     flex-shrink: 0;
     background-color: #f5f5f5;
-    border: 2px solid #ffffff;
+    border: 2px solid #d52528; /* Crimson red border for avatar */
   }
 
   .ai-testimonial-carousel__image-{{ ai_gen_id }} {
@@ -161,7 +166,7 @@
     font-family: 'Anton', sans-serif;
     font-size: 18px;
     font-weight: 400;
-    color: #ffffff !important;
+    color: #d52528 !important; /* Crimson red reviewer name */
     text-transform: uppercase;
     margin: 0 0 4px;
     letter-spacing: 0.5px;
@@ -171,7 +176,7 @@
     font-family: 'Inter', sans-serif;
     font-size: 12px;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.7) !important;
+    color: rgba(0, 0, 0, 0.6) !important; /* Dark grey reviewer role */
     text-transform: uppercase;
     margin: 0;
     display: flex;
