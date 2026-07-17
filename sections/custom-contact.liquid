@@ -1,6 +1,6 @@
 {% schema %}
 {
-  "name": "Image & Text Contact",
+  "name": "Split Contact Page",
   "settings": [
     {
       "type": "image_picker",
@@ -52,8 +52,7 @@
     {
       "type": "url",
       "id": "email_url",
-      "label": "Email URL",
-      "info": "To link directly to an email client, enter mailto:your@email.com"
+      "label": "Email URL"
     },
     {
       "type": "text",
@@ -65,17 +64,11 @@
       "type": "url",
       "id": "chat_url",
       "label": "Chat URL (optional)"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text Color",
-      "default": "#ffffff"
     }
   ],
   "presets": [
     {
-      "name": "Image & Text Contact"
+      "name": "Split Contact Page"
     }
   ]
 }
@@ -86,32 +79,50 @@
     display: flex;
     flex-wrap: wrap;
     width: 100vw;
-    margin-left: calc(50% - 50vw); /* Forces 100% viewport width reliably */
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
     min-height: 85vh;
   }
 
   /* Left Half: Image */
   .split-contact-image-col {
-    flex: 1 1 50%;
-    min-height: 500px;
+    width: 50vw;
+    flex: 0 0 50vw;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: transparent;
   }
 
   /* Right Half: Content */
   .split-contact-content-col {
-    flex: 1 1 50%;
+    width: 50vw;
+    flex: 0 0 50vw;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .split-contact-top, .split-contact-bottom {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 8% 10%;
-    font-family: 'Inter', sans-serif;
-    color: {{ section.settings.text_color }};
-    background-color: transparent; /* Merges with theme background */
+    padding: 10% 15%;
+  }
+
+  .split-contact-top {
+    background-color: #fdf7ee; /* Cream */
+    color: #333333;
+  }
+
+  .split-contact-bottom {
+    background-color: #7b1616; /* Dark Crimson Red */
+    color: #ffffff;
   }
 
   /* Typography */
@@ -119,62 +130,59 @@
   .split-contact-content-col h2 {
     font-family: 'Anton', sans-serif;
     text-transform: uppercase;
-    font-size: 72px;
-    font-weight: 400; /* Anton is naturally thick */
+    font-size: 64px;
+    font-weight: 400;
     margin-bottom: 24px;
-    color: {{ section.settings.text_color }};
     letter-spacing: 1px;
     line-height: 1.1;
   }
 
+  .split-contact-top h1 {
+    color: #333333;
+  }
+
+  .split-contact-bottom h2 {
+    color: #ffffff;
+  }
+
   .split-contact-intro {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.6;
     margin-bottom: 24px;
     font-weight: 500;
   }
 
   .split-contact-links {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.5;
     font-weight: 500;
   }
 
-  .split-contact-content-col a {
-    color: {{ section.settings.text_color }};
+  .split-contact-top a {
+    color: #333333;
     font-weight: 700;
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 4px;
     transition: opacity 0.2s;
   }
-  .split-contact-content-col a:hover {
+  .split-contact-top a:hover {
     opacity: 0.7;
   }
 
   /* Action Section */
-  .split-contact-action {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding-top: 40px;
-    margin-top: 40px;
-    border-top: 1px solid rgba(255,255,255,0.2);
-  }
-
-  .split-contact-action .info-line {
+  .split-contact-bottom .info-line {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 16px;
   }
 
-  .split-contact-action .action-link {
+  .split-contact-bottom .action-link {
     display: block;
     margin-top: 24px;
     font-size: 18px;
     font-weight: 800;
-    color: {{ section.settings.text_color }};
+    color: #ffffff;
     text-transform: uppercase;
     text-decoration: underline;
     text-decoration-thickness: 3px;
@@ -185,20 +193,24 @@
 
   /* Responsive Design */
   @media screen and (max-width: 900px) {
+    .split-contact-wrapper {
+      flex-direction: column;
+    }
     .split-contact-image-col {
-      flex: 1 1 100%;
+      width: 100vw;
+      flex: 0 0 auto;
       min-height: 400px;
     }
     .split-contact-content-col {
-      flex: 1 1 100%;
+      width: 100vw;
+      flex: 0 0 auto;
+    }
+    .split-contact-top, .split-contact-bottom {
       padding: 60px 20px;
     }
     .split-contact-content-col h1,
     .split-contact-content-col h2 {
-      font-size: 52px;
-    }
-    .split-contact-intro {
-      font-size: 18px;
+      font-size: 48px;
     }
   }
 </style>
@@ -218,23 +230,28 @@
 
   <!-- Right Side: Content -->
   <div class="split-contact-content-col">
-    {%- if section.settings.main_heading != blank -%}
-      <h1>{{ section.settings.main_heading }}</h1>
-    {%- endif -%}
     
-    {%- if section.settings.intro_text != blank -%}
-      <div class="split-contact-intro">
-        {{ section.settings.intro_text }}
-      </div>
-    {%- endif -%}
+    <!-- Top Block -->
+    <div class="split-contact-top">
+      {%- if section.settings.main_heading != blank -%}
+        <h1>{{ section.settings.main_heading }}</h1>
+      {%- endif -%}
+      
+      {%- if section.settings.intro_text != blank -%}
+        <div class="split-contact-intro">
+          {{ section.settings.intro_text }}
+        </div>
+      {%- endif -%}
 
-    {%- if section.settings.links_text != blank -%}
-      <div class="split-contact-links">
-        {{ section.settings.links_text }}
-      </div>
-    {%- endif -%}
+      {%- if section.settings.links_text != blank -%}
+        <div class="split-contact-links">
+          {{ section.settings.links_text }}
+        </div>
+      {%- endif -%}
+    </div>
 
-    <div class="split-contact-action">
+    <!-- Bottom Block -->
+    <div class="split-contact-bottom">
       {%- if section.settings.action_heading != blank -%}
         <h2>{{ section.settings.action_heading }}</h2>
       {%- endif -%}
@@ -259,5 +276,6 @@
         </a>
       {%- endif -%}
     </div>
+    
   </div>
 </div>
