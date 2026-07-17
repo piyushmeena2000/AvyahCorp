@@ -1,54 +1,33 @@
 {% schema %}
 {
-  "name": "Split Contact Page",
+  "name": "Centered Contact Page",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Left Column Image"
-    },
-    {
-      "type": "header",
-      "content": "Top Right Section"
-    },
-    {
-      "type": "color",
-      "id": "top_bg_color",
-      "label": "Background Color",
-      "default": "#fdf7ee"
-    },
-    {
       "type": "text",
-      "id": "top_heading",
-      "label": "Heading",
+      "id": "main_heading",
+      "label": "Main Heading",
       "default": "Contact Us"
     },
     {
       "type": "richtext",
-      "id": "top_text",
-      "label": "Body Text",
+      "id": "intro_text",
+      "label": "Introductory Text",
       "default": "<p>Our customer service team is all about you. Just as we strive for every bite to be delicious, we want to ensure every interaction is Perfect.</p>"
     },
     {
       "type": "richtext",
-      "id": "top_links_text",
-      "label": "Links Text",
+      "id": "links_text",
+      "label": "Secondary Links Text",
       "default": "<p>Check out our <a href=\"/pages/faq\">FAQ page</a> for common questions.</p>"
     },
     {
       "type": "header",
-      "content": "Bottom Right Section"
-    },
-    {
-      "type": "color",
-      "id": "bottom_bg_color",
-      "label": "Background Color",
-      "default": "#daf1ee"
+      "content": "Action Section"
     },
     {
       "type": "text",
-      "id": "bottom_heading",
-      "label": "Heading",
+      "id": "action_heading",
+      "label": "Action Heading",
       "default": "Want to chat?"
     },
     {
@@ -90,74 +69,45 @@
       "type": "color",
       "id": "text_color",
       "label": "Text Color",
-      "default": "#39302c"
-    },
-    {
-      "type": "color",
-      "id": "bottom_text_color",
-      "label": "Bottom Text Color",
       "default": "#ffffff"
     }
   ],
   "presets": [
     {
-      "name": "Split Contact Page"
+      "name": "Centered Contact Page"
     }
   ]
 }
 {% endschema %}
 
 <style>
-  .split-contact-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    min-height: 85vh; /* Gives that full-screen immersive feel */
-    font-family: 'Inter', sans-serif;
-    color: {{ section.settings.text_color }};
-  }
-
-  /* Left Half: Image */
-  .split-contact-image-col {
-    flex: 1 1 50%;
-    min-height: 500px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #e5e5e5;
-  }
-
-  /* Right Half: Stacked Content */
-  .split-contact-content-col {
-    flex: 1 1 50%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .split-contact-block {
-    flex: 1; /* Both top and bottom take 50% of the right column */
+  .centered-contact-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 10% 12%;
+    width: 100%;
+    min-height: 75vh;
+    padding: 80px 20px;
+    background-color: transparent; /* Merges with theme background */
+    font-family: 'Inter', sans-serif;
+    color: {{ section.settings.text_color }};
   }
 
-  .split-contact-top {
-    background-color: {{ section.settings.top_bg_color }};
-  }
-  
-  .split-contact-bottom {
-    background-color: {{ section.settings.bottom_bg_color }};
-    color: {{ section.settings.bottom_text_color }};
+  .centered-contact-container {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
   }
 
   /* Typography */
-  .split-contact-block h1,
-  .split-contact-block h2 {
-    font-size: 56px;
+  .centered-contact-wrapper h1,
+  .centered-contact-wrapper h2 {
+    font-size: 64px;
     font-weight: 800;
     margin-bottom: 24px;
     color: {{ section.settings.text_color }};
@@ -165,20 +115,20 @@
     line-height: 1.1;
   }
 
-  .split-contact-top .top-body-text p {
-    font-size: 18px;
+  .centered-contact-intro p {
+    font-size: 20px;
     line-height: 1.6;
     margin-bottom: 24px;
     font-weight: 500;
   }
 
-  .split-contact-top .top-links-text p {
-    font-size: 16px;
+  .centered-contact-links p {
+    font-size: 18px;
     line-height: 1.5;
     font-weight: 500;
   }
 
-  .split-contact-top a {
+  .centered-contact-wrapper a {
     color: {{ section.settings.text_color }};
     font-weight: 700;
     text-decoration: underline;
@@ -186,26 +136,32 @@
     text-underline-offset: 4px;
     transition: opacity 0.2s;
   }
-  .split-contact-top a:hover {
+  .centered-contact-wrapper a:hover {
     opacity: 0.7;
   }
 
-  .split-contact-bottom .info-line {
-    font-size: 16px;
+  /* Action Section */
+  .centered-contact-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .centered-contact-action .info-line {
+    font-size: 18px;
     font-weight: 600;
     margin-bottom: 16px;
   }
 
-  .split-contact-bottom h2 {
-    color: {{ section.settings.bottom_text_color }};
-  }
-
-  .split-contact-bottom .action-link {
+  .centered-contact-action .action-link {
     display: block;
-    margin-top: 16px;
-    font-size: 16px;
+    margin-top: 24px;
+    font-size: 18px;
     font-weight: 800;
-    color: {{ section.settings.bottom_text_color }};
+    color: {{ section.settings.text_color }};
     text-transform: uppercase;
     text-decoration: underline;
     text-decoration-thickness: 3px;
@@ -213,71 +169,51 @@
     letter-spacing: 1px;
     transition: opacity 0.2s;
   }
-  .split-contact-bottom .action-link:hover {
+  .centered-contact-action .action-link:hover {
     opacity: 0.7;
   }
 
   /* Responsive Design */
-  @media screen and (max-width: 900px) {
-    .split-contact-image-col {
-      flex: 1 1 100%;
-      min-height: 400px;
-    }
-    .split-contact-content-col {
-      flex: 1 1 100%;
-    }
-    .split-contact-block {
+  @media screen and (max-width: 768px) {
+    .centered-contact-wrapper {
       padding: 60px 20px;
     }
-    .split-contact-block h1,
-    .split-contact-block h2 {
-      font-size: 42px;
+    .centered-contact-wrapper h1,
+    .centered-contact-wrapper h2 {
+      font-size: 48px;
+    }
+    .centered-contact-intro p {
+      font-size: 18px;
     }
   }
 </style>
 
-<div class="split-contact-wrapper">
-  
-  {%- liquid 
-    assign bg_image_url = ''
-    if section.settings.image != blank
-      assign bg_image_url = section.settings.image | img_url: 'master'
-    endif
-  -%}
-  
-  <div class="split-contact-image-col" style="background-image: url('{{ bg_image_url }}');">
-    {%- if section.settings.image == blank -%}
-      <!-- Placeholder if no image uploaded -->
-      <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; opacity:0.3;">
-        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-      </div>
-    {%- endif -%}
-  </div>
-
-  <div class="split-contact-content-col">
-    <!-- Top Block -->
-    <div class="split-contact-block split-contact-top">
-      {%- if section.settings.top_heading != blank -%}
-        <h1>{{ section.settings.top_heading }}</h1>
+<div class="centered-contact-wrapper">
+  <div class="centered-contact-container">
+    
+    <!-- Top Content -->
+    <div class="centered-contact-top">
+      {%- if section.settings.main_heading != blank -%}
+        <h1>{{ section.settings.main_heading }}</h1>
       {%- endif -%}
       
-      {%- if section.settings.top_text != blank -%}
-        <div class="top-body-text">
-          {{ section.settings.top_text }}
+      {%- if section.settings.intro_text != blank -%}
+        <div class="centered-contact-intro">
+          {{ section.settings.intro_text }}
         </div>
       {%- endif -%}
 
-      {%- if section.settings.top_links_text != blank -%}
-        <div class="top-links-text">
-          {{ section.settings.top_links_text }}
+      {%- if section.settings.links_text != blank -%}
+        <div class="centered-contact-links">
+          {{ section.settings.links_text }}
         </div>
       {%- endif -%}
     </div>
 
-    <!-- Bottom Block -->
-    <div class="split-contact-block split-contact-bottom">
-      {%- if section.settings.bottom_heading != blank -%}
-        <h2>{{ section.settings.bottom_heading }}</h2>
+    <!-- Bottom Action Content -->
+    <div class="centered-contact-action">
+      {%- if section.settings.action_heading != blank -%}
+        <h2>{{ section.settings.action_heading }}</h2>
       {%- endif -%}
       
       {%- if section.settings.office_hours != blank -%}
@@ -300,5 +236,6 @@
         </a>
       {%- endif -%}
     </div>
+
   </div>
 </div>
