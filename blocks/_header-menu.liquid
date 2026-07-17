@@ -315,7 +315,7 @@
     min-height: var(--minimum-touch-target);
     align-items: center;
     position: relative;
-    padding-bottom: 1px;
+    padding-bottom: 4px;
 
     &::after {
       content: '';
@@ -323,7 +323,7 @@
       bottom: 0;
       left: 0;
       width: 0;
-      height: 1.5px;
+      height: 2px;
       background-color: var(--menu-top-level-font-color, #fff);
       transition: width 0.25s ease;
     }
@@ -745,29 +745,25 @@
     transform: rotate(180deg);
   }
 
-  .avyah-catalog-item {
-    position: static;
-  }
-
   .avyah-megamenu {
     display: none;
     position: absolute;
     top: 100%;
-    left: 0;
-    right: 0;
-    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 680px;
     background: #ffffff;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-    border-radius: 0;
+    border-radius: 0 0 16px 16px;
     border-top: 3px solid #d52528;
     z-index: 10000;
     animation: avyahMegaIn 0.2s ease;
-    padding: 36px var(--section-padding-inline, 40px);
+    padding: 32px 36px;
   }
 
   @keyframes avyahMegaIn {
-    from { opacity: 0; transform: translateY(-8px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
   }
 
   .avyah-catalog-item:hover .avyah-megamenu {
@@ -776,9 +772,7 @@
 
   .avyah-megamenu__inner {
     display: flex;
-    gap: 40px;
-    max-width: var(--page-width, 1200px);
-    margin: 0 auto;
+    gap: 36px;
   }
 
   .avyah-megamenu__sidebar {
