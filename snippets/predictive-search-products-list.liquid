@@ -60,7 +60,7 @@
                 resource: product,
                 image_width: 500,
                 image_hover: true,
-                image_aspect_ratio: '4 / 5'
+                image_aspect_ratio: '1 / 1'
               %}
             </li>
           {% endfor %}
@@ -75,7 +75,7 @@
                 resource: product,
                 image_width: 500,
                 image_hover: true,
-                image_aspect_ratio: '4 / 5'
+                image_aspect_ratio: '1 / 1'
               %}
             </li>
           {% endfor %}
@@ -104,7 +104,7 @@
             resource: product,
             image_width: 500,
             image_hover: true,
-            image_aspect_ratio: '4 / 5'
+            image_aspect_ratio: '1 / 1'
           %}
         </li>
       {% endfor %}
@@ -137,6 +137,16 @@
     padding: 8px;
     border: 1px solid #eeeeee;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  /* Force dark text and proper image fitting */
+  .predictive-search-results__card * {
+    color: #111111 !important;
+  }
+
+  .predictive-search-results__card img {
+    object-fit: contain !important;
+    background-color: #f9f9f9;
   }
 
   .predictive-search-results__card:hover {
