@@ -414,11 +414,9 @@
   }
 
   .header-section:has(> #header-component[sticky='always']),
-  .header-section:has(> #header-component[sticky='scroll-up'][data-sticky-state='active']) {
+  .header-section:has(> #header-component[sticky='scroll-up']) {
     position: sticky;
-
-    /* Use -1 instead of 0 so intersection observer can track sticky state */
-    top: -1px;
+    top: 0;
     z-index: var(--layer-sticky);
   }
 

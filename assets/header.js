@@ -125,60 +125,64 @@ class HeaderComponent extends Component {
     }
   }
 
+  #scrollLock = false;
+
   #handleWindowScroll = () => {
-    const stickyMode = this.getAttribute('sticky');
-    if (!this.#offscreen && stickyMode !== 'always') return;
+    if (this.#scrollLock) return;
+    this.#scrollLock = true;
 
-    const scrollTop = document.scrollingElement?.scrollTop ?? 0;
-    const isScrollingUp = scrollTop < this.#lastScrollTop;
-    if (this.#timeout) {
-      clearTimeout(this.#timeout);
-      this.#timeout = null;
-    }
+    requestAnimationFrame(() => {
+      const stickyMode = this.getAttribute('sticky');
+      if (stickyMode !== 'scroll-up' && stickyMode !== 'always') {
+        this.#scrollLock = false;
+        return;
+      }
 
-    if (stickyMode === 'always') {
-      const isAtTop = this.getBoundingClientRect().top >= 0;
+      const scrollTop = document.scrollingElement?.scrollTop ?? 0;
+      const isScrollingUp = scrollTop < this.#lastScrollTop;
+      const headerHeight = this.getBoundingClientRect().height || 100;
 
-      if (isAtTop) {
+      if (this.#timeout) {
+        clearTimeout(this.#timeout);
+        this.#timeout = null;
+      }
+
+      // If at top of page, reset
+      if (scrollTop <= headerHeight) {
+        this.removeAttribute('data-animating');
+        this.dataset.stickyState = 'inactive';
         this.dataset.scrollDirection = 'none';
-      } else if (isScrollingUp) {
+        this.#lastScrollTop = scrollTop;
+        this.#scrollLock = false;
+        return;
+      }
+
+      if (stickyMode === 'always') {
+        if (isScrollingUp) {
+          this.dataset.scrollDirection = 'up';
+        } else {
+          this.dataset.scrollDirection = 'down';
+        }
+        this.#lastScrollTop = scrollTop;
+        this.#scrollLock = false;
+        return;
+      }
+
+      // Headroom 'scroll-up' logic
+      if (isScrollingUp) {
+        this.removeAttribute('data-animating');
+        this.dataset.stickyState = 'active';
         this.dataset.scrollDirection = 'up';
-      } else {
-        this.dataset.scrollDirection = 'down';
+      } else if (this.dataset.stickyState !== 'idle') {
+        // Scrolling down
+        this.dataset.scrollDirection = 'none';
+        this.setAttribute('data-animating', '');
+        this.dataset.stickyState = 'idle';
       }
 
       this.#lastScrollTop = scrollTop;
-      return;
-    }
-
-    if (isScrollingUp) {
-      this.removeAttribute('data-animating');
-
-      if (this.getBoundingClientRect().top >= 0) {
-        // reset sticky state when header is scrolled up to natural position
-        this.#offscreen = false;
-        this.dataset.stickyState = 'inactive';
-        this.dataset.scrollDirection = 'none';
-      } else {
-        // show sticky header when scrolling up
-        this.dataset.stickyState = 'active';
-        this.dataset.scrollDirection = 'up';
-      }
-    } else if (this.dataset.stickyState === 'active') {
-      this.dataset.scrollDirection = 'none';
-      // delay transitioning to idle hidden state for hiding animation
-      this.setAttribute('data-animating', '');
-
-      this.#timeout = setTimeout(() => {
-        this.dataset.stickyState = 'idle';
-        this.removeAttribute('data-animating');
-      }, this.#animationDelay);
-    } else {
-      this.dataset.scrollDirection = 'none';
-      this.dataset.stickyState = 'idle';
-    }
-
-    this.#lastScrollTop = scrollTop;
+      this.#scrollLock = false;
+    });
   };
 
   connectedCallback() {
