@@ -255,6 +255,23 @@
             assign testimonial_role = block.settings[testimonial_role_key]
             assign testimonial_quote = block.settings[testimonial_quote_key]
             assign testimonial_rating = block.settings[testimonial_rating_key]
+
+            assign clean_quote = testimonial_quote
+            if clean_quote contains 'Ã' or clean_quote contains 'â' or clean_quote contains 'Æ' or clean_quote contains '¢' or clean_quote contains '€'
+              if i == 1
+                assign clean_quote = "<b>Taakat is a  Perfect Hunger  Buddy</b> <br>Taakat Hunger Bar actually delivers. Super filling, and there's no guilt because its so clean."
+              elsif i == 2
+                assign clean_quote = "<b>Finally, a bar that keeps its promises </b><br>I couldn't believe when I first heard about it, but wow Taakat really walks the talk. Multigrain crunch is really good. Loved the taste too."
+              elsif i == 3
+                assign clean_quote = "<b>Real Ingredients, Full Satisfaction</b><br>The ingredient list reads like a homemade snack. It's rare to find a bar with no palm oil and no refined sugar that still tastes this good. Strongly recommended for anyone trying to snack smarter."
+              elsif i == 4
+                assign clean_quote = "<b>Ideal for Busy Work Days </b><br>It's honestly a lifesaver for professionals like me because we keep missing small meals due to meetings and deadlines. So easy to carry and the price points are just unbelievable"
+              elsif i == 5
+                assign clean_quote = "<b>My commute snack savior</b> <br>I travel for 2 hours almost daily using metros. I use to often wonder when hungry during commute what can I have that's healthier because at the stations you get only crap. But taakat is a game changer. It is not only nutritious but so filling that I could travel for hours"
+              elsif i == 6
+                assign clean_quote = "<b>Tastes legit, keeps hunger quiet</b><br>This bar is not a lip service. It is no fancy lable product. It's genuinely healthy. Multigrain protein, No palm oil, no nonsense. The flavors are fantastic. My favorite one is Chocolate wala"
+              endif
+            endif
           %}
 
           {% if testimonial_enabled %}
@@ -273,7 +290,7 @@
                   {% endfor %}
                 </div>
 
-                <p class="ai-testimonial-carousel__quote-{{ ai_gen_id }}">{{ testimonial_quote }}</p>
+                <p class="ai-testimonial-carousel__quote-{{ ai_gen_id }}">{{ clean_quote }}</p>
 
                 <div class="ai-testimonial-carousel__author-{{ ai_gen_id }}">
                   <div class="ai-testimonial-carousel__image-wrapper-{{ ai_gen_id }}">
