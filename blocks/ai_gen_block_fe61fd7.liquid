@@ -258,9 +258,9 @@
     width: 100%;
     background-color: {{ block.settings.button_background }};
     color: {{ block.settings.button_text_color }};
-    padding: 12px 20px;
+    padding: 12px 6px;
     border-radius: 8px;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 400;
     text-decoration: none;
     border: none;
@@ -272,6 +272,9 @@
     letter-spacing: 0.5px;
     margin-top: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .ai-product-card-button-{{ ai_gen_id }}:hover {
@@ -466,9 +469,9 @@
           
           {% assign product_category = "range" %}
           {% assign handle_down = product.handle | downcase %}
-          {% if handle_down contains 'combo' or handle_down contains 'king' or handle_down contains 'variety' %}
+          {% if handle_down contains 'combo' or handle_down contains 'king' or handle_down contains 'variety' or handle_down contains 'pack-of-80' or handle_down contains 'x-8' %}
             {% assign product_category = "combo" %}
-          {% elsif handle_down contains 'wholesome' or handle_down contains 'pack-24' or handle_down contains 'pack-of-10-bars-x-8' %}
+          {% elsif handle_down contains 'wholesome' or handle_down contains 'pack-24' or handle_down contains 'snackbox' %}
             {% assign product_category = "snackbox" %}
           {% endif %}
           
