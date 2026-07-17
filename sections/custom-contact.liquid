@@ -91,6 +91,12 @@
       "id": "text_color",
       "label": "Text Color",
       "default": "#39302c"
+    },
+    {
+      "type": "color",
+      "id": "bottom_text_color",
+      "label": "Bottom Text Color",
+      "default": "#ffffff"
     }
   ],
   "presets": [
@@ -105,7 +111,12 @@
   .split-contact-wrapper {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
     min-height: 85vh; /* Gives that full-screen immersive feel */
     font-family: 'Inter', sans-serif;
     color: {{ section.settings.text_color }};
@@ -144,6 +155,7 @@
   
   .split-contact-bottom {
     background-color: {{ section.settings.bottom_bg_color }};
+    color: {{ section.settings.bottom_text_color }};
   }
 
   /* Typography */
@@ -188,12 +200,16 @@
     margin-bottom: 16px;
   }
 
+  .split-contact-bottom h2 {
+    color: {{ section.settings.bottom_text_color }};
+  }
+
   .split-contact-bottom .action-link {
     display: block;
     margin-top: 16px;
     font-size: 16px;
     font-weight: 800;
-    color: {{ section.settings.text_color }};
+    color: {{ section.settings.bottom_text_color }};
     text-transform: uppercase;
     text-decoration: underline;
     text-decoration-thickness: 3px;
