@@ -103,7 +103,7 @@
             {% assign animation_index = 0 %}
             {%- for link in linklist.links -%}
               {% assign downcased_title = link.title | downcase %}
-              {% if downcased_title == 'home' or downcased_title contains 'store' or downcased_title contains 'locator' or downcased_title contains 'find' %}
+              {% if downcased_title == 'home' or downcased_title contains 'store' or downcased_title contains 'locator' or downcased_title contains 'find' or downcased_title contains 'ingredient' or downcased_title contains 'explore' %}
                 {% continue %}
               {% endif %}
               {% assign link_title = link.title %}
@@ -261,7 +261,7 @@
             {% assign animation_index = 0 %}
             {%- for link in linklist.links -%}
               {% assign downcased_title = link.title | downcase %}
-              {% if downcased_title == 'home' or downcased_title contains 'store' or downcased_title contains 'locator' or downcased_title contains 'find' %}
+              {% if downcased_title == 'home' or downcased_title contains 'store' or downcased_title contains 'locator' or downcased_title contains 'find' or downcased_title contains 'ingredient' or downcased_title contains 'explore' %}
                 {% continue %}
               {% endif %}
               {% assign link_title = link.title %}

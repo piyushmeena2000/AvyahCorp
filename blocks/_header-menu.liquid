@@ -37,6 +37,10 @@
             role="list"
           >
             {% for link in block_settings.menu.links %}
+              {% assign _dt = link.title | downcase %}
+              {% if _dt == 'home' or _dt contains 'store' or _dt contains 'locator' or _dt contains 'find' or _dt contains 'ingredient' or _dt contains 'explore' %}
+                {% continue %}
+              {% endif %}
               <li>
                 <a
                   href="{{ link.url }}"
