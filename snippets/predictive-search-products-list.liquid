@@ -117,6 +117,33 @@
     padding-inline: var(--padding-xl);
   }
 
+  .predictive-search-results__title {
+    color: #111111 !important;
+    font-weight: 700;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 8px;
+  }
+
+  .predictive-search-results__wrapper-products {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+  }
+
+  .predictive-search-results__card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 8px;
+    border: 1px solid #eeeeee;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .predictive-search-results__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+
   .recently-viewed-wrapper {
     display: grid;
     grid-template-rows: auto auto;
