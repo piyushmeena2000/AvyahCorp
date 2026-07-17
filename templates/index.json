@@ -946,7 +946,7 @@
             "heading": "Also Available At",
             "heading_size": 40,
             "heading_spacing": 40,
-            "heading_color": "#ffffff",
+            "heading_color": "#d52528",
             "logo_1": "shopify://shop_images/Amazon_logo_svg.webp",
             "logo_2": "shopify://shop_images/flipkart-logo-png-transparent.png",
             "logo_3": "shopify://shop_images/TATA_1mg_Logo_svg.png",
@@ -967,7 +967,7 @@
             "border_color": "#e6e6e6",
             "grayscale": false,
             "scroll_speed": 0.1,
-            "background_color": "#d52528",
+            "background_color": "#ffffff",
             "padding_top": 40,
             "padding_bottom": 60
           },
