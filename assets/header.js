@@ -56,7 +56,7 @@ class HeaderComponent extends Component {
    * The duration to wait for hiding animation, when sticky behavior is 'scroll-up'
    * @constant {number}
    */
-  #animationDelay = 150;
+  #animationDelay = 300;
 
   /**
    * Keeps the global `--header-height` custom property up to date,
