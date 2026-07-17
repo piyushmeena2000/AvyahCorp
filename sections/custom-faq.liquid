@@ -1,0 +1,234 @@
+<style>
+  .superyou-faq-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .superyou-faq-left {
+    flex: 1;
+    min-width: 50%;
+    background-color: #f7ebd5; /* Cream/beige color like SuperYou */
+    padding: 80px 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .superyou-faq-right {
+    flex: 1;
+    min-width: 50%;
+    background-color: #e51d20; /* SuperYou red */
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    min-height: 500px;
+  }
+
+  .superyou-faq-right img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .superyou-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 64px;
+    line-height: 1;
+    color: #df3e33;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    letter-spacing: 0;
+  }
+
+  .superyou-accordion-item {
+    background-color: #eed7b1; /* Slightly darker beige for cards */
+    margin-bottom: 12px;
+    padding: 16px 24px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .superyou-accordion-item:hover {
+    background-color: #e6c99c;
+  }
+
+  .superyou-accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .superyou-accordion-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #111;
+    margin: 0;
+  }
+
+  .superyou-accordion-icon {
+    width: 24px;
+    height: 24px;
+    background-color: #000;
+    border-radius: 50%;
+    color: #eed7b1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  .superyou-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, margin-top 0.3s ease;
+  }
+
+  .superyou-accordion-inner {
+    padding-top: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+  }
+
+  .superyou-btn {
+    display: inline-block;
+    margin-top: 32px;
+    padding: 14px 24px;
+    background-color: #e51d20;
+    color: #fff;
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid #000;
+    box-shadow: 4px 4px 0 #000;
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+
+  .superyou-btn:hover {
+    background-color: #cc1a1c;
+  }
+
+  .superyou-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0 0 0 #000;
+  }
+
+  @media screen and (max-width: 768px) {
+    .superyou-faq-left, .superyou-faq-right {
+      min-width: 100%;
+    }
+    .superyou-faq-left {
+      padding: 40px 20px;
+    }
+    .superyou-title {
+      font-size: 48px;
+    }
+  }
+</style>
+
+<div class="superyou-faq-wrapper">
+  <div class="superyou-faq-left">
+    <h2 class="superyou-title">FREQUENTLY<br>ASKED<br>QUESTIONS</h2>
+    
+    {% for block in section.blocks %}
+      <div class="superyou-accordion-item" onclick="toggleFaq(this)">
+        <div class="superyou-accordion-header">
+          <h3 class="superyou-accordion-title">{{ block.settings.question }}</h3>
+          <div class="superyou-accordion-icon">+</div>
+        </div>
+        <div class="superyou-accordion-content">
+          <div class="superyou-accordion-inner">
+            {{ block.settings.answer }}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    <a href="{{ section.settings.button_link }}" class="superyou-btn">{{ section.settings.button_text }}</a>
+  </div>
+  <div class="superyou-faq-right">
+    {% if section.settings.image != blank %}
+      {{ section.settings.image | image_url: width: 1000 | image_tag }}
+    {% else %}
+      <img src="{{ 'faq-dummy-kid.png' | asset_url }}" alt="FAQ Dummy">
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  function toggleFaq(el) {
+    const content = el.querySelector('.superyou-accordion-content');
+    const icon = el.querySelector('.superyou-accordion-icon');
+    if (content.style.maxHeight) {
+      content.style.maxHeight = null;
+      icon.innerHTML = '+';
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+      icon.innerHTML = '-';
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "SuperYou FAQ Split",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Right Column Image"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "EXPLORE ALL FAQS"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "QUESTION HERE?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Answer goes here</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SuperYou FAQ Split",
+      "blocks": [
+        { "type": "faq_item", "settings": { "question": "Are any purchases final sale?", "answer": "<p>We are unable to accept returns on certain items. These will be carefully marked before purchase.</p>" } },
+        { "type": "faq_item", "settings": { "question": "When will I get my order?", "answer": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Where are your products manufactured?", "answer": "<p>Our products are manufactured both locally and globally. We carefully select our manufacturing partners to ensure our products are high quality and a fair value.</p>" } },
+        { "type": "faq_item", "settings": { "question": "How much does shipping cost?", "answer": "<p>Shipping is calculated based on your location and the items in your order. You will always know the shipping price before you purchase.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

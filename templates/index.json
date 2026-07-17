@@ -903,46 +903,38 @@
       }
     },
     "section_nhYFxg": {
-      "type": "_blocks",
+      "type": "custom-faq",
       "blocks": {
-        "faq_block": {
-          "type": "ai_gen_block_faq",
+        "faq_1": {
+          "type": "faq_item",
           "settings": {
-            "background_color": "#f8edd9",
-            "padding_top": 80,
-            "padding_bottom": 80,
-            "padding_top_mobile": 48,
-            "padding_bottom_mobile": 48,
-            "heading": "FREQUENTLY ASKED QUESTIONS",
-            "subheading": "",
-            "title_size_desktop": 60,
-            "title_size_mobile": 36,
-            "title_color": "#d52528",
-            "accent_color": "#d52528",
-            "button_text": "EXPLORE ALL FAQS",
-            "button_link": "shopify:\/\/collections\/all",
-            "button_bg_color": "#d52528",
-            "button_hover_bg": "#000000",
-            "button_text_color": "#ffffff",
-            "faq_1_question": "Are any purchases final sale?",
-            "faq_1_answer": "We are unable to accept returns on certain items. These will be carefully marked before purchase.",
-            "faq_2_question": "When will I get my order?",
-            "faq_2_answer": "We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.",
-            "faq_3_question": "Where are your products manufactured?",
-            "faq_3_answer": "Our products are manufactured both locally and globally. We carefully select our manufacturing partners to ensure our products are high quality and a fair value.",
-            "faq_4_question": "How much does shipping cost?",
-            "faq_4_answer": "Shipping is calculated based on your location and the items in your order. You will always know the shipping price before you purchase."
+            "question": "WHY DID YOU USE MAIDA IN YOUR WAFERS?",
+            "answer": "<p>It gives the perfect crunch! We balance it with high protein for health.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "IS FERMENTED YEAST PROTEIN ACTUALLY GOOD?",
+            "answer": "<p>Yes, it's highly bioavailable and easily digested by the body.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "HOW DO YOU GET THE SWEETNESS WITHOUT ADDED SUGAR?",
+            "answer": "<p>We use natural Stevia and monk fruit extract for a perfectly clean sweetness.</p>"
           }
         }
       },
       "block_order": [
-        "faq_block"
+        "faq_1",
+        "faq_2",
+        "faq_3"
       ],
-      "name": "Custom FAQ",
       "settings": {
-        "section_width": "full-width",
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "button_text": "EXPLORE ALL FAQS",
+        "button_link": "shopify:\/\/collections\/all"
       }
     },
     "176275416535a5af93": {
