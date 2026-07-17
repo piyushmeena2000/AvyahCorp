@@ -112,11 +112,7 @@
     display: flex;
     flex-wrap: wrap;
     width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    margin-left: calc(50% - 50vw);
     min-height: 85vh; /* Gives that full-screen immersive feel */
     font-family: 'Inter', sans-serif;
     color: {{ section.settings.text_color }};
