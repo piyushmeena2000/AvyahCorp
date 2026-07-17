@@ -1,0 +1,302 @@
+{% schema %}
+{
+  "name": "Custom Contact",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get in Touch"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Have a question about our products, an order, or interested in carrying our brand? We'd love to hear from you."
+    },
+    {
+      "type": "text",
+      "id": "support_email",
+      "label": "Support Email",
+      "default": "support@avyahcorp.com"
+    },
+    {
+      "type": "text",
+      "id": "wholesale_email",
+      "label": "Wholesale Email",
+      "default": "wholesale@avyahcorp.com"
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "HQ Address",
+      "default": "Avyah Corp HQ\n123 Health Way\nCity, State, ZIP"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#a72023"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Contact"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .custom-contact-section {
+    padding: 80px 20px;
+    background-color: #ffffff;
+    font-family: 'Inter', sans-serif;
+  }
+  .custom-contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+  }
+  .custom-contact-info {
+    flex: 1 1 400px;
+  }
+  .custom-contact-form-wrapper {
+    flex: 1 1 500px;
+    background-color: #f9f9f9;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  .custom-contact-heading {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #111;
+    line-height: 1.2;
+    font-family: 'Inter', sans-serif;
+  }
+  .custom-contact-subtext {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+  .contact-info-block {
+    margin-bottom: 30px;
+  }
+  .contact-info-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: {{ section.settings.accent_color }};
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .contact-info-detail {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+  }
+  .contact-info-detail a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-info-detail a:hover {
+    color: {{ section.settings.accent_color }};
+  }
+
+  /* Form Styles */
+  .custom-contact-form .field {
+    margin-bottom: 20px;
+  }
+  .custom-contact-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+  }
+  .custom-contact-form input,
+  .custom-contact-form textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s;
+    background-color: #fff;
+  }
+  .custom-contact-form input:focus,
+  .custom-contact-form textarea:focus {
+    outline: none;
+    border-color: {{ section.settings.accent_color }};
+  }
+  .custom-contact-form textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+  .custom-contact-submit {
+    display: inline-block;
+    width: 100%;
+    padding: 16px 32px;
+    background-color: {{ section.settings.accent_color }};
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    font-family: 'Inter', sans-serif;
+  }
+  .custom-contact-submit:hover {
+    background-color: #7b1616; /* Darker red on hover */
+  }
+  .custom-contact-submit:active {
+    transform: scale(0.98);
+  }
+  
+  .form-status-success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .form-status-error {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  @media screen and (max-width: 768px) {
+    .custom-contact-section {
+      padding: 50px 15px;
+    }
+    .custom-contact-heading {
+      font-size: 32px;
+    }
+    .custom-contact-form-wrapper {
+      padding: 25px;
+    }
+  }
+</style>
+
+<div class="custom-contact-section">
+  <div class="custom-contact-container">
+    <div class="custom-contact-info">
+      <h1 class="custom-contact-heading">{{ section.settings.heading }}</h1>
+      <p class="custom-contact-subtext">{{ section.settings.subtext }}</p>
+      
+      {% if section.settings.support_email != blank %}
+      <div class="contact-info-block">
+        <div class="contact-info-title">Customer Support</div>
+        <div class="contact-info-detail">
+          <a href="mailto:{{ section.settings.support_email }}">{{ section.settings.support_email }}</a>
+        </div>
+      </div>
+      {% endif %}
+      
+      {% if section.settings.wholesale_email != blank %}
+      <div class="contact-info-block">
+        <div class="contact-info-title">Wholesale & Partnerships</div>
+        <div class="contact-info-detail">
+          <a href="mailto:{{ section.settings.wholesale_email }}">{{ section.settings.wholesale_email }}</a>
+        </div>
+      </div>
+      {% endif %}
+      
+      {% if section.settings.address != blank %}
+      <div class="contact-info-block">
+        <div class="contact-info-title">Headquarters</div>
+        <div class="contact-info-detail">
+          {{ section.settings.address | newline_to_br }}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="custom-contact-form-wrapper">
+      {%- form 'contact', id: 'ContactForm', class: 'custom-contact-form' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="form-status-success" tabindex="-1" autofocus>
+            Thank you! Your message has been sent successfully. We will get back to you soon.
+          </div>
+        {%- elsif form.errors -%}
+          <div class="form-status-error">
+            Oops! There was a problem submitting your form. Please check the fields below.
+          </div>
+        {%- endif -%}
+
+        <div class="field">
+          <label for="ContactForm-name">Name</label>
+          <input
+            autocomplete="name"
+            type="text"
+            id="ContactForm-name"
+            name="contact[Name]"
+            value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+            placeholder="Your Name"
+            required
+          >
+        </div>
+        
+        <div class="field">
+          <label for="ContactForm-email">Email <span aria-hidden="true">*</span></label>
+          <input
+            autocomplete="email"
+            type="email"
+            id="ContactForm-email"
+            name="contact[email]"
+            spellcheck="false"
+            autocapitalize="off"
+            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+            aria-required="true"
+            {% if form.errors contains 'email' %}
+              aria-invalid="true"
+            {% endif %}
+            placeholder="Your Email"
+            required
+          >
+        </div>
+        
+        <div class="field">
+          <label for="ContactForm-subject">Subject</label>
+          <input
+            type="text"
+            id="ContactForm-subject"
+            name="contact[Subject]"
+            placeholder="How can we help you?"
+          >
+        </div>
+
+        <div class="field">
+          <label for="ContactForm-body">Message</label>
+          <textarea
+            rows="10"
+            id="ContactForm-body"
+            name="contact[Comment]"
+            placeholder="Write your message here..."
+            required
+          >
+            {{- form.body -}}
+          </textarea>
+        </div>
+
+        <button type="submit" class="custom-contact-submit">
+          Send Message
+        </button>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
