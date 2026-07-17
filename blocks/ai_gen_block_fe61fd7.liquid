@@ -142,7 +142,7 @@
     flex: 0 0 calc((100% - ({{ block.settings.desktop_cards_visible | minus: 1 }} * {{ block.settings.card_gap }}px)) / {{ block.settings.desktop_cards_visible }});
     max-width: 420px !important;
     min-width: 320px !important;
-    min-height: 520px !important;
+    min-height: 480px !important;
     background-color: #ffffff;
     border-radius: 16px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -243,15 +243,17 @@
   }
 
   .ai-product-card-specs-{{ ai_gen_id }} {
-    font-size: 12px;
-    color: #555555 !important;
-    margin: 12px 0 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #d52528 !important;
+    margin: 6px 0 0;
     font-family: 'Inter', sans-serif;
     text-align: left;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-top: auto;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .ai-product-card-button-{{ ai_gen_id }} {
@@ -377,7 +379,7 @@
     .ai-product-card-{{ ai_gen_id }} {
       flex: 0 0 75%;
       max-width: none;
-      min-height: 380px !important;
+      min-height: 340px !important;
       background-color: #ffffff;
       border-radius: 16px;
       padding: 12px;
@@ -508,14 +510,15 @@
               <h3 class="ai-product-card-title-{{ ai_gen_id }}">
                 <a href="{{ product.url }}">{{ product.title }}</a>
               </h3>
-              {% assign specs = "Full Size • 20g Protein* • 7 Bars" %}
-              {% assign downcased_title = product.title | downcase %}
-              {% if downcased_title contains 'taakat' or downcased_title contains 'perfect' %}
-                {% assign specs = "Full Size • 20g Protein* • 7 Bars" %}
-              {% elsif downcased_title contains 'mast' or downcased_title contains 'minis' %}
-                {% assign specs = "Full Size • 15g Protein* • 8 Bars" %}
-              {% elsif downcased_title contains 'variety' or downcased_title contains 'pack' or downcased_title contains 'king' %}
-                {% assign specs = "Full Size • 17g Protein* • 8 Bars" %}
+              {% assign specs = "5g Protein* • 10 Bars" %}
+              {% assign handle_down = product.handle | downcase %}
+              {% assign title_down = product.title | downcase %}
+              {% if handle_down contains 'pack-of-80' or handle_down contains 'x-8' or handle_down contains '80-bar' or handle_down contains 'saver' or title_down contains '80' or title_down contains 'saver' %}
+                {% assign specs = "5g Protein* • 80 Bars" %}
+              {% elsif handle_down contains 'wholesome' or handle_down contains 'pack-24' or title_down contains 'wholesome' or title_down contains '24' %}
+                {% assign specs = "5g Protein* • 24 Bars" %}
+              {% elsif handle_down contains 'combo' or handle_down contains 'value-pack' or title_down contains 'combo' %}
+                {% assign specs = "5g Protein* • 30 Bars" %}
               {% endif %}
               <p class="ai-product-card-specs-{{ ai_gen_id }}">{{ specs }}</p>
             </div>
@@ -560,7 +563,7 @@
                 <span class="count">({{ i | times: 17 | plus: 8 }})</span>
               </div>
               <h3 class="ai-product-card-title-{{ ai_gen_id }}">Sample Product Title</h3>
-              <p class="ai-product-card-specs-{{ ai_gen_id }}">Full Size • 20g Protein* • 7 Bars</p>
+              <p class="ai-product-card-specs-{{ ai_gen_id }}">5g Protein* • 10 Bars</p>
             </div>
             <button class="ai-product-card-button-{{ ai_gen_id }}">
               {{ block.settings.button_text }} - ₹699
