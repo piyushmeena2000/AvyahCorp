@@ -55,12 +55,27 @@
   .ai-testimonial-carousel__track-{{ ai_gen_id }} {
     display: flex;
     gap: 24px;
-    transition: transform 0.5s ease;
+    width: max-content;
+    animation: ai-testimonial-marquee-{{ ai_gen_id }} 35s linear infinite;
+  }
+
+  .ai-testimonial-carousel__track-{{ ai_gen_id }}:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes ai-testimonial-marquee-{{ ai_gen_id }} {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-50%, 0, 0);
+    }
   }
 
   .ai-testimonial-carousel__slide-{{ ai_gen_id }} {
-    flex: 0 0 calc(33.333% - 16px);
-    min-width: 0;
+    flex: 0 0 380px;
+    width: 380px;
+    min-width: 380px;
   }
 
   .ai-testimonial-carousel__card-{{ ai_gen_id }} {
@@ -165,11 +180,7 @@
   }
 
   .ai-testimonial-carousel__controls-{{ ai_gen_id }} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-top: 50px;
+    display: none !important;
   }
 
   .ai-testimonial-carousel__button-{{ ai_gen_id }} {
@@ -218,13 +229,17 @@
 
   @media screen and (max-width: 989px) {
     .ai-testimonial-carousel__slide-{{ ai_gen_id }} {
-      flex: 0 0 calc(50% - 12px);
+      flex: 0 0 320px !important;
+      width: 320px !important;
+      min-width: 320px !important;
     }
   }
 
   @media screen and (max-width: 749px) {
     .ai-testimonial-carousel__slide-{{ ai_gen_id }} {
-      flex: 0 0 100%;
+      flex: 0 0 280px !important;
+      width: 280px !important;
+      min-width: 280px !important;
     }
 
     .ai-testimonial-carousel__track-{{ ai_gen_id }} {
@@ -263,88 +278,90 @@
 
     <div class="ai-testimonial-carousel__track-wrapper-{{ ai_gen_id }}">
       <div class="ai-testimonial-carousel__track-{{ ai_gen_id }}">
-        {% for i in (1..6) %}
-          {% liquid
-            assign testimonial_enabled_key = 'testimonial_' | append: i | append: '_enabled'
-            assign testimonial_image_key = 'testimonial_' | append: i | append: '_image'
-            assign testimonial_name_key = 'testimonial_' | append: i | append: '_name'
-            assign testimonial_role_key = 'testimonial_' | append: i | append: '_role'
-            assign testimonial_quote_key = 'testimonial_' | append: i | append: '_quote'
-            assign testimonial_rating_key = 'testimonial_' | append: i | append: '_rating'
+        {% for repeat in (1..2) %}
+          {% for i in (1..6) %}
+            {% liquid
+              assign testimonial_enabled_key = 'testimonial_' | append: i | append: '_enabled'
+              assign testimonial_image_key = 'testimonial_' | append: i | append: '_image'
+              assign testimonial_name_key = 'testimonial_' | append: i | append: '_name'
+              assign testimonial_role_key = 'testimonial_' | append: i | append: '_role'
+              assign testimonial_quote_key = 'testimonial_' | append: i | append: '_quote'
+              assign testimonial_rating_key = 'testimonial_' | append: i | append: '_rating'
 
-            assign testimonial_enabled = block.settings[testimonial_enabled_key]
-            assign testimonial_image = block.settings[testimonial_image_key]
-            assign testimonial_name = block.settings[testimonial_name_key]
-            assign testimonial_role = block.settings[testimonial_role_key]
-            assign testimonial_quote = block.settings[testimonial_quote_key]
-            assign testimonial_rating = block.settings[testimonial_rating_key]
+              assign testimonial_enabled = block.settings[testimonial_enabled_key]
+              assign testimonial_image = block.settings[testimonial_image_key]
+              assign testimonial_name = block.settings[testimonial_name_key]
+              assign testimonial_role = block.settings[testimonial_role_key]
+              assign testimonial_quote = block.settings[testimonial_quote_key]
+              assign testimonial_rating = block.settings[testimonial_rating_key]
 
-            assign clean_quote = testimonial_quote
-            if clean_quote contains 'Ã' or clean_quote contains 'â' or clean_quote contains 'Æ' or clean_quote contains '¢' or clean_quote contains '€'
-              if i == 1
-                assign clean_quote = "<b>Taakat is a  Perfect Hunger  Buddy</b> <br>Taakat Hunger Bar actually delivers. Super filling, and there's no guilt because its so clean."
-              elsif i == 2
-                assign clean_quote = "<b>Finally, a bar that keeps its promises </b><br>I couldn't believe when I first heard about it, but wow Taakat really walks the talk. Multigrain crunch is really good. Loved the taste too."
-              elsif i == 3
-                assign clean_quote = "<b>Real Ingredients, Full Satisfaction</b><br>The ingredient list reads like a homemade snack. It's rare to find a bar with no palm oil and no refined sugar that still tastes this good. Strongly recommended for anyone trying to snack smarter."
-              elsif i == 4
-                assign clean_quote = "<b>Ideal for Busy Work Days </b><br>It's honestly a lifesaver for professionals like me because we keep missing small meals due to meetings and deadlines. So easy to carry and the price points are just unbelievable"
-              elsif i == 5
-                assign clean_quote = "<b>My commute snack savior</b> <br>I travel for 2 hours almost daily using metros. I use to often wonder when hungry during commute what can I have that's healthier because at the stations you get only crap. But taakat is a game changer. It is not only nutritious but so filling that I could travel for hours"
-              elsif i == 6
-                assign clean_quote = "<b>Tastes legit, keeps hunger quiet</b><br>This bar is not a lip service. It is no fancy lable product. It's genuinely healthy. Multigrain protein, No palm oil, no nonsense. The flavors are fantastic. My favorite one is Chocolate wala"
+              assign clean_quote = testimonial_quote
+              if clean_quote contains 'Ã' or clean_quote contains 'â' or clean_quote contains 'Æ' or clean_quote contains '¢' or clean_quote contains '€'
+                if i == 1
+                  assign clean_quote = "<b>Taakat is a  Perfect Hunger  Buddy</b> <br>Taakat Hunger Bar actually delivers. Super filling, and there's no guilt because its so clean."
+                elsif i == 2
+                  assign clean_quote = "<b>Finally, a bar that keeps its promises </b><br>I couldn't believe when I first heard about it, but wow Taakat really walks the talk. Multigrain crunch is really good. Loved the taste too."
+                elsif i == 3
+                  assign clean_quote = "<b>Real Ingredients, Full Satisfaction</b><br>The ingredient list reads like a homemade snack. It's rare to find a bar with no palm oil and no refined sugar that still tastes this good. Strongly recommended for anyone trying to snack smarter."
+                elsif i == 4
+                  assign clean_quote = "<b>Ideal for Busy Work Days </b><br>It's honestly a lifesaver for professionals like me because we keep missing small meals due to meetings and deadlines. So easy to carry and the price points are just unbelievable"
+                elsif i == 5
+                  assign clean_quote = "<b>My commute snack savior</b> <br>I travel for 2 hours almost daily using metros. I use to often wonder when hungry during commute what can I have that's healthier because at the stations you get only crap. But taakat is a game changer. It is not only nutritious but so filling that I could travel for hours"
+                elsif i == 6
+                  assign clean_quote = "<b>Tastes legit, keeps hunger quiet</b><br>This bar is not a lip service. It is no fancy lable product. It's genuinely healthy. Multigrain protein, No palm oil, no nonsense. The flavors are fantastic. My favorite one is Chocolate wala"
+                endif
               endif
-            endif
-          %}
+            %}
 
-          {% if testimonial_enabled %}
-            <div class="ai-testimonial-carousel__slide-{{ ai_gen_id }}">
-              <div class="ai-testimonial-carousel__card-{{ ai_gen_id }}">
-                <div class="ai-testimonial-carousel__stars-{{ ai_gen_id }}">
-                  {% for star in (1..testimonial_rating) %}
-                    <svg
-                      class="ai-testimonial-carousel__star-{{ ai_gen_id }}"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                  {% endfor %}
-                </div>
-
-                <p class="ai-testimonial-carousel__quote-{{ ai_gen_id }}">{{ clean_quote }}</p>
-
-                <div class="ai-testimonial-carousel__author-{{ ai_gen_id }}">
-                  <div class="ai-testimonial-carousel__image-wrapper-{{ ai_gen_id }}">
-                    {% if testimonial_image %}
-                      <img
-                        src="{{ testimonial_image | image_url: width: 120 }}"
-                        alt="{{ testimonial_name | escape }}"
-                        class="ai-testimonial-carousel__image-{{ ai_gen_id }}"
-                        loading="lazy"
-                        width="120"
-                        height="120"
+            {% if testimonial_enabled %}
+              <div class="ai-testimonial-carousel__slide-{{ ai_gen_id }}">
+                <div class="ai-testimonial-carousel__card-{{ ai_gen_id }}">
+                  <div class="ai-testimonial-carousel__stars-{{ ai_gen_id }}">
+                    {% for star in (1..testimonial_rating) %}
+                      <svg
+                        class="ai-testimonial-carousel__star-{{ ai_gen_id }}"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
                       >
-                    {% else %}
-                      <div class="ai-testimonial-carousel__image-placeholder-{{ ai_gen_id }}">
-                        {{ 'image' | placeholder_svg_tag }}
-                      </div>
-                    {% endif %}
-                  </div>
-                  <div class="ai-testimonial-carousel__author-info-{{ ai_gen_id }}">
-                    <p class="ai-testimonial-carousel__name-{{ ai_gen_id }}">{{ testimonial_name }}</p>
-                    <p class="ai-testimonial-carousel__role-{{ ai_gen_id }}">
-                      <svg viewBox="0 0 24 24" width="14" height="14" fill="#008a00" style="display:inline-block; vertical-align:middle; margin-right:4px;">
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                       </svg>
-                      {{ testimonial_role }}
-                    </p>
+                    {% endfor %}
+                  </div>
+
+                  <p class="ai-testimonial-carousel__quote-{{ ai_gen_id }}">{{ clean_quote }}</p>
+
+                  <div class="ai-testimonial-carousel__author-{{ ai_gen_id }}">
+                    <div class="ai-testimonial-carousel__image-wrapper-{{ ai_gen_id }}">
+                      {% if testimonial_image %}
+                        <img
+                          src="{{ testimonial_image | image_url: width: 120 }}"
+                          alt="{{ testimonial_name | escape }}"
+                          class="ai-testimonial-carousel__image-{{ ai_gen_id }}"
+                          loading="lazy"
+                          width="120"
+                          height="120"
+                        >
+                      {% else %}
+                        <div class="ai-testimonial-carousel__image-placeholder-{{ ai_gen_id }}">
+                          {{ 'image' | placeholder_svg_tag }}
+                        </div>
+                      {% endif %}
+                    </div>
+                    <div class="ai-testimonial-carousel__author-info-{{ ai_gen_id }}">
+                      <p class="ai-testimonial-carousel__name-{{ ai_gen_id }}">{{ testimonial_name }}</p>
+                      <p class="ai-testimonial-carousel__role-{{ ai_gen_id }}">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="#008a00" style="display:inline-block; vertical-align:middle; margin-right:4px;">
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                        {{ testimonial_role }}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          {% endif %}
+            {% endif %}
+          {% endfor %}
         {% endfor %}
       </div>
     </div>
@@ -399,23 +416,7 @@
       }
 
       connectedCallback() {
-        this.track = this.querySelector('.ai-testimonial-carousel__track-{{ ai_gen_id }}');
-        this.slides = this.querySelectorAll('.ai-testimonial-carousel__slide-{{ ai_gen_id }}');
-        this.prevButton = this.querySelector('.ai-testimonial-carousel__prev-{{ ai_gen_id }}');
-        this.nextButton = this.querySelector('.ai-testimonial-carousel__next-{{ ai_gen_id }}');
-        this.dotsContainer = this.querySelector('.ai-testimonial-carousel__dots-{{ ai_gen_id }}');
-
-        this.updateSlidesPerView();
-        this.createDots();
-        this.updateCarousel();
-        this.setupEventListeners();
-        this.setupDragging();
-
-        window.addEventListener('resize', () => {
-          this.updateSlidesPerView();
-          this.createDots();
-          this.updateCarousel();
-        });
+        // Carousel functions disabled to allow seamless CSS infinite scroll.
       }
 
       updateSlidesPerView() {
