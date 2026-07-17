@@ -5,56 +5,77 @@
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
+  /* Force parent section backgrounds to brand crimson red */
+  .shopify-section:has(.ai-testimonial-carousel-{{ ai_gen_id }}),
+  .section:has(.ai-testimonial-carousel-{{ ai_gen_id }}),
+  .section-background:has(+ .section .ai-testimonial-carousel-{{ ai_gen_id }}),
+  .section-background:has(.ai-testimonial-carousel-{{ ai_gen_id }}) {
+    background-color: #d52528 !important;
+    background: #d52528 !important;
+  }
+
+  /* Prevent any wrapper element from clipping the marquee or shadows */
+  .section:has(.ai-testimonial-carousel-{{ ai_gen_id }}) .custom-section-content,
+  .section:has(.ai-testimonial-carousel-{{ ai_gen_id }}) .section-content-wrapper,
+  .section:has(.ai-testimonial-carousel-{{ ai_gen_id }}) .border-style,
+  .section:has(.ai-testimonial-carousel-{{ ai_gen_id }}) .spacing-style {
+    overflow: visible !important;
+  }
+
   .ai-testimonial-carousel-{{ ai_gen_id }} {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
     padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px !important;
     background-color: #d52528 !important; /* Crimson Red background */
-    overflow: hidden;
+    overflow: hidden !important;
   }
 
   .ai-testimonial-carousel__container-{{ ai_gen_id }} {
-    width: 100%;
-    margin: 0;
-    padding: 0;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .ai-testimonial-carousel__header-{{ ai_gen_id }} {
-    text-align: center;
-    margin-bottom: 50px;
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 20px;
+    text-align: center !important;
+    margin-bottom: 50px !important;
+    max-width: 1400px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 0 20px !important;
   }
 
   .ai-testimonial-carousel__title-{{ ai_gen_id }} {
-    font-family: 'Anton', sans-serif;
-    font-size: {{ block.settings.heading_size }}px;
+    font-family: 'Anton', sans-serif !important;
+    font-size: {{ block.settings.heading_size }}px !important;
     color: #ffffff !important; /* White heading */
-    margin: 0 0 12px;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-    line-height: 1.1;
+    margin: 0 0 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: -1px !important;
+    line-height: 1.1 !important;
   }
 
   .ai-testimonial-carousel__subtitle-{{ ai_gen_id }} {
-    font-family: 'Inter', sans-serif;
-    font-size: {{ block.settings.subheading_size }}px;
+    font-family: 'Inter', sans-serif !important;
+    font-size: {{ block.settings.subheading_size }}px !important;
     color: rgba(255, 255, 255, 0.8) !important; /* White subtitle */
-    margin: 0;
+    margin: 0 !important;
   }
 
   .ai-testimonial-carousel__track-wrapper-{{ ai_gen_id }} {
-    position: relative;
-    overflow: hidden;
-    padding: 20px 0 60px 0; /* padding top/bottom only to prevent side clipping */
-    margin: -20px 0 -60px 0;
-    width: 100%;
+    position: relative !important;
+    overflow: hidden !important;
+    padding: 20px 0 60px 0 !important; /* padding top/bottom only to prevent side clipping */
+    margin: -20px 0 -60px 0 !important;
+    width: 100vw !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
   }
 
   .ai-testimonial-carousel__track-{{ ai_gen_id }} {
