@@ -3,24 +3,37 @@
 {% style %}
   .ai-faq-section-{{ ai_gen_id }} {
     width: 100%;
-    padding: {{ block.settings.padding_top }}px 20px {{ block.settings.padding_bottom }}px;
-    background-color: {{ block.settings.background_color }};
-    display: flex;
-    justify-content: center;
-    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: {{ block.settings.background_color | default: '#f8edd9' }};
   }
 
-  .ai-faq-container-{{ ai_gen_id }} {
-    width: 100%;
-    max-width: 800px;
+  .ai-faq-left-{{ ai_gen_id }} {
+    padding: {{ block.settings.padding_top }}px 80px {{ block.settings.padding_bottom }}px 10vw;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-faq-right-{{ ai_gen_id }} {
+    background-color: #d52528;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .ai-faq-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .ai-faq-header-{{ ai_gen_id }} {
-    text-align: center;
-    margin-bottom: 48px;
+    text-align: left;
+    margin-bottom: 40px;
   }
 
   .ai-faq-title-{{ ai_gen_id }} {
@@ -29,7 +42,7 @@
     line-height: 1.1;
     color: {{ block.settings.title_color }};
     text-transform: uppercase;
-    margin: 0 0 12px 0;
+    margin: 0;
     letter-spacing: -1px;
   }
 
@@ -37,7 +50,7 @@
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     color: #555555;
-    margin: 0;
+    margin: 12px 0 0 0;
     line-height: 1.5;
   }
 
@@ -46,31 +59,20 @@
     margin-bottom: 40px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 8px;
   }
 
-  /* Branded Rounded Card Style matching Product Cards */
   .ai-faq-card-{{ ai_gen_id }} {
-    background-color: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-left: 4px solid transparent;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-    padding: 20px 24px;
+    background-color: #eeddbf;
+    border: none;
+    padding: 18px 24px;
     cursor: pointer;
     box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease;
   }
 
   .ai-faq-card-{{ ai_gen_id }}:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-    border-color: rgba(0, 0, 0, 0.1);
-  }
-
-  .ai-faq-card-{{ ai_gen_id }}.active {
-    border-left-color: {{ block.settings.accent_color }};
-    background-color: #ffffff;
+    background-color: #e5d2b1;
   }
 
   .ai-faq-question-row-{{ ai_gen_id }} {
@@ -82,12 +84,14 @@
   }
 
   .ai-faq-question-{{ ai_gen_id }} {
-    font-family: 'Inter', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
     color: #111111;
     margin: 0;
-    line-height: 1.4;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .ai-faq-icon-{{ ai_gen_id }} {
@@ -97,20 +101,28 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    transition: transform 0.3s ease;
-    color: #444444;
+    color: #000;
+    background-color: #000;
+    border-radius: 50%;
   }
 
   .ai-faq-icon-{{ ai_gen_id }} svg {
-    width: 20px;
-    height: 20px;
-    stroke: currentColor;
+    width: 14px;
+    height: 14px;
+    stroke: #eeddbf;
     transition: transform 0.3s ease;
   }
+  
+  .ai-faq-icon-{{ ai_gen_id }} .icon-minus {
+    display: none;
+  }
 
-  .ai-faq-card-{{ ai_gen_id }}.active .ai-faq-icon-{{ ai_gen_id }} {
-    transform: rotate(180deg);
-    color: {{ block.settings.accent_color }};
+  .ai-faq-card-{{ ai_gen_id }}.active .ai-faq-icon-{{ ai_gen_id }} .icon-plus {
+    display: none;
+  }
+  
+  .ai-faq-card-{{ ai_gen_id }}.active .ai-faq-icon-{{ ai_gen_id }} .icon-minus {
+    display: block;
   }
 
   .ai-faq-answer-{{ ai_gen_id }} {
@@ -124,7 +136,8 @@
     font-family: 'Inter', sans-serif;
     font-size: 15px;
     line-height: 1.6;
-    color: #444444;
+    color: #333333;
+    font-weight: 500;
   }
 
   .ai-faq-answer-inner-{{ ai_gen_id }} p {
@@ -134,7 +147,6 @@
     margin-bottom: 0;
   }
 
-  /* Branded Action Button matching Add to Cart */
   .ai-faq-btn-{{ ai_gen_id }} {
     display: inline-block;
     background-color: {{ block.settings.button_bg_color }};
@@ -144,39 +156,48 @@
     text-transform: uppercase;
     padding: 14px 32px;
     text-decoration: none;
-    border-radius: 8px;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    border: 2px solid #000;
+    box-shadow: 4px 4px 0px #000;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
     letter-spacing: 1px;
-    border: none;
+    width: fit-content;
   }
 
   .ai-faq-btn-{{ ai_gen_id }}:hover {
-    background-color: {{ block.settings.button_hover_bg }};
-    transform: translateY(-1px);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000;
+  }
+  
+  .ai-faq-btn-{{ ai_gen_id }}:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px #000;
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 900px) {
     .ai-faq-section-{{ ai_gen_id }} {
-      padding: {{ block.settings.padding_top_mobile }}px 15px {{ block.settings.padding_bottom_mobile }}px;
+      grid-template-columns: 1fr;
+    }
+    .ai-faq-left-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding_top_mobile }}px 20px {{ block.settings.padding_bottom_mobile }}px;
+    }
+    .ai-faq-right-{{ ai_gen_id }} {
+      height: 400px;
     }
     .ai-faq-title-{{ ai_gen_id }} {
       font-size: {{ block.settings.title_size_mobile }}px;
     }
-    .ai-faq-card-{{ ai_gen_id }} {
-      padding: 16px 20px;
-    }
     .ai-faq-question-{{ ai_gen_id }} {
-      font-size: 15px;
+      font-size: 16px;
     }
   }
 {% endstyle %}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
 <div class="ai-faq-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
-  <div class="ai-faq-container-{{ ai_gen_id }}">
+  <div class="ai-faq-left-{{ ai_gen_id }}">
     <div class="ai-faq-header-{{ ai_gen_id }}">
       <h2 class="ai-faq-title-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
       {% if block.settings.subheading != blank %}
@@ -198,8 +219,12 @@
             <div class="ai-faq-question-row-{{ ai_gen_id }} ai-faq-question-row">
               <h3 class="ai-faq-question-{{ ai_gen_id }}">{{ question }}</h3>
               <div class="ai-faq-icon-{{ ai_gen_id }} ai-faq-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="6 9 12 15 18 9"></polyline>
+                <svg class="icon-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <svg class="icon-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
               </div>
             </div>
@@ -218,6 +243,9 @@
         {{ block.settings.button_text }}
       </a>
     {% endif %}
+  </div>
+  <div class="ai-faq-right-{{ ai_gen_id }}">
+    <img src="{{ 'genz_kid_taakat.png' | asset_url }}" alt="FAQ Image" class="ai-faq-image-{{ ai_gen_id }}" loading="lazy">
   </div>
 </div>
 
