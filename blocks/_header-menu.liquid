@@ -101,52 +101,65 @@
                     <div class="avyah-megamenu" id="avyah-megamenu-panel">
                       <div class="avyah-megamenu__inner">
                         <div class="avyah-megamenu__sidebar">
-                          <a href="/collections/all" class="avyah-megamenu__sidebar-link avyah-megamenu__sidebar-link--bold">SHOP ALL</a>
+                          <a href="/collections/all" class="avyah-megamenu__sidebar-link avyah-megamenu__sidebar-link--bold avyah-tab-link active" data-tab="tab-all">SHOP ALL</a>
                           {%- for childlink in link.links -%}
-                            <a href="{{ childlink.url }}" class="avyah-megamenu__sidebar-link">{{ childlink.title | upcase }}</a>
+                            <a href="{{ childlink.url }}" class="avyah-megamenu__sidebar-link avyah-tab-link" data-tab="tab-{{ forloop.index }}">{{ childlink.title | upcase }}</a>
                           {%- endfor -%}
                         </div>
-                        <div class="avyah-megamenu__grid">
-                          {%- for childlink in link.links -%}
-                            <a href="{{ childlink.url }}" class="avyah-megamenu__card">
+                        <div class="avyah-megamenu__content-area">
+                          <div class="avyah-megamenu__grid avyah-tab-content active" id="tab-all">
+                            {%- for childlink in link.links -%}
+                              <a href="{{ childlink.url }}" class="avyah-megamenu__card">
+                                <div class="avyah-megamenu__card-img">
+                                  {%- if childlink.type == 'collection_link' and childlink.object.image -%}
+                                    <img src="{{ childlink.object.image | image_url: width: 400 }}" alt="{{ childlink.title | escape }}" loading="lazy" width="400" height="400">
+                                  {%- elsif childlink.type == 'collection_link' and childlink.object.products.first.featured_image -%}
+                                    <img src="{{ childlink.object.products.first.featured_image | image_url: width: 400 }}" alt="{{ childlink.title | escape }}" loading="lazy" width="400" height="400">
+                                  {%- else -%}
+                                    <div class="avyah-megamenu__card-placeholder">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                    </div>
+                                  {%- endif -%}
+                                </div>
+                                <span class="avyah-megamenu__card-title">{{ childlink.title | upcase }}</span>
+                              </a>
+                            {%- endfor -%}
+                            <a href="/collections/all" class="avyah-megamenu__card">
                               <div class="avyah-megamenu__card-img">
-                                {%- if childlink.type == 'collection_link' and childlink.object.image -%}
-                                  <img
-                                    src="{{ childlink.object.image | image_url: width: 400 }}"
-                                    alt="{{ childlink.title | escape }}"
-                                    loading="lazy"
-                                    width="400"
-                                    height="400"
-                                  >
-                                {%- elsif childlink.type == 'collection_link' and childlink.object.products.first.featured_image -%}
-                                  <img
-                                    src="{{ childlink.object.products.first.featured_image | image_url: width: 400 }}"
-                                    alt="{{ childlink.title | escape }}"
-                                    loading="lazy"
-                                    width="400"
-                                    height="400"
-                                  >
-                                {%- else -%}
-                                  <div class="avyah-megamenu__card-placeholder">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1">
-                                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                                      <circle cx="8.5" cy="8.5" r="1.5"/>
-                                      <polyline points="21 15 16 10 5 21"/>
-                                    </svg>
-                                  </div>
-                                {%- endif -%}
+                                <div class="avyah-megamenu__card-placeholder avyah-megamenu__card-placeholder--all"><span>→</span></div>
                               </div>
-                              <span class="avyah-megamenu__card-title">{{ childlink.title | upcase }}</span>
+                              <span class="avyah-megamenu__card-title">ALL PRODUCTS</span>
                             </a>
-                          {%- endfor -%}
-                          <a href="/collections/all" class="avyah-megamenu__card">
-                            <div class="avyah-megamenu__card-img">
-                              <div class="avyah-megamenu__card-placeholder avyah-megamenu__card-placeholder--all">
-                                <span>→</span>
-                              </div>
+                          </div>
+                          
+                          {%- for childlink in link.links -%}
+                            <div class="avyah-megamenu__grid avyah-tab-content" id="tab-{{ forloop.index }}">
+                              {%- if childlink.type == 'collection_link' -%}
+                                {%- for product in childlink.object.products limit: 4 -%}
+                                  <a href="{{ product.url }}" class="avyah-megamenu__card">
+                                    <div class="avyah-megamenu__card-img">
+                                      {%- if product.featured_image -%}
+                                        <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy" width="400" height="400">
+                                      {%- else -%}
+                                        <div class="avyah-megamenu__card-placeholder">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                        </div>
+                                      {%- endif -%}
+                                    </div>
+                                    <span class="avyah-megamenu__card-title">{{ product.title | upcase }}</span>
+                                  </a>
+                                {%- endfor -%}
+                                <a href="{{ childlink.url }}" class="avyah-megamenu__card">
+                                  <div class="avyah-megamenu__card-img">
+                                    <div class="avyah-megamenu__card-placeholder avyah-megamenu__card-placeholder--all">
+                                      <span>→</span>
+                                    </div>
+                                  </div>
+                                  <span class="avyah-megamenu__card-title">VIEW ALL {{ childlink.title | upcase }}</span>
+                                </a>
+                              {%- endif -%}
                             </div>
-                            <span class="avyah-megamenu__card-title">ALL PRODUCTS</span>
-                          </a>
+                          {%- endfor -%}
                         </div>
                       </div>
                     </div>
@@ -193,6 +206,34 @@
           </div>
         </nav>
       </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const tabLinks = document.querySelectorAll('.avyah-tab-link');
+          const tabContents = document.querySelectorAll('.avyah-tab-content');
+
+          tabLinks.forEach(link => {
+            link.addEventListener('mouseenter', function() {
+              const targetTab = this.getAttribute('data-tab');
+
+              tabLinks.forEach(l => l.classList.remove('active'));
+              tabContents.forEach(c => c.classList.remove('active'));
+
+              this.classList.add('active');
+              const targetElement = document.getElementById(targetTab);
+              if(targetElement) {
+                 targetElement.classList.add('active');
+              }
+            });
+            
+            link.addEventListener('click', function(e) {
+              if (this.getAttribute('data-tab') !== 'tab-all') {
+                  // Allow the click if they really want to navigate to the collection page
+              }
+            });
+          });
+        });
+      </script>
 
       <script
         src="{{ 'header-menu.js' | asset_url }}"
@@ -792,25 +833,46 @@
     text-decoration: none;
     padding: 8px 0;
     transition: color 0.15s ease;
-    letter-spacing: 1.2px;
+    letter-spacing: 0.5px;
   }
 
-  .avyah-megamenu__sidebar-link:hover {
+  .avyah-megamenu__sidebar-link:hover,
+  .avyah-megamenu__sidebar-link.active {
     color: #d52528;
   }
 
   .avyah-megamenu__sidebar-link--bold {
     font-weight: 700;
     color: #111;
+  }
+  
+  .avyah-megamenu__sidebar-link--bold.active {
     text-decoration: underline;
     text-underline-offset: 3px;
   }
 
-  .avyah-megamenu__grid {
+  .avyah-megamenu__content-area {
+    flex: 1;
+    min-height: 250px;
+  }
+
+  .avyah-tab-content {
+    display: none;
+    animation: avyahTabFadeIn 0.2s ease forwards;
+  }
+
+  .avyah-tab-content.active {
     display: grid;
+  }
+
+  @keyframes avyahTabFadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .avyah-megamenu__grid {
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 20px;
-    flex: 1;
   }
 
   .avyah-megamenu__card {
@@ -864,7 +926,7 @@
     font-size: 15px;
     font-weight: 400;
     color: #111;
-    letter-spacing: 1.2px;
+    letter-spacing: 0.5px;
     text-align: center;
   }
 {% endstylesheet %}
