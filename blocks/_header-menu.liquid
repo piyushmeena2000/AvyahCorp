@@ -72,7 +72,7 @@
             class="menu-list"
             style="{% render 'menu-font-styles', settings: block_settings %}"
           >
-            <ul class="menu-list__list list-unstyled" role="list">
+            <ul class="menu-list__list list-unstyled" role="list" style="gap: 0 var(--menu-horizontal-gap, 28px); justify-content: center;">
               {%- for link in block_settings.menu.links -%}
                 {%- assign _dt = link.title | downcase -%}
                 {%- if _dt == 'home' or _dt contains 'store' or _dt contains 'locator' or _dt contains 'find' or _dt contains 'ingredient' or _dt contains 'explore' -%}
