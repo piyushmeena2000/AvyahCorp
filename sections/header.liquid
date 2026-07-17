@@ -289,17 +289,22 @@
   .header__column--right {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 28px;
     flex-wrap: nowrap;
   }
 
-  /* Ensure right-nav and header-actions sit inline */
+  /* Ensure right-nav, search, and header-actions sit inline in correct order */
   .header__column--right .avyah-right-nav {
-    order: 0;
+    order: 1;
+  }
+
+  .header__column--right .search-action {
+    order: 2;
+    margin-inline: 0 !important;
   }
 
   .header__column--right header-actions {
-    order: 1;
+    order: 3;
     margin-inline-start: 0 !important;
   }
 

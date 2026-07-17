@@ -1,10 +1,29 @@
 {% comment %}
-  Avyah Right-side Navigation: Explore (dropdown) + How It's Made
+  Avyah Right-side Navigation: Ingredients + Explore (dropdown)
   Injected into the header right column alongside cart/search icons
 {% endcomment %}
 
+{% liquid
+  assign ingredients_url = '/pages/how-its-made'
+  assign explore_link = blank
+
+  for link in linklists['main-menu'].links
+    assign title_down = link.title | downcase
+    if title_down contains 'ingredient' or title_down contains 'made'
+      assign ingredients_url = link.url
+    elsif title_down contains 'explore'
+      assign explore_link = link
+    endif
+  endfor
+%}
+
 <nav class="avyah-right-nav" aria-label="Secondary navigation">
   <ul class="avyah-right-nav__list list-unstyled">
+
+    {%- comment -%} INGREDIENTS direct link {%- endcomment -%}
+    <li class="avyah-right-nav__item">
+      <a href="{{ ingredients_url }}" class="avyah-right-nav__link{% if request.path == ingredients_url %} avyah-right-nav__link--active{% endif %}">INGREDIENTS</a>
+    </li>
 
     {%- comment -%} EXPLORE dropdown {%- endcomment -%}
     <li class="avyah-right-nav__item avyah-right-nav__item--has-dropdown" id="avyah-explore-item">
@@ -21,17 +40,18 @@
       </button>
       <div class="avyah-right-nav__dropdown" id="avyah-explore-dropdown" role="region" aria-labelledby="avyah-explore-btn">
         <ul class="avyah-right-nav__dropdown-list list-unstyled">
-          <li><a href="/pages/our-story" class="avyah-right-nav__dropdown-link">Our Story</a></li>
-          <li><a href="/blogs/news" class="avyah-right-nav__dropdown-link">Blog</a></li>
-          <li><a href="/pages/about" class="avyah-right-nav__dropdown-link">About Us</a></li>
-          <li><a href="/pages/sustainability" class="avyah-right-nav__dropdown-link">Sustainability</a></li>
+          {%- if explore_link and explore_link.links != blank -%}
+            {%- for child in explore_link.links -%}
+              <li><a href="{{ child.url }}" class="avyah-right-nav__dropdown-link{% if child.current %} avyah-right-nav__dropdown-link--active{% endif %}">{{ child.title }}</a></li>
+            {%- endfor -%}
+          {%- else -%}
+            <li><a href="/pages/our-story" class="avyah-right-nav__dropdown-link">Our Story</a></li>
+            <li><a href="/blogs/news" class="avyah-right-nav__dropdown-link">Blog</a></li>
+            <li><a href="/pages/about" class="avyah-right-nav__dropdown-link">About Us</a></li>
+            <li><a href="/pages/sustainability" class="avyah-right-nav__dropdown-link">Sustainability</a></li>
+          {%- endif -%}
         </ul>
       </div>
-    </li>
-
-    {%- comment -%} HOW IT'S MADE direct link {%- endcomment -%}
-    <li class="avyah-right-nav__item">
-      <a href="/pages/how-its-made" class="avyah-right-nav__link">HOW IT'S MADE</a>
     </li>
 
   </ul>
@@ -53,7 +73,7 @@
   .avyah-right-nav__list {
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: var(--menu-horizontal-gap, 28px);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -64,18 +84,19 @@
   }
 
   .avyah-right-nav__link {
-    font-family: var(--font-heading--family, 'Anton', sans-serif);
-    font-size: 1rem;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    color: var(--color-foreground);
+    font-family: var(--menu-top-level-font-family, var(--font-heading--family, 'Anton', sans-serif));
+    font-style: var(--menu-top-level-font-style, normal);
+    font-weight: var(--menu-top-level-font-weight, 400);
+    font-size: var(--menu-top-level-font-size, 1rem);
+    line-height: var(--menu-top-level-font-line-height, 1.2);
+    text-transform: var(--menu-top-level-font-case, uppercase);
+    color: var(--menu-top-level-font-color, var(--color-foreground));
     text-decoration: none;
     white-space: nowrap;
     transition: color 0.2s ease;
     display: flex;
     align-items: center;
     gap: 4px;
-    text-transform: uppercase;
   }
 
   .avyah-right-nav__link--button {
@@ -92,7 +113,8 @@
   }
 
   .avyah-right-nav__link:hover,
-  .avyah-right-nav__link--button:hover {
+  .avyah-right-nav__link--button:hover,
+  .avyah-right-nav__link--active {
     color: #d52528;
   }
 
@@ -148,7 +170,8 @@
     transition: color 0.15s ease, background 0.15s ease;
   }
 
-  .avyah-right-nav__dropdown-link:hover {
+  .avyah-right-nav__dropdown-link:hover,
+  .avyah-right-nav__dropdown-link--active {
     color: #d52528;
     background: #fef5f5;
   }
