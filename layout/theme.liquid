@@ -92,5 +92,11 @@
     {% if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add-modal' %}
     {% endif %}
+    {% if template.name == 'product' %}
+      {%- assign current_product = closest.product | default: product -%}
+      {{ 'avyah-taakat-custom.css' | asset_url | stylesheet_tag }}
+      <script id="taakat-variants-json" type="application/json">{{ current_product.variants | json }}</script>
+      <script src="{{ 'avyah-taakat-custom.js' | asset_url }}" defer="defer"></script>
+    {% endif %}
   </body>
 </html>
