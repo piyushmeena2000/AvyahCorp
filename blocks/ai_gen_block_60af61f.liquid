@@ -104,6 +104,8 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
+    display: flex;
+    align-items: stretch;
   }
 
   .ai-story-image-{{ ai_gen_id }} {
@@ -111,6 +113,7 @@
     height: 100%;
     display: block;
     object-fit: cover;
+    flex: 1;
   }
 
   @media screen and (max-width: 749px) {
