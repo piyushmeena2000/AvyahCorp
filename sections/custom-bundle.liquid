@@ -986,25 +986,67 @@
       addToCartBtn.disabled = true;
       addToCartBtn.textContent = 'Adding...';
 
-      // 1. Prepare items payload for Shopify Ajax API
+      // 1. Apply discount code in the background
+      try {
+        await fetch(`/discount/${discountCode}`);
+      } catch (e) {
+        console.error('Failed to apply discount in background: ', e);
+      }
+
+      // 2. Prepare items payload for Shopify Ajax API
       const items = selectedItems.map(item => ({
         id: item.id,
         quantity: 1
       }));
 
+      // Find all cart items components and section IDs to update
+      const sectionsToUpdate = [];
+      document.querySelectorAll('cart-items-component').forEach(item => {
+        if (item.dataset.sectionId) {
+          sectionsToUpdate.push(item.dataset.sectionId);
+        }
+      });
+
       try {
-        // 2. Fetch add to cart endpoint
+        // 3. Fetch add to cart endpoint
         const response = await fetch('/cart/add.js', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ items })
+          body: JSON.stringify({
+            items,
+            sections: sectionsToUpdate.join(','),
+            sections_url: window.location.pathname
+          })
         });
 
         if (response.ok) {
-          // 3. Apply discount code programmatically and redirect to cart
-          window.location.href = `/discount/${discountCode}?redirect=/cart`;
+          const responseJson = await response.json();
+          
+          // 4. Dispatch the theme's cart update event to refresh cart content and cart drawer counts
+          document.dispatchEvent(new CustomEvent('cart:update', {
+            bubbles: true,
+            detail: {
+              resource: responseJson,
+              sourceId: 'custom-bundle-builder',
+              data: {
+                itemCount: responseJson.item_count,
+                sections: responseJson.sections,
+                source: 'cart-items-component'
+              }
+            }
+          }));
+
+          // 5. Open the cart drawer directly
+          const cartDrawer = document.querySelector('cart-drawer-component');
+          if (cartDrawer) {
+            cartDrawer.open();
+          }
+
+          // Reset checkout button state
+          addToCartBtn.disabled = false;
+          addToCartBtn.textContent = 'Add Bundle to Cart';
         } else {
           alert('Could not add items to cart. Please try again.');
           addToCartBtn.disabled = false;
