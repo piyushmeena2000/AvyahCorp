@@ -1,12 +1,29 @@
 (function() {
-  function initTaakatCustom() {
+  function startPolling() {
     if (!window.location.pathname.includes('/products/sugar-free')) return;
     
-    // Dynamically flag the body to activate CSS overrides scoped to this class
+    // Immediately apply body class so that CSS styling activates as early as possible
     document.body.classList.add('taakat-sugar-free-product-page');
 
-    const variantsJsonEl = document.getElementById('taakat-variants-json');
-    if (!variantsJsonEl) return;
+    let attempts = 0;
+    const maxAttempts = 100; // 5 seconds total (100 * 50ms)
+    
+    const interval = setInterval(function() {
+      attempts++;
+      const variantsJsonEl = document.getElementById('taakat-variants-json');
+      const productDetailsEl = document.querySelector('.product-details .group-block');
+      
+      if (variantsJsonEl && productDetailsEl) {
+        clearInterval(interval);
+        initTaakatCustom(variantsJsonEl, productDetailsEl);
+      } else if (attempts >= maxAttempts) {
+        clearInterval(interval);
+        console.warn('Taakat custom script timed out waiting for DOM elements.');
+      }
+    }, 50);
+  }
+
+  function initTaakatCustom(variantsJsonEl, productDetailsEl) {
     if (window.taakatCustomInitialized) return;
     window.taakatCustomInitialized = true;
 
@@ -17,10 +34,6 @@
       console.error('Failed to parse Taakat variants', e);
       return;
     }
-
-    // Find destination inside product info block
-    const productDetailsEl = document.querySelector('.product-details .group-block');
-    if (!productDetailsEl) return;
 
     // Let's locate the standard title block to place subtitle right under it
     const titleBlock = productDetailsEl.querySelector('h1, h2, h3, .view-product-title');
@@ -226,13 +239,13 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTaakatCustom);
+    document.addEventListener('DOMContentLoaded', startPolling);
   } else {
-    initTaakatCustom();
+    startPolling();
   }
 
   document.addEventListener('shopify:section:load', function() {
     window.taakatCustomInitialized = false;
-    initTaakatCustom();
+    startPolling();
   });
 })();
