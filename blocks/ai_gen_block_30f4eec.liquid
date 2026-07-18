@@ -1,167 +1,256 @@
-{% doc %}
-  @prompt
-    make a slideshow cards in which there is image at the left side with rounded corners and in the right there is text where there is heading and subheading text and there is a buttion on the both sides for nnext and previos and i want atlest 8 card there like this something like a slide show with text and buttions it should also auto scroll and only when i put text when only i want it to show the card otherwise it should be hidden, change the subheading font to inter regular
-{% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
-  .ai-slideshow-container-{{ ai_gen_id }} {
+  .ai-timeline-section-{{ ai_gen_id }} {
+    width: 100%;
+    background-color: #faf6f0; /* Warm cream page background */
+    padding: 100px 0;
     position: relative;
-    width: {{ block.settings.desktop_width_percent }}%;
-    max-width: 100%;
     overflow: hidden;
     display: block;
   }
 
-  .ai-slideshow-wrapper-{{ ai_gen_id }} {
+  .ai-timeline-container-{{ ai_gen_id }} {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
     position: relative;
-    width: 100%;
   }
 
-  .ai-slideshow-track-{{ ai_gen_id }} {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
+  /* Central axis line */
+  .ai-timeline-axis-{{ ai_gen_id }} {
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    bottom: 20px;
+    width: 4px;
+    background-color: #e3ded6;
+    transform: translateX(-50%);
+    z-index: 1;
   }
 
-  .ai-slideshow-slide-{{ ai_gen_id }} {
-    min-width: 100%;
+  .ai-timeline-row-{{ ai_gen_id }} {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: {{ block.settings.content_gap }}px;
-    padding: {{ block.settings.slide_padding }}px;
-    background-color: {{ block.settings.slide_background_color }};
-    border-radius: {{ block.settings.slide_border_radius }}px;
-  }
-
-  .ai-slideshow-image-wrapper-{{ ai_gen_id }} {
-    flex: 0 0 {{ block.settings.image_width_percent }}%;
-    max-width: {{ block.settings.image_width_percent }}%;
-  }
-
-  .ai-slideshow-image-{{ ai_gen_id }} {
+    position: relative;
+    margin-bottom: 100px;
     width: 100%;
-    height: auto;
-    border-radius: {{ block.settings.image_border_radius }}px;
-    object-fit: cover;
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .ai-slideshow-image-placeholder-{{ ai_gen_id }} {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    background-color: #f4f4f4;
-    border-radius: {{ block.settings.image_border_radius }}px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .ai-timeline-row-{{ ai_gen_id }}.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  .ai-slideshow-image-placeholder-{{ ai_gen_id }} svg {
-    width: 100%;
-    height: 100%;
-    max-width: 200px;
-    max-height: 200px;
+  .ai-timeline-row-{{ ai_gen_id }}:last-child {
+    margin-bottom: 0;
   }
 
-  .ai-slideshow-content-{{ ai_gen_id }} {
-    flex: 1;
+  .ai-timeline-col-media-{{ ai_gen_id }} {
+    width: 46%;
+  }
+
+  .ai-timeline-col-text-{{ ai_gen_id }} {
+    width: 46%;
+  }
+
+  /* Alternating layout */
+  .ai-timeline-row-{{ ai_gen_id }}:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+
+  /* Node indicator on the axis line */
+  .ai-timeline-node-{{ ai_gen_id }} {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: #faf6f0;
+    border: 4px solid #a72023; /* Brand Crimson */
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    z-index: 2;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.5s ease;
+    box-shadow: 0 0 0 4px #faf6f0;
+  }
+
+  .ai-timeline-row-{{ ai_gen_id }}.visible .ai-timeline-node-{{ ai_gen_id }} {
+    background-color: #a72023;
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+
+  /* Card styling */
+  .ai-timeline-card-{{ ai_gen_id }} {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.02);
+    border: 1px solid #eae6df;
     display: flex;
     flex-direction: column;
     gap: 16px;
+    text-align: left;
   }
 
-  .ai-slideshow-heading-{{ ai_gen_id }} {
-    font-size: {{ block.settings.heading_size }}px;
-    color: {{ block.settings.heading_color }};
+  .ai-timeline-badge-{{ ai_gen_id }} {
+    display: inline-block;
+    align-self: flex-start;
+    background-color: #a72023;
+    color: #ffffff;
+    padding: 4px 14px;
+    border-radius: 100px;
+    font-family: 'Anton', sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .ai-timeline-heading-{{ ai_gen_id }} {
+    font-family: 'Anton', sans-serif;
+    font-size: 32px;
+    color: #2b1f1d;
     margin: 0;
-    font-weight: 600;
+    line-height: 1.15;
+    text-transform: uppercase;
   }
 
-  .ai-slideshow-subheading-{{ ai_gen_id }} {
+  .ai-timeline-subheading-{{ ai_gen_id }} {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
-    font-size: {{ block.settings.subheading_size }}px;
-    color: {{ block.settings.subheading_color }};
+    font-size: 16px;
+    color: #5a4e4c;
     margin: 0;
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
-  .ai-slideshow-nav-button-{{ ai_gen_id }} {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: {{ block.settings.button_background_color }};
-    color: {{ block.settings.button_icon_color }};
-    border: none;
-    width: {{ block.settings.button_size }}px;
-    height: {{ block.settings.button_size }}px;
-    border-radius: 50%;
-    cursor: pointer;
+  .ai-timeline-image-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background-color: #e9e5db;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  }
+
+  .ai-timeline-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .ai-timeline-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
-    transition: background-color 0.3s ease;
   }
 
-  .ai-slideshow-nav-button-{{ ai_gen_id }}:hover {
-    background-color: {{ block.settings.button_hover_background_color }};
-  }
-
-  .ai-slideshow-nav-button-{{ ai_gen_id }}--prev {
-    left: {{ block.settings.button_offset }}px;
-  }
-
-  .ai-slideshow-nav-button-{{ ai_gen_id }}--next {
-    right: {{ block.settings.button_offset }}px;
-  }
-
-  .ai-slideshow-nav-button-{{ ai_gen_id }} svg {
-    width: 24px;
-    height: 24px;
+  .ai-timeline-image-placeholder-{{ ai_gen_id }} svg {
+    width: 40%;
+    height: 40%;
+    fill: #b5b0a4;
   }
 
   @media screen and (max-width: 749px) {
-    .ai-slideshow-slide-{{ ai_gen_id }} {
-      flex-direction: column;
+    .ai-timeline-section-{{ ai_gen_id }} {
+      padding: 60px 0;
     }
 
-    .ai-slideshow-image-wrapper-{{ ai_gen_id }} {
-      flex: 0 0 100%;
-      max-width: 100%;
+    .ai-timeline-axis-{{ ai_gen_id }} {
+      left: 20px;
+      transform: none;
     }
 
-    .ai-slideshow-heading-{{ ai_gen_id }} {
-      font-size: calc({{ block.settings.heading_size }}px * 0.8);
+    .ai-timeline-row-{{ ai_gen_id }} {
+      flex-direction: column !important;
+      align-items: flex-start;
+      margin-bottom: 50px;
+      padding-left: 45px;
+      width: auto;
     }
 
-    .ai-slideshow-subheading-{{ ai_gen_id }} {
-      font-size: calc({{ block.settings.subheading_size }}px * 0.9);
+    .ai-timeline-col-media-{{ ai_gen_id }},
+    .ai-timeline-col-text-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-timeline-col-media-{{ ai_gen_id }} {
+      margin-top: 16px;
+      order: 2;
+    }
+
+    .ai-timeline-col-text-{{ ai_gen_id }} {
+      order: 1;
+    }
+
+    .ai-timeline-node-{{ ai_gen_id }} {
+      left: 20px;
+      top: 30px;
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+
+    .ai-timeline-row-{{ ai_gen_id }}.visible .ai-timeline-node-{{ ai_gen_id }} {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    .ai-timeline-card-{{ ai_gen_id }} {
+      padding: 24px;
+    }
+
+    .ai-timeline-heading-{{ ai_gen_id }} {
+      font-size: 24px;
     }
   }
 {% endstyle %}
 
-<slideshow-carousel-{{ ai_gen_id }}
-  class="ai-slideshow-container-{{ ai_gen_id }}"
-  data-autoplay="{{ block.settings.autoplay }}"
-  data-autoplay-speed="{{ block.settings.autoplay_speed }}"
-  {{ block.shopify_attributes }}
->
-  <div class="ai-slideshow-wrapper-{{ ai_gen_id }}">
-    <div class="ai-slideshow-track-{{ ai_gen_id }}">
-      {% for i in (1..8) %}
-        {% liquid
-          assign heading_key = 'slide_' | append: i | append: '_heading'
-          assign subheading_key = 'slide_' | append: i | append: '_subheading'
-          assign image_key = 'slide_' | append: i | append: '_image'
+<timeline-section-{{ ai_gen_id }} class="ai-timeline-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-timeline-container-{{ ai_gen_id }}">
+    <div class="ai-timeline-axis-{{ ai_gen_id }}"></div>
 
-          assign heading = block.settings[heading_key]
-          assign subheading = block.settings[subheading_key]
-          assign image = block.settings[image_key]
-        %}
+    {% for i in (1..8) %}
+      {% liquid
+        assign heading_key = 'slide_' | append: i | append: '_heading'
+        assign subheading_key = 'slide_' | append: i | append: '_subheading'
+        assign image_key = 'slide_' | append: i | append: '_image'
 
-        {% if heading != blank or subheading != blank %}
-          <div class="ai-slideshow-slide-{{ ai_gen_id }}" data-slide-index="{{ forloop.index0 }}">
-            <div class="ai-slideshow-image-wrapper-{{ ai_gen_id }}">
+        assign heading_raw = block.settings[heading_key]
+        assign subheading = block.settings[subheading_key]
+        assign image = block.settings[image_key]
+
+        # Parse Tag/Badge and clean heading
+        assign badge = "MILESTONE"
+        assign heading = heading_raw
+        if heading_raw contains "|"
+          assign parts = heading_raw | split: "|"
+          assign badge = parts[0] | strip
+          assign heading = parts[1] | strip
+        endif
+      %}
+
+      {% if heading_raw != blank or subheading != blank %}
+        <div class="ai-timeline-row-{{ ai_gen_id }}" data-timeline-row>
+          <div class="ai-timeline-node-{{ ai_gen_id }}"></div>
+          
+          <div class="ai-timeline-col-text-{{ ai_gen_id }}">
+            <div class="ai-timeline-card-{{ ai_gen_id }}">
+              <span class="ai-timeline-badge-{{ ai_gen_id }}">{{ badge }}</span>
+              <h3 class="ai-timeline-heading-{{ ai_gen_id }}">{{ heading }}</h3>
+              {% if subheading != blank %}
+                <p class="ai-timeline-subheading-{{ ai_gen_id }}">{{ subheading }}</p>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="ai-timeline-col-media-{{ ai_gen_id }}">
+            <div class="ai-timeline-image-wrapper-{{ ai_gen_id }}">
               {% if image %}
                 <img
                   src="{{ image | image_url: width: 800 }}"
@@ -169,149 +258,55 @@
                   loading="lazy"
                   width="{{ image.width }}"
                   height="{{ image.height }}"
-                  class="ai-slideshow-image-{{ ai_gen_id }}"
+                  class="ai-timeline-image-{{ ai_gen_id }}"
                 >
               {% else %}
-                <div class="ai-slideshow-image-placeholder-{{ ai_gen_id }}">
+                <div class="ai-timeline-image-placeholder-{{ ai_gen_id }}">
                   {{ 'image' | placeholder_svg_tag }}
                 </div>
               {% endif %}
             </div>
-
-            <div class="ai-slideshow-content-{{ ai_gen_id }}">
-              {% if heading != blank %}
-                <h3 class="ai-slideshow-heading-{{ ai_gen_id }}">{{ heading }}</h3>
-              {% endif %}
-              {% if subheading != blank %}
-                <p class="ai-slideshow-subheading-{{ ai_gen_id }}">{{ subheading }}</p>
-              {% endif %}
-            </div>
           </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-
-    <button
-      class="ai-slideshow-nav-button-{{ ai_gen_id }} ai-slideshow-nav-button-{{ ai_gen_id }}--prev"
-      aria-label="Previous slide"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <polyline points="15 18 9 12 15 6"></polyline>
-      </svg>
-    </button>
-
-    <button
-      class="ai-slideshow-nav-button-{{ ai_gen_id }} ai-slideshow-nav-button-{{ ai_gen_id }}--next"
-      aria-label="Next slide"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <polyline points="9 18 15 12 9 6"></polyline>
-      </svg>
-    </button>
+        </div>
+      {% endif %}
+    {% endfor %}
   </div>
-</slideshow-carousel-{{ ai_gen_id }}>
+</timeline-section-{{ ai_gen_id }}>
 
 <script>
   (function() {
-    class SlideshowCarousel{{ ai_gen_id }} extends HTMLElement {
-      constructor() {
-        super();
-        this.currentIndex = 0;
-        this.autoplayInterval = null;
-      }
-
+    class TimelineSection{{ ai_gen_id }} extends HTMLElement {
       connectedCallback() {
-        this.track = this.querySelector('.ai-slideshow-track-{{ ai_gen_id }}');
-        this.slides = this.querySelectorAll('.ai-slideshow-slide-{{ ai_gen_id }}');
-        this.prevButton = this.querySelector('.ai-slideshow-nav-button-{{ ai_gen_id }}--prev');
-        this.nextButton = this.querySelector('.ai-slideshow-nav-button-{{ ai_gen_id }}--next');
-        this.autoplay = this.dataset.autoplay === 'true';
-        this.autoplaySpeed = parseInt(this.dataset.autoplaySpeed) || 5000;
+        const rows = this.querySelectorAll('[data-timeline-row]');
+        const observerOptions = {
+          root: null,
+          rootMargin: '0px 0px -120px 0px',
+          threshold: 0.1
+        };
 
-        if (this.slides.length === 0) {
-          return;
-        }
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, observerOptions);
 
-        this.setupEventListeners();
-        this.updateSlidePosition();
-
-        if (this.autoplay) {
-          this.startAutoplay();
-        }
-      }
-
-      setupEventListeners() {
-        this.prevButton.addEventListener('click', () => {
-          this.goToPrevSlide();
-          if (this.autoplay) {
-            this.resetAutoplay();
-          }
+        rows.forEach(row => {
+          observer.observe(row);
         });
-
-        this.nextButton.addEventListener('click', () => {
-          this.goToNextSlide();
-          if (this.autoplay) {
-            this.resetAutoplay();
-          }
-        });
-      }
-
-      goToPrevSlide() {
-        this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
-        this.updateSlidePosition();
-      }
-
-      goToNextSlide() {
-        this.currentIndex = (this.currentIndex + 1) % this.slides.length;
-        this.updateSlidePosition();
-      }
-
-      updateSlidePosition() {
-        const offset = -this.currentIndex * 100;
-        this.track.style.transform = `translateX(${offset}%)`;
-      }
-
-      startAutoplay() {
-        this.autoplayInterval = setInterval(() => {
-          this.goToNextSlide();
-        }, this.autoplaySpeed);
-      }
-
-      resetAutoplay() {
-        clearInterval(this.autoplayInterval);
-        this.startAutoplay();
-      }
-
-      disconnectedCallback() {
-        if (this.autoplayInterval) {
-          clearInterval(this.autoplayInterval);
-        }
       }
     }
 
-    customElements.define('slideshow-carousel-{{ ai_gen_id }}', SlideshowCarousel{{ ai_gen_id }});
+    if (!customElements.get('timeline-section-{{ ai_gen_id }}')) {
+      customElements.define('timeline-section-{{ ai_gen_id }}', TimelineSection{{ ai_gen_id }});
+    }
   })();
 </script>
 
 {% schema %}
 {
-  "name": "Slideshow cards",
+  "name": "Timeline section",
   "tag": null,
   "settings": [
     {
@@ -494,13 +489,13 @@
       "type": "text",
       "id": "slide_1_heading",
       "label": "Heading",
-      "default": "Premium Healthy Snacks"
+      "default": "2021 | The Spark of an Idea"
     },
     {
       "type": "textarea",
       "id": "slide_1_subheading",
       "label": "Subheading",
-      "default": "Discover our range of nutritious and delicious snacks crafted for your wellness journey."
+      "default": "AvyahCorp was founded on a simple realization: healthy snacks shouldn't taste like cardboard, and premium nutrition shouldn't cost a fortune. We started mixing ingredients in a small kitchen, seeking the perfect balance of taste and fuel."
     },
     {
       "type": "image_picker",
@@ -515,13 +510,13 @@
       "type": "text",
       "id": "slide_2_heading",
       "label": "Heading",
-      "default": "Taakat Hunger Bar"
+      "default": "2022 | Introducing the Hunger Bar"
     },
     {
       "type": "textarea",
       "id": "slide_2_subheading",
       "label": "Subheading",
-      "default": "Power-packed energy bars designed to fuel your active lifestyle with natural ingredients."
+      "default": "After months of formulation and testing with nutritionists, we launched our flagship product: the TAAKAT Hunger Bar. A high-protein, zero-compromise snack designed to beat midday crashes with pure ingredients."
     },
     {
       "type": "image_picker",
@@ -536,13 +531,13 @@
       "type": "text",
       "id": "slide_3_heading",
       "label": "Heading",
-      "default": "Great Indian Snack Box"
+      "default": "2023 | Reaching Every Snackbox"
     },
     {
       "type": "textarea",
       "id": "slide_3_subheading",
       "label": "Subheading",
-      "default": "Curated multi-pack assortments featuring the best of Indian flavors and healthy choices."
+      "default": "We expanded our manufacturing capacity and launched our snack assortments and combos, bringing healthy, affordable choices to thousands of homes, offices, and gyms across India."
     },
     {
       "type": "image_picker",
@@ -556,12 +551,14 @@
     {
       "type": "text",
       "id": "slide_4_heading",
-      "label": "Heading"
+      "label": "Heading",
+      "default": "2024 | Snack Right. Spend Right."
     },
     {
       "type": "textarea",
       "id": "slide_4_subheading",
-      "label": "Subheading"
+      "label": "Subheading",
+      "default": "Today, we continue to innovate with clean-label ingredients, zero refined sugar, and bold, delicious flavors. Our promise remains: premium quality snacks at price tags that make sense."
     },
     {
       "type": "image_picker",

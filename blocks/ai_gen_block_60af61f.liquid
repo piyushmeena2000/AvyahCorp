@@ -7,48 +7,65 @@
 {% style %}
   .ai-story-section-{{ ai_gen_id }} {
     display: block;
-    width: {{ block.settings.desktop_width_percent }}%;
-    max-width: 100%;
-    background-color: {{ block.settings.background_color }};
+    width: 100%;
+    background-color: #f7f4eb; /* Warm DTC cream background */
+    padding: 80px 0;
+    overflow: hidden;
   }
 
   .ai-story-container-{{ ai_gen_id }} {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: {{ block.settings.column_gap }}px;
-    align-items: stretch;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: {{ block.settings.section_padding }}px 0 {{ block.settings.section_padding }}px 20px;
-    min-height: 500px;
+    padding: 0 20px;
   }
 
   .ai-story-content-{{ ai_gen_id }} {
     display: flex;
     flex-direction: column;
-    gap: {{ block.settings.text_spacing }}px;
-    justify-content: center;
-    padding-left: {{ block.settings.content_padding_left }}px;
+    gap: 24px;
+    text-align: left;
   }
 
   .ai-story-heading-{{ ai_gen_id }} {
-    font-size: {{ block.settings.heading_size }}px;
-    color: {{ block.settings.heading_color }};
+    font-family: 'Anton', sans-serif;
+    font-size: 64px;
+    color: #2b1f1d;
     margin: 0;
-    line-height: 1.2;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
   }
 
   .ai-story-text-{{ ai_gen_id }} {
     font-family: 'Inter', sans-serif;
-    font-size: {{ block.settings.text_size }}px;
-    color: {{ block.settings.text_color }};
-    line-height: 1.6;
+    font-weight: 400;
+    font-size: 18px;
+    color: #4a3e3c;
+    line-height: 1.7;
+  }
+
+  .ai-story-text-{{ ai_gen_id }} p {
+    margin: 0 0 16px;
+  }
+
+  .ai-story-text-{{ ai_gen_id }} p:last-child {
+    margin: 0;
   }
 
   .ai-story-image-wrapper-{{ ai_gen_id }} {
     width: 100%;
-    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+    background-color: #e9e5db;
+    aspect-ratio: 4 / 3;
     display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .ai-story-image-{{ ai_gen_id }} {
@@ -56,62 +73,43 @@
     height: 100%;
     display: block;
     object-fit: cover;
-    border-radius: {{ block.settings.image_border_radius }}px;
   }
 
   .ai-story-image-placeholder-{{ ai_gen_id }} {
     width: 100%;
     height: 100%;
-    background-color: #f4f4f4;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: {{ block.settings.image_border_radius }}px;
-    position: relative;
   }
 
   .ai-story-image-placeholder-{{ ai_gen_id }} svg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .ai-story-empty-state-{{ ai_gen_id }} {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 20px;
-    font-size: 14px;
-    color: #666;
-    text-align: center;
-    pointer-events: none;
+    width: 50%;
+    height: 50%;
+    fill: #b5b0a4;
   }
 
   @media screen and (max-width: 749px) {
+    .ai-story-section-{{ ai_gen_id }} {
+      padding: 40px 0;
+    }
+
     .ai-story-container-{{ ai_gen_id }} {
       grid-template-columns: 1fr;
-      gap: {{ block.settings.mobile_gap }}px;
-      min-height: auto;
-      padding: {{ block.settings.section_padding }}px 20px;
-    }
-
-    .ai-story-content-{{ ai_gen_id }} {
-      order: {{ block.settings.mobile_content_order }};
-      padding-left: 0;
-    }
-
-    .ai-story-image-wrapper-{{ ai_gen_id }} {
-      order: {{ block.settings.mobile_image_order }};
-      min-height: 300px;
+      gap: 30px;
     }
 
     .ai-story-heading-{{ ai_gen_id }} {
-      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+      font-size: 40px;
     }
 
     .ai-story-text-{{ ai_gen_id }} {
-      font-size: {{ block.settings.text_size | times: 0.9 }}px;
+      font-size: 16px;
+    }
+
+    .ai-story-image-wrapper-{{ ai_gen_id }} {
+      min-height: 250px;
+      aspect-ratio: 4 / 3;
     }
   }
 {% endstyle %}
@@ -140,9 +138,6 @@
       {% else %}
         <div class="ai-story-image-placeholder-{{ ai_gen_id }}">
           {{ 'image' | placeholder_svg_tag }}
-          <div class="ai-story-empty-state-{{ ai_gen_id }}">
-            Next, add an image
-          </div>
         </div>
       {% endif %}
     </div>
