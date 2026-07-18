@@ -5,6 +5,42 @@
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
+  /* Force parent Shopify section wrappers to stretch full-width without any gaps or borders */
+  .shopify-section:has(.ai-story-section-{{ ai_gen_id }}) {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .shopify-section:has(.ai-story-section-{{ ai_gen_id }}) .section {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    display: block !important;
+  }
+
+  .shopify-section:has(.ai-story-section-{{ ai_gen_id }}) .custom-section-content {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .shopify-section:has(.ai-story-section-{{ ai_gen_id }}) .section-content-wrapper {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    min-height: auto !important;
+  }
+
   .ai-story-section-{{ ai_gen_id }} {
     display: block;
     width: 100%;
