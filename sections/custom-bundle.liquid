@@ -815,16 +815,33 @@
       });
     });
 
-    // Tier selection logic
     const tierOptions = document.querySelectorAll('.bundle-tier-option');
+    // Helper to set active tier values
+    function setActiveTier(size) {
+      tierOptions.forEach(opt => {
+        const optSize = parseInt(opt.dataset.size);
+        if (optSize === size) {
+          opt.classList.add('active');
+          discountPercent = parseInt(opt.dataset.discount);
+          discountCode = opt.dataset.code;
+        } else if (size > 4 && optSize === 4) {
+          // Keep the highest tier active if size exceeds 4
+          opt.classList.add('active');
+          discountPercent = parseInt(opt.dataset.discount);
+          discountCode = opt.dataset.code;
+        } else {
+          opt.classList.remove('active');
+        }
+      });
+    }
+
+    // Tier selection logic
     tierOptions.forEach(option => {
       option.addEventListener('click', () => {
-        tierOptions.forEach(opt => opt.classList.remove('active'));
-        option.classList.add('active');
-
-        bundleSize = parseInt(option.dataset.size);
-        discountPercent = parseInt(option.dataset.discount);
-        discountCode = option.dataset.code;
+        const size = parseInt(option.dataset.size);
+        bundleSize = size;
+        
+        setActiveTier(size);
 
         // Clean overflow if any items exceeded new size limit
         if (selectedItems.length > bundleSize) {
@@ -843,9 +860,18 @@
         const btn = card.querySelector('.add-to-bundle-btn');
         if (btn.disabled) return;
 
+        // Expand bundle dynamically instead of alerting
         if (selectedItems.length >= bundleSize) {
-          alert(`Your bundle is already full! Increase your bundle size or remove a flavor.`);
-          return;
+          if (bundleSize === 2) {
+            bundleSize = 3;
+            setActiveTier(3);
+          } else if (bundleSize === 3) {
+            bundleSize = 4;
+            setActiveTier(4);
+          } else {
+            bundleSize = selectedItems.length + 1;
+            setActiveTier(bundleSize);
+          }
         }
 
         const item = {
@@ -882,6 +908,12 @@
           slotEl.querySelector('.bundle-slot-remove').addEventListener('click', (e) => {
             const index = parseInt(e.target.dataset.index);
             selectedItems.splice(index, 1);
+            
+            // Shrink bundleSize back dynamically if it was expanded past the standard 4 boxes
+            if (bundleSize > 4) {
+              bundleSize = Math.max(4, selectedItems.length);
+            }
+
             renderSlots();
             updatePriceAndButton();
           });
