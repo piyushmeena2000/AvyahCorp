@@ -1,24 +1,25 @@
 <style>
   .ai-subscribe-section {
     position: relative;
-    background-color: #cbe8e8; /* Soft DTC teal background */
-    padding: 60px 4% 50px;
+    background-color: #ffffff; /* Clean white background */
+    padding: 70px 4% 60px;
     overflow: visible;
     width: 100%;
     box-sizing: border-box;
     z-index: 10;
   }
   
+  /* Smooth organic liquid wave transition replacing the cut effect */
   .ai-subscribe-section::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 12px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 12' fill='%23cbe8e8'%3E%3Cpolygon points='0,12 12,0 24,12'/%3E%3C/svg%3E");
-    background-repeat: repeat-x;
-    background-size: 24px 12px;
+    height: 48px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath d='M0,32 C240,96 480,96 720,64 C960,32 1200,32 1440,64 L1440,120 L0,120 Z' fill='%23ffffff'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     transform: translateY(-99%);
   }
   
@@ -40,8 +41,7 @@
     font-weight: 800;
     font-size: 13px;
     letter-spacing: 1.5px;
-    color: #2b1f1d;
-    opacity: 0.7;
+    color: #d52528; /* Highlight overline in brand red */
     text-transform: uppercase;
     margin-bottom: 8px;
     display: block;
@@ -60,8 +60,7 @@
   .ai-subscribe-subtext {
     font-family: 'Inter', sans-serif;
     font-size: 15px;
-    color: #2b1f1d;
-    opacity: 0.8;
+    color: #5a4e4c;
     margin: 0;
   }
   
@@ -74,11 +73,11 @@
   
   .ai-subscribe-input-wrapper {
     display: flex;
-    background: #ffffff;
+    background: #faf6f0; /* Soft warm cream input background for contrast against white */
     border-radius: 50px;
     padding: 6px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    border: 2px solid #2b1f1d; /* Solid border for strong container definition */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.03);
     width: 100%;
     box-sizing: border-box;
   }
@@ -90,20 +89,22 @@
     padding: 12px 24px;
     font-family: 'Inter', sans-serif;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     color: #2b1f1d;
     outline: none;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
   
+  /* Highly visible, bold placeholder styling */
   .ai-subscribe-input::placeholder {
-    color: #8c8280;
-    font-weight: 600;
+    color: #2b1f1d !important;
+    opacity: 0.8 !important;
+    font-weight: 700 !important;
   }
   
   .ai-subscribe-submit {
-    background-color: #0b5c59; /* Elegant dark teal button */
+    background-color: #d52528; /* Crimson red button matching logo theme */
     color: #ffffff;
     border: none;
     border-radius: 50px;
@@ -117,15 +118,14 @@
   }
   
   .ai-subscribe-submit:hover {
-    background-color: #06403e;
+    background-color: #a72023;
     transform: scale(1.02);
   }
   
   .ai-subscribe-disclaimer {
     font-family: 'Inter', sans-serif;
     font-size: 11px;
-    color: #2b1f1d;
-    opacity: 0.6;
+    color: #5a4e4c;
     line-height: 1.4;
     margin: 0;
   }
@@ -167,9 +167,9 @@
       gap: 12px;
     }
     .ai-subscribe-input {
-      background: #ffffff;
+      background: #faf6f0;
       border-radius: 50px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
+      border: 2px solid #2b1f1d;
       width: 100%;
       text-align: center;
       padding: 15px 24px;
