@@ -1,5 +1,4 @@
 <!doctype html>
-<!-- THEME SYNC TEST -->
 <!-- Shopify GitHub Sync Trigger v1.0.2 -->
 <html
   class="no-js{% if request.design_mode %} shopify-design-mode{% endif %}"
@@ -93,9 +92,5 @@
     {% if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add-modal' %}
     {% endif %}
-    {%- assign current_product = closest.product | default: product -%}
-    {{ 'avyah-taakat-custom.css' | asset_url | stylesheet_tag }}
-    <script id="taakat-variants-json" type="application/json">{{ current_product.variants | json }}</script>
-    <script src="{{ 'avyah-taakat-custom.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>
