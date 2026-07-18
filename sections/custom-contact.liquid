@@ -75,12 +75,17 @@
 {% endschema %}
 
 <style>
+  #MainContent[data-template="page.contact"] {
+    display: block !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
   .split-contact-wrapper {
     display: flex;
     flex-wrap: wrap;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    min-height: 70vh;
+    width: 100%;
+    min-height: 85vh;
   }
 
   /* Left Half: Image */
