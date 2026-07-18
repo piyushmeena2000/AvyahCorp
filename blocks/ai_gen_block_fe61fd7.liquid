@@ -688,12 +688,34 @@
         this.initSlider();
         this.initAddToCart();
         this.initTabs();
+        this.initTouchpad();
 
         window.addEventListener('resize', () => {
           this.updateSliderSettings();
           this.setPositionByIndex();
           this.createDots();
         });
+      }
+
+      initTouchpad() {
+        this.addEventListener('wheel', (e) => {
+          if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+            return;
+          }
+          
+          e.preventDefault();
+          
+          if (!this.wheelTimeout) {
+            if (e.deltaX > 20 && this.currentIndex < this.maxIndex) {
+              this.goToSlide(this.currentIndex + 1);
+            } else if (e.deltaX < -20 && this.currentIndex > 0) {
+              this.goToSlide(this.currentIndex - 1);
+            }
+            this.wheelTimeout = setTimeout(() => {
+              this.wheelTimeout = null;
+            }, 300);
+          }
+        }, { passive: false });
       }
 
       updateSliderSettings() {
