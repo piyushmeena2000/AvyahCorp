@@ -1,298 +1,228 @@
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
-  .ai-timeline-section-{{ ai_gen_id }} {
+  .ai-categories-section-{{ ai_gen_id }} {
     width: 100%;
-    background-color: #a72023; /* Crimson Red background */
-    padding: 100px 0;
+    background-color: #ffffff; /* Clean white background */
+    padding: 80px 0;
     position: relative;
     overflow: hidden;
     display: block;
   }
 
-  .ai-timeline-container-{{ ai_gen_id }} {
-    max-width: 1100px;
+  .ai-categories-container-{{ ai_gen_id }} {
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    position: relative;
+    text-align: center;
   }
 
-  /* Central axis line */
-  .ai-timeline-axis-{{ ai_gen_id }} {
-    position: absolute;
-    left: 50%;
-    top: 20px;
-    bottom: 20px;
-    width: 4px;
-    background-color: #ffffff; /* White timeline axis */
-    transform: translateX(-50%);
-    z-index: 1;
-  }
-
-  .ai-timeline-row-{{ ai_gen_id }} {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    margin-bottom: 100px;
-    width: 100%;
-    opacity: 0;
-    transform: translateY(60px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .ai-timeline-row-{{ ai_gen_id }}.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .ai-timeline-row-{{ ai_gen_id }}:last-child {
-    margin-bottom: 0;
-  }
-
-  .ai-timeline-col-media-{{ ai_gen_id }} {
-    width: 46%;
-  }
-
-  .ai-timeline-col-text-{{ ai_gen_id }} {
-    width: 46%;
-  }
-
-  /* Alternating layout */
-  .ai-timeline-row-{{ ai_gen_id }}:nth-child(even) {
-    flex-direction: row-reverse;
-  }
-
-  /* Node indicator on the axis line */
-  .ai-timeline-node-{{ ai_gen_id }} {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 20px;
-    height: 20px;
-    background-color: #ffffff;
-    border: 4px solid #ffffff;
-    border-radius: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
-    z-index: 2;
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.5s ease;
-    box-shadow: 0 0 0 4px #a72023;
-  }
-
-  .ai-timeline-row-{{ ai_gen_id }}.visible .ai-timeline-node-{{ ai_gen_id }} {
-    background-color: #ffffff;
-    transform: translate(-50%, -50%) scale(1.3);
-  }
-
-  /* Card styling */
-  .ai-timeline-card-{{ ai_gen_id }} {
-    background-color: #ffffff;
-    border-radius: 16px;
-    padding: 32px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    border: 1px solid #eae6df;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    text-align: left;
-  }
-
-  .ai-timeline-badge-{{ ai_gen_id }} {
-    display: inline-block;
-    align-self: flex-start;
-    background-color: #a72023;
-    color: #ffffff;
-    padding: 4px 14px;
-    border-radius: 100px;
+  .ai-categories-title-{{ ai_gen_id }} {
     font-family: 'Anton', sans-serif;
-    font-size: 13px;
+    font-size: 48px;
+    color: #a72023; /* Bold crimson heading */
+    margin: 0 0 50px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 4px;
+    text-align: center;
   }
 
-  .ai-timeline-heading-{{ ai_gen_id }} {
-    font-family: 'Anton', sans-serif;
-    font-size: 32px;
-    color: #2b1f1d;
-    margin: 0;
-    line-height: 1.15;
-    text-transform: uppercase;
+  .ai-categories-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    justify-content: center;
   }
 
-  .ai-timeline-subheading-{{ ai_gen_id }} {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    color: #5a4e4c;
-    margin: 0;
-    line-height: 1.6;
+  /* Category card wrapper */
+  .ai-cat-card-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
   }
 
-  .ai-timeline-image-wrapper-{{ ai_gen_id }} {
+  /* Colored category card shape */
+  .ai-cat-card-{{ ai_gen_id }} {
     width: 100%;
-    border-radius: 16px;
+    aspect-ratio: 0.85; /* Portrait layout */
+    border-radius: 20px;
     overflow: hidden;
-    aspect-ratio: 4 / 3;
-    background-color: #e9e5db;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 20px;
   }
 
-  .ai-timeline-image-{{ ai_gen_id }} {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
+  .ai-cat-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
   }
 
-  .ai-timeline-image-placeholder-{{ ai_gen_id }} {
+  /* Preset background colors based on index */
+  .ai-cat-card-{{ ai_gen_id }}--1 { background-color: #f7ca44; } /* Yellow/Orange */
+  .ai-cat-card-{{ ai_gen_id }}--2 { background-color: #a72023; } /* Crimson Red */
+  .ai-cat-card-{{ ai_gen_id }}--3 { background-color: #40a058; } /* Green */
+  .ai-cat-card-{{ ai_gen_id }}--4 { background-color: #6e6f72; } /* Grey */
+  .ai-cat-card-{{ ai_gen_id }}--5 { background-color: #3b91d6; } /* Blue */
+  .ai-cat-card-{{ ai_gen_id }}--6 { background-color: #a72023; }
+  .ai-cat-card-{{ ai_gen_id }}--7 { background-color: #f7ca44; }
+  .ai-cat-card-{{ ai_gen_id }}--8 { background-color: #40a058; }
+
+  /* Product package image styling */
+  .ai-cat-image-wrapper-{{ ai_gen_id }} {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .ai-timeline-image-placeholder-{{ ai_gen_id }} svg {
-    width: 40%;
-    height: 40%;
-    fill: #b5b0a4;
+  .ai-cat-card-{{ ai_gen_id }}:hover .ai-cat-image-wrapper-{{ ai_gen_id }} {
+    transform: scale(1.06) rotate(2deg);
+  }
+
+  .ai-cat-image-{{ ai_gen_id }} {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));
+  }
+
+  /* Category title text underneath */
+  .ai-cat-label-{{ ai_gen_id }} {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    color: #a72023;
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    transition: color 0.3s ease;
+  }
+
+  .ai-cat-card-wrapper-{{ ai_gen_id }}:hover .ai-cat-label-{{ ai_gen_id }} {
+    color: #2b1f1d;
+  }
+
+  /* Responsive styling */
+  @media screen and (max-width: 1023px) {
+    .ai-categories-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
   }
 
   @media screen and (max-width: 749px) {
-    .ai-timeline-section-{{ ai_gen_id }} {
-      padding: 60px 0;
+    .ai-categories-title-{{ ai_gen_id }} {
+      font-size: 32px;
+      margin-bottom: 30px;
     }
 
-    .ai-timeline-axis-{{ ai_gen_id }} {
-      left: 20px;
-      transform: none;
-      background-color: #ffffff;
+    .ai-categories-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
     }
 
-    .ai-timeline-row-{{ ai_gen_id }} {
-      flex-direction: column !important;
-      align-items: flex-start;
-      margin-bottom: 50px;
-      padding-left: 45px;
-      width: auto;
+    .ai-cat-card-{{ ai_gen_id }} {
+      padding: 12px;
+      border-radius: 16px;
     }
 
-    .ai-timeline-col-media-{{ ai_gen_id }},
-    .ai-timeline-col-text-{{ ai_gen_id }} {
-      width: 100%;
+    .ai-cat-label-{{ ai_gen_id }} {
+      font-size: 18px;
+      margin-top: 10px;
     }
+  }
 
-    .ai-timeline-col-media-{{ ai_gen_id }} {
-      margin-top: 16px;
-      order: 2;
-    }
-
-    .ai-timeline-col-text-{{ ai_gen_id }} {
-      order: 1;
-    }
-
-    .ai-timeline-node-{{ ai_gen_id }} {
-      left: 20px;
-      top: 30px;
-      transform: translate(-50%, -50%) scale(0.8);
-      background-color: #ffffff;
-      box-shadow: 0 0 0 4px #a72023;
-    }
-
-    .ai-timeline-row-{{ ai_gen_id }}.visible .ai-timeline-node-{{ ai_gen_id }} {
-      transform: translate(-50%, -50%) scale(1.2);
-    }
-
-    .ai-timeline-card-{{ ai_gen_id }} {
-      padding: 24px;
-    }
-
-    .ai-timeline-heading-{{ ai_gen_id }} {
-      font-size: 24px;
+  @media screen and (max-width: 479px) {
+    .ai-categories-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 {% endstyle %}
 
-<timeline-section-{{ ai_gen_id }} class="ai-timeline-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
-  <div class="ai-timeline-container-{{ ai_gen_id }}">
-    <div class="ai-timeline-axis-{{ ai_gen_id }}"></div>
-
-    {% for i in (1..8) %}
-      {% liquid
-        assign heading_key = 'slide_' | append: i | append: '_heading'
-        assign subheading_key = 'slide_' | append: i | append: '_subheading'
-        assign image_key = 'slide_' | append: i | append: '_image'
-
-        assign heading_raw = block.settings[heading_key]
-        assign subheading = block.settings[subheading_key]
-        assign image = block.settings[image_key]
-
-        # Parse Tag/Badge and clean heading
-        assign badge = "MILESTONE"
-        assign heading = heading_raw
-        if heading_raw contains "|"
-          assign parts = heading_raw | split: "|"
-          assign badge = parts[0] | strip
-          assign heading = parts[1] | strip
-        endif
-      %}
-
-      {% if heading_raw != blank or subheading != blank %}
-        <div class="ai-timeline-row-{{ ai_gen_id }}" data-timeline-row>
-          <div class="ai-timeline-node-{{ ai_gen_id }}"></div>
-          
-          <div class="ai-timeline-col-text-{{ ai_gen_id }}">
-            <div class="ai-timeline-card-{{ ai_gen_id }}">
-              <span class="ai-timeline-badge-{{ ai_gen_id }}">{{ badge }}</span>
-              <h3 class="ai-timeline-heading-{{ ai_gen_id }}">{{ heading }}</h3>
-              {% if subheading != blank %}
-                <p class="ai-timeline-subheading-{{ ai_gen_id }}">{{ subheading }}</p>
-              {% endif %}
-            </div>
-          </div>
-
-          <div class="ai-timeline-col-media-{{ ai_gen_id }}">
-            <div class="ai-timeline-image-wrapper-{{ ai_gen_id }}">
-              {% if image %}
-                <img
-                  src="{{ image | image_url: width: 800 }}"
-                  alt="{{ image.alt | escape }}"
-                  loading="lazy"
-                  width="{{ image.width }}"
-                  height="{{ image.height }}"
-                  class="ai-timeline-image-{{ ai_gen_id }}"
-                >
-              {% else %}
-                {% liquid
-                  # Beautiful Unsplash Fallbacks based on loop index
-                  assign index_mod = i | modulo: 4
-                  if index_mod == 1
-                    assign fallback_url = "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80"
-                  elsif index_mod == 2
-                    assign fallback_url = "https://images.unsplash.com/photo-1607349913338-fca88bfc6711?auto=format&fit=crop&w=800&q=80"
-                  elsif index_mod == 3
-                    assign fallback_url = "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=800&q=80"
-                  else
-                    assign fallback_url = "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800&q=80"
-                  endif
-                %}
-                <img
-                  src="{{ fallback_url }}"
-                  alt="Avyah Milestone {{ i }}"
-                  loading="lazy"
-                  width="800"
-                  height="600"
-                  class="ai-timeline-image-{{ ai_gen_id }}"
-                >
-              {% endif %}
-            </div>
-          </div>
-        </div>
+<div class="ai-categories-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-categories-container-{{ ai_gen_id }}">
+    <h2 class="ai-categories-title-{{ ai_gen_id }}">
+      {% if block.settings.section_title != blank %}
+        {{ block.settings.section_title }}
+      {% else %}
+        AVYAH GOT MAAAAD TASTY!
       {% endif %}
-    {% endfor %}
+    </h2>
+
+    <div class="ai-categories-grid-{{ ai_gen_id }}">
+      {% for i in (1..8) %}
+        {% liquid
+          assign heading_key = 'slide_' | append: i | append: '_heading'
+          assign image_key = 'slide_' | append: i | append: '_image'
+          assign link_key = 'slide_' | append: i | append: '_link'
+
+          assign heading_raw = block.settings[heading_key]
+          assign image = block.settings[image_key]
+          assign link = block.settings[link_key]
+
+          # Parse/clean heading
+          assign heading = heading_raw
+          if heading_raw contains "|"
+            assign parts = heading_raw | split: "|"
+            assign heading = parts[1] | strip
+          endif
+        %}
+
+        {% if heading != blank %}
+          <a href="{% if link != blank %}{{ link }}{% else %}#{% endif %}" class="ai-cat-card-wrapper-{{ ai_gen_id }}">
+            <div class="ai-cat-card-{{ ai_gen_id }} ai-cat-card-{{ ai_gen_id }}--{{ i }}">
+              <div class="ai-cat-image-wrapper-{{ ai_gen_id }}">
+                {% if image %}
+                  <img
+                    src="{{ image | image_url: width: 600 }}"
+                    alt="{{ image.alt | escape }}"
+                    loading="lazy"
+                    width="{{ image.width }}"
+                    height="{{ image.height }}"
+                    class="ai-cat-image-{{ ai_gen_id }}"
+                  >
+                {% else %}
+                  {% liquid
+                    # Premium Local and stock image fallbacks
+                    if i == 1
+                      assign fallback_url = 'cart_taakat_hunger_bar.png' | asset_url
+                    elsif i == 2
+                      assign fallback_url = 'cart_mast_mix.png' | asset_url
+                    elsif i == 3
+                      assign fallback_url = 'cart_king.png' | asset_url
+                    elsif i == 4
+                      assign fallback_url = 'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=600&q=80'
+                    elsif i == 5
+                      assign fallback_url = 'https://images.unsplash.com/photo-1607349913338-fca88bfc6711?auto=format&fit=crop&w=600&q=80'
+                    else
+                      assign fallback_url = 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=600&q=80'
+                    endif
+                  %}
+                  <img
+                    src="{{ fallback_url }}"
+                    alt="Avyah Category {{ i }}"
+                    loading="lazy"
+                    width="400"
+                    height="500"
+                    class="ai-cat-image-{{ ai_gen_id }}"
+                  >
+                {% endif %}
+              </div>
+            </div>
+            <span class="ai-cat-label-{{ ai_gen_id }}">{{ heading }}</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
   </div>
-</timeline-section-{{ ai_gen_id }}>
+</div>
 
 <script>
   (function() {
@@ -327,180 +257,14 @@
 
 {% schema %}
 {
-  "name": "Timeline section",
+  "name": "Product Categories Grid",
   "tag": null,
   "settings": [
     {
-      "type": "header",
-      "content": "Layout"
-    },
-    {
-      "type": "range",
-      "id": "desktop_width_percent",
-      "label": "Desktop width",
-      "min": 50,
-      "max": 100,
-      "step": 5,
-      "unit": "%",
-      "default": 100
-    },
-    {
-      "type": "range",
-      "id": "image_width_percent",
-      "label": "Image width",
-      "min": 30,
-      "max": 60,
-      "step": 5,
-      "unit": "%",
-      "default": 40
-    },
-    {
-      "type": "range",
-      "id": "content_gap",
-      "label": "Content gap",
-      "min": 10,
-      "max": 60,
-      "step": 5,
-      "unit": "px",
-      "default": 30
-    },
-    {
-      "type": "range",
-      "id": "slide_padding",
-      "label": "Slide padding",
-      "min": 10,
-      "max": 60,
-      "step": 5,
-      "unit": "px",
-      "default": 30
-    },
-    {
-      "type": "header",
-      "content": "Autoplay"
-    },
-    {
-      "type": "checkbox",
-      "id": "autoplay",
-      "label": "Enable autoplay",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "autoplay_speed",
-      "label": "Autoplay speed",
-      "min": 2000,
-      "max": 9000,
-      "step": 500,
-      "unit": "ms",
-      "default": 5000
-    },
-    {
-      "type": "header",
-      "content": "Style"
-    },
-    {
-      "type": "color",
-      "id": "slide_background_color",
-      "label": "Slide background",
-      "default": "#ffffff"
-    },
-    {
-      "type": "range",
-      "id": "slide_border_radius",
-      "label": "Slide border radius",
-      "min": 0,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "image_border_radius",
-      "label": "Image border radius",
-      "min": 0,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 12
-    },
-    {
-      "type": "header",
-      "content": "Text"
-    },
-    {
-      "type": "range",
-      "id": "heading_size",
-      "label": "Heading size",
-      "min": 16,
-      "max": 48,
-      "step": 2,
-      "unit": "px",
-      "default": 28
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading color",
-      "default": "#000000"
-    },
-    {
-      "type": "range",
-      "id": "subheading_size",
-      "label": "Subheading size",
-      "min": 12,
-      "max": 24,
-      "step": 1,
-      "unit": "px",
-      "default": 16
-    },
-    {
-      "type": "color",
-      "id": "subheading_color",
-      "label": "Subheading color",
-      "default": "#666666"
-    },
-    {
-      "type": "header",
-      "content": "Navigation buttons"
-    },
-    {
-      "type": "range",
-      "id": "button_size",
-      "label": "Button size",
-      "min": 30,
-      "max": 60,
-      "step": 2,
-      "unit": "px",
-      "default": 44
-    },
-    {
-      "type": "range",
-      "id": "button_offset",
-      "label": "Button offset",
-      "min": 10,
-      "max": 50,
-      "step": 5,
-      "unit": "px",
-      "default": 20
-    },
-    {
-      "type": "color",
-      "id": "button_background_color",
-      "label": "Button background",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "button_hover_background_color",
-      "label": "Button hover background",
-      "default": "#333333"
-    },
-    {
-      "type": "color",
-      "id": "button_icon_color",
-      "label": "Button icon color",
-      "default": "#ffffff"
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "AVYAH GOT MAAAAD TASTY!"
     },
     {
       "type": "header",
@@ -510,18 +274,17 @@
       "type": "text",
       "id": "slide_1_heading",
       "label": "Heading",
-      "default": "2021 | The Spark of an Idea"
-    },
-    {
-      "type": "textarea",
-      "id": "slide_1_subheading",
-      "label": "Subheading",
-      "default": "AvyahCorp was founded on a simple realization: healthy snacks shouldn't taste like cardboard, and premium nutrition shouldn't cost a fortune. We started mixing ingredients in a small kitchen, seeking the perfect balance of taste and fuel."
+      "default": "Hunger Bars"
     },
     {
       "type": "image_picker",
       "id": "slide_1_image",
       "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "slide_1_link",
+      "label": "Link"
     },
     {
       "type": "header",
@@ -531,18 +294,17 @@
       "type": "text",
       "id": "slide_2_heading",
       "label": "Heading",
-      "default": "2022 | Introducing the Hunger Bar"
-    },
-    {
-      "type": "textarea",
-      "id": "slide_2_subheading",
-      "label": "Subheading",
-      "default": "After months of formulation and testing with nutritionists, we launched our flagship product: the TAAKAT Hunger Bar. A high-protein, zero-compromise snack designed to beat midday crashes with pure ingredients."
+      "default": "Mast Mix"
     },
     {
       "type": "image_picker",
       "id": "slide_2_image",
       "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "slide_2_link",
+      "label": "Link"
     },
     {
       "type": "header",
@@ -552,18 +314,17 @@
       "type": "text",
       "id": "slide_3_heading",
       "label": "Heading",
-      "default": "2023 | Reaching Every Snackbox"
-    },
-    {
-      "type": "textarea",
-      "id": "slide_3_subheading",
-      "label": "Subheading",
-      "default": "We expanded our manufacturing capacity and launched our snack assortments and combos, bringing healthy, affordable choices to thousands of homes, offices, and gyms across India."
+      "default": "King Peanut"
     },
     {
       "type": "image_picker",
       "id": "slide_3_image",
       "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "slide_3_link",
+      "label": "Link"
     },
     {
       "type": "header",
@@ -573,18 +334,17 @@
       "type": "text",
       "id": "slide_4_heading",
       "label": "Heading",
-      "default": "2024 | Snack Right. Spend Right."
-    },
-    {
-      "type": "textarea",
-      "id": "slide_4_subheading",
-      "label": "Subheading",
-      "default": "Today, we continue to innovate with clean-label ingredients, zero refined sugar, and bold, delicious flavors. Our promise remains: premium quality snacks at price tags that make sense."
+      "default": "Combos"
     },
     {
       "type": "image_picker",
       "id": "slide_4_image",
       "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "slide_4_link",
+      "label": "Link"
     },
     {
       "type": "header",
@@ -593,17 +353,18 @@
     {
       "type": "text",
       "id": "slide_5_heading",
-      "label": "Heading"
-    },
-    {
-      "type": "textarea",
-      "id": "slide_5_subheading",
-      "label": "Subheading"
+      "label": "Heading",
+      "default": "Energy Bars"
     },
     {
       "type": "image_picker",
       "id": "slide_5_image",
       "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "slide_5_link",
+      "label": "Link"
     },
     {
       "type": "header",
@@ -615,14 +376,14 @@
       "label": "Heading"
     },
     {
-      "type": "textarea",
-      "id": "slide_6_subheading",
-      "label": "Subheading"
-    },
-    {
       "type": "image_picker",
       "id": "slide_6_image",
       "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "slide_6_link",
+      "label": "Link"
     },
     {
       "type": "header",
@@ -634,14 +395,14 @@
       "label": "Heading"
     },
     {
-      "type": "textarea",
-      "id": "slide_7_subheading",
-      "label": "Subheading"
-    },
-    {
       "type": "image_picker",
       "id": "slide_7_image",
       "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "slide_7_link",
+      "label": "Link"
     },
     {
       "type": "header",
@@ -653,19 +414,19 @@
       "label": "Heading"
     },
     {
-      "type": "textarea",
-      "id": "slide_8_subheading",
-      "label": "Subheading"
-    },
-    {
       "type": "image_picker",
       "id": "slide_8_image",
       "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "slide_8_link",
+      "label": "Link"
     }
   ],
   "presets": [
     {
-      "name": "Slideshow cards"
+      "name": "Product Categories Grid"
     }
   ]
 }

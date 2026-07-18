@@ -8,15 +8,15 @@
   .ai-story-section-{{ ai_gen_id }} {
     display: block;
     width: 100%;
-    background-color: #a72023; /* Crimson Red background */
+    background-color: #ffffff; /* Clean white background */
     padding: 80px 0;
     overflow: hidden;
   }
 
   .ai-story-container-{{ ai_gen_id }} {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 60px;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 80px;
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
@@ -32,8 +32,8 @@
 
   .ai-story-heading-{{ ai_gen_id }} {
     font-family: 'Anton', sans-serif;
-    font-size: 64px;
-    color: #ffffff; /* White font color */
+    font-size: 56px;
+    color: #a72023; /* Crimson Red text */
     margin: 0;
     line-height: 1.1;
     text-transform: uppercase;
@@ -44,7 +44,7 @@
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 18px;
-    color: #ffffff; /* White font color */
+    color: #4a3e3c; /* Dark charcoal text */
     line-height: 1.7;
   }
 
@@ -58,11 +58,11 @@
 
   .ai-story-image-wrapper-{{ ai_gen_id }} {
     width: 100%;
-    border-radius: 16px;
+    border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-    background-color: rgba(255, 255, 255, 0.1);
-    aspect-ratio: 4 / 3;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    background-color: #f7f7f7;
+    aspect-ratio: 1.2;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,12 +77,12 @@
 
   @media screen and (max-width: 749px) {
     .ai-story-section-{{ ai_gen_id }} {
-      padding: 40px 0;
+      padding: 60px 0;
     }
 
     .ai-story-container-{{ ai_gen_id }} {
       grid-template-columns: 1fr;
-      gap: 30px;
+      gap: 40px;
     }
 
     .ai-story-heading-{{ ai_gen_id }} {
@@ -95,7 +95,7 @@
 
     .ai-story-image-wrapper-{{ ai_gen_id }} {
       min-height: 250px;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 1.2;
     }
   }
 {% endstyle %}
@@ -124,7 +124,7 @@
       {% else %}
         <img
           src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
-          alt="Avyah Team Startup"
+          alt="Avyah Founders"
           loading="lazy"
           width="1200"
           height="900"
