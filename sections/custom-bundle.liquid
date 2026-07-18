@@ -180,31 +180,32 @@
   }
 
   .bundle-tab {
-    font-family: 'Anton', sans-serif;
-    font-size: 20px;
-    text-transform: uppercase;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: rgba(255, 255, 255, 0.6); /* Semi-transparent white */
-    padding: 5px 10px;
-    position: relative;
-    transition: color 0.3s;
-    letter-spacing: 0.5px;
+    font-family: 'Anton', sans-serif !important;
+    font-size: 16px !important;
+    text-transform: uppercase !important;
+    background-color: #8c1619 !important; /* Dark Crimson background */
+    color: #ffffff !important; /* White text */
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    padding: 10px 24px !important;
+    border-radius: 50px !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s, color 0.2s !important;
+    letter-spacing: 1.5px !important;
+    font-weight: 400 !important;
+  }
+
+  .bundle-tab:hover {
+    background-color: #731215 !important;
   }
 
   .bundle-tab.active {
-    color: #ffffff; /* White text */
+    background-color: #ffffff !important; /* Selected tab in White background */
+    color: #8c1619 !important; /* Dark crimson text */
+    border-color: #ffffff !important;
   }
 
   .bundle-tab.active::after {
-    content: '';
-    position: absolute;
-    bottom: -17px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: #ffffff; /* White underline */
+    display: none !important;
   }
 
   /* Products Grid */
@@ -615,7 +616,8 @@
       padding-bottom: 10px;
     }
     .bundle-tab {
-      font-size: 16px;
+      font-size: 14px !important;
+      padding: 8px 18px !important;
     }
   }
 </style>
