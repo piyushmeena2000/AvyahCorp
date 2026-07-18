@@ -680,6 +680,242 @@
   </script>
 {% endunless %}
 
+<style>
+  /* ========== DISCOVER DROPDOWN ========== */
+  .avyah-discover-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .avyah-discover-wrap .avyah-discover-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    text-transform: uppercase;
+    letter-spacing: inherit;
+    text-decoration: none;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .avyah-discover-wrap .avyah-discover-trigger svg {
+    width: 10px;
+    height: 10px;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .avyah-discover-wrap:hover .avyah-discover-trigger svg,
+  .avyah-discover-wrap.open .avyah-discover-trigger svg {
+    transform: rotate(180deg);
+  }
+
+  .avyah-discover-dropdown {
+    position: absolute;
+    top: calc(100% + 16px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+    padding: 8px 0;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .avyah-discover-wrap:hover .avyah-discover-dropdown,
+  .avyah-discover-wrap.open .avyah-discover-dropdown {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Small arrow notch */
+  .avyah-discover-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-left: 1px solid rgba(0,0,0,0.06);
+    border-top: 1px solid rgba(0,0,0,0.06);
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  .avyah-discover-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+
+  .avyah-discover-dropdown a:hover {
+    background: #fef2f2;
+    color: #d52528;
+  }
+
+  .avyah-discover-dropdown a .dd-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+
+  .avyah-discover-dropdown a:hover .dd-icon {
+    opacity: 1;
+  }
+
+  /* Mobile: show as plain stacked links inside drawer */
+  @media (max-width: 749px) {
+    .avyah-discover-dropdown {
+      position: static;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      transform: none !important;
+      box-shadow: none;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      background: transparent;
+    }
+    .avyah-discover-dropdown::before { display: none; }
+    .avyah-discover-dropdown a {
+      color: inherit;
+      padding: 10px 0 10px 16px;
+      font-size: 14px;
+      border-left: 2px solid #d52528;
+      margin-bottom: 2px;
+    }
+    .avyah-discover-dropdown a:hover {
+      background: transparent;
+      color: #d52528;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const DISCOVER_ITEMS = [
+      {
+        label: 'Our Blogs',
+        url: '/blogs/news',
+        icon: '<svg class="dd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>'
+      },
+      {
+        label: 'Our Story',
+        url: '/pages/our-story',
+        icon: '<svg class="dd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>'
+      },
+      {
+        label: 'Careers',
+        url: '/pages/careers',
+        icon: '<svg class="dd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>'
+      },
+      {
+        label: 'Media & Press',
+        url: '/pages/media',
+        icon: '<svg class="dd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>'
+      },
+      {
+        label: 'Contact Us',
+        url: '/pages/contact',
+        icon: '<svg class="dd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.32h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6.09 6.09l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>'
+      }
+    ];
+
+    function buildDropdown() {
+      // Build dropdown HTML
+      const dd = document.createElement('div');
+      dd.className = 'avyah-discover-dropdown';
+      DISCOVER_ITEMS.forEach(item => {
+        const a = document.createElement('a');
+        a.href = item.url;
+        a.innerHTML = item.icon + item.label;
+        dd.appendChild(a);
+      });
+      return dd;
+    }
+
+    function injectDiscover() {
+      // Find "OUR BLOGS" or "BLOGS" link in the header nav
+      const allLinks = document.querySelectorAll('header-component a, #header-component a');
+      let blogLink = null;
+      allLinks.forEach(link => {
+        const txt = link.textContent.trim().toUpperCase();
+        if (txt === 'OUR BLOGS' || txt === 'BLOGS') {
+          blogLink = link;
+        }
+      });
+
+      if (!blogLink || blogLink.dataset.discoverPatched) return;
+      blogLink.dataset.discoverPatched = 'true';
+
+      // Create wrapper
+      const wrap = document.createElement('span');
+      wrap.className = 'avyah-discover-wrap';
+
+      // Create trigger button (replaces the link text)
+      const trigger = document.createElement('a');
+      trigger.className = 'avyah-discover-trigger';
+      trigger.href = '#';
+      trigger.setAttribute('aria-haspopup', 'true');
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.innerHTML = 'DISCOVER <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
+      trigger.addEventListener('click', e => {
+        e.preventDefault();
+        wrap.classList.toggle('open');
+        trigger.setAttribute('aria-expanded', wrap.classList.contains('open'));
+      });
+
+      const dd = buildDropdown();
+      wrap.appendChild(trigger);
+      wrap.appendChild(dd);
+
+      // Replace the original blog link with our new wrapper
+      blogLink.parentNode.replaceChild(wrap, blogLink);
+
+      // Close on outside click
+      document.addEventListener('click', e => {
+        if (!wrap.contains(e.target)) wrap.classList.remove('open');
+      });
+    }
+
+    // Run after DOM settles (theme uses custom elements / hydration)
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => setTimeout(injectDiscover, 300));
+    } else {
+      setTimeout(injectDiscover, 300);
+    }
+
+    // Also re-run after Shopify section hydration in case of re-renders
+    document.addEventListener('shopify:section:load', () => setTimeout(injectDiscover, 300));
+  })();
+</script>
+
 {% schema %}
 {
   "name": "t:names.header",
