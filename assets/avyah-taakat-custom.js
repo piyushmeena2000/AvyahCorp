@@ -1,9 +1,9 @@
 (function() {
   function startPolling() {
-    if (!window.location.pathname.includes('/products/sugar-free')) return;
+    if (!window.location.pathname.includes('/products/')) return;
     
     // Immediately apply body class so that CSS styling activates as early as possible
-    document.body.classList.add('taakat-sugar-free-product-page');
+    document.body.classList.add('taakat-custom-product-page');
 
     let attempts = 0;
     const maxAttempts = 100; // 5 seconds total (100 * 50ms)
@@ -37,11 +37,16 @@
 
     // Let's locate the standard title block to place subtitle right under it
     const titleBlock = productDetailsEl.querySelector('h1, h2, h3, .view-product-title');
+    let productTitle = 'Taakat Hunger Bar';
     if (titleBlock) {
       const subtitle = document.createElement('span');
       subtitle.className = 'taakat-subtitle-badge';
       subtitle.textContent = 'FULL SIZE • 5G PROTEIN • 20+ SUPERFOODS';
       titleBlock.parentNode.insertBefore(subtitle, titleBlock.nextSibling);
+
+      // Dynamically extract name before first | or just clean title
+      const rawText = titleBlock.innerText || titleBlock.textContent;
+      productTitle = rawText.split('|')[0].trim();
     }
 
     // Create our main custom widget container
@@ -94,7 +99,7 @@
         <div class="taakat-flavor-dropdown">
           <div class="taakat-flavor-dropdown-left">
             <span class="tfd-dot"></span>
-            <span>Taakat Hunger Bar | Sugarfree</span>
+            <span>${productTitle}</span>
           </div>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
