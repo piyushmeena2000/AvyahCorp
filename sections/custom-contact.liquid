@@ -127,8 +127,7 @@
   }
 
   /* Typography */
-  .split-contact-content-col h1,
-  .split-contact-content-col h2 {
+  .split-contact-content-col h1 {
     font-family: 'Anton', sans-serif;
     text-transform: uppercase;
     font-size: 64px;
@@ -136,6 +135,16 @@
     margin-bottom: 24px;
     letter-spacing: 1px;
     line-height: 1.1;
+  }
+
+  .split-contact-content-col h2 {
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
   }
 
   .split-contact-top h1 {
@@ -173,23 +182,32 @@
 
   /* Action Section */
   .split-contact-bottom .info-line {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 16px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    opacity: 0.9;
   }
 
   .split-contact-bottom .action-link {
-    display: block;
-    margin-top: 24px;
-    font-size: 18px;
-    font-weight: 800;
-    color: #ffffff;
+    display: inline-block;
+    margin-top: 16px;
+    padding: 14px 36px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #a72023; /* Primary Crimson Red text */
+    background-color: #ffffff; /* White background */
+    border-radius: 50px; /* Pill button */
     text-transform: uppercase;
-    text-decoration: underline;
-    text-decoration-thickness: 3px;
-    text-underline-offset: 6px;
+    text-decoration: none;
     letter-spacing: 1px;
-    transition: opacity 0.2s;
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  .split-contact-bottom .action-link:hover {
+    background-color: #f5f5f5;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
   }
 
   /* Responsive Design */
