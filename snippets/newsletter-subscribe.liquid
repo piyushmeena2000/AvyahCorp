@@ -1,0 +1,245 @@
+<style>
+  .ai-subscribe-section {
+    position: relative;
+    background-color: #cbe8e8; /* Soft DTC teal background */
+    padding: 60px 4% 50px;
+    overflow: visible;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 10;
+  }
+  
+  .ai-subscribe-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 12' fill='%23cbe8e8'%3E%3Cpolygon points='0,12 12,0 24,12'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 24px 12px;
+    transform: translateY(-99%);
+  }
+  
+  .ai-subscribe-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
+  }
+  
+  .ai-subscribe-content {
+    text-align: left;
+  }
+  
+  .ai-subscribe-overline {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    color: #2b1f1d;
+    opacity: 0.7;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  .ai-subscribe-heading {
+    font-family: 'Anton', sans-serif;
+    font-size: 40px;
+    color: #2b1f1d;
+    line-height: 1.15;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+    letter-spacing: -0.5px;
+  }
+  
+  .ai-subscribe-subtext {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #2b1f1d;
+    opacity: 0.8;
+    margin: 0;
+  }
+  
+  .ai-subscribe-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  
+  .ai-subscribe-input-wrapper {
+    display: flex;
+    background: #ffffff;
+    border-radius: 50px;
+    padding: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .ai-subscribe-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 12px 24px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2b1f1d;
+    outline: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .ai-subscribe-input::placeholder {
+    color: #8c8280;
+    font-weight: 600;
+  }
+  
+  .ai-subscribe-submit {
+    background-color: #0b5c59; /* Elegant dark teal button */
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 35px;
+    font-family: 'Anton', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-transform: uppercase;
+  }
+  
+  .ai-subscribe-submit:hover {
+    background-color: #06403e;
+    transform: scale(1.02);
+  }
+  
+  .ai-subscribe-disclaimer {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: #2b1f1d;
+    opacity: 0.6;
+    line-height: 1.4;
+    margin: 0;
+  }
+  
+  .ai-subscribe-message {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    margin-top: 5px;
+    font-weight: 600;
+  }
+  .ai-subscribe-message.success {
+    color: #0b5c59;
+  }
+  .ai-subscribe-message.error {
+    color: #d52528;
+  }
+  
+  @media screen and (max-width: 749px) {
+    .ai-subscribe-section {
+      padding: 50px 20px 40px;
+    }
+    .ai-subscribe-container {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      text-align: center;
+    }
+    .ai-subscribe-content {
+      text-align: center;
+    }
+    .ai-subscribe-heading {
+      font-size: 32px;
+    }
+    .ai-subscribe-input-wrapper {
+      flex-direction: column;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      gap: 12px;
+    }
+    .ai-subscribe-input {
+      background: #ffffff;
+      border-radius: 50px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      width: 100%;
+      text-align: center;
+      padding: 15px 24px;
+    }
+    .ai-subscribe-submit {
+      width: 100%;
+      padding: 15px 0;
+    }
+    .ai-subscribe-disclaimer {
+      text-align: center;
+    }
+  }
+</style>
+
+<div class="ai-subscribe-section">
+  <div class="ai-subscribe-container">
+    <div class="ai-subscribe-content">
+      <span class="ai-subscribe-overline">BECOME AN AVYAH INSIDER...</span>
+      <h2 class="ai-subscribe-heading">Get exclusive deals and early access to new products.</h2>
+      <p class="ai-subscribe-subtext">Our emails are junk-free just like our snacks.</p>
+    </div>
+
+    <div class="ai-subscribe-form-wrapper">
+      {%- form 'customer', class: 'ai-subscribe-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="ai-subscribe-input-wrapper">
+          <input
+            id="NewsletterForm--{{ section.id }}"
+            type="email"
+            name="contact[email]"
+            class="ai-subscribe-input"
+            value="{{ form.email }}"
+            aria-required="true"
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="email"
+            placeholder="EMAIL ADDRESS"
+            required
+          >
+          <button
+            type="submit"
+            class="ai-subscribe-submit"
+            name="commit"
+            id="Subscribe--{{ section.id }}"
+            aria-label="Subscribe"
+          >
+            SIGN UP
+          </button>
+        </div>
+        
+        {%- if form.errors -%}
+          <small class="ai-subscribe-message error" id="Newsletter-error--{{ section.id }}">
+            {{- form.errors.translated_fields.email | capitalize }}
+            {{ form.errors.messages.email -}}
+          </small>
+        {%- endif -%}
+        
+        {%- if form.posted_successfully? -%}
+          <h3
+            class="ai-subscribe-message success"
+            id="Newsletter-success--{{ section.id }}"
+            tabindex="-1"
+            autofocus
+          >
+            Thanks for subscribing!
+          </h3>
+        {%- endif -%}
+      {%- endform -%}
+      
+      <p class="ai-subscribe-disclaimer">*By completing this form you are signing up to receive our emails and can unsubscribe at any time.</p>
+    </div>
+  </div>
+</div>
