@@ -682,137 +682,134 @@
 
 <style>
   /* ========== DISCOVER DROPDOWN ========== */
-  .avyah-discover-wrap {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
+
+  /* The parent <li> becomes the positioning context */
+  .avyah-discover-li {
+    position: relative !important;
   }
 
-  .avyah-discover-wrap .avyah-discover-trigger {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    cursor: pointer;
-    font-family: 'Anton', sans-serif;
-    font-size: inherit;
-    font-weight: 400;
-    color: inherit;
-    text-transform: uppercase;
-    letter-spacing: inherit;
-    text-decoration: none;
-    background: none;
-    border: none;
-    padding: 0;
+  /* The existing nav <a> tag is mutated — no wrapper needed */
+  .avyah-discover-li > a {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    font-family: 'Anton', sans-serif !important;
   }
 
-  .avyah-discover-wrap .avyah-discover-trigger svg {
+  .avyah-discover-li > a svg.avyah-chevron {
     width: 10px;
     height: 10px;
     transition: transform 0.2s ease;
     flex-shrink: 0;
   }
 
-  .avyah-discover-wrap:hover .avyah-discover-trigger svg,
-  .avyah-discover-wrap.open .avyah-discover-trigger svg {
-    transform: rotate(180deg);
-  }
-
+  /* Dropdown panel — uses padding-top as an invisible hover bridge */
   .avyah-discover-dropdown {
     position: absolute;
-    top: calc(100% + 16px);
+    top: 100%;
     left: 50%;
-    transform: translateX(-50%);
-    min-width: 200px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.14);
-    padding: 8px 0;
+    padding-top: 14px; /* invisible bridge so mouse can travel to menu */
+    min-width: 210px;
     z-index: 9999;
     opacity: 0;
     pointer-events: none;
-    transform: translateX(-50%) translateY(-6px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    border: 1px solid rgba(0,0,0,0.06);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    transform: translateX(-50%) translateY(-4px);
   }
 
-  .avyah-discover-wrap:hover .avyah-discover-dropdown,
-  .avyah-discover-wrap.open .avyah-discover-dropdown {
+  .avyah-discover-li:hover .avyah-discover-dropdown,
+  .avyah-discover-li.open .avyah-discover-dropdown {
     opacity: 1;
     pointer-events: auto;
     transform: translateX(-50%) translateY(0);
   }
 
-  /* Small arrow notch */
-  .avyah-discover-dropdown::before {
+  /* Rotate chevron on open */
+  .avyah-discover-li:hover > a svg.avyah-chevron,
+  .avyah-discover-li.open > a svg.avyah-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* The visible white card */
+  .avyah-discover-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,0,0,0.07);
+    padding: 6px 0;
+    overflow: hidden;
+  }
+
+  /* Arrow notch */
+  .avyah-discover-card::before {
     content: '';
     position: absolute;
-    top: -6px;
+    top: 8px;
     left: 50%;
-    transform: translateX(-50%);
     width: 12px;
     height: 12px;
     background: #fff;
-    border-left: 1px solid rgba(0,0,0,0.06);
-    border-top: 1px solid rgba(0,0,0,0.06);
+    border-left: 1px solid rgba(0,0,0,0.07);
+    border-top: 1px solid rgba(0,0,0,0.07);
     transform: translateX(-50%) rotate(45deg);
   }
 
-  .avyah-discover-dropdown a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 11px 20px;
-    font-family: 'Anton', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    color: #1a1a1a;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: background 0.15s, color 0.15s;
-    white-space: nowrap;
+  .avyah-discover-card a {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 11px 20px !important;
+    font-family: 'Anton', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    color: #1a1a1a !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
+    transition: background 0.15s, color 0.15s !important;
+    white-space: nowrap !important;
   }
 
-  .avyah-discover-dropdown a:hover {
-    background: #fef2f2;
-    color: #d52528;
+  .avyah-discover-card a:hover {
+    background: #fef2f2 !important;
+    color: #d52528 !important;
   }
 
-  .avyah-discover-dropdown a .dd-icon {
-    width: 16px;
-    height: 16px;
+  .avyah-discover-card a .dd-icon {
+    width: 15px;
+    height: 15px;
     flex-shrink: 0;
-    opacity: 0.6;
+    opacity: 0.5;
+    transition: opacity 0.15s;
   }
 
-  .avyah-discover-dropdown a:hover .dd-icon {
+  .avyah-discover-card a:hover .dd-icon {
     opacity: 1;
   }
 
-  /* Mobile: show as plain stacked links inside drawer */
+  /* Mobile */
   @media (max-width: 749px) {
     .avyah-discover-dropdown {
       position: static;
       opacity: 1 !important;
       pointer-events: auto !important;
       transform: none !important;
+      padding-top: 0;
+    }
+    .avyah-discover-card {
       box-shadow: none;
       border: none;
       border-radius: 0;
-      padding: 0;
+      padding: 4px 0 4px 12px;
       background: transparent;
     }
-    .avyah-discover-dropdown::before { display: none; }
-    .avyah-discover-dropdown a {
-      color: inherit;
-      padding: 10px 0 10px 16px;
-      font-size: 14px;
+    .avyah-discover-card::before { display: none; }
+    .avyah-discover-card a {
+      color: inherit !important;
+      padding: 8px 0 !important;
+      font-size: 13px !important;
       border-left: 2px solid #d52528;
-      margin-bottom: 2px;
-    }
-    .avyah-discover-dropdown a:hover {
-      background: transparent;
-      color: #d52528;
+      padding-left: 10px !important;
     }
   }
 </style>
@@ -825,7 +822,6 @@
         url: '/blogs/news',
         icon: '<svg class="dd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>'
       },
-
       {
         label: 'Careers',
         url: '/pages/careers',
@@ -844,71 +840,66 @@
     ];
 
     function buildDropdown() {
-      // Build dropdown HTML
-      const dd = document.createElement('div');
-      dd.className = 'avyah-discover-dropdown';
+      const wrap = document.createElement('div');
+      wrap.className = 'avyah-discover-dropdown';
+
+      const card = document.createElement('div');
+      card.className = 'avyah-discover-card';
+
       DISCOVER_ITEMS.forEach(item => {
         const a = document.createElement('a');
         a.href = item.url;
         a.innerHTML = item.icon + item.label;
-        dd.appendChild(a);
+        card.appendChild(a);
       });
-      return dd;
+
+      wrap.appendChild(card);
+      return wrap;
     }
 
     function injectDiscover() {
-      // Find "OUR BLOGS" or "BLOGS" link in the header nav
+      // Find "OUR BLOGS" link in the nav
       const allLinks = document.querySelectorAll('header-component a, #header-component a');
       let blogLink = null;
       allLinks.forEach(link => {
         const txt = link.textContent.trim().toUpperCase();
-        if (txt === 'OUR BLOGS' || txt === 'BLOGS') {
+        if ((txt === 'OUR BLOGS' || txt === 'BLOGS') && !link.dataset.discoverPatched) {
           blogLink = link;
         }
       });
 
-      if (!blogLink || blogLink.dataset.discoverPatched) return;
+      if (!blogLink) return;
       blogLink.dataset.discoverPatched = 'true';
 
-      // Create wrapper
-      const wrap = document.createElement('span');
-      wrap.className = 'avyah-discover-wrap';
+      // Work with parent <li> so we don't disturb the <a> element's classes
+      const li = blogLink.closest('li') || blogLink.parentElement;
+      li.classList.add('avyah-discover-li');
 
-      // Create trigger button (replaces the link text)
-      const trigger = document.createElement('a');
-      trigger.className = 'avyah-discover-trigger';
-      trigger.href = '#';
-      trigger.setAttribute('aria-haspopup', 'true');
-      trigger.setAttribute('aria-expanded', 'false');
-      trigger.innerHTML = 'DISCOVER <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
-      trigger.addEventListener('click', e => {
+      // Mutate the existing <a> in-place — change its text and add chevron
+      blogLink.innerHTML = 'DISCOVER <svg class="avyah-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
+      blogLink.href = '#';
+      blogLink.addEventListener('click', e => {
         e.preventDefault();
-        wrap.classList.toggle('open');
-        trigger.setAttribute('aria-expanded', wrap.classList.contains('open'));
+        li.classList.toggle('open');
       });
 
+      // Append dropdown to <li>
       const dd = buildDropdown();
-      wrap.appendChild(trigger);
-      wrap.appendChild(dd);
-
-      // Replace the original blog link with our new wrapper
-      blogLink.parentNode.replaceChild(wrap, blogLink);
+      li.appendChild(dd);
 
       // Close on outside click
       document.addEventListener('click', e => {
-        if (!wrap.contains(e.target)) wrap.classList.remove('open');
+        if (!li.contains(e.target)) li.classList.remove('open');
       });
     }
 
-    // Run after DOM settles (theme uses custom elements / hydration)
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => setTimeout(injectDiscover, 300));
+      document.addEventListener('DOMContentLoaded', () => setTimeout(injectDiscover, 400));
     } else {
-      setTimeout(injectDiscover, 300);
+      setTimeout(injectDiscover, 400);
     }
 
-    // Also re-run after Shopify section hydration in case of re-renders
-    document.addEventListener('shopify:section:load', () => setTimeout(injectDiscover, 300));
+    document.addEventListener('shopify:section:load', () => setTimeout(injectDiscover, 400));
   })();
 </script>
 
