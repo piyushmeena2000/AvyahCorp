@@ -1,28 +1,28 @@
 /* ========== TAAKAT BESPOKE OVERRIDES CSS ========== */
 
 /* Force Section Background to White and text to Charcoal Dark Brown */
-.product-information {
+.taakat-sugar-free-product-page .product-information {
   background-color: #ffffff !important;
   color: #3d2b27 !important;
 }
 
-.product-information .section-background {
+.taakat-sugar-free-product-page .product-information .section-background {
   background-color: #ffffff !important;
 }
 
 /* Force details text, headers, and content to match */
-.product-details,
-.product-details * {
+.taakat-sugar-free-product-page .product-details,
+.taakat-sugar-free-product-page .product-details * {
   color: #3d2b27 !important;
 }
 
-.product-details a {
+.taakat-sugar-free-product-page .product-details a {
   color: #d52528 !important;
 }
 
 /* Custom Header Font */
-.product-details .group-block h3, 
-.product-details .group-block h3 * {
+.taakat-sugar-free-product-page .product-details .group-block h3, 
+.taakat-sugar-free-product-page .product-details .group-block h3 * {
   font-family: 'Anton', sans-serif !important;
   font-size: 46px !important;
   line-height: 1.1 !important;
@@ -44,45 +44,45 @@
 }
 
 /* Description text color */
-.product-details [data-testid="product-information-details"] p,
-.product-details .custom-footer-text,
-.product-details .custom-footer-text * {
+.taakat-sugar-free-product-page .product-details [data-testid="product-information-details"] p,
+.taakat-sugar-free-product-page .product-details .custom-footer-text,
+.taakat-sugar-free-product-page .product-details .custom-footer-text * {
   color: #6a5e5c !important;
 }
 
 /* 1. Media Gallery Sidebar Layout */
 @media screen and (min-width: 750px) {
-  media-gallery {
+  .taakat-sugar-free-product-page media-gallery {
     display: flex !important;
     flex-direction: row-reverse !important;
     gap: 20px !important;
     align-items: flex-start !important;
   }
 
-  media-gallery slideshow {
+  .taakat-sugar-free-product-page media-gallery slideshow {
     flex: 1 !important;
     width: auto !important;
   }
 
-  media-gallery slideshow-controls {
+  .taakat-sugar-free-product-page media-gallery slideshow-controls {
     width: 90px !important;
     flex-shrink: 0 !important;
     margin: 0 !important;
   }
 
-  .slideshow-controls__thumbnails-container {
+  .taakat-sugar-free-product-page .slideshow-controls__thumbnails-container {
     height: 520px !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
   }
 
-  .slideshow-controls__thumbnails {
+  .taakat-sugar-free-product-page .slideshow-controls__thumbnails {
     flex-direction: column !important;
     gap: 12px !important;
     padding-right: 5px !important;
   }
 
-  .slideshow-controls__thumbnail {
+  .taakat-sugar-free-product-page .slideshow-controls__thumbnail {
     width: 72px !important;
     height: 72px !important;
     border-radius: 12px !important;
@@ -91,30 +91,30 @@
     background-color: #fff !important;
   }
 
-  .slideshow-controls__thumbnail[aria-selected="true"] {
+  .taakat-sugar-free-product-page .slideshow-controls__thumbnail[aria-selected="true"] {
     border-color: #d52528 !important;
   }
 }
 
 /* Rounded cream container for the main product image */
-.product-media-container {
+.taakat-sugar-free-product-page .product-media-container {
   background-color: #fcf4e4 !important; /* Warm yellow/cream container background */
   border-radius: 24px !important;
   overflow: hidden !important;
   border: 1px solid rgba(0,0,0,0.02) !important;
 }
 
-.product-media-container img {
+.taakat-sugar-free-product-page .product-media-container img {
   border-radius: 24px !important;
   padding: 15px !important;
 }
 
 /* Hide theme's default controls */
-.product-details variant-picker,
-.product-details buy-buttons quantity,
-.product-details buy-buttons .payment-buttons,
-.product-details price,
-.product-details .divider-block {
+.taakat-sugar-free-product-page .product-details variant-picker,
+.taakat-sugar-free-product-page .product-details buy-buttons quantity,
+.taakat-sugar-free-product-page .product-details buy-buttons .payment-buttons,
+.taakat-sugar-free-product-page .product-details price,
+.taakat-sugar-free-product-page .product-details .divider-block {
   display: none !important;
 }
 
@@ -418,11 +418,11 @@
 }
 
 /* 6. Clean Accordion Styling Overrides */
-.product-details accordion .accordion-row {
+.taakat-sugar-free-product-page .product-details accordion .accordion-row {
   border-bottom: 1px solid #e1dcd7 !important;
 }
 
-.product-details accordion .accordion-row__title {
+.taakat-sugar-free-product-page .product-details accordion .accordion-row__title {
   font-family: 'Anton', sans-serif !important;
   font-size: 16px !important;
   text-transform: uppercase !important;
@@ -434,5 +434,13 @@
   .taakat-box-grid {
     grid-template-columns: 1fr;
     gap: 15px;
+  }
+}
+
+/* 7. Column Width Balance Overrides */
+@media screen and (min-width: 750px) {
+  .taakat-sugar-free-product-page .product-information__grid.product-information--media-left {
+    grid-template-columns: 1.2fr 0.8fr !important;
+    gap: 40px !important;
   }
 }

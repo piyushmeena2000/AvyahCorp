@@ -1,5 +1,10 @@
 (function() {
   function initTaakatCustom() {
+    if (!window.location.pathname.includes('/products/sugar-free')) return;
+    
+    // Dynamically flag the body to activate CSS overrides scoped to this class
+    document.body.classList.add('taakat-sugar-free-product-page');
+
     const variantsJsonEl = document.getElementById('taakat-variants-json');
     if (!variantsJsonEl) return;
     if (window.taakatCustomInitialized) return;
