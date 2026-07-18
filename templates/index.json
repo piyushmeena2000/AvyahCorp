@@ -618,6 +618,7 @@
         "spacer_fnWeNx": {
           "type": "spacer",
           "name": "t:names.spacer",
+          "disabled": true,
           "settings": {
             "size": "pixel",
             "percent_size": 10,
@@ -671,7 +672,7 @@
           "settings": {
             "heading": "What our customers say",
             "subheading": "Trusted by thousands of happy customers",
-            "section_padding_top": 48,
+            "section_padding_top": 20,
             "section_padding_bottom": 48,
             "background_color": "#d52528",
             "heading_color": "#ffffff",
