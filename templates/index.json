@@ -304,47 +304,6 @@
         "padding-block-start": 20,
         "padding-block-end": 0
       }
-    },
-    "whats_inside_section": {
-      "type": "_blocks",
-      "blocks": {
-        "whats_inside_block": {
-          "type": "ai_gen_block_whats_inside",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "whats_inside_block"
-      ],
-      "name": "What's Inside",
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 0,
-        "section_width": "full-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
     "1761551169f8c757e1": {
       "type": "_blocks",
       "blocks": {
@@ -1165,7 +1124,6 @@
     "1763012598ae0f747e",
     "176301326056e85bde",
     "blocks_iCdxRh",
-    "whats_inside_section",
     "1761551169f8c757e1",
     "17615625630340cad8",
     "blocks_BCAYqP",
