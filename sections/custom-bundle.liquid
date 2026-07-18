@@ -224,6 +224,7 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.03);
     transition: transform 0.3s, box-shadow 0.3s;
     border: 1px solid rgba(0,0,0,0.03);
+    height: 100%; /* Force cards to be same height */
   }
 
   .bundle-card:hover {
@@ -265,7 +266,7 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    flex: 1;
+    flex: 1; /* Takes remaining space in the card */
     text-align: center;
   }
 
@@ -276,6 +277,7 @@
     margin: 0 0 8px;
     color: #333333;
     line-height: 1.2;
+    min-height: 52px; /* Set a minimum height for titles to prevent small shifts */
   }
 
   .bundle-card-desc {
@@ -283,6 +285,7 @@
     color: #666666;
     margin: 0 0 15px;
     line-height: 1.4;
+    flex-grow: 1; /* Pushes the price and button to the absolute bottom of the card */
   }
 
   .bundle-card-price {
@@ -588,21 +591,20 @@
       
       <!-- Tabs Header -->
       <div class="bundle-tabs">
-        <button class="bundle-tab active" data-tab="all">{{ section.settings.tab_1_title }}</button>
-        <button class="bundle-tab" data-tab="full">{{ section.settings.tab_2_title }}</button>
-        <button class="bundle-tab" data-tab="mini">{{ section.settings.tab_3_title }}</button>
+        <button class="bundle-tab active" data-tab="all">All Range</button>
+        <button class="bundle-tab" data-tab="taakat">Taakat Hunger Bar</button>
+        <button class="bundle-tab" data-tab="mastmix">Mast Mix</button>
+        <button class="bundle-tab" data-tab="king">King</button>
+        <button class="bundle-tab" data-tab="snackbox">Snackbox</button>
+        <button class="bundle-tab" data-tab="combos">Combos</button>
       </div>
 
       <!-- Products Grid -->
       <div class="bundle-grid">
         
-        <!-- Tab 1 / All Products -->
+        <!-- All Products Loop -->
         {%- liquid
-          assign col_1 = collections[section.settings.collection_1]
-          assign col_2 = collections[section.settings.collection_2]
-          assign col_3 = collections[section.settings.collection_3]
-
-          assign target_collection = col_1
+          assign target_collection = collections[section.settings.collection_1]
           if section.settings.collection_1 == blank
             assign target_collection = collections['all']
           endif
@@ -610,39 +612,43 @@
 
         {%- for product in target_collection.products -%}
           {%- liquid
-            assign is_full = false
-            assign is_mini = false
-
-            if col_2 != blank
-              for p in col_2.products
-                if p.id == product.id
-                  assign is_full = true
-                endif
-              endfor
-            endif
-
-            if col_3 != blank
-              for p in col_3.products
-                if p.id == product.id
-                  assign is_mini = true
-                endif
-              endfor
-            endif
-            
-            # Map collections dynamically if we can't find direct matches
             assign handle = product.handle | downcase
-            if col_2 == blank and handle contains 'full'
-              assign is_full = true
+            assign title = product.title | downcase
+
+            assign is_taakat = false
+            assign is_mastmix = false
+            assign is_king = false
+            assign is_snackbox = false
+            assign is_combos = false
+
+            if handle contains 'taakat' or title contains 'taakat' or handle contains 'hunger' or title contains 'hunger'
+              assign is_taakat = true
             endif
-            if col_3 == blank and handle contains 'mini'
-              assign is_mini = true
+
+            if handle contains 'mast' or title contains 'mast'
+              assign is_mastmix = true
+            endif
+
+            if handle contains 'king' or title contains 'king'
+              assign is_king = true
+            endif
+
+            if handle contains 'snackbox' or title contains 'snackbox' or handle contains 'snack-box' or title contains 'snack box'
+              assign is_snackbox = true
+            endif
+
+            if handle contains 'combo' or title contains 'combo'
+              assign is_combos = true
             endif
           -%}
 
           <div class="bundle-card" 
                data-product-id="{{ product.id }}"
-               data-is-full="{{ is_full }}"
-               data-is-mini="{{ is_mini }}"
+               data-is-taakat="{{ is_taakat }}"
+               data-is-mastmix="{{ is_mastmix }}"
+               data-is-king="{{ is_king }}"
+               data-is-snackbox="{{ is_snackbox }}"
+               data-is-combos="{{ is_combos }}"
                style="display: flex;">
             
             <div class="bundle-card-image-wrap">
@@ -764,10 +770,16 @@
         cards.forEach(card => {
           if (filter === 'all') {
             card.style.display = 'flex';
-          } else if (filter === 'full') {
-            card.style.display = card.dataset.isFull === 'true' ? 'flex' : 'none';
-          } else if (filter === 'mini') {
-            card.style.display = card.dataset.isMini === 'true' ? 'flex' : 'none';
+          } else if (filter === 'taakat') {
+            card.style.display = card.dataset.isTaakat === 'true' ? 'flex' : 'none';
+          } else if (filter === 'mastmix') {
+            card.style.display = card.dataset.isMastmix === 'true' ? 'flex' : 'none';
+          } else if (filter === 'king') {
+            card.style.display = card.dataset.isKing === 'true' ? 'flex' : 'none';
+          } else if (filter === 'snackbox') {
+            card.style.display = card.dataset.isSnackbox === 'true' ? 'flex' : 'none';
+          } else if (filter === 'combos') {
+            card.style.display = card.dataset.isCombos === 'true' ? 'flex' : 'none';
           }
         });
       });
