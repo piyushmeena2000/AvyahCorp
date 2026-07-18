@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Find destination inside product info block
-  // We want to insert our custom widget right below the product title/subtitle area
   const productDetailsEl = document.querySelector('.product-details .group-block');
   if (!productDetailsEl) return;
 
@@ -32,43 +31,67 @@ document.addEventListener('DOMContentLoaded', function () {
   let boxCardsHtml = '';
   variants.forEach((variant, index) => {
     let boxLabel = '1 BOX';
-    let barsLabel = '20 Bars';
-    let tagHtml = '';
+    let discountLabel = '';
+    let popularBadge = '';
+    let discountMultiplier = 1.0;
     
     if (index === 0) {
       boxLabel = '1 BOX';
-      barsLabel = '20 Bars';
     } else if (index === 1) {
       boxLabel = '2 BOXES';
-      barsLabel = '40 Bars';
-      tagHtml = '<span class="taakat-box-tag">10% OFF</span>';
+      discountLabel = '<span class="taakat-box-discount-label">10% OFF</span>';
+      discountMultiplier = 0.9;
     } else if (index === 2) {
       boxLabel = '3 BOXES';
-      barsLabel = '60 Bars';
-      tagHtml = '<span class="taakat-box-tag">POPULAR - 20% OFF</span>';
+      discountLabel = '<span class="taakat-box-discount-label">20% OFF</span>';
+      popularBadge = '<span class="taakat-popular-badge">POPULAR</span>';
+      discountMultiplier = 0.8;
     }
 
-    const priceFormatted = (variant.price / 100).toFixed(2);
-    const perBarFormatted = (variant.price / 100 / (index === 0 ? 20 : index === 1 ? 40 : 60)).toFixed(2);
+    const priceRaw = variant.price;
+    const finalPrice = priceRaw * discountMultiplier;
+    const priceFormatted = (finalPrice / 100).toFixed(2);
+    const barsCount = index === 0 ? 20 : index === 1 ? 40 : 60;
+    const perBarFormatted = (finalPrice / 100 / barsCount).toFixed(2);
 
     boxCardsHtml += `
       <div class="taakat-box-card ${index === 0 ? 'active' : ''}" data-index="${index}" data-price="${variant.price}">
-        ${tagHtml}
+        ${discountLabel}
         <span class="taakat-box-title">${boxLabel}</span>
-        <span class="taakat-box-bars">${barsLabel}</span>
         <span class="taakat-box-price">Rs. ${priceFormatted}</span>
         <span class="taakat-box-perbar">Rs. ${perBarFormatted}/Bar</span>
+        ${popularBadge}
       </div>
     `;
   });
 
-  // Full Widget Layout
+  // Full Widget Layout (Adding Flavor, Size, Subscribe, Buttons)
   customWidget.innerHTML = `
-    <span class="taakat-variant-label">Select Quantity:</span>
+    <!-- Flavor Selector Mockup -->
+    <div class="taakat-flavor-section">
+      <span class="taakat-flavor-label">Flavor:</span>
+      <div class="taakat-flavor-dropdown">
+        <div class="taakat-flavor-dropdown-left">
+          <span class="tfd-dot"></span>
+          <span>Taakat Hunger Bar | Sugarfree</span>
+        </div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+
+    <!-- Quantity Box Selector -->
+    <span class="taakat-variant-label">Quantity:</span>
     <div class="taakat-box-grid">
       ${boxCardsHtml}
     </div>
 
+    <!-- Size Pill Selector -->
+    <div class="taakat-size-section">
+      <span class="taakat-variant-label">Size:</span>
+      <span class="taakat-size-pill" id="taakat-size-display-pill">20 BARS</span>
+    </div>
+
+    <!-- Purchase Switcher -->
     <div class="taakat-purchase-options">
       <div class="taakat-purchase-option active" data-type="onetime">
         <div class="tpo-left">
@@ -86,13 +109,15 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
     </div>
 
+    <!-- Submit Add to Cart Button -->
     <button type="button" class="taakat-submit-btn">ADD TO CART - Rs. 0.00</button>
-    <span class="taakat-shipping-note">⚡ FREE SHIPPING ON 2+ BOXES</span>
+    <span class="taakat-shipping-note">⚡ FREE SHIPPING ON ORDERS WITH 2+ BOXES</span>
 
+    <!-- Badge bar -->
     <div class="taakat-badges-bar">
       <div class="taakat-badge-item">
         <span class="taakat-badge-icon">🌾</span>
-        <span>Gluten Free</span>
+        <span>Soy Free</span>
       </div>
       <div class="taakat-badge-item">
         <span class="taakat-badge-icon">🌱</span>
@@ -100,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
       <div class="taakat-badge-item">
         <span class="taakat-badge-icon">🥛</span>
-        <span>Soy Free</span>
+        <span>Gluten Free</span>
       </div>
     </div>
   `;
@@ -115,13 +140,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // State
   let activeIndex = 0;
-  let purchaseType = 'onetime'; // 'onetime' or 'subscribe'
+  let purchaseType = 'onetime';
 
   function updatePricing() {
     const activeVariant = variants[activeIndex];
     if (!activeVariant) return;
 
-    const basePrice = activeVariant.price / 100;
+    let discountMultiplier = 1.0;
+    if (activeIndex === 1) discountMultiplier = 0.9;
+    else if (activeIndex === 2) discountMultiplier = 0.8;
+
+    const basePrice = (activeVariant.price * discountMultiplier) / 100;
     const subPrice = basePrice * 0.9;
 
     document.getElementById('tpo-onetime-price').textContent = `Rs. ${basePrice.toFixed(2)}`;
@@ -129,6 +158,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const finalPrice = purchaseType === 'subscribe' ? subPrice : basePrice;
     document.querySelector('.taakat-submit-btn').textContent = `ADD TO CART - Rs. ${finalPrice.toFixed(2)}`;
+
+    // Update Size Pill
+    const sizePillText = activeIndex === 0 ? '20 BARS' : activeIndex === 1 ? '40 BARS' : '60 BARS';
+    document.getElementById('taakat-size-display-pill').textContent = sizePillText;
   }
 
   // Listeners
@@ -155,28 +188,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Add to Cart submission intercept
   customWidget.querySelector('.taakat-submit-btn').addEventListener('click', function () {
-    // Find Shopify's real Add to Cart submit button and trigger click
     const realSubmitBtn = document.querySelector('.product-details form[action*="/cart/add"] [type="submit"], .product-details form[action*="/cart/add"] button[type="submit"], .product-details buy-buttons button');
     if (realSubmitBtn) {
       realSubmitBtn.click();
     } else {
-      // Fallback: programmatic form submit
       const form = document.querySelector('.product-details form[action*="/cart/add"]');
       if (form) form.submit();
     }
   });
 
   function selectShopifyVariant(index) {
-    // Attempt to check corresponding radio button in native widget
     const variantInputs = document.querySelectorAll('.product-details variant-picker input[type="radio"]');
     if (variantInputs.length > index) {
       variantInputs[index].click();
       variantInputs[index].checked = true;
-      // Dispatch change event to notify theme JS
       variantInputs[index].dispatchEvent(new Event('change', { bubbles: true }));
     }
 
-    // Also select in standard option select fields if present
     const selectEl = document.querySelector('.product-details select[name="id"]');
     if (selectEl && selectEl.options.length > index) {
       selectEl.selectedIndex = index;
