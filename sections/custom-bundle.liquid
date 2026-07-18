@@ -225,6 +225,7 @@
     transition: transform 0.3s, box-shadow 0.3s;
     border: none; /* Removed border to prevent cheap looking stroke */
     height: 100%; /* Force cards to be same height */
+    cursor: pointer; /* Indicate entire card is clickable */
   }
 
   .bundle-card:hover {
@@ -835,10 +836,13 @@
       });
     });
 
-    // Add to Bundle Click Handler
-    const addBtns = document.querySelectorAll('.add-to-bundle-btn');
-    addBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
+    // Add to Bundle Click Handler (clicking the card adds it to the bundle)
+    const productCards = document.querySelectorAll('.bundle-card');
+    productCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const btn = card.querySelector('.add-to-bundle-btn');
+        if (btn.disabled) return;
+
         if (selectedItems.length >= bundleSize) {
           alert(`Your bundle is already full! Increase your bundle size or remove a flavor.`);
           return;
