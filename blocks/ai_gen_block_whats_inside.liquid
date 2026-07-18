@@ -1,0 +1,388 @@
+{% doc %}
+  @prompt
+    What's Inside section - 3 product tabs showing ingredients for Taakat, Mast Mix, King
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .whats-inside-{{ ai_gen_id }} {
+    background-color: #faf6f0;
+    padding: 70px 5% 80px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .whats-inside-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .whats-inside-label-{{ ai_gen_id }} {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #d52528;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .whats-inside-title-{{ ai_gen_id }} {
+    font-family: 'Anton', sans-serif;
+    font-size: 48px;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  /* Tab switcher */
+  .whats-inside-tabs-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .wi-tab-{{ ai_gen_id }} {
+    font-family: 'Anton', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 10px 28px;
+    border-radius: 50px;
+    border: 2px solid #d52528;
+    background: transparent;
+    color: #d52528;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .wi-tab-{{ ai_gen_id }}:hover,
+  .wi-tab-{{ ai_gen_id }}.active {
+    background: #d52528;
+    color: #fff;
+  }
+
+  /* Panel layout */
+  .wi-panels-{{ ai_gen_id }} {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .wi-panel-{{ ai_gen_id }} {
+    display: none;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    align-items: center;
+    background: #fff;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.08);
+    min-height: 340px;
+  }
+
+  .wi-panel-{{ ai_gen_id }}.active {
+    display: grid;
+  }
+
+  /* Left: info */
+  .wi-left-{{ ai_gen_id }} {
+    padding: 48px 48px 48px 52px;
+  }
+
+  .wi-stars-{{ ai_gen_id }} {
+    color: #f5a623;
+    font-size: 14px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+
+  .wi-desc-{{ ai_gen_id }} {
+    font-family: 'Anton', sans-serif;
+    font-size: 32px;
+    line-height: 1.2;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    margin: 0 0 20px;
+    max-width: 340px;
+  }
+
+  .wi-sub-{{ ai_gen_id }} {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #5a4e4c;
+    line-height: 1.6;
+    max-width: 340px;
+  }
+
+  .wi-cta-{{ ai_gen_id }} {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 12px 28px;
+    background: #1a1a1a;
+    color: #fff;
+    font-family: 'Anton', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+
+  .wi-cta-{{ ai_gen_id }}:hover {
+    background: #d52528;
+  }
+
+  /* Center: image */
+  .wi-img-wrap-{{ ai_gen_id }} {
+    width: 260px;
+    height: 340px;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .wi-img-wrap-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Right: badges */
+  .wi-right-{{ ai_gen_id }} {
+    padding: 48px 52px 48px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .wi-badge-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+  }
+
+  .wi-badge-icon-{{ ai_gen_id }} {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .wi-badge-text-{{ ai_gen_id }} {
+    font-family: 'Anton', sans-serif;
+    font-size: 13px;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+  }
+
+  .wi-badge-sub-{{ ai_gen_id }} {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: #8a7e7c;
+    text-transform: none;
+  }
+
+  /* Mobile */
+  @media screen and (max-width: 749px) {
+    .whats-inside-{{ ai_gen_id }} {
+      padding: 50px 20px 60px;
+    }
+    .whats-inside-title-{{ ai_gen_id }} {
+      font-size: 34px;
+    }
+    .wi-panel-{{ ai_gen_id }}.active {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+    }
+    .wi-img-wrap-{{ ai_gen_id }} {
+      width: 100%;
+      height: 240px;
+      order: -1;
+    }
+    .wi-left-{{ ai_gen_id }} {
+      padding: 30px 24px 20px;
+    }
+    .wi-desc-{{ ai_gen_id }} {
+      font-size: 26px;
+      max-width: 100%;
+    }
+    .wi-right-{{ ai_gen_id }} {
+      padding: 20px 24px 30px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .wi-badge-{{ ai_gen_id }} {
+      flex: 1;
+      min-width: 80px;
+    }
+  }
+{% endstyle %}
+
+<div class="whats-inside-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="whats-inside-header-{{ ai_gen_id }}">
+    <span class="whats-inside-label-{{ ai_gen_id }}">100% Real Ingredients</span>
+    <h2 class="whats-inside-title-{{ ai_gen_id }}">What's Inside?</h2>
+  </div>
+
+  <!-- Tabs -->
+  <div class="whats-inside-tabs-{{ ai_gen_id }}">
+    <button class="wi-tab-{{ ai_gen_id }} active" data-target="taakat-{{ ai_gen_id }}">Taakat Bar</button>
+    <button class="wi-tab-{{ ai_gen_id }}" data-target="mastmix-{{ ai_gen_id }}">Mast Mix</button>
+    <button class="wi-tab-{{ ai_gen_id }}" data-target="king-{{ ai_gen_id }}">King Bar</button>
+  </div>
+
+  <!-- Panels -->
+  <div class="wi-panels-{{ ai_gen_id }}">
+
+    <!-- TAAKAT -->
+    <div class="wi-panel-{{ ai_gen_id }} active" id="taakat-{{ ai_gen_id }}">
+      <div class="wi-left-{{ ai_gen_id }}">
+        <div class="wi-stars-{{ ai_gen_id }}">★★★★★ <span style="color:#5a4e4c;font-size:13px;">(16,000+ reviews)</span></div>
+        <p class="wi-desc-{{ ai_gen_id }}">Taakat is a 🌾 whole grain bar, packed with 🥜 real peanuts, 🍫 dark chocolate, and ⚡ 5G of protein.</p>
+        <p class="wi-sub-{{ ai_gen_id }}">No maida. No refined sugar. No preservatives. Just pure fuel for your hunger.</p>
+        <a href="/collections/taakat" class="wi-cta-{{ ai_gen_id }}">Shop Taakat →</a>
+      </div>
+      <div class="wi-img-wrap-{{ ai_gen_id }}">
+        <img src="{{ 'taakat-inside.png' | asset_url }}" alt="Taakat Hunger Bar cross section showing ingredients" loading="lazy">
+      </div>
+      <div class="wi-right-{{ ai_gen_id }}">
+        <div class="wi-badge-{{ ai_gen_id }}">
+          <span class="wi-badge-icon-{{ ai_gen_id }}">💪</span>
+          <span class="wi-badge-text-{{ ai_gen_id }}">5G Protein</span>
+          <span class="wi-badge-sub-{{ ai_gen_id }}">Per bar</span>
+        </div>
+        <div class="wi-badge-{{ ai_gen_id }}">
+          <span class="wi-badge-icon-{{ ai_gen_id }}">🌾</span>
+          <span class="wi-badge-text-{{ ai_gen_id }}">Whole Grains</span>
+          <span class="wi-badge-sub-{{ ai_gen_id }}">Real oats & wheat</span>
+        </div>
+        <div class="wi-badge-{{ ai_gen_id }}">
+          <span class="wi-badge-icon-{{ ai_gen_id }}">✅</span>
+          <span class="wi-badge-text-{{ ai_gen_id }}">No Preservatives</span>
+          <span class="wi-badge-sub-{{ ai_gen_id }}">100% clean label</span>
+        </div>
+        <div class="wi-badge-{{ ai_gen_id }}">
+          <span class="wi-badge-icon-{{ ai_gen_id }}">🏭</span>
+          <span class="wi-badge-text-{{ ai_gen_id }}">FSSAI Certified</span>
+          <span class="wi-badge-sub-{{ ai_gen_id }}">Manufactured in India</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAST MIX -->
+    <div class="wi-panel-{{ ai_gen_id }}" id="mastmix-{{ ai_gen_id }}">
+      <div class="wi-left-{{ ai_gen_id }}">
+        <div class="wi-stars-{{ ai_gen_id }}">★★★★★ <span style="color:#5a4e4c;font-size:13px;">(8,200+ reviews)</span></div>
+        <p class="wi-desc-{{ ai_gen_id }}">Mast Mix is a 🥜 roasted nut mix, loaded with 🌿 herbs, 🧄 spices, and a 🔥 bold masala kick.</p>
+        <p class="wi-sub-{{ ai_gen_id }}">Roasted not fried. No artificial flavours. A guilt-free snack that keeps you going all day.</p>
+        <a href="/collections/mast-mix" class="wi-cta-{{ ai_gen_id }}">Shop Mast Mix →</a>
+      </div>
+      <div class="wi-img-wrap-{{ ai_gen_id }}">
+        <img src="{{ 'mastmix-inside.png' | asset_url }}" alt="Mast Mix ingredients showing nuts seeds and spices" loading="lazy">
+      </div>
+      <div class="wi-right-{{ ai_gen_id }}">
+        <div class="wi-badge-{{ ai_gen_id }}">
+          <span class="wi-badge-icon-{{ ai_gen_id }}">🔥</span>
+          <span class="wi-badge-text-{{ ai_gen_id }}">Roasted</span>
+          <span class="wi-badge-sub-{{ ai_gen_id }}">Not fried</span>
+        </div>
+        <div class="wi-badge-{{ ai_gen_id }}">
+          <span class="wi-badge-icon-{{ ai_gen_id }}">🌿</span>
+          <span class="wi-badge-text-{{ ai_gen_id }}">Real Herbs</span>
+          <span class="wi-badge-sub-{{ ai_gen_id }}">No artificial flavour</span>
+        </div>
+        <div class="wi-badge-{{ ai_gen_id }}">
+          <span class="wi-badge-icon-{{ ai_gen_id }}">✅</span>
+          <span class="wi-badge-text-{{ ai_gen_id }}">No Maida</span>
+          <span class="wi-badge-sub-{{ ai_gen_id }}">Clean ingredients</span>
+        </div>
+        <div class="wi-badge-{{ ai_gen_id }}">
+          <span class="wi-badge-icon-{{ ai_gen_id }}">🏭</span>
+          <span class="wi-badge-text-{{ ai_gen_id }}">FSSAI Certified</span>
+          <span class="wi-badge-sub-{{ ai_gen_id }}">Made in India</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- KING -->
+    <div class="wi-panel-{{ ai_gen_id }}" id="king-{{ ai_gen_id }}">
+      <div class="wi-left-{{ ai_gen_id }}">
+        <div class="wi-stars-{{ ai_gen_id }}">★★★★★ <span style="color:#5a4e4c;font-size:13px;">(5,400+ reviews)</span></div>
+        <p class="wi-desc-{{ ai_gen_id }}">King is a 👑 premium bar with 🥜 whole cashews, 🍫 Belgian cocoa, 🍯 honey, and 8G of protein.</p>
+        <p class="wi-sub-{{ ai_gen_id }}">Our richest bar yet. Crafted for those who refuse to compromise on taste or nutrition.</p>
+        <a href="/collections/king" class="wi-cta-{{ ai_gen_id }}">Shop King →</a>
+      </div>
+      <div class="wi-img-wrap-{{ ai_gen_id }}">
+        <img src="{{ 'king-inside.png' | asset_url }}" alt="King bar cross section showing premium ingredients" loading="lazy">
+      </div>
+      <div class="wi-right-{{ ai_gen_id }}">
+        <div class="wi-badge-{{ ai_gen_id }}">
+          <span class="wi-badge-icon-{{ ai_gen_id }}">💪</span>
+          <span class="wi-badge-text-{{ ai_gen_id }}">8G Protein</span>
+          <span class="wi-badge-sub-{{ ai_gen_id }}">Per bar</span>
+        </div>
+        <div class="wi-badge-{{ ai_gen_id }}">
+          <span class="wi-badge-icon-{{ ai_gen_id }}">🍯</span>
+          <span class="wi-badge-text-{{ ai_gen_id }}">Real Honey</span>
+          <span class="wi-badge-sub-{{ ai_gen_id }}">No sugar syrups</span>
+        </div>
+        <div class="wi-badge-{{ ai_gen_id }}">
+          <span class="wi-badge-icon-{{ ai_gen_id }}">✅</span>
+          <span class="wi-badge-text-{{ ai_gen_id }}">No Preservatives</span>
+          <span class="wi-badge-sub-{{ ai_gen_id }}">100% clean label</span>
+        </div>
+        <div class="wi-badge-{{ ai_gen_id }}">
+          <span class="wi-badge-icon-{{ ai_gen_id }}">🏭</span>
+          <span class="wi-badge-text-{{ ai_gen_id }}">FSSAI Certified</span>
+          <span class="wi-badge-sub-{{ ai_gen_id }}">Premium quality</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  (function() {
+    const tabs = document.querySelectorAll('.wi-tab-{{ ai_gen_id }}');
+    const panels = document.querySelectorAll('.wi-panel-{{ ai_gen_id }}');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.target;
+        tabs.forEach(t => t.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        const panel = document.getElementById(target);
+        if (panel) panel.classList.add('active');
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "What's Inside",
+  "settings": [],
+  "presets": [
+    {
+      "name": "What's Inside"
+    }
+  ]
+}
+{% endschema %}

@@ -305,6 +305,46 @@
         "padding-block-end": 0
       }
     },
+    "whats_inside_section": {
+      "type": "_blocks",
+      "blocks": {
+        "whats_inside_block": {
+          "type": "ai_gen_block_whats_inside",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "whats_inside_block"
+      ],
+      "name": "What's Inside",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "1761551169f8c757e1": {
       "type": "_blocks",
       "blocks": {
@@ -951,7 +991,7 @@
             "heading": "Also Available At",
             "heading_size": 40,
             "heading_spacing": 40,
-            "heading_color": "#ffffff",
+            "heading_color": "#d52528",
             "logo_1": "shopify://shop_images/Amazon_logo_svg.webp",
             "logo_2": "shopify://shop_images/flipkart-logo-png-transparent.png",
             "logo_3": "shopify://shop_images/TATA_1mg_Logo_svg.png",
@@ -966,13 +1006,13 @@
             "logo_spacing": 40,
             "logo_padding": 16,
             "logo_border_radius": 8,
-            "logo_background": "rgba(0,0,0,0)",
+            "logo_background": "#ffffff",
             "show_border": false,
             "border_width": 1,
             "border_color": "#e6e6e6",
             "grayscale": false,
             "scroll_speed": 0.1,
-            "background_color": "#d52528",
+            "background_color": "#ffffff",
             "padding_top": 40,
             "padding_bottom": 60
           },
@@ -1125,6 +1165,7 @@
     "1763012598ae0f747e",
     "176301326056e85bde",
     "blocks_iCdxRh",
+    "whats_inside_section",
     "1761551169f8c757e1",
     "17615625630340cad8",
     "blocks_BCAYqP",
