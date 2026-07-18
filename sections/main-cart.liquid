@@ -22,6 +22,27 @@
 
       {%- unless cart.empty? -%}
         <div class="cart-page__summary">
+          <!-- Free Shipping Progress Card -->
+          <div class="cart-shipping-bar-card">
+            {%- liquid
+              assign threshold = 150000 # Rs. 1500 threshold
+              assign total = cart.total_price
+              assign percent = total | times: 100 | divided_by: threshold
+              if percent > 100
+                assign percent = 100
+              endif
+            -%}
+            <div class="cart-shipping-bar-text">
+              {% if total >= threshold %}
+                🎉 You've unlocked <strong>FREE SHIPPING</strong>!
+              {% else %}
+                Add <strong>{{ threshold | minus: total | money }}</strong> more for <strong>FREE SHIPPING</strong>
+              {% endif %}
+            </div>
+            <div class="cart-shipping-bar-progress">
+              <div class="cart-shipping-bar-fill" style="width: {{ percent }}%;"></div>
+            </div>
+          </div>
           {%- content_for 'block', id: 'cart-page-summary', type: '_cart-summary' -%}
         </div>
       {%- endunless -%}
@@ -44,6 +65,185 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 0 var(--padding-5xl);
+    padding: 60px 20px !important;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .cart-page__title h1 {
+    font-family: 'Anton', sans-serif !important;
+    font-size: 54px !important;
+    text-transform: uppercase !important;
+    color: #ffffff !important;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+  }
+
+  /* Style each cart item as a card */
+  .cart-items__table-row {
+    background-color: #ffffff !important;
+    border-radius: 20px !important;
+    padding: 24px !important;
+    margin-bottom: 24px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
+    border: none !important;
+    display: grid !important;
+    grid-template-columns: 120px 1fr auto !important;
+    grid-template-rows: auto auto !important;
+    grid-template-areas:
+      'media details price'
+      'media quantity price' !important;
+    align-items: center !important;
+    column-gap: 24px !important;
+  }
+
+  .cart-items__media {
+    grid-area: media !important;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .cart-items__details {
+    grid-area: details !important;
+    color: #333333 !important;
+  }
+
+  .cart-items__details a {
+    color: #333333 !important;
+    font-family: 'Anton', sans-serif !important;
+    font-size: 20px !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+  }
+
+  .cart-items__details dl, .cart-items__details p {
+    color: #666666 !important;
+    font-size: 14px !important;
+  }
+
+  .cart-items__quantity {
+    grid-area: quantity !important;
+    margin-top: 10px !important;
+  }
+
+  .cart-items__price {
+    grid-area: price !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 700 !important;
+    color: #333333 !important;
+    font-size: 20px !important;
+    text-align: right !important;
+  }
+
+  /* Style quantity selector inside the card */
+  .cart-items__quantity .quantity-selector {
+    border: 1px solid #dddddd !important;
+    border-radius: 50px !important;
+    background-color: #f9f9f9 !important;
+    color: #333333 !important;
+    overflow: hidden;
+  }
+
+  .cart-items__quantity .quantity-selector input {
+    color: #333333 !important;
+  }
+
+  .cart-items__remove {
+    color: #888888 !important;
+  }
+  .cart-items__remove:hover {
+    color: #a72023 !important;
+  }
+
+  /* Free Shipping Card styling */
+  .cart-shipping-bar-card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    text-align: center;
+  }
+  .cart-shipping-bar-text {
+    font-size: 14px;
+    color: #333333;
+    margin-bottom: 12px;
+  }
+  .cart-shipping-bar-text strong {
+    color: #a72023;
+  }
+  .cart-shipping-bar-progress {
+    height: 8px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+  .cart-shipping-bar-fill {
+    height: 100%;
+    background-color: #a72023;
+    border-radius: 10px;
+    transition: width 0.4s ease;
+  }
+
+  /* Style Summary Section on the right */
+  .cart__summary-container {
+    background-color: #ffffff !important;
+    border-radius: 24px !important;
+    padding: 30px !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08) !important;
+    border: none !important;
+  }
+
+  .cart__summary-inner {
+    padding: 0 !important;
+    color: #333333 !important;
+  }
+
+  .cart__summary-totals {
+    border: none !important;
+    gap: 15px !important;
+    width: 100% !important;
+  }
+
+  .cart__total-label {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 700 !important;
+    color: #666666 !important;
+    font-size: 16px !important;
+  }
+
+  .cart__total-value {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 800 !important;
+    color: #a72023 !important;
+    font-size: 28px !important;
+  }
+
+  .cart__tax-note {
+    color: #888888 !important;
+    font-size: 13px !important;
+    line-height: 1.4;
+  }
+
+  /* Checkout Button */
+  .cart__checkout-button {
+    background-color: #a72023 !important;
+    color: #ffffff !important;
+    border-radius: 50px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    font-size: 15px !important;
+    letter-spacing: 1px !important;
+    height: 52px !important;
+    box-shadow: 0 4px 15px rgba(167, 32, 35, 0.2) !important;
+    transition: background-color 0.2s, transform 0.2s !important;
+  }
+
+  .cart__checkout-button:hover {
+    background-color: #8f1b1e !important;
+    transform: translateY(-2px) !important;
   }
 
   .cart-page--empty {
@@ -81,15 +281,14 @@
     }
 
     .cart-page__summary {
-      display: grid;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
       height: 100%;
       grid-column: 2;
       grid-row: 1 / -1;
       align-self: stretch;
-      grid-template-rows: subgrid;
       padding-top: 0;
-
-      /* needed to support blurred effect from hero section */
       position: relative;
     }
 
@@ -102,7 +301,7 @@
     }
 
     .cart__container--extend {
-      height: 100%;
+      height: auto; /* Allow height to adjust content */
     }
   }
 
