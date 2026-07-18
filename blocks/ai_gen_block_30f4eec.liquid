@@ -3,7 +3,7 @@
 {% style %}
   .ai-timeline-section-{{ ai_gen_id }} {
     width: 100%;
-    background-color: #faf6f0; /* Warm cream page background */
+    background-color: #a72023; /* Crimson Red background */
     padding: 100px 0;
     position: relative;
     overflow: hidden;
@@ -24,7 +24,7 @@
     top: 20px;
     bottom: 20px;
     width: 4px;
-    background-color: #e3ded6;
+    background-color: #ffffff; /* White timeline axis */
     transform: translateX(-50%);
     z-index: 1;
   }
@@ -70,17 +70,17 @@
     top: 50%;
     width: 20px;
     height: 20px;
-    background-color: #faf6f0;
-    border: 4px solid #a72023; /* Brand Crimson */
+    background-color: #ffffff;
+    border: 4px solid #ffffff;
     border-radius: 50%;
     transform: translate(-50%, -50%) scale(0.8);
     z-index: 2;
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.5s ease;
-    box-shadow: 0 0 0 4px #faf6f0;
+    box-shadow: 0 0 0 4px #a72023;
   }
 
   .ai-timeline-row-{{ ai_gen_id }}.visible .ai-timeline-node-{{ ai_gen_id }} {
-    background-color: #a72023;
+    background-color: #ffffff;
     transform: translate(-50%, -50%) scale(1.3);
   }
 
@@ -89,7 +89,7 @@
     background-color: #ffffff;
     border-radius: 16px;
     padding: 32px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
     border: 1px solid #eae6df;
     display: flex;
     flex-direction: column;
@@ -167,6 +167,7 @@
     .ai-timeline-axis-{{ ai_gen_id }} {
       left: 20px;
       transform: none;
+      background-color: #ffffff;
     }
 
     .ai-timeline-row-{{ ai_gen_id }} {
@@ -195,6 +196,8 @@
       left: 20px;
       top: 30px;
       transform: translate(-50%, -50%) scale(0.8);
+      background-color: #ffffff;
+      box-shadow: 0 0 0 4px #a72023;
     }
 
     .ai-timeline-row-{{ ai_gen_id }}.visible .ai-timeline-node-{{ ai_gen_id }} {
@@ -261,9 +264,27 @@
                   class="ai-timeline-image-{{ ai_gen_id }}"
                 >
               {% else %}
-                <div class="ai-timeline-image-placeholder-{{ ai_gen_id }}">
-                  {{ 'image' | placeholder_svg_tag }}
-                </div>
+                {% liquid
+                  # Beautiful Unsplash Fallbacks based on loop index
+                  assign index_mod = i | modulo: 4
+                  if index_mod == 1
+                    assign fallback_url = "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80"
+                  elsif index_mod == 2
+                    assign fallback_url = "https://images.unsplash.com/photo-1607349913338-fca88bfc6711?auto=format&fit=crop&w=800&q=80"
+                  elsif index_mod == 3
+                    assign fallback_url = "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=800&q=80"
+                  else
+                    assign fallback_url = "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800&q=80"
+                  endif
+                %}
+                <img
+                  src="{{ fallback_url }}"
+                  alt="Avyah Milestone {{ i }}"
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                  class="ai-timeline-image-{{ ai_gen_id }}"
+                >
               {% endif %}
             </div>
           </div>

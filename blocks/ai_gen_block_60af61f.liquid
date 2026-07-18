@@ -8,7 +8,7 @@
   .ai-story-section-{{ ai_gen_id }} {
     display: block;
     width: 100%;
-    background-color: #f7f4eb; /* Warm DTC cream background */
+    background-color: #a72023; /* Crimson Red background */
     padding: 80px 0;
     overflow: hidden;
   }
@@ -33,7 +33,7 @@
   .ai-story-heading-{{ ai_gen_id }} {
     font-family: 'Anton', sans-serif;
     font-size: 64px;
-    color: #2b1f1d;
+    color: #ffffff; /* White font color */
     margin: 0;
     line-height: 1.1;
     text-transform: uppercase;
@@ -44,7 +44,7 @@
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 18px;
-    color: #4a3e3c;
+    color: #ffffff; /* White font color */
     line-height: 1.7;
   }
 
@@ -60,8 +60,8 @@
     width: 100%;
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
-    background-color: #e9e5db;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+    background-color: rgba(255, 255, 255, 0.1);
     aspect-ratio: 4 / 3;
     display: flex;
     align-items: center;
@@ -73,20 +73,6 @@
     height: 100%;
     display: block;
     object-fit: cover;
-  }
-
-  .ai-story-image-placeholder-{{ ai_gen_id }} {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .ai-story-image-placeholder-{{ ai_gen_id }} svg {
-    width: 50%;
-    height: 50%;
-    fill: #b5b0a4;
   }
 
   @media screen and (max-width: 749px) {
@@ -136,9 +122,14 @@
           class="ai-story-image-{{ ai_gen_id }}"
         >
       {% else %}
-        <div class="ai-story-image-placeholder-{{ ai_gen_id }}">
-          {{ 'image' | placeholder_svg_tag }}
-        </div>
+        <img
+          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
+          alt="Avyah Team Startup"
+          loading="lazy"
+          width="1200"
+          height="900"
+          class="ai-story-image-{{ ai_gen_id }}"
+        >
       {% endif %}
     </div>
   </div>
