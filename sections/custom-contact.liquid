@@ -78,11 +78,9 @@
   .split-contact-wrapper {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
     min-height: 70vh;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
   }
 
   /* Left Half: Image */
@@ -90,7 +88,7 @@
     width: 50%;
     flex: 0 0 50%;
     background-size: cover;
-    background-position: center center;
+    background-position: left center; /* Align to the left to prevent the hand from being cut off */
     background-repeat: no-repeat;
   }
 
