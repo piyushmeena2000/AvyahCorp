@@ -281,7 +281,11 @@
   body:has(#header-group #header-component[data-sticky-state='active']) .product-details.sticky-content--desktop {
     --sticky-header-offset: var(--header-height);
   }
-{% endstylesheet %}
+{% if product.handle == 'sugar-free' %}
+  {{ 'avyah-taakat-custom.css' | asset_url | stylesheet_tag }}
+  <script id="taakat-variants-json" type="application/json">{{ product.variants | json }}</script>
+  <script src="{{ 'avyah-taakat-custom.js' | asset_url }}" defer="defer"></script>
+{% endif %}
 
 {% schema %}
 {

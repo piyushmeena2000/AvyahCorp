@@ -1,0 +1,227 @@
+{% schema %}
+{
+  "name": "Taakat Baked Details",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Healthy Baked is Meant to Be Delicious"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "(MADE WITH REAL WHOLE FOODS)"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "We don't use artificial preservatives, refined flours, or hydrogenated oils in our bars thanks to our favorite better-for-you ingredients:"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left Side Image"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "LEARN MORE"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Taakat Baked Details"
+    }
+  ]
+}
+{% endschema %}
+
+{% if product.handle == 'sugar-free' %}
+{% style %}
+  .tbd-section {
+    background-color: #faf6f0;
+    padding: 80px 5%;
+    display: flex;
+    align-items: center;
+    gap: 5%;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .tbd-left {
+    flex: 1;
+    max-width: 50%;
+  }
+
+  .tbd-left img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  .tbd-right {
+    flex: 1;
+    max-width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .tbd-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 54px;
+    line-height: 1.1;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
+  }
+
+  .tbd-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #d52528;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .tbd-desc {
+    font-size: 15px;
+    color: #5a4e4c;
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+
+  .tbd-features {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .tbd-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .tbd-feature-icon {
+    font-size: 32px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .tbd-feature-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tbd-feature-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+  }
+
+  .tbd-feature-desc {
+    font-size: 13.5px;
+    color: #6a5e5c;
+    line-height: 1.5;
+  }
+
+  .tbd-btn {
+    align-self: flex-start;
+    background-color: #0d6e6d;
+    color: #ffffff;
+    padding: 12px 36px;
+    border-radius: 8px;
+    font-family: 'Anton', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+
+  .tbd-btn:hover {
+    background-color: #0a5453;
+  }
+
+  @media screen and (max-width: 991px) {
+    .tbd-section {
+      flex-direction: column;
+      gap: 40px;
+      padding: 60px 20px;
+    }
+    .tbd-left, .tbd-right {
+      max-width: 100%;
+      width: 100%;
+    }
+    .tbd-title {
+      font-size: 38px;
+    }
+  }
+{% endstyle %}
+
+<div class="tbd-section">
+  <div class="tbd-left">
+    {% if section.settings.left_image != blank %}
+      <img src="{{ section.settings.left_image | image_url: width: 1000 }}" alt="{{ section.settings.title }}" loading="lazy">
+    {% else %}
+      <img src="{{ 'contact_page_bar_1784293683660.png' | asset_url }}" alt="Avyah Taakat Ingredients Box" loading="lazy">
+    {% endif %}
+  </div>
+
+  <div class="tbd-right">
+    <h2 class="tbd-title">{{ section.settings.title }}</h2>
+    <div class="tbd-subtitle">{{ section.settings.subtitle }}</div>
+    <p class="tbd-desc">{{ section.settings.description }}</p>
+
+    <div class="tbd-features">
+      <div class="tbd-feature-item">
+        <span class="tbd-feature-icon">🌾</span>
+        <div class="tbd-feature-info">
+          <span class="tbd-feature-title">Whole Grain Nutrition</span>
+          <span class="tbd-feature-desc">Packed with whole rolled oats, wheat flakes, and high-fiber grains to give you long-lasting energy without blood sugar spikes.</span>
+        </div>
+      </div>
+      
+      <div class="tbd-feature-item">
+        <span class="tbd-feature-icon">🍯</span>
+        <div class="tbd-feature-info">
+          <span class="tbd-feature-title">Zero Added Refined Sugar</span>
+          <span class="tbd-feature-desc">Naturally sweetened. Zero syrups, maltodextrin, or hidden chemical sweeteners, keeping it diabetic-safe and 100% clean.</span>
+        </div>
+      </div>
+
+      <div class="tbd-feature-item">
+        <span class="tbd-feature-icon">🥜</span>
+        <div class="tbd-feature-info">
+          <span class="tbd-feature-title">Protein & Good Fats</span>
+          <span class="tbd-feature-desc">Rich in roasted almonds, peanuts, seeds, and healthy dietary fats that satisfy hunger while supporting metabolic health.</span>
+        </div>
+      </div>
+    </div>
+
+    {% if section.settings.btn_link != blank %}
+      <a href="{{ section.settings.btn_link }}" class="tbd-btn">{{ section.settings.btn_text }}</a>
+    {% else %}
+      <a href="/pages/our-story" class="tbd-btn">{{ section.settings.btn_text }}</a>
+    {% endif %}
+  </div>
+</div>
+{% endif %}

@@ -1,0 +1,315 @@
+/* ========== TAAKAT BESPOKE OVERRIDES CSS ========== */
+
+/* 1. Media Gallery Sidebar Layout */
+@media screen and (min-width: 750px) {
+  /* Restructure gallery into side-by-side thumbnails + main image */
+  media-gallery {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+    gap: 20px !important;
+    align-items: flex-start !important;
+  }
+
+  media-gallery slideshow {
+    flex: 1 !important;
+    width: auto !important;
+  }
+
+  media-gallery slideshow-controls {
+    width: 90px !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+  }
+
+  .slideshow-controls__thumbnails-container {
+    height: 500px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .slideshow-controls__thumbnails {
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding-right: 5px !important;
+  }
+
+  .slideshow-controls__thumbnail {
+    width: 72px !important;
+    height: 72px !important;
+    border-radius: 12px !important;
+    border: 2px solid transparent !important;
+    overflow: hidden !important;
+  }
+
+  .slideshow-controls__thumbnail[aria-selected="true"] {
+    border-color: #d52528 !important;
+  }
+}
+
+/* Rounded cream container for the main product image */
+.product-media-container {
+  background-color: #fcf4e4 !important; /* Cream background matching perfect bar */
+  border-radius: 24px !important;
+  overflow: hidden !important;
+}
+
+.product-media-container img {
+  border-radius: 24px !important;
+  padding: 10px !important;
+}
+
+/* 2. Variant Selector & Buy Forms overhaul */
+/* Hide the default variant selectors and default buy button form controls so we can replace them */
+.product-details variant-picker,
+.product-details buy-buttons quantity,
+.product-details buy-buttons .payment-buttons,
+.product-details price {
+  display: none !important;
+}
+
+/* Custom Header */
+.product-details .group-block h3 {
+  font-family: 'Anton', sans-serif !important;
+  font-size: 42px !important;
+  line-height: 1.1 !important;
+  color: #1a1a1a !important;
+  text-transform: uppercase !important;
+  margin-bottom: 5px !important;
+}
+
+.taakat-subtitle-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #5a4e4c;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: block;
+}
+
+/* 3. Custom Box Selection Grid */
+.taakat-variant-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.taakat-box-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.taakat-box-card {
+  border: 2px solid #e1dcd7;
+  border-radius: 12px;
+  padding: 16px 8px;
+  text-align: center;
+  cursor: pointer;
+  background: #fff;
+  transition: all 0.2s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.taakat-box-card.active {
+  border-color: #d52528;
+  background-color: #fff9f9;
+}
+
+.taakat-box-tag {
+  background-color: #d52528;
+  color: #fff;
+  font-family: 'Anton', sans-serif;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.taakat-box-title {
+  font-family: 'Anton', sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin-bottom: 2px;
+  letter-spacing: 0.5px;
+}
+
+.taakat-box-bars {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #5a4e4c;
+  margin-bottom: 10px;
+}
+
+.taakat-box-price {
+  font-family: 'Anton', sans-serif;
+  font-size: 16px;
+  color: #d52528;
+}
+
+.taakat-box-perbar {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #8a7e7c;
+  margin-top: 2px;
+}
+
+/* 4. Subscribe and Save Radio Switcher */
+.taakat-purchase-options {
+  border: 1px solid #e1dcd7;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+
+.taakat-purchase-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  cursor: pointer;
+  background: #fff;
+  transition: background 0.15s;
+}
+
+.taakat-purchase-option:not(:last-child) {
+  border-bottom: 1px solid #e1dcd7;
+}
+
+.taakat-purchase-option.active {
+  background-color: #faf6f0;
+}
+
+.tpo-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tpo-radio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e1dcd7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.tpo-radio::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background-color: #d52528;
+  border-radius: 50%;
+  display: block;
+  transform: scale(0);
+  transition: transform 0.2s;
+}
+
+.taakat-purchase-option.active .tpo-radio {
+  border-color: #d52528;
+}
+
+.taakat-purchase-option.active .tpo-radio::after {
+  transform: scale(1);
+}
+
+.tpo-label {
+  font-family: 'Anton', sans-serif;
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  letter-spacing: 0.5px;
+}
+
+.tpo-price {
+  font-family: 'Anton', sans-serif;
+  font-size: 16px;
+  color: #1a1a1a;
+}
+
+/* 5. Add to Cart Custom Button */
+.taakat-submit-btn {
+  width: 100%;
+  background-color: #d52528;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 18px 24px;
+  font-family: 'Anton', sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 4px 20px rgba(213, 37, 40, 0.2);
+}
+
+.taakat-submit-btn:hover {
+  background-color: #b01b1e;
+}
+
+.taakat-shipping-note {
+  display: block;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #5a4e4c;
+  margin-top: 10px;
+  letter-spacing: 0.5px;
+}
+
+/* 6. Badges bar */
+.taakat-badges-bar {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 25px;
+  padding: 15px 0;
+  border-top: 1px solid #e1dcd7;
+  border-bottom: 1px solid #e1dcd7;
+}
+
+.taakat-badge-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Anton', sans-serif;
+  font-size: 12px;
+  color: #5a4e4c;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.taakat-badge-icon {
+  font-size: 20px;
+}
+
+@media screen and (max-width: 749px) {
+  .taakat-box-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}

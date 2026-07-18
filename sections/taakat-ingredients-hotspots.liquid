@@ -1,0 +1,272 @@
+{% schema %}
+{
+  "name": "Taakat Hotspots",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "TAAKAT HUNGER BAR"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "SUGARFREE & DIABETIC FIT"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Taakat Hotspots"
+    }
+  ]
+}
+{% endschema %}
+
+{% if product.handle == 'sugar-free' %}
+{% style %}
+  .tih-section {
+    background-color: #faf6f0;
+    padding: 100px 5%;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tih-header {
+    text-align: center;
+    margin-bottom: 60px;
+    z-index: 2;
+  }
+
+  .tih-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 56px;
+    color: #1a1a1a;
+    line-height: 1;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .tih-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #d52528;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  /* Hotspots layout grid */
+  .tih-container {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.2fr;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Center: main vertical product image */
+  .tih-center {
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  .tih-center img {
+    height: 520px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.12));
+  }
+
+  /* Left and Right Columns for Descriptions */
+  .tih-col {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+  }
+
+  .tih-col.left {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .tih-col.right {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  /* Description blocks */
+  .tih-block {
+    max-width: 320px;
+    position: relative;
+  }
+
+  .tih-block-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    background: #fff;
+    display: inline-block;
+  }
+
+  .tih-block-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    margin: 10px 0 8px 0;
+    letter-spacing: 0.5px;
+  }
+
+  .tih-block-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    color: #5a4e4c;
+    line-height: 1.6;
+  }
+
+  /* Pointer Line connectors (rendered via CSS borders or SVGs) */
+  /* On desktop, we'll draw styling hooks */
+  @media screen and (min-width: 992px) {
+    .tih-block[data-pointer="almonds"]::after {
+      content: '';
+      position: absolute;
+      width: 140px;
+      height: 60px;
+      border-bottom: 2px dashed #b5a4a1;
+      border-right: 2px dashed #b5a4a1;
+      border-bottom-right-radius: 20px;
+      top: 20px;
+      left: 105%;
+      pointer-events: none;
+    }
+    .tih-block[data-pointer="oats"]::after {
+      content: '';
+      position: absolute;
+      width: 130px;
+      height: 80px;
+      border-top: 2px dashed #b5a4a1;
+      border-right: 2px dashed #b5a4a1;
+      border-top-right-radius: 20px;
+      bottom: 20px;
+      left: 105%;
+      pointer-events: none;
+    }
+    .tih-block[data-pointer="chocolate"]::after {
+      content: '';
+      position: absolute;
+      width: 140px;
+      height: 60px;
+      border-bottom: 2px dashed #b5a4a1;
+      border-left: 2px dashed #b5a4a1;
+      border-bottom-left-radius: 20px;
+      top: 20px;
+      right: 105%;
+      pointer-events: none;
+    }
+    .tih-block[data-pointer="honey"]::after {
+      content: '';
+      position: absolute;
+      width: 130px;
+      height: 80px;
+      border-top: 2px dashed #b5a4a1;
+      border-left: 2px dashed #b5a4a1;
+      border-top-left-radius: 20px;
+      bottom: 20px;
+      right: 105%;
+      pointer-events: none;
+    }
+  }
+
+  @media screen and (max-width: 991px) {
+    .tih-section {
+      padding: 60px 20px;
+    }
+    .tih-title {
+      font-size: 38px;
+    }
+    .tih-container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .tih-center {
+      order: -1;
+    }
+    .tih-center img {
+      height: 380px;
+    }
+    .tih-col {
+      gap: 40px;
+      align-items: center !important;
+      text-align: center !important;
+    }
+    .tih-block {
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+{% endstyle %}
+
+<div class="tih-section">
+  <div class="tih-header">
+    <h2 class="tih-title">{{ section.settings.heading }}</h2>
+    <div class="tih-subtitle">{{ section.settings.subheading }}</div>
+  </div>
+
+  <div class="tih-container">
+    <!-- Left Column (Almond & Oats) -->
+    <div class="tih-col left">
+      <div class="tih-block" data-pointer="almonds">
+        <span class="tih-block-img">🌰</span>
+        <h4 class="tih-block-title">Almonds & Peanuts</h4>
+        <p class="tih-block-desc">Nutrient-packed with high-quality plant protein, healthy fats, and antioxidants. Minimally processed to keep the raw taste and bite.</p>
+      </div>
+      
+      <div class="tih-col-gap"></div>
+
+      <div class="tih-block" data-pointer="oats">
+        <span class="tih-block-img">🌾</span>
+        <h4 class="tih-block-title">Rolled Oats & Seeds</h4>
+        <p class="tih-block-desc">Rich in dietary fiber and essential vitamins. Slowly baked to offer a satisfying crunch that aids digestion and provides slow-release energy.</p>
+      </div>
+    </div>
+
+    <!-- Center Product Image -->
+    <div class="tih-center">
+      <img src="{{ 'taakat-vertical.png' | asset_url }}" alt="Avyah Taakat Hunger Bar vertical profile" loading="lazy">
+    </div>
+
+    <!-- Right Column (Dark Chocolate & Honey) -->
+    <div class="tih-col right">
+      <div class="tih-block" data-pointer="chocolate">
+        <span class="tih-block-img">🍫</span>
+        <h4 class="tih-block-title">Rich Cocoa</h4>
+        <p class="tih-block-desc">Premium dark cocoa is carefully selected and infused to create a satisfying sweet-savory balance without spiking sugar levels.</p>
+      </div>
+      
+      <div class="tih-col-gap"></div>
+
+      <div class="tih-block" data-pointer="honey">
+        <span class="tih-block-img">🌿</span>
+        <h4 class="tih-block-title">No Added Sugar</h4>
+        <p class="tih-block-desc">Clean sweetness derived entirely from low-glycemic, natural food ingredients, making it absolutely perfect and safe for diabetics.</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
