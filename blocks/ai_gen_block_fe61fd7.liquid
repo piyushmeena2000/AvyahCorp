@@ -669,21 +669,22 @@
     class ProductSlider{{ ai_gen_id }} extends HTMLElement {
       constructor() {
         super();
+        this.isDragging = false;
+        this.startPos = 0;
+        this.currentTranslate = 0;
+        this.prevTranslate = 0;
+        this.currentIndex = 0;
+      }
+
+      connectedCallback() {
         this.track = this.querySelector('[data-track]');
         this.dotsContainer = this.querySelector('[data-dots]');
         this.moreButton = this.querySelector('[data-more-button]');
         this.allCards = Array.from(this.querySelectorAll('.ai-product-card-{{ ai_gen_id }}'));
         this.cards = this.allCards;
         this.addToCartButtons = this.querySelectorAll('.ai-product-card-button-{{ ai_gen_id }}[data-variant-id]');
-        this.isDragging = false;
-        this.startPos = 0;
-        this.currentTranslate = 0;
-        this.prevTranslate = 0;
-        this.currentIndex = 0;
         this.totalCards = this.cards.length;
-      }
 
-      connectedCallback() {
         this.updateSliderSettings();
         this.initSlider();
         this.initAddToCart();
@@ -964,7 +965,7 @@
       "type": "product_list",
       "id": "product_list",
       "label": "Products",
-      "limit": 12
+      "limit": 50
     },
     {
       "type": "header",
