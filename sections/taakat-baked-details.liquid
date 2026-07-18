@@ -45,7 +45,8 @@
 }
 {% endschema %}
 
-{% if product.handle == 'sugar-free' %}
+{% assign current_product = closest.product | default: product %}
+{% if current_product.handle == 'sugar-free' %}
 {% style %}
   .tbd-section {
     background-color: #faf6f0;
