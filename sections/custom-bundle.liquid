@@ -435,6 +435,25 @@
     margin-bottom: 25px;
     border-top: 1px solid #f0f0f0;
     padding-top: 25px;
+    max-height: 275px; /* Limit height of slot list */
+    overflow-y: auto;  /* Scroll internally when list grows */
+    padding-right: 6px; /* Space for scrollbar */
+  }
+
+  /* Stylize scrollbar for slots container */
+  .bundle-slots-container::-webkit-scrollbar {
+    width: 6px;
+  }
+  .bundle-slots-container::-webkit-scrollbar-track {
+    background: #f9f9f9;
+    border-radius: 10px;
+  }
+  .bundle-slots-container::-webkit-scrollbar-thumb {
+    background: #cccccc;
+    border-radius: 10px;
+  }
+  .bundle-slots-container::-webkit-scrollbar-thumb:hover {
+    background: #a72023; /* Brand red accent on hover */
   }
 
   .bundle-slot {
@@ -928,6 +947,9 @@
 
         slotContainer.appendChild(slotEl);
       }
+
+      // Auto-scroll to the bottom of the slot container to show the latest added items
+      slotContainer.scrollTop = slotContainer.scrollHeight;
     }
 
     // Calculate Price and Update button state
