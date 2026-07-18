@@ -47,6 +47,11 @@
   class="product-information section section--{{ content_width }} spacing-style color-{{ section.settings.color_scheme }} relative"
   style="{% render 'spacing-style', settings: section.settings %} --gap: {{ section.settings.gap }}px;"
 >
+  {% if product.handle == 'sugar-free' %}
+    {{ 'avyah-taakat-custom.css' | asset_url | stylesheet_tag }}
+    <script id="taakat-variants-json" type="application/json">{{ product.variants | json }}</script>
+    <script src="{{ 'avyah-taakat-custom.js' | asset_url }}" defer="defer"></script>
+  {% endif %}
   {% if section.settings.desktop_media_position == 'left' and product_has_media %}
     {% assign product_href = '#ProductInformation-' | append: section.id %}
     {% render 'skip-to-content-link', href: product_href, text: 'accessibility.skip_to_product_info' %}
@@ -281,11 +286,7 @@
   body:has(#header-group #header-component[data-sticky-state='active']) .product-details.sticky-content--desktop {
     --sticky-header-offset: var(--header-height);
   }
-{% if product.handle == 'sugar-free' %}
-  {{ 'avyah-taakat-custom.css' | asset_url | stylesheet_tag }}
-  <script id="taakat-variants-json" type="application/json">{{ product.variants | json }}</script>
-  <script src="{{ 'avyah-taakat-custom.js' | asset_url }}" defer="defer"></script>
-{% endif %}
+
 
 {% schema %}
 {

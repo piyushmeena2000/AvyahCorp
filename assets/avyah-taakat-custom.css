@@ -196,8 +196,8 @@
 }
 
 .taakat-box-card.active {
-  border-color: #0d6e6d !important; /* Teal green active border */
-  background-color: #f7fbfb !important;
+  border-color: #d52528 !important; /* Crimson active border */
+  background-color: #fffbfb !important;
 }
 
 .taakat-box-discount-label {
@@ -239,7 +239,7 @@
 }
 
 .taakat-popular-badge {
-  background-color: #0d6e6d !important; /* Teal Popular badge */
+  background-color: #d52528 !important; /* Crimson Popular badge */
   color: #fff !important;
   font-family: 'Anton', sans-serif !important;
   font-size: 10px !important;
@@ -322,7 +322,7 @@
   content: '';
   width: 12px;
   height: 12px;
-  background-color: #0d6e6d; /* Teal active dot */
+  background-color: #d52528; /* Crimson active dot */
   border-radius: 50%;
   display: block;
   transform: scale(0);
@@ -330,7 +330,7 @@
 }
 
 .taakat-purchase-option.active .tpo-radio {
-  border-color: #0d6e6d !important;
+  border-color: #d52528 !important;
 }
 
 .taakat-purchase-option.active .tpo-radio::after {
