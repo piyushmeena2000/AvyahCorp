@@ -88,7 +88,7 @@
     width: 50%;
     flex: 0 0 50%;
     background-size: cover;
-    background-position: left center; /* Align to the left to prevent the hand from being cut off */
+    background-position: center center; /* Center-aligned for manufacturing line view */
     background-repeat: no-repeat;
   }
 
@@ -214,7 +214,7 @@
 <div class="split-contact-wrapper">
   
   {%- liquid 
-    assign bg_image_url = 'contact_page_bar.png' | asset_url
+    assign bg_image_url = 'contact_page_manufacturing.png' | asset_url
     if section.settings.image != blank
       assign bg_image_url = section.settings.image | img_url: 'master'
     endif
