@@ -79,8 +79,7 @@
               class="cart-drawer__heading h3"
               id="cart-drawer-heading"
             >
-              {{ 'content.cart_title' | t }}
-              {% render 'cart-bubble' %}
+              Your Cart ({{ cart.item_count }})
             </h2>
 
             <button
@@ -93,6 +92,50 @@
                 {{- 'icon-close.svg' | inline_asset_content -}}
               </span>
             </button>
+          </div>
+
+          <!-- Bundle Progress Tracker -->
+          {%- liquid
+            assign total_boxes = cart.item_count
+            assign pct = 0
+            if total_boxes == 1
+              assign pct = 0
+            elsif total_boxes == 2
+              assign pct = 33
+            elsif total_boxes == 3
+              assign pct = 66
+            elsif total_boxes >= 4
+              assign pct = 100
+            endif
+          -%}
+          <div class="cart-drawer-progress-container">
+            <div class="cart-drawer-progress-line-bg"></div>
+            <div class="cart-drawer-progress-line-fill" style="width: {{ pct }}%;"></div>
+            
+            <div class="cart-drawer-progress-steps">
+              <div class="cart-drawer-step {% if total_boxes >= 1 %}active{% endif %}" style="left: 0%;">
+                <div class="step-dot">{% if total_boxes >= 1 %}✓{% endif %}</div>
+                <div class="step-label">1 Box</div>
+              </div>
+              <div class="cart-drawer-step {% if total_boxes >= 2 %}active{% endif %}" style="left: 33%;">
+                <div class="step-discount">10% OFF</div>
+                <div class="step-dot">{% if total_boxes >= 2 %}✓{% endif %}</div>
+                <div class="step-label">2 Boxes</div>
+              </div>
+              <div class="cart-drawer-step {% if total_boxes >= 3 %}active{% endif %}" style="left: 66%;">
+                <div class="step-discount">20% OFF</div>
+                <div class="step-dot">{% if total_boxes >= 3 %}✓{% endif %}</div>
+                <div class="step-label">3 Boxes</div>
+              </div>
+              <div class="cart-drawer-step {% if total_boxes >= 4 %}active{% endif %}" style="left: 100%;">
+                <div class="step-discount-wrap">
+                  <div class="step-badge">Best Value</div>
+                  <div class="step-discount">30% OFF</div>
+                </div>
+                <div class="step-dot">{% if total_boxes >= 4 %}✓{% endif %}</div>
+                <div class="step-label">4 Boxes</div>
+              </div>
+            </div>
           </div>
 
           <div
@@ -218,17 +261,280 @@
     height: 100%;
     overflow: hidden;
   }
-
+ 
   .cart-drawer__content {
     height: calc(100% - var(--header-height));
     display: flex;
     flex-direction: column;
   }
-
+ 
   .cart-drawer__summary {
     background-color: var(--color-background);
     position: sticky;
     bottom: 0;
     z-index: 1;
+  }
+
+  /* Bundle Progress Tracker styles */
+  .cart-drawer-progress-container {
+    padding: 35px 30px 20px;
+    background-color: #ffffff;
+    position: relative;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .cart-drawer-progress-line-bg {
+    position: absolute;
+    top: 55px; /* aligned with center of dot */
+    left: 45px;
+    right: 45px;
+    height: 3px;
+    background-color: #e6e6e6;
+    z-index: 1;
+  }
+  .cart-drawer-progress-line-fill {
+    position: absolute;
+    top: 55px;
+    left: 45px;
+    right: 45px;
+    height: 3px;
+    background-color: #a72023; /* Brand Red */
+    z-index: 2;
+    transition: width 0.4s ease;
+  }
+  .cart-drawer-progress-steps {
+    position: relative;
+    height: 65px;
+    z-index: 3;
+  }
+  .cart-drawer-step {
+    position: absolute;
+    top: 20px;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 80px;
+  }
+  .step-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 2px solid #e6e6e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    color: transparent;
+    transition: all 0.3s ease;
+    margin-bottom: 8px;
+  }
+  .cart-drawer-step.active .step-dot {
+    background-color: #a72023;
+    border-color: #a72023;
+    color: #ffffff;
+  }
+  .step-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #888888;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .cart-drawer-step.active .step-label {
+    color: #333333;
+  }
+  .step-discount {
+    font-size: 11px;
+    font-weight: 800;
+    color: #888888;
+    position: absolute;
+    bottom: 35px; /* Above the dot */
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+  .cart-drawer-step.active .step-discount {
+    color: #a72023;
+  }
+  .step-discount-wrap {
+    position: absolute;
+    bottom: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .step-badge {
+    background-color: #2e8b57; /* sea green */
+    color: #ffffff;
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  /* Cart Drawer Items Redesign */
+  .cart-drawer .cart-items__table-row {
+    display: grid !important;
+    grid-template-columns: 80px 1fr auto !important;
+    grid-template-rows: auto auto !important;
+    grid-template-areas:
+      'media details price'
+      'media quantity price' !important;
+    align-items: center !important;
+    column-gap: 15px !important;
+    padding: 15px 20px !important;
+    margin-bottom: 0 !important;
+    border-bottom: 1px solid #f0f0f0 !important;
+  }
+
+  .cart-drawer .cart-items__media {
+    grid-area: media !important;
+    width: 80px !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    background-color: #f7f7f7 !important;
+  }
+
+  .cart-drawer .cart-items__details {
+    grid-area: details !important;
+    padding: 0 !important;
+  }
+
+  .cart-drawer .cart-items__title {
+    font-family: 'Anton', sans-serif !important;
+    font-size: 16px !important;
+    text-transform: uppercase !important;
+    color: #333333 !important;
+    text-decoration: none !important;
+    line-height: 1.2 !important;
+    display: block !important;
+    margin-bottom: 4px !important;
+  }
+
+  .cart-drawer .cart-items__variants {
+    font-size: 12px !important;
+    color: #666666 !important;
+    margin-bottom: 4px !important;
+  }
+
+  /* Style cart drawer quantity and remove button */
+  .cart-drawer .cart-items__quantity {
+    grid-area: quantity !important;
+    margin-top: 5px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .cart-drawer .quantity-selector {
+    border: 1px solid #e6e6e6 !important;
+    border-radius: 50px !important;
+    height: 32px !important;
+    width: 90px !important;
+    background-color: #f9f9f9 !important;
+  }
+
+  .cart-drawer .quantity-selector button {
+    width: 28px !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+  }
+
+  .cart-drawer .quantity-selector input {
+    font-size: 13px !important;
+  }
+
+  /* CSS Hack to turn Delete Icon into 'Remove' Text link */
+  .cart-drawer .cart-items__remove {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    box-shadow: none !important;
+    cursor: pointer !important;
+    display: inline-block !important;
+    margin: 0 !important;
+  }
+
+  .cart-drawer .cart-items__remove svg {
+    display: none !important;
+  }
+
+  .cart-drawer .cart-items__remove::after {
+    content: 'Remove' !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+    color: #888888 !important;
+    text-decoration: underline !important;
+    font-weight: 500 !important;
+    display: inline-block !important;
+  }
+
+  .cart-drawer .cart-items__remove:hover::after {
+    color: #a72023 !important;
+  }
+
+  .cart-drawer .cart-items__price {
+    grid-area: price !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    color: #333333 !important;
+    text-align: right !important;
+  }
+
+  /* Style cart summary in drawer */
+  .cart-drawer .cart__summary-container {
+    background-color: #ffffff !important;
+    border-top: 1px solid #f0f0f0 !important;
+    padding: 20px !important;
+    box-shadow: none !important;
+  }
+
+  .cart-drawer .cart__summary-totals {
+    border: none !important;
+    padding: 0 !important;
+    margin-bottom: 15px !important;
+  }
+
+  .cart-drawer .cart__total-label {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    color: #666666 !important;
+  }
+
+  .cart-drawer .cart__total-value {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 22px !important;
+    color: #a72023 !important;
+  }
+
+  .cart-drawer .cart__checkout-button {
+    background-color: #a72023 !important;
+    color: #ffffff !important;
+    border-radius: 50px !important;
+    height: 48px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    box-shadow: 0 4px 15px rgba(167, 32, 35, 0.15) !important;
+  }
+
+  .cart-drawer .cart__checkout-button:hover {
+    background-color: #8f1b1e !important;
   }
 {% endstylesheet %}
