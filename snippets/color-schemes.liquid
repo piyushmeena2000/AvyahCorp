@@ -135,11 +135,32 @@
     background: #ffffff !important;
   }
 
-  body.template-index [class*="193b272"] h2,
-  body.template-index [class*="ai-logo-carousel"] h2,
-  body.template-index [class*="193b272"] [class*="heading"],
-  body.template-index [class*="ai-logo-carousel"] [class*="heading"] {
-    color: #d52528 !important;
+  /* Product listing price font color - BLACK (#111111) */
+  body.template-index [class*="product-card"] .current-price,
+  body.template-index [class*="product-card"] [class*="price-row"] span.current-price,
+  body.template-index [class*="ai-product-card"] .current-price,
+  body.template-index [class*="ai-product-card"] [class*="price-row"] span.current-price,
+  body.template-index [class*="product-card"] [class*="price"] *,
+  body.template-index [class*="ai-product-card"] [class*="price"] * {
+    color: #111111 !important;
+  }
+
+  body.template-index [class*="product-card"] .compare-price,
+  body.template-index [class*="ai-product-card"] .compare-price {
+    color: #888888 !important;
+    text-decoration: line-through !important;
+  }
+
+  /* Discount Badge - Crimson Red (#d52528) with White Text */
+  body.template-index [class*="discount-badge"],
+  body.template-index [class*="discount"],
+  body.template-index [class*="badge--sale"],
+  body.template-index [class*="price__badge-sale"],
+  body.template-index [class*="product-card"] [class*="discount"],
+  body.template-index [class*="ai-product-card"] [class*="discount-badge"] {
+    background-color: #d52528 !important;
+    background: #d52528 !important;
+    color: #ffffff !important;
   }
 
   {% for scheme in settings.color_schemes -%}

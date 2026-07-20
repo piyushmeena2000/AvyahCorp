@@ -884,7 +884,7 @@ results-list .product-card .jdgm-prev-badge__text,
   margin-left: 0 !important;
 }
 
-/* 4. Price - Anton Font 20px */
+/* 4. Price - Anton / Inter Font 18-20px BLACK */
 results-list .product-card .price,
 .collection-wrapper .product-card .price,
 results-list .product-card .price *,
@@ -893,27 +893,43 @@ results-list .product-card .price *,
 .product-grid__item .price,
 .price-item,
 .price-item--sale,
-.price-item--regular {
+.price-item--regular,
+body.template-index [class*="product-card"] .current-price,
+body.template-index [class*="product-card"] [class*="price-row"] span.current-price,
+body.template-index [class*="ai-product-card"] .current-price,
+body.template-index [class*="ai-product-card"] [class*="price-row"] span.current-price,
+body.template-index [class*="product-card"] [class*="price"] *,
+body.template-index [class*="ai-product-card"] [class*="price"] * {
   order: 4 !important;
   color: #111111 !important;
-  font-family: 'Anton', sans-serif !important;
-  font-weight: 400 !important;
-  font-size: 20px !important;
+  font-weight: 700 !important;
   letter-spacing: 0.5px !important;
-  text-align: left !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  margin: 2px 0 10px 0 !important;
 }
 
 results-list .product-card .price--on-sale .price-item--regular,
 .collection-wrapper .product-card .price--on-sale .price-item--regular,
-.price--on-sale .price-item--regular {
+.price--on-sale .price-item--regular,
+body.template-index [class*="product-card"] .compare-price,
+body.template-index [class*="ai-product-card"] .compare-price {
   color: #888888 !important;
-  font-size: 15px !important;
+  font-size: 14px !important;
   text-decoration: line-through !important;
   margin-right: 6px !important;
+}
+
+/* Discount Badge - Crimson Red (#d52528) with White Text */
+body.template-index [class*="discount-badge"],
+body.template-index [class*="discount"],
+body.template-index [class*="badge--sale"],
+body.template-index [class*="price__badge-sale"],
+body.template-index [class*="product-card"] [class*="discount"],
+body.template-index [class*="ai-product-card"] [class*="discount-badge"] {
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+  color: #ffffff !important;
+  border-radius: 4px !important;
+  padding: 3px 8px !important;
+  font-weight: 800 !important;
 }
 
 /* 5. ADD TO CART Pill Button */
