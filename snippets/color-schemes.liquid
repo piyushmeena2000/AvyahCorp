@@ -1,4 +1,49 @@
 {% style %}
+  :root,
+  body.template-index,
+  body.template-index #MainContent,
+  body.template-index main,
+  body.template-index .content-for-layout,
+  body.template-index .shopify-section,
+  body.template-index .shopify-section > div,
+  body.template-index section,
+  body.template-index .section,
+  body.template-index [class*="section"],
+  body.template-index .section-background,
+  body.template-index [class*="color-scheme"],
+  body.template-index [class*="color-scheme"] > div,
+  body.template-index [class*="scheme-"],
+  body.template-index [class*="ai_gen_block"],
+  body.template-index .text-block,
+  body.template-index .rich-text {
+    --color-background: 213, 37, 40 !important;
+    --color-background-rgb: 213, 37, 40 !important;
+    --gradient-background: #d52528 !important;
+    background-color: #d52528 !important;
+    background: #d52528 !important;
+  }
+
+  body.template-index h1,
+  body.template-index h2,
+  body.template-index h3,
+  body.template-index h4,
+  body.template-index h5,
+  body.template-index h6,
+  body.template-index p,
+  body.template-index span:not(.jdgm-prev-badge__text),
+  body.template-index .rte,
+  body.template-index .rte * {
+    color: #ffffff !important;
+  }
+
+  body.template-index [class*="ai_gen_block_200d848"] [class*="card"],
+  body.template-index [class*="ai_gen_block_200d848"] div[class*="item"],
+  body.template-index [class*="ai_gen_block_200d848"] > div > div {
+    background-color: #a72023 !important;
+    background: #a72023 !important;
+    color: #ffffff !important;
+  }
+
   {% for scheme in settings.color_schemes -%}
     {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
     {% if forloop.index == 1 %}
@@ -19,18 +64,18 @@
       {% assign opacity_30_60 = 0.30 %}
     {% endif %}
     .color-{{ scheme.id }} {
-        --color-background: rgb({{ scheme.settings.background.rgba }});
-        /* RGB values only to apply different opacities - Relative color values are not supported in iOS < 16.4 */
-        --color-background-rgb: {{ scheme.settings.background.rgb }};
+        --color-background: 213, 37, 40;
+        --color-background-rgb: 213, 37, 40;
+        --gradient-background: #d52528;
         --opacity-5-15: {{ opacity_5_15 }};
         --opacity-10-25: {{ opacity_10_25 }};
         --opacity-35-55: {{ opacity_35_55 }};
         --opacity-40-60: {{ opacity_40_60 }};
         --opacity-30-60: {{ opacity_30_60 }};
-        --color-foreground: rgb({{ scheme.settings.foreground.rgba }});
-        --color-foreground-rgb: {{ scheme.settings.foreground.rgb }};
-        --color-foreground-heading: rgb({{ scheme.settings.foreground_heading.rgba }});
-        --color-foreground-heading-rgb: {{ scheme.settings.foreground_heading.rgb }};
+        --color-foreground: 255, 255, 255;
+        --color-foreground-rgb: 255, 255, 255;
+        --color-foreground-heading: 255, 255, 255;
+        --color-foreground-heading-rgb: 255, 255, 255;
         --color-primary: rgb({{ scheme.settings.primary.rgba }});
         --color-primary-rgb: {{ scheme.settings.primary.rgb }};
         --color-primary-hover: rgb({{ scheme.settings.primary_hover.rgba }});
