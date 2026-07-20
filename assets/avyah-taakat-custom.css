@@ -977,18 +977,39 @@ results-list .product-badges__badge,
 }
 
 /* ==========================================================================
-   HOMEPAGE BRAND CRIMSON RED BACKGROUND
+   HOMEPAGE BRAND CRIMSON RED BACKGROUND & WHITE TEXT OVERRIDES
    ========================================================================== */
 body.template-index,
 body.template-index #MainContent,
 body.template-index .content-for-layout,
+body.template-index .shopify-section,
+body.template-index .section,
+body.template-index [class*="section"],
+body.template-index .section-background,
+body.template-index .color-scheme-1,
+body.template-index .color-scheme-2,
+body.template-index .color-scheme-3,
+body.template-index .color-scheme-4,
+body.template-index .color-scheme-5,
 main[data-template="index"],
-main[data-template="index"] .shopify-section {
+main[data-template="index"] .shopify-section,
+main[data-template="index"] .section-background {
   background-color: #d52528 !important;
 }
 
-body.template-index .section-background {
-  background-color: #d52528 !important;
+/* Force text inside homepage sections to white */
+body.template-index h1,
+body.template-index h2,
+body.template-index h3,
+body.template-index h4,
+body.template-index p,
+body.template-index .rte,
+body.template-index .rte *,
+main[data-template="index"] p,
+main[data-template="index"] h1,
+main[data-template="index"] h2,
+main[data-template="index"] h3 {
+  color: #ffffff !important;
 }
 
 
