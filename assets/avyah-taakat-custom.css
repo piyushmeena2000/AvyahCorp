@@ -1119,7 +1119,37 @@ body.template-index .product-grid__item:nth-child(5n+3) .card-gallery { backgrou
 body.template-index .product-grid__item:nth-child(5n+4) .card-gallery { background-color: #e0f2e7 !important; }
 body.template-index .product-grid__item:nth-child(5n+5) .card-gallery { background-color: #f7e6e7 !important; }
 
-/* Partner Logos ("Also Available At") contrast pill background */
+/* ==========================================================================
+   CUSTOMER REVIEWS SECTION - BLACK TEXT ON WHITE CARDS
+   ========================================================================== */
+body.template-index [class*="ai_gen_block_c24781f"] [class*="card"],
+body.template-index [class*="ai_gen_block_c24781f"] div[class*="item"],
+body.template-index [class*="ai_gen_block_c24781f"] [class*="testimonial"] {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #111111 !important;
+}
+
+body.template-index [class*="ai_gen_block_c24781f"] [class*="card"] *,
+body.template-index [class*="ai_gen_block_c24781f"] div[class*="item"] *,
+body.template-index [class*="ai_gen_block_c24781f"] [class*="testimonial"] *,
+body.template-index [class*="ai_gen_block_c24781f"] p,
+body.template-index [class*="ai_gen_block_c24781f"] h3,
+body.template-index [class*="ai_gen_block_c24781f"] h4,
+body.template-index [class*="ai_gen_block_c24781f"] h5,
+body.template-index [class*="ai_gen_block_c24781f"] span,
+body.template-index [class*="ai_gen_block_c24781f"] div,
+body.template-index [class*="ai_gen_block_c24781f"] b,
+body.template-index [class*="ai_gen_block_c24781f"] strong {
+  color: #111111 !important;
+}
+
+/* Maintain Section Title & Subtitle in White on Red Background */
+body.template-index [class*="ai_gen_block_c24781f"] > div > h2,
+body.template-index [class*="ai_gen_block_c24781f"] > div > p,
+body.template-index [class*="ai_gen_block_c24781f"] h2 {
+  color: #ffffff !important;
+}
 body.template-index [class*="partner"],
 body.template-index [class*="available"],
 body.template-index [class*="logo-list"],
