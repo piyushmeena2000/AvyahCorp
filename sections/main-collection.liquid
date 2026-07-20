@@ -32,6 +32,14 @@
 >
   {% render 'skip-to-content-link', href: '#ResultsList', text: 'accessibility.skip_to_results_list' %}
 
+  <!-- PerfectSnacks Collection Sub-Navigation Bar -->
+  <div class="perfect-collection-subnav">
+    <a href="/collections/all" class="{% if collection.handle == 'all' or collection.handle == blank %}active{% endif %}">ALL SIZES</a>
+    <a href="/collections/taakat" class="{% if collection.handle == 'taakat' %}active{% endif %}">FULL SIZE</a>
+    <a href="/collections/snackbox" class="{% if collection.handle == 'snackbox' %}active{% endif %}">SNACK SIZE</a>
+    <a href="/collections/combos" class="{% if collection.handle == 'combos' %}active{% endif %}">MINI SIZE</a>
+  </div>
+
   <div
     class="collection-wrapper grid gap-style"
   >

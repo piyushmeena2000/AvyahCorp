@@ -437,11 +437,240 @@
   }
 }
 
-/* 7. Column Width Balance Overrides */
-@media screen and (min-width: 750px) {
-  .taakat-custom-product-page .product-information__grid.product-information--media-left {
-    grid-template-columns: 1.2fr 0.8fr !important;
-    gap: 40px !important;
-  }
+
+
+/* ==========================================================================
+   PERFECTSNACKS COLLECTION LISTING OVERRIDES
+   ========================================================================== */
+
+/* Force Collection Page Background & Container to Clean Pure White */
+body:has(.product-grid-container),
+.product-grid-container,
+.collection-wrapper,
+results-list,
+.section-background:has(+ results-list),
+.main-collection-grid {
+  background-color: #ffffff !important;
+  color: #3d2b27 !important;
 }
+
+/* Ensure section backgrounds on collection templates are white */
+.section-background.color-scheme-1,
+.section-background.color-scheme-2,
+.section-background.color-scheme-3,
+.section-background.color-scheme-4,
+.section-background.color-scheme-5 {
+  background-color: #ffffff !important;
+}
+
+/* Collection Hero Header & Titles */
+.collection-hero,
+[data-section-type="collection-hero"],
+.collection-header {
+  background-color: #ffffff !important;
+  padding: 40px 20px 20px 20px !important;
+  text-align: center !important;
+}
+
+.collection-hero h1,
+.collection-hero__title,
+.collection-title,
+.collection-heading-text,
+results-list ~ .collection-title,
+.section:has(.collection-wrapper) h1,
+.section:has(.collection-wrapper) h2 {
+  font-family: 'Anton', sans-serif !important;
+  font-size: 52px !important;
+  text-transform: uppercase !important;
+  color: #3d2b27 !important;
+  text-align: center !important;
+  letter-spacing: 0.5px !important;
+  margin: 0 auto 10px auto !important;
+  line-height: 1.1 !important;
+}
+
+.collection-hero__description,
+.collection-description,
+.section:has(.collection-wrapper) .rte {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 15px !important;
+  color: #6a5e5c !important;
+  text-align: center !important;
+  max-width: 680px !important;
+  margin: 0 auto 24px auto !important;
+  line-height: 1.5 !important;
+}
+
+/* Sub-Navigation Links Bar under Collection Title (ALL SIZES | FULL SIZE | SNACK SIZE | MINI SIZE) */
+.perfect-collection-subnav {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 28px !important;
+  margin: 15px 0 35px 0 !important;
+  flex-wrap: wrap !important;
+}
+
+.perfect-collection-subnav a {
+  font-family: 'Anton', sans-serif !important;
+  font-size: 17px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  color: #8c7f7c !important;
+  text-decoration: none !important;
+  padding-bottom: 4px !important;
+  border-bottom: 2px solid transparent !important;
+  transition: color 0.2s ease, border-color 0.2s ease !important;
+}
+
+.perfect-collection-subnav a.active,
+.perfect-collection-subnav a:hover {
+  color: #3d2b27 !important;
+  border-bottom-color: #3d2b27 !important;
+}
+
+/* Collection Filter Bar (Availability, Price, Sort) */
+facets-form,
+.facets-container,
+.facets__wrapper,
+.facets-block-wrapper,
+.facets {
+  background-color: #ffffff !important;
+  color: #3d2b27 !important;
+}
+
+.facets__label,
+.facet-checkbox,
+.facets__summary,
+.facets__item,
+.facet-filters__label,
+.facet-filters__summary {
+  color: #3d2b27 !important;
+  font-weight: 600 !important;
+}
+
+.facet-filters__sort,
+.facets__summary-button {
+  border: 1.5px solid #e1dcd7 !important;
+  border-radius: 30px !important;
+  padding: 8px 16px !important;
+  background-color: #ffffff !important;
+  color: #3d2b27 !important;
+}
+
+/* Product Grid Gap & Cards Layout */
+results-list .product-grid,
+.collection-wrapper .product-grid {
+  gap: 36px 24px !important;
+}
+
+results-list .product-grid__item,
+.collection-wrapper .product-grid__item {
+  background: transparent !important;
+}
+
+/* Product Card Gallery Image Containers (Pastel Rounded Cards) */
+results-list .card-gallery,
+.collection-wrapper .card-gallery {
+  border-radius: 24px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease !important;
+  border: none !important;
+}
+
+/* Alternating Pastel Background Colors matching PerfectSnacks collection cards */
+results-list .product-grid__item:nth-child(5n+1) .card-gallery,
+.collection-wrapper .product-grid__item:nth-child(5n+1) .card-gallery {
+  background-color: #d2ebed !important; /* Soft Pastel Teal / Blue */
+}
+
+results-list .product-grid__item:nth-child(5n+2) .card-gallery,
+.collection-wrapper .product-grid__item:nth-child(5n+2) .card-gallery {
+  background-color: #e2dcf2 !important; /* Soft Pastel Lavender */
+}
+
+results-list .product-grid__item:nth-child(5n+3) .card-gallery,
+.collection-wrapper .product-grid__item:nth-child(5n+3) .card-gallery {
+  background-color: #d8edd8 !important; /* Soft Pastel Mint Green */
+}
+
+results-list .product-grid__item:nth-child(5n+4) .card-gallery,
+.collection-wrapper .product-grid__item:nth-child(5n+4) .card-gallery {
+  background-color: #fef0d7 !important; /* Soft Golden Cream */
+}
+
+results-list .product-grid__item:nth-child(5n+5) .card-gallery,
+.collection-wrapper .product-grid__item:nth-child(5n+5) .card-gallery {
+  background-color: #fce4ec !important; /* Soft Rose Coral */
+}
+
+/* Product Card Image Padding & Hover Scale Effect */
+results-list .card-gallery img,
+.collection-wrapper .card-gallery img,
+results-list .card-gallery .product-media-container img,
+.collection-wrapper .card-gallery .product-media-container img {
+  padding: 24px 20px !important;
+  object-fit: contain !important;
+  border-radius: 24px !important;
+  transition: transform 0.35s ease !important;
+}
+
+results-list .card-gallery:hover img,
+.collection-wrapper .card-gallery:hover img {
+  transform: scale(1.06) !important;
+}
+
+/* Product Card Information (Below Image) */
+results-list .product-card__content,
+.collection-wrapper .product-card__content {
+  background: transparent !important;
+  padding: 14px 4px 0 4px !important;
+}
+
+results-list .product-card [class*="product-title"],
+.collection-wrapper .product-card [class*="product-title"],
+results-list .product-card .product-title,
+.collection-wrapper .product-card .product-title,
+results-list .product-card h3,
+.collection-wrapper .product-card h3 {
+  font-family: 'Anton', sans-serif !important;
+  font-size: 20px !important;
+  line-height: 1.25 !important;
+  color: #3d2b27 !important;
+  text-transform: uppercase !important;
+  margin-top: 8px !important;
+  margin-bottom: 6px !important;
+  letter-spacing: 0.3px !important;
+}
+
+results-list .product-card .price,
+.collection-wrapper .product-card .price,
+results-list .product-card .price *,
+.collection-wrapper .product-card .price * {
+  color: #3d2b27 !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+}
+
+results-list .product-card .price--on-sale .price-item--regular,
+.collection-wrapper .product-card .price--on-sale .price-item--regular {
+  color: #999999 !important;
+  text-decoration: line-through !important;
+  margin-right: 6px !important;
+}
+
+/* Badge Overrides on Collection Cards */
+results-list .product-badges__badge,
+.collection-wrapper .product-badges__badge {
+  background-color: #d52528 !important;
+  color: #ffffff !important;
+  font-family: 'Anton', sans-serif !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  border-radius: 50px !important;
+  padding: 4px 12px !important;
+  letter-spacing: 0.5px !important;
+}
+
 
