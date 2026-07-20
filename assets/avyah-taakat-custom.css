@@ -704,7 +704,7 @@ main-collection,
   overflow: hidden !important;
   clear: both !important;
   line-height: 0 !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+  background-color: #d52528 !important; /* Crimson Red Seamless Backdrop */
 }
 
 .avyah-collection-hero-banner__link {
@@ -712,20 +712,21 @@ main-collection,
   width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
+  line-height: 0 !important;
 }
 
 .avyah-collection-hero-banner__image,
 .avyah-collection-hero-banner img {
-  width: 100vw !important;
-  max-width: 100vw !important;
+  width: 100% !important;
+  max-width: 100% !important;
   height: auto !important;
-  min-height: 180px !important;
-  max-height: 480px !important;
+  min-height: initial !important;
+  max-height: initial !important;
   display: block !important;
-  object-fit: cover !important;
+  object-fit: contain !important;
   border: none !important;
   border-radius: 0 !important;
-  margin: 0 !important;
+  margin: 0 auto !important;
   padding: 0 !important;
 }
 
