@@ -592,21 +592,13 @@ facets-form,
 .facet-filters__summary {
   color: #000000 !important;
   font-weight: 600 !important;
-}
-
-.facet-filters__sort,
-.facets__summary-button {
-  border: 1.5px solid #e1dcd7 !important;
-  border-radius: 30px !important;
-  padding: 8px 16px !important;
-  background-color: #ffffff !important;
-  color: #000000 !important;
-}
-
-.facet-filters__sort select,
-.facet-filters__sort option {
-  color: #000000 !important;
-  background-color: #ffffff !important;
+/* Completely Hide Filter & Sort Bar (Availability, Price, Sort) */
+.facets-container,
+.facets,
+.facet-filters,
+.facets-wrapper,
+[data-block-id="filters"] {
+  display: none !important;
 }
 
 /* Product Grid Gap & Cards Layout */

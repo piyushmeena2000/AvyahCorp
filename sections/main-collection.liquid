@@ -58,12 +58,6 @@
   <div
     class="collection-wrapper grid gap-style"
   >
-    {% content_for 'block',
-      type: 'filters',
-      id: 'filters',
-      results: collection,
-      results_size: collection.products_count
-    %}
 
     {% assign products_per_page = 24 %}
 
