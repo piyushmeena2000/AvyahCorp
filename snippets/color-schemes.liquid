@@ -71,44 +71,56 @@
   }
 
 /* ==========================================================================
-   CUSTOMER REVIEWS SECTION - CRIMSON RED BACKGROUND (#d52528) & WHITE TITLES
+   CUSTOMER REVIEWS SECTION - RED SECTION BG, SOLID PURE WHITE CARDS
    ========================================================================== */
   body.template-index #shopify-section-blocks_zFCw9K,
-  body.template-index #shopify-section-blocks_zFCw9K *,
   body.template-index .shopify-section:has([class*="c24781f"]),
   body.template-index .section:has([class*="c24781f"]),
   body.template-index [class*="c24781f"],
   body.template-index [class*="c24781f"] [class*="container"],
-  body.template-index [class*="c24781f"] [class*="header"] {
+  body.template-index [class*="c24781f"] [class*="header"],
+  body.template-index [class*="c24781f"] [class*="track-wrapper"] {
     background-color: #d52528 !important;
     background: #d52528 !important;
   }
 
-  /* Force Section Title and Subtitle to WHITE */
+  /* Section Title & Subtitle - WHITE text */
   body.template-index [class*="c24781f"] [class*="title"],
   body.template-index [class*="c24781f"] [class*="subtitle"],
   body.template-index [class*="c24781f"] h2,
-  body.template-index [class*="c24781f"] p.ai-testimonial-carousel__subtitle-c24781f,
   body.template-index [class*="c24781f"] [class*="header"] * {
     color: #ffffff !important;
+    background: transparent !important;
+    background-color: transparent !important;
   }
 
-  /* Review Cards background WHITE and text BLACK */
-  body.template-index [class*="c24781f"] [class*="card"] {
+  /* ONLY Review Cards & all elements inside them - 100% SOLID WHITE BACKGROUND */
+  body.template-index [class*="c24781f"] [class*="card"],
+  body.template-index [class*="c24781f"] [class*="card"] *,
+  body.template-index [class*="c24781f"] [class*="slide"] > div,
+  body.template-index [class*="c24781f"] [class*="slide"] > div * {
     background-color: #ffffff !important;
     background: #ffffff !important;
   }
 
+  /* Text colors inside cards */
   body.template-index [class*="c24781f"] [class*="card"] p,
   body.template-index [class*="c24781f"] [class*="card"] span,
   body.template-index [class*="c24781f"] [class*="card"] b,
   body.template-index [class*="c24781f"] [class*="card"] strong,
-  body.template-index [class*="c24781f"] [class*="card"] div {
-    color: #111111 !important;
+  body.template-index [class*="c24781f"] [class*="card"] div,
+  body.template-index [class*="c24781f"] [class*="quote"],
+  body.template-index [class*="c24781f"] [class*="quote"] * {
+    color: #333333 !important;
   }
 
   body.template-index [class*="c24781f"] [class*="card"] [class*="name"] {
     color: #d52528 !important;
+  }
+
+  body.template-index [class*="c24781f"] [class*="card"] [class*="role"],
+  body.template-index [class*="c24781f"] [class*="card"] [class*="role"] * {
+    color: #666666 !important;
   }
 
   {% for scheme in settings.color_schemes -%}
