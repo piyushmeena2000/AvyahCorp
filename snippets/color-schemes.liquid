@@ -206,6 +206,27 @@
     color: #ffffff !important;
   }
 
+  /* Product Filter Category Tabs (RANGE, SNACKBOX, COMBO) */
+  body.template-index [class*="ai-product-tab-btn"] {
+    background-color: #a72023 !important;
+    background: #a72023 !important;
+    color: #ffffff !important;
+    border: none !important;
+  }
+
+  body.template-index [class*="ai-product-tab-btn"]:hover {
+    background-color: #921b1e !important;
+    background: #921b1e !important;
+    color: #ffffff !important;
+  }
+
+  body.template-index [class*="ai-product-tab-btn"].active {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: none !important;
+  }
+
   {% for scheme in settings.color_schemes -%}
     {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
     {% if forloop.index == 1 %}

@@ -430,30 +430,34 @@
   }
 
   .ai-product-tab-btn-{{ ai_gen_id }} {
-    background-color: #ffffff;
-    border: 1px solid #d5d5d5;
-    border-radius: 6px; /* Rectangular instead of pill/circle */
+    background-color: #a72023 !important; /* Dark Crimson Red default */
+    background: #a72023 !important;
+    border: none !important;
+    border-radius: 8px;
     font-family: 'Anton', sans-serif;
     font-size: 18px;
     font-weight: 400;
     text-transform: uppercase;
-    color: #000000;
+    color: #ffffff !important; /* White text default */
     cursor: pointer;
     padding: 8px 24px;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
     letter-spacing: 0.5px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   .ai-product-tab-btn-{{ ai_gen_id }}:hover {
-    background-color: #f7f7f7;
+    background-color: #921b1e !important;
+    background: #921b1e !important;
+    color: #ffffff !important;
   }
 
   .ai-product-tab-btn-{{ ai_gen_id }}.active {
-    background-color: #a72023; /* Active Red */
-    color: #ffffff;
-    border-color: #a72023;
-    box-shadow: 0 4px 10px rgba(167, 32, 35, 0.2);
+    background-color: #ffffff !important; /* Active White background */
+    background: #ffffff !important;
+    color: #000000 !important; /* Active Black font */
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   }
 
   @media screen and (max-width: 749px) {

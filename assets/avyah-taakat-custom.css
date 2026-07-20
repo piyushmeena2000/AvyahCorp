@@ -976,6 +976,28 @@ body.template-index [class*="ai-product-card"] .discount-badge * {
 }
 
 /* 5. ADD TO CART Pill Button */
+/* Product Filter Category Tabs (RANGE, SNACKBOX, COMBO) */
+body.template-index [class*="ai-product-tab-btn"] {
+  background-color: #a72023 !important;
+  background: #a72023 !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+body.template-index [class*="ai-product-tab-btn"]:hover {
+  background-color: #921b1e !important;
+  background: #921b1e !important;
+  color: #ffffff !important;
+}
+
+body.template-index [class*="ai-product-tab-btn"].active {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
 .avyah-card-quick-add-form {
   order: 5 !important;
   width: 100% !important;
