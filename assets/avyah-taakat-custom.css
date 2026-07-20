@@ -1120,41 +1120,42 @@ body.template-index .product-grid__item:nth-child(5n+4) .card-gallery { backgrou
 body.template-index .product-grid__item:nth-child(5n+5) .card-gallery { background-color: #f7e6e7 !important; }
 
 /* ==========================================================================
-   CUSTOMER REVIEWS SECTION - BLACK TEXT ON WHITE CARDS
+   CUSTOMER REVIEWS SECTION - CRIMSON RED SECTION BG, WHITE CARDS WITH BLACK TEXT
    ========================================================================== */
+body.template-index [class*="c24781f"],
+body.template-index [class*="c24781f"] > div {
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+}
+
+/* Section Title & Subtitle - WHITE text */
+body.template-index [class*="c24781f"] h2,
+body.template-index [class*="c24781f"] h3,
+body.template-index [class*="c24781f"] p.subheading,
+body.template-index [class*="c24781f"] > div > h2,
+body.template-index [class*="c24781f"] > div > p,
+body.template-index [class*="c24781f"] > div > div > h2,
+body.template-index [class*="c24781f"] > div > div > p,
+body.template-index [class*="c24781f"] .heading,
+body.template-index [class*="c24781f"] .subheading {
+  color: #ffffff !important;
+}
+
+/* ONLY individual Review Cards - White card background & Black text */
 body.template-index [class*="c24781f"] [class*="card"],
-body.template-index [class*="c24781f"] div[class*="item"],
 body.template-index [class*="c24781f"] [class*="testimonial"],
-body.template-index [class*="c24781f"] > div > div > div {
+body.template-index [class*="c24781f"] [class*="slide"] > div,
+body.template-index [class*="c24781f"] [class*="slider"] > div {
   background-color: #ffffff !important;
   background: #ffffff !important;
   color: #111111 !important;
 }
 
 body.template-index [class*="c24781f"] [class*="card"] *,
-body.template-index [class*="c24781f"] div[class*="item"] *,
 body.template-index [class*="c24781f"] [class*="testimonial"] *,
-body.template-index [class*="c24781f"] p,
-body.template-index [class*="c24781f"] h1,
-body.template-index [class*="c24781f"] h3,
-body.template-index [class*="c24781f"] h4,
-body.template-index [class*="c24781f"] h5,
-body.template-index [class*="c24781f"] h6,
-body.template-index [class*="c24781f"] span,
-body.template-index [class*="c24781f"] div,
-body.template-index [class*="c24781f"] b,
-body.template-index [class*="c24781f"] strong,
-body.template-index [class*="c24781f"] em {
+body.template-index [class*="c24781f"] [class*="slide"] > div *,
+body.template-index [class*="c24781f"] [class*="slider"] > div * {
   color: #111111 !important;
-}
-
-/* Maintain Section Title & Subtitle in White on Red Background */
-body.template-index [class*="c24781f"] > div > h2,
-body.template-index [class*="c24781f"] > div > p,
-body.template-index [class*="c24781f"] h2,
-body.template-index [class*="c24781f"] .heading,
-body.template-index [class*="c24781f"] .subheading {
-  color: #ffffff !important;
 }
 body.template-index [class*="partner"],
 body.template-index [class*="available"],
