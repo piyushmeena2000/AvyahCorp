@@ -917,19 +917,28 @@ body.template-index [class*="ai-product-card"] .compare-price {
   margin-right: 6px !important;
 }
 
-/* Discount Badge - Crimson Red (#d52528) with White Text */
+/* Discount Badge - Crimson Red (#d52528) with WHITE Text */
 body.template-index [class*="discount-badge"],
 body.template-index [class*="discount"],
 body.template-index [class*="badge--sale"],
 body.template-index [class*="price__badge-sale"],
 body.template-index [class*="product-card"] [class*="discount"],
-body.template-index [class*="ai-product-card"] [class*="discount-badge"] {
+body.template-index [class*="ai-product-card"] [class*="discount-badge"],
+body.template-index [class*="product-card"] .discount-badge,
+body.template-index [class*="ai-product-card"] .discount-badge {
   background-color: #d52528 !important;
   background: #d52528 !important;
   color: #ffffff !important;
   border-radius: 4px !important;
   padding: 3px 8px !important;
   font-weight: 800 !important;
+}
+
+body.template-index [class*="discount-badge"] *,
+body.template-index [class*="discount"] *,
+body.template-index [class*="product-card"] .discount-badge *,
+body.template-index [class*="ai-product-card"] .discount-badge * {
+  color: #ffffff !important;
 }
 
 /* 5. ADD TO CART Pill Button */
