@@ -223,13 +223,21 @@
   }
 
   .ai-product-card-reviews-{{ ai_gen_id }} .stars {
-    color: #ffd700; /* Yellow Stars like SuperYou */
+    color: #ffb800 !important; /* Vivid Gold Stars */
     font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  .ai-product-card-reviews-{{ ai_gen_id }} .rating-num {
+    color: #111111 !important;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
   }
 
   .ai-product-card-reviews-{{ ai_gen_id }} .count {
-    color: #333333;
-    font-size: 11px;
+    color: #666666 !important;
+    font-size: 12px;
     font-weight: 600;
     font-family: 'Inter', sans-serif;
   }
@@ -562,8 +570,9 @@
             <div class="ai-product-card-content-{{ ai_gen_id }}">
               <div class="ai-product-card-reviews-{{ ai_gen_id }}">
                 <span class="stars">★★★★★</span>
+                <span class="rating-num">4.9</span>
                 <span class="count">
-                  {% assign ratings = "14,61,2172,934,85" | split: "," %}
+                  {% assign ratings = "1,420,2,172,934,1,850,3,110" | split: "," %}
                   {% assign rating_index = forloop.index0 | modulo: 5 %}
                   ({{ ratings[rating_index] }})
                 </span>
@@ -635,7 +644,8 @@
             <div class="ai-product-card-content-{{ ai_gen_id }}">
               <div class="ai-product-card-reviews-{{ ai_gen_id }}">
                 <span class="stars">★★★★★</span>
-                <span class="count">({{ i | times: 17 | plus: 8 }})</span>
+                <span class="rating-num">4.9</span>
+                <span class="count">({{ i | times: 184 | plus: 120 }})</span>
               </div>
               <h3 class="ai-product-card-title-{{ ai_gen_id }}">Sample Product Title</h3>
               <p class="ai-product-card-specs-{{ ai_gen_id }}">5g Protein* • 10 Bars</p>
