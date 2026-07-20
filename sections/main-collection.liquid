@@ -58,7 +58,7 @@
     <a href="/collections/mast-mix" class="{% if collection.handle == 'mast-mix' or collection.handle == 'mastmix' %}active{% endif %}">MAST MIX</a>
     <a href="/collections/king" class="{% if collection.handle == 'king' %}active{% endif %}">KING</a>
     <a href="/collections/combos" class="{% if collection.handle == 'combos' or collection.handle == 'combo' %}active{% endif %}">COMBOS</a>
-    <a href="/collections/all" class="{% if collection.handle == 'snackbox' or collection.handle == 'snack-box' or collection.handle == 'all' %}active{% endif %}">SNACKBOX</a>
+    <a href="/collections/snackbox" class="{% if collection.handle == 'snackbox' or collection.handle == 'snack-box' %}active{% endif %}">SNACKBOX</a>
   </div>
 
   <div
@@ -77,9 +77,26 @@
       {% assign products_per_page = section.settings.products_per_page %}
     {% endif %}
 
+    {% assign display_products = collection.products %}
+    {% if collection.handle == 'snackbox' and display_products.size == 0 %}
+      {% assign snack_items = '' | split: '' %}
+      {% for prod in collections['all'].products %}
+        {% assign title_low = prod.title | downcase %}
+        {% if title_low contains 'snack box' or title_low contains 'snackbox' or title_low contains 'great indian' %}
+          {% assign single_prod = prod | slice: 0, 1 %}
+          {% assign snack_items = snack_items | concat: single_prod %}
+        {% endif %}
+      {% endfor %}
+      {% if snack_items.size > 0 %}
+        {% assign display_products = snack_items %}
+      {% else %}
+        {% assign display_products = collections['all'].products %}
+      {% endif %}
+    {% endif %}
+
     {% paginate collection.products by products_per_page %}
       {% capture children %}
-        {% for product in collection.products %}
+        {% for product in display_products %}
           <li
             id="{{ section.id }}-{{ product.id }}"
             class="product-grid__item product-grid__item--{{ forloop.index0 }}"
@@ -97,7 +114,7 @@
       {% render 'product-grid',
         section: section,
         children: children,
-        products: collection.products,
+        products: display_products,
         paginate: paginate,
         enable_infinite_scroll: section.settings.enable_infinite_scroll
       %}

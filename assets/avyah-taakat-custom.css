@@ -683,29 +683,32 @@ results-list .product-grid__item:nth-child(5n+5) .card-gallery,
 }
 
 /* ==========================================================================
-   AVYAH COLLECTION HERO BANNER ("NO MAIDA • NO PALM OIL • NO REFINED SUGAR")
+   AVYAH COLLECTION HERO BANNER (FULL WIDTH EDGE-TO-EDGE, NO WHITE GAPS)
    ========================================================================== */
 .avyah-collection-hero-banner {
   width: 100% !important;
-  max-width: 1280px !important;
-  margin: 30px auto 30px auto !important;
-  padding: 0 20px !important;
+  max-width: 100% !important;
+  margin: 0 0 35px 0 !important;
+  padding: 0 !important;
   position: relative !important;
+  left: 0 !important;
+  right: 0 !important;
   clear: both !important;
   z-index: 1 !important;
 }
 
 .avyah-collection-hero-banner__inner {
   background: linear-gradient(135deg, #d52528 0%, #a72023 100%) !important;
-  border-radius: 24px !important;
-  padding: 36px 40px !important;
+  border-radius: 0 !important;
+  padding: 40px 6% !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
   gap: 30px !important;
-  box-shadow: 0 12px 35px rgba(213, 37, 40, 0.25) !important;
+  box-shadow: none !important;
   overflow: hidden !important;
   position: relative !important;
+  width: 100% !important;
 }
 
 .avyah-collection-hero-banner__content {
@@ -850,7 +853,7 @@ results-list .card-gallery:hover img,
   transform: scale(1.06) !important;
 }
 
-/* Product Card Information (Below Image) */
+/* Product Card Information Alignment (Below Image) */
 results-list .product-card__content,
 .collection-wrapper .product-card__content {
   background: transparent !important;
@@ -858,6 +861,7 @@ results-list .product-card__content,
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
+  text-align: left !important;
   overflow: visible !important;
 }
 
@@ -872,23 +876,61 @@ results-list .product-card a,
   font-family: 'Anton', sans-serif !important;
   font-size: 18px !important;
   line-height: 1.3 !important;
-  color: #000000 !important; /* Pure Black */
+  color: #000000 !important;
   text-transform: uppercase !important;
+  text-align: left !important;
   margin: 6px 0 4px 0 !important;
   letter-spacing: 0.3px !important;
   word-break: break-word !important;
   white-space: normal !important;
   overflow: visible !important;
+  width: 100% !important;
+}
+
+/* Review Rating Stars Alignment Fix */
+results-list .product-card .jdgm-widget,
+.collection-wrapper .product-card .jdgm-widget,
+results-list .product-card .jdgm-prev-badge,
+.collection-wrapper .product-card .jdgm-prev-badge,
+results-list .product-card [data-block-id*="review"],
+.collection-wrapper .product-card [data-block-id*="review"],
+results-list .product-card [class*="review"],
+.collection-wrapper .product-card [class*="review"],
+results-list .product-card [class*="rating"],
+.collection-wrapper .product-card [class*="rating"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: left !important;
+  margin: 4px 0 6px 0 !important;
+  width: 100% !important;
+}
+
+results-list .product-card .jdgm-prev-badge__stars,
+.collection-wrapper .product-card .jdgm-prev-badge__stars {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin-right: 4px !important;
+  color: #f59e0b !important;
+}
+
+results-list .product-card .jdgm-prev-badge__text,
+.collection-wrapper .product-card .jdgm-prev-badge__text {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #333333 !important;
 }
 
 results-list .product-card .price,
 .collection-wrapper .product-card .price,
 results-list .product-card .price *,
 .collection-wrapper .product-card .price * {
-  color: #000000 !important; /* Pure Black */
+  color: #000000 !important;
   font-family: 'Inter', sans-serif !important;
   font-weight: 700 !important;
   font-size: 15px !important;
+  text-align: left !important;
 }
 
 results-list .product-card .price--on-sale .price-item--regular,
