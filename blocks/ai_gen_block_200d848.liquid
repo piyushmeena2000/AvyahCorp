@@ -93,12 +93,28 @@
   }
 
   .ai-feature-card-{{ ai_gen_id }}:hover {
-    transform: none;
-    box-shadow: none;
+    transform: translateY(-4px);
   }
 
   .ai-feature-card-{{ ai_gen_id }}:hover::before {
-    background-color: transparent !important;
+    background-color: #ffffff !important;
+    opacity: 1 !important;
+  }
+
+  .ai-feature-card-{{ ai_gen_id }}:hover .ai-feature-card-title-{{ ai_gen_id }} {
+    color: #d52528 !important;
+    background: transparent !important;
+  }
+
+  .ai-feature-card-{{ ai_gen_id }}:hover .ai-feature-card-description-{{ ai_gen_id }} {
+    color: #d52528 !important;
+    opacity: 1 !important;
+    background: transparent !important;
+  }
+
+  .ai-feature-card-{{ ai_gen_id }}:hover .ai-feature-card-icon-{{ ai_gen_id }} img,
+  .ai-feature-card-{{ ai_gen_id }}:hover .ai-feature-card-icon-placeholder-{{ ai_gen_id }} svg {
+    filter: brightness(0) saturate(100%) invert(21%) sepia(85%) saturate(2462%) hue-rotate(345deg) brightness(91%) contrast(92%) !important;
   }
 
   .ai-feature-card-icon-{{ ai_gen_id }} {

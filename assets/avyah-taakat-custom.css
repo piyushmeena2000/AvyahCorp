@@ -1049,6 +1049,38 @@ body.template-index [class*="ai_gen_block_200d848"] [class*="card"] *,
 body.template-index [class*="ai_gen_block_200d848"] div[class*="item"] *,
 body.template-index [class*="ai_gen_block_200d848"] > div > div * {
   color: #ffffff !important;
+  transition: color 0.3s ease !important;
+}
+
+/* HOVER STATE FOR FEATURE BENEFIT CARDS: White Background + Crimson Red Text & Icon */
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+}
+
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover::before,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover::before,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover::before {
+  background-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover *,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover *,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover *,
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover h3,
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover p {
+  color: #d52528 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover img,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover img,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover img {
+  filter: brightness(0) saturate(100%) invert(21%) sepia(85%) saturate(2462%) hue-rotate(345deg) brightness(91%) contrast(92%) !important;
 }
 
 /* Exception for product cards */
