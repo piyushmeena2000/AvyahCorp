@@ -977,6 +977,23 @@ results-list .product-badges__badge,
 }
 
 /* ==========================================================================
+   HEADER NAVIGATION MENU TEXT - WHITE
+   ========================================================================== */
+#header-group *,
+.header *,
+.header__inline-menu *,
+.header__menu-item,
+.header__menu-item *,
+header nav *,
+.buddha-menu-item *,
+.buddha-menu-item > a,
+.buddha-menu-item span,
+ul.mm-submenu a,
+ul.mm-submenu span {
+  color: #ffffff !important;
+}
+
+/* ==========================================================================
    ABSOLUTE 100% UNLINKED HOMEPAGE CRIMSON RED OVERRIDE
    ========================================================================== */
 body.template-index,
@@ -1017,13 +1034,50 @@ body.template-index .rte * {
   color: #ffffff !important;
 }
 
-/* Exception for Feature Benefit Cards */
+/* ==========================================================================
+   FEATURE BENEFIT CARDS (NORMAL & HOVER STATES)
+   ========================================================================== */
 body.template-index [class*="ai_gen_block_200d848"] [class*="card"],
 body.template-index [class*="ai_gen_block_200d848"] div[class*="item"],
 body.template-index [class*="ai_gen_block_200d848"] > div > div {
   background-color: #a72023 !important;
   background: #a72023 !important;
   color: #ffffff !important;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease !important;
+}
+
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"] *,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"] *,
+body.template-index [class*="ai_gen_block_200d848"] > div > div * {
+  color: #ffffff !important;
+  transition: color 0.3s ease !important;
+}
+
+/* HOVER STATE: White Background + Crimson Red Text & Titles + Filtered Icon */
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #d52528 !important;
+  transform: translateY(-4px) !important;
+}
+
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover *,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover *,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover *,
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover h1,
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover h2,
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover h3,
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover h4,
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover p,
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover span {
+  color: #d52528 !important;
+}
+
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover img,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover img {
+  filter: brightness(0) saturate(100%) invert(21%) sepia(85%) saturate(2462%) hue-rotate(345deg) brightness(91%) contrast(92%) !important;
 }
 
 /* Exception for product cards */
