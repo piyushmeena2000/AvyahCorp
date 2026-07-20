@@ -977,32 +977,42 @@ results-list .product-badges__badge,
 }
 
 /* ==========================================================================
-   HOMEPAGE BRAND CRIMSON RED BACKGROUND & WHITE TEXT OVERRIDES
+   HOMEPAGE BRAND CRIMSON RED BACKGROUND & WHITE TEXT OVERRIDES (UNLINKED)
    ========================================================================== */
 body.template-index,
 body.template-index #MainContent,
+body.template-index main,
 body.template-index .content-for-layout,
 body.template-index .shopify-section,
+body.template-index .shopify-section > div,
 body.template-index .section,
 body.template-index [class*="section"],
 body.template-index .section-background,
-body.template-index .color-scheme-1,
-body.template-index .color-scheme-2,
-body.template-index .color-scheme-3,
-body.template-index .color-scheme-4,
-body.template-index .color-scheme-5,
+body.template-index [class*="color-scheme"],
+body.template-index [class*="color-scheme"] > div,
+body.template-index [class*="scheme-"],
+body.template-index [class*="ai_gen_block"],
+body.template-index .text-block,
+body.template-index .rich-text,
 main[data-template="index"],
 main[data-template="index"] .shopify-section,
 main[data-template="index"] .section-background {
   background-color: #d52528 !important;
+  background: #d52528 !important;
+  --color-background: 213, 37, 40 !important;
+  --gradient-background: #d52528 !important;
 }
 
-/* Force text inside homepage sections to white */
+/* Force all text inside homepage sections to white */
 body.template-index h1,
 body.template-index h2,
 body.template-index h3,
 body.template-index h4,
+body.template-index h5,
+body.template-index h6,
 body.template-index p,
+body.template-index span:not(.jdgm-prev-badge__text),
+body.template-index a:not(.button):not(.avyah-card-add-to-cart-btn),
 body.template-index .rte,
 body.template-index .rte *,
 main[data-template="index"] p,
@@ -1010,6 +1020,32 @@ main[data-template="index"] h1,
 main[data-template="index"] h2,
 main[data-template="index"] h3 {
   color: #ffffff !important;
+}
+
+/* Force Feature Benefit Cards (NO NASTIES, POCKET FRIENDLY, QUICK FUEL, REAL INGREDIENTS) to Red Cards */
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"],
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"],
+body.template-index [class*="ai_gen_block_200d848"] > div > div {
+  background-color: #a72023 !important;
+  background: #a72023 !important;
+  color: #ffffff !important;
+}
+
+/* Partner Logos ("Also Available At") contrast pill background */
+body.template-index [class*="partner"],
+body.template-index [class*="available"],
+body.template-index [class*="logo-list"],
+body.template-index [class*="logos"] {
+  background-color: #d52528 !important;
+}
+
+body.template-index [class*="logo-list"] img,
+body.template-index [class*="available"] img,
+body.template-index [class*="partner"] img {
+  background-color: #ffffff !important;
+  padding: 8px 16px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
 }
 
 
