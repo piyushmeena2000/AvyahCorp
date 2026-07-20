@@ -536,20 +536,14 @@ rte-formatter *,
   margin: 0 auto 10px auto !important;
 }
 
-.section:has(+ results-list) .text-block:has(.rte) p,
+.section:has(+ results-list) .text-block:has(.rte),
 .section:has(+ results-list) .rte,
 .collection-hero__description,
 .collection-description,
 [data-block-id="text_twGGkJ"],
 [data-block-id="text_twGGkJ"] p,
 [data-block-id="text_twGGkJ"] * {
-  font-family: 'Inter', sans-serif !important;
-  font-size: 15px !important;
-  color: #111111 !important;
-  text-align: center !important;
-  max-width: 680px !important;
-  margin: 0 auto 24px auto !important;
-  line-height: 1.5 !important;
+  display: none !important;
 }
 
 /* Sub-Navigation Links Bar under Collection Title (ALL SIZES | FULL SIZE | SNACK SIZE | MINI SIZE) */
