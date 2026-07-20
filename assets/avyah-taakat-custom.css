@@ -1117,21 +1117,23 @@ body.template-index dialog.cart-drawer__dialog .quantity-selector input {
   background-color: #ffffff !important;
 }
 
-/* Checkout Button */
+/* Checkout Button - PerfectSnacks Pill Red CTA */
 body.template-index dialog.cart-drawer__dialog .cart__checkout-button,
 body.template-index dialog.cart-drawer__dialog button#checkout {
-  background-color: #000000 !important;
-  background: #000000 !important;
+  background-color: #d52528 !important;
+  background: #d52528 !important;
   color: #ffffff !important;
-  border-radius: 8px !important;
-  height: 50px !important;
+  border-radius: 50px !important;
+  height: 52px !important;
   font-family: 'Anton', sans-serif !important;
-  font-size: 18px !important;
+  font-size: 19px !important;
   font-weight: 400 !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  letter-spacing: 0.8px !important;
+  box-shadow: 0 4px 15px rgba(213, 37, 40, 0.25) !important;
   border: none !important;
+  transition: all 0.25s ease !important;
+  width: 100% !important;
 }
 
 body.template-index dialog.cart-drawer__dialog .cart__checkout-button *,
@@ -1141,10 +1143,9 @@ body.template-index dialog.cart-drawer__dialog button#checkout * {
 
 body.template-index dialog.cart-drawer__dialog .cart__checkout-button:hover,
 body.template-index dialog.cart-drawer__dialog button#checkout:hover {
-  background-color: #d52528 !important;
-  background: #d52528 !important;
-  color: #ffffff !important;
-  box-shadow: 0 6px 18px rgba(213, 37, 40, 0.35) !important;
+  background-color: #c01b1e !important;
+  background: #c01b1e !important;
+  box-shadow: 0 6px 20px rgba(213, 37, 40, 0.4) !important;
 }
 
 .avyah-card-quick-add-form {

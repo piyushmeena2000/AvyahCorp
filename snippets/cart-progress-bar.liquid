@@ -1,0 +1,176 @@
+{% comment %}
+  Renders PerfectSnacks-style tiered bundle discount progress bar in cart drawer
+{% endcomment %}
+{% assign item_count = cart.item_count %}
+
+{% liquid
+  assign progress_percent = 0
+  assign status_message = ''
+  
+  if item_count == 0
+    assign progress_percent = 0
+    assign status_message = 'Add 1 box to start saving!'
+  elsif item_count == 1
+    assign progress_percent = 20
+    assign status_message = 'Add 1 more box to unlock <b>10% OFF</b>!'
+  elsif item_count == 2
+    assign progress_percent = 50
+    assign status_message = '🎉 Unlocked <b>10% OFF</b>! Add 1 more for <b>20% OFF</b>!'
+  elsif item_count == 3
+    assign progress_percent = 78
+    assign status_message = '🎉 Unlocked <b>20% OFF</b>! Add 1 more for <b>30% OFF</b>!'
+  else
+    assign progress_percent = 100
+    assign status_message = '🌟 You unlocked <b>30% OFF (BEST VALUE)</b>!'
+  endif
+%}
+
+<div class="perfect-cart-progress-container">
+  <div class="perfect-cart-progress-status">
+    {{ status_message }}
+  </div>
+
+  <div class="perfect-cart-progress-bar-wrapper">
+    <div class="perfect-cart-progress-line-track"></div>
+    <div class="perfect-cart-progress-line-fill" style="width: {{ progress_percent }}%;"></div>
+
+    <!-- Step 1: 1 Box -->
+    <div class="perfect-cart-progress-step {% if item_count >= 1 %}is-active{% endif %}" style="left: 5%;">
+      <div class="perfect-cart-step-circle">{% if item_count >= 1 %}✓{% endif %}</div>
+      <span class="perfect-cart-step-label">1 Box</span>
+    </div>
+
+    <!-- Step 2: 2 Boxes - 10% OFF -->
+    <div class="perfect-cart-progress-step {% if item_count >= 2 %}is-active{% endif %}" style="left: 36%;">
+      <div class="perfect-cart-step-badge">10% OFF</div>
+      <div class="perfect-cart-step-circle">{% if item_count >= 2 %}✓{% endif %}</div>
+      <span class="perfect-cart-step-label">2 Boxes</span>
+    </div>
+
+    <!-- Step 3: 3 Boxes - 20% OFF -->
+    <div class="perfect-cart-progress-step {% if item_count >= 3 %}is-active{% endif %}" style="left: 67%;">
+      <div class="perfect-cart-step-badge">20% OFF</div>
+      <div class="perfect-cart-step-circle">{% if item_count >= 3 %}✓{% endif %}</div>
+      <span class="perfect-cart-step-label">3 Boxes</span>
+    </div>
+
+    <!-- Step 4: 4 Boxes - 30% OFF BEST VALUE -->
+    <div class="perfect-cart-progress-step {% if item_count >= 4 %}is-active{% endif %}" style="left: 95%;">
+      <div class="perfect-cart-step-badge best-value">BEST VALUE<br>30% OFF</div>
+      <div class="perfect-cart-step-circle">{% if item_count >= 4 %}✓{% endif %}</div>
+      <span class="perfect-cart-step-label">4 Boxes</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .perfect-cart-progress-container {
+    padding: 16px 20px 24px 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #f0f0f0;
+    text-align: center;
+  }
+
+  .perfect-cart-progress-status {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #d52528;
+    margin-bottom: 22px;
+    font-weight: 500;
+  }
+
+  .perfect-cart-progress-status b {
+    font-weight: 800;
+  }
+
+  .perfect-cart-progress-bar-wrapper {
+    position: relative;
+    height: 3px;
+    margin: 30px 15px 15px 15px;
+  }
+
+  .perfect-cart-progress-line-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: #e6e6e6;
+    border-radius: 3px;
+  }
+
+  .perfect-cart-progress-line-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background-color: #d52528;
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  .perfect-cart-progress-step {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .perfect-cart-step-badge {
+    position: absolute;
+    bottom: 22px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    color: #d52528;
+    white-space: nowrap;
+    line-height: 1.1;
+  }
+
+  .perfect-cart-step-badge.best-value {
+    background-color: #d2f0eb;
+    color: #006064;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 9px;
+    bottom: 24px;
+  }
+
+  .perfect-cart-step-circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 2px solid #d52528;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: all 0.3s ease;
+  }
+
+  .perfect-cart-progress-step.is-active .perfect-cart-step-circle {
+    background-color: #d52528;
+    border-color: #d52528;
+    color: #ffffff;
+  }
+
+  .perfect-cart-step-label {
+    position: absolute;
+    top: 22px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #d52528;
+    white-space: nowrap;
+  }
+
+  .perfect-cart-progress-step:not(.is-active) .perfect-cart-step-label {
+    color: #999999;
+  }
+</style>
