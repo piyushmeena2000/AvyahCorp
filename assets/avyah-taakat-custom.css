@@ -1037,13 +1037,13 @@ body.template-index cart-drawer-component:not(dialog *) .cart-bubble__text-count
 }
 
 /* ==========================================================================
-   SLIDE-OUT CART DRAWER PANEL (MODAL ONLY) - CRIMSON RED BACKGROUND & WHITE FONT
+   SLIDE-OUT CART DRAWER PANEL (MODAL ONLY) - PURE WHITE BACKGROUND & BLACK FONT
    ========================================================================== */
 body.template-index dialog.cart-drawer__dialog,
 body.template-index .cart-drawer__dialog {
-  background-color: #d52528 !important;
-  background: #d52528 !important;
-  color: #ffffff !important;
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #111111 !important;
 }
 
 body.template-index dialog.cart-drawer__dialog div,
@@ -1057,11 +1057,11 @@ body.template-index dialog.cart-drawer__dialog .cart-drawer__content,
 body.template-index dialog.cart-drawer__dialog .cart-drawer__header,
 body.template-index dialog.cart-drawer__dialog .cart-drawer__summary,
 body.template-index dialog.cart-drawer__dialog .cart-items-component {
-  background-color: #d52528 !important;
-  background: #d52528 !important;
+  background-color: #ffffff !important;
+  background: #ffffff !important;
 }
 
-/* All text inside slide-out cart drawer dialog -> WHITE (#ffffff) */
+/* All text inside slide-out cart drawer dialog -> BLACK (#111111) */
 body.template-index dialog.cart-drawer__dialog h1,
 body.template-index dialog.cart-drawer__dialog h2,
 body.template-index dialog.cart-drawer__dialog h3,
@@ -1070,7 +1070,7 @@ body.template-index dialog.cart-drawer__dialog h5,
 body.template-index dialog.cart-drawer__dialog h6,
 body.template-index dialog.cart-drawer__dialog p,
 body.template-index dialog.cart-drawer__dialog a,
-body.template-index dialog.cart-drawer__dialog span:not(.visually-hidden):not(.quantity-selector *),
+body.template-index dialog.cart-drawer__dialog span:not(.visually-hidden):not(.quantity-selector *):not(.cart__checkout-button *),
 body.template-index dialog.cart-drawer__dialog td,
 body.template-index dialog.cart-drawer__dialog th,
 body.template-index dialog.cart-drawer__dialog div,
@@ -1081,33 +1081,33 @@ body.template-index dialog.cart-drawer__dialog .cart-items__price,
 body.template-index dialog.cart-drawer__dialog .cart__total-label,
 body.template-index dialog.cart-drawer__dialog .cart__total-value,
 body.template-index dialog.cart-drawer__dialog [data-cart-subtotal] {
-  color: #ffffff !important;
+  color: #111111 !important;
 }
 
-/* Compare-at prices -> Translucent White */
+/* Compare-at prices -> Grey */
 body.template-index dialog.cart-drawer__dialog .compare-at-price,
 body.template-index dialog.cart-drawer__dialog s {
-  color: rgba(255, 255, 255, 0.7) !important;
+  color: #777777 !important;
   text-decoration: line-through !important;
 }
 
-/* Tax note -> Light White */
+/* Tax note -> Grey */
 body.template-index dialog.cart-drawer__dialog .tax-note,
 body.template-index dialog.cart-drawer__dialog .tax-note * {
-  color: rgba(255, 255, 255, 0.8) !important;
+  color: #666666 !important;
 }
 
-/* Close & Delete Icons -> White */
+/* Close & Delete Icons -> Black */
 body.template-index dialog.cart-drawer__dialog .cart-drawer__close-button svg,
 body.template-index dialog.cart-drawer__dialog .cart-items__remove svg {
-  color: #ffffff !important;
-  fill: #ffffff !important;
-  stroke: #ffffff !important;
+  color: #111111 !important;
+  fill: #111111 !important;
+  stroke: #111111 !important;
 }
 
 /* Quantity selector */
 body.template-index dialog.cart-drawer__dialog .quantity-selector {
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border: 1px solid #d5d5d5 !important;
   background-color: #ffffff !important;
 }
 
@@ -1117,11 +1117,11 @@ body.template-index dialog.cart-drawer__dialog .quantity-selector input {
   background-color: transparent !important;
 }
 
-/* Checkout Button - Solid Black CTA on Red Cart */
+/* Checkout Button - Crimson Red CTA */
 body.template-index dialog.cart-drawer__dialog .cart__checkout-button,
 body.template-index dialog.cart-drawer__dialog button#checkout {
-  background-color: #000000 !important;
-  background: #000000 !important;
+  background-color: #d52528 !important;
+  background: #d52528 !important;
   color: #ffffff !important;
   border-radius: 50px !important;
   height: 52px !important;
@@ -1130,7 +1130,7 @@ body.template-index dialog.cart-drawer__dialog button#checkout {
   font-weight: 400 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.8px !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25) !important;
+  box-shadow: 0 4px 15px rgba(213, 37, 40, 0.25) !important;
   border: none !important;
   transition: all 0.25s ease !important;
   width: 100% !important;
@@ -1143,10 +1143,10 @@ body.template-index dialog.cart-drawer__dialog button#checkout * {
 
 body.template-index dialog.cart-drawer__dialog .cart__checkout-button:hover,
 body.template-index dialog.cart-drawer__dialog button#checkout:hover {
-  background-color: #ffffff !important;
-  background: #ffffff !important;
-  color: #d52528 !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35) !important;
+  background-color: #c01b1e !important;
+  background: #c01b1e !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(213, 37, 40, 0.4) !important;
 }
 
 .avyah-card-quick-add-form {
