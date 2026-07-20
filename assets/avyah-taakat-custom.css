@@ -443,13 +443,22 @@
    PERFECTSNACKS COLLECTION LISTING OVERRIDES (PURE WHITE CLEAN THEME)
    ========================================================================== */
 
-/* Force Collection Page Background & Container to Clean Pure White */
+/* Force Collection Page Background & Container to Clean Pure White with Black Typography */
 body:has(.product-grid-container),
 .product-grid-container,
 .collection-wrapper,
 results-list,
 .section-background:has(+ results-list),
-.main-collection-grid {
+.main-collection-grid,
+.section:has(+ results-list),
+.section:has(.collection-wrapper),
+[data-section-type="collection-hero"],
+.collection-hero,
+.collection-header {
+  --color-foreground: 0 0 0 !important;
+  --color-foreground-heading: 0 0 0 !important;
+  --color-body-text: #000000 !important;
+  --color-heading-text: #000000 !important;
   background-color: #ffffff !important;
   color: #000000 !important;
 }
@@ -475,13 +484,22 @@ results-list,
   color: #000000 !important;
 }
 
-/* Force pure black on all text elements inside the top header section */
+/* Force pure solid black on all text elements inside the top header section */
 .section:has(+ results-list) *,
+.section:has(.collection-wrapper) > .text-block *,
 .collection-hero *,
 .collection-header *,
+rte-formatter *,
+[data-block-id="text_tqQTNE"],
 [data-block-id="text_tqQTNE"] *,
-[data-block-id="text_twGGkJ"] * {
+[data-block-id="text_twGGkJ"],
+[data-block-id="text_twGGkJ"] *,
+.collection-title,
+.collection-title *,
+.collection-heading-text,
+.collection-heading-text * {
   color: #000000 !important;
+  fill: #000000 !important;
 }
 
 .section:has(+ results-list) .text-block,
@@ -489,7 +507,8 @@ results-list,
 .collection-hero h1,
 .collection-hero__title,
 .collection-title,
-.collection-heading-text {
+.collection-heading-text,
+[data-block-id="text_tqQTNE"] {
   font-family: 'Anton', sans-serif !important;
   font-size: 52px !important;
   text-transform: uppercase !important;
@@ -503,7 +522,11 @@ results-list,
 .section:has(+ results-list) .text-block *,
 .section:has(+ results-list) .text-block p,
 .section:has(+ results-list) .text-block h1,
-.section:has(+ results-list) .text-block h2 {
+.section:has(+ results-list) .text-block h2,
+[data-block-id="text_tqQTNE"] p,
+[data-block-id="text_tqQTNE"] h1,
+[data-block-id="text_tqQTNE"] h2,
+[data-block-id="text_tqQTNE"] * {
   font-family: 'Anton', sans-serif !important;
   font-size: 52px !important;
   text-transform: uppercase !important;
@@ -516,10 +539,13 @@ results-list,
 .section:has(+ results-list) .text-block:has(.rte) p,
 .section:has(+ results-list) .rte,
 .collection-hero__description,
-.collection-description {
+.collection-description,
+[data-block-id="text_twGGkJ"],
+[data-block-id="text_twGGkJ"] p,
+[data-block-id="text_twGGkJ"] * {
   font-family: 'Inter', sans-serif !important;
   font-size: 15px !important;
-  color: #333333 !important;
+  color: #111111 !important;
   text-align: center !important;
   max-width: 680px !important;
   margin: 0 auto 24px auto !important;
