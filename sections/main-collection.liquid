@@ -32,13 +32,33 @@
 >
   {% render 'skip-to-content-link', href: '#ResultsList', text: 'accessibility.skip_to_results_list' %}
 
+  <!-- Collection Hero Banner ("NO MAIDA • NO PALM OIL • NO REFINED SUGAR • MADE WITH MULTIGRAIN") -->
+  <div class="avyah-collection-hero-banner">
+    <div class="avyah-collection-hero-banner__inner">
+      <div class="avyah-collection-hero-banner__content">
+        <div class="avyah-hero-badge">100% CLEAN SNACKING</div>
+        <h1 class="avyah-hero-title">NO MAIDA • NO PALM OIL • NO REFINED SUGAR</h1>
+        <p class="avyah-hero-subtitle">MADE WITH MULTIGRAIN, NUTS & SEEDS • POWER PACKED HEALTHY SNACKS</p>
+        <div class="avyah-hero-pills">
+          <span class="avyah-hero-pill">🌾 100% Multigrain</span>
+          <span class="avyah-hero-pill">🚫 No Maida</span>
+          <span class="avyah-hero-pill">🌴 No Palm Oil</span>
+          <span class="avyah-hero-pill">🍯 No Refined Sugar</span>
+        </div>
+      </div>
+      <div class="avyah-collection-hero-banner__media">
+        <img src="{{ 'avyah_hero_banner.png' | asset_url }}" alt="Avyah Healthy Snacks Banner" loading="eager" width="600" height="300">
+      </div>
+    </div>
+  </div>
+
   <!-- PerfectSnacks Collection Sub-Navigation Bar (Range Collections) -->
   <div class="perfect-collection-subnav">
-    <a href="/collections/taakat" class="{% if collection.handle == 'taakat' %}active{% endif %}">TAAKAT HUNGER BAR</a>
+    <a href="/collections/taakat" class="{% if collection.handle == 'taakat' or collection.handle == 'range' %}active{% endif %}">TAAKAT HUNGER BAR</a>
     <a href="/collections/mast-mix" class="{% if collection.handle == 'mast-mix' or collection.handle == 'mastmix' %}active{% endif %}">MAST MIX</a>
     <a href="/collections/king" class="{% if collection.handle == 'king' %}active{% endif %}">KING</a>
     <a href="/collections/combos" class="{% if collection.handle == 'combos' or collection.handle == 'combo' %}active{% endif %}">COMBOS</a>
-    <a href="/collections/snackbox" class="{% if collection.handle == 'snackbox' %}active{% endif %}">SNACKBOX</a>
+    <a href="/collections/snackbox" class="{% if collection.handle == 'snackbox' or collection.handle == 'snack-box' %}active{% endif %}">SNACKBOX</a>
   </div>
 
   <div
@@ -57,9 +77,14 @@
       {% assign products_per_page = section.settings.products_per_page %}
     {% endif %}
 
-    {% paginate collection.products by products_per_page %}
+    {% assign current_products = collection.products %}
+    {% if current_products.size == 0 %}
+      {% assign current_products = collections['all'].products %}
+    {% endif %}
+
+    {% paginate current_products by products_per_page %}
       {% capture children %}
-        {% for product in collection.products %}
+        {% for product in current_products %}
           <li
             id="{{ section.id }}-{{ product.id }}"
             class="product-grid__item product-grid__item--{{ forloop.index0 }}"
@@ -77,7 +102,7 @@
       {% render 'product-grid',
         section: section,
         children: children,
-        products: collection.products,
+        products: current_products,
         paginate: paginate,
         enable_infinite_scroll: section.settings.enable_infinite_scroll
       %}
