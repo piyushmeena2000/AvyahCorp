@@ -1,0 +1,123 @@
+{% comment %}
+  Collection Landscape Hero Banner Section
+  Allows store owner to upload and change banner images directly in Shopify Theme Editor.
+{% endcomment %}
+
+<div
+  class="avyah-shopify-collection-banner"
+  style="background-color: {{ section.settings.background_color | default: '#d52528' }};"
+>
+  <div class="avyah-shopify-collection-banner__container">
+    {%- if section.settings.banner_link != blank -%}
+      <a href="{{ section.settings.banner_link }}" class="avyah-shopify-collection-banner__link">
+    {%- endif -%}
+
+    {%- if section.settings.banner_image != blank -%}
+      {{
+        section.settings.banner_image
+        | image_url: width: 1920
+        | image_tag:
+          loading: 'eager',
+          width: 1920,
+          height: 360,
+          class: 'avyah-shopify-collection-banner__img',
+          alt: section.settings.banner_image.alt | default: 'Collection Hero Banner'
+      }}
+    {%- else -%}
+      <img
+        src="{{ 'avyah_hero_banner.png' | asset_url }}"
+        alt="Avyah Multigrain Banner"
+        width="1920"
+        height="360"
+        loading="eager"
+        class="avyah-shopify-collection-banner__img"
+      >
+    {%- endif -%}
+
+    {%- if section.settings.banner_link != blank -%}
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .avyah-shopify-collection-banner {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    overflow: hidden !important;
+    line-height: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .avyah-shopify-collection-banner__container {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .avyah-shopify-collection-banner__link {
+    display: block !important;
+    width: 100% !important;
+    line-height: 0 !important;
+  }
+
+  .avyah-shopify-collection-banner__img {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: auto !important;
+    max-height: 220px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    display: block !important;
+    margin: 0 auto !important;
+  }
+
+  @media screen and (max-width: 768px) {
+    .avyah-shopify-collection-banner__img {
+      max-height: 140px !important;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Collection Top Banner",
+  "tag": "section",
+  "class": "section-collection-top-banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner Image (Upload & Change in Shopify Admin)"
+    },
+    {
+      "type": "url",
+      "id": "banner_link",
+      "label": "Banner Link (Optional)"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Banner Backdrop Color",
+      "default": "#d52528"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Top Banner"
+    }
+  ]
+}
+{% endschema %}

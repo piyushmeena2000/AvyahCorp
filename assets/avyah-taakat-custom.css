@@ -741,7 +741,8 @@ results-list .card-gallery:hover img,
 
 /* Product Card Information Alignment (Below Image) */
 results-list .product-card__content,
-.collection-wrapper .product-card__content {
+.collection-wrapper .product-card__content,
+.product-grid__item .product-card__content {
   background: transparent !important;
   padding: 12px 0 8px 0 !important;
   display: flex !important;
@@ -751,6 +752,7 @@ results-list .product-card__content,
   overflow: visible !important;
 }
 
+/* Force Anton Font for Product Titles */
 results-list .product-card [class*="product-title"],
 .collection-wrapper .product-card [class*="product-title"],
 results-list .product-card .product-title,
@@ -758,22 +760,30 @@ results-list .product-card .product-title,
 results-list .product-card h3,
 .collection-wrapper .product-card h3,
 results-list .product-card a,
-.collection-wrapper .product-card a {
+.collection-wrapper .product-card a,
+.product-card [class*="title"],
+.product-card h3,
+.product-card h2,
+.product-card a,
+.product-grid__item [class*="title"],
+.product-grid__item h3,
+.product-grid__item a {
   font-family: 'Anton', sans-serif !important;
-  font-size: 18px !important;
-  line-height: 1.3 !important;
+  font-size: 16px !important;
+  line-height: 1.25 !important;
   color: #000000 !important;
   text-transform: uppercase !important;
   text-align: left !important;
   margin: 6px 0 4px 0 !important;
-  letter-spacing: 0.3px !important;
+  letter-spacing: 0.5px !important;
   word-break: break-word !important;
   white-space: normal !important;
   overflow: visible !important;
   width: 100% !important;
+  display: block !important;
 }
 
-/* Review Rating Stars Alignment Fix */
+/* Force Left-Alignment for Review Stars & Judge.me Widget */
 results-list .product-card .jdgm-widget,
 .collection-wrapper .product-card .jdgm-widget,
 results-list .product-card .jdgm-prev-badge,
@@ -783,40 +793,59 @@ results-list .product-card [data-block-id*="review"],
 results-list .product-card [class*="review"],
 .collection-wrapper .product-card [class*="review"],
 results-list .product-card [class*="rating"],
-.collection-wrapper .product-card [class*="rating"] {
+.collection-wrapper .product-card [class*="rating"],
+.product-card .jdgm-prev-badge,
+.product-grid__item .jdgm-widget,
+.product-grid__item .jdgm-prev-badge,
+.product-grid__item [class*="rating"],
+.product-grid__item [class*="review"],
+.jdgm-prev-badge {
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
   text-align: left !important;
   margin: 4px 0 6px 0 !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
   width: 100% !important;
+  float: none !important;
 }
 
 results-list .product-card .jdgm-prev-badge__stars,
-.collection-wrapper .product-card .jdgm-prev-badge__stars {
+.collection-wrapper .product-card .jdgm-prev-badge__stars,
+.product-grid__item .jdgm-prev-badge__stars,
+.jdgm-prev-badge__stars {
   display: inline-flex !important;
   align-items: center !important;
-  margin-right: 4px !important;
+  margin-right: 6px !important;
   color: #f59e0b !important;
 }
 
 results-list .product-card .jdgm-prev-badge__text,
-.collection-wrapper .product-card .jdgm-prev-badge__text {
+.collection-wrapper .product-card .jdgm-prev-badge__text,
+.product-grid__item .jdgm-prev-badge__text,
+.jdgm-prev-badge__text {
   font-family: 'Inter', sans-serif !important;
   font-size: 13px !important;
   font-weight: 600 !important;
   color: #333333 !important;
+  margin-left: 0 !important;
 }
 
 results-list .product-card .price,
 .collection-wrapper .product-card .price,
 results-list .product-card .price *,
-.collection-wrapper .product-card .price * {
+.collection-wrapper .product-card .price *,
+.product-card .price,
+.product-grid__item .price {
   color: #000000 !important;
   font-family: 'Inter', sans-serif !important;
   font-weight: 700 !important;
   font-size: 15px !important;
   text-align: left !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
 }
 
 results-list .product-card .price--on-sale .price-item--regular,
