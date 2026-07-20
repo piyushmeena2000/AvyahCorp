@@ -118,9 +118,21 @@
     color: #d52528 !important;
   }
 
-  body.template-index [class*="c24781f"] [class*="card"] [class*="role"],
-  body.template-index [class*="c24781f"] [class*="card"] [class*="role"] * {
-    color: #666666 !important;
+  body.template-index [class*="partner"],
+  body.template-index [class*="available"],
+  body.template-index [class*="logo-list"],
+  body.template-index [class*="logos"],
+  body.template-index [class*="193b272"],
+  body.template-index [class*="ai-logo-carousel"],
+  body.template-index .shopify-section:has([class*="193b272"]),
+  body.template-index .section:has([class*="193b272"]) {
+    background-color: #d52528 !important;
+    background: #d52528 !important;
+  }
+
+  body.template-index [class*="193b272"] h2,
+  body.template-index [class*="ai-logo-carousel"] h2 {
+    color: #ffffff !important;
   }
 
   {% for scheme in settings.color_schemes -%}

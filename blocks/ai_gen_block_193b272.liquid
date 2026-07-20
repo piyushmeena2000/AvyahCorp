@@ -9,7 +9,7 @@
     width: 100%;
     overflow: hidden;
     padding: {{ block.settings.padding_top }}px 0 {{ block.settings.padding_bottom }}px;
-    background-color: #ffffff !important; /* Force white background */
+    background-color: #d52528 !important; /* Brand Crimson Red background */
   }
 
   .ai-logo-carousel__container-{{ ai_gen_id }} {
@@ -20,8 +20,10 @@
   .ai-logo-carousel__heading-{{ ai_gen_id }} {
     text-align: center;
     margin: 0 0 {{ block.settings.heading_spacing }}px;
-    color: #d52528 !important; /* Force brand crimson red text color */
+    color: #ffffff !important; /* White heading text color */
     font-size: {{ block.settings.heading_size }}px;
+    font-family: 'Anton', sans-serif !important;
+    text-transform: uppercase !important;
   }
 
   .ai-logo-carousel__track-wrapper-{{ ai_gen_id }} {
@@ -38,15 +40,17 @@
 
   .ai-logo-carousel__slide-{{ ai_gen_id }} {
     flex-shrink: 0;
-    width: {{ block.settings.logo_width }}px;
+    width: auto !important;
+    min-width: 140px !important;
     height: {{ block.settings.logo_height }}px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: {{ block.settings.logo_padding }}px;
-    background-color: transparent !important; /* Force transparent logo slides */
-    border-radius: {{ block.settings.logo_border_radius }}px;
-    border: none !important; /* Remove borders completely */
+    padding: 10px 24px !important;
+    background-color: #ffffff !important; /* White pill badge for logo clarity */
+    border-radius: 14px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+    border: none !important;
   }
 
   .ai-logo-carousel__image-{{ ai_gen_id }} {
