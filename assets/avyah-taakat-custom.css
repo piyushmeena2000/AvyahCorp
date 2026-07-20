@@ -895,7 +895,7 @@ body.template-index [class*="ai-product-card-reviews"] .stars,
 body.template-index [class*="product-card-reviews"] .stars,
 [class*="ai-product-card-reviews"] .stars {
   color: #ffb800 !important; /* Bright Gold Stars */
-  font-size: 14px !important;
+  font-size: 18px !important;
   letter-spacing: 1.5px !important;
   line-height: 1 !important;
 }
@@ -905,7 +905,7 @@ body.template-index [class*="product-card-reviews"] .rating-num,
 [class*="ai-product-card-reviews"] .rating-num {
   color: #111111 !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 12px !important;
+  font-size: 14px !important;
   font-weight: 700 !important;
 }
 
@@ -914,7 +914,7 @@ body.template-index [class*="product-card-reviews"] .count,
 [class*="ai-product-card-reviews"] .count {
   color: #666666 !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 12px !important;
+  font-size: 14px !important;
   font-weight: 600 !important;
 }
 
