@@ -82,6 +82,8 @@
             {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
             {% # theme-check-enable %}
 
+            <div class="perfect-card-subcaption">5g Protein* • Healthy Multigrain Snack</div>
+
             <form action="/cart/add" method="post" enctype="multipart/form-data" class="avyah-card-quick-add-form">
               <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
               <button

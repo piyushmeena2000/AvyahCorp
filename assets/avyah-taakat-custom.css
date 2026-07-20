@@ -700,57 +700,77 @@ main-collection,
   margin-bottom: 28px !important;
 }
 
-/* Ensure product card media containers & links display image properly */
-results-list .card-gallery a,
-.collection-wrapper .card-gallery a,
-results-list .card-gallery slideshow-component,
-.collection-wrapper .card-gallery slideshow-component,
-results-list .card-gallery .product-media-container,
-.collection-wrapper .card-gallery .product-media-container,
-results-list .card-gallery slideshow-slide,
-.collection-wrapper .card-gallery slideshow-slide {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 100% !important;
-  height: 100% !important;
-  position: relative !important;
+/* /* ==========================================================================
+   PERFECTSNACKS PRODUCT CARD CLONE STYLES
+   ========================================================================== */
+
+/* Pastel Card Background Cycle (Exact PerfectSnacks Pastel Palette) */
+.product-grid__item:nth-child(5n+1) .card-gallery,
+.product-grid__item:nth-child(5n+1) .product-media-container,
+.product-grid__item:nth-child(5n+1) [class*="card-gallery"] {
+  background-color: #dceef2 !important; /* Soft Pastel Cyan */
 }
 
-/* Product Card Image Fit & Hover Scale Effect */
-results-list .card-gallery img,
-.collection-wrapper .card-gallery img,
-results-list .card-gallery .product-media-container img,
-.collection-wrapper .card-gallery .product-media-container img,
-results-list .card-gallery slideshow-slide img,
-.collection-wrapper .card-gallery slideshow-slide img {
-  position: relative !important;
-  max-width: 85% !important;
-  max-height: 85% !important;
-  width: auto !important;
-  height: auto !important;
-  object-fit: contain !important;
-  margin: auto !important;
-  display: block !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  border-radius: 12px !important;
-  transition: transform 0.35s ease !important;
+.product-grid__item:nth-child(5n+2) .card-gallery,
+.product-grid__item:nth-child(5n+2) .product-media-container,
+.product-grid__item:nth-child(5n+2) [class*="card-gallery"] {
+  background-color: #e5e4f4 !important; /* Soft Pastel Lavender */
 }
 
-results-list .card-gallery:hover img,
-.collection-wrapper .card-gallery:hover img {
-  transform: scale(1.06) !important;
+.product-grid__item:nth-child(5n+3) .card-gallery,
+.product-grid__item:nth-child(5n+3) .product-media-container,
+.product-grid__item:nth-child(5n+3) [class*="card-gallery"] {
+  background-color: #d8f2f2 !important; /* Soft Pastel Aqua */
 }
 
-/* Product Card Gallery Image Containers (Pastel Rounded Cards) */
+.product-grid__item:nth-child(5n+4) .card-gallery,
+.product-grid__item:nth-child(5n+4) .product-media-container,
+.product-grid__item:nth-child(5n+4) [class*="card-gallery"] {
+  background-color: #e0f2e7 !important; /* Soft Pastel Mint */
+}
+
+.product-grid__item:nth-child(5n+5) .card-gallery,
+.product-grid__item:nth-child(5n+5) .product-media-container,
+.product-grid__item:nth-child(5n+5) [class*="card-gallery"] {
+  background-color: #f7e6e7 !important; /* Soft Pastel Rose */
+}
+
+/* Product Card Gallery Containers & Rounded Corners */
 results-list .card-gallery,
 .collection-wrapper .card-gallery,
 .product-grid__item .card-gallery,
 .product-card .card-gallery,
 .product-media-container {
-  border-radius: 20px !important;
+  border-radius: 24px !important;
   overflow: hidden !important;
+  aspect-ratio: 1 / 1 !important;
+  padding: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Product Card Image Fit & Hover Animation */
+results-list .card-gallery img,
+.collection-wrapper .card-gallery img,
+results-list .card-gallery .product-media-container img,
+.collection-wrapper .card-gallery .product-media-container img,
+.product-grid__item img {
+  position: relative !important;
+  max-width: 88% !important;
+  max-height: 88% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  margin: auto !important;
+  display: block !important;
+  border-radius: 12px !important;
+  transition: transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
+
+.product-grid__item:hover .card-gallery img,
+.product-grid__item:hover img {
+  transform: scale(1.08) translateY(-4px) !important;
 }
 
 /* Product Card Information Alignment & Ordering (Below Image) */
@@ -767,7 +787,54 @@ results-list .product-card__content,
   overflow: visible !important;
 }
 
-/* 1. Review Rating Stars directly below image */
+/* 1. Force Anton Font for Product Titles */
+results-list .product-card [class*="product-title"],
+.collection-wrapper .product-card [class*="product-title"],
+results-list .product-card .product-title,
+.collection-wrapper .product-card .product-title,
+results-list .product-card h3,
+.collection-wrapper .product-card h3,
+results-list .product-card a,
+.collection-wrapper .product-card a,
+.product-card [class*="title"],
+.product-card h3,
+.product-card h2,
+.product-card a,
+.product-card p,
+.product-grid__item [class*="title"],
+.product-grid__item h3,
+.product-grid__item a,
+.product-title-block,
+[data-block-id*="title"] * {
+  order: 1 !important;
+  font-family: 'Anton', sans-serif !important;
+  font-size: 19px !important;
+  line-height: 1.25 !important;
+  color: #111111 !important;
+  text-transform: uppercase !important;
+  text-align: left !important;
+  margin: 12px 0 2px 0 !important;
+  letter-spacing: 0.3px !important;
+  font-weight: 400 !important;
+  word-break: break-word !important;
+  white-space: normal !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+/* 2. Sub-caption Subtitle (8g Protein* • 12 Bars) */
+.perfect-card-subcaption {
+  order: 2 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #555555 !important;
+  text-align: left !important;
+  margin: 0 0 10px 0 !important;
+  line-height: 1.3 !important;
+}
+
+/* 3. Review Rating Stars */
 results-list .product-card .jdgm-widget,
 .collection-wrapper .product-card .jdgm-widget,
 results-list .product-card .jdgm-prev-badge,
@@ -784,12 +851,12 @@ results-list .product-card [class*="rating"],
 .product-grid__item [class*="rating"],
 .product-grid__item [class*="review"],
 .jdgm-prev-badge {
-  order: 1 !important;
+  order: 3 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
   text-align: left !important;
-  margin: 6px 0 4px 0 !important;
+  margin: 2px 0 8px 0 !important;
   margin-left: 0 !important;
   margin-right: auto !important;
   width: 100% !important;
@@ -817,43 +884,7 @@ results-list .product-card .jdgm-prev-badge__text,
   margin-left: 0 !important;
 }
 
-/* 2. Force Anton Font for Product Titles */
-results-list .product-card [class*="product-title"],
-.collection-wrapper .product-card [class*="product-title"],
-results-list .product-card .product-title,
-.collection-wrapper .product-card .product-title,
-results-list .product-card h3,
-.collection-wrapper .product-card h3,
-results-list .product-card a,
-.collection-wrapper .product-card a,
-.product-card [class*="title"],
-.product-card h3,
-.product-card h2,
-.product-card a,
-.product-card p,
-.product-grid__item [class*="title"],
-.product-grid__item h3,
-.product-grid__item a,
-.product-title-block,
-[data-block-id*="title"] * {
-  order: 2 !important;
-  font-family: 'Anton', sans-serif !important;
-  font-size: 16px !important;
-  line-height: 1.25 !important;
-  color: #000000 !important;
-  text-transform: uppercase !important;
-  text-align: left !important;
-  margin: 4px 0 6px 0 !important;
-  letter-spacing: 0.5px !important;
-  font-weight: 400 !important;
-  word-break: break-word !important;
-  white-space: normal !important;
-  overflow: visible !important;
-  width: 100% !important;
-  display: block !important;
-}
-
-/* 3. Force Anton Font & Bigger Price */
+/* 4. Price - Anton Font 20px */
 results-list .product-card .price,
 .collection-wrapper .product-card .price,
 results-list .product-card .price *,
@@ -863,8 +894,8 @@ results-list .product-card .price *,
 .price-item,
 .price-item--sale,
 .price-item--regular {
-  order: 3 !important;
-  color: #000000 !important;
+  order: 4 !important;
+  color: #111111 !important;
   font-family: 'Anton', sans-serif !important;
   font-weight: 400 !important;
   font-size: 20px !important;
@@ -885,11 +916,11 @@ results-list .product-card .price--on-sale .price-item--regular,
   margin-right: 6px !important;
 }
 
-/* 4. Quick Add to Cart Form & Crimson Red Button */
+/* 5. ADD TO CART Pill Button */
 .avyah-card-quick-add-form {
-  order: 4 !important;
+  order: 5 !important;
   width: 100% !important;
-  margin-top: 6px !important;
+  margin-top: 8px !important;
 }
 
 .avyah-card-add-to-cart-btn {
@@ -897,15 +928,15 @@ results-list .product-card .price--on-sale .price-item--regular,
   background-color: #d52528 !important;
   color: #ffffff !important;
   font-family: 'Anton', sans-serif !important;
-  font-size: 15px !important;
-  letter-spacing: 1px !important;
+  font-size: 16px !important;
+  letter-spacing: 1.2px !important;
   text-transform: uppercase !important;
-  padding: 10px 16px !important;
-  border-radius: 30px !important;
+  padding: 12px 20px !important;
+  border-radius: 40px !important;
   border: none !important;
   cursor: pointer !important;
   transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease !important;
-  box-shadow: 0 4px 12px rgba(213, 37, 40, 0.25) !important;
+  box-shadow: 0 4px 14px rgba(213, 37, 40, 0.28) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -914,7 +945,7 @@ results-list .product-card .price--on-sale .price-item--regular,
 .avyah-card-add-to-cart-btn:hover {
   background-color: #b01b1e !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 16px rgba(213, 37, 40, 0.35) !important;
+  box-shadow: 0 6px 18px rgba(213, 37, 40, 0.4) !important;
 }
 
 .avyah-card-add-to-cart-btn[disabled] {
