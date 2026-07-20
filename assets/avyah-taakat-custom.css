@@ -463,22 +463,42 @@ results-list,
   background-color: #d52528 !important;
 }
 
-/* Collection Hero Header & Titles */
+/* Collection Hero Header & Titles Centering */
+.product-grid-container ~ .section,
+.section-background:has(+ results-list) + .section,
+.section:has(+ results-list),
+.section:has(.collection-wrapper),
 .collection-hero,
 [data-section-type="collection-hero"],
 .collection-header {
   background-color: #d52528 !important;
-  padding: 40px 20px 20px 20px !important;
   text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 40px 20px 20px 20px !important;
 }
 
+.product-grid-container ~ .section *,
+.section:has(+ results-list) *,
+.section:has(.collection-wrapper) *,
+.collection-hero *,
+.collection-header *,
+[class*="text-block"] {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.section:has(+ results-list) p,
+.section:has(+ results-list) h1,
+.section:has(+ results-list) h2,
 .collection-hero h1,
 .collection-hero__title,
 .collection-title,
 .collection-heading-text,
-results-list ~ .collection-title,
-.section:has(.collection-wrapper) h1,
-.section:has(.collection-wrapper) h2 {
+results-list ~ .collection-title {
   font-family: 'Anton', sans-serif !important;
   font-size: 52px !important;
   text-transform: uppercase !important;
@@ -489,9 +509,9 @@ results-list ~ .collection-title,
   line-height: 1.1 !important;
 }
 
+.section:has(+ results-list) .rte,
 .collection-hero__description,
-.collection-description,
-.section:has(.collection-wrapper) .rte {
+.collection-description {
   font-family: 'Inter', sans-serif !important;
   font-size: 15px !important;
   color: rgba(255, 255, 255, 0.9) !important;
