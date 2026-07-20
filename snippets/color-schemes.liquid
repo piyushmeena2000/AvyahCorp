@@ -228,24 +228,23 @@
   }
 
   /* Cart Drawer Overrides - Pure White Background & BLACK Font */
-  body.template-index dialog.cart-drawer__dialog,
-  body.template-index .cart-drawer__dialog,
-  body.template-index .cart-drawer__inner,
-  body.template-index .cart-drawer__content,
-  body.template-index .cart-drawer__header,
-  body.template-index .cart-drawer__summary,
-  body.template-index .cart-items-component {
+  .cart-drawer,
+  cart-drawer-component,
+  dialog.cart-drawer__dialog,
+  .cart-drawer__dialog,
+  .cart-drawer__inner,
+  .cart-drawer__content,
+  .cart-drawer__header,
+  .cart-drawer__summary,
+  .cart-items-component {
     background-color: #ffffff !important;
     background: #ffffff !important;
+    color: #111111 !important;
   }
 
-  body.template-index dialog.cart-drawer__dialog *,
-  body.template-index .cart-drawer__dialog *,
-  body.template-index .cart-drawer__inner *,
-  body.template-index .cart-drawer__content *,
-  body.template-index .cart-drawer__header *,
-  body.template-index .cart-drawer__summary *,
-  body.template-index .cart-items-component * {
+  .cart-drawer *:not(.cart__checkout-button):not(.cart__checkout-button *):not(#checkout):not(#checkout *):not(.close-button):not(.close-button *),
+  cart-drawer-component *:not(.cart__checkout-button):not(.cart__checkout-button *):not(#checkout):not(#checkout *):not(.close-button):not(.close-button *),
+  dialog.cart-drawer__dialog *:not(.cart__checkout-button):not(.cart__checkout-button *):not(#checkout):not(#checkout *):not(.close-button):not(.close-button *) {
     color: #111111 !important;
   }
 

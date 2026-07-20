@@ -1041,20 +1041,9 @@ body.template-index .cart-items__table-row {
 }
 
 /* ALL text inside Slide-Out Cart Drawer MUST BE BLACK (#111111) */
-body.template-index dialog.cart-drawer__dialog,
-body.template-index dialog.cart-drawer__dialog *,
-body.template-index .cart-drawer__dialog,
-body.template-index .cart-drawer__dialog *,
-body.template-index .cart-drawer__inner,
-body.template-index .cart-drawer__inner *,
-body.template-index .cart-drawer__content,
-body.template-index .cart-drawer__content *,
-body.template-index .cart-drawer__header,
-body.template-index .cart-drawer__header *,
-body.template-index .cart-drawer__summary,
-body.template-index .cart-drawer__summary *,
-body.template-index .cart-items-component,
-body.template-index .cart-items-component * {
+.cart-drawer *:not(.cart__checkout-button):not(.cart__checkout-button *):not(#checkout):not(#checkout *):not(.close-button):not(.close-button *),
+cart-drawer-component *:not(.cart__checkout-button):not(.cart__checkout-button *):not(#checkout):not(#checkout *):not(.close-button):not(.close-button *),
+dialog.cart-drawer__dialog *:not(.cart__checkout-button):not(.cart__checkout-button *):not(#checkout):not(#checkout *):not(.close-button):not(.close-button *) {
   color: #111111 !important;
 }
 
@@ -1250,17 +1239,17 @@ body.template-index [class*="scheme-"] {
   background: #d52528 !important;
 }
 
-/* Force Text inside homepage to White */
-body.template-index p,
-body.template-index h1,
-body.template-index h2,
-body.template-index h3,
-body.template-index h4,
-body.template-index h5,
-body.template-index h6,
-body.template-index li,
-body.template-index .rte,
-body.template-index .rte * {
+/* Force Text inside homepage to White (EXCEPT inside Cart Drawer) */
+body.template-index p:not(.cart-drawer *):not(dialog *),
+body.template-index h1:not(.cart-drawer *):not(dialog *),
+body.template-index h2:not(.cart-drawer *):not(dialog *),
+body.template-index h3:not(.cart-drawer *):not(dialog *),
+body.template-index h4:not(.cart-drawer *):not(dialog *),
+body.template-index h5:not(.cart-drawer *):not(dialog *),
+body.template-index h6:not(.cart-drawer *):not(dialog *),
+body.template-index li:not(.cart-drawer *):not(dialog *),
+body.template-index .rte:not(.cart-drawer *):not(dialog *),
+body.template-index .rte *:not(.cart-drawer *):not(dialog *) {
   color: #ffffff !important;
 }
 
