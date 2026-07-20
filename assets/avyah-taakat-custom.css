@@ -1070,13 +1070,32 @@ body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover h1,
 body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover h2,
 body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover h3,
 body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover h4,
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover h5,
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover h6,
 body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover p,
-body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover span {
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover span,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover h1,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover h2,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover h3,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover h4,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover h5,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover h6,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover p,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover span,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover h1,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover h2,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover h3,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover h4,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover h5,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover h6,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover p,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover span {
   color: #d52528 !important;
 }
 
 body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover img,
-body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover img {
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover img,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover img {
   filter: brightness(0) saturate(100%) invert(21%) sepia(85%) saturate(2462%) hue-rotate(345deg) brightness(91%) contrast(92%) !important;
 }
 
