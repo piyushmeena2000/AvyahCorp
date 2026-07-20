@@ -465,15 +465,24 @@ results-list,
 
 /* Collection Hero Header & Titles Centering (Header Only) */
 .section:has(+ results-list),
+.section-background:has(+ results-list) + .section,
 .collection-hero,
 [data-section-type="collection-hero"],
 .collection-header {
   background-color: #ffffff !important;
   text-align: center !important;
   padding: 40px 20px 20px 20px !important;
+  color: #3d2b27 !important;
+}
+
+.section:has(+ results-list) *,
+.collection-hero *,
+.collection-header * {
+  color: #3d2b27 !important;
 }
 
 .section:has(+ results-list) .text-block,
+.section:has(+ results-list) [class*="text-block"],
 .collection-hero h1,
 .collection-hero__title,
 .collection-title,
@@ -488,6 +497,7 @@ results-list,
   line-height: 1.1 !important;
 }
 
+.section:has(+ results-list) .text-block *,
 .section:has(+ results-list) .text-block p,
 .section:has(+ results-list) .text-block h1,
 .section:has(+ results-list) .text-block h2 {
@@ -501,6 +511,7 @@ results-list,
 }
 
 .section:has(+ results-list) .text-block:has(.rte) p,
+.section:has(+ results-list) .rte,
 .collection-hero__description,
 .collection-description {
   font-family: 'Inter', sans-serif !important;
@@ -579,7 +590,7 @@ facets-form,
 results-list .product-grid,
 .collection-wrapper .product-grid {
   display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
   gap: 36px 24px !important;
   width: 100% !important;
 }
@@ -606,8 +617,19 @@ results-list .card-gallery,
   border-radius: 24px !important;
   overflow: hidden !important;
   position: relative !important;
+  aspect-ratio: 1 / 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid rgba(61,43,39,0.06) !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03) !important;
   transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease !important;
-  border: none !important;
+}
+
+results-list .card-gallery:hover,
+.collection-wrapper .card-gallery:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08) !important;
 }
 
 /* Alternating Pastel Background Colors matching PerfectSnacks collection cards */
@@ -636,18 +658,16 @@ results-list .product-grid__item:nth-child(5n+5) .card-gallery,
   background-color: #fce4ec !important; /* Soft Rose Coral */
 }
 
-/* Product Card Image Fit & Hover Scale Effect */
+/* Product Card Image Padding & Hover Scale Effect */
 results-list .card-gallery img,
 .collection-wrapper .card-gallery img,
-results-list .card-gallery .product-media-container,
-.collection-wrapper .card-gallery .product-media-container,
 results-list .card-gallery .product-media-container img,
 .collection-wrapper .card-gallery .product-media-container img {
-  padding: 0 !important;
+  padding: 24px 18px !important;
   margin: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover !important;
+  object-fit: contain !important;
   border-radius: 24px !important;
   transition: transform 0.35s ease !important;
 }
