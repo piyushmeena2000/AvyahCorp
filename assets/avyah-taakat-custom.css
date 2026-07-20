@@ -939,29 +939,36 @@ body.template-index [class*="ai-product-card"] [class*="discount-badge"] {
   margin-top: 8px !important;
 }
 
-.avyah-card-add-to-cart-btn {
+.avyah-card-add-to-cart-btn,
+body.template-index [class*="product-card"] button,
+body.template-index [class*="ai-product-card-button"] {
   width: 100% !important;
-  background-color: #d52528 !important;
+  background-color: #000000 !important;
+  background: #000000 !important;
   color: #ffffff !important;
   font-family: 'Anton', sans-serif !important;
   font-size: 16px !important;
   letter-spacing: 1.2px !important;
   text-transform: uppercase !important;
   padding: 12px 20px !important;
-  border-radius: 40px !important;
+  border-radius: 8px !important;
   border: none !important;
   cursor: pointer !important;
   transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease !important;
-  box-shadow: 0 4px 14px rgba(213, 37, 40, 0.28) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
 
-.avyah-card-add-to-cart-btn:hover {
-  background-color: #b01b1e !important;
+.avyah-card-add-to-cart-btn:hover,
+body.template-index [class*="product-card"] button:hover,
+body.template-index [class*="ai-product-card-button"]:hover {
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+  color: #ffffff !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 18px rgba(213, 37, 40, 0.4) !important;
+  box-shadow: 0 6px 18px rgba(213, 37, 40, 0.35) !important;
 }
 
 .avyah-card-add-to-cart-btn[disabled] {

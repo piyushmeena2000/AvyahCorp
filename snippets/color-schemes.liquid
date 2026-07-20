@@ -151,13 +151,16 @@
     text-decoration: line-through !important;
   }
 
-  /* Discount Badge - Crimson Red (#d52528) with White Text */
-  body.template-index [class*="discount-badge"],
-  body.template-index [class*="discount"],
-  body.template-index [class*="badge--sale"],
-  body.template-index [class*="price__badge-sale"],
-  body.template-index [class*="product-card"] [class*="discount"],
-  body.template-index [class*="ai-product-card"] [class*="discount-badge"] {
+  /* ADD TO CART Button - BLACK naturally, Crimson Red (#d52528) on hover */
+  body.template-index [class*="product-card"] button,
+  body.template-index [class*="ai-product-card-button"] {
+    background-color: #000000 !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  body.template-index [class*="product-card"] button:hover,
+  body.template-index [class*="ai-product-card-button"]:hover {
     background-color: #d52528 !important;
     background: #d52528 !important;
     color: #ffffff !important;

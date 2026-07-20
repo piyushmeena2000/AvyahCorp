@@ -308,15 +308,15 @@
     position: relative;
     display: block;
     width: 100%;
-    background-color: #a72023; /* Brand Crimson */
-    color: #ffffff;
+    background-color: #000000 !important; /* Black button */
+    color: #ffffff !important;
     padding: 12px 6px;
     border-radius: 8px;
     font-size: 18px !important;
     font-weight: 400;
     text-decoration: none;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
     text-align: center;
     font-family: 'Anton', sans-serif;
     text-transform: uppercase;
@@ -325,14 +325,15 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    border: none; /* Removed black stroke */
-    box-shadow: 0 4px 10px rgba(167, 32, 35, 0.15); /* Soft crimson shadow */
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   }
 
   .ai-product-card-button-{{ ai_gen_id }}:hover {
-    background-color: #921b1e;
+    background-color: #d52528 !important; /* Crimson Red on Hover */
+    color: #ffffff !important;
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(167, 32, 35, 0.25);
+    box-shadow: 0 6px 15px rgba(213, 37, 40, 0.3);
   }
 
   .ai-product-card-button-{{ ai_gen_id }}:active {
