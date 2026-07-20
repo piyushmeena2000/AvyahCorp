@@ -207,45 +207,34 @@
   }
 
   /* Header Cart Trigger Button - NO white background */
-  header cart-drawer-component,
-  header [data-testid="cart-drawer-trigger"],
-  .header-actions cart-drawer-component,
-  .header-actions [data-testid="cart-drawer-trigger"],
-  .header-actions__action {
+  body.template-index cart-drawer-component:not(dialog *),
+  body.template-index .cart-drawer:not(dialog *),
+  body.template-index [data-testid="cart-drawer-trigger"],
+  body.template-index .header-actions__action {
     background: transparent !important;
     background-color: transparent !important;
     box-shadow: none !important;
     border: none !important;
   }
 
-  header cart-drawer-component svg,
-  header [data-testid="cart-drawer-trigger"] svg,
-  .header-actions cart-drawer-component svg,
-  .header-actions [data-testid="cart-drawer-trigger"] svg {
+  body.template-index cart-drawer-component:not(dialog *) svg,
+  body.template-index .cart-drawer:not(dialog *) svg,
+  body.template-index [data-testid="cart-drawer-trigger"] svg {
     color: #ffffff !important;
-    fill: #ffffff !important;
     stroke: #ffffff !important;
+    fill: none !important;
   }
 
-  /* Cart Drawer Overrides - Pure White Background & BLACK Font */
-  .cart-drawer,
-  cart-drawer-component,
-  dialog.cart-drawer__dialog,
-  .cart-drawer__dialog,
-  .cart-drawer__inner,
-  .cart-drawer__content,
-  .cart-drawer__header,
-  .cart-drawer__summary,
-  .cart-items-component {
+  /* Slide-Out Cart Drawer Modal Only */
+  body.template-index dialog.cart-drawer__dialog,
+  body.template-index .cart-drawer__dialog {
     background-color: #ffffff !important;
     background: #ffffff !important;
     color: #111111 !important;
   }
 
-  .cart-drawer *:not(.cart__checkout-button):not(.cart__checkout-button *):not(#checkout):not(#checkout *):not(.close-button):not(.close-button *),
-  cart-drawer-component *:not(.cart__checkout-button):not(.cart__checkout-button *):not(#checkout):not(#checkout *):not(.close-button):not(.close-button *),
-  dialog.cart-drawer__dialog *:not(.cart__checkout-button):not(.cart__checkout-button *):not(#checkout):not(#checkout *):not(.close-button):not(.close-button *) {
-    color: #111111 !important;
+  body.template-index dialog.cart-drawer__dialog * {
+    --color-background: #ffffff !important;
   }
 
   /* Product Filter Category Tabs (RANGE, SNACKBOX, COMBO) */
