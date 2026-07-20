@@ -126,13 +126,15 @@
   body.template-index [class*="ai-logo-carousel"],
   body.template-index .shopify-section:has([class*="193b272"]),
   body.template-index .section:has([class*="193b272"]) {
-    background-color: #d52528 !important;
-    background: #d52528 !important;
+    background-color: #ffffff !important;
+    background: #ffffff !important;
   }
 
   body.template-index [class*="193b272"] h2,
-  body.template-index [class*="ai-logo-carousel"] h2 {
-    color: #ffffff !important;
+  body.template-index [class*="ai-logo-carousel"] h2,
+  body.template-index [class*="193b272"] [class*="heading"],
+  body.template-index [class*="ai-logo-carousel"] [class*="heading"] {
+    color: #d52528 !important;
   }
 
   {% for scheme in settings.color_schemes -%}
