@@ -687,7 +687,7 @@ main-collection,
 }
 
 /* ==========================================================================
-   AVYAH FULL-BLEED MONTHLY HERO BANNER (60% COMPACT HEIGHT, EDGE-TO-EDGE)
+   AVYAH FULL-BLEED MONTHLY HERO BANNER (728PX CONTAINER, UNCROPPED GRAPHIC)
    ========================================================================== */
 .avyah-collection-hero-banner {
   width: 100vw !important;
@@ -696,49 +696,44 @@ main-collection,
   margin-right: calc(50% - 50vw) !important;
   margin-top: 0 !important;
   margin-bottom: 24px !important;
-  padding: 0 !important;
+  padding: 12px 0 !important;
   position: relative !important;
   top: 0 !important;
   left: 0 !important;
   right: 0 !important;
-  max-height: 280px !important;
   overflow: hidden !important;
   clear: both !important;
   line-height: 0 !important;
   background-color: #d52528 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .avyah-collection-hero-banner__link {
-  display: block !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
   width: 100% !important;
-  height: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  max-width: 728px !important;
+  margin: 0 auto !important;
+  padding: 0 16px !important;
   line-height: 0 !important;
 }
 
 .avyah-collection-hero-banner__image,
 .avyah-collection-hero-banner img {
   width: 100% !important;
-  max-width: 100% !important;
-  height: 280px !important;
-  max-height: 280px !important;
+  max-width: 728px !important;
+  height: auto !important;
+  min-height: initial !important;
+  max-height: initial !important;
   display: block !important;
-  object-fit: cover !important;
-  object-position: center !important;
+  object-fit: contain !important;
   border: none !important;
-  border-radius: 0 !important;
+  border-radius: 12px !important;
   margin: 0 auto !important;
   padding: 0 !important;
-}
-
-@media screen and (max-width: 749px) {
-  .avyah-collection-hero-banner,
-  .avyah-collection-hero-banner__image,
-  .avyah-collection-hero-banner img {
-    height: 180px !important;
-    max-height: 180px !important;
-  }
 }
 
 /* Ensure product card media containers & links display image properly */
