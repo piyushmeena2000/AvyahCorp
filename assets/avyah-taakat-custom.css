@@ -743,10 +743,21 @@ results-list .card-gallery:hover img,
   transform: scale(1.06) !important;
 }
 
-/* Product Card Information Alignment (Below Image) */
+/* Product Card Gallery Image Containers (Pastel Rounded Cards) */
+results-list .card-gallery,
+.collection-wrapper .card-gallery,
+.product-grid__item .card-gallery,
+.product-card .card-gallery,
+.product-media-container {
+  border-radius: 20px !important;
+  overflow: hidden !important;
+}
+
+/* Product Card Information Alignment & Ordering (Below Image) */
 results-list .product-card__content,
 .collection-wrapper .product-card__content,
-.product-grid__item .product-card__content {
+.product-grid__item .product-card__content,
+.product-card {
   background: transparent !important;
   padding: 12px 0 8px 0 !important;
   display: flex !important;
@@ -756,38 +767,7 @@ results-list .product-card__content,
   overflow: visible !important;
 }
 
-/* Force Anton Font for Product Titles */
-results-list .product-card [class*="product-title"],
-.collection-wrapper .product-card [class*="product-title"],
-results-list .product-card .product-title,
-.collection-wrapper .product-card .product-title,
-results-list .product-card h3,
-.collection-wrapper .product-card h3,
-results-list .product-card a,
-.collection-wrapper .product-card a,
-.product-card [class*="title"],
-.product-card h3,
-.product-card h2,
-.product-card a,
-.product-grid__item [class*="title"],
-.product-grid__item h3,
-.product-grid__item a {
-  font-family: 'Anton', sans-serif !important;
-  font-size: 16px !important;
-  line-height: 1.25 !important;
-  color: #000000 !important;
-  text-transform: uppercase !important;
-  text-align: left !important;
-  margin: 6px 0 4px 0 !important;
-  letter-spacing: 0.5px !important;
-  word-break: break-word !important;
-  white-space: normal !important;
-  overflow: visible !important;
-  width: 100% !important;
-  display: block !important;
-}
-
-/* Force Left-Alignment for Review Stars & Judge.me Widget */
+/* 1. Review Rating Stars directly below image */
 results-list .product-card .jdgm-widget,
 .collection-wrapper .product-card .jdgm-widget,
 results-list .product-card .jdgm-prev-badge,
@@ -804,11 +784,12 @@ results-list .product-card [class*="rating"],
 .product-grid__item [class*="rating"],
 .product-grid__item [class*="review"],
 .jdgm-prev-badge {
+  order: 1 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
   text-align: left !important;
-  margin: 4px 0 6px 0 !important;
+  margin: 6px 0 4px 0 !important;
   margin-left: 0 !important;
   margin-right: auto !important;
   width: 100% !important;
@@ -836,20 +817,112 @@ results-list .product-card .jdgm-prev-badge__text,
   margin-left: 0 !important;
 }
 
+/* 2. Force Anton Font for Product Titles */
+results-list .product-card [class*="product-title"],
+.collection-wrapper .product-card [class*="product-title"],
+results-list .product-card .product-title,
+.collection-wrapper .product-card .product-title,
+results-list .product-card h3,
+.collection-wrapper .product-card h3,
+results-list .product-card a,
+.collection-wrapper .product-card a,
+.product-card [class*="title"],
+.product-card h3,
+.product-card h2,
+.product-card a,
+.product-card p,
+.product-grid__item [class*="title"],
+.product-grid__item h3,
+.product-grid__item a,
+.product-title-block,
+[data-block-id*="title"] * {
+  order: 2 !important;
+  font-family: 'Anton', sans-serif !important;
+  font-size: 16px !important;
+  line-height: 1.25 !important;
+  color: #000000 !important;
+  text-transform: uppercase !important;
+  text-align: left !important;
+  margin: 4px 0 6px 0 !important;
+  letter-spacing: 0.5px !important;
+  font-weight: 400 !important;
+  word-break: break-word !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  width: 100% !important;
+  display: block !important;
+}
+
+/* 3. Force Anton Font & Bigger Price */
 results-list .product-card .price,
 .collection-wrapper .product-card .price,
 results-list .product-card .price *,
 .collection-wrapper .product-card .price *,
 .product-card .price,
-.product-grid__item .price {
+.product-grid__item .price,
+.price-item,
+.price-item--sale,
+.price-item--regular {
+  order: 3 !important;
   color: #000000 !important;
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 15px !important;
+  font-family: 'Anton', sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 20px !important;
+  letter-spacing: 0.5px !important;
   text-align: left !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
+  margin: 2px 0 10px 0 !important;
+}
+
+results-list .product-card .price--on-sale .price-item--regular,
+.collection-wrapper .product-card .price--on-sale .price-item--regular,
+.price--on-sale .price-item--regular {
+  color: #888888 !important;
+  font-size: 15px !important;
+  text-decoration: line-through !important;
+  margin-right: 6px !important;
+}
+
+/* 4. Quick Add to Cart Form & Crimson Red Button */
+.avyah-card-quick-add-form {
+  order: 4 !important;
+  width: 100% !important;
+  margin-top: 6px !important;
+}
+
+.avyah-card-add-to-cart-btn {
+  width: 100% !important;
+  background-color: #d52528 !important;
+  color: #ffffff !important;
+  font-family: 'Anton', sans-serif !important;
+  font-size: 15px !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  padding: 10px 16px !important;
+  border-radius: 30px !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease !important;
+  box-shadow: 0 4px 12px rgba(213, 37, 40, 0.25) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.avyah-card-add-to-cart-btn:hover {
+  background-color: #b01b1e !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(213, 37, 40, 0.35) !important;
+}
+
+.avyah-card-add-to-cart-btn[disabled] {
+  background-color: #cccccc !important;
+  color: #666666 !important;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+  transform: none !important;
 }
 
 results-list .product-card .price--on-sale .price-item--regular,

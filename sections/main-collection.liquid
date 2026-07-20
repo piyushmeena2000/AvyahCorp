@@ -81,6 +81,17 @@
             {% # theme-check-disable %}
             {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
             {% # theme-check-enable %}
+
+            <form action="/cart/add" method="post" enctype="multipart/form-data" class="avyah-card-quick-add-form">
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              <button
+                type="submit"
+                class="avyah-card-add-to-cart-btn"
+                {% unless product.available %}disabled{% endunless %}
+              >
+                {% if product.available %}ADD TO CART{% else %}OUT OF STOCK{% endif %}
+              </button>
+            </form>
           </li>
         {% endfor %}
       {% endcapture %}
