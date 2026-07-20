@@ -1120,42 +1120,44 @@ body.template-index .product-grid__item:nth-child(5n+4) .card-gallery { backgrou
 body.template-index .product-grid__item:nth-child(5n+5) .card-gallery { background-color: #f7e6e7 !important; }
 
 /* ==========================================================================
-   CUSTOMER REVIEWS SECTION - CRIMSON RED SECTION BG, WHITE CARDS WITH BLACK TEXT
+   CUSTOMER REVIEWS SECTION - CRIMSON RED BACKGROUND (#d52528) & WHITE TITLES
    ========================================================================== */
+body.template-index #shopify-section-blocks_zFCw9K,
+body.template-index #shopify-section-blocks_zFCw9K *,
+body.template-index .shopify-section:has([class*="c24781f"]),
+body.template-index .section:has([class*="c24781f"]),
 body.template-index [class*="c24781f"],
-body.template-index [class*="c24781f"] > div {
+body.template-index [class*="c24781f"] [class*="container"],
+body.template-index [class*="c24781f"] [class*="header"] {
   background-color: #d52528 !important;
   background: #d52528 !important;
 }
 
-/* Section Title & Subtitle - WHITE text */
+/* Force Section Title and Subtitle to WHITE */
+body.template-index [class*="c24781f"] [class*="title"],
+body.template-index [class*="c24781f"] [class*="subtitle"],
 body.template-index [class*="c24781f"] h2,
-body.template-index [class*="c24781f"] h3,
-body.template-index [class*="c24781f"] p.subheading,
-body.template-index [class*="c24781f"] > div > h2,
-body.template-index [class*="c24781f"] > div > p,
-body.template-index [class*="c24781f"] > div > div > h2,
-body.template-index [class*="c24781f"] > div > div > p,
-body.template-index [class*="c24781f"] .heading,
-body.template-index [class*="c24781f"] .subheading {
+body.template-index [class*="c24781f"] p.ai-testimonial-carousel__subtitle-c24781f,
+body.template-index [class*="c24781f"] [class*="header"] * {
   color: #ffffff !important;
 }
 
-/* ONLY individual Review Cards - White card background & Black text */
-body.template-index [class*="c24781f"] [class*="card"],
-body.template-index [class*="c24781f"] [class*="testimonial"],
-body.template-index [class*="c24781f"] [class*="slide"] > div,
-body.template-index [class*="c24781f"] [class*="slider"] > div {
+/* Review Cards background WHITE and text BLACK */
+body.template-index [class*="c24781f"] [class*="card"] {
   background-color: #ffffff !important;
   background: #ffffff !important;
+}
+
+body.template-index [class*="c24781f"] [class*="card"] p,
+body.template-index [class*="c24781f"] [class*="card"] span,
+body.template-index [class*="c24781f"] [class*="card"] b,
+body.template-index [class*="c24781f"] [class*="card"] strong,
+body.template-index [class*="c24781f"] [class*="card"] div {
   color: #111111 !important;
 }
 
-body.template-index [class*="c24781f"] [class*="card"] *,
-body.template-index [class*="c24781f"] [class*="testimonial"] *,
-body.template-index [class*="c24781f"] [class*="slide"] > div *,
-body.template-index [class*="c24781f"] [class*="slider"] > div * {
-  color: #111111 !important;
+body.template-index [class*="c24781f"] [class*="card"] [class*="name"] {
+  color: #d52528 !important;
 }
 body.template-index [class*="partner"],
 body.template-index [class*="available"],
