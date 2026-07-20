@@ -976,4 +976,19 @@ results-list .product-badges__badge,
   letter-spacing: 0.5px !important;
 }
 
+/* ==========================================================================
+   HOMEPAGE BRAND CRIMSON RED BACKGROUND
+   ========================================================================== */
+body.template-index,
+body.template-index #MainContent,
+body.template-index .content-for-layout,
+main[data-template="index"],
+main[data-template="index"] .shopify-section {
+  background-color: #d52528 !important;
+}
+
+body.template-index .section-background {
+  background-color: #d52528 !important;
+}
+
 
