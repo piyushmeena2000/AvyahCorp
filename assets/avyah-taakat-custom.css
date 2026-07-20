@@ -440,27 +440,27 @@
 
 
 /* ==========================================================================
-   PERFECTSNACKS COLLECTION LISTING OVERRIDES (CRIMSON RED BRAND THEME)
+   PERFECTSNACKS COLLECTION LISTING OVERRIDES (PURE WHITE CLEAN THEME)
    ========================================================================== */
 
-/* Force Collection Page Background & Container to Crimson Red */
+/* Force Collection Page Background & Container to Clean Pure White */
 body:has(.product-grid-container),
 .product-grid-container,
 .collection-wrapper,
 results-list,
 .section-background:has(+ results-list),
 .main-collection-grid {
-  background-color: #d52528 !important;
-  color: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #3d2b27 !important;
 }
 
-/* Ensure section backgrounds on collection templates are crimson red */
+/* Ensure section backgrounds on collection templates are white */
 .section-background.color-scheme-1,
 .section-background.color-scheme-2,
 .section-background.color-scheme-3,
 .section-background.color-scheme-4,
 .section-background.color-scheme-5 {
-  background-color: #d52528 !important;
+  background-color: #ffffff !important;
 }
 
 /* Collection Hero Header & Titles Centering (Header Only) */
@@ -468,7 +468,7 @@ results-list,
 .collection-hero,
 [data-section-type="collection-hero"],
 .collection-header {
-  background-color: #d52528 !important;
+  background-color: #ffffff !important;
   text-align: center !important;
   padding: 40px 20px 20px 20px !important;
 }
@@ -481,7 +481,7 @@ results-list,
   font-family: 'Anton', sans-serif !important;
   font-size: 52px !important;
   text-transform: uppercase !important;
-  color: #ffffff !important;
+  color: #3d2b27 !important;
   text-align: center !important;
   letter-spacing: 0.5px !important;
   margin: 0 auto 10px auto !important;
@@ -494,7 +494,7 @@ results-list,
   font-family: 'Anton', sans-serif !important;
   font-size: 52px !important;
   text-transform: uppercase !important;
-  color: #ffffff !important;
+  color: #3d2b27 !important;
   text-align: center !important;
   letter-spacing: 0.5px !important;
   margin: 0 auto 10px auto !important;
@@ -505,7 +505,7 @@ results-list,
 .collection-description {
   font-family: 'Inter', sans-serif !important;
   font-size: 15px !important;
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: #6a5e5c !important;
   text-align: center !important;
   max-width: 680px !important;
   margin: 0 auto 24px auto !important;
@@ -527,7 +527,7 @@ results-list,
   font-size: 17px !important;
   text-transform: uppercase !important;
   letter-spacing: 1px !important;
-  color: rgba(255, 255, 255, 0.7) !important;
+  color: #8c7f7c !important;
   text-decoration: none !important;
   padding-bottom: 4px !important;
   border-bottom: 2px solid transparent !important;
@@ -536,8 +536,8 @@ results-list,
 
 .perfect-collection-subnav a.active,
 .perfect-collection-subnav a:hover {
-  color: #ffffff !important;
-  border-bottom-color: #ffffff !important;
+  color: #3d2b27 !important;
+  border-bottom-color: #3d2b27 !important;
 }
 
 /* Collection Filter Bar (Availability, Price, Sort) */
@@ -546,8 +546,8 @@ facets-form,
 .facets__wrapper,
 .facets-block-wrapper,
 .facets {
-  background-color: #d52528 !important;
-  color: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #3d2b27 !important;
 }
 
 .facets__label,
@@ -556,17 +556,17 @@ facets-form,
 .facets__item,
 .facet-filters__label,
 .facet-filters__summary {
-  color: #ffffff !important;
+  color: #3d2b27 !important;
   font-weight: 600 !important;
 }
 
 .facet-filters__sort,
 .facets__summary-button {
-  border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+  border: 1.5px solid #e1dcd7 !important;
   border-radius: 30px !important;
   padding: 8px 16px !important;
-  background-color: transparent !important;
-  color: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #3d2b27 !important;
 }
 
 .facet-filters__sort select,
@@ -673,7 +673,7 @@ results-list .product-card h3,
   font-family: 'Anton', sans-serif !important;
   font-size: 20px !important;
   line-height: 1.25 !important;
-  color: #ffffff !important;
+  color: #3d2b27 !important;
   text-transform: uppercase !important;
   margin-top: 8px !important;
   margin-bottom: 6px !important;
@@ -684,14 +684,14 @@ results-list .product-card .price,
 .collection-wrapper .product-card .price,
 results-list .product-card .price *,
 .collection-wrapper .product-card .price * {
-  color: #ffffff !important;
+  color: #3d2b27 !important;
   font-weight: 700 !important;
   font-size: 16px !important;
 }
 
 results-list .product-card .price--on-sale .price-item--regular,
 .collection-wrapper .product-card .price--on-sale .price-item--regular {
-  color: rgba(255, 255, 255, 0.65) !important;
+  color: #999999 !important;
   text-decoration: line-through !important;
   margin-right: 6px !important;
 }
@@ -699,7 +699,7 @@ results-list .product-card .price--on-sale .price-item--regular,
 /* Badge Overrides on Collection Cards */
 results-list .product-badges__badge,
 .collection-wrapper .product-badges__badge {
-  background-color: #3d2b27 !important;
+  background-color: #d52528 !important;
   color: #ffffff !important;
   font-family: 'Anton', sans-serif !important;
   font-size: 11px !important;
