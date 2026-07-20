@@ -58,7 +58,7 @@
     <a href="/collections/mast-mix" class="{% if collection.handle == 'mast-mix' or collection.handle == 'mastmix' %}active{% endif %}">MAST MIX</a>
     <a href="/collections/king" class="{% if collection.handle == 'king' %}active{% endif %}">KING</a>
     <a href="/collections/combos" class="{% if collection.handle == 'combos' or collection.handle == 'combo' %}active{% endif %}">COMBOS</a>
-    <a href="/collections/snackbox" class="{% if collection.handle == 'snackbox' or collection.handle == 'snack-box' %}active{% endif %}">SNACKBOX</a>
+    <a href="/collections/all" class="{% if collection.handle == 'snackbox' or collection.handle == 'snack-box' or collection.handle == 'all' %}active{% endif %}">SNACKBOX</a>
   </div>
 
   <div
@@ -77,14 +77,9 @@
       {% assign products_per_page = section.settings.products_per_page %}
     {% endif %}
 
-    {% assign current_products = collection.products %}
-    {% if current_products.size == 0 %}
-      {% assign current_products = collections['all'].products %}
-    {% endif %}
-
-    {% paginate current_products by products_per_page %}
+    {% paginate collection.products by products_per_page %}
       {% capture children %}
-        {% for product in current_products %}
+        {% for product in collection.products %}
           <li
             id="{{ section.id }}-{{ product.id }}"
             class="product-grid__item product-grid__item--{{ forloop.index0 }}"
@@ -102,7 +97,7 @@
       {% render 'product-grid',
         section: section,
         children: children,
-        products: current_products,
+        products: collection.products,
         paginate: paginate,
         enable_infinite_scroll: section.settings.enable_infinite_scroll
       %}
