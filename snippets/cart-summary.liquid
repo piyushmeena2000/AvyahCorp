@@ -63,11 +63,12 @@
       class="cart__summary-item cart__total"
       role="status"
     >
-      <span class="cart__total-label cart-primary-typography">{{ 'content.cart_estimated_total' | t }}</span>
+      <span class="cart__total-label cart-primary-typography" style="color: #111111 !important;">{{ 'content.cart_estimated_total' | t }}</span>
       <text-component
         ref="cartTotal"
         value="{{ total_price | strip_html }}"
         class="cart__total-value cart-secondary-typography"
+        style="color: #111111 !important; font-weight: 800;"
         {% comment %} Used by payment_terms web component {% endcomment %}
         data-cart-subtotal
       >
@@ -75,13 +76,13 @@
       </text-component>
     </span>
     {% if settings.show_installments %}
-      <span class="cart__summary-item cart__installments">
+      <span class="cart__summary-item cart__installments" style="color: #111111 !important;">
         {% form 'cart', cart %}
           {{ form | payment_terms }}
         {% endform %}
       </span>
     {% endif %}
-    <div class="cart__summary-item tax-note cart-primary-typography">
+    <div class="cart__summary-item tax-note cart-primary-typography" style="color: #666666 !important;">
       {% render 'tax-info', has_discounts_enabled: settings.show_add_discount_code %}
     </div>
   </div>
