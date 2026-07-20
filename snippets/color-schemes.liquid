@@ -206,35 +206,46 @@
     color: #ffffff !important;
   }
 
-  /* Cart Drawer Overrides - Pure White Background & Black Font */
-  .cart-drawer,
-  cart-drawer-component,
-  dialog.cart-drawer__dialog,
-  .cart-drawer__dialog,
-  .cart-drawer__inner,
-  .cart-drawer__content,
-  .cart-drawer__header,
-  .cart-drawer__summary,
-  .cart-items-component {
-    --color-background: #ffffff !important;
-    --color-foreground: #111111 !important;
-    --color-heading: #111111 !important;
-    background-color: #ffffff !important;
-    background: #ffffff !important;
-    color: #111111 !important;
+  /* Header Cart Trigger Button - NO white background */
+  header cart-drawer-component,
+  header [data-testid="cart-drawer-trigger"],
+  .header-actions cart-drawer-component,
+  .header-actions [data-testid="cart-drawer-trigger"],
+  .header-actions__action {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
   }
 
-  .cart-drawer h1,
-  .cart-drawer h2,
-  .cart-drawer h3,
-  .cart-drawer h4,
-  .cart-drawer .cart-drawer__heading,
-  .cart-drawer .cart-items__title,
-  .cart-drawer .cart-items__title a,
-  .cart-drawer .cart-items__price,
-  .cart-drawer .cart__total-label,
-  .cart-drawer .cart__total-value,
-  .cart-drawer [data-cart-subtotal] {
+  header cart-drawer-component svg,
+  header [data-testid="cart-drawer-trigger"] svg,
+  .header-actions cart-drawer-component svg,
+  .header-actions [data-testid="cart-drawer-trigger"] svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+  }
+
+  /* Cart Drawer Overrides - Pure White Background & BLACK Font */
+  body.template-index dialog.cart-drawer__dialog,
+  body.template-index .cart-drawer__dialog,
+  body.template-index .cart-drawer__inner,
+  body.template-index .cart-drawer__content,
+  body.template-index .cart-drawer__header,
+  body.template-index .cart-drawer__summary,
+  body.template-index .cart-items-component {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+  }
+
+  body.template-index dialog.cart-drawer__dialog *,
+  body.template-index .cart-drawer__dialog *,
+  body.template-index .cart-drawer__inner *,
+  body.template-index .cart-drawer__content *,
+  body.template-index .cart-drawer__header *,
+  body.template-index .cart-drawer__summary *,
+  body.template-index .cart-items-component * {
     color: #111111 !important;
   }
 
