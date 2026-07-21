@@ -721,14 +721,17 @@
                 <span class="count">({{ i | times: 184 | plus: 120 }})</span>
               </div>
               <h3 class="ai-product-card-title-{{ ai_gen_id }}">Sample Product Title</h3>
-              <p class="ai-product-card-specs-{{ ai_gen_id }}">5g Protein* • 10 Bars</p>
-              <div class="ai-product-card-price-row-{{ ai_gen_id }}">
-                <span class="compare-price">₹840</span>
-                <span class="current-price">₹550</span>
-                <span class="discount-badge">-35% OFF</span>
+              <p class="ai-product-card-specs-{{ ai_gen_id }}" style="text-align: left !important; margin-left: 0 !important; color: #666666 !important; font-weight: 600 !important; text-transform: uppercase !important; font-size: 12px !important; margin-top: 4px !important; margin-bottom: 8px !important;">PACK OF 1 • 10 BARS</p>
+              <div class="ai-product-card-price-row-{{ ai_gen_id }}" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: flex-start !important; align-self: flex-start !important; text-align: left !important; float: left !important; margin-left: 0 !important; margin-right: auto !important; width: 100% !important; gap: 8px !important;">
+                <span class="compare-price" style="text-align: left !important; float: left !important; margin-left: 0 !important;">Rs. 600.00</span>
+                <span class="current-price" style="text-align: left !important; float: left !important; margin-left: 0 !important;">Rs. 550.00</span>
+                <span class="discount-badge" style="text-align: left !important; float: left !important; margin-left: 0 !important;">-8% OFF</span>
               </div>
             </div>
-            <button class="ai-product-card-button-{{ ai_gen_id }}">
+            <button
+              class="ai-product-card-button-{{ ai_gen_id }}"
+              style="background-color: #8B0000 !important; background: #8B0000 !important; color: #ffffff !important; border-color: #8B0000 !important;"
+            >
               ADD TO CART
             </button>
           </div>
