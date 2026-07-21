@@ -1632,16 +1632,52 @@ body:has(.avyah-megamenu:hover) #MainContent {
 
 .header-section,
 #header-group,
-header-component {
+#header-component,
+header-component,
+.header,
+.header__inner,
+header-menu,
+.header-menu,
+.menu-list {
   position: sticky !important;
   top: 0 !important;
   z-index: 10000 !important;
   transition: none !important; /* Zero transition delay or animation */
   will-change: transform;
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+  color: #ffffff !important;
 }
 
 header-component.header[data-sticky-state] {
   transition: none !important;
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+}
+
+/* Force all header menu links, titles & icons to WHITE (#ffffff) */
+#header-group *:not(.menu-list__submenu *):not(.avyah-discover-card *),
+.header *:not(.menu-list__submenu *):not(.avyah-discover-card *),
+.header__inline-menu *:not(.menu-list__submenu *):not(.avyah-discover-card *),
+.header__menu-item:not(.menu-list__submenu *),
+header nav *:not(.menu-list__submenu *):not(.avyah-discover-card *),
+.header-actions__action,
+.header-actions__action *:not(.cart-count),
+header-component *:not(.menu-list__submenu *):not(.avyah-discover-card *) {
+  color: #ffffff !important;
+}
+
+header-component svg:not(.dd-icon),
+header-component svg path:not(.dd-icon *),
+header-component svg circle:not(.dd-icon *),
+header-component svg polyline:not(.dd-icon *),
+header-component svg line:not(.dd-icon *),
+#header-group svg:not(.dd-icon),
+#header-group svg path:not(.dd-icon *),
+.header svg:not(.dd-icon),
+.header svg path:not(.dd-icon *) {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
 }
 
 /* ========================================================
