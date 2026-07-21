@@ -1001,103 +1001,97 @@ body.template-index [class*="ai-product-tab-btn"].active {
 /* ==========================================================================
    HEADER CART ICON TRIGGER BUTTON - TRANSPARENT BACKGROUND & WHITE ICON
    ========================================================================== */
-body.template-index cart-drawer-component:not(dialog *),
-body.template-index .cart-drawer:not(dialog *),
-body.template-index [data-testid="cart-drawer-trigger"],
-body.template-index .header-actions__action {
+header [data-testid="cart-drawer-trigger"],
+.header-actions__action {
   background: transparent !important;
   background-color: transparent !important;
   box-shadow: none !important;
   border: none !important;
 }
 
-body.template-index cart-drawer-component:not(dialog *) *,
-body.template-index .cart-drawer:not(dialog *) *,
-body.template-index [data-testid="cart-drawer-trigger"] * {
+header [data-testid="cart-drawer-trigger"] *,
+.header-actions__action * {
   background: transparent !important;
   background-color: transparent !important;
   color: #ffffff !important;
 }
 
-body.template-index cart-drawer-component:not(dialog *) svg,
-body.template-index .cart-drawer:not(dialog *) svg,
-body.template-index [data-testid="cart-drawer-trigger"] svg {
+header [data-testid="cart-drawer-trigger"] svg,
+.header-actions__action svg {
   color: #ffffff !important;
   stroke: #ffffff !important;
   fill: none !important;
 }
 
-body.template-index cart-drawer-component:not(dialog *) .cart-bubble {
-  background-color: #000000 !important;
-}
-
-body.template-index cart-drawer-component:not(dialog *) .cart-bubble__text-count {
-  color: #ffffff !important;
-  font-weight: 700 !important;
-}
-
 /* ==========================================================================
    SLIDE-OUT CART DRAWER PANEL (MODAL ONLY) - PURE WHITE BACKGROUND & BLACK FONT
    ========================================================================== */
-body.template-index dialog,
-body.template-index dialog *,
-body.template-index .cart-drawer,
-body.template-index .cart-drawer *,
-body.template-index .cart-drawer__dialog,
-body.template-index .cart-drawer__dialog *,
-body.template-index cart-drawer-component dialog * {
+dialog.cart-drawer__dialog,
+.cart-drawer__dialog,
+cart-drawer-component dialog {
   --color-background: 255, 255, 255 !important;
   --color-background-rgb: 255, 255, 255 !important;
   --gradient-background: #ffffff !important;
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+}
+
+dialog.cart-drawer__dialog *,
+.cart-drawer__dialog *,
+.cart-drawer__content *,
+.perfect-cart-items-wrapper *,
+.perfect-cart-item-row * {
+  color: #111111 !important;
+}
+
+/* Specific button / badge overrides */
+dialog.cart-drawer__dialog .cart__checkout-button,
+dialog.cart-drawer__dialog .cart__checkout-button *,
+.cart__checkout-button,
+.cart__checkout-button * {
+  color: #ffffff !important;
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+}
+
+dialog.cart-drawer__dialog .upsell-add-btn,
+dialog.cart-drawer__dialog .upsell-add-btn *,
+.upsell-add-btn,
+.upsell-add-btn * {
+  color: #ffffff !important;
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+}
+
+dialog.cart-drawer__dialog .perfect-cart-progress-status,
+dialog.cart-drawer__dialog .perfect-cart-progress-status *,
+dialog.cart-drawer__dialog .perfect-cart-step-label,
+dialog.cart-drawer__dialog .perfect-cart-step-badge {
+  color: #d52528 !important;
+}
+
+dialog.cart-drawer__dialog .perfect-cart-step-circle {
+  color: #ffffff !important;
+  background-color: #d52528 !important;
+  border-color: #d52528 !important;
 }
 
 body.template-index dialog.cart-drawer__dialog,
 body.template-index .cart-drawer__dialog,
 body.template-index dialog.cart-drawer__dialog div,
 body.template-index dialog.cart-drawer__dialog form,
-body.template-index dialog.cart-drawer__dialog table,
-body.template-index dialog.cart-drawer__dialog tr,
-body.template-index dialog.cart-drawer__dialog td,
-body.template-index dialog.cart-drawer__dialog th,
 body.template-index dialog.cart-drawer__dialog .cart-drawer__inner,
 body.template-index dialog.cart-drawer__dialog .cart-drawer__content,
 body.template-index dialog.cart-drawer__dialog .cart-drawer__header,
 body.template-index dialog.cart-drawer__dialog .cart-drawer__summary,
-body.template-index dialog.cart-drawer__dialog .cart-items-component,
-body.template-index dialog.cart-drawer__dialog .cart-items,
-body.template-index dialog.cart-drawer__dialog .cart-items__wrapper,
-body.template-index dialog.cart-drawer__dialog .cart-items__table,
-body.template-index dialog.cart-drawer__dialog .cart-items__table tbody,
-body.template-index dialog.cart-drawer__dialog .cart-items__table-row,
+body.template-index dialog.cart-drawer__dialog .perfect-cart-items-wrapper,
+body.template-index dialog.cart-drawer__dialog .perfect-cart-item-row,
 body.template-index dialog.cart-drawer__dialog .perfect-cart-progress-container,
 body.template-index dialog.cart-drawer__dialog .cart-drawer-upsell-container,
 body.template-index dialog.cart-drawer__dialog .cart-drawer-upsell-card,
 body.template-index dialog.cart-drawer__dialog .cart__summary-container {
   background-color: #ffffff !important;
   background: #ffffff !important;
-}
-
-/* All text inside slide-out cart drawer dialog -> BLACK (#111111) */
-body.template-index dialog.cart-drawer__dialog h1,
-body.template-index dialog.cart-drawer__dialog h2,
-body.template-index dialog.cart-drawer__dialog h3,
-body.template-index dialog.cart-drawer__dialog h4,
-body.template-index dialog.cart-drawer__dialog h5,
-body.template-index dialog.cart-drawer__dialog h6,
-body.template-index dialog.cart-drawer__dialog p,
-body.template-index dialog.cart-drawer__dialog a,
-body.template-index dialog.cart-drawer__dialog span:not(.visually-hidden):not(.quantity-selector *):not(.cart__checkout-button *),
-body.template-index dialog.cart-drawer__dialog td,
-body.template-index dialog.cart-drawer__dialog th,
-body.template-index dialog.cart-drawer__dialog div,
-body.template-index dialog.cart-drawer__dialog text-component,
-body.template-index dialog.cart-drawer__dialog .cart-drawer__heading,
-body.template-index dialog.cart-drawer__dialog .cart-items__title,
-body.template-index dialog.cart-drawer__dialog .cart-items__price,
-body.template-index dialog.cart-drawer__dialog .cart__total-label,
-body.template-index dialog.cart-drawer__dialog .cart__total-value,
-body.template-index dialog.cart-drawer__dialog [data-cart-subtotal] {
-  color: #111111 !important;
 }
 
 /* Compare-at prices -> Grey */
