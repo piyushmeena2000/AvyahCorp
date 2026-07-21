@@ -101,27 +101,32 @@
                 </div>
               </div>
 
-              <!-- Row 4: Quantity Stepper & Remove Button -->
-              <div class="perfect-cart-item-controls" style="display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 4px !important;">
-                {% assign can_update_quantity = item.instructions.can_update_quantity | default: true, allow_false: true %}
-                {% render 'quantity-selector',
-                  product: item.product,
-                  in_cart_quantity: item.quantity,
-                  line_index: item.index,
-                  min: 0,
-                  class: 'perfect-quantity-stepper',
-                  can_update_quantity: can_update_quantity
-                %}
+              <!-- Row 4: Quantity Stepper [ - 1 + ] & Remove Link -->
+              <div class="perfect-cart-item-controls" style="display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 4px !important; margin-top: 4px !important;">
+                <div class="perfect-qty-pill" style="display: inline-flex !important; align-items: center !important; justify-content: space-between !important; border: 1px solid #d5d5d5 !important; border-radius: 50px !important; height: 32px !important; width: 90px !important; background-color: #ffffff !important; padding: 0 4px !important; box-sizing: border-box !important;">
+                  <a
+                    href="/cart/change?line={{ item.index }}&quantity={{ item.quantity | minus: 1 }}"
+                    style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 16px !important; font-weight: 700 !important; text-decoration: none !important; width: 28px !important; height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; user-select: none !important;"
+                    aria-label="Decrease quantity"
+                  >-</a>
+                  
+                  <span style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 13px !important; font-weight: 700 !important; width: 26px !important; text-align: center !important; display: block !important;">
+                    {{ item.quantity }}
+                  </span>
 
-                <button
-                  type="button"
-                  class="perfect-remove-btn"
-                  style="background: none !important; border: none !important; padding: 0 !important; font-family: 'Inter', sans-serif !important; font-size: 12px !important; font-weight: 600 !important; color: #111111 !important; text-decoration: underline !important; cursor: pointer !important; margin-top: 2px !important;"
-                  aria-label="{{ 'accessibility.remove_item' | t: title: item.title | escape }}"
-                  on:click="/onLineItemRemove/{{ item.index | plus: 1 }}"
+                  <a
+                    href="/cart/change?line={{ item.index }}&quantity={{ item.quantity | plus: 1 }}"
+                    style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 16px !important; font-weight: 700 !important; text-decoration: none !important; width: 28px !important; height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; user-select: none !important;"
+                    aria-label="Increase quantity"
+                  >+</a>
+                </div>
+
+                <a
+                  href="/cart/change?line={{ item.index }}&quantity=0"
+                  style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 12px !important; font-weight: 600 !important; text-decoration: underline !important; display: inline-block !important; margin-top: 4px !important;"
                 >
                   Remove
-                </button>
+                </a>
               </div>
             </div>
           </div>
