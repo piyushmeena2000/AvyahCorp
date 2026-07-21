@@ -2,8 +2,8 @@
   Renders the upsell section inside the cart drawer
 {%- endcomment -%}
 
-<div class="cart-drawer-upsell-container">
-  <h3 class="cart-drawer-upsell-heading">Stock Up and Save:</h3>
+<div class="cart-drawer-upsell-container" style="background-color: #ffffff !important;">
+  <h3 class="cart-drawer-upsell-heading" style="color: #111111 !important; font-family: 'Anton', sans-serif !important; font-weight: 400 !important; font-size: 18px !important; text-transform: uppercase !important; margin: 0 0 12px 0;">You May Also Like:</h3>
   <div class="cart-drawer-upsell-list scrollbar-hidden">
     {%- liquid
       # Get the first collection or all products
@@ -25,15 +25,15 @@
         {%- assign variant = prod.first_available_variant -%}
         {%- if variant.available -%}
           {%- assign count = count | plus: 1 -%}
-          <div class="cart-drawer-upsell-card">
-            <div class="upsell-image-wrap">
-              <img src="{{ prod.featured_image | img_url: '200x200', crop: 'center' }}" alt="{{ prod.title }}" loading="lazy">
+          <div class="cart-drawer-upsell-card" style="background-color: #ffffff !important; border: 1px solid #f0f0f0 !important;">
+            <div class="upsell-image-wrap" style="border-radius: 12px !important; overflow: hidden !important;">
+              <img src="{{ prod.featured_image | img_url: '200x200', crop: 'center' }}" alt="{{ prod.title }}" loading="lazy" style="width: 100% !important; height: 100% !important; object-fit: cover !important;">
             </div>
             <div class="upsell-info">
-              <h4 class="upsell-title">{{ prod.title | truncate: 35 }}</h4>
-              <span class="upsell-price">{{ prod.price | money }}</span>
+              <h4 class="upsell-title" style="color: #111111 !important; font-size: 14px !important; font-weight: 700 !important; margin: 0 0 4px 0;">{{ prod.title | truncate: 35 }}</h4>
+              <span class="upsell-price" style="color: #111111 !important; font-size: 14px !important; font-weight: 700 !important;">{{ prod.price | money }}</span>
             </div>
-            <button class="upsell-add-btn" data-variant-id="{{ variant.id }}">
+            <button class="upsell-add-btn" data-variant-id="{{ variant.id }}" style="background-color: #d52528 !important; color: #ffffff !important;">
               + Add
             </button>
           </div>

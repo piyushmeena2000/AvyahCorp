@@ -406,7 +406,7 @@
     box-sizing: border-box !important;
   }
 
-  .perfect-qty-btn {
+  .perfect-quantity-stepper button {
     width: 28px !important;
     height: 100% !important;
     border: none !important;
@@ -421,14 +421,20 @@
     justify-content: center !important;
     padding: 0 !important;
     margin: 0 !important;
-    transition: background-color 0.2s !important;
   }
 
-  .perfect-qty-btn:hover {
-    background-color: #f0f0f0 !important;
+  .perfect-quantity-stepper button:hover {
+    background-color: #f5f5f5 !important;
   }
 
-  .perfect-qty-input {
+  .perfect-quantity-stepper button svg {
+    width: 10px !important;
+    height: 10px !important;
+    color: #111111 !important;
+    stroke: #111111 !important;
+  }
+
+  .perfect-quantity-stepper input {
     width: 34px !important;
     height: 100% !important;
     border: none !important;
@@ -443,8 +449,8 @@
     appearance: textfield !important;
   }
 
-  .perfect-qty-input::-webkit-outer-spin-button,
-  .perfect-qty-input::-webkit-inner-spin-button {
+  .perfect-quantity-stepper input::-webkit-outer-spin-button,
+  .perfect-quantity-stepper input::-webkit-inner-spin-button {
     -webkit-appearance: none !important;
     margin: 0 !important;
   }

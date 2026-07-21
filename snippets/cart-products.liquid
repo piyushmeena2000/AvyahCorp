@@ -43,43 +43,24 @@
       <div class="perfect-cart-items-wrapper">
         {% for item in cart.items %}
           <div class="perfect-cart-item-row" data-key="{{ item.key }}" ref="cartItemRows[]">
-            <!-- Left: Pastel Image Container -->
-            <div class="perfect-cart-item-image-box">
+            <!-- Left: Pastel Image Container (Covered Rounded Box) -->
+            <div class="perfect-cart-item-image-box" style="border-radius: 14px !important; overflow: hidden !important; padding: 0 !important; width: 90px !important; height: 90px !important; min-width: 90px !important;">
               {% if item.image %}
-                <a href="{{ item.url }}">
-                  <img src="{{ item.image | image_url: width: 250 }}" alt="{{ item.product.title | escape }}" loading="lazy">
+                <a href="{{ item.url }}" style="display: block !important; width: 100% !important; height: 100% !important;">
+                  <img src="{{ item.image | image_url: width: 250 }}" alt="{{ item.product.title | escape }}" loading="lazy" style="width: 100% !important; height: 100% !important; object-fit: cover !important; border-radius: 14px !important;">
                 </a>
               {% endif %}
             </div>
 
             <!-- Right: Content & Controls -->
             <div class="perfect-cart-item-info">
-              <!-- Top Row: Title + Single Price -->
-              <div class="perfect-cart-item-header">
-                <a href="{{ item.url }}" class="perfect-cart-item-title" style="color: #111111 !important; text-decoration: none !important;">
-                  {{ item.product.title }}
-                </a>
-                <div class="perfect-cart-item-prices">
-                  {% if item.original_price != item.final_price %}
-                    <span class="perfect-price-sale" style="color: #111111 !important; font-weight: 700 !important;">{{ item.final_price | money }}</span>
-                    <s class="perfect-price-compare" style="color: #888888 !important; text-decoration: line-through !important;">
-                      {% if item.variant.compare_at_price > item.original_price %}
-                        {{ item.variant.compare_at_price | money }}
-                      {% else %}
-                        {{ item.original_price | money }}
-                      {% endif %}
-                    </s>
-                  {% else %}
-                    <span class="perfect-price-sale" style="color: #111111 !important; font-weight: 700 !important;">{{ item.original_price | money }}</span>
-                    {% if item.variant.compare_at_price > item.original_price %}
-                      <s class="perfect-price-compare" style="color: #888888 !important; text-decoration: line-through !important;">{{ item.variant.compare_at_price | money }}</s>
-                    {% endif %}
-                  {% endif %}
-                </div>
-              </div>
+              <!-- Row 1: Product Title in Regular Anton font -->
+              <a href="{{ item.url }}" class="perfect-cart-item-title" style="font-family: 'Anton', sans-serif !important; font-weight: 400 !important; font-size: 16px !important; color: #111111 !important; text-decoration: none !important; text-transform: uppercase !important; line-height: 1.25 !important; margin: 0 0 2px 0 !important; display: block !important;">
+                {{ item.product.title }}
+              </a>
 
-              <!-- Variant Subtitle -->
-              <div class="perfect-cart-item-subtitle" style="color: #555555 !important;">
+              <!-- Row 2: Subtitle / Variant Info -->
+              <div class="perfect-cart-item-subtitle" style="font-family: 'Inter', sans-serif !important; font-size: 12px !important; font-weight: 500 !important; color: #555555 !important; margin-bottom: 2px !important;">
                 {%- if item.product.has_only_default_variant == false -%}
                   {%- for option in item.options_with_values -%}
                     {{ option.value }}{%- if forloop.last != true %}, {% endif -%}
@@ -89,49 +70,54 @@
                 {%- endif -%}
               </div>
 
-              <!-- Offer Discount Line -->
-              <div class="perfect-cart-item-offer" style="color: #333333 !important; font-weight: 800 !important;">
-                {% if item.line_level_discount_allocations.size > 0 %}
-                  {%- for discount in item.line_level_discount_allocations -%}
-                    GET {{ discount.discount_application.title | uppercase }}
-                  {%- endfor -%}
-                {% else %}
-                  GET 30% OFF
-                {% endif %}
+              <!-- Row 3: GET 30% OFF on Left, Price with Discounted Price on Right -->
+              <div class="perfect-cart-item-offer-price-row" style="display: flex !important; justify-content: space-between !important; align-items: center !important; gap: 8px !important; width: 100% !important; margin: 2px 0 6px 0 !important;">
+                <div class="perfect-cart-item-offer" style="font-family: 'Inter', sans-serif !important; font-size: 11px !important; font-weight: 800 !important; color: #333333 !important; text-transform: uppercase !important;">
+                  {% if item.line_level_discount_allocations.size > 0 %}
+                    {%- for discount in item.line_level_discount_allocations -%}
+                      GET {{ discount.discount_application.title | uppercase }}
+                    {%- endfor -%}
+                  {% else %}
+                    GET 30% OFF
+                  {% endif %}
+                </div>
+
+                <div class="perfect-cart-item-prices" style="text-align: right !important; white-space: nowrap !important;">
+                  {% if item.original_price != item.final_price %}
+                    <span class="perfect-price-sale" style="font-family: 'Inter', sans-serif !important; color: #111111 !important; font-weight: 700 !important; font-size: 14px !important;">{{ item.final_price | money }}</span>
+                    <s class="perfect-price-compare" style="font-family: 'Inter', sans-serif !important; color: #888888 !important; text-decoration: line-through !important; font-size: 12px !important; margin-left: 4px !important;">
+                      {% if item.variant.compare_at_price > item.original_price %}
+                        {{ item.variant.compare_at_price | money }}
+                      {% else %}
+                        {{ item.original_price | money }}
+                      {% endif %}
+                    </s>
+                  {% else %}
+                    <span class="perfect-price-sale" style="font-family: 'Inter', sans-serif !important; color: #111111 !important; font-weight: 700 !important; font-size: 14px !important;">{{ item.original_price | money }}</span>
+                    {% if item.variant.compare_at_price > item.original_price %}
+                      <s class="perfect-price-compare" style="font-family: 'Inter', sans-serif !important; color: #888888 !important; text-decoration: line-through !important; font-size: 12px !important; margin-left: 4px !important;">{{ item.variant.compare_at_price | money }}</s>
+                    {% endif %}
+                  {% endif %}
+                </div>
               </div>
 
-              <!-- Quantity Stepper & Remove Button -->
-              <div class="perfect-cart-item-controls">
-                <div class="perfect-quantity-stepper">
-                  <button
-                    type="button"
-                    class="perfect-qty-btn perfect-qty-minus"
-                    style="color: #111111 !important;"
-                    aria-label="Decrease quantity"
-                    on:click="/onLineItemQuantityChange/{{ item.index | plus: 1 }}/{{ item.quantity | minus: 1 }}"
-                  >-</button>
-                  <input
-                    type="number"
-                    class="perfect-qty-input"
-                    style="color: #111111 !important;"
-                    value="{{ item.quantity }}"
-                    min="0"
-                    aria-label="Item quantity"
-                    readonly
-                  >
-                  <button
-                    type="button"
-                    class="perfect-qty-btn perfect-qty-plus"
-                    style="color: #111111 !important;"
-                    aria-label="Increase quantity"
-                    on:click="/onLineItemQuantityChange/{{ item.index | plus: 1 }}/{{ item.quantity | plus: 1 }}"
-                  >+</button>
-                </div>
+              <!-- Row 4: Quantity Stepper & Remove Button -->
+              <div class="perfect-cart-item-controls" style="display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 4px !important;">
+                {% assign can_update_quantity = item.instructions.can_update_quantity | default: true, allow_false: true %}
+                {% render 'quantity-selector',
+                  product: item.product,
+                  in_cart_quantity: item.quantity,
+                  line_index: item.index,
+                  min: 0,
+                  class: 'perfect-quantity-stepper',
+                  can_update_quantity: can_update_quantity
+                %}
 
                 <button
                   type="button"
                   class="perfect-remove-btn"
-                  style="color: #111111 !important; text-decoration: underline !important;"
+                  style="background: none !important; border: none !important; padding: 0 !important; font-family: 'Inter', sans-serif !important; font-size: 12px !important; font-weight: 600 !important; color: #111111 !important; text-decoration: underline !important; cursor: pointer !important; margin-top: 2px !important;"
+                  aria-label="{{ 'accessibility.remove_item' | t: title: item.title | escape }}"
                   on:click="/onLineItemRemove/{{ item.index | plus: 1 }}"
                 >
                   Remove
