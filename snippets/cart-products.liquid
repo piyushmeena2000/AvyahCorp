@@ -320,6 +320,50 @@
         syncCartWithServer();
       }
     }
+
+    // Automatically update cart drawer when products are added from homepage/product grid ADD TO CART buttons
+    document.addEventListener('cart:update', async function(e) {
+      if (e.detail && e.detail.sourceId === 'cart-items-component') return;
+
+      try {
+        const cartRes = await fetch('/cart.js', { cache: 'no-store' });
+        const cart = await cartRes.json();
+
+        document.querySelectorAll('.cart-drawer__heading, [data-testid="cart-drawer-trigger"]').forEach(el => {
+          if (cart.item_count !== undefined) {
+            el.innerHTML = el.innerHTML.replace(/\(\d+\)/, `(${cart.item_count})`);
+          }
+        });
+
+        const emptyView = document.querySelector('.empty-cart-custom');
+        const itemsView = document.querySelector('.cart-drawer__items');
+        const summaryView = document.querySelector('.cart-drawer__summary');
+
+        if (cart.item_count > 0) {
+          if (emptyView) emptyView.style.setProperty('display', 'none', 'important');
+          if (itemsView) itemsView.style.setProperty('display', 'block', 'important');
+          if (summaryView) summaryView.style.setProperty('display', 'flex', 'important');
+
+          const htmlRes = await fetch(window.location.href, { cache: 'no-store' });
+          const htmlText = await htmlRes.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(htmlText, 'text/html');
+
+          const newItems = doc.querySelector('.perfect-cart-items-wrapper');
+          const currentItems = document.querySelector('.perfect-cart-items-wrapper');
+          if (newItems && currentItems) {
+            currentItems.innerHTML = newItems.innerHTML;
+          }
+
+          const newSummary = doc.querySelector('.cart__summary-totals, .cart__total-container, .cart-drawer__summary');
+          if (newSummary && summaryView) {
+            summaryView.innerHTML = newSummary.innerHTML;
+          }
+        }
+      } catch (err) {
+        console.error('Error handling cart add update:', err);
+      }
+    });
   })();
 </script>
 
