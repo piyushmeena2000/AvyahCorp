@@ -15,24 +15,66 @@
     {% render 'text', fallback_text: product_title, block: block %}
   </a>
   {% liquid
-    assign subtitle_text = closest.product.metafields.descriptors.subtitle.value | default: closest.product.metafields.custom.subtitle.value
-    if subtitle_text == blank
-      assign _title_upper = closest.product.title | upcase
-      if _title_upper contains 'COMBO'
-        assign subtitle_text = 'PACK OF 2 • 10 HIGH-PROTEIN BARS'
-      elsif _title_upper contains 'SUGARFREE' or _title_upper contains 'SUGAR FREE' or _title_upper contains 'DIABETIC'
-        assign subtitle_text = 'SUGAR FREE • FIT FOR DIABETIC'
-      elsif _title_upper contains 'BERRY' or _title_upper contains 'CRANBERRY'
-        assign subtitle_text = 'REAL BERRIES • MULTIGRAIN SNACK'
-      elsif _title_upper contains 'CHOCO' or _title_upper contains 'CHOCOLATE'
-        assign subtitle_text = 'CLEAN CHOCOLATE • MULTIGRAIN BAKED BAR'
+    assign product = closest.product
+    assign title_u = product.title | upcase
+    assign handle_u = product.handle | upcase
+    assign desc_u = product.description | strip_html | upcase
+    
+    assign qty_text = ""
+    
+    if title_u contains "MAST MIX" or title_u contains "MASTMIX" or handle_u contains "MAST-MIX" or handle_u contains "MASTMIX" or title_u contains "NAMKEEN"
+      if title_u contains "12" or handle_u contains "12"
+        assign qty_text = "PACK OF 12 NAMKEENS"
+      elsif title_u contains "6" or handle_u contains "6"
+        assign qty_text = "PACK OF 6 NAMKEENS"
+      elsif title_u contains "3" or handle_u contains "3"
+        assign qty_text = "PACK OF 3 NAMKEENS"
+      elsif title_u contains "2" or handle_u contains "2"
+        assign qty_text = "PACK OF 2 NAMKEENS"
       else
-        assign subtitle_text = 'HEALTHY MULTIGRAIN SNACK • PACK OF 5'
+        assign qty_text = "PACK OF 1 NAMKEEN"
+      endif
+
+    elsif title_u contains "COMBO" or handle_u contains "COMBO" or title_u contains "SNACK BOX" or title_u contains "SNACKBOX" or handle_u contains "SNACKBOX"
+      if title_u contains "KING" or handle_u contains "KING" or desc_u contains "KING"
+        if title_u contains "NAMKEEN" or desc_u contains "NAMKEEN" or desc_u contains "MAST MIX" or title_u contains "MASTMIX"
+          assign qty_text = "10 BARS • 2 NAMKEENS • 1 KING PACK"
+        else
+          assign qty_text = "30 BARS • 1 KING PACK"
+        endif
+      elsif title_u contains "NAMKEEN" or desc_u contains "NAMKEEN" or desc_u contains "MAST MIX" or title_u contains "MASTMIX"
+        assign qty_text = "10 BARS • 2 NAMKEENS"
+      elsif title_u contains "3 PACK" or title_u contains "COMBO 3" or handle_u contains "COMBO-3" or title_u contains "30 BARS"
+        assign qty_text = "3 PACKS • 30 BARS"
+      elsif title_u contains "2 PACK" or title_u contains "COMBO 2" or handle_u contains "COMBO-2" or title_u contains "20 BARS"
+        assign qty_text = "2 PACKS • 20 BARS"
+      else
+        assign qty_text = "2 PACKS • 10 BARS"
+      endif
+
+    elsif title_u contains "KING" or handle_u contains "KING"
+      assign qty_text = "80 BARS • 1 KING PACK"
+
+    else
+      if title_u contains "80" or handle_u contains "80" or handle_u contains "PACK-OF-80" or handle_u contains "X-8" or handle_u contains "80-BAR"
+        assign qty_text = "8 PACKS • 80 BARS"
+      elsif title_u contains "24" or handle_u contains "24" or handle_u contains "PACK-24"
+        assign qty_text = "24 BARS"
+      elsif title_u contains "30" or handle_u contains "30"
+        assign qty_text = "3 PACKS • 30 BARS"
+      elsif title_u contains "20" or handle_u contains "20"
+        assign qty_text = "2 PACKS • 20 BARS"
+      elsif title_u contains "10 BARS" or title_u contains "PACK OF 10" or handle_u contains "PACK-OF-10" or handle_u contains "10-BARS"
+        assign qty_text = "PACK OF 1 • 10 BARS"
+      elsif title_u contains "5 BARS" or title_u contains "PACK OF 5" or handle_u contains "PACK-OF-5"
+        assign qty_text = "PACK OF 1 • 5 BARS"
+      else
+        assign qty_text = "PACK OF 1 • 10 BARS"
       endif
     endif
   %}
   <div class="avyah-product-card-subtitle" style="font-family: 'Inter', sans-serif !important; font-size: 12px !important; color: #666666 !important; margin-top: 4px !important; margin-bottom: 8px !important; text-align: left !important; font-weight: 600 !important; text-transform: uppercase !important; letter-spacing: 0.5px !important; line-height: 1.3 !important;">
-    {{ subtitle_text }}
+    {{ qty_text }}
   </div>
 {% endif %}
 

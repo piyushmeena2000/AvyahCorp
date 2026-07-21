@@ -591,26 +591,68 @@
               <h3 class="ai-product-card-title-{{ ai_gen_id }}">
                 <a href="{{ product.url }}">{{ product.title }}</a>
               </h3>
-              {% assign specs = "PACK OF 10 • HEALTHY MULTIGRAIN BARS" %}
-              {% assign handle_down = product.handle | downcase %}
-              {% assign title_down = product.title | downcase %}
-              {% if handle_down contains 'pack-of-80' or handle_down contains 'x-8' or handle_down contains '80-bar' or handle_down contains 'saver' or title_down contains '80' or title_down contains 'saver' %}
-                {% assign specs = "80 BARS • SAVER VALUE PACK" %}
-              {% elsif handle_down contains 'wholesome' or handle_down contains 'pack-24' or title_down contains 'wholesome' or title_down contains '24' %}
-                {% assign specs = "24 BARS • WHOLESOME FAMILY PACK" %}
-              {% elsif handle_down contains 'combo' or handle_down contains 'value-pack' or title_down contains 'combo' %}
-                {% assign specs = "PACK OF 2 • 10 HIGH-PROTEIN BARS" %}
-              {% elsif handle_down contains 'sugar-free' or handle_down contains 'sugarfree' or title_down contains 'sugarfree' or title_down contains 'sugar free' or title_down contains 'diabetic' %}
-                {% assign specs = "SUGAR FREE • FIT FOR DIABETIC" %}
-              {% elsif handle_down contains 'berry' or title_down contains 'berry' %}
-                {% assign specs = "REAL BERRIES • MULTIGRAIN SNACK" %}
-              {% elsif handle_down contains 'choco' or title_down contains 'choco' %}
-                {% assign specs = "CLEAN CHOCOLATE • MULTIGRAIN BAKED BAR" %}
-              {% endif %}
-              <p class="ai-product-card-specs-{{ ai_gen_id }}" style="text-align: left !important; margin-left: 0 !important; color: #666666 !important; font-weight: 600 !important; text-transform: uppercase !important; font-size: 12px !important; margin-top: 4px !important; margin-bottom: 8px !important;">{{ specs }}</p>
+              {% liquid
+                assign title_u = product.title | upcase
+                assign handle_u = product.handle | upcase
+                assign desc_u = product.description | strip_html | upcase
+                
+                assign qty_text = ""
+                
+                if title_u contains "MAST MIX" or title_u contains "MASTMIX" or handle_u contains "MAST-MIX" or handle_u contains "MASTMIX" or title_u contains "NAMKEEN"
+                  if title_u contains "12" or handle_u contains "12"
+                    assign qty_text = "PACK OF 12 NAMKEENS"
+                  elsif title_u contains "6" or handle_u contains "6"
+                    assign qty_text = "PACK OF 6 NAMKEENS"
+                  elsif title_u contains "3" or handle_u contains "3"
+                    assign qty_text = "PACK OF 3 NAMKEENS"
+                  elsif title_u contains "2" or handle_u contains "2"
+                    assign qty_text = "PACK OF 2 NAMKEENS"
+                  else
+                    assign qty_text = "PACK OF 1 NAMKEEN"
+                  endif
+
+                elsif title_u contains "COMBO" or handle_u contains "COMBO" or title_u contains "SNACK BOX" or title_u contains "SNACKBOX" or handle_u contains "SNACKBOX"
+                  if title_u contains "KING" or handle_u contains "KING" or desc_u contains "KING"
+                    if title_u contains "NAMKEEN" or desc_u contains "NAMKEEN" or desc_u contains "MAST MIX" or title_u contains "MASTMIX"
+                      assign qty_text = "10 BARS • 2 NAMKEENS • 1 KING PACK"
+                    else
+                      assign qty_text = "30 BARS • 1 KING PACK"
+                    endif
+                  elsif title_u contains "NAMKEEN" or desc_u contains "NAMKEEN" or desc_u contains "MAST MIX" or title_u contains "MASTMIX"
+                    assign qty_text = "10 BARS • 2 NAMKEENS"
+                  elsif title_u contains "3 PACK" or title_u contains "COMBO 3" or handle_u contains "COMBO-3" or title_u contains "30 BARS"
+                    assign qty_text = "3 PACKS • 30 BARS"
+                  elsif title_u contains "2 PACK" or title_u contains "COMBO 2" or handle_u contains "COMBO-2" or title_u contains "20 BARS"
+                    assign qty_text = "2 PACKS • 20 BARS"
+                  else
+                    assign qty_text = "2 PACKS • 10 BARS"
+                  endif
+
+                elsif title_u contains "KING" or handle_u contains "KING"
+                  assign qty_text = "80 BARS • 1 KING PACK"
+
+                else
+                  if title_u contains "80" or handle_u contains "80" or handle_u contains "PACK-OF-80" or handle_u contains "X-8" or handle_u contains "80-BAR"
+                    assign qty_text = "8 PACKS • 80 BARS"
+                  elsif title_u contains "24" or handle_u contains "24" or handle_u contains "PACK-24"
+                    assign qty_text = "24 BARS"
+                  elsif title_u contains "30" or handle_u contains "30"
+                    assign qty_text = "3 PACKS • 30 BARS"
+                  elsif title_u contains "20" or handle_u contains "20"
+                    assign qty_text = "2 PACKS • 20 BARS"
+                  elsif title_u contains "10 BARS" or title_u contains "PACK OF 10" or handle_u contains "PACK-OF-10" or handle_u contains "10-BARS"
+                    assign qty_text = "PACK OF 1 • 10 BARS"
+                  elsif title_u contains "5 BARS" or title_u contains "PACK OF 5" or handle_u contains "PACK-OF-5"
+                    assign qty_text = "PACK OF 1 • 5 BARS"
+                  else
+                    assign qty_text = "PACK OF 1 • 10 BARS"
+                  endif
+                endif
+              %}
+              <p class="ai-product-card-specs-{{ ai_gen_id }}" style="text-align: left !important; margin-left: 0 !important; color: #666666 !important; font-weight: 600 !important; text-transform: uppercase !important; font-size: 12px !important; margin-top: 4px !important; margin-bottom: 8px !important;">{{ qty_text }}</p>
               
               <!-- Pricing Row -->
-              <div class="ai-product-card-price-row-{{ ai_gen_id }}">
+              <div class="ai-product-card-price-row-{{ ai_gen_id }}" style="display: flex !important; align-items: center !important; justify-content: flex-start !important; text-align: left !important; margin-left: 0 !important; margin-right: auto !important; width: 100% !important; gap: 8px !important;">
                 {% if product.compare_at_price > product.price %}
                   <span class="compare-price">{{ product.compare_at_price | money }}</span>
                   <span class="current-price">{{ product.price | money }}</span>
@@ -624,6 +666,7 @@
             </div>
             <button
               class="ai-product-card-button-{{ ai_gen_id }}"
+              style="background-color: #8B0000 !important; background: #8B0000 !important; color: #ffffff !important; border-color: #8B0000 !important;"
               data-product-id="{{ product.id }}"
               data-variant-id="{{ product.selected_or_first_available_variant.id }}"
               {% unless product.available %}disabled{% endunless %}
