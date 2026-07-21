@@ -279,11 +279,14 @@
 
   /* Pricing Row */
   .ai-product-card-price-row-{{ ai_gen_id }} {
-    display: flex;
-    align-items: center;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
     flex-wrap: wrap;
     gap: 8px;
-    margin: auto 0 10px; /* Push to the bottom of content wrapper */
+    margin: 4px 0 10px 0 !important;
+    width: 100% !important;
     font-family: 'Inter', sans-serif;
   }
 
@@ -310,6 +313,7 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     border: none;
+    margin-left: 0 !important;
   }
 
   /* Bold button with solid outline and pop shadow */
@@ -317,7 +321,8 @@
     position: relative;
     display: block;
     width: 100%;
-    background-color: #000000 !important; /* Black button */
+    background-color: #8B0000 !important; /* Dark Crimson Red button */
+    background: #8B0000 !important;
     color: #ffffff !important;
     padding: 12px 6px;
     border-radius: 8px;
@@ -339,10 +344,11 @@
   }
 
   .ai-product-card-button-{{ ai_gen_id }}:hover {
-    background-color: #d52528 !important; /* Crimson Red on Hover */
+    background-color: #6d0000 !important; /* Darker Crimson Red on Hover */
+    background: #6d0000 !important;
     color: #ffffff !important;
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(213, 37, 40, 0.3);
+    box-shadow: 0 6px 15px rgba(139, 0, 0, 0.4);
   }
 
   .ai-product-card-button-{{ ai_gen_id }}:active {
@@ -585,17 +591,23 @@
               <h3 class="ai-product-card-title-{{ ai_gen_id }}">
                 <a href="{{ product.url }}">{{ product.title }}</a>
               </h3>
-              {% assign specs = "5g Protein* • 10 Bars" %}
+              {% assign specs = "PACK OF 10 • HEALTHY MULTIGRAIN BARS" %}
               {% assign handle_down = product.handle | downcase %}
               {% assign title_down = product.title | downcase %}
               {% if handle_down contains 'pack-of-80' or handle_down contains 'x-8' or handle_down contains '80-bar' or handle_down contains 'saver' or title_down contains '80' or title_down contains 'saver' %}
-                {% assign specs = "5g Protein* • 80 Bars" %}
+                {% assign specs = "80 BARS • SAVER VALUE PACK" %}
               {% elsif handle_down contains 'wholesome' or handle_down contains 'pack-24' or title_down contains 'wholesome' or title_down contains '24' %}
-                {% assign specs = "5g Protein* • 24 Bars" %}
+                {% assign specs = "24 BARS • WHOLESOME FAMILY PACK" %}
               {% elsif handle_down contains 'combo' or handle_down contains 'value-pack' or title_down contains 'combo' %}
-                {% assign specs = "5g Protein* • 30 Bars" %}
+                {% assign specs = "PACK OF 2 • 10 HIGH-PROTEIN BARS" %}
+              {% elsif handle_down contains 'sugar-free' or handle_down contains 'sugarfree' or title_down contains 'sugarfree' or title_down contains 'sugar free' or title_down contains 'diabetic' %}
+                {% assign specs = "SUGAR FREE • FIT FOR DIABETIC" %}
+              {% elsif handle_down contains 'berry' or title_down contains 'berry' %}
+                {% assign specs = "REAL BERRIES • MULTIGRAIN SNACK" %}
+              {% elsif handle_down contains 'choco' or title_down contains 'choco' %}
+                {% assign specs = "CLEAN CHOCOLATE • MULTIGRAIN BAKED BAR" %}
               {% endif %}
-              <p class="ai-product-card-specs-{{ ai_gen_id }}">{{ specs }}</p>
+              <p class="ai-product-card-specs-{{ ai_gen_id }}" style="text-align: left !important; margin-left: 0 !important; color: #666666 !important; font-weight: 600 !important; text-transform: uppercase !important; font-size: 12px !important; margin-top: 4px !important; margin-bottom: 8px !important;">{{ specs }}</p>
               
               <!-- Pricing Row -->
               <div class="ai-product-card-price-row-{{ ai_gen_id }}">
