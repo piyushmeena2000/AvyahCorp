@@ -112,8 +112,8 @@
                   <button
                     type="button"
                     class="perfect-qty-ajax-btn"
-                    data-line="{{ forloop.index }}"
-                    data-qty="{{ item.quantity | minus: 1 }}"
+                    data-key="{{ item.key }}"
+                    data-action="minus"
                     style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 16px !important; font-weight: 700 !important; background: transparent !important; border: none !important; width: 26px !important; height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; user-select: none !important;"
                     aria-label="Decrease quantity"
                   >-</button>
@@ -125,8 +125,8 @@
                   <button
                     type="button"
                     class="perfect-qty-ajax-btn"
-                    data-line="{{ forloop.index }}"
-                    data-qty="{{ item.quantity | plus: 1 }}"
+                    data-key="{{ item.key }}"
+                    data-action="plus"
                     style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 16px !important; font-weight: 700 !important; background: transparent !important; border: none !important; width: 26px !important; height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; user-select: none !important;"
                     aria-label="Increase quantity"
                   >+</button>
@@ -136,8 +136,8 @@
                 <button
                   type="button"
                   class="perfect-qty-ajax-btn perfect-recycle-btn"
-                  data-line="{{ forloop.index }}"
-                  data-qty="0"
+                  data-key="{{ item.key }}"
+                  data-action="remove"
                   title="Remove item"
                   aria-label="Remove item"
                   style="background: transparent !important; border: none !important; padding: 4px !important; cursor: pointer !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; color: #111111 !important;"
@@ -173,25 +173,31 @@
       e.preventDefault();
       e.stopPropagation();
 
-      const line = parseInt(btn.dataset.line, 10);
-      let targetQty = parseInt(btn.dataset.qty, 10);
+      const itemKey = btn.dataset.key;
+      const action = btn.dataset.action;
       const row = btn.closest('.perfect-cart-item-row');
-      if (!row) return;
+      if (!row || !itemKey) return;
 
       const qtySpan = row.querySelector('.perfect-qty-pill span');
-      const minusBtn = row.querySelector('[aria-label="Decrease quantity"]');
-      const plusBtn = row.querySelector('[aria-label="Increase quantity"]');
-      
       let currentQty = parseInt(qtySpan ? qtySpan.textContent.trim() : '1', 10);
       if (isNaN(currentQty)) currentQty = 1;
 
-      // Determine new quantity
-      let newQty = targetQty;
-      if (btn.classList.contains('perfect-recycle-btn')) {
-        newQty = 0;
+      // Track active quantity state
+      if (pendingUpdates[itemKey] === undefined) {
+        pendingUpdates[itemKey] = currentQty;
       }
 
-      // Optimistic Instant Height Collapse on Removal (Zero Blank Space)
+      if (action === 'plus') {
+        pendingUpdates[itemKey] += 1;
+      } else if (action === 'minus') {
+        pendingUpdates[itemKey] = Math.max(0, pendingUpdates[itemKey] - 1);
+      } else if (action === 'remove') {
+        pendingUpdates[itemKey] = 0;
+      }
+
+      const newQty = pendingUpdates[itemKey];
+
+      // Optimistic Instant UI Update
       if (newQty <= 0) {
         const currentHeight = row.offsetHeight;
         row.style.maxHeight = currentHeight + 'px';
@@ -199,7 +205,6 @@
         row.style.boxSizing = 'border-box';
         row.style.transition = 'max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, margin 0.25s ease, padding 0.25s ease';
         
-        // Force reflow
         void row.offsetHeight;
         
         row.style.maxHeight = '0px';
@@ -215,14 +220,9 @@
         }, 260);
       } else if (qtySpan) {
         qtySpan.textContent = newQty;
-        if (minusBtn) minusBtn.dataset.qty = Math.max(0, newQty - 1);
-        if (plusBtn) plusBtn.dataset.qty = newQty + 1;
       }
 
-      // Queue background server sync
-      pendingUpdates[line] = newQty;
-
-      // Debounce server call by 200ms for lightning responsiveness
+      // Debounce background server sync
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => {
         syncCartWithServer();
@@ -230,34 +230,24 @@
     });
 
     async function syncCartWithServer() {
-      const lineToUpdate = Object.keys(pendingUpdates)[0];
-      if (!lineToUpdate) return;
+      const keysToSync = Object.keys(pendingUpdates);
+      if (keysToSync.length === 0) return;
 
-      const qty = pendingUpdates[lineToUpdate];
-      delete pendingUpdates[lineToUpdate];
-
-      // Find section ID
-      const sectionEl = document.querySelector('cart-items-component[data-section-id]');
-      const sectionId = sectionEl ? sectionEl.dataset.sectionId : '';
+      const itemKey = keysToSync[0];
+      const qty = pendingUpdates[itemKey];
+      delete pendingUpdates[itemKey];
 
       try {
-        const payload = {
-          line: parseInt(lineToUpdate, 10),
-          quantity: qty
-        };
-
-        if (sectionId) {
-          payload.sections = sectionId;
-          payload.sections_url = window.location.pathname;
-        }
-
         const res = await fetch('/cart/change.js', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({
+            id: itemKey,
+            quantity: qty
+          })
         });
 
         if (res.ok) {
@@ -269,58 +259,26 @@
             detail: { resource: data }
           }));
 
-          // If Shopify returned section HTML in single request, morph DOM cleanly
-          if (data.sections && sectionId && data.sections[sectionId]) {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(data.sections[sectionId], 'text/html');
-
-            const newItems = doc.querySelector('.perfect-cart-items-wrapper');
-            const currentItems = document.querySelector('.perfect-cart-items-wrapper');
-            if (newItems && currentItems) {
-              currentItems.innerHTML = newItems.innerHTML;
-            }
-
-            const newSummary = doc.querySelector('.cart__summary-totals, .cart__total-container, .cart-drawer__summary');
-            const currentSummary = document.querySelector('.cart__summary-totals, .cart__total-container, .cart-drawer__summary');
-            if (newSummary && currentSummary) {
-              currentSummary.innerHTML = newSummary.innerHTML;
-            }
-
-            const newHeader = doc.querySelector('.cart-drawer__heading');
-            const currentHeader = document.querySelector('.cart-drawer__heading');
-            if (newHeader && currentHeader) {
-              currentHeader.innerHTML = newHeader.innerHTML;
-            }
-          } else {
-            // Update cart header count
-            const totalCount = data.item_count;
-            document.querySelectorAll('.cart-drawer__heading, [data-testid="cart-drawer-trigger"]').forEach(el => {
-              if (totalCount !== undefined) {
-                el.innerHTML = el.innerHTML.replace(/\(\d+\)/, `(${totalCount})`);
-              }
-            });
-
-            // Smooth fallback background fetch
-            const htmlRes = await fetch(window.location.href, { cache: 'no-store' });
-            const htmlText = await htmlRes.text();
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(htmlText, 'text/html');
-
-            const newItems = doc.querySelector('.perfect-cart-items-wrapper');
-            const currentItems = document.querySelector('.perfect-cart-items-wrapper');
-            if (newItems && currentItems) {
-              currentItems.innerHTML = newItems.innerHTML;
-            }
-
-            const newSummary = doc.querySelector('.cart__summary-totals, .cart__total-container, .cart-drawer__summary');
-            const currentSummary = document.querySelector('.cart__summary-totals, .cart__total-container, .cart-drawer__summary');
-            if (newSummary && currentSummary) {
-              currentSummary.innerHTML = newSummary.innerHTML;
+          // Verify quantity from server response (never revert!)
+          if (data.items) {
+            const updatedItem = data.items.find(i => i.key === itemKey);
+            const row = document.querySelector(`.perfect-cart-item-row[data-key="${itemKey}"]`);
+            if (updatedItem && row) {
+              const qtySpan = row.querySelector('.perfect-qty-pill span');
+              if (qtySpan) qtySpan.textContent = updatedItem.quantity;
             }
           }
+
+          // Update header count & totals cleanly
+          const totalCount = data.item_count;
+          document.querySelectorAll('.cart-drawer__heading, [data-testid="cart-drawer-trigger"]').forEach(el => {
+            if (totalCount !== undefined) {
+              el.innerHTML = el.innerHTML.replace(/\(\d+\)/, `(${totalCount})`);
+            }
+          });
         }
       } catch (err) {
-        console.error('Optimistic cart sync error:', err);
+        console.error('AJAX cart quantity update error:', err);
       }
 
       if (Object.keys(pendingUpdates).length > 0) {
