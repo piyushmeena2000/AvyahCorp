@@ -2,6 +2,7 @@
   Renders the upsell section inside the cart drawer
 {%- endcomment -%}
 
+{%- unless cart.empty? -%}
 <div class="cart-drawer-upsell-container" style="background-color: #ffffff !important;">
   <h3 class="cart-drawer-upsell-heading" style="color: #111111 !important; font-family: 'Anton', sans-serif !important; font-weight: 400 !important; font-size: 18px !important; text-transform: uppercase !important; margin: 0 0 12px 0;">You May Also Like:</h3>
   <div class="cart-drawer-upsell-list scrollbar-hidden">
@@ -45,6 +46,7 @@
     {%- endfor -%}
   </div>
 </div>
+{%- endunless -%}
 
 <style>
   .cart-drawer-upsell-container {
