@@ -1491,4 +1491,53 @@ body.template-index [class*="ai-logo-carousel"] [class*="heading"] {
   color: #d52528 !important;
 }
 
+/* =============================================
+   MEGA MENU & POPUP MODAL TEXT COLOR FIX
+   Force all text in header popups/dropdowns to Black (#111111)
+============================================= */
+body.template-index .avyah-megamenu,
+body.template-index .avyah-megamenu *,
+body.template-index .avyah-megamenu a,
+body.template-index .avyah-megamenu span,
+body.template-index .avyah-megamenu div,
+body.template-index .avyah-megamenu__sidebar,
+body.template-index .avyah-megamenu__sidebar-link,
+body.template-index .avyah-megamenu__content-area,
+body.template-index .avyah-megamenu__card,
+body.template-index .avyah-megamenu__card-title,
+body.template-index .menu-list__submenu,
+body.template-index .menu-list__submenu *,
+body.template-index .mega-menu__grid,
+body.template-index .mega-menu__grid *,
+.avyah-megamenu,
+.avyah-megamenu *,
+.avyah-megamenu a,
+.avyah-megamenu span,
+.avyah-megamenu div,
+.avyah-megamenu__sidebar,
+.avyah-megamenu__sidebar-link,
+.avyah-megamenu__content-area,
+.avyah-megamenu__card,
+.avyah-megamenu__card-title,
+.menu-list__submenu,
+.menu-list__submenu *,
+.mega-menu__grid,
+.mega-menu__grid * {
+  color: #111111 !important;
+}
+
+/* Sidebar tab active/hover state in mega menu */
+body.template-index .avyah-megamenu__sidebar-link.active,
+body.template-index .avyah-megamenu__sidebar-link:hover,
+.avyah-megamenu__sidebar-link.active,
+.avyah-megamenu__sidebar-link:hover {
+  color: #d52528 !important;
+}
+
+body.template-index .avyah-megamenu__sidebar-link--bold.active,
+.avyah-megamenu__sidebar-link--bold.active {
+  color: #d52528 !important;
+  text-decoration: underline !important;
+}
+
 
