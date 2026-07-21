@@ -1040,8 +1040,18 @@ dialog.cart-drawer__dialog *,
 .cart-drawer__dialog *,
 .cart-drawer__content *,
 .perfect-cart-items-wrapper *,
-.perfect-cart-item-row * {
+.perfect-cart-item-row *,
+.empty-cart-custom,
+.empty-cart-custom *,
+.cart-drawer__heading,
+.cart-drawer__heading * {
   color: #111111 !important;
+}
+
+.empty-cart-custom svg,
+.cart-drawer__close-button svg {
+  color: #111111 !important;
+  stroke: #111111 !important;
 }
 
 /* Specific button / badge overrides */
