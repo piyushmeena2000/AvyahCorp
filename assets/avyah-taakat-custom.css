@@ -1563,52 +1563,53 @@ body.template-index [class*="ai-logo-carousel"] [class*="heading"] {
 }
 
 /* ========================================================
-   DARK WEBSITE DIMMING OVERLAY WHEN CATALOG MENU IS OPEN
-   Keeps Header + Mega Menu normal, dims rest of website
+   GLOBAL DARK BACKDROP OVERLAY FOR CATALOG MEGA MENU
 ======================================================== */
+
+.avyah-global-menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.65) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 9990 !important;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.avyah-global-menu-backdrop.is-visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
 
 header-component,
 .header,
 .header__inner,
 header-menu,
 .avyah-megamenu,
-.avyah-catalog-megamenu {
+.avyah-catalog-megamenu,
+.avyah-catalog-item {
   z-index: 10005 !important;
+}
+
+.avyah-megamenu,
+.avyah-catalog-megamenu {
+  z-index: 10010 !important;
 }
 
 body.avyah-megamenu-active main,
 body.avyah-megamenu-active #MainContent,
 body.avyah-megamenu-active .shopify-section:not(:has(header-component)),
 body.avyah-megamenu-active footer,
-body.avyah-megamenu-active .footer,
-body:has(.avyah-megamenu:hover) main,
-body:has(.avyah-megamenu:hover) #MainContent,
-body:has(.avyah-catalog-item:hover) main,
-body:has(.avyah-catalog-item:hover) #MainContent {
+body.avyah-megamenu-active .footer {
   filter: brightness(0.35) contrast(1.05) !important;
   transition: filter 0.25s ease !important;
-}
-
-body.avyah-megamenu-active::after,
-body:has(.avyah-megamenu:hover)::after,
-body:has(.avyah-catalog-item:hover)::after {
-  content: '';
-  position: fixed;
-  top: 70px;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  z-index: 9990;
-  pointer-events: none;
-  animation: avyahDimIn 0.2s ease forwards;
-}
-
-@keyframes avyahDimIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
 }
 
 

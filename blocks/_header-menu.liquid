@@ -209,47 +209,66 @@
       </div>
 
       <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          const tabLinks = document.querySelectorAll('.avyah-tab-link');
-          const tabContents = document.querySelectorAll('.avyah-tab-content');
+        (function() {
+          function setupMegaMenuBackdrop() {
+            let backdrop = document.getElementById('avyah-global-menu-backdrop');
+            if (!backdrop) {
+              backdrop = document.createElement('div');
+              backdrop.id = 'avyah-global-menu-backdrop';
+              backdrop.className = 'avyah-global-menu-backdrop';
+              document.body.appendChild(backdrop);
+            }
 
-          tabLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-              e.preventDefault();
-              const targetTab = this.getAttribute('data-tab');
+            const tabLinks = document.querySelectorAll('.avyah-tab-link');
+            const tabContents = document.querySelectorAll('.avyah-tab-content');
 
-              tabLinks.forEach(l => l.classList.remove('active'));
-              tabContents.forEach(c => c.classList.remove('active'));
+            tabLinks.forEach(link => {
+              link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetTab = this.getAttribute('data-tab');
 
-              this.classList.add('active');
-              const targetElement = document.getElementById(targetTab);
-              if(targetElement) {
-                 targetElement.classList.add('active');
-              }
+                tabLinks.forEach(l => l.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+
+                this.classList.add('active');
+                const targetElement = document.getElementById(targetTab);
+                if(targetElement) {
+                   targetElement.classList.add('active');
+                }
+              });
             });
-          });
 
-          // Toggle dark website dimming overlay when CATALOG menu is hovered/opened
-          const catalogItem = document.querySelector('.avyah-catalog-item');
-          const megaMenu = document.getElementById('avyah-megamenu-panel');
+            const catalogItem = document.querySelector('.avyah-catalog-item, #avyah-megamenu-trigger');
+            const megaMenu = document.getElementById('avyah-megamenu-panel');
 
-          function addDarkOverlay() {
-            document.body.classList.add('avyah-megamenu-active');
+            function showOverlay() {
+              backdrop.classList.add('is-visible');
+              document.body.classList.add('avyah-megamenu-active');
+            }
+
+            function hideOverlay() {
+              backdrop.classList.remove('is-visible');
+              document.body.classList.remove('avyah-megamenu-active');
+            }
+
+            if (catalogItem) {
+              catalogItem.addEventListener('mouseenter', showOverlay);
+              catalogItem.addEventListener('mouseleave', hideOverlay);
+            }
+            if (megaMenu) {
+              megaMenu.addEventListener('mouseenter', showOverlay);
+              megaMenu.addEventListener('mouseleave', hideOverlay);
+            }
+
+            backdrop.addEventListener('click', hideOverlay);
           }
 
-          function removeDarkOverlay() {
-            document.body.classList.remove('avyah-megamenu-active');
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setupMegaMenuBackdrop);
+          } else {
+            setupMegaMenuBackdrop();
           }
-
-          if (catalogItem) {
-            catalogItem.addEventListener('mouseenter', addDarkOverlay);
-            catalogItem.addEventListener('mouseleave', removeDarkOverlay);
-          }
-          if (megaMenu) {
-            megaMenu.addEventListener('mouseenter', addDarkOverlay);
-            megaMenu.addEventListener('mouseleave', removeDarkOverlay);
-          }
-        });
+        })();
       </script>
 
       <script
