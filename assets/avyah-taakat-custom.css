@@ -1808,6 +1808,7 @@ button[name="add"]:hover,
   justify-content: flex-start !important;
   align-self: flex-start !important;
   text-align: left !important;
+  float: left !important;
   margin-left: 0 !important;
   margin-right: auto !important;
   width: 100% !important;
@@ -1817,7 +1818,17 @@ button[name="add"]:hover,
 [class*="ai-product-card-price-row"] * {
   text-align: left !important;
   justify-content: flex-start !important;
+  float: left !important;
   margin-left: 0 !important;
+}
+
+[class*="ai-product-card-price-row"] .current-price,
+[class*="ai-product-card-price-row"] .compare-price,
+[class*="ai-product-card-price-row"] .discount-badge {
+  text-align: left !important;
+  float: left !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 [class*="ai-product-card-content"] {
