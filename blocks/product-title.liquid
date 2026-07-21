@@ -10,9 +10,30 @@
     class="contents user-select-text"
     ref="productTitleLink"
     href="{% render 'product-card-variant-url', product: closest.product %}"
+    style="text-align: left !important;"
   >
     {% render 'text', fallback_text: product_title, block: block %}
   </a>
+  {% liquid
+    assign subtitle_text = closest.product.metafields.descriptors.subtitle.value | default: closest.product.metafields.custom.subtitle.value
+    if subtitle_text == blank
+      assign _title_upper = closest.product.title | upcase
+      if _title_upper contains 'COMBO'
+        assign subtitle_text = 'PACK OF 2 • 10 HIGH-PROTEIN BARS'
+      elsif _title_upper contains 'SUGARFREE' or _title_upper contains 'SUGAR FREE' or _title_upper contains 'DIABETIC'
+        assign subtitle_text = 'SUGAR FREE • FIT FOR DIABETIC'
+      elsif _title_upper contains 'BERRY' or _title_upper contains 'CRANBERRY'
+        assign subtitle_text = 'REAL BERRIES • MULTIGRAIN SNACK'
+      elsif _title_upper contains 'CHOCO' or _title_upper contains 'CHOCOLATE'
+        assign subtitle_text = 'CLEAN CHOCOLATE • MULTIGRAIN BAKED BAR'
+      else
+        assign subtitle_text = 'HEALTHY MULTIGRAIN SNACK • PACK OF 5'
+      endif
+    endif
+  %}
+  <div class="avyah-product-card-subtitle" style="font-family: 'Inter', sans-serif !important; font-size: 12px !important; color: #666666 !important; margin-top: 4px !important; margin-bottom: 8px !important; text-align: left !important; font-weight: 600 !important; text-transform: uppercase !important; letter-spacing: 0.5px !important; line-height: 1.3 !important;">
+    {{ subtitle_text }}
+  </div>
 {% endif %}
 
 {% schema %}
