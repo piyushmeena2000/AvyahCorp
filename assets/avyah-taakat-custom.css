@@ -1092,15 +1092,15 @@ body.template-index dialog.cart-drawer__dialog form,
 body.template-index dialog.cart-drawer__dialog .cart-drawer__inner,
 body.template-index dialog.cart-drawer__dialog .cart-drawer__content,
 body.template-index dialog.cart-drawer__dialog .cart-drawer__header,
-body.template-index dialog.cart-drawer__dialog .cart-drawer__summary,
-body.template-index dialog.cart-drawer__dialog .perfect-cart-items-wrapper,
-body.template-index dialog.cart-drawer__dialog .perfect-cart-item-row,
-body.template-index dialog.cart-drawer__dialog .perfect-cart-progress-container,
-body.template-index dialog.cart-drawer__dialog .cart-drawer-upsell-container,
-body.template-index dialog.cart-drawer__dialog .cart-drawer-upsell-card,
 body.template-index dialog.cart-drawer__dialog .cart__summary-container {
   background-color: #ffffff !important;
   background: #ffffff !important;
+}
+
+.cart-drawer__summary {
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+  box-shadow: none !important;
 }
 
 /* Compare-at prices -> Grey */

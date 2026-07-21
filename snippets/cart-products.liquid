@@ -158,10 +158,10 @@
       e.stopPropagation();
       
       const line = btn.dataset.line;
-      const qty = btn.dataset.qty;
+      const qty = parseInt(btn.dataset.qty, 10);
+      const row = btn.closest('.perfect-cart-item-row');
       
-      btn.style.opacity = '0.3';
-      btn.style.pointerEvents = 'none';
+      if (row) row.style.opacity = '0.4';
       
       try {
         const res = await fetch('/cart/change.js', {
@@ -172,23 +172,50 @@
           },
           body: JSON.stringify({
             line: parseInt(line, 10),
-            quantity: parseInt(qty, 10)
+            quantity: qty
           })
         });
         
         if (res.ok) {
           const data = await res.json();
+
+          // Dispatch theme cart update event
           document.dispatchEvent(new CustomEvent('cart:update', {
             bubbles: true,
             detail: { resource: data }
           }));
-          window.location.reload();
-        } else {
-          window.location.reload();
+
+          // Fetch fresh section DOM asynchronously without page reload
+          const htmlRes = await fetch(window.location.href, { cache: 'no-store' });
+          const htmlText = await htmlRes.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(htmlText, 'text/html');
+
+          // 1. Morph cart item rows in-place
+          const newItems = doc.querySelector('.perfect-cart-items-wrapper');
+          const currentItems = document.querySelector('.perfect-cart-items-wrapper');
+          if (newItems && currentItems) {
+            currentItems.innerHTML = newItems.innerHTML;
+          }
+
+          // 2. Morph summary totals in-place
+          const newSummary = doc.querySelector('.cart__summary-totals, .cart__total-container, .cart-drawer__summary');
+          const currentSummary = document.querySelector('.cart__summary-totals, .cart__total-container, .cart-drawer__summary');
+          if (newSummary && currentSummary) {
+            currentSummary.innerHTML = newSummary.innerHTML;
+          }
+
+          // 3. Update cart drawer count heading
+          const newHeader = doc.querySelector('.cart-drawer__heading');
+          const currentHeader = document.querySelector('.cart-drawer__heading');
+          if (newHeader && currentHeader) {
+            currentHeader.innerHTML = newHeader.innerHTML;
+          }
         }
       } catch (err) {
         console.error('AJAX cart quantity update error:', err);
-        window.location.reload();
+      } finally {
+        if (row) row.style.opacity = '1';
       }
     });
   })();
