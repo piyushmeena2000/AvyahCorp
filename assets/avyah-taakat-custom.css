@@ -1531,15 +1531,18 @@ body.template-index [class*="ai-logo-carousel"] [class*="heading"] {
   font-family: 'Anton', sans-serif !important;
   font-weight: 400 !important;
   font-size: 16px !important;
-  color: rgba(255, 255, 255, 0.9) !important;
-  transition: all 0.2s ease !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  text-decoration: none !important;
+  transition: color 0.15s ease !important;
 }
 
 .avyah-megamenu__sidebar-link.active,
-.avyah-megamenu__sidebar-link:hover {
+.avyah-megamenu__sidebar-link:hover,
+.avyah-megamenu__sidebar-link:focus {
   color: #ffffff !important;
   text-decoration: underline !important;
   text-underline-offset: 4px !important;
+  font-weight: 400 !important;
 }
 
 .avyah-megamenu__card-title {

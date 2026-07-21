@@ -101,7 +101,7 @@
                     <div class="avyah-megamenu" id="avyah-megamenu-panel" style="background-color: #d52528 !important; background: #d52528 !important; color: #ffffff !important;">
                       <div class="avyah-megamenu__inner" style="background-color: #d52528 !important; color: #ffffff !important;">
                         <div class="avyah-megamenu__sidebar" style="background-color: #d52528 !important; color: #ffffff !important; border-right: 1px solid rgba(255, 255, 255, 0.25) !important;">
-                          <a href="/collections/all" class="avyah-megamenu__sidebar-link avyah-megamenu__sidebar-link--bold avyah-tab-link active" data-tab="tab-all" style="color: #ffffff !important;">SHOP ALL</a>
+                          <a href="/collections/all" class="avyah-megamenu__sidebar-link avyah-tab-link active" data-tab="tab-all" style="color: #ffffff !important;">SHOP ALL</a>
                           {%- for childlink in link.links -%}
                             <a href="{{ childlink.url }}" class="avyah-megamenu__sidebar-link avyah-tab-link" data-tab="tab-{{ forloop.index }}" style="color: #ffffff !important;">{{ childlink.title | upcase }}</a>
                           {%- endfor -%}
@@ -223,19 +223,24 @@
             const tabContents = document.querySelectorAll('.avyah-tab-content');
 
             tabLinks.forEach(link => {
-              link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetTab = this.getAttribute('data-tab');
+              function activateTab(e) {
+                if (e.type === 'click') {
+                  e.preventDefault();
+                }
+                const targetTab = link.getAttribute('data-tab');
 
                 tabLinks.forEach(l => l.classList.remove('active'));
                 tabContents.forEach(c => c.classList.remove('active'));
 
-                this.classList.add('active');
+                link.classList.add('active');
                 const targetElement = document.getElementById(targetTab);
                 if(targetElement) {
                    targetElement.classList.add('active');
                 }
-              });
+              }
+
+              link.addEventListener('click', activateTab);
+              link.addEventListener('mouseenter', activateTab);
             });
 
             const catalogItem = document.querySelector('.avyah-catalog-item, #avyah-megamenu-trigger');
