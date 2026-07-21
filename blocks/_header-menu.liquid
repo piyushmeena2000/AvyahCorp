@@ -228,6 +228,27 @@
               }
             });
           });
+
+          // Toggle dark website dimming overlay when CATALOG menu is hovered/opened
+          const catalogItem = document.querySelector('.avyah-catalog-item');
+          const megaMenu = document.getElementById('avyah-megamenu-panel');
+
+          function addDarkOverlay() {
+            document.body.classList.add('avyah-megamenu-active');
+          }
+
+          function removeDarkOverlay() {
+            document.body.classList.remove('avyah-megamenu-active');
+          }
+
+          if (catalogItem) {
+            catalogItem.addEventListener('mouseenter', addDarkOverlay);
+            catalogItem.addEventListener('mouseleave', removeDarkOverlay);
+          }
+          if (megaMenu) {
+            megaMenu.addEventListener('mouseenter', addDarkOverlay);
+            megaMenu.addEventListener('mouseleave', removeDarkOverlay);
+          }
         });
       </script>
 

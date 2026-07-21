@@ -1562,27 +1562,53 @@ body.template-index [class*="ai-logo-carousel"] [class*="heading"] {
   width: 100% !important;
 }
 
-/* Dark Backdrop Overlay when Mega-Menu is open */
-.avyah-megamenu-backdrop {
-  display: none;
+/* ========================================================
+   DARK WEBSITE DIMMING OVERLAY WHEN CATALOG MENU IS OPEN
+   Keeps Header + Mega Menu normal, dims rest of website
+======================================================== */
+
+header-component,
+.header,
+.header__inner,
+header-menu,
+.avyah-megamenu,
+.avyah-catalog-megamenu {
+  z-index: 10005 !important;
+}
+
+body.avyah-megamenu-active main,
+body.avyah-megamenu-active #MainContent,
+body.avyah-megamenu-active .shopify-section:not(:has(header-component)),
+body.avyah-megamenu-active footer,
+body.avyah-megamenu-active .footer,
+body:has(.avyah-megamenu:hover) main,
+body:has(.avyah-megamenu:hover) #MainContent,
+body:has(.avyah-catalog-item:hover) main,
+body:has(.avyah-catalog-item:hover) #MainContent {
+  filter: brightness(0.35) contrast(1.05) !important;
+  transition: filter 0.25s ease !important;
+}
+
+body.avyah-megamenu-active::after,
+body:has(.avyah-megamenu:hover)::after,
+body:has(.avyah-catalog-item:hover)::after {
+  content: '';
   position: fixed;
-  top: 0;
+  top: 70px;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  z-index: 9998;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 9990;
   pointer-events: none;
-  transition: opacity 0.25s ease;
+  animation: avyahDimIn 0.2s ease forwards;
 }
 
-.avyah-catalog-item:hover ~ .avyah-megamenu-backdrop,
-.avyah-catalog-item:hover .avyah-megamenu-backdrop,
-body:has(.avyah-megamenu:hover) .avyah-megamenu-backdrop,
-.avyah-catalog-megamenu.avyah-catalog-megamenu--visible ~ .avyah-megamenu-backdrop {
-  display: block !important;
+@keyframes avyahDimIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 
