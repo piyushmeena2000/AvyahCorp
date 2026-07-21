@@ -1739,11 +1739,16 @@ body header-component .menu-list__submenu,
 .mega-menu__link[href*="blog"] span {
   color: #d52528 !important;
   -webkit-text-fill-color: #d52528 !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
   font-family: 'Anton', sans-serif !important;
   font-size: 24px !important;
   font-weight: 400 !important;
   letter-spacing: 0.5px !important;
   text-transform: uppercase !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .menu-list__submenu a[href*="blog"] svg,
@@ -1765,11 +1770,16 @@ body header-component .menu-list__submenu,
 .mega-menu__link:not([href*="blog"]) span {
   color: #000000 !important;
   -webkit-text-fill-color: #000000 !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
   font-family: 'Anton', sans-serif !important;
   font-size: 24px !important;
   font-weight: 400 !important;
   letter-spacing: 0.5px !important;
   text-transform: uppercase !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .menu-list__submenu a:not([href*="blog"]) svg,
