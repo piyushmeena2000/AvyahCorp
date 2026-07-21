@@ -96,7 +96,7 @@
             </button>
           </div>
 
-          {% render 'cart-progress-bar' %}
+          </div>
 
           <div
             class="cart-drawer__content motion-reduce"
@@ -165,7 +165,7 @@
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
-    border-bottom: 1px solid #e6e6e6 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
     padding-bottom: var(--padding-md) !important;
   }
 
@@ -174,26 +174,27 @@
     margin-bottom: 0 !important;
   }
 
+  /* Dark Crimson Red Cart Drawer Dialog */
   .cart-drawer__dialog.cart-drawer__dialog {
-    --color-background: #ffffff !important;
-    --color-foreground: #111111 !important;
-    --color-foreground-rgb: 17 17 17 !important;
-    --color-heading: #111111 !important;
-    --color-heading-rgb: 17 17 17 !important;
-    --color-border: #e6e6e6 !important;
-    --color-primary: #111111 !important;
-    --color-primary-hover: #333333 !important;
-    background-color: #ffffff !important;
-    background: #ffffff !important;
-    color: #111111 !important;
+    --color-background: #7a0c0e !important;
+    --color-foreground: #ffffff !important;
+    --color-foreground-rgb: 255 255 255 !important;
+    --color-heading: #ffffff !important;
+    --color-heading-rgb: 255 255 255 !important;
+    --color-border: rgba(255, 255, 255, 0.15) !important;
+    --color-primary: #ffffff !important;
+    --color-primary-hover: #f0f0f0 !important;
+    background-color: #7a0c0e !important;
+    background: #7a0c0e !important;
+    color: #ffffff !important;
     width: min(520px, 100vw) !important;
     max-width: 100vw !important;
   }
 
   .cart-drawer__header {
-    background-color: #ffffff !important;
-    background: #ffffff !important;
-    border-bottom: 1px solid #f0f0f0 !important;
+    background-color: #7a0c0e !important;
+    background: #7a0c0e !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
   }
 
   .cart-drawer__heading.h3 {
@@ -201,17 +202,17 @@
     font-weight: 400 !important;
     text-transform: capitalize;
     font-size: 24px !important;
-    color: #111111 !important;
+    color: #ffffff !important;
   }
 
   .cart-drawer__close-button {
-    color: #111111 !important;
+    color: #ffffff !important;
   }
 
   .cart-drawer__close-button svg {
-    fill: #111111 !important;
-    stroke: #111111 !important;
-    color: #111111 !important;
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+    color: #ffffff !important;
   }
 
   .empty-cart-custom {
@@ -224,19 +225,19 @@
     height: 100%;
     justify-content: center;
     box-sizing: border-box;
-    background-color: #ffffff !important;
+    background-color: #7a0c0e !important;
   }
 
   .empty-cart-custom__text {
     font-family: 'Inter', sans-serif !important;
     font-size: 16px !important;
     font-weight: 500 !important;
-    color: #666666 !important;
+    color: rgba(255, 255, 255, 0.8) !important;
     margin-top: 15px !important;
   }
 
   .empty-cart-custom__icon-wrapper {
-    color: #cccccc;
+    color: rgba(255, 255, 255, 0.5);
     width: 80px;
     height: 80px;
     display: flex;
@@ -247,44 +248,44 @@
   .empty-cart-custom__icon-wrapper svg {
     width: 100%;
     height: 100%;
-    fill: #cccccc !important;
+    fill: rgba(255, 255, 255, 0.7) !important;
   }
 
   .cart-drawer__inner {
     height: 100%;
     overflow: hidden;
-    background-color: #ffffff !important;
+    background-color: #7a0c0e !important;
   }
  
   .cart-drawer__content {
     height: calc(100% - var(--header-height));
     display: flex;
     flex-direction: column;
-    background-color: #ffffff !important;
+    background-color: #7a0c0e !important;
   }
  
   .cart-drawer__summary {
-    background-color: #ffffff !important;
-    background: #ffffff !important;
+    background-color: #7a0c0e !important;
+    background: #7a0c0e !important;
     position: sticky;
     bottom: 0;
     z-index: 1;
-    border-top: 1px solid #f0f0f0 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
   }
 
   /* Force table layout to blocks */
   .cart-drawer .cart-items__table {
     display: block !important;
     width: 100% !important;
-    background-color: #ffffff !important;
+    background-color: #7a0c0e !important;
   }
   .cart-drawer .cart-items__table tbody {
     display: block !important;
     width: 100% !important;
-    background-color: #ffffff !important;
+    background-color: #7a0c0e !important;
   }
 
-  /* PerfectSnacks Cart Drawer Items Redesign - PURE WHITE BACKGROUND */
+  /* Dark Crimson Red Cart Item Rows */
   .cart-drawer .cart-items__table-row {
     display: grid !important;
     grid-template-columns: 100px 1fr auto !important;
@@ -296,11 +297,11 @@
     column-gap: 16px !important;
     padding: 18px 20px !important;
     margin-bottom: 0 !important;
-    border-bottom: 1px solid #f0f0f0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
     width: 100% !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
-    background-color: #ffffff !important;
+    background-color: #7a0c0e !important;
   }
 
   .cart-drawer .cart-items__media {
@@ -334,14 +335,14 @@
   .cart-drawer .cart-items__details {
     grid-area: details !important;
     padding: 0 !important;
-    color: #111111 !important;
+    color: #ffffff !important;
   }
 
   .cart-drawer .cart-items__title {
     font-family: 'Anton', sans-serif !important;
     font-size: 18px !important;
     text-transform: capitalize !important;
-    color: #111111 !important;
+    color: #ffffff !important;
     text-decoration: none !important;
     line-height: 1.25 !important;
     display: block !important;
@@ -354,7 +355,7 @@
     font-family: 'Inter', sans-serif !important;
     font-size: 12px !important;
     font-weight: 600 !important;
-    color: #666666 !important;
+    color: rgba(255, 255, 255, 0.75) !important;
     margin-bottom: 6px !important;
   }
 
@@ -368,11 +369,11 @@
   }
 
   .cart-drawer .quantity-selector {
-    border: 1px solid #d5d5d5 !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
     border-radius: 50px !important;
     height: 32px !important;
     width: 88px !important;
-    background-color: #ffffff !important;
+    background-color: rgba(0, 0, 0, 0.25) !important;
   }
 
   .cart-drawer .quantity-selector button {
@@ -383,7 +384,7 @@
     justify-content: center !important;
     font-size: 13px !important;
     font-weight: 700 !important;
-    color: #111111 !important;
+    color: #ffffff !important;
     background-color: transparent !important;
     border: none !important;
   }
@@ -391,7 +392,7 @@
   .cart-drawer .quantity-selector input {
     font-size: 13px !important;
     font-weight: 700 !important;
-    color: #111111 !important;
+    color: #ffffff !important;
     background-color: transparent !important;
   }
 
@@ -400,14 +401,21 @@
     font-family: 'Inter', sans-serif !important;
     font-weight: 800 !important;
     font-size: 17px !important;
-    color: #111111 !important;
+    color: #ffffff !important;
     text-align: right !important;
+  }
+
+  .cart-drawer .cart-items__remove svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
   }
 
   /* Style cart summary in drawer */
   .cart-drawer .cart__summary-container {
-    background-color: #ffffff !important;
-    border-top: 1px solid #f0f0f0 !important;
+    background-color: #7a0c0e !important;
+    background: #7a0c0e !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
     padding: 20px !important;
     box-shadow: none !important;
   }
@@ -422,7 +430,7 @@
     font-family: 'Inter', sans-serif !important;
     font-weight: 700 !important;
     font-size: 14px !important;
-    color: #111111 !important;
+    color: #ffffff !important;
   }
 
   .cart-drawer .cart__total-value,
@@ -430,20 +438,20 @@
     font-family: 'Inter', sans-serif !important;
     font-weight: 800 !important;
     font-size: 22px !important;
-    color: #111111 !important;
+    color: #ffffff !important;
   }
 
   .cart-drawer .tax-note,
   .cart-drawer .tax-note * {
-    color: #666666 !important;
+    color: rgba(255, 255, 255, 0.7) !important;
   }
 
-  /* Checkout Button - RED CRIMSON CTA */
+  /* Checkout Button - PURE WHITE CTA BUTTON WITH DARK CRIMSON TEXT */
   .cart-drawer .cart__checkout-button,
   .cart-drawer button#checkout {
-    background-color: #d52528 !important;
-    background: #d52528 !important;
-    color: #ffffff !important;
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #7a0c0e !important;
     border-radius: 50px !important;
     height: 52px !important;
     font-family: 'Anton', sans-serif !important;
@@ -451,17 +459,22 @@
     font-weight: 400 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.8px !important;
-    box-shadow: 0 4px 15px rgba(213, 37, 40, 0.25) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25) !important;
     border: none !important;
     transition: all 0.25s ease !important;
     width: 100% !important;
   }
 
+  .cart-drawer .cart__checkout-button *,
+  .cart-drawer button#checkout * {
+    color: #7a0c0e !important;
+  }
+
   .cart-drawer .cart__checkout-button:hover,
   .cart-drawer button#checkout:hover {
-    background-color: #c01b1e !important;
-    background: #c01b1e !important;
-    color: #ffffff !important;
-    box-shadow: 0 6px 20px rgba(213, 37, 40, 0.4) !important;
+    background-color: #f5f5f5 !important;
+    background: #f5f5f5 !important;
+    color: #7a0c0e !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35) !important;
   }
 {% endstylesheet %}
