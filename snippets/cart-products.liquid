@@ -326,7 +326,8 @@
       if (e.detail && e.detail.sourceId === 'cart-items-component') return;
 
       try {
-        const cartRes = await fetch('/cart.js', { cache: 'no-store' });
+        const cacheBuster = '?ts=' + Date.now();
+        const cartRes = await fetch('/cart.js' + cacheBuster, { cache: 'reload', headers: { 'Cache-Control': 'no-cache' } });
         const cart = await cartRes.json();
 
         document.querySelectorAll('.cart-drawer__heading, [data-testid="cart-drawer-trigger"]').forEach(el => {
@@ -344,7 +345,8 @@
           if (itemsView) itemsView.style.setProperty('display', 'block', 'important');
           if (summaryView) summaryView.style.setProperty('display', 'flex', 'important');
 
-          const htmlRes = await fetch(window.location.href, { cache: 'no-store' });
+          // Fetch fresh section HTML bypassing browser HTTP cache using timestamp
+          const htmlRes = await fetch(window.location.pathname + cacheBuster, { cache: 'reload', headers: { 'Cache-Control': 'no-cache' } });
           const htmlText = await htmlRes.text();
           const parser = new DOMParser();
           const doc = parser.parseFromString(htmlText, 'text/html');
@@ -358,6 +360,17 @@
           const newSummary = doc.querySelector('.cart__summary-totals, .cart__total-container, .cart-drawer__summary');
           if (newSummary && summaryView) {
             summaryView.innerHTML = newSummary.innerHTML;
+          }
+
+          // Open drawer if not already open
+          const drawerComponent = document.querySelector('cart-drawer-component');
+          if (drawerComponent && typeof drawerComponent.open === 'function') {
+            drawerComponent.open();
+          } else {
+            const dialog = document.querySelector('dialog.cart-drawer__dialog');
+            if (dialog && !dialog.open && typeof dialog.showModal === 'function') {
+              dialog.showModal();
+            }
           }
         }
       } catch (err) {

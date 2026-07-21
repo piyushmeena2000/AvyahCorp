@@ -808,6 +808,16 @@
               
               document.dispatchEvent(cartEvent);
 
+              const drawerComponent = document.querySelector('cart-drawer-component');
+              if (drawerComponent && typeof drawerComponent.open === 'function') {
+                drawerComponent.open();
+              } else {
+                const dialog = document.querySelector('dialog.cart-drawer__dialog');
+                if (dialog && !dialog.open && typeof dialog.showModal === 'function') {
+                  dialog.showModal();
+                }
+              }
+
             } catch (error) {
               console.error('Error adding to cart:', error);
               button.textContent = 'Error';
