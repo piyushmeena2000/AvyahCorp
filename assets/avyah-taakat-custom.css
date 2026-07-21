@@ -1701,7 +1701,11 @@ header-component svg line:not(.dd-icon *),
 }
 
 /* ========================================================
-   DISCOVER DROPDOWN — SOLID BLACK TEXT & ICONS (#000000)
+   DISCOVER DROPDOWN — EXACT MATCH TO PHOTOSHOP MOCK (IMAGE 1)
+   - Font: Anton 24px Uppercase
+   - OUR BLOGS: Crimson Red (#d52528) with red icon
+   - CAREERS: Solid Black (#000000) with black icon
+   - Container: Clean white popover card with top pointer arrow
 ======================================================== */
 header #header-component .menu-list__submenu,
 header #header-component .menu-list__submenu *,
@@ -1711,57 +1715,67 @@ body #header-group .menu-list__submenu *,
 body .header .menu-list__submenu *,
 body header-component .menu-list__submenu *,
 .menu-list__submenu,
-.menu-list__submenu *,
 .menu-list__submenu-inner,
-.menu-list__submenu-inner *,
 .mega-menu__grid,
-.mega-menu__grid *,
-.mega-menu__column,
-.mega-menu__column *,
-.avyah-discover-card,
-.avyah-discover-dropdown {
+.mega-menu__column {
   background-color: #ffffff !important;
   background: #ffffff !important;
 }
 
-header #header-component .menu-list__submenu a,
-header #header-component .menu-list__submenu span,
-#header-group .menu-list__submenu a,
-#header-group .menu-list__submenu span,
-body #header-group .menu-list__submenu a,
-body #header-group .menu-list__submenu span,
-body .header .menu-list__submenu a,
-body .header .menu-list__submenu span,
-body header-component .menu-list__submenu a,
-body header-component .menu-list__submenu span,
-.menu-list__submenu a,
-.menu-list__submenu a *,
-.menu-list__submenu span,
-.menu-list__submenu p,
-.mega-menu__link,
-.mega-menu__link *,
-.mega-menu__link span,
-.avyah-discover-card a,
-.avyah-discover-card span,
-.avyah-discover-dropdown a,
-.avyah-discover-dropdown span {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+/* OUR BLOGS in Crimson Red (#d52528) */
+.menu-list__submenu a[href*="blog"],
+.menu-list__submenu a[href*="blog"] *,
+.menu-list__submenu a[href*="blog"] span,
+.mega-menu__link[href*="blog"],
+.mega-menu__link[href*="blog"] *,
+.mega-menu__link[href*="blog"] span {
+  color: #d52528 !important;
+  -webkit-text-fill-color: #d52528 !important;
+  font-family: 'Anton', sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
 }
 
-.menu-list__submenu svg,
-.menu-list__submenu svg *,
-.menu-list__submenu path,
-.menu-list__submenu .dd-icon,
-.mega-menu__link svg,
-.mega-menu__link path,
-.avyah-discover-card svg,
-.avyah-discover-card path,
-.avyah-discover-dropdown svg,
-.avyah-discover-dropdown path {
-  color: #000000 !important;
-  stroke: #000000 !important;
+.menu-list__submenu a[href*="blog"] svg,
+.menu-list__submenu a[href*="blog"] svg *,
+.menu-list__submenu a[href*="blog"] path,
+.mega-menu__link[href*="blog"] svg,
+.mega-menu__link[href*="blog"] path {
+  stroke: #d52528 !important;
+  color: #d52528 !important;
   fill: none !important;
+}
+
+/* CAREERS & OTHER LINKS in Solid Black (#000000) */
+.menu-list__submenu a:not([href*="blog"]),
+.menu-list__submenu a:not([href*="blog"]) *,
+.menu-list__submenu a:not([href*="blog"]) span,
+.mega-menu__link:not([href*="blog"]),
+.mega-menu__link:not([href*="blog"]) *,
+.mega-menu__link:not([href*="blog"]) span {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  font-family: 'Anton', sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+}
+
+.menu-list__submenu a:not([href*="blog"]) svg,
+.menu-list__submenu a:not([href*="blog"]) svg *,
+.menu-list__submenu a:not([href*="blog"]) path,
+.mega-menu__link:not([href*="blog"]) svg,
+.mega-menu__link:not([href*="blog"]) path {
+  stroke: #000000 !important;
+  color: #000000 !important;
+  fill: none !important;
+}
+
+.menu-list__submenu a:hover {
+  background-color: rgba(0, 0, 0, 0.04) !important;
 }
 
 .menu-list__submenu a:hover,
