@@ -1309,12 +1309,12 @@ results-list .product-badges__badge,
 /* ==========================================================================
    HEADER NAVIGATION MENU TEXT - WHITE
    ========================================================================== */
-#header-group *,
-.header *,
-.header__inline-menu *,
-.header__menu-item,
-.header__menu-item *,
-header nav *,
+#header-group *:not(.menu-list__submenu *):not(.avyah-discover-card *),
+.header *:not(.menu-list__submenu *):not(.avyah-discover-card *),
+.header__inline-menu *:not(.menu-list__submenu *):not(.avyah-discover-card *),
+.header__menu-item:not(.menu-list__submenu *),
+.header__menu-item *:not(.menu-list__submenu *),
+header nav *:not(.menu-list__submenu *):not(.avyah-discover-card *),
 .buddha-menu-item *,
 .buddha-menu-item > a,
 .buddha-menu-item span,
@@ -1701,9 +1701,12 @@ header-component svg line:not(.dd-icon *),
 }
 
 /* ========================================================
-   DISCOVER DROPDOWN — SOLID BLACK TEXT & ICONS
+   DISCOVER DROPDOWN — SOLID BLACK TEXT & ICONS (#000000)
 ======================================================== */
 .menu-list__submenu,
+.menu-list__submenu-inner,
+.mega-menu__grid,
+.mega-menu__column,
 .avyah-discover-card,
 .avyah-discover-dropdown {
   background-color: #ffffff !important;
@@ -1711,8 +1714,12 @@ header-component svg line:not(.dd-icon *),
 }
 
 .menu-list__submenu a,
+.menu-list__submenu a *,
 .menu-list__submenu span,
+.menu-list__submenu p,
 .mega-menu__link,
+.mega-menu__link *,
+.mega-menu__link span,
 .avyah-discover-card a,
 .avyah-discover-card span,
 .avyah-discover-dropdown a,
@@ -1721,20 +1728,23 @@ header-component svg line:not(.dd-icon *),
 }
 
 .menu-list__submenu svg,
+.menu-list__submenu svg *,
 .menu-list__submenu path,
+.menu-list__submenu .dd-icon,
+.mega-menu__link svg,
+.mega-menu__link path,
 .avyah-discover-card svg,
 .avyah-discover-card path,
-.avyah-discover-card .dd-icon,
 .avyah-discover-dropdown svg,
 .avyah-discover-dropdown path {
   color: #000000 !important;
   stroke: #000000 !important;
-  opacity: 1 !important;
+  fill: none !important;
 }
 
 .menu-list__submenu a:hover,
+.menu-list__submenu a:hover span,
 .mega-menu__link:hover,
-.avyah-discover-card a:hover,
 .avyah-discover-dropdown a:hover {
   background-color: #fef2f2 !important;
   color: #d52528 !important;
