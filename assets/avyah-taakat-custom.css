@@ -692,7 +692,11 @@ main-collection,
 }
 
 .avyah-shopify-collection-banner__img {
-  max-height: 270px !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  height: auto !important;
+  max-height: 520px !important;
+  object-fit: cover !important;
 }
 
 .perfect-collection-subnav {
