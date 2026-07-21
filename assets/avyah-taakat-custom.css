@@ -1683,4 +1683,52 @@ header-component[data-sticky-state='active'] {
   -webkit-backdrop-filter: blur(12px) !important;
 }
 
+/* ========================================================
+   DISCOVER DROPDOWN — SOLID BLACK TEXT & ICONS
+======================================================== */
+.menu-list__submenu,
+.avyah-discover-card,
+.avyah-discover-dropdown {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+}
+
+.menu-list__submenu a,
+.menu-list__submenu span,
+.mega-menu__link,
+.avyah-discover-card a,
+.avyah-discover-card span,
+.avyah-discover-dropdown a,
+.avyah-discover-dropdown span {
+  color: #000000 !important;
+}
+
+.menu-list__submenu svg,
+.menu-list__submenu path,
+.avyah-discover-card svg,
+.avyah-discover-card path,
+.avyah-discover-card .dd-icon,
+.avyah-discover-dropdown svg,
+.avyah-discover-dropdown path {
+  color: #000000 !important;
+  stroke: #000000 !important;
+  opacity: 1 !important;
+}
+
+.menu-list__submenu a:hover,
+.mega-menu__link:hover,
+.avyah-discover-card a:hover,
+.avyah-discover-dropdown a:hover {
+  background-color: #fef2f2 !important;
+  color: #d52528 !important;
+}
+
+.menu-list__submenu a:hover *,
+.mega-menu__link:hover *,
+.avyah-discover-card a:hover *,
+.avyah-discover-dropdown a:hover * {
+  color: #d52528 !important;
+  stroke: #d52528 !important;
+}
+
 

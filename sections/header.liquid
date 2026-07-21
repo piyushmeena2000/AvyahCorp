@@ -762,7 +762,7 @@
     font-family: 'Anton', sans-serif !important;
     font-size: 14px !important;
     font-weight: 400 !important;
-    color: #1a1a1a !important;
+    color: #000000 !important;
     text-decoration: none !important;
     text-transform: uppercase !important;
     letter-spacing: 0.8px !important;
@@ -770,8 +770,16 @@
     white-space: nowrap !important;
   }
 
+  .avyah-discover-card a * {
+    color: #000000 !important;
+  }
+
   .avyah-discover-card a:hover {
     background: #fef2f2 !important;
+    color: #d52528 !important;
+  }
+
+  .avyah-discover-card a:hover * {
     color: #d52528 !important;
   }
 
@@ -779,12 +787,16 @@
     width: 15px;
     height: 15px;
     flex-shrink: 0;
-    opacity: 0.5;
-    transition: opacity 0.15s;
+    opacity: 1 !important;
+    color: #000000 !important;
+    stroke: #000000 !important;
+    fill: none !important;
+    transition: color 0.15s, stroke 0.15s;
   }
 
   .avyah-discover-card a:hover .dd-icon {
-    opacity: 1;
+    color: #d52528 !important;
+    stroke: #d52528 !important;
   }
 
   /* Mobile */
