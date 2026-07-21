@@ -191,12 +191,28 @@
         newQty = 0;
       }
 
-      // Optimistic Instant UI Update (0ms perceived latency)
+      // Optimistic Instant Height Collapse on Removal (Zero Blank Space)
       if (newQty <= 0) {
-        row.style.transition = 'all 0.25s ease';
+        const currentHeight = row.offsetHeight;
+        row.style.maxHeight = currentHeight + 'px';
+        row.style.overflow = 'hidden';
+        row.style.boxSizing = 'border-box';
+        row.style.transition = 'max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, margin 0.25s ease, padding 0.25s ease';
+        
+        // Force reflow
+        void row.offsetHeight;
+        
+        row.style.maxHeight = '0px';
         row.style.opacity = '0';
-        row.style.transform = 'translateX(20px)';
-        setTimeout(() => { row.style.display = 'none'; }, 250);
+        row.style.marginTop = '0px';
+        row.style.marginBottom = '0px';
+        row.style.paddingTop = '0px';
+        row.style.paddingBottom = '0px';
+        row.style.borderBottom = 'none';
+
+        setTimeout(() => {
+          row.remove();
+        }, 260);
       } else if (qtySpan) {
         qtySpan.textContent = newQty;
         if (minusBtn) minusBtn.dataset.qty = Math.max(0, newQty - 1);
