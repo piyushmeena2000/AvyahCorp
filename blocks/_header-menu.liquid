@@ -75,7 +75,7 @@
             <ul class="menu-list__list list-unstyled" role="list" style="gap: 0 var(--menu-horizontal-gap, 28px); justify-content: center;">
               {%- for link in block_settings.menu.links -%}
                 {%- assign _dt = link.title | downcase -%}
-                {%- if _dt == 'home' or _dt contains 'store' or _dt contains 'locator' or _dt contains 'find' or _dt contains 'ingredient' or _dt contains 'explore' -%}
+                {%- if _dt == 'home' or _dt contains 'store' or _dt contains 'locator' or _dt contains 'find' or _dt contains 'explore' -%}
                   {%- continue -%}
                 {%- endif -%}
 
@@ -201,6 +201,17 @@
                       <span class="menu-list__link-title">{{ link.title | escape }}</span>
                     </a>
                   {%- endif -%}
+                {%- comment -%} Inject INGREDIENTS link right beside BULK ORDER {%- endcomment -%}
+                {%- if _dt contains 'bulk' -%}
+                  <li role="presentation" class="menu-list__list-item">
+                    <a
+                      href="/pages/how-its-made"
+                      class="menu-list__link{% if request.path contains 'ingredient' or request.path contains 'made' %} menu-list__link--active{% endif %}"
+                    >
+                      <span class="menu-list__link-title">INGREDIENTS</span>
+                    </a>
+                  </li>
+                {%- endif -%}
                 </li>
               {%- endfor -%}
             </ul>
