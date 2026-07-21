@@ -1039,13 +1039,20 @@ body.template-index cart-drawer-component:not(dialog *) .cart-bubble__text-count
 /* ==========================================================================
    SLIDE-OUT CART DRAWER PANEL (MODAL ONLY) - PURE WHITE BACKGROUND & BLACK FONT
    ========================================================================== */
-body.template-index dialog.cart-drawer__dialog,
-body.template-index .cart-drawer__dialog {
-  background-color: #ffffff !important;
-  background: #ffffff !important;
-  color: #111111 !important;
+body.template-index dialog,
+body.template-index dialog *,
+body.template-index .cart-drawer,
+body.template-index .cart-drawer *,
+body.template-index .cart-drawer__dialog,
+body.template-index .cart-drawer__dialog *,
+body.template-index cart-drawer-component dialog * {
+  --color-background: 255, 255, 255 !important;
+  --color-background-rgb: 255, 255, 255 !important;
+  --gradient-background: #ffffff !important;
 }
 
+body.template-index dialog.cart-drawer__dialog,
+body.template-index .cart-drawer__dialog,
 body.template-index dialog.cart-drawer__dialog div,
 body.template-index dialog.cart-drawer__dialog form,
 body.template-index dialog.cart-drawer__dialog table,
@@ -1056,7 +1063,16 @@ body.template-index dialog.cart-drawer__dialog .cart-drawer__inner,
 body.template-index dialog.cart-drawer__dialog .cart-drawer__content,
 body.template-index dialog.cart-drawer__dialog .cart-drawer__header,
 body.template-index dialog.cart-drawer__dialog .cart-drawer__summary,
-body.template-index dialog.cart-drawer__dialog .cart-items-component {
+body.template-index dialog.cart-drawer__dialog .cart-items-component,
+body.template-index dialog.cart-drawer__dialog .cart-items,
+body.template-index dialog.cart-drawer__dialog .cart-items__wrapper,
+body.template-index dialog.cart-drawer__dialog .cart-items__table,
+body.template-index dialog.cart-drawer__dialog .cart-items__table tbody,
+body.template-index dialog.cart-drawer__dialog .cart-items__table-row,
+body.template-index dialog.cart-drawer__dialog .perfect-cart-progress-container,
+body.template-index dialog.cart-drawer__dialog .cart-drawer-upsell-container,
+body.template-index dialog.cart-drawer__dialog .cart-drawer-upsell-card,
+body.template-index dialog.cart-drawer__dialog .cart__summary-container {
   background-color: #ffffff !important;
   background: #ffffff !important;
 }
@@ -1233,43 +1249,34 @@ ul.mm-submenu span {
 }
 
 /* ==========================================================================
-   ABSOLUTE 100% UNLINKED HOMEPAGE CRIMSON RED OVERRIDE
+   HOMEPAGE CRIMSON RED OVERRIDE - EXCLUDING CART DRAWER & DIALOGS
    ========================================================================== */
-body.template-index,
-body.template-index *,
-body.template-index *::before,
-body.template-index *::after {
-  --color-background: 213, 37, 40 !important;
-  --color-background-rgb: 213, 37, 40 !important;
-  --gradient-background: #d52528 !important;
-}
-
 body.template-index main#MainContent,
 body.template-index .content-for-layout,
-body.template-index .shopify-section,
-body.template-index section,
-body.template-index .section,
-body.template-index div,
-body.template-index [class*="section"],
-body.template-index [class*="block"],
-body.template-index [class*="container"],
-body.template-index [class*="color-scheme"],
-body.template-index [class*="scheme-"] {
+body.template-index .shopify-section:not(:has(dialog)):not(:has(.cart-drawer)),
+body.template-index section:not(dialog *):not(.cart-drawer *),
+body.template-index .section:not(dialog *):not(.cart-drawer *),
+body.template-index div:not(dialog *):not(.cart-drawer *):not(cart-drawer-component *):not(.cart-drawer__inner *):not(.cart-drawer__content *),
+body.template-index [class*="section"]:not(dialog *):not(.cart-drawer *),
+body.template-index [class*="block"]:not(dialog *):not(.cart-drawer *),
+body.template-index [class*="container"]:not(dialog *):not(.cart-drawer *),
+body.template-index [class*="color-scheme"]:not(dialog *):not(.cart-drawer *),
+body.template-index [class*="scheme-"]:not(dialog *):not(.cart-drawer *) {
   background-color: #d52528 !important;
   background: #d52528 !important;
 }
 
 /* Force Text inside homepage to White (EXCEPT inside Cart Drawer) */
-body.template-index p:not(.cart-drawer *):not(dialog *),
-body.template-index h1:not(.cart-drawer *):not(dialog *),
-body.template-index h2:not(.cart-drawer *):not(dialog *),
-body.template-index h3:not(.cart-drawer *):not(dialog *),
-body.template-index h4:not(.cart-drawer *):not(dialog *),
-body.template-index h5:not(.cart-drawer *):not(dialog *),
-body.template-index h6:not(.cart-drawer *):not(dialog *),
-body.template-index li:not(.cart-drawer *):not(dialog *),
-body.template-index .rte:not(.cart-drawer *):not(dialog *),
-body.template-index .rte *:not(.cart-drawer *):not(dialog *) {
+body.template-index p:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index h1:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index h2:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index h3:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index h4:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index h5:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index h6:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index li:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index .rte:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index .rte *:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *) {
   color: #ffffff !important;
 }
 

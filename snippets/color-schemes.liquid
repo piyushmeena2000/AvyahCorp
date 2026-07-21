@@ -1,21 +1,20 @@
 {% style %}
   :root,
-  body.template-index,
   body.template-index #MainContent,
   body.template-index main,
   body.template-index .content-for-layout,
-  body.template-index .shopify-section,
-  body.template-index .shopify-section > div,
-  body.template-index section,
-  body.template-index .section,
-  body.template-index [class*="section"],
-  body.template-index .section-background,
-  body.template-index [class*="color-scheme"],
-  body.template-index [class*="color-scheme"] > div,
-  body.template-index [class*="scheme-"],
-  body.template-index [class*="ai_gen_block"],
-  body.template-index .text-block,
-  body.template-index .rich-text {
+  body.template-index .shopify-section:not(:has(dialog)):not(:has(.cart-drawer)),
+  body.template-index .shopify-section > div:not(dialog *):not(.cart-drawer *),
+  body.template-index section:not(dialog *):not(.cart-drawer *),
+  body.template-index .section:not(dialog *):not(.cart-drawer *),
+  body.template-index [class*="section"]:not(dialog *):not(.cart-drawer *),
+  body.template-index .section-background:not(dialog *):not(.cart-drawer *),
+  body.template-index [class*="color-scheme"]:not(dialog *):not(.cart-drawer *),
+  body.template-index [class*="color-scheme"] > div:not(dialog *):not(.cart-drawer *),
+  body.template-index [class*="scheme-"]:not(dialog *):not(.cart-drawer *),
+  body.template-index [class*="ai_gen_block"]:not(dialog *):not(.cart-drawer *),
+  body.template-index .text-block:not(dialog *):not(.cart-drawer *),
+  body.template-index .rich-text:not(dialog *):not(.cart-drawer *) {
     --color-background: 213, 37, 40 !important;
     --color-background-rgb: 213, 37, 40 !important;
     --gradient-background: #d52528 !important;
