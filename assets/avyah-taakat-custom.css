@@ -1060,11 +1060,52 @@ dialog.cart-drawer__dialog .cart__checkout-button,
   color: #ffffff !important;
   background-color: #d52528 !important;
   background: #d52528 !important;
-  border-radius: 10px !important;
+  border-radius: 6px !important;
 }
 
 dialog.cart-drawer__dialog .cart__checkout-button * {
   color: #ffffff !important;
+}
+
+/* White background for discount code wrapper */
+.perfect-cart-discount-wrapper {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+}
+
+#cart-discount-code {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #111111 !important;
+}
+
+#cart-discount-apply {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+  border-radius: 6px !important;
+  transition: all 0.25s ease !important;
+}
+
+#cart-discount-apply:hover {
+  background-color: #d52528 !important;
+  color: #ffffff !important;
+}
+
+/* Reduced gap between Estimated total and Checkout button */
+.cart-drawer__summary {
+  gap: 8px !important;
+  padding-top: 10px !important;
+  padding-bottom: 16px !important;
+}
+
+.cart__summary-totals {
+  gap: 8px !important;
+  margin-bottom: 4px !important;
+}
+
+.cart__ctas {
+  margin-top: 6px !important;
+  width: 100% !important;
 }
 
 dialog.cart-drawer__dialog .upsell-add-btn,
