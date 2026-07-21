@@ -278,12 +278,13 @@
 
             backdrop.addEventListener('click', hideOverlay);
 
-            // Standalone Ultra-Smooth Headroom Header Scroll Animation
+            // Progressive Reveal Header Scroll Animation System
             let lastScrollY = window.scrollY || document.documentElement.scrollTop || 0;
             let ticking = false;
 
-            function onScroll() {
+            function updateProgressiveReveal() {
               const currentScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+              const diff = currentScrollY - lastScrollY;
               const headerGroup = document.querySelector('#header-group') || document.querySelector('.header-section') || document.querySelector('header-component');
 
               if (!headerGroup) {
@@ -291,20 +292,20 @@
                 return;
               }
 
-              // Top of page (within 15px) -> Normal header
-              if (currentScrollY <= 15) {
-                headerGroup.classList.remove('headroom--unpinned', 'headroom--pinned');
-                headerGroup.classList.add('headroom--top');
+              // 1. At Top of Page (within 20px)
+              if (currentScrollY <= 20) {
+                headerGroup.classList.remove('is-progressive-unpinned', 'is-progressive-revealed', 'headroom--unpinned', 'headroom--pinned');
+                headerGroup.classList.add('is-at-top', 'headroom--top');
               }
-              // Scrolling Down past 80px -> Slide Header UP out of view
-              else if (currentScrollY > lastScrollY && currentScrollY > 80) {
-                headerGroup.classList.remove('headroom--pinned', 'headroom--top');
-                headerGroup.classList.add('headroom--unpinned');
+              // 2. Scrolling Down past 90px -> Progressive Hide (Slide Up)
+              else if (diff > 4 && currentScrollY > 90) {
+                headerGroup.classList.remove('is-progressive-revealed', 'is-at-top', 'headroom--pinned', 'headroom--top');
+                headerGroup.classList.add('is-progressive-unpinned', 'headroom--unpinned');
               }
-              // Scrolling UP -> Slide Header DOWN into view
-              else if (currentScrollY < lastScrollY && currentScrollY > 40) {
-                headerGroup.classList.remove('headroom--unpinned', 'headroom--top');
-                headerGroup.classList.add('headroom--pinned');
+              // 3. Scrolling UP -> Progressive Reveal (Slide Down with Glassmorphism Shadow)
+              else if (diff < -4 && currentScrollY > 40) {
+                headerGroup.classList.remove('is-progressive-unpinned', 'is-at-top', 'headroom--unpinned', 'headroom--top');
+                headerGroup.classList.add('is-progressive-revealed', 'headroom--pinned');
               }
 
               lastScrollY = currentScrollY;
@@ -313,7 +314,7 @@
 
             window.addEventListener('scroll', function() {
               if (!ticking) {
-                requestAnimationFrame(onScroll);
+                requestAnimationFrame(updateProgressiveReveal);
                 ticking = true;
               }
             }, { passive: true });
