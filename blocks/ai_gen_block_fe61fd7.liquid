@@ -665,15 +665,14 @@
               <p class="ai-product-card-specs-{{ ai_gen_id }}" style="text-align: left !important; margin-left: 0 !important; color: #666666 !important; font-weight: 600 !important; text-transform: uppercase !important; font-size: 12px !important; margin-top: 4px !important; margin-bottom: 8px !important;">{{ qty_text }}</p>
               
               <!-- Pricing Row -->
-              <div class="ai-product-card-price-row-{{ ai_gen_id }}" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: flex-start !important; align-self: flex-start !important; text-align: left !important; float: left !important; margin-left: 0 !important; margin-right: auto !important; width: 100% !important; gap: 8px !important;">
+              <div class="ai-product-card-price-row-{{ ai_gen_id }}" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; margin-top: 8px !important; margin-bottom: 12px !important;">
+                <span class="current-price" style="font-size: 24px !important; font-weight: 900 !important; color: #000000 !important; font-family: 'Inter', sans-serif !important; letter-spacing: -0.5px !important; text-align: left !important; margin-left: 0 !important; float: left !important;">{{ product.price | money }}</span>
                 {% if product.compare_at_price > product.price %}
-                  <span class="compare-price" style="text-align: left !important; float: left !important; margin-left: 0 !important;">{{ product.compare_at_price | money }}</span>
-                  <span class="current-price" style="text-align: left !important; float: left !important; margin-left: 0 !important;">{{ product.price | money }}</span>
-                  <span class="discount-badge" style="text-align: left !important; float: left !important; margin-left: 0 !important;">
+                  <span class="discount-badge" style="background-color: #d52528 !important; color: #ffffff !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 4px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">
                     -{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}% OFF
                   </span>
                 {% else %}
-                  <span class="current-price" style="text-align: left !important; float: left !important; margin-left: 0 !important;">{{ product.price | money }}</span>
+                  <span class="discount-badge" style="background-color: #d52528 !important; color: #ffffff !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 4px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">-8% OFF</span>
                 {% endif %}
               </div>
             </div>
@@ -722,10 +721,9 @@
               </div>
               <h3 class="ai-product-card-title-{{ ai_gen_id }}">Sample Product Title</h3>
               <p class="ai-product-card-specs-{{ ai_gen_id }}" style="text-align: left !important; margin-left: 0 !important; color: #666666 !important; font-weight: 600 !important; text-transform: uppercase !important; font-size: 12px !important; margin-top: 4px !important; margin-bottom: 8px !important;">PACK OF 1 • 10 BARS</p>
-              <div class="ai-product-card-price-row-{{ ai_gen_id }}" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: flex-start !important; align-self: flex-start !important; text-align: left !important; float: left !important; margin-left: 0 !important; margin-right: auto !important; width: 100% !important; gap: 8px !important;">
-                <span class="compare-price" style="text-align: left !important; float: left !important; margin-left: 0 !important;">Rs. 600.00</span>
-                <span class="current-price" style="text-align: left !important; float: left !important; margin-left: 0 !important;">Rs. 550.00</span>
-                <span class="discount-badge" style="text-align: left !important; float: left !important; margin-left: 0 !important;">-8% OFF</span>
+              <div class="ai-product-card-price-row-{{ ai_gen_id }}" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; margin-top: 8px !important; margin-bottom: 12px !important;">
+                <span class="current-price" style="font-size: 24px !important; font-weight: 900 !important; color: #000000 !important; font-family: 'Inter', sans-serif !important; letter-spacing: -0.5px !important; text-align: left !important; margin-left: 0 !important; float: left !important;">Rs. 550.00</span>
+                <span class="discount-badge" style="background-color: #d52528 !important; color: #ffffff !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 4px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">-8% OFF</span>
               </div>
             </div>
             <button

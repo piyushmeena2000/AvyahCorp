@@ -41,39 +41,18 @@
   endif
 -%}
 
-<div ref="priceContainer" class="avyah-price-container" style="display: flex !important; align-items: center !important; justify-content: flex-start !important; gap: 8px !important; text-align: left !important; margin-left: 0 !important; margin-right: auto !important; width: 100% !important;">
-  {% if show_sale_price_first == false and show_compare_price %}
-    <span role="group">
-      <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
-      <span class="compare-at-price">{{- compare_at_price -}}</span>
-    </span>
-  {% endif %}
+{% liquid
+  assign discount_percent = 8
+  if show_compare_price and selected_variant.compare_at_price > 0
+    assign raw_compare = selected_variant.compare_at_price
+    assign raw_price = selected_variant.price
+    if raw_compare > raw_price
+      assign discount_percent = raw_compare | minus: raw_price | times: 100.0 | divided_by: raw_compare | round
+    endif
+  endif
+%}
 
-  {% if show_compare_price %}
-    <span role="group">
-      <span class="visually-hidden">{{ 'content.price_sale' | t }}&nbsp;</span>
-      <span class="price">{{ price | default: '&nbsp;' }}</span>
-    </span>
-  {% else %}
-    <span class="price">{{ price | default: '&nbsp;' }}</span>
-  {% endif %}
-
-  {% if show_sale_price_first == true and show_compare_price %}
-    <span role="group">
-      <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
-      <span class="compare-at-price">{{- compare_at_price -}}</span>
-    </span>
-  {% endif %}
-  {%- if selected_variant.unit_price and show_unit_price %}
-    {%- liquid
-      if product.handle == closest.product.handle and settings.currency_code_enabled_product_pages
-        assign unit_price = selected_variant.unit_price | money_with_currency
-      elsif product.handle != closest.product.handle and settings.currency_code_enabled_product_cards
-        assign unit_price = selected_variant.unit_price | money_with_currency
-      else
-        assign unit_price = selected_variant.unit_price | money
-      endif
-    -%}
-    {% render 'unit-price', price: unit_price, measurement: selected_variant.unit_price_measurement %}
-  {%- endif -%}
+<div ref="priceContainer" class="avyah-price-container" style="display: flex !important; align-items: center !important; justify-content: space-between !important; text-align: left !important; margin-left: 0 !important; width: 100% !important; margin-top: 8px !important; margin-bottom: 12px !important;">
+  <span class="price" style="font-size: 24px !important; font-weight: 900 !important; color: #000000 !important; font-family: 'Inter', sans-serif !important; letter-spacing: -0.5px !important; text-align: left !important; margin-left: 0 !important; float: left !important;">{{ price | default: '&nbsp;' }}</span>
+  <span class="discount-badge" style="background-color: #d52528 !important; color: #ffffff !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 4px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">-{{ discount_percent }}% OFF</span>
 </div>
