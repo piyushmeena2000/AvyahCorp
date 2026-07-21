@@ -30,7 +30,7 @@
               <img src="{{ prod.featured_image | img_url: '200x200', crop: 'center' }}" alt="{{ prod.title }}" loading="lazy" style="width: 100% !important; height: 100% !important; object-fit: cover !important;">
             </div>
             <div class="upsell-info">
-              <h4 class="upsell-title" style="color: #111111 !important; font-size: 14px !important; font-weight: 700 !important; margin: 0 0 4px 0;">{{ prod.title | truncate: 35 }}</h4>
+              <h4 class="upsell-title" style="font-family: 'Anton', sans-serif !important; font-weight: 400 !important; font-size: 15px !important; color: #111111 !important; text-transform: uppercase !important; margin: 0 0 4px 0;">{{ prod.title | truncate: 35 }}</h4>
               <span class="upsell-price" style="color: #111111 !important; font-size: 14px !important; font-weight: 700 !important;">{{ prod.price | money }}</span>
             </div>
             <button class="upsell-add-btn" data-variant-id="{{ variant.id }}" style="background-color: #d52528 !important; color: #ffffff !important;">
@@ -111,11 +111,13 @@
     width: 100%;
   }
   .upsell-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: #333333;
+    font-family: 'Anton', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    color: #111111 !important;
+    text-transform: uppercase !important;
     margin: 0 0 4px;
-    line-height: 1.3;
+    line-height: 1.25;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
