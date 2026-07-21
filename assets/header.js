@@ -128,55 +128,8 @@ class HeaderComponent extends Component {
   #scrollLock = false;
 
   #handleWindowScroll = () => {
-    if (this.#scrollLock) return;
-    this.#scrollLock = true;
-
-    requestAnimationFrame(() => {
-      const stickyMode = this.getAttribute('sticky') || 'scroll-up';
-      const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
-      const isScrollingUp = scrollTop < this.#lastScrollTop;
-      const headerHeight = this.getBoundingClientRect().height || 80;
-
-      if (this.#timeout) {
-        clearTimeout(this.#timeout);
-        this.#timeout = null;
-      }
-
-      // If at top of page (within 10px), reset to inactive
-      if (scrollTop <= 10) {
-        this.removeAttribute('data-animating');
-        this.dataset.stickyState = 'inactive';
-        this.dataset.scrollDirection = 'none';
-        this.#lastScrollTop = scrollTop;
-        this.#scrollLock = false;
-        return;
-      }
-
-      if (stickyMode === 'always') {
-        this.dataset.stickyState = 'active';
-        this.dataset.scrollDirection = isScrollingUp ? 'up' : 'down';
-        this.#lastScrollTop = scrollTop;
-        this.#scrollLock = false;
-        return;
-      }
-
-      // Headroom Animation logic:
-      // Scrolling Down past header -> unpin/hide header
-      if (!isScrollingUp && scrollTop > headerHeight + 30) {
-        this.dataset.scrollDirection = 'down';
-        this.setAttribute('data-animating', '');
-        this.dataset.stickyState = 'idle';
-      } 
-      // Scrolling Up -> pin/show header
-      else if (isScrollingUp && scrollTop > 50) {
-        this.removeAttribute('data-animating');
-        this.dataset.stickyState = 'active';
-        this.dataset.scrollDirection = 'up';
-      }
-
-      this.#lastScrollTop = scrollTop;
-      this.#scrollLock = false;
-    });
+    // Handled by 1-to-1 scroll-linked physical tracking system
+    return;
   };
 
   connectedCallback() {

@@ -1623,10 +1623,11 @@ body:has(.avyah-megamenu:hover) #MainContent {
 }
 
 /* ========================================================
-   PROGRESSIVE REVEAL HEADER ANIMATION SYSTEM
-   - At Top: Normal header without shadows
-   - Scrolling DOWN: Progressive Hide (translates -105% UP)
-   - Scrolling UP: Progressive Reveal (translates 0 DOWN + Elevated Glassmorphism Shadow)
+   SCROLL-LINKED PROGRESSIVE REVEAL HEADER SYSTEM
+   SuperYou & Perfect Snack 1-to-1 Physical Scroll Tracking
+   - Header vertical position is directly linked to scroll distance
+   - 1-to-1 pixel tracking via translateY
+   - NO transitions, NO delays, NO keyframes, NO opacity changes
 ======================================================== */
 
 .header-section,
@@ -1635,52 +1636,12 @@ header-component {
   position: sticky !important;
   top: 0 !important;
   z-index: 10000 !important;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, background-color 0.3s ease !important;
-  will-change: transform, box-shadow;
+  transition: none !important; /* Zero transition delay or animation */
+  will-change: transform;
 }
 
-/* 1. At Top of Page */
-.is-at-top,
-.headroom--top,
-#header-group.is-at-top,
-#header-group.headroom--top,
-.header-section.is-at-top,
-.header-section.headroom--top,
-header-component.is-at-top,
-header-component.headroom--top,
-header-component[data-sticky-state='inactive'] {
-  transform: translateY(0) !important;
-  box-shadow: none !important;
-}
-
-/* 2. Scrolling Down -> Progressive Hide (Translates Up) */
-.is-progressive-unpinned,
-.headroom--unpinned,
-#header-group.is-progressive-unpinned,
-#header-group.headroom--unpinned,
-.header-section.is-progressive-unpinned,
-.header-section.headroom--unpinned,
-header-component.is-progressive-unpinned,
-header-component.headroom--unpinned,
-header-component[data-sticky-state='idle'] {
-  transform: translateY(-105%) !important;
-  box-shadow: none !important;
-}
-
-/* 3. Scrolling Up -> Progressive Reveal (Translates Down + Elevated Glassmorphism Shadow) */
-.is-progressive-revealed,
-.headroom--pinned,
-#header-group.is-progressive-revealed,
-#header-group.headroom--pinned,
-.header-section.is-progressive-revealed,
-.header-section.headroom--pinned,
-header-component.is-progressive-revealed,
-header-component.headroom--pinned,
-header-component[data-sticky-state='active'] {
-  transform: translateY(0) !important;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
+header-component.header[data-sticky-state] {
+  transition: none !important;
 }
 
 /* ========================================================

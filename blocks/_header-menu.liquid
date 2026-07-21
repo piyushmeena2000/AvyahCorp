@@ -286,46 +286,57 @@
 
             backdrop.addEventListener('click', hideOverlay);
 
-            // Progressive Reveal Header Scroll Animation System
-            let lastScrollY = window.scrollY || document.documentElement.scrollTop || 0;
-            let ticking = false;
+            // Scroll-Linked Progressive Reveal Header System (SuperYou & Perfect Snack 1-to-1 Physical Scroll Tracking)
+            (function() {
+              const headerElement = document.querySelector('#header-group') || document.querySelector('.header-section') || document.querySelector('header-component');
+              if (!headerElement) return;
 
-            function updateProgressiveReveal() {
-              const currentScrollY = window.scrollY || document.documentElement.scrollTop || 0;
-              const diff = currentScrollY - lastScrollY;
-              const headerGroup = document.querySelector('#header-group') || document.querySelector('.header-section') || document.querySelector('header-component');
+              headerElement.style.position = 'sticky';
+              headerElement.style.top = '0';
+              headerElement.style.zIndex = '10000';
+              headerElement.style.willChange = 'transform';
+              headerElement.style.transition = 'none';
 
-              if (!headerGroup) {
+              let lastScrollY = Math.max(0, window.scrollY || document.documentElement.scrollTop || 0);
+              let currentTranslateY = 0;
+              let ticking = false;
+
+              function getHeaderHeight() {
+                return headerElement.offsetHeight || headerElement.getBoundingClientRect().height || 80;
+              }
+
+              function onScroll() {
+                const currentScrollY = Math.max(0, window.scrollY || document.documentElement.scrollTop || 0);
+                const deltaY = currentScrollY - lastScrollY;
+                const headerHeight = getHeaderHeight();
+
+                if (currentScrollY <= 0) {
+                  currentTranslateY = 0;
+                } else {
+                  currentTranslateY = Math.min(0, Math.max(-headerHeight, currentTranslateY - deltaY));
+                }
+
+                headerElement.style.transform = 'translate3d(0, ' + currentTranslateY + 'px, 0)';
+
+                lastScrollY = currentScrollY;
                 ticking = false;
-                return;
               }
 
-              // 1. At Top of Page (within 20px)
-              if (currentScrollY <= 20) {
-                headerGroup.classList.remove('is-progressive-unpinned', 'is-progressive-revealed', 'headroom--unpinned', 'headroom--pinned');
-                headerGroup.classList.add('is-at-top', 'headroom--top');
-              }
-              // 2. Scrolling Down past 90px -> Progressive Hide (Slide Up)
-              else if (diff > 4 && currentScrollY > 90) {
-                headerGroup.classList.remove('is-progressive-revealed', 'is-at-top', 'headroom--pinned', 'headroom--top');
-                headerGroup.classList.add('is-progressive-unpinned', 'headroom--unpinned');
-              }
-              // 3. Scrolling UP -> Progressive Reveal (Slide Down with Glassmorphism Shadow)
-              else if (diff < -4 && currentScrollY > 40) {
-                headerGroup.classList.remove('is-progressive-unpinned', 'is-at-top', 'headroom--unpinned', 'headroom--top');
-                headerGroup.classList.add('is-progressive-revealed', 'headroom--pinned');
-              }
+              window.addEventListener('scroll', function() {
+                if (!ticking) {
+                  requestAnimationFrame(onScroll);
+                  ticking = true;
+                }
+              }, { passive: true });
 
-              lastScrollY = currentScrollY;
-              ticking = false;
-            }
-
-            window.addEventListener('scroll', function() {
-              if (!ticking) {
-                requestAnimationFrame(updateProgressiveReveal);
-                ticking = true;
-              }
-            }, { passive: true });
+              window.addEventListener('resize', function() {
+                const headerHeight = getHeaderHeight();
+                if (currentTranslateY < -headerHeight) {
+                  currentTranslateY = -headerHeight;
+                  headerElement.style.transform = 'translate3d(0, ' + currentTranslateY + 'px, 0)';
+                }
+              }, { passive: true });
+            })();
           }
 
           if (document.readyState === 'loading') {
