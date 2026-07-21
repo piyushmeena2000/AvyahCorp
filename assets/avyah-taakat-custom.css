@@ -1627,29 +1627,39 @@ body:has(.avyah-megamenu:hover) #MainContent {
    Scrolling Down -> Unpins / hides header translateY(-100%)
    Scrolling Up   -> Pins / slides header down translateY(0)
 ======================================================== */
-.header-section {
+.header-section,
+#header-group,
+header-component {
   position: sticky !important;
   top: 0 !important;
   z-index: 10000 !important;
-}
-
-header-component.header,
-#header-component {
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease !important;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease !important;
   will-change: transform;
 }
 
-header-component.header[data-sticky-state='idle'] {
+.headroom--unpinned,
+#header-group.headroom--unpinned,
+.header-section.headroom--unpinned,
+header-component.headroom--unpinned,
+header-component[data-sticky-state='idle'] {
   transform: translateY(-100%) !important;
   box-shadow: none !important;
 }
 
-header-component.header[data-sticky-state='active'] {
+.headroom--pinned,
+#header-group.headroom--pinned,
+.header-section.headroom--pinned,
+header-component.headroom--pinned,
+header-component[data-sticky-state='active'] {
   transform: translateY(0) !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
 }
 
-header-component.header[data-sticky-state='inactive'] {
+.headroom--top,
+#header-group.headroom--top,
+.header-section.headroom--top,
+header-component.headroom--top,
+header-component[data-sticky-state='inactive'] {
   transform: translateY(0) !important;
   box-shadow: none !important;
 }

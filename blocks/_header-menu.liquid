@@ -277,6 +277,46 @@
             }
 
             backdrop.addEventListener('click', hideOverlay);
+
+            // Standalone Ultra-Smooth Headroom Header Scroll Animation
+            let lastScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+            let ticking = false;
+
+            function onScroll() {
+              const currentScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+              const headerGroup = document.querySelector('#header-group') || document.querySelector('.header-section') || document.querySelector('header-component');
+
+              if (!headerGroup) {
+                ticking = false;
+                return;
+              }
+
+              // Top of page (within 15px) -> Normal header
+              if (currentScrollY <= 15) {
+                headerGroup.classList.remove('headroom--unpinned', 'headroom--pinned');
+                headerGroup.classList.add('headroom--top');
+              }
+              // Scrolling Down past 80px -> Slide Header UP out of view
+              else if (currentScrollY > lastScrollY && currentScrollY > 80) {
+                headerGroup.classList.remove('headroom--pinned', 'headroom--top');
+                headerGroup.classList.add('headroom--unpinned');
+              }
+              // Scrolling UP -> Slide Header DOWN into view
+              else if (currentScrollY < lastScrollY && currentScrollY > 40) {
+                headerGroup.classList.remove('headroom--unpinned', 'headroom--top');
+                headerGroup.classList.add('headroom--pinned');
+              }
+
+              lastScrollY = currentScrollY;
+              ticking = false;
+            }
+
+            window.addEventListener('scroll', function() {
+              if (!ticking) {
+                requestAnimationFrame(onScroll);
+                ticking = true;
+              }
+            }, { passive: true });
           }
 
           if (document.readyState === 'loading') {
