@@ -104,29 +104,38 @@
               <!-- Row 4: Quantity Stepper [ - 1 + ] & Remove Link -->
               <div class="perfect-cart-item-controls" style="display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 4px !important; margin-top: 4px !important;">
                 <div class="perfect-qty-pill" style="display: inline-flex !important; align-items: center !important; justify-content: space-between !important; border: 1px solid #d5d5d5 !important; border-radius: 50px !important; height: 32px !important; width: 90px !important; background-color: #ffffff !important; padding: 0 4px !important; box-sizing: border-box !important;">
-                  <a
-                    href="/cart/change?line={{ item.index }}&quantity={{ item.quantity | minus: 1 }}"
-                    style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 16px !important; font-weight: 700 !important; text-decoration: none !important; width: 28px !important; height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; user-select: none !important;"
+                  <button
+                    type="button"
+                    class="perfect-qty-ajax-btn"
+                    data-line="{{ forloop.index }}"
+                    data-qty="{{ item.quantity | minus: 1 }}"
+                    style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 16px !important; font-weight: 700 !important; background: transparent !important; border: none !important; width: 28px !important; height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; user-select: none !important;"
                     aria-label="Decrease quantity"
-                  >-</a>
+                  >-</button>
                   
                   <span style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 13px !important; font-weight: 700 !important; width: 26px !important; text-align: center !important; display: block !important;">
                     {{ item.quantity }}
                   </span>
 
-                  <a
-                    href="/cart/change?line={{ item.index }}&quantity={{ item.quantity | plus: 1 }}"
-                    style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 16px !important; font-weight: 700 !important; text-decoration: none !important; width: 28px !important; height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; user-select: none !important;"
+                  <button
+                    type="button"
+                    class="perfect-qty-ajax-btn"
+                    data-line="{{ forloop.index }}"
+                    data-qty="{{ item.quantity | plus: 1 }}"
+                    style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 16px !important; font-weight: 700 !important; background: transparent !important; border: none !important; width: 28px !important; height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; user-select: none !important;"
                     aria-label="Increase quantity"
-                  >+</a>
+                  >+</button>
                 </div>
 
-                <a
-                  href="/cart/change?line={{ item.index }}&quantity=0"
-                  style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 12px !important; font-weight: 600 !important; text-decoration: underline !important; display: inline-block !important; margin-top: 4px !important;"
+                <button
+                  type="button"
+                  class="perfect-qty-ajax-btn"
+                  data-line="{{ forloop.index }}"
+                  data-qty="0"
+                  style="background: none !important; border: none !important; padding: 0 !important; font-family: 'Inter', sans-serif !important; font-size: 12px !important; font-weight: 600 !important; color: #111111 !important; text-decoration: underline !important; cursor: pointer !important; margin-top: 4px !important;"
                 >
                   Remove
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -135,6 +144,55 @@
     </form>
   {%- endif -%}
 </div>
+
+<script>
+  (function() {
+    if (window.perfectCartQtyInit) return;
+    window.perfectCartQtyInit = true;
+    
+    document.addEventListener('click', async function(e) {
+      const btn = e.target.closest('.perfect-qty-ajax-btn');
+      if (!btn) return;
+      
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const line = btn.dataset.line;
+      const qty = btn.dataset.qty;
+      
+      btn.style.opacity = '0.3';
+      btn.style.pointerEvents = 'none';
+      
+      try {
+        const res = await fetch('/cart/change.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            line: parseInt(line, 10),
+            quantity: parseInt(qty, 10)
+          })
+        });
+        
+        if (res.ok) {
+          const data = await res.json();
+          document.dispatchEvent(new CustomEvent('cart:update', {
+            bubbles: true,
+            detail: { resource: data }
+          }));
+          window.location.reload();
+        } else {
+          window.location.reload();
+        }
+      } catch (err) {
+        console.error('AJAX cart quantity update error:', err);
+        window.location.reload();
+      }
+    });
+  })();
+</script>
 
 {% stylesheet %}
   .cart-items {
