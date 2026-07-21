@@ -58,6 +58,34 @@
     endif
   -%}
 
+  <!-- Sleek Discount Code Box -->
+  <div class="perfect-cart-discount-wrapper" style="width: 100% !important; margin-bottom: 14px !important;">
+    <div style="display: flex !important; gap: 8px !important; width: 100% !important;">
+      <input
+        type="text"
+        id="cart-discount-code"
+        placeholder="Discount code"
+        style="flex: 1 !important; height: 40px !important; border: 1px solid #d5d5d5 !important; border-radius: 8px !important; padding: 0 12px !important; font-family: 'Inter', sans-serif !important; font-size: 13px !important; color: #111111 !important; background-color: #ffffff !important; outline: none !important;"
+      >
+      <button
+        type="button"
+        id="cart-discount-apply"
+        style="height: 40px !important; padding: 0 16px !important; background-color: #111111 !important; color: #ffffff !important; border: none !important; border-radius: 8px !important; font-family: 'Inter', sans-serif !important; font-size: 13px !important; font-weight: 600 !important; cursor: pointer !important; white-space: nowrap !important;"
+        onclick="applyCartDiscountCode()"
+      >
+        Apply
+      </button>
+    </div>
+  </div>
+  <script>
+    function applyCartDiscountCode() {
+      const input = document.getElementById('cart-discount-code');
+      const code = input ? input.value.trim() : '';
+      if (!code) return;
+      window.location.href = `/discount/${encodeURIComponent(code)}?redirect=${encodeURIComponent(window.location.pathname)}`;
+    }
+  </script>
+
   <div class="cart__total-container">
     <span
       class="cart__summary-item cart__total"
