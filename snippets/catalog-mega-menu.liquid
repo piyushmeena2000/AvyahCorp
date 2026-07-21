@@ -8,14 +8,14 @@
   <div class="avyah-catalog-megamenu__inner">
 
     {%- comment -%} LEFT: Text nav links {%- endcomment -%}
-    <div class="avyah-catalog-megamenu__left">
-      <p class="avyah-catalog-megamenu__eyebrow">OUR RANGE</p>
+    <div class="avyah-catalog-megamenu__left" style="color: #111111 !important;">
+      <p class="avyah-catalog-megamenu__eyebrow" style="color: #d52528 !important;">OUR RANGE</p>
       <ul class="avyah-catalog-megamenu__links list-unstyled">
-        <li><a href="/collections/all" class="avyah-catalog-megamenu__link avyah-catalog-megamenu__link--bold">SHOP ALL</a></li>
-        <li><a href="/collections/range" class="avyah-catalog-megamenu__link">FULL SIZE BARS</a></li>
-        <li><a href="/collections/snackbox" class="avyah-catalog-megamenu__link">SNACK BOXES</a></li>
-        <li><a href="/collections/combo" class="avyah-catalog-megamenu__link">COMBO PACKS</a></li>
-        <li><a href="/collections/variety" class="avyah-catalog-megamenu__link">VARIETY PACKS</a></li>
+        <li><a href="/collections/all" class="avyah-catalog-megamenu__link avyah-catalog-megamenu__link--bold" style="color: #d52528 !important;">SHOP ALL</a></li>
+        <li><a href="/collections/range" class="avyah-catalog-megamenu__link" style="color: #111111 !important;">FULL SIZE BARS</a></li>
+        <li><a href="/collections/snackbox" class="avyah-catalog-megamenu__link" style="color: #111111 !important;">SNACK BOXES</a></li>
+        <li><a href="/collections/combo" class="avyah-catalog-megamenu__link" style="color: #111111 !important;">COMBO PACKS</a></li>
+        <li><a href="/collections/variety" class="avyah-catalog-megamenu__link" style="color: #111111 !important;">VARIETY PACKS</a></li>
       </ul>
     </div>
 
@@ -37,7 +37,7 @@
           {%- assign col_object = collections[col_handle] -%}
         {%- endif -%}
 
-        <a href="{{ col_url }}" class="avyah-catalog-megamenu__card">
+        <a href="{{ col_url }}" class="avyah-catalog-megamenu__card" style="color: #111111 !important;">
           <div class="avyah-catalog-megamenu__card-image-wrapper">
             {%- if col_object and col_object.image -%}
               <img
@@ -59,11 +59,11 @@
               >
             {%- else -%}
               <div class="avyah-catalog-megamenu__card-placeholder">
-                <span>{{ col_label | slice: 0 }}</span>
+                <span style="color: #d52528 !important;">{{ col_label | slice: 0 }}</span>
               </div>
             {%- endif -%}
           </div>
-          <p class="avyah-catalog-megamenu__card-label">{{ col_label | upcase }}</p>
+          <p class="avyah-catalog-megamenu__card-label" style="color: #111111 !important;">{{ col_label | upcase }}</p>
         </a>
       {%- endfor -%}
 

@@ -98,18 +98,18 @@
                         <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
                     </a>
-                    <div class="avyah-megamenu" id="avyah-megamenu-panel">
-                      <div class="avyah-megamenu__inner">
-                        <div class="avyah-megamenu__sidebar">
-                          <a href="/collections/all" class="avyah-megamenu__sidebar-link avyah-megamenu__sidebar-link--bold avyah-tab-link active" data-tab="tab-all">SHOP ALL</a>
+                    <div class="avyah-megamenu" id="avyah-megamenu-panel" style="background-color: #ffffff !important; color: #111111 !important;">
+                      <div class="avyah-megamenu__inner" style="background-color: #ffffff !important; color: #111111 !important;">
+                        <div class="avyah-megamenu__sidebar" style="background-color: #ffffff !important; color: #111111 !important;">
+                          <a href="/collections/all" class="avyah-megamenu__sidebar-link avyah-megamenu__sidebar-link--bold avyah-tab-link active" data-tab="tab-all" style="color: #111111 !important;">SHOP ALL</a>
                           {%- for childlink in link.links -%}
-                            <a href="{{ childlink.url }}" class="avyah-megamenu__sidebar-link avyah-tab-link" data-tab="tab-{{ forloop.index }}">{{ childlink.title | upcase }}</a>
+                            <a href="{{ childlink.url }}" class="avyah-megamenu__sidebar-link avyah-tab-link" data-tab="tab-{{ forloop.index }}" style="color: #111111 !important;">{{ childlink.title | upcase }}</a>
                           {%- endfor -%}
                         </div>
-                        <div class="avyah-megamenu__content-area">
-                          <div class="avyah-megamenu__grid avyah-tab-content active" id="tab-all">
+                        <div class="avyah-megamenu__content-area" style="background-color: #ffffff !important; color: #111111 !important;">
+                          <div class="avyah-megamenu__grid avyah-tab-content active" id="tab-all" style="background-color: #ffffff !important; color: #111111 !important;">
                             {%- for childlink in link.links -%}
-                              <a href="{{ childlink.url }}" class="avyah-megamenu__card">
+                              <a href="{{ childlink.url }}" class="avyah-megamenu__card" style="color: #111111 !important;">
                                 <div class="avyah-megamenu__card-img">
                                   {%- if childlink.type == 'collection_link' and childlink.object.image -%}
                                     <img src="{{ childlink.object.image | image_url: width: 400 }}" alt="{{ childlink.title | escape }}" loading="lazy" width="400" height="400">
@@ -121,22 +121,22 @@
                                     </div>
                                   {%- endif -%}
                                 </div>
-                                <span class="avyah-megamenu__card-title">{{ childlink.title | upcase }}</span>
+                                <span class="avyah-megamenu__card-title" style="color: #111111 !important;">{{ childlink.title | upcase }}</span>
                               </a>
                             {%- endfor -%}
-                            <a href="/collections/all" class="avyah-megamenu__card">
+                            <a href="/collections/all" class="avyah-megamenu__card" style="color: #111111 !important;">
                               <div class="avyah-megamenu__card-img">
-                                <div class="avyah-megamenu__card-placeholder avyah-megamenu__card-placeholder--all"><span>→</span></div>
+                                <div class="avyah-megamenu__card-placeholder avyah-megamenu__card-placeholder--all"><span style="color: #d52528 !important;">→</span></div>
                               </div>
-                              <span class="avyah-megamenu__card-title">ALL PRODUCTS</span>
+                              <span class="avyah-megamenu__card-title" style="color: #111111 !important;">ALL PRODUCTS</span>
                             </a>
                           </div>
                           
                           {%- for childlink in link.links -%}
-                            <div class="avyah-megamenu__grid avyah-tab-content" id="tab-{{ forloop.index }}">
+                            <div class="avyah-megamenu__grid avyah-tab-content" id="tab-{{ forloop.index }}" style="background-color: #ffffff !important; color: #111111 !important;">
                               {%- if childlink.type == 'collection_link' -%}
                                 {%- for product in childlink.object.products limit: 4 -%}
-                                  <a href="{{ product.url }}" class="avyah-megamenu__card">
+                                  <a href="{{ product.url }}" class="avyah-megamenu__card" style="color: #111111 !important;">
                                     <div class="avyah-megamenu__card-img">
                                       {%- if product.featured_image -%}
                                         <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy" width="400" height="400">
@@ -146,16 +146,16 @@
                                         </div>
                                       {%- endif -%}
                                     </div>
-                                    <span class="avyah-megamenu__card-title">{{ product.title | upcase }}</span>
+                                    <span class="avyah-megamenu__card-title" style="color: #111111 !important;">{{ product.title | upcase }}</span>
                                   </a>
                                 {%- endfor -%}
-                                <a href="{{ childlink.url }}" class="avyah-megamenu__card">
+                                <a href="{{ childlink.url }}" class="avyah-megamenu__card" style="color: #111111 !important;">
                                   <div class="avyah-megamenu__card-img">
                                     <div class="avyah-megamenu__card-placeholder avyah-megamenu__card-placeholder--all">
-                                      <span>→</span>
+                                      <span style="color: #d52528 !important;">→</span>
                                     </div>
                                   </div>
-                                  <span class="avyah-megamenu__card-title">VIEW ALL {{ childlink.title | upcase }}</span>
+                                  <span class="avyah-megamenu__card-title" style="color: #111111 !important;">VIEW ALL {{ childlink.title | upcase }}</span>
                                 </a>
                               {%- endif -%}
                             </div>
