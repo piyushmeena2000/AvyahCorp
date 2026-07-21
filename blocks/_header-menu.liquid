@@ -178,29 +178,27 @@
                         <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
                     </a>
-                    <div class="menu-list__submenu avyah-discover-popover" style="background-color: #ffffff !important; background: #ffffff !important; border-radius: 18px !important; box-shadow: 0 12px 35px rgba(0,0,0,0.2) !important; padding: 14px 18px !important; min-width: 230px !important;">
+                    <div class="menu-list__submenu avyah-discover-popover" style="background-color: #ffffff !important; background: #ffffff !important; border-radius: 18px !important; box-shadow: 0 12px 35px rgba(0,0,0,0.2) !important; padding: 10px !important; min-width: 230px !important;">
                       <div class="avyah-discover-arrow" style="position: absolute !important; top: -8px !important; left: 50% !important; transform: translateX(-50%) !important; width: 0 !important; height: 0 !important; border-left: 8px solid transparent !important; border-right: 8px solid transparent !important; border-bottom: 8px solid #ffffff !important;"></div>
                       <div class="menu-list__submenu-inner" style="background-color: #ffffff !important;">
-                        <div class="mega-menu__grid" style="display: flex !important; flex-direction: column !important; gap: 8px !important; background-color: #ffffff !important;">
-                          {%- for childlink in link.links -%}
-                            {%- assign _clt = childlink.title | downcase -%}
-                            {%- assign link_color = "#000000" -%}
-                            {%- if _clt contains 'blog' -%}
-                              {%- assign link_color = "#d52528" -%}
-                            {%- endif -%}
-                            <div class="mega-menu__column" style="width: 100% !important; background-color: #ffffff !important;">
-                              <a href="{{ childlink.url }}" class="mega-menu__link{% if childlink.current %} mega-menu__link--active{% endif %}" style="display: flex !important; align-items: center !important; gap: 14px !important; color: {{ link_color }} !important; -webkit-text-fill-color: {{ link_color }} !important; font-family: 'Anton', sans-serif !important; font-size: 24px !important; font-weight: 400 !important; text-transform: uppercase !important; text-decoration: none !important; padding: 10px 14px !important; border-radius: 10px !important; transition: background 0.15s ease !important;">
-                                {%- if _clt contains 'blog' -%}
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d52528" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="dd-icon" style="color: #d52528 !important; stroke: #d52528 !important; flex-shrink:0;"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/></svg>
-                                {%- elsif _clt contains 'career' or _clt contains 'job' -%}
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="dd-icon" style="color: #000000 !important; stroke: #000000 !important; flex-shrink:0;"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                                {%- else -%}
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="dd-icon" style="color: #000000 !important; stroke: #000000 !important; flex-shrink:0;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                {%- endif -%}
-                                <span style="color: {{ link_color }} !important; -webkit-text-fill-color: {{ link_color }} !important; font-family: 'Anton', sans-serif !important; font-size: 24px !important; font-weight: 400 !important; letter-spacing: 0.5px !important; text-transform: uppercase !important;">{{ childlink.title | escape }}</span>
-                              </a>
-                            </div>
-                          {%- endfor -%}
+                        <div class="mega-menu__grid" style="display: flex !important; flex-direction: column !important; gap: 4px !important; background-color: #ffffff !important;">
+                          
+                          <!-- ITEM 1: OUR BLOGS -->
+                          <div class="mega-menu__column" style="width: 100% !important; background-color: #ffffff !important;">
+                            <a href="/blogs/news" class="mega-menu__link" style="display: flex !important; align-items: center !important; gap: 14px !important; background-color: #fff5f5 !important; color: #d52528 !important; -webkit-text-fill-color: #d52528 !important; font-family: 'Anton', sans-serif !important; font-size: 22px !important; font-weight: 400 !important; text-transform: uppercase !important; text-decoration: none !important; padding: 12px 16px !important; border-radius: 12px !important; transition: background 0.15s ease !important; width: 100% !important; box-sizing: border-box !important;">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d52528" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="dd-icon" style="color: #d52528 !important; stroke: #d52528 !important; flex-shrink:0;"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/></svg>
+                              <span style="color: #d52528 !important; -webkit-text-fill-color: #d52528 !important; font-family: 'Anton', sans-serif !important; font-size: 22px !important; font-weight: 400 !important; letter-spacing: 0.5px !important; text-transform: uppercase !important; display: inline-block !important; line-height: 1 !important;">OUR BLOGS</span>
+                            </a>
+                          </div>
+
+                          <!-- ITEM 2: CAREERS -->
+                          <div class="mega-menu__column" style="width: 100% !important; background-color: #ffffff !important;">
+                            <a href="/pages/careers" class="mega-menu__link" style="display: flex !important; align-items: center !important; gap: 14px !important; background-color: #ffffff !important; color: #000000 !important; -webkit-text-fill-color: #000000 !important; font-family: 'Anton', sans-serif !important; font-size: 22px !important; font-weight: 400 !important; text-transform: uppercase !important; text-decoration: none !important; padding: 12px 16px !important; border-radius: 12px !important; transition: background 0.15s ease !important; width: 100% !important; box-sizing: border-box !important;">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="dd-icon" style="color: #000000 !important; stroke: #000000 !important; flex-shrink:0;"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                              <span style="color: #000000 !important; -webkit-text-fill-color: #000000 !important; font-family: 'Anton', sans-serif !important; font-size: 22px !important; font-weight: 400 !important; letter-spacing: 0.5px !important; text-transform: uppercase !important; display: inline-block !important; line-height: 1 !important;">CAREERS</span>
+                            </a>
+                          </div>
+
                         </div>
                       </div>
                     </div>
