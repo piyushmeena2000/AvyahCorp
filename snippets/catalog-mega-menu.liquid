@@ -8,14 +8,14 @@
   <div class="avyah-catalog-megamenu__inner">
 
     {%- comment -%} LEFT: Text nav links {%- endcomment -%}
-    <div class="avyah-catalog-megamenu__left" style="color: #111111 !important;">
-      <p class="avyah-catalog-megamenu__eyebrow" style="color: #d52528 !important;">OUR RANGE</p>
+    <div class="avyah-catalog-megamenu__left" style="color: #ffffff !important; border-right: 1px solid rgba(255, 255, 255, 0.25) !important;">
+      <p class="avyah-catalog-megamenu__eyebrow" style="color: #ffffff !important;">OUR RANGE</p>
       <ul class="avyah-catalog-megamenu__links list-unstyled">
-        <li><a href="/collections/all" class="avyah-catalog-megamenu__link avyah-catalog-megamenu__link--bold" style="color: #d52528 !important;">SHOP ALL</a></li>
-        <li><a href="/collections/range" class="avyah-catalog-megamenu__link" style="color: #111111 !important;">FULL SIZE BARS</a></li>
-        <li><a href="/collections/snackbox" class="avyah-catalog-megamenu__link" style="color: #111111 !important;">SNACK BOXES</a></li>
-        <li><a href="/collections/combo" class="avyah-catalog-megamenu__link" style="color: #111111 !important;">COMBO PACKS</a></li>
-        <li><a href="/collections/variety" class="avyah-catalog-megamenu__link" style="color: #111111 !important;">VARIETY PACKS</a></li>
+        <li><a href="/collections/all" class="avyah-catalog-megamenu__link avyah-catalog-megamenu__link--bold" style="color: #ffffff !important;">SHOP ALL</a></li>
+        <li><a href="/collections/range" class="avyah-catalog-megamenu__link" style="color: #ffffff !important;">FULL SIZE BARS</a></li>
+        <li><a href="/collections/snackbox" class="avyah-catalog-megamenu__link" style="color: #ffffff !important;">SNACK BOXES</a></li>
+        <li><a href="/collections/combo" class="avyah-catalog-megamenu__link" style="color: #ffffff !important;">COMBO PACKS</a></li>
+        <li><a href="/collections/variety" class="avyah-catalog-megamenu__link" style="color: #ffffff !important;">VARIETY PACKS</a></li>
       </ul>
     </div>
 
@@ -37,8 +37,8 @@
           {%- assign col_object = collections[col_handle] -%}
         {%- endif -%}
 
-        <a href="{{ col_url }}" class="avyah-catalog-megamenu__card" style="color: #111111 !important;">
-          <div class="avyah-catalog-megamenu__card-image-wrapper">
+        <a href="{{ col_url }}" class="avyah-catalog-megamenu__card" style="color: #ffffff !important;">
+          <div class="avyah-catalog-megamenu__card-image-wrapper" style="border: 2px solid rgba(255, 255, 255, 0.2) !important; background: rgba(255, 255, 255, 0.1) !important;">
             {%- if col_object and col_object.image -%}
               <img
                 src="{{ col_object.image | image_url: width: 400 }}"
@@ -58,12 +58,12 @@
                 class="avyah-catalog-megamenu__card-image"
               >
             {%- else -%}
-              <div class="avyah-catalog-megamenu__card-placeholder">
-                <span style="color: #d52528 !important;">{{ col_label | slice: 0 }}</span>
+              <div class="avyah-catalog-megamenu__card-placeholder" style="background: rgba(255, 255, 255, 0.15) !important;">
+                <span style="color: #ffffff !important;">{{ col_label | slice: 0 }}</span>
               </div>
             {%- endif -%}
           </div>
-          <p class="avyah-catalog-megamenu__card-label" style="color: #111111 !important;">{{ col_label | upcase }}</p>
+          <p class="avyah-catalog-megamenu__card-label" style="color: #ffffff !important;">{{ col_label | upcase }}</p>
         </a>
       {%- endfor -%}
 
@@ -83,9 +83,9 @@
     left: 0;
     right: 0;
     width: 100%;
-    background: #ffffff;
-    border-top: 3px solid #d52528;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    background: #d52528;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     z-index: 9999;
     padding: 36px 60px 40px;
     animation: avyahMenuFadeIn 0.2s ease;

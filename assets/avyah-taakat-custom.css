@@ -1492,55 +1492,8 @@ body.template-index [class*="ai-logo-carousel"] [class*="heading"] {
 }
 
 /* =============================================
-   MEGA MENU & POPUP MODAL TEXT COLOR FIX
-   Force all text in header popups/dropdowns to Black (#111111)
+   MEGA MENU CRIMSON RED DESIGN & DARK BACKDROP
 ============================================= */
-body.template-index .avyah-megamenu,
-body.template-index .avyah-megamenu *,
-body.template-index .avyah-megamenu a,
-body.template-index .avyah-megamenu span,
-body.template-index .avyah-megamenu div,
-body.template-index .avyah-megamenu__sidebar,
-body.template-index .avyah-megamenu__sidebar-link,
-body.template-index .avyah-megamenu__content-area,
-body.template-index .avyah-megamenu__card,
-body.template-index .avyah-megamenu__card-title,
-body.template-index .menu-list__submenu,
-body.template-index .menu-list__submenu *,
-body.template-index .mega-menu__grid,
-body.template-index .mega-menu__grid *,
-.avyah-megamenu,
-.avyah-megamenu *,
-.avyah-megamenu a,
-.avyah-megamenu span,
-.avyah-megamenu div,
-.avyah-megamenu__sidebar,
-.avyah-megamenu__sidebar-link,
-.avyah-megamenu__content-area,
-.avyah-megamenu__card,
-.avyah-megamenu__card-title,
-.menu-list__submenu,
-.menu-list__submenu *,
-.mega-menu__grid,
-.mega-menu__grid * {
-  color: #111111 !important;
-}
-
-/* Sidebar tab active/hover state in mega menu */
-body.template-index .avyah-megamenu__sidebar-link.active,
-body.template-index .avyah-megamenu__sidebar-link:hover,
-.avyah-megamenu__sidebar-link.active,
-.avyah-megamenu__sidebar-link:hover {
-  color: #d52528 !important;
-}
-
-body.template-index .avyah-megamenu__sidebar-link--bold.active,
-.avyah-megamenu__sidebar-link--bold.active {
-  color: #d52528 !important;
-  text-decoration: underline !important;
-}
-
-/* Full Width Horizontal Expansion for Mega Menu Window */
 .avyah-megamenu,
 .avyah-catalog-megamenu {
   left: 0 !important;
@@ -1550,10 +1503,56 @@ body.template-index .avyah-megamenu__sidebar-link--bold.active,
   transform: none !important;
   border-radius: 0 !important;
   padding: 36px 60px !important;
-  background-color: #ffffff !important;
-  background: #ffffff !important;
-  border-top: 3px solid #d52528 !important;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15) !important;
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+  border-top: 2px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4) !important;
+}
+
+.avyah-megamenu *,
+.avyah-megamenu a,
+.avyah-megamenu span,
+.avyah-megamenu div,
+.avyah-megamenu__sidebar,
+.avyah-megamenu__sidebar-link,
+.avyah-megamenu__content-area,
+.avyah-megamenu__card,
+.avyah-megamenu__card-title,
+.avyah-catalog-megamenu,
+.avyah-catalog-megamenu * {
+  color: #ffffff !important;
+}
+
+.avyah-megamenu__sidebar {
+  border-right: 1px solid rgba(255, 255, 255, 0.25) !important;
+}
+
+.avyah-megamenu__sidebar-link {
+  font-family: 'Anton', sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  transition: all 0.2s ease !important;
+}
+
+.avyah-megamenu__sidebar-link.active,
+.avyah-megamenu__sidebar-link:hover {
+  color: #ffffff !important;
+  text-decoration: underline !important;
+  text-underline-offset: 4px !important;
+}
+
+.avyah-megamenu__card-title {
+  font-family: 'Anton', sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 15px !important;
+  color: #ffffff !important;
+}
+
+.avyah-megamenu__card-img {
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
 }
 
 .avyah-megamenu__inner,
@@ -1561,6 +1560,29 @@ body.template-index .avyah-megamenu__sidebar-link--bold.active,
   max-width: 1280px !important;
   margin: 0 auto !important;
   width: 100% !important;
+}
+
+/* Dark Backdrop Overlay when Mega-Menu is open */
+.avyah-megamenu-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 9998;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.avyah-catalog-item:hover ~ .avyah-megamenu-backdrop,
+.avyah-catalog-item:hover .avyah-megamenu-backdrop,
+body:has(.avyah-megamenu:hover) .avyah-megamenu-backdrop,
+.avyah-catalog-megamenu.avyah-catalog-megamenu--visible ~ .avyah-megamenu-backdrop {
+  display: block !important;
 }
 
 
