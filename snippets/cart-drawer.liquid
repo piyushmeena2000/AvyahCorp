@@ -287,14 +287,9 @@
 
   /* PerfectSnacks White Cart Item Rows */
   .cart-drawer .cart-items__table-row {
-    display: grid !important;
-    grid-template-columns: 100px 1fr auto !important;
-    grid-template-rows: auto auto !important;
-    grid-template-areas:
-      'media details price'
-      'media quantity price' !important;
-    align-items: center !important;
-    column-gap: 16px !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
     padding: 18px 20px !important;
     margin-bottom: 0 !important;
     border-bottom: 1px solid #f0f0f0 !important;
@@ -305,9 +300,9 @@
   }
 
   .cart-drawer .cart-items__media {
-    grid-area: media !important;
     width: 100px !important;
     height: 100px !important;
+    min-width: 100px !important;
     border-radius: 16px !important;
     overflow: hidden !important;
     padding: 8px !important;
@@ -333,9 +328,20 @@
   }
 
   .cart-drawer .cart-items__details {
-    grid-area: details !important;
+    flex-grow: 1 !important;
     padding: 0 !important;
     color: #111111 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+  }
+
+  .cart-drawer .cart-item-header-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    width: 100% !important;
   }
 
   .cart-drawer .cart-items__title {
@@ -346,9 +352,30 @@
     text-decoration: none !important;
     line-height: 1.25 !important;
     display: block !important;
-    margin-bottom: 4px !important;
+    margin: 0 !important;
     white-space: normal !important;
     word-break: break-word !important;
+  }
+
+  .cart-drawer .cart-item-price-block {
+    text-align: right !important;
+    white-space: nowrap !important;
+  }
+
+  .cart-drawer .cart-item-final-price {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    color: #111111 !important;
+  }
+
+  .cart-drawer .compare-at-price {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    color: #888888 !important;
+    text-decoration: line-through !important;
+    margin-left: 6px !important;
   }
 
   .cart-drawer .cart-items__variants {
@@ -356,16 +383,27 @@
     font-size: 12px !important;
     font-weight: 600 !important;
     color: #555555 !important;
-    margin-bottom: 6px !important;
+    margin-top: 2px !important;
+    margin-bottom: 2px !important;
   }
 
-  /* Style cart drawer quantity and remove button */
-  .cart-drawer .cart-items__quantity {
-    grid-area: quantity !important;
-    margin-top: 6px !important;
+  .cart-drawer .cart-item-offer-tag {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.5px !important;
+    color: #333333 !important;
+    text-transform: uppercase !important;
+    margin-top: 2px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .cart-drawer .cart-item-actions-wrapper {
     display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+    margin-top: 6px !important;
   }
 
   .cart-drawer .quantity-selector {
@@ -374,10 +412,26 @@
     height: 32px !important;
     width: 88px !important;
     background-color: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
   }
 
-  .cart-drawer .quantity-selector button {
-    width: 26px !important;
+  .cart-drawer .cart-items__remove-text-btn {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: #111111 !important;
+    text-decoration: underline !important;
+    cursor: pointer !important;
+    margin-top: 4px !important;
+  }
+
+  .cart-drawer .cart-items__remove-text-btn:hover {
+    color: #d52528 !important;
+  }
     height: 100% !important;
     display: flex !important;
     align-items: center !important;

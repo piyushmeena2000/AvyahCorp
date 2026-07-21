@@ -104,224 +104,108 @@
                 data-parent-key="{{ item.parent_relationship.parent.key }}"
                 data-key="{{ item.key }}"
               >
+                <!-- Pastel Image Card -->
                 <td
                   class="cart-items__media"
                   role="cell"
                   headers="productImage"
                 >
                   {% if item.image -%}
-                    {% liquid
-                      assign ratio = 1
-                      assign border_opacity = settings.cart_thumbnail_border_opacity | divided_by: 100.0
-                      assign border_override = '--border-width: [cart_thumbnail_border_width]px; --border-style: [cart_thumbnail_border_style]; --border-color: rgb(var(--color-border-rgb) / [cart_thumbnail_border_opacity]); --border-radius: [cart_thumbnail_border_radius]px;' | replace: '[cart_thumbnail_border_width]', settings.cart_thumbnail_border_width | replace: '[cart_thumbnail_border_style]', settings.cart_thumbnail_border | replace: '[cart_thumbnail_border_opacity]', border_opacity | replace: '[cart_thumbnail_border_radius]', settings.cart_thumbnail_border_radius
-
-                      if settings.cart_thumbnail_border_radius > 0
-                        assign border_override = border_override | append: ' overflow: hidden;'
-                      endif
-                      if block_settings.image_ratio == 'portrait'
-                        assign ratio = 0.8
-                      elsif block_settings.image_ratio == 'adapt'
-                        assign ratio = item.image.aspect_ratio
-                      endif
-                    %}
                     <a
                       href="{{ item.url }}"
                       class="cart-items__media-container"
-                      style="--ratio:{{ ratio }};"
                     >
-                      {%- liquid
-                        echo item.image | image_url: width: 250 | image_tag: class: 'cart-items__media-image border-style', style: border_override
-                      -%}
+                      <img src="{{ item.image | image_url: width: 250 }}" alt="{{ item.product.title | escape }}" loading="lazy">
                     </a>
                   {%- endif %}
                 </td>
+
+                <!-- Details & Actions -->
                 <td
                   class="cart-items__details cart-primary-typography"
                   role="cell"
                   headers="productInformation"
                 >
-                  <p>
+                  <!-- Title & Single Price Header Row -->
+                  <div class="cart-item-header-row">
                     <a
                       href="{{ item.url }}"
                       class="cart-items__title"
                       style="color: #111111 !important;"
-                      {% if item.parent_relationship.parent != null %}
-                        aria-label="{{ 'accessibility.nested_product' | t: product_title: item.product.title, parent_title: item.parent_relationship.parent.title | escape }}"
-                      {% endif %}
                     >
                       {{- item.product.title -}}
                     </a>
-                  </p>
-                  {% if item.product.vendor and block_settings.vendor %}
-                    <p style="color: #666666 !important;">
-                      {{ item.product.vendor }}
-                    </p>
-                  {% endif %}
+                    <div class="cart-item-price-block">
+                      {% if item.original_price != item.final_price %}
+                        <span class="cart-item-final-price" style="color: #111111 !important; font-weight: 700;">{{ item.final_price | money }}</span>
+                        <s class="compare-at-price" style="color: #888888 !important; text-decoration: line-through;">
+                          {% if item.variant.compare_at_price > item.original_price %}
+                            {{ item.variant.compare_at_price | money }}
+                          {% else %}
+                            {{ item.original_price | money }}
+                          {% endif %}
+                        </s>
+                      {% else %}
+                        <span class="cart-item-final-price" style="color: #111111 !important; font-weight: 700;">{{ item.original_price | money }}</span>
+                        {% if item.variant.compare_at_price > item.original_price %}
+                          <s class="compare-at-price" style="color: #888888 !important; text-decoration: line-through;">{{ item.variant.compare_at_price | money }}</s>
+                        {% endif %}
+                      {% endif %}
+                    </div>
+                  </div>
 
-                  {%- if item.item_components.size != 0 -%}
-                    <ul class="cart-items__bundle list-unstyled" style="color: #666666 !important;">
-                      {%- for component in item.item_components -%}
-                        <li style="color: #666666 !important;">
-                          {{- component.title -}}
-                          {%- if component.quantity > 1 -%}
-                            <span style="color: #666666 !important;"> × {{ component.quantity }}</span>
-                          {%- endif -%}
-                        </li>
-                      {%- endfor -%}
-                    </ul>
-                  {%- endif -%}
-
-                  {%- if item.product.has_only_default_variant == false
-                    or item.properties.size != 0
-                    or item.selling_plan_allocation != null
-                  -%}
-                    <dl class="cart-items__variants" style="color: #666666 !important;">
-                      {%- if item.product.has_only_default_variant == false and item.item_components.size == 0 -%}
+                  <!-- Subtitle / Variant Info -->
+                  {%- if item.product.has_only_default_variant == false or item.properties.size != 0 -%}
+                    <div class="cart-items__variants" style="color: #555555 !important;">
+                      {%- if item.product.has_only_default_variant == false -%}
                         {%- for option in item.options_with_values -%}
-                          <div class="cart-items__variant" style="color: #666666 !important;">
-                            <dt class="visually-hidden">{{ option.name }}:</dt>
-                            <dd style="color: #666666 !important;">
-                              {{- option.value -}}
-                              {%- if forloop.last != true %},&nbsp;{% endif -%}
-                            </dd>
-                          </div>
+                          <span>{{ option.value }}{%- if forloop.last != true %}, {% endif -%}</span>
                         {%- endfor -%}
                       {%- endif -%}
-
-                      {%- for property in item.properties -%}
-                        {%- assign property_first_char = property.first | slice: 0 -%}
-                        {%- if property.last != blank and property_first_char != '_' -%}
-                          <div class="cart-items__properties" style="color: #666666 !important;">
-                            <dt style="color: #666666 !important;">{{ property.first }}:</dt>
-                            <dd style="color: #666666 !important;">
-                              {%- if property.last contains '/uploads/' -%}
-                                <a href="{{ property.last }}" style="color: #666666 !important;">{{ property.last | split: '/' | last }}</a>
-                              {%- else -%}
-                                {{ property.last }}
-                              {%- endif -%}
-                            </dd>
-                          </div>
-                        {%- endif -%}
-                      {%- endfor -%}
-                    </dl>
-
-                    {% if item.selling_plan_allocation %}
-                      <p style="color: #666666 !important;">{{ item.selling_plan_allocation.selling_plan.name }}</p>
-                    {% endif %}
-                  {%- endif -%}
-
-                  {% if item.line_level_discount_allocations.size > 0 %}
-                    <ul
-                      class="list-unstyled"
-                      role="list"
-                      style="color: #d52528 !important;"
-                    >
-                      {%- for discount in item.line_level_discount_allocations -%}
-                        <li style="color: #d52528 !important;">{{ discount.discount_application.title | escape }}</li>
-                      {%- endfor -%}
-                    </ul>
-                  {% endif %}
-
-                  <div style="color: #111111 !important;">
-                    {% if item.original_price != item.final_price %}
-                      <span class="visually-hidden">{{ 'content.price_sale' | t }}</span>
-                      <span style="color: #111111 !important; font-weight: 700;">{{ item.final_price | money }}</span>
-                      <span class="visually-hidden">{{ 'content.price_regular' | t }}</span>
-                      <s class="compare-at-price" style="color: #888888 !important;">
-                        {% if item.variant.compare_at_price > item.original_price %}
-                          {{ item.variant.compare_at_price | money }}
-                        {% else %}
-                          {{ item.original_price | money }}
-                        {% endif %}
-                      </s>
-                    {% else %}
-                      {% if item.variant.compare_at_price > item.original_price %}
-                        <span class="visually-hidden">{{ 'content.price_sale' | t }}</span>
-                      {% else %}
-                        <span class="visually-hidden">{{ 'content.price' | t }}</span>
-                      {% endif %}
-
-                      <span style="color: #111111 !important; font-weight: 700;">{{ item.original_price | money }}</span>
-
-                      {% if item.variant.compare_at_price > item.original_price %}
-                        <span class="visually-hidden">{{ 'content.price_regular' | t }}</span>
-                        <s class="compare-at-price" style="color: #888888 !important;">{{ item.variant.compare_at_price | money }}</s>
-                      {% endif %}
-                    {% endif %}
-                  </div>
-                </td>
-                <td
-                  class="cart-items__quantity"
-                  role="cell"
-                  headers="quantity"
-                >
-                  {% # Here I want to pass some arguments to the quantity block so it knows which value should the input be set to. Though quantity block could be a snippet instead %}
-                  {% assign can_update_quantity = item.instructions.can_update_quantity
-                    | default: true, allow_false: true
-                  %}
-                  {% render 'quantity-selector',
-                    product: item.product,
-                    in_cart_quantity: item.quantity,
-                    line_index: item.index,
-                    min: 0,
-                    class: 'cart-primary-typography',
-                    can_update_quantity: can_update_quantity
-                  %}
-
-                  <button
-                    class="button button--tertiary cart-items__remove"
-                    type="button"
-                    style="color: #666666 !important;"
-                    aria-label="{{ 'accessibility.remove_item' | t: title: item.title | escape }}"
-                    on:click="/onLineItemRemove/{{ item.index | plus: 1 }}"
-                    {% assign can_remove = item.instructions.can_remove | default: true, allow_false: true %}
-                    {% if can_remove == false %}
-                      hidden
-                    {% endif %}
-                  >
-                    {{- 'icon-delete.svg' | inline_asset_content -}}
-                    <span class="visually-hidden">Remove</span>
-                  </button>
-                </td>
-                <td
-                  class="cart-items__error hidden"
-                  role="cell"
-                  ref="cartItemErrorContainer-{{ item.index | plus: 1 }}"
-                  headers="quantity"
-                >
-                  <div
-                    class="cart-item__error"
-                    role="alert"
-                  >
-                    <span class="svg-wrapper">
-                      {{- 'icon-error.svg' | inline_asset_content -}}
-                    </span>
-                    <small
-                      class="cart-item__error-text cart-primary-typography"
-                      ref="cartItemError-{{ item.index | plus: 1 }}"
-                    ></small>
-                  </div>
-                </td>
-                <td
-                  class="cart-items__price cart-secondary-typography"
-                  role="cell"
-                  headers="productTotal"
-                >
-                  {%- liquid
-                    if settings.currency_code_enabled_cart_items
-                      assign price = item.final_line_price | money_with_currency
-                      assign unit_price = item.unit_price | money_with_currency
-                    else
-                      assign price = item.final_line_price | money
-                      assign unit_price = item.unit_price | money
-                    endif
-                  -%}
-                  <text-component value="{{ price | strip_html }}">{{ price }}</text-component>
-                  {%- if item.unit_price_measurement -%}
-                    <div class="cart-items__price-unit cart-secondary-typography">
-                      {% render 'unit-price', price: unit_price, measurement: item.unit_price_measurement %}
+                    </div>
+                  {%- else -%}
+                    <div class="cart-items__variants" style="color: #555555 !important;">
+                      Full Size - 8 Bars
                     </div>
                   {%- endif -%}
+
+                  <!-- Offer Tag -->
+                  {% if item.line_level_discount_allocations.size > 0 %}
+                    <div class="cart-item-offer-tag" style="color: #333333 !important; font-weight: 800; font-size: 11px; text-transform: uppercase;">
+                      {%- for discount in item.line_level_discount_allocations -%}
+                        GET {{ discount.discount_application.title | escape }}
+                      {%- endfor -%}
+                    </div>
+                  {% else %}
+                    <div class="cart-item-offer-tag" style="color: #333333 !important; font-weight: 800; font-size: 11px; text-transform: uppercase; margin-top: 2px;">
+                      GET 30% OFF
+                    </div>
+                  {% endif %}
+
+                  <!-- Quantity & Remove Button -->
+                  <div class="cart-item-actions-wrapper">
+                    {% assign can_update_quantity = item.instructions.can_update_quantity
+                      | default: true, allow_false: true
+                    %}
+                    {% render 'quantity-selector',
+                      product: item.product,
+                      in_cart_quantity: item.quantity,
+                      line_index: item.index,
+                      min: 0,
+                      class: 'cart-primary-typography',
+                      can_update_quantity: can_update_quantity
+                    %}
+
+                    <button
+                      class="cart-items__remove-text-btn"
+                      type="button"
+                      style="background: none; border: none; padding: 0; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: #111111; text-decoration: underline; cursor: pointer; margin-top: 4px;"
+                      aria-label="{{ 'accessibility.remove_item' | t: title: item.title | escape }}"
+                      on:click="/onLineItemRemove/{{ item.index | plus: 1 }}"
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </td>
               </tr>
             {% endfor %}
