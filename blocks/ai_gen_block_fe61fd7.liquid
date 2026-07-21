@@ -209,17 +209,22 @@
 
   .ai-product-card-content-{{ ai_gen_id }} {
     padding: 14px 0 0;
-    text-align: left;
+    text-align: left !important;
     flex-grow: 1;
-    display: flex;
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
   }
 
   .ai-product-card-reviews-{{ ai_gen_id }} {
-    display: flex;
-    align-items: center;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
     gap: 6px;
     margin-bottom: 8px;
+    width: 100% !important;
   }
 
   .ai-product-card-reviews-{{ ai_gen_id }} .stars {
@@ -258,12 +263,14 @@
     font-family: 'Anton', sans-serif;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    text-align: left;
+    text-align: left !important;
+    width: 100% !important;
   }
 
   .ai-product-card-title-{{ ai_gen_id }} a {
     color: #000000 !important;
     text-decoration: none;
+    text-align: left !important;
   }
 
   .ai-product-card-specs-{{ ai_gen_id }} {
@@ -272,20 +279,26 @@
     color: #666666 !important;
     margin: 4px 0 10px;
     font-family: 'Inter', sans-serif;
-    text-align: left;
+    text-align: left !important;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    width: 100% !important;
+    margin-left: 0 !important;
   }
 
   /* Pricing Row */
   .ai-product-card-price-row-{{ ai_gen_id }} {
     display: flex !important;
+    flex-direction: row !important;
     align-items: center !important;
     justify-content: flex-start !important;
+    align-self: flex-start !important;
     text-align: left !important;
     flex-wrap: wrap;
     gap: 8px;
     margin: 4px 0 10px 0 !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
     width: 100% !important;
     font-family: 'Inter', sans-serif;
   }
