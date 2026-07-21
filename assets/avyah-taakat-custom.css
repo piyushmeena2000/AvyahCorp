@@ -1703,16 +1703,37 @@ header-component svg line:not(.dd-icon *),
 /* ========================================================
    DISCOVER DROPDOWN — SOLID BLACK TEXT & ICONS (#000000)
 ======================================================== */
+header #header-component .menu-list__submenu,
+header #header-component .menu-list__submenu *,
+#header-group .menu-list__submenu,
+#header-group .menu-list__submenu *,
+body #header-group .menu-list__submenu *,
+body .header .menu-list__submenu *,
+body header-component .menu-list__submenu *,
 .menu-list__submenu,
+.menu-list__submenu *,
 .menu-list__submenu-inner,
+.menu-list__submenu-inner *,
 .mega-menu__grid,
+.mega-menu__grid *,
 .mega-menu__column,
+.mega-menu__column *,
 .avyah-discover-card,
 .avyah-discover-dropdown {
   background-color: #ffffff !important;
   background: #ffffff !important;
 }
 
+header #header-component .menu-list__submenu a,
+header #header-component .menu-list__submenu span,
+#header-group .menu-list__submenu a,
+#header-group .menu-list__submenu span,
+body #header-group .menu-list__submenu a,
+body #header-group .menu-list__submenu span,
+body .header .menu-list__submenu a,
+body .header .menu-list__submenu span,
+body header-component .menu-list__submenu a,
+body header-component .menu-list__submenu span,
 .menu-list__submenu a,
 .menu-list__submenu a *,
 .menu-list__submenu span,
@@ -1725,6 +1746,7 @@ header-component svg line:not(.dd-icon *),
 .avyah-discover-dropdown a,
 .avyah-discover-dropdown span {
   color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
 }
 
 .menu-list__submenu svg,
