@@ -1708,18 +1708,26 @@ header-component svg line:not(.dd-icon *),
    - Container: Clean white popover card with top pointer arrow
 ======================================================== */
 header #header-component .menu-list__submenu,
-header #header-component .menu-list__submenu *,
 #header-group .menu-list__submenu,
-#header-group .menu-list__submenu *,
-body #header-group .menu-list__submenu *,
-body .header .menu-list__submenu *,
-body header-component .menu-list__submenu *,
+body #header-group .menu-list__submenu,
+body .header .menu-list__submenu,
+body header-component .menu-list__submenu,
 .menu-list__submenu,
 .menu-list__submenu-inner,
 .mega-menu__grid,
 .mega-menu__column {
   background-color: #ffffff !important;
   background: #ffffff !important;
+}
+
+/* Enable DISCOVER hover dropdown popover */
+.menu-list__list-item:hover .menu-list__submenu,
+.menu-list__list-item:focus-within .menu-list__submenu,
+.menu-list__submenu:hover {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
 }
 
 /* OUR BLOGS in Crimson Red (#d52528) */

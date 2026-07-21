@@ -164,7 +164,7 @@
                       </div>
                     </div>
                     <div class="avyah-megamenu-backdrop"></div>
-                  {%- elsif link.links != blank -%}
+                  {%- elsif link.links != blank or _dt contains 'discover' -%}
                     {%- comment -%} Other links with children {%- endcomment -%}
                     <a
                       href="{{ link.url }}"
