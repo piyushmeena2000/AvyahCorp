@@ -1540,4 +1540,27 @@ body.template-index .avyah-megamenu__sidebar-link--bold.active,
   text-decoration: underline !important;
 }
 
+/* Full Width Horizontal Expansion for Mega Menu Window */
+.avyah-megamenu,
+.avyah-catalog-megamenu {
+  left: 0 !important;
+  right: 0 !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  transform: none !important;
+  border-radius: 0 !important;
+  padding: 36px 60px !important;
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  border-top: 3px solid #d52528 !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15) !important;
+}
+
+.avyah-megamenu__inner,
+.avyah-catalog-megamenu__inner {
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
 
