@@ -108,6 +108,7 @@
       {%- if product.variants.size > 1 -%}
         <button
           class="button quick-add__button quick-add__button--choose"
+          style="background-color: #8B0000 !important; background: #8B0000 !important; color: #ffffff !important; border-color: #8B0000 !important;"
           {% comment %} type="submit" is the default, so we explicitly set it to "button" to prevent the ProductFormComponent.handleSubmit from being triggered {% endcomment %}
           type="button"
           name="add"
