@@ -1692,4 +1692,48 @@ header-component.header[data-sticky-state] {
   stroke: #d52528 !important;
 }
 
+/* ========================================================
+   GRAY ADD TO CART BUTTONS
+   Applies sleek gray background (#4a4a4a) to all Add To Cart
+   and Quick Buy buttons across product cards and pages.
+======================================================== */
+.quick-add__button,
+.quick-add__button--add,
+.quick-add__button--choose,
+add-to-cart-component button,
+button[name="add"],
+.product-form__submit,
+.add-to-cart-button {
+  background-color: #4a4a4a !important;
+  background: #4a4a4a !important;
+  color: #ffffff !important;
+  border-color: #4a4a4a !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease !important;
+}
+
+.quick-add__button *,
+.quick-add__button--add *,
+.quick-add__button--choose *,
+add-to-cart-component button *,
+button[name="add"] *,
+.product-form__submit *,
+.add-to-cart-button * {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* Hover State */
+.quick-add__button:hover,
+.quick-add__button--add:hover,
+.quick-add__button--choose:hover,
+add-to-cart-component button:hover,
+button[name="add"]:hover,
+.product-form__submit:hover,
+.add-to-cart-button:hover {
+  background-color: #2c2c2c !important;
+  background: #2c2c2c !important;
+  border-color: #2c2c2c !important;
+  color: #ffffff !important;
+}
+
 
