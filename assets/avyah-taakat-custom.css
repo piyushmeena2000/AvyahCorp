@@ -1103,6 +1103,20 @@ body.template-index dialog.cart-drawer__dialog .cart__summary-container {
   box-shadow: none !important;
 }
 
+/* Animated Recycle Trash Icon Button */
+.perfect-recycle-btn {
+  transition: color 0.3s ease !important;
+}
+
+.perfect-recycle-btn:hover {
+  color: #d52528 !important;
+}
+
+.perfect-recycle-btn:hover .recycle-icon {
+  transform: rotate(180deg) scale(1.15) !important;
+  color: #d52528 !important;
+}
+
 /* Compare-at prices -> Grey */
 body.template-index dialog.cart-drawer__dialog .compare-at-price,
 body.template-index dialog.cart-drawer__dialog s {

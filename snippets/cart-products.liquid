@@ -59,33 +59,38 @@
                 {{ item.product.title }}
               </a>
 
-              <!-- Row 2: Subtitle / Variant Info -->
-              <div class="perfect-cart-item-subtitle" style="font-family: 'Inter', sans-serif !important; font-size: 12px !important; font-weight: 500 !important; color: #555555 !important; margin-bottom: 2px !important;">
+              <!-- Row 2: Dynamic Subtitle / Pack Info -->
+              <div class="perfect-cart-item-subtitle" style="font-family: 'Inter', sans-serif !important; font-size: 12px !important; font-weight: 500 !important; color: #666666 !important; margin-bottom: 4px !important;">
                 {%- if item.product.has_only_default_variant == false -%}
                   {%- for option in item.options_with_values -%}
                     {{ option.value }}{%- if forloop.last != true %}, {% endif -%}
                   {%- endfor -%}
                 {%- else -%}
-                  Full Size - 8 Bars
+                  {%- assign title_lower = item.product.title | downcase -%}
+                  {%- if title_lower contains 'pack of 10' or title_lower contains '10 pack' -%}
+                    10 Pack
+                  {%- elsif title_lower contains 'pack of 24' or title_lower contains '24 pack' -%}
+                    24 Pack
+                  {%- elsif title_lower contains '20 bars' -%}
+                    20 Bars
+                  {%- elsif title_lower contains '30 bars' -%}
+                    30 Bars
+                  {%- elsif title_lower contains 'bars' or title_lower contains 'bar' -%}
+                    Energy Bars
+                  {%- elsif title_lower contains 'mast mix' or title_lower contains 'namkeen' -%}
+                    Roasted Namkeen Pack
+                  {%- else -%}
+                    {{ item.product.type | default: 'Healthy Snack Pack' }}
+                  {%- endif -%}
                 {%- endif -%}
               </div>
 
-              <!-- Row 3: GET 30% OFF on Left, Price with Discounted Price on Right -->
-              <div class="perfect-cart-item-offer-price-row" style="display: flex !important; justify-content: space-between !important; align-items: center !important; gap: 8px !important; width: 100% !important; margin: 2px 0 6px 0 !important;">
-                <div class="perfect-cart-item-offer" style="font-family: 'Inter', sans-serif !important; font-size: 11px !important; font-weight: 800 !important; color: #333333 !important; text-transform: uppercase !important;">
-                  {% if item.line_level_discount_allocations.size > 0 %}
-                    {%- for discount in item.line_level_discount_allocations -%}
-                      GET {{ discount.discount_application.title | uppercase }}
-                    {%- endfor -%}
-                  {% else %}
-                    GET 30% OFF
-                  {% endif %}
-                </div>
-
-                <div class="perfect-cart-item-prices" style="text-align: right !important; white-space: nowrap !important;">
+              <!-- Row 3: Single Price Row -->
+              <div class="perfect-cart-item-price-row" style="display: flex !important; justify-content: flex-start !important; align-items: center !important; width: 100% !important; margin: 2px 0 6px 0 !important;">
+                <div class="perfect-cart-item-prices">
                   {% if item.original_price != item.final_price %}
-                    <span class="perfect-price-sale" style="font-family: 'Inter', sans-serif !important; color: #111111 !important; font-weight: 700 !important; font-size: 14px !important;">{{ item.final_price | money }}</span>
-                    <s class="perfect-price-compare" style="font-family: 'Inter', sans-serif !important; color: #888888 !important; text-decoration: line-through !important; font-size: 12px !important; margin-left: 4px !important;">
+                    <span class="perfect-price-sale" style="font-family: 'Inter', sans-serif !important; color: #111111 !important; font-weight: 700 !important; font-size: 15px !important;">{{ item.final_price | money }}</span>
+                    <s class="perfect-price-compare" style="font-family: 'Inter', sans-serif !important; color: #888888 !important; text-decoration: line-through !important; font-size: 13px !important; margin-left: 6px !important;">
                       {% if item.variant.compare_at_price > item.original_price %}
                         {{ item.variant.compare_at_price | money }}
                       {% else %}
@@ -93,27 +98,27 @@
                       {% endif %}
                     </s>
                   {% else %}
-                    <span class="perfect-price-sale" style="font-family: 'Inter', sans-serif !important; color: #111111 !important; font-weight: 700 !important; font-size: 14px !important;">{{ item.original_price | money }}</span>
+                    <span class="perfect-price-sale" style="font-family: 'Inter', sans-serif !important; color: #111111 !important; font-weight: 700 !important; font-size: 15px !important;">{{ item.original_price | money }}</span>
                     {% if item.variant.compare_at_price > item.original_price %}
-                      <s class="perfect-price-compare" style="font-family: 'Inter', sans-serif !important; color: #888888 !important; text-decoration: line-through !important; font-size: 12px !important; margin-left: 4px !important;">{{ item.variant.compare_at_price | money }}</s>
+                      <s class="perfect-price-compare" style="font-family: 'Inter', sans-serif !important; color: #888888 !important; text-decoration: line-through !important; font-size: 13px !important; margin-left: 6px !important;">{{ item.variant.compare_at_price | money }}</s>
                     {% endif %}
                   {% endif %}
                 </div>
               </div>
 
-              <!-- Row 4: Quantity Stepper [ - 1 + ] & Remove Link -->
-              <div class="perfect-cart-item-controls" style="display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 4px !important; margin-top: 4px !important;">
-                <div class="perfect-qty-pill" style="display: inline-flex !important; align-items: center !important; justify-content: space-between !important; border: 1px solid #d5d5d5 !important; border-radius: 50px !important; height: 32px !important; width: 90px !important; background-color: #ffffff !important; padding: 0 4px !important; box-sizing: border-box !important;">
+              <!-- Row 4: Quantity Stepper [ - 1 + ] & Animated Recycle Icon on Right -->
+              <div class="perfect-cart-item-controls" style="display: flex !important; align-items: center !important; gap: 12px !important; margin-top: 4px !important;">
+                <div class="perfect-qty-pill" style="display: inline-flex !important; align-items: center !important; justify-content: space-between !important; border: 1px solid #d5d5d5 !important; border-radius: 50px !important; height: 32px !important; width: 88px !important; background-color: #ffffff !important; padding: 0 4px !important; box-sizing: border-box !important;">
                   <button
                     type="button"
                     class="perfect-qty-ajax-btn"
                     data-line="{{ forloop.index }}"
                     data-qty="{{ item.quantity | minus: 1 }}"
-                    style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 16px !important; font-weight: 700 !important; background: transparent !important; border: none !important; width: 28px !important; height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; user-select: none !important;"
+                    style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 16px !important; font-weight: 700 !important; background: transparent !important; border: none !important; width: 26px !important; height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; user-select: none !important;"
                     aria-label="Decrease quantity"
                   >-</button>
                   
-                  <span style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 13px !important; font-weight: 700 !important; width: 26px !important; text-align: center !important; display: block !important;">
+                  <span style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 13px !important; font-weight: 700 !important; width: 24px !important; text-align: center !important; display: block !important;">
                     {{ item.quantity }}
                   </span>
 
@@ -122,19 +127,27 @@
                     class="perfect-qty-ajax-btn"
                     data-line="{{ forloop.index }}"
                     data-qty="{{ item.quantity | plus: 1 }}"
-                    style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 16px !important; font-weight: 700 !important; background: transparent !important; border: none !important; width: 28px !important; height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; user-select: none !important;"
+                    style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 16px !important; font-weight: 700 !important; background: transparent !important; border: none !important; width: 26px !important; height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; user-select: none !important;"
                     aria-label="Increase quantity"
                   >+</button>
                 </div>
 
+                <!-- Animated Recycle / Trash Delete Button -->
                 <button
                   type="button"
-                  class="perfect-qty-ajax-btn"
+                  class="perfect-qty-ajax-btn perfect-recycle-btn"
                   data-line="{{ forloop.index }}"
                   data-qty="0"
-                  style="background: none !important; border: none !important; padding: 0 !important; font-family: 'Inter', sans-serif !important; font-size: 12px !important; font-weight: 600 !important; color: #111111 !important; text-decoration: underline !important; cursor: pointer !important; margin-top: 4px !important;"
+                  title="Remove item"
+                  aria-label="Remove item"
+                  style="background: transparent !important; border: none !important; padding: 4px !important; cursor: pointer !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; color: #666666 !important;"
                 >
-                  Remove
+                  <svg class="recycle-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.4s ease, color 0.3s ease !important;">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                  </svg>
                 </button>
               </div>
             </div>
