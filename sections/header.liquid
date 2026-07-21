@@ -188,6 +188,7 @@
 <header-component
   id="header-component"
   class="{{ class }}"
+  style="background-color: #d52528 !important; background: #d52528 !important; color: #ffffff !important;"
   {% if transparent %}
     transparent="{{ transparent }}"
   {% endif %}
@@ -225,7 +226,7 @@
           assign border_bottom_setting_id = 'border_width'
       endcase
 
-      assign style = '--border-bottom-width: [width]px; ' | replace: '[width]', section.settings[border_bottom_setting_id]
+      assign style = 'background-color: #d52528 !important; background: #d52528 !important; color: #ffffff !important; --border-bottom-width: [width]px; ' | replace: '[width]', section.settings[border_bottom_setting_id]
 
       if row == 'top'
         assign style = style | append: '--border-bottom-width-mobile: [width]px; ' | replace: '[width]', section.settings.border_width

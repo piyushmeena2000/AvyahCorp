@@ -1635,10 +1635,15 @@ body:has(.avyah-megamenu:hover) #MainContent {
 #header-component,
 header-component,
 .header,
+.header__row,
+.header__row--top,
+.header__top-row,
+[class*="header__row"],
 .header__inner,
 header-menu,
 .header-menu,
-.menu-list {
+.menu-list,
+.menu-list__scroll-container {
   position: sticky !important;
   top: 0 !important;
   z-index: 10000 !important;
@@ -1649,21 +1654,29 @@ header-menu,
   color: #ffffff !important;
 }
 
-header-component.header[data-sticky-state] {
+header-component.header[data-sticky-state],
+header-component [class*="header__row"] {
   transition: none !important;
   background-color: #d52528 !important;
   background: #d52528 !important;
 }
 
 /* Force all header menu links, titles & icons to WHITE (#ffffff) */
-#header-group *:not(.menu-list__submenu *):not(.avyah-discover-card *),
-.header *:not(.menu-list__submenu *):not(.avyah-discover-card *),
+#header-group a:not(.menu-list__submenu a):not(.avyah-discover-card a),
+#header-group span:not(.menu-list__submenu span):not(.avyah-discover-card span):not(.cart-count),
+#header-group p:not(.menu-list__submenu p):not(.avyah-discover-card p),
+#header-group li:not(.menu-list__submenu li):not(.avyah-discover-card li),
+.header a:not(.menu-list__submenu a):not(.avyah-discover-card a),
+.header span:not(.menu-list__submenu span):not(.avyah-discover-card span):not(.cart-count),
 .header__inline-menu *:not(.menu-list__submenu *):not(.avyah-discover-card *),
 .header__menu-item:not(.menu-list__submenu *),
+.menu-list__link,
+.menu-list__link-title,
 header nav *:not(.menu-list__submenu *):not(.avyah-discover-card *),
 .header-actions__action,
 .header-actions__action *:not(.cart-count),
-header-component *:not(.menu-list__submenu *):not(.avyah-discover-card *) {
+header-component a:not(.menu-list__submenu a):not(.avyah-discover-card a),
+header-component span:not(.menu-list__submenu span):not(.avyah-discover-card span):not(.cart-count) {
   color: #ffffff !important;
 }
 
@@ -1675,9 +1688,12 @@ header-component svg line:not(.dd-icon *),
 #header-group svg:not(.dd-icon),
 #header-group svg path:not(.dd-icon *),
 .header svg:not(.dd-icon),
-.header svg path:not(.dd-icon *) {
+.header svg path:not(.dd-icon *),
+.header-actions__action svg,
+.header-actions__action svg path {
   fill: #ffffff !important;
   stroke: #ffffff !important;
+  color: #ffffff !important;
 }
 
 /* ========================================================
