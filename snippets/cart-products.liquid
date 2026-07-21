@@ -40,177 +40,102 @@
       id="cart-form"
       method="post"
     >
-      <div
-        class="cart-items spacing-style{% if block_settings.dividers %} cart-items--dividers{% endif %}"
-        style="{%  render 'spacing-style', settings: block_settings %} --cart-items-gap:{{ block_settings.gap | append: "px" }};"
-      >
-        <table
-          class="cart-items__table"
-          role="table"
-        >
-          <caption
-            class="visually-hidden"
-            role="caption"
-          >
-            {{ 'content.cart_total' | t }}
-            <span>{{ cart.total_price | money_with_currency }}</span>
-          </caption>
+      <div class="perfect-cart-items-wrapper">
+        {% for item in cart.items %}
+          <div class="perfect-cart-item-row" data-key="{{ item.key }}" ref="cartItemRows[]">
+            <!-- Left: Pastel Image Container -->
+            <div class="perfect-cart-item-image-box">
+              {% if item.image %}
+                <a href="{{ item.url }}">
+                  <img src="{{ item.image | image_url: width: 250 }}" alt="{{ item.product.title | escape }}" loading="lazy">
+                </a>
+              {% endif %}
+            </div>
 
-          <thead
-            class="visually-hidden"
-            role="rowgroup"
-          >
-            <tr
-              role="row"
-              class="cart-items__table-row"
-            >
-              <th
-                id="productImage"
-                scope="col"
-                role="columnheader"
-              >
-                {{ 'content.product_image' | t }}
-              </th>
-              <th
-                id="productInformation"
-                scope="col"
-                role="columnheader"
-              >
-                {{ 'content.product_information' | t }}
-              </th>
-              <th
-                id="quantity"
-                scope="col"
-                role="columnheader"
-              >
-                {{ 'content.quantity' | t }}
-              </th>
-              <th
-                id="productTotal"
-                scope="col"
-                role="columnheader"
-              >
-                {{ 'content.product_total' | t }}
-              </th>
-            </tr>
-          </thead>
-
-          <tbody role="rowgroup">
-            {% for item in cart.items %}
-              <tr
-                role="row"
-                class="cart-items__table-row{% if item.parent_relationship.parent != null %} cart-items__nested-line{% endif %}"
-                ref="cartItemRows[]"
-                data-parent-key="{{ item.parent_relationship.parent.key }}"
-                data-key="{{ item.key }}"
-              >
-                <!-- Pastel Image Card -->
-                <td
-                  class="cart-items__media"
-                  role="cell"
-                  headers="productImage"
-                >
-                  {% if item.image -%}
-                    <a
-                      href="{{ item.url }}"
-                      class="cart-items__media-container"
-                    >
-                      <img src="{{ item.image | image_url: width: 250 }}" alt="{{ item.product.title | escape }}" loading="lazy">
-                    </a>
-                  {%- endif %}
-                </td>
-
-                <!-- Details & Actions -->
-                <td
-                  class="cart-items__details cart-primary-typography"
-                  role="cell"
-                  headers="productInformation"
-                >
-                  <!-- Title & Single Price Header Row -->
-                  <div class="cart-item-header-row">
-                    <a
-                      href="{{ item.url }}"
-                      class="cart-items__title"
-                      style="color: #111111 !important;"
-                    >
-                      {{- item.product.title -}}
-                    </a>
-                    <div class="cart-item-price-block">
-                      {% if item.original_price != item.final_price %}
-                        <span class="cart-item-final-price" style="color: #111111 !important; font-weight: 700;">{{ item.final_price | money }}</span>
-                        <s class="compare-at-price" style="color: #888888 !important; text-decoration: line-through;">
-                          {% if item.variant.compare_at_price > item.original_price %}
-                            {{ item.variant.compare_at_price | money }}
-                          {% else %}
-                            {{ item.original_price | money }}
-                          {% endif %}
-                        </s>
+            <!-- Right: Content & Controls -->
+            <div class="perfect-cart-item-info">
+              <!-- Top Row: Title + Single Price -->
+              <div class="perfect-cart-item-header">
+                <a href="{{ item.url }}" class="perfect-cart-item-title">
+                  {{ item.product.title }}
+                </a>
+                <div class="perfect-cart-item-prices">
+                  {% if item.original_price != item.final_price %}
+                    <span class="perfect-price-sale">{{ item.final_price | money }}</span>
+                    <s class="perfect-price-compare">
+                      {% if item.variant.compare_at_price > item.original_price %}
+                        {{ item.variant.compare_at_price | money }}
                       {% else %}
-                        <span class="cart-item-final-price" style="color: #111111 !important; font-weight: 700;">{{ item.original_price | money }}</span>
-                        {% if item.variant.compare_at_price > item.original_price %}
-                          <s class="compare-at-price" style="color: #888888 !important; text-decoration: line-through;">{{ item.variant.compare_at_price | money }}</s>
-                        {% endif %}
+                        {{ item.original_price | money }}
                       {% endif %}
-                    </div>
-                  </div>
-
-                  <!-- Subtitle / Variant Info -->
-                  {%- if item.product.has_only_default_variant == false or item.properties.size != 0 -%}
-                    <div class="cart-items__variants" style="color: #555555 !important;">
-                      {%- if item.product.has_only_default_variant == false -%}
-                        {%- for option in item.options_with_values -%}
-                          <span>{{ option.value }}{%- if forloop.last != true %}, {% endif -%}</span>
-                        {%- endfor -%}
-                      {%- endif -%}
-                    </div>
-                  {%- else -%}
-                    <div class="cart-items__variants" style="color: #555555 !important;">
-                      Full Size - 8 Bars
-                    </div>
-                  {%- endif -%}
-
-                  <!-- Offer Tag -->
-                  {% if item.line_level_discount_allocations.size > 0 %}
-                    <div class="cart-item-offer-tag" style="color: #333333 !important; font-weight: 800; font-size: 11px; text-transform: uppercase;">
-                      {%- for discount in item.line_level_discount_allocations -%}
-                        GET {{ discount.discount_application.title | escape }}
-                      {%- endfor -%}
-                    </div>
+                    </s>
                   {% else %}
-                    <div class="cart-item-offer-tag" style="color: #333333 !important; font-weight: 800; font-size: 11px; text-transform: uppercase; margin-top: 2px;">
-                      GET 30% OFF
-                    </div>
+                    <span class="perfect-price-sale">{{ item.original_price | money }}</span>
+                    {% if item.variant.compare_at_price > item.original_price %}
+                      <s class="perfect-price-compare">{{ item.variant.compare_at_price | money }}</s>
+                    {% endif %}
                   {% endif %}
+                </div>
+              </div>
 
-                  <!-- Quantity & Remove Button -->
-                  <div class="cart-item-actions-wrapper">
-                    {% assign can_update_quantity = item.instructions.can_update_quantity
-                      | default: true, allow_false: true
-                    %}
-                    {% render 'quantity-selector',
-                      product: item.product,
-                      in_cart_quantity: item.quantity,
-                      line_index: item.index,
-                      min: 0,
-                      class: 'cart-primary-typography',
-                      can_update_quantity: can_update_quantity
-                    %}
+              <!-- Variant Subtitle -->
+              <div class="perfect-cart-item-subtitle">
+                {%- if item.product.has_only_default_variant == false -%}
+                  {%- for option in item.options_with_values -%}
+                    {{ option.value }}{%- if forloop.last != true %}, {% endif -%}
+                  {%- endfor -%}
+                {%- else -%}
+                  Full Size - 8 Bars
+                {%- endif -%}
+              </div>
 
-                    <button
-                      class="cart-items__remove-text-btn"
-                      type="button"
-                      style="background: none; border: none; padding: 0; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: #111111; text-decoration: underline; cursor: pointer; margin-top: 4px;"
-                      aria-label="{{ 'accessibility.remove_item' | t: title: item.title | escape }}"
-                      on:click="/onLineItemRemove/{{ item.index | plus: 1 }}"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+              <!-- Offer Discount Line -->
+              <div class="perfect-cart-item-offer">
+                {% if item.line_level_discount_allocations.size > 0 %}
+                  {%- for discount in item.line_level_discount_allocations -%}
+                    GET {{ discount.discount_application.title | uppercase }}
+                  {%- endfor -%}
+                {% else %}
+                  GET 30% OFF
+                {% endif %}
+              </div>
+
+              <!-- Quantity Stepper & Remove Button -->
+              <div class="perfect-cart-item-controls">
+                <div class="perfect-quantity-stepper">
+                  <button
+                    type="button"
+                    class="perfect-qty-btn perfect-qty-minus"
+                    aria-label="Decrease quantity"
+                    on:click="/onLineItemQuantityChange/{{ item.index | plus: 1 }}/{{ item.quantity | minus: 1 }}"
+                  >-</button>
+                  <input
+                    type="number"
+                    class="perfect-qty-input"
+                    value="{{ item.quantity }}"
+                    min="0"
+                    aria-label="Item quantity"
+                    readonly
+                  >
+                  <button
+                    type="button"
+                    class="perfect-qty-btn perfect-qty-plus"
+                    aria-label="Increase quantity"
+                    on:click="/onLineItemQuantityChange/{{ item.index | plus: 1 }}/{{ item.quantity | plus: 1 }}"
+                  >+</button>
+                </div>
+
+                <button
+                  type="button"
+                  class="perfect-remove-btn"
+                  on:click="/onLineItemRemove/{{ item.index | plus: 1 }}"
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
       </div>
     </form>
   {%- endif -%}
