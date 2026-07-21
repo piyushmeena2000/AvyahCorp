@@ -162,33 +162,88 @@
   (function() {
     if (window.perfectCartQtyInit) return;
     window.perfectCartQtyInit = true;
-    
-    document.addEventListener('click', async function(e) {
+
+    let pendingUpdates = {};
+    let debounceTimer = null;
+
+    document.addEventListener('click', function(e) {
       const btn = e.target.closest('.perfect-qty-ajax-btn');
       if (!btn) return;
-      
+
       e.preventDefault();
       e.stopPropagation();
-      
-      const line = btn.dataset.line;
-      const qty = parseInt(btn.dataset.qty, 10);
+
+      const line = parseInt(btn.dataset.line, 10);
+      let targetQty = parseInt(btn.dataset.qty, 10);
       const row = btn.closest('.perfect-cart-item-row');
+      if (!row) return;
+
+      const qtySpan = row.querySelector('.perfect-qty-pill span');
+      const minusBtn = row.querySelector('[aria-label="Decrease quantity"]');
+      const plusBtn = row.querySelector('[aria-label="Increase quantity"]');
       
-      if (row) row.style.opacity = '0.4';
-      
+      let currentQty = parseInt(qtySpan ? qtySpan.textContent.trim() : '1', 10);
+      if (isNaN(currentQty)) currentQty = 1;
+
+      // Determine new quantity
+      let newQty = targetQty;
+      if (btn.classList.contains('perfect-recycle-btn')) {
+        newQty = 0;
+      }
+
+      // Optimistic Instant UI Update (0ms perceived latency)
+      if (newQty <= 0) {
+        row.style.transition = 'all 0.25s ease';
+        row.style.opacity = '0';
+        row.style.transform = 'translateX(20px)';
+        setTimeout(() => { row.style.display = 'none'; }, 250);
+      } else if (qtySpan) {
+        qtySpan.textContent = newQty;
+        if (minusBtn) minusBtn.dataset.qty = Math.max(0, newQty - 1);
+        if (plusBtn) plusBtn.dataset.qty = newQty + 1;
+      }
+
+      // Queue background server sync
+      pendingUpdates[line] = newQty;
+
+      // Debounce server call by 200ms for lightning responsiveness
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        syncCartWithServer();
+      }, 200);
+    });
+
+    async function syncCartWithServer() {
+      const lineToUpdate = Object.keys(pendingUpdates)[0];
+      if (!lineToUpdate) return;
+
+      const qty = pendingUpdates[lineToUpdate];
+      delete pendingUpdates[lineToUpdate];
+
+      // Find section ID
+      const sectionEl = document.querySelector('cart-items-component[data-section-id]');
+      const sectionId = sectionEl ? sectionEl.dataset.sectionId : '';
+
       try {
+        const payload = {
+          line: parseInt(lineToUpdate, 10),
+          quantity: qty
+        };
+
+        if (sectionId) {
+          payload.sections = sectionId;
+          payload.sections_url = window.location.pathname;
+        }
+
         const res = await fetch('/cart/change.js', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify({
-            line: parseInt(line, 10),
-            quantity: qty
-          })
+          body: JSON.stringify(payload)
         });
-        
+
         if (res.ok) {
           const data = await res.json();
 
@@ -198,39 +253,64 @@
             detail: { resource: data }
           }));
 
-          // Fetch fresh section DOM asynchronously without page reload
-          const htmlRes = await fetch(window.location.href, { cache: 'no-store' });
-          const htmlText = await htmlRes.text();
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(htmlText, 'text/html');
+          // If Shopify returned section HTML in single request, morph DOM cleanly
+          if (data.sections && sectionId && data.sections[sectionId]) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data.sections[sectionId], 'text/html');
 
-          // 1. Morph cart item rows in-place
-          const newItems = doc.querySelector('.perfect-cart-items-wrapper');
-          const currentItems = document.querySelector('.perfect-cart-items-wrapper');
-          if (newItems && currentItems) {
-            currentItems.innerHTML = newItems.innerHTML;
-          }
+            const newItems = doc.querySelector('.perfect-cart-items-wrapper');
+            const currentItems = document.querySelector('.perfect-cart-items-wrapper');
+            if (newItems && currentItems) {
+              currentItems.innerHTML = newItems.innerHTML;
+            }
 
-          // 2. Morph summary totals in-place
-          const newSummary = doc.querySelector('.cart__summary-totals, .cart__total-container, .cart-drawer__summary');
-          const currentSummary = document.querySelector('.cart__summary-totals, .cart__total-container, .cart-drawer__summary');
-          if (newSummary && currentSummary) {
-            currentSummary.innerHTML = newSummary.innerHTML;
-          }
+            const newSummary = doc.querySelector('.cart__summary-totals, .cart__total-container, .cart-drawer__summary');
+            const currentSummary = document.querySelector('.cart__summary-totals, .cart__total-container, .cart-drawer__summary');
+            if (newSummary && currentSummary) {
+              currentSummary.innerHTML = newSummary.innerHTML;
+            }
 
-          // 3. Update cart drawer count heading
-          const newHeader = doc.querySelector('.cart-drawer__heading');
-          const currentHeader = document.querySelector('.cart-drawer__heading');
-          if (newHeader && currentHeader) {
-            currentHeader.innerHTML = newHeader.innerHTML;
+            const newHeader = doc.querySelector('.cart-drawer__heading');
+            const currentHeader = document.querySelector('.cart-drawer__heading');
+            if (newHeader && currentHeader) {
+              currentHeader.innerHTML = newHeader.innerHTML;
+            }
+          } else {
+            // Update cart header count
+            const totalCount = data.item_count;
+            document.querySelectorAll('.cart-drawer__heading, [data-testid="cart-drawer-trigger"]').forEach(el => {
+              if (totalCount !== undefined) {
+                el.innerHTML = el.innerHTML.replace(/\(\d+\)/, `(${totalCount})`);
+              }
+            });
+
+            // Smooth fallback background fetch
+            const htmlRes = await fetch(window.location.href, { cache: 'no-store' });
+            const htmlText = await htmlRes.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlText, 'text/html');
+
+            const newItems = doc.querySelector('.perfect-cart-items-wrapper');
+            const currentItems = document.querySelector('.perfect-cart-items-wrapper');
+            if (newItems && currentItems) {
+              currentItems.innerHTML = newItems.innerHTML;
+            }
+
+            const newSummary = doc.querySelector('.cart__summary-totals, .cart__total-container, .cart-drawer__summary');
+            const currentSummary = document.querySelector('.cart__summary-totals, .cart__total-container, .cart-drawer__summary');
+            if (newSummary && currentSummary) {
+              currentSummary.innerHTML = newSummary.innerHTML;
+            }
           }
         }
       } catch (err) {
-        console.error('AJAX cart quantity update error:', err);
-      } finally {
-        if (row) row.style.opacity = '1';
+        console.error('Optimistic cart sync error:', err);
       }
-    });
+
+      if (Object.keys(pendingUpdates).length > 0) {
+        syncCartWithServer();
+      }
+    }
   })();
 </script>
 
