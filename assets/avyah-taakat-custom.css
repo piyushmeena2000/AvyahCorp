@@ -2064,4 +2064,15 @@ button.bundle-tab,
   filter: none !important;
 }
 
+/* ========================================================
+   BULK ORDER PAGE CRIMSON RED BACKGROUND MATCH (#d52528)
+======================================================== */
+.bundle-page-wrapper,
+#MainContent[data-template="page.bulk-order"],
+body.template-page-bulk-order main#MainContent,
+[class*="bundle-page"] {
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+}
+
 
