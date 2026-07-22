@@ -1,0 +1,628 @@
+{% schema %}
+{
+  "name": "Custom Ingredients Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "hero_badge",
+      "label": "Hero Badge Text",
+      "default": "100% CLEAN & HONEST FORMULATION"
+    },
+    {
+      "type": "text",
+      "id": "hero_heading",
+      "label": "Hero Main Heading",
+      "default": "REAL INGREDIENTS. ZERO NONSENSE."
+    },
+    {
+      "type": "richtext",
+      "id": "hero_subtext",
+      "label": "Hero Subtext",
+      "default": "<p>At Avyah, we believe food should fuel you, not slow you down. Every bite is packed with whole grains, Slow-roasted nuts, natural seeds, and unrefined sweeteners. No palm oil, no artificial flavor enhancers, and zero chemical preservatives.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Ingredients Page"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  #MainContent[data-template="page.how-its-made"],
+  #MainContent[data-template="page.ingredients"] {
+    display: block !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
+  .ingredients-page-wrapper {
+    background-color: #fdf7ee; /* Warm Cream Background */
+    color: #3d2b27;
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* 1. HERO SECTION */
+  .ingredients-hero {
+    background-color: #d52528; /* Primary Crimson Red Header Match */
+    color: #ffffff;
+    padding: 80px 20px 70px;
+    text-align: center;
+    position: relative;
+  }
+
+  .ingredients-hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .ingredients-badge {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #d52528;
+    font-family: 'Anton', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 4px;
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+
+  .ingredients-hero h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: 64px;
+    text-transform: uppercase;
+    line-height: 1.05;
+    margin: 0 0 20px;
+    letter-spacing: 1px;
+    color: #ffffff;
+  }
+
+  .ingredients-hero-subtext {
+    font-size: 19px;
+    line-height: 1.6;
+    margin: 0 auto 40px;
+    max-width: 780px;
+    opacity: 0.95;
+    font-weight: 400;
+  }
+
+  .ingredients-hero-subtext p {
+    margin: 0;
+    color: #ffffff;
+  }
+
+  /* Quick Stats Bar */
+  .ingredients-stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 35px;
+    margin-top: 20px;
+  }
+
+  .ingredients-stat-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.15);
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .ingredients-stat-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ingredients-stat-text {
+    font-family: 'Anton', sans-serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+
+  /* 2. CORE INGREDIENT GRID SECTION */
+  .ingredients-grid-section {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 90px 20px;
+  }
+
+  .ingredients-section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .ingredients-section-header h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 44px;
+    text-transform: uppercase;
+    color: #3d2b27;
+    margin: 0 0 12px;
+    letter-spacing: 1px;
+  }
+
+  .ingredients-section-header p {
+    font-size: 17px;
+    color: #6a5e5c;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .ingredients-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .ingredient-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 36px 30px;
+    box-shadow: 0 4px 20px rgba(61, 43, 39, 0.05);
+    border: 1px solid #efe6d9;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .ingredient-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .ingredient-icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background-color: #fff5f5;
+    color: #d52528;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ingredient-tag {
+    font-family: 'Anton', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #2e5a3c;
+    background-color: #eaf4ed;
+    padding: 6px 12px;
+    border-radius: 4px;
+  }
+
+  .ingredient-card h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 26px;
+    text-transform: uppercase;
+    color: #3d2b27;
+    margin: 0 0 12px;
+    line-height: 1.1;
+  }
+
+  .ingredient-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #6a5e5c;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  /* 3. WHAT WE SAY NO TO (TRANSPARENCY SECTION) */
+  .ingredients-no-section {
+    background-color: #3d2b27; /* Dark Charcoal Brown */
+    color: #ffffff;
+    padding: 90px 20px;
+  }
+
+  .ingredients-no-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ingredients-no-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .ingredients-no-header h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 48px;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin: 0 0 12px;
+    letter-spacing: 1px;
+  }
+
+  .ingredients-no-header p {
+    font-size: 17px;
+    color: #d1c5b8;
+    margin: 0;
+  }
+
+  .ingredients-no-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .ingredients-no-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 30px 24px;
+    text-align: center;
+  }
+
+  .ingredients-no-cross {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: rgba(213, 37, 40, 0.2);
+    color: #ff5256;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .ingredients-no-item h4 {
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin: 0 0 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .ingredients-no-item p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #d1c5b8;
+    margin: 0;
+  }
+
+  /* 4. PROCESS STEPS */
+  .ingredients-process-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 90px 20px;
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 50px;
+  }
+
+  .process-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 32px 24px;
+    border: 1px solid #efe6d9;
+    text-align: center;
+    position: relative;
+  }
+
+  .process-num {
+    font-family: 'Anton', sans-serif;
+    font-size: 40px;
+    color: #d52528;
+    line-height: 1;
+    margin-bottom: 16px;
+    opacity: 0.85;
+  }
+
+  .process-card h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: #3d2b27;
+    margin: 0 0 10px;
+  }
+
+  .process-card p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #6a5e5c;
+    margin: 0;
+  }
+
+  /* 5. CTA BANNER */
+  .ingredients-cta {
+    background-color: #d52528;
+    color: #ffffff;
+    text-align: center;
+    padding: 70px 20px;
+  }
+
+  .ingredients-cta h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 48px;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+    color: #ffffff;
+  }
+
+  .ingredients-cta p {
+    font-size: 18px;
+    margin: 0 0 32px;
+    color: #ffffff;
+    opacity: 0.95;
+  }
+
+  .ingredients-cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .ingredients-cta-btn {
+    display: inline-block;
+    padding: 14px 36px;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .ingredients-cta-primary {
+    background-color: #ffffff;
+    color: #d52528;
+  }
+
+  .ingredients-cta-primary:hover {
+    background-color: #f5f5f5;
+  }
+
+  .ingredients-cta-secondary {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+  }
+
+  .ingredients-cta-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Responsive Design */
+  @media screen and (max-width: 992px) {
+    .ingredients-grid,
+    .process-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .ingredients-no-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .ingredients-hero h1 {
+      font-size: 48px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .ingredients-grid,
+    .process-grid,
+    .ingredients-no-grid {
+      grid-template-columns: 1fr;
+    }
+    .ingredients-hero h1 {
+      font-size: 36px;
+    }
+    .ingredients-stats-bar {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
+
+<div class="ingredients-page-wrapper">
+  <!-- 1. HERO SECTION -->
+  <section class="ingredients-hero">
+    <div class="ingredients-hero-inner">
+      <span class="ingredients-badge">{{ section.settings.hero_badge }}</span>
+      <h1>{{ section.settings.hero_heading }}</h1>
+      <div class="ingredients-hero-subtext">
+        {{ section.settings.hero_subtext }}
+      </div>
+
+      <div class="ingredients-stats-bar">
+        <div class="ingredients-stat-item">
+          <div class="ingredients-stat-icon">🌾</div>
+          <span class="ingredients-stat-text">100% Whole Multigrains</span>
+        </div>
+        <div class="ingredients-stat-item">
+          <div class="ingredients-stat-icon">🥜</div>
+          <span class="ingredients-stat-text">Slow-Roasted Nuts</span>
+        </div>
+        <div class="ingredients-stat-item">
+          <div class="ingredients-stat-icon">🚫</div>
+          <span class="ingredients-stat-text">Zero Palm Oil</span>
+        </div>
+        <div class="ingredients-stat-item">
+          <div class="ingredients-stat-icon">🍯</div>
+          <span class="ingredients-stat-text">Unrefined Sweeteners</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. CORE INGREDIENT HIGHLIGHT GRID -->
+  <section class="ingredients-grid-section">
+    <div class="ingredients-section-header">
+      <h2>WHAT GOES INTO OUR RECIPES</h2>
+      <p>Clean, nutrient-dense ingredients sourced straight from nature.</p>
+    </div>
+
+    <div class="ingredients-grid">
+      <!-- Card 1 -->
+      <div class="ingredient-card">
+        <div class="ingredient-card-header">
+          <div class="ingredient-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <span class="ingredient-tag">SUSTAINED ENERGY</span>
+        </div>
+        <h3>5-GRAIN WHOLE OATS & WHEAT</h3>
+        <p>A powerhouse blend of rolled oats, whole wheat, brown rice, ragi, and jowar offering dietary fiber and slow-release complex carbs for steady energy all day.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="ingredient-card">
+        <div class="ingredient-card-header">
+          <div class="ingredient-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          </div>
+          <span class="ingredient-tag">HEALTHY FATS</span>
+        </div>
+        <h3>SLOW-ROASTED NUTS</h3>
+        <p>Premium California almonds, cashews, and pistachios hand-selected and slowly dry-roasted to preserve essential fatty acids and natural crunch.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="ingredient-card">
+        <div class="ingredient-card-header">
+          <div class="ingredient-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <span class="ingredient-tag">OMEGA-3 & MINERALS</span>
+        </div>
+        <h3>SUPER SEEDS TRIO</h3>
+        <p>Chia seeds, pumpkin seeds, and flaxseeds packed with plant-based Omega-3 fatty acids, zinc, and magnesium for heart health and immunity support.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="ingredient-card">
+        <div class="ingredient-card-header">
+          <div class="ingredient-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 5.25-7 13-7 13S5 14.25 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </div>
+          <span class="ingredient-tag">CRASH-FREE SWEETNESS</span>
+        </div>
+        <h3>DATES & ORGANIC JAGGERY</h3>
+        <p>Sweetened naturally using unrefined date puree and organic cold-pressed jaggery. No refined white sugar, zero high-fructose corn syrup.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="ingredient-card">
+        <div class="ingredient-card-header">
+          <div class="ingredient-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <span class="ingredient-tag">NATURAL SPICES</span>
+        </div>
+        <h3>SPICE & HERB INFUSION</h3>
+        <p>Real green cardamom, Ceylon cinnamon, and Himalayan pink salt to bring out rich, authentic flavors without chemical MSG or artificial enhancers.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="ingredient-card">
+        <div class="ingredient-card-header">
+          <div class="ingredient-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <span class="ingredient-tag">CLEAN PROTEIN</span>
+        </div>
+        <h3>PLANT & WHEY CRISPIES</h3>
+        <p>High-density pea protein isolate and light whey protein crispies providing clean macro nutrition for active lifestyles and muscle recovery.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. TRANSPARENCY SECTION: WHAT WE SAY NO TO -->
+  <section class="ingredients-no-section">
+    <div class="ingredients-no-inner">
+      <div class="ingredients-no-header">
+        <h2>WHAT WE LEAVE OUT</h2>
+        <p>Transparency matters. Here is what you will NEVER find inside an Avyah product.</p>
+      </div>
+
+      <div class="ingredients-no-grid">
+        <div class="ingredients-no-item">
+          <div class="ingredients-no-cross">✕</div>
+          <h4>NO PALM OIL</h4>
+          <p>Zero cheap hydrogenated oils or harmful palm fat blends.</p>
+        </div>
+        <div class="ingredients-no-item">
+          <div class="ingredients-no-cross">✕</div>
+          <h4>NO REFINED SUGAR</h4>
+          <p>Free from bleached white sugar, maltodextrin, and syrup spikes.</p>
+        </div>
+        <div class="ingredients-no-item">
+          <div class="ingredients-no-cross">✕</div>
+          <h4>NO ARTIFICIAL COLORS</h4>
+          <p>100% natural colors derived straight from real fruits & grains.</p>
+        </div>
+        <div class="ingredients-no-item">
+          <div class="ingredients-no-cross">✕</div>
+          <h4>NO PRESERVATIVES</h4>
+          <p>Zero chemical additives or synthetic shelf-life extenders.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. QUALITY PROCESS STEPS -->
+  <section class="ingredients-process-section">
+    <div class="ingredients-section-header">
+      <h2>OUR 4-STEP QUALITY STANDARDS</h2>
+      <p>How we ensure unmatched purity, taste, and crunch in every batch.</p>
+    </div>
+
+    <div class="process-grid">
+      <div class="process-card">
+        <div class="process-num">01</div>
+        <h3>ETHICAL SOURCING</h3>
+        <p>We source grains, nuts, and spices directly from verified Indian farms and certified growers.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-num">02</div>
+        <h3>SLOW DRY-ROASTING</h3>
+        <p>Nuts and grains are slowly dry-roasted at optimal temperatures to retain maximum micronutrients.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-num">03</div>
+        <h3>ZERO-TOUCH MIXING</h3>
+        <p>Blended in automated, ultra-hygienic stainless steel chambers with zero human contact.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-num">04</div>
+        <h3>NITROGEN SEALED</h3>
+        <p>Flushed with natural nitrogen packaging to lock in crisp freshness without chemical preservatives.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CALL TO ACTION BANNER -->
+  <section class="ingredients-cta">
+    <h2>EXPERIENCE REAL FOOD TODAY</h2>
+    <p>Discover our full range of clean energy bars, roasted snack mixes, and custom box bundles.</p>
+    <div class="ingredients-cta-buttons">
+      <a href="/collections/all" class="ingredients-cta-btn ingredients-cta-primary">EXPLORE CATALOG</a>
+      <a href="/pages/bulk-order" class="ingredients-cta-btn ingredients-cta-secondary">BUILD YOUR BUNDLE</a>
+    </div>
+  </section>
+</div>

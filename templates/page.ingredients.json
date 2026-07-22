@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "custom_ingredients": {
+      "type": "custom-ingredients",
+      "settings": {
+        "hero_badge": "100% CLEAN & HONEST FORMULATION",
+        "hero_heading": "REAL INGREDIENTS. ZERO NONSENSE.",
+        "hero_subtext": "<p>At Avyah, we believe food should fuel you, not slow you down. Every bite is packed with whole grains, slow-roasted nuts, natural seeds, and unrefined sweeteners. No palm oil, no artificial flavor enhancers, and zero chemical preservatives.</p>"
+      }
+    }
+  },
+  "order": [
+    "custom_ingredients"
+  ]
+}
