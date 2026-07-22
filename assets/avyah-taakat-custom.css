@@ -2024,4 +2024,15 @@ button[name="add"]:hover,
   width: 100% !important;
 }
 
+/* ========================================================
+   RECTANGULAR BUTTON STYLING (REPLACING PILL / ROUNDED SHAPE)
+======================================================== */
+.split-contact-bottom .action-link,
+.action-link,
+a.action-link,
+.contact-button,
+[class*="action-link"] {
+  border-radius: 4px !important; /* Crisp rectangular shape */
+}
+
 
