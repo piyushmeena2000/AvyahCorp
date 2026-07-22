@@ -1240,50 +1240,80 @@ body.template-index dialog.cart-drawer__dialog button#checkout:hover {
   box-shadow: 0 6px 20px rgba(213, 37, 40, 0.4) !important;
 }
 
-.avyah-card-quick-add-form {
-  order: 5 !important;
-  width: 100% !important;
-  margin-top: 8px !important;
+/* ========================================================
+   UNIFIED COLLECTION PRODUCT CARD FRAME (IMAGE 2 MATCH)
+======================================================== */
+.product-grid__item.avyah-unified-product-card,
+.product-grid__item {
+  border: 1.5px solid #d52528 !important;
+  border-radius: 4px !important;
+  padding: 12px 12px 0 12px !important;
+  background-color: #ffffff !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  box-shadow: none !important;
 }
 
-.avyah-card-add-to-cart-btn,
-body.template-index [class*="product-card"] button,
-body.template-index [class*="ai-product-card-button"] {
-  width: 100% !important;
-  background-color: #000000 !important;
-  background: #000000 !important;
-  color: #ffffff !important;
-  font-family: 'Anton', sans-serif !important;
-  font-size: 16px !important;
-  letter-spacing: 1.2px !important;
-  text-transform: uppercase !important;
-  padding: 12px 20px !important;
-  border-radius: 8px !important;
+.product-grid__item .product-card,
+.product-grid__item .card-wrapper {
   border: none !important;
-  cursor: pointer !important;
-  transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.perfect-card-subcaption {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: #666666 !important;
+  text-align: center !important;
+  margin: 4px 0 8px 0 !important;
+  width: 100% !important;
+}
+
+.avyah-card-quick-add-form {
+  display: block !important;
+  width: calc(100% + 24px) !important;
+  margin-left: -12px !important;
+  margin-right: -12px !important;
+  margin-bottom: 0 !important;
+  margin-top: auto !important;
+}
+
+.avyah-card-add-to-cart-btn {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-}
-
-.avyah-card-add-to-cart-btn:hover,
-body.template-index [class*="product-card"] button:hover,
-body.template-index [class*="ai-product-card-button"]:hover {
+  width: 100% !important;
+  min-height: 44px !important;
   background-color: #d52528 !important;
   background: #d52528 !important;
   color: #ffffff !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 6px 18px rgba(213, 37, 40, 0.35) !important;
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  padding: 12px 16px !important;
+  border-radius: 0 0 2px 2px !important;
+  border: none !important;
+  box-shadow: inset 0 -2px 0 #a0181b !important;
+  cursor: pointer !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  box-sizing: border-box !important;
 }
 
-.avyah-card-add-to-cart-btn[disabled] {
-  background-color: #cccccc !important;
-  color: #666666 !important;
-  box-shadow: none !important;
-  cursor: not-allowed !important;
-  transform: none !important;
+.avyah-card-add-to-cart-btn:hover {
+  background-color: #b01b1e !important;
+  background: #b01b1e !important;
+  color: #ffffff !important;
 }
 
 results-list .product-card .price--on-sale .price-item--regular,
