@@ -1767,14 +1767,14 @@ header-component svg line:not(.dd-icon *),
 /* Default state for DISCOVER menu links (Solid Black #000000) */
 a.avyah-discover-link,
 a.avyah-discover-link *,
-a.avyah-discover-link strong,
-a.avyah-discover-link .avyah-discover-title {
+a.avyah-discover-link span,
+a.avyah-discover-link strong {
   color: #000000 !important;
   -webkit-text-fill-color: #000000 !important;
   -webkit-background-clip: initial !important;
   background-clip: initial !important;
   mix-blend-mode: normal !important;
-  font-family: 'Anton', sans-serif !important;
+  font-family: 'Anton', Arial, sans-serif !important;
   font-size: 20px !important;
   font-weight: 700 !important;
   letter-spacing: 0.5px !important;
@@ -1815,8 +1815,8 @@ a.avyah-discover-link:hover {
 
 a.avyah-discover-link:hover,
 a.avyah-discover-link:hover *,
-a.avyah-discover-link:hover strong,
-a.avyah-discover-link:hover .avyah-discover-title {
+a.avyah-discover-link:hover span,
+a.avyah-discover-link:hover strong {
   color: #d52528 !important;
   -webkit-text-fill-color: #d52528 !important;
 }

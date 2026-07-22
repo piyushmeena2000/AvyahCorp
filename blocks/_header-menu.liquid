@@ -178,28 +178,8 @@
                         <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
                     </a>
-                    <div class="menu-list__submenu avyah-discover-popover">
+                    <div class="menu-list__submenu avyah-discover-popover" style="position: absolute !important; top: calc(100% + 8px) !important; left: 50% !important; transform: translateX(-50%) !important; background-color: #ffffff !important; background: #ffffff !important; border-radius: 16px !important; box-shadow: 0 12px 35px rgba(0,0,0,0.2) !important; padding: 10px !important; min-width: 220px !important; box-sizing: border-box !important; z-index: 999999 !important;">
                       <style>
-                        .avyah-discover-popover {
-                          background-color: #ffffff !important;
-                          background: #ffffff !important;
-                          border-radius: 16px !important;
-                          box-shadow: 0 12px 35px rgba(0,0,0,0.2) !important;
-                          padding: 10px !important;
-                          min-width: 220px !important;
-                          box-sizing: border-box !important;
-                          z-index: 999999 !important;
-                        }
-                        .avyah-discover-popover strong,
-                        .avyah-discover-popover span,
-                        .avyah-discover-popover p,
-                        .avyah-discover-popover a {
-                          display: inline-block !important;
-                          visibility: visible !important;
-                          opacity: 1 !important;
-                          height: auto !important;
-                          width: auto !important;
-                        }
                         a.avyah-discover-link {
                           display: flex !important;
                           align-items: center !important;
@@ -209,17 +189,19 @@
                           text-decoration: none !important;
                           background-color: #ffffff !important;
                           background: #ffffff !important;
-                          transition: all 0.2s ease !important;
+                          color: #000000 !important;
+                          -webkit-text-fill-color: #000000 !important;
+                          transition: all 0.15s ease !important;
                           width: 100% !important;
                           box-sizing: border-box !important;
                         }
-                        a.avyah-discover-link strong.avyah-discover-title {
+                        a.avyah-discover-link span {
                           color: #000000 !important;
                           -webkit-text-fill-color: #000000 !important;
                           -webkit-background-clip: initial !important;
                           background-clip: initial !important;
                           mix-blend-mode: normal !important;
-                          font-family: 'Anton', sans-serif !important;
+                          font-family: 'Anton', Arial, sans-serif !important;
                           font-size: 20px !important;
                           font-weight: 700 !important;
                           letter-spacing: 0.5px !important;
@@ -228,6 +210,8 @@
                           display: inline-block !important;
                           visibility: visible !important;
                           opacity: 1 !important;
+                          margin: 0 !important;
+                          padding: 0 !important;
                           transition: color 0.15s ease, -webkit-text-fill-color 0.15s ease !important;
                         }
                         a.avyah-discover-link svg {
@@ -241,7 +225,7 @@
                           background-color: #fff5f5 !important;
                           background: #fff5f5 !important;
                         }
-                        a.avyah-discover-link:hover strong.avyah-discover-title {
+                        a.avyah-discover-link:hover span {
                           color: #d52528 !important;
                           -webkit-text-fill-color: #d52528 !important;
                         }
@@ -258,17 +242,17 @@
                           
                           <!-- ITEM 1: OUR BLOGS -->
                           <div class="mega-menu__column" style="width: 100% !important; background-color: #ffffff !important;">
-                            <a href="/blogs/news" class="avyah-discover-link">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/></svg>
-                              <strong class="avyah-discover-title">OUR BLOGS</strong>
+                            <a href="/blogs/news" class="avyah-discover-link" style="display: flex !important; align-items: center !important; gap: 14px !important; background-color: #ffffff !important; text-decoration: none !important; padding: 12px 16px !important; border-radius: 12px !important; width: 100% !important; box-sizing: border-box !important;">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0 !important;"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/></svg>
+                              <span style="color: #000000 !important; -webkit-text-fill-color: #000000 !important; font-family: 'Anton', Arial, sans-serif !important; font-size: 20px !important; font-weight: 700 !important; text-transform: uppercase !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; line-height: 1 !important;">OUR BLOGS</span>
                             </a>
                           </div>
 
                           <!-- ITEM 2: CAREERS -->
                           <div class="mega-menu__column" style="width: 100% !important; background-color: #ffffff !important;">
-                            <a href="/pages/careers" class="avyah-discover-link">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                              <strong class="avyah-discover-title">CAREERS</strong>
+                            <a href="/pages/careers" class="avyah-discover-link" style="display: flex !important; align-items: center !important; gap: 14px !important; background-color: #ffffff !important; text-decoration: none !important; padding: 12px 16px !important; border-radius: 12px !important; width: 100% !important; box-sizing: border-box !important;">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0 !important;"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                              <span style="color: #000000 !important; -webkit-text-fill-color: #000000 !important; font-family: 'Anton', Arial, sans-serif !important; font-size: 20px !important; font-weight: 700 !important; text-transform: uppercase !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; line-height: 1 !important;">CAREERS</span>
                             </a>
                           </div>
 
