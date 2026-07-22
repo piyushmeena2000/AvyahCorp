@@ -1315,11 +1315,11 @@ results-list .product-badges__badge,
 .header__menu-item:not(.menu-list__submenu *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
 .header__menu-item *:not(.menu-list__submenu *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
 header nav *:not(.menu-list__submenu *):not(.avyah-discover-card *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
-.buddha-menu-item *,
-.buddha-menu-item > a,
-.buddha-menu-item span,
-ul.mm-submenu a,
-ul.mm-submenu span {
+.buddha-menu-item *:not(.avyah-discover-popover *):not(.avyah-discover-link *),
+.buddha-menu-item > a:not(.avyah-discover-popover a):not(.avyah-discover-link),
+.buddha-menu-item span:not(.avyah-discover-popover span):not(.avyah-discover-link span),
+ul.mm-submenu a:not(.avyah-discover-popover a):not(.avyah-discover-link),
+ul.mm-submenu span:not(.avyah-discover-popover span):not(.avyah-discover-link span) {
   color: #ffffff !important;
 }
 
@@ -1775,13 +1775,17 @@ header-component svg line:not(.dd-icon *),
 .header .avyah-discover-popover *,
 header-component .avyah-discover-popover *,
 .menu-list .avyah-discover-popover *,
+.buddha-menu-item .avyah-discover-popover *,
+ul.mm-submenu .avyah-discover-popover *,
 .avyah-discover-popover *,
 .avyah-discover-link,
-.avyah-discover-link * {
+.avyah-discover-link *,
+.avyah-discover-title-text {
   color: #000000 !important;
   -webkit-text-fill-color: #000000 !important;
   -webkit-background-clip: initial !important;
   background-clip: initial !important;
+  background-image: none !important;
   mix-blend-mode: normal !important;
   font-family: 'Anton', Arial, sans-serif !important;
   font-size: 20px !important;
@@ -1796,6 +1800,8 @@ header-component .avyah-discover-popover *,
 #header-group .avyah-discover-link:hover *,
 .header .avyah-discover-link:hover *,
 header-component .avyah-discover-link:hover *,
+.buddha-menu-item .avyah-discover-link:hover *,
+ul.mm-submenu .avyah-discover-link:hover *,
 .avyah-discover-link:hover * {
   color: #d52528 !important;
   -webkit-text-fill-color: #d52528 !important;
