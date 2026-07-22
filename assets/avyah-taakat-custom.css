@@ -1909,7 +1909,7 @@ product-card-link {
 product-card-link product-card {
   border: 1.5px solid #d52528 !important;
   border-radius: 4px !important;
-  padding: 12px !important;
+  padding: 12px 12px 14px 12px !important;
   background-color: #ffffff !important;
   box-shadow: none !important;
   position: relative !important;
@@ -1917,7 +1917,7 @@ product-card-link product-card {
   flex-direction: column !important;
   box-sizing: border-box !important;
   height: 100% !important;
-  overflow: hidden !important;
+  overflow: visible !important;
 }
 
 /* Card Content Alignment */
@@ -1930,6 +1930,7 @@ product-card-link product-card {
   padding: 0 !important;
   display: flex !important;
   flex-direction: column !important;
+  flex: 1 !important;
 }
 
 /* Top Ribbon Badge Tag ("JUST LAUNCHED" / "BESTSELLER" / "SALE") */
@@ -2039,19 +2040,45 @@ product-card-link product-card {
   font-family: 'Inter', sans-serif !important;
 }
 
-/* Full Width Solid Crimson Red Add to Cart Button */
+/* Force Quick Add Container to Display on All Pages */
+.product-card quick-add-component,
 .product-card .quick-add,
+.product-card product-form-component,
+.product-card add-to-cart-component,
+.product-card form[data-type="add-to-cart-form"],
+.product-grid__card quick-add-component,
+.product-grid__card .quick-add {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  inset: auto !important;
+  width: 100% !important;
+  margin-top: auto !important;
+  margin-bottom: 0 !important;
+}
+
+/* Full Width Solid Crimson Red Add to Cart Button */
 .product-card .quick-add__button,
 .product-card .quick-add__button--add,
 .product-card .quick-add__button--choose,
 .product-card add-to-cart-component button,
 .product-card button[name="add"],
+.product-card .add-to-cart-button,
 .product-card [class*="ai-product-card-button"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   width: calc(100% + 24px) !important;
   margin-left: -12px !important;
   margin-right: -12px !important;
-  margin-bottom: -12px !important;
-  margin-top: auto !important;
+  margin-bottom: -14px !important;
+  margin-top: 10px !important;
+  min-height: 44px !important;
   background-color: #d52528 !important;
   background: #d52528 !important;
   color: #ffffff !important;
@@ -2063,14 +2090,24 @@ product-card-link product-card {
   padding: 12px 16px !important;
   border-radius: 0 0 2px 2px !important;
   border: none !important;
-  box-shadow: inset 0 -2px 0 #a0181b !important;
+  box-shadow: inset 0 -2px 0 #000000 !important;
   box-sizing: border-box !important;
   cursor: pointer !important;
-  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
-.product-card .quick-add:hover,
+.product-card .quick-add__button *,
+.product-card button[name="add"] *,
+.product-card add-to-cart-component button * {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
 .product-card .quick-add__button:hover,
+.product-card button[name="add"]:hover,
 .product-card add-to-cart-component button:hover {
   background-color: #b01b1e !important;
   background: #b01b1e !important;
