@@ -2046,4 +2046,22 @@ button.bundle-tab,
   border-radius: 4px !important; /* Crisp rectangular shape */
 }
 
+/* ========================================================
+   REMOVE HOVER LIFT & TRANSFORM EFFECTS FROM ALL PRODUCT LISTINGS
+======================================================== */
+.bundle-card:hover,
+.product-card:hover,
+.card:hover,
+.card-wrapper:hover,
+[class*="product-card"]:hover,
+[class*="ai-product-card"]:hover,
+.bundle-card-image-wrap:hover img,
+.bundle-card-image-wrap img:hover,
+.product-card .media img:hover,
+[class*="product-card"] img:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
 
