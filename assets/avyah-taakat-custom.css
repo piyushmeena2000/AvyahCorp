@@ -1701,23 +1701,39 @@ header-component svg line:not(.dd-icon *),
 }
 
 /* ========================================================
-   DISCOVER DROPDOWN — EXACT MATCH TO PHOTOSHOP MOCK (IMAGE 1)
-   - Font: Anton 24px Uppercase
-   - OUR BLOGS: Crimson Red (#d52528) with red icon
-   - CAREERS: Solid Black (#000000) with black icon
-   - Container: Clean white popover card with top pointer arrow
+   DISCOVER DROPDOWN — PERFECT STYLING & HOVER STATE
+   - Background: Pure White (#ffffff)
+   - Default Text & Icons: Solid Black (#000000)
+   - Hover State: Text & Icon turn Crimson Red (#d52528) with #fff5f5 background
 ======================================================== */
-header #header-component .menu-list__submenu,
-#header-group .menu-list__submenu,
-body #header-group .menu-list__submenu,
-body .header .menu-list__submenu,
-body header-component .menu-list__submenu,
-.menu-list__submenu,
-.menu-list__submenu-inner,
-.mega-menu__grid,
-.mega-menu__column {
+.avyah-discover-popover,
+.avyah-discover-popover *,
+.avyah-discover-popover .menu-list__submenu-inner,
+.avyah-discover-popover .mega-menu__grid,
+.avyah-discover-popover .mega-menu__column {
   background-color: #ffffff !important;
   background: #ffffff !important;
+}
+
+.avyah-discover-popover {
+  border-radius: 18px !important;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.2) !important;
+  padding: 10px !important;
+  min-width: 230px !important;
+  box-sizing: border-box !important;
+}
+
+.avyah-discover-arrow {
+  position: absolute !important;
+  top: -8px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 0 !important;
+  height: 0 !important;
+  border-left: 8px solid transparent !important;
+  border-right: 8px solid transparent !important;
+  border-bottom: 8px solid #ffffff !important;
+  z-index: 100001 !important;
 }
 
 /* Enable DISCOVER hover dropdown popover */
@@ -1730,70 +1746,70 @@ body header-component .menu-list__submenu,
   pointer-events: auto !important;
 }
 
-/* OUR BLOGS in Crimson Red (#d52528) */
-.menu-list__submenu a[href*="blog"],
-.menu-list__submenu a[href*="blog"] *,
-.menu-list__submenu a[href*="blog"] span,
-.mega-menu__link[href*="blog"],
-.mega-menu__link[href*="blog"] *,
-.mega-menu__link[href*="blog"] span {
-  color: #d52528 !important;
-  -webkit-text-fill-color: #d52528 !important;
-  -webkit-background-clip: initial !important;
-  background-clip: initial !important;
-  mix-blend-mode: normal !important;
-  font-family: 'Anton', sans-serif !important;
-  font-size: 24px !important;
-  font-weight: 400 !important;
-  letter-spacing: 0.5px !important;
-  text-transform: uppercase !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-
-.menu-list__submenu a[href*="blog"] svg,
-.menu-list__submenu a[href*="blog"] svg *,
-.menu-list__submenu a[href*="blog"] path,
-.mega-menu__link[href*="blog"] svg,
-.mega-menu__link[href*="blog"] path {
-  stroke: #d52528 !important;
-  color: #d52528 !important;
-  fill: none !important;
-}
-
-/* CAREERS & OTHER LINKS in Solid Black (#000000) */
-.menu-list__submenu a:not([href*="blog"]),
-.menu-list__submenu a:not([href*="blog"]) *,
-.menu-list__submenu a:not([href*="blog"]) span,
-.mega-menu__link:not([href*="blog"]),
-.mega-menu__link:not([href*="blog"]) *,
-.mega-menu__link:not([href*="blog"]) span {
+/* Default state for DISCOVER menu links (Solid Black #000000) */
+a.avyah-discover-link,
+a.avyah-discover-link *,
+a.avyah-discover-link span,
+a.avyah-discover-link .avyah-discover-label {
   color: #000000 !important;
   -webkit-text-fill-color: #000000 !important;
   -webkit-background-clip: initial !important;
   background-clip: initial !important;
   mix-blend-mode: normal !important;
   font-family: 'Anton', sans-serif !important;
-  font-size: 24px !important;
+  font-size: 22px !important;
   font-weight: 400 !important;
   letter-spacing: 0.5px !important;
   text-transform: uppercase !important;
+  line-height: 1.1 !important;
   opacity: 1 !important;
   visibility: visible !important;
+  display: inline-block !important;
+  transition: all 0.15s ease !important;
 }
 
-.menu-list__submenu a:not([href*="blog"]) svg,
-.menu-list__submenu a:not([href*="blog"]) svg *,
-.menu-list__submenu a:not([href*="blog"]) path,
-.mega-menu__link:not([href*="blog"]) svg,
-.mega-menu__link:not([href*="blog"]) path {
+a.avyah-discover-link svg,
+a.avyah-discover-link svg *,
+a.avyah-discover-link svg path,
+a.avyah-discover-link .avyah-discover-icon {
   stroke: #000000 !important;
   color: #000000 !important;
   fill: none !important;
+  transition: all 0.15s ease !important;
 }
 
-.menu-list__submenu a:hover {
-  background-color: rgba(0, 0, 0, 0.04) !important;
+a.avyah-discover-link {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  background-color: transparent !important;
+  text-decoration: none !important;
+  padding: 12px 16px !important;
+  border-radius: 12px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* HOVER STATE: Icon and text turn to Crimson Red (#d52528) */
+a.avyah-discover-link:hover {
+  background-color: #fff5f5 !important;
+  background: #fff5f5 !important;
+}
+
+a.avyah-discover-link:hover,
+a.avyah-discover-link:hover *,
+a.avyah-discover-link:hover span,
+a.avyah-discover-link:hover .avyah-discover-label {
+  color: #d52528 !important;
+  -webkit-text-fill-color: #d52528 !important;
+}
+
+a.avyah-discover-link:hover svg,
+a.avyah-discover-link:hover svg *,
+a.avyah-discover-link:hover svg path,
+a.avyah-discover-link:hover .avyah-discover-icon {
+  stroke: #d52528 !important;
+  color: #d52528 !important;
 }
 
 .menu-list__submenu a:hover,
