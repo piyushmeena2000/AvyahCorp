@@ -1897,75 +1897,92 @@ product-card-link {
 }
 
 .product-card [ref="priceContainer"],
-.product-card product-price div,
-.product-card product-price > div {
+/* ========================================================
+   SUPERYOU 1-TO-1 BESPOKE PRODUCT CARD DESIGN (IMAGE 2 MATCH)
+   Crisp Red Frame + Top Ribbon Tag + Centered Anton Title +
+   Centered Rating + Centered Price + Full Width Bottom Button
+======================================================== */
+.product-card,
+.card-wrapper,
+[class*="ai-product-card"],
+.product-grid__card,
+product-card-link product-card {
+  border: 1.5px solid #d52528 !important;
+  border-radius: 4px !important;
+  padding: 12px !important;
+  background-color: #ffffff !important;
+  box-shadow: none !important;
+  position: relative !important;
   display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Card Content Alignment */
+.product-card__content,
+[class*="ai-product-card-content"] {
+  text-align: center !important;
   align-items: center !important;
-  justify-content: flex-start !important;
-  gap: 8px !important;
+  justify-content: center !important;
   width: 100% !important;
-  margin-left: 0 !important;
-  margin-right: auto !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
+/* Top Ribbon Badge Tag ("JUST LAUNCHED" / "BESTSELLER" / "SALE") */
 .product-card .badge,
-.product-card [class*="discount"],
-.product-card .price-badge {
-  margin-left: 0 !important;
-}
-
-/* ========================================================
-   DARK CRIMSON RED ADD TO CART BUTTONS (#8B0000)
-   Applies Dark Crimson Red background to all Add To Cart
-   and Quick Buy buttons across all listings, carousels & product pages.
-======================================================== */
-.quick-add__button,
-.quick-add__button--add,
-.quick-add__button--choose,
-add-to-cart-component button,
-button[name="add"],
-.product-form__submit,
-.add-to-cart-button,
-.button.quick-add__button,
-[class*="ai-product-card-button"] {
-  background-color: #8B0000 !important;
-  background: #8B0000 !important;
+.product-card [class*="badge"],
+[class*="ai-product-card"] .badge,
+.product-card-badge {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  background-color: #d52528 !important;
+  background: #d52528 !important;
   color: #ffffff !important;
-  border-color: #8B0000 !important;
-  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease !important;
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  padding: 4px 10px !important;
+  border-radius: 0 0 0 4px !important;
+  z-index: 10 !important;
+  margin: 0 !important;
 }
 
-.quick-add__button *,
-.quick-add__button--add *,
-.quick-add__button--choose *,
-add-to-cart-component button *,
-button[name="add"] *,
-.product-form__submit *,
-.add-to-cart-button *,
-[class*="ai-product-card-button"] * {
-  color: #ffffff !important;
-  fill: #ffffff !important;
+/* Image Container */
+.product-card .card__media,
+.product-card .media,
+.product-card-image-wrap,
+[class*="ai-product-card-image"] {
+  background-color: #f2f3f5 !important;
+  border-radius: 2px !important;
+  overflow: hidden !important;
+  margin-bottom: 12px !important;
+  width: 100% !important;
 }
 
-/* Hover State */
-.quick-add__button:hover,
-.quick-add__button--add:hover,
-.quick-add__button--choose:hover,
-add-to-cart-component button:hover,
-button[name="add"]:hover,
-.product-form__submit:hover,
-.add-to-cart-button:hover,
-[class*="ai-product-card-button"]:hover {
-  background-color: #6d0000 !important;
-  background: #6d0000 !important;
-  border-color: #6d0000 !important;
-  color: #ffffff !important;
+/* Centered Title (Anton Font) */
+[class*="ai-product-card-title"],
+.product-card .product-title,
+.product-card h3,
+.product-card__title {
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+  color: #000000 !important;
+  line-height: 1.25 !important;
+  margin: 8px 0 !important;
+  width: 100% !important;
 }
 
-/* ========================================================
-   GLOBAL OVERRIDE FOR ALL CAROUSELS, COLLECTION LISTINGS & PRODUCT CARDS
-   (Exact Match to Image 2: Large 24px Price on Far Left, Red Discount Badge on Far Right)
-======================================================== */
+/* Centered Price & Discount Row */
 .avyah-price-container,
 [class*="ai-product-card-price-row"],
 [ref="priceContainer"],
@@ -1974,66 +1991,93 @@ button[name="add"]:hover,
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
-  justify-content: space-between !important;
+  justify-content: center !important;
+  gap: 8px !important;
   width: 100% !important;
   box-sizing: border-box !important;
-  margin-top: 8px !important;
-  margin-bottom: 12px !important;
+  margin-top: 4px !important;
+  margin-bottom: 10px !important;
+  text-align: center !important;
 }
 
 .avyah-price-container .price,
 [class*="ai-product-card-price-row"] .current-price,
 .product-card .price .price,
-.product-card .current-price {
-  font-size: 24px !important;
-  font-weight: 900 !important;
+.product-card .current-price,
+.product-card .price-item--sale,
+.product-card .price-item--regular {
+  font-size: 18px !important;
+  font-weight: 800 !important;
   color: #000000 !important;
   font-family: 'Inter', sans-serif !important;
-  letter-spacing: -0.5px !important;
-  text-align: left !important;
-  margin-left: 0 !important;
-  float: left !important;
+  text-align: center !important;
+  margin: 0 !important;
+  float: none !important;
+}
+
+.product-card .compare-at-price,
+.product-card s,
+.product-card .price-item--compare {
+  color: #888888 !important;
+  text-decoration: line-through !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
 }
 
 .avyah-price-container .discount-badge,
 [class*="ai-product-card-price-row"] .discount-badge,
 .product-card .discount-badge {
-  background-color: #d52528 !important;
-  color: #ffffff !important;
-  font-size: 12px !important;
+  background-color: transparent !important;
+  color: #00b050 !important; /* Green percentage text as seen in Image 2 */
+  font-size: 14px !important;
   font-weight: 800 !important;
-  padding: 4px 10px !important;
-  border-radius: 4px !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
   text-transform: uppercase !important;
-  margin-left: auto !important;
-  float: right !important;
+  margin: 0 !important;
+  float: none !important;
   font-family: 'Inter', sans-serif !important;
 }
 
-[class*="ai-product-card-content"],
-.product-card__content {
-  text-align: left !important;
-  align-items: flex-start !important;
-  justify-content: flex-start !important;
-  width: 100% !important;
+/* Full Width Solid Crimson Red Add to Cart Button */
+.product-card .quick-add,
+.product-card .quick-add__button,
+.product-card .quick-add__button--add,
+.product-card .quick-add__button--choose,
+.product-card add-to-cart-component button,
+.product-card button[name="add"],
+.product-card [class*="ai-product-card-button"] {
+  width: calc(100% + 24px) !important;
+  margin-left: -12px !important;
+  margin-right: -12px !important;
+  margin-bottom: -12px !important;
+  margin-top: auto !important;
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+  color: #ffffff !important;
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  padding: 12px 16px !important;
+  border-radius: 0 0 2px 2px !important;
+  border: none !important;
+  box-shadow: inset 0 -2px 0 #a0181b !important;
+  box-sizing: border-box !important;
+  cursor: pointer !important;
+  display: block !important;
 }
 
-[class*="ai-product-card-title"],
-.product-card .product-title {
-  text-align: left !important;
-  width: 100% !important;
+.product-card .quick-add:hover,
+.product-card .quick-add__button:hover,
+.product-card add-to-cart-component button:hover {
+  background-color: #b01b1e !important;
+  background: #b01b1e !important;
+  color: #ffffff !important;
 }
 
-[class*="ai-product-card-specs"],
-.avyah-product-card-subtitle {
-  text-align: left !important;
-  margin-left: 0 !important;
-  width: 100% !important;
-}
-
-/* ========================================================
-   RECTANGULAR BUTTON & TAB STYLING (REPLACING PILL / ROUNDED SHAPE)
-======================================================== */
+/* RECTANGULAR BUTTON & TAB STYLING */
 .split-contact-bottom .action-link,
 .action-link,
 a.action-link,
@@ -2044,12 +2088,10 @@ a.action-link,
 button.bundle-tab,
 .add-to-bundle-btn,
 .bundle-badge {
-  border-radius: 4px !important; /* Crisp rectangular shape */
+  border-radius: 4px !important;
 }
 
-/* ========================================================
-   REMOVE HOVER LIFT & TRANSFORM EFFECTS FROM ALL PRODUCT LISTINGS
-======================================================== */
+/* REMOVE HOVER LIFT & TRANSFORM EFFECTS */
 .bundle-card:hover,
 .product-card:hover,
 .card:hover,
@@ -2065,9 +2107,7 @@ button.bundle-tab,
   filter: none !important;
 }
 
-/* ========================================================
-   BULK ORDER PAGE CRIMSON RED BACKGROUND MATCH (#d52528)
-======================================================== */
+/* BULK ORDER PAGE CRIMSON RED BACKGROUND MATCH */
 .bundle-page-wrapper,
 #MainContent[data-template="page.bulk-order"],
 body.template-page-bulk-order main#MainContent,
