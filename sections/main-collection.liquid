@@ -23,6 +23,187 @@
 {% endjavascript %}
 
 {% comment %} We always render this full-width, as the child blocks have width: page/full settings {% endcomment %}
+<style>
+  /* ========================================================
+     1-TO-1 IMAGE 2 MATCH: PERFECT COLLECTION PRODUCT CARD SYSTEM
+  ======================================================== */
+  .main-collection-grid .product-grid {
+    gap: 20px !important;
+  }
+
+  .product-grid__item.avyah-perfect-card,
+  li.product-grid__item.avyah-perfect-card,
+  li.avyah-perfect-card,
+  .product-grid li {
+    border: 1.5px solid #555555 !important;
+    border-radius: 12px !important;
+    padding: 16px !important;
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    position: relative !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    margin: 0 !important;
+    list-style: none !important;
+  }
+
+  .avyah-card-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Image */
+  .avyah-card-media-link {
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 12px !important;
+    text-decoration: none !important;
+    background: #ffffff !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+  }
+
+  .avyah-card-media-link img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 240px !important;
+    object-fit: contain !important;
+    display: block !important;
+    margin: 0 auto !important;
+  }
+
+  /* Rating Stars */
+  .avyah-card-rating {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 4px !important;
+    margin-bottom: 8px !important;
+    text-align: left !important;
+  }
+
+  .avyah-card-rating .stars {
+    color: #ffc107 !important;
+    font-size: 15px !important;
+    letter-spacing: 1px !important;
+  }
+
+  .avyah-card-rating .count {
+    color: #666666 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    font-family: 'Inter', sans-serif !important;
+  }
+
+  /* Title */
+  .avyah-card-title-link {
+    text-decoration: none !important;
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 6px !important;
+  }
+
+  .avyah-card-title {
+    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: 17px !important;
+    font-weight: 400 !important;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    text-transform: uppercase !important;
+    text-align: left !important;
+    line-height: 1.25 !important;
+    margin: 0 !important;
+    letter-spacing: 0.3px !important;
+  }
+
+  /* Subtitle */
+  .avyah-card-subtitle {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: #666666 !important;
+    text-transform: uppercase !important;
+    text-align: left !important;
+    margin-bottom: 12px !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  /* Price Row */
+  .avyah-card-price-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    margin-top: auto !important;
+    margin-bottom: 14px !important;
+  }
+
+  .avyah-card-price {
+    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: 22px !important;
+    font-weight: 400 !important;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    text-align: left !important;
+    letter-spacing: -0.3px !important;
+  }
+
+  .avyah-card-discount-badge {
+    background-color: #d52528 !important;
+    background: #d52528 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    padding: 4px 8px !important;
+    border-radius: 4px !important;
+    text-transform: uppercase !important;
+  }
+
+  /* ADD TO CART Form & Button */
+  .avyah-card-quick-add-form {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .avyah-card-add-to-cart-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-height: 44px !important;
+    background-color: #d52528 !important;
+    background: #d52528 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    padding: 10px 16px !important;
+    border-radius: 6px !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s ease !important;
+    box-sizing: border-box !important;
+  }
+
+  .avyah-card-add-to-cart-btn:hover {
+    background-color: #b01b1e !important;
+    background: #b01b1e !important;
+    color: #ffffff !important;
+  }
+</style>
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <results-list
   class="section product-grid-container color-{{ section.settings.color_scheme }}"
