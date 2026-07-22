@@ -1309,12 +1309,12 @@ results-list .product-badges__badge,
 /* ==========================================================================
    HEADER NAVIGATION MENU TEXT - WHITE
    ========================================================================== */
-#header-group *:not(.menu-list__submenu *):not(.avyah-discover-card *),
-.header *:not(.menu-list__submenu *):not(.avyah-discover-card *),
-.header__inline-menu *:not(.menu-list__submenu *):not(.avyah-discover-card *),
-.header__menu-item:not(.menu-list__submenu *),
-.header__menu-item *:not(.menu-list__submenu *),
-header nav *:not(.menu-list__submenu *):not(.avyah-discover-card *),
+#header-group *:not(.menu-list__submenu *):not(.avyah-discover-card *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
+.header *:not(.menu-list__submenu *):not(.avyah-discover-card *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
+.header__inline-menu *:not(.menu-list__submenu *):not(.avyah-discover-card *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
+.header__menu-item:not(.menu-list__submenu *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
+.header__menu-item *:not(.menu-list__submenu *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
+header nav *:not(.menu-list__submenu *):not(.avyah-discover-card *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
 .buddha-menu-item *,
 .buddha-menu-item > a,
 .buddha-menu-item span,
@@ -1689,21 +1689,21 @@ header-component [class*="header__row"] {
 }
 
 /* Force all header menu links, titles & icons to WHITE (#ffffff) */
-#header-group a:not(.menu-list__submenu a):not(.avyah-discover-card a),
-#header-group span:not(.menu-list__submenu span):not(.avyah-discover-card span):not(.cart-count),
-#header-group p:not(.menu-list__submenu p):not(.avyah-discover-card p),
-#header-group li:not(.menu-list__submenu li):not(.avyah-discover-card li),
-.header a:not(.menu-list__submenu a):not(.avyah-discover-card a),
-.header span:not(.menu-list__submenu span):not(.avyah-discover-card span):not(.cart-count),
-.header__inline-menu *:not(.menu-list__submenu *):not(.avyah-discover-card *),
-.header__menu-item:not(.menu-list__submenu *),
+#header-group a:not(.menu-list__submenu a):not(.avyah-discover-card a):not(.avyah-discover-popover a):not(.avyah-discover-link),
+#header-group span:not(.menu-list__submenu span):not(.avyah-discover-card span):not(.cart-count):not(.avyah-discover-popover span),
+#header-group p:not(.menu-list__submenu p):not(.avyah-discover-card p):not(.avyah-discover-popover p),
+#header-group li:not(.menu-list__submenu li):not(.avyah-discover-card li):not(.avyah-discover-popover li),
+.header a:not(.menu-list__submenu a):not(.avyah-discover-card a):not(.avyah-discover-popover a):not(.avyah-discover-link),
+.header span:not(.menu-list__submenu span):not(.avyah-discover-card span):not(.cart-count):not(.avyah-discover-popover span),
+.header__inline-menu *:not(.menu-list__submenu *):not(.avyah-discover-card *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
+.header__menu-item:not(.menu-list__submenu *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
 .menu-list__link,
 .menu-list__link-title,
-header nav *:not(.menu-list__submenu *):not(.avyah-discover-card *),
+header nav *:not(.menu-list__submenu *):not(.avyah-discover-card *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
 .header-actions__action,
 .header-actions__action *:not(.cart-count),
-header-component a:not(.menu-list__submenu a):not(.avyah-discover-card a),
-header-component span:not(.menu-list__submenu span):not(.avyah-discover-card span):not(.cart-count) {
+header-component a:not(.menu-list__submenu a):not(.avyah-discover-card a):not(.avyah-discover-popover a):not(.avyah-discover-link),
+header-component span:not(.menu-list__submenu span):not(.avyah-discover-card span):not(.cart-count):not(.avyah-discover-popover span) {
   color: #ffffff !important;
 }
 
@@ -1770,10 +1770,14 @@ header-component svg line:not(.dd-icon *),
 }
 
 /* Default state for DISCOVER menu links (Solid Black #000000) */
-a.avyah-discover-link,
-a.avyah-discover-link *,
-a.avyah-discover-link span,
-a.avyah-discover-link strong {
+/* ABSOLUTE FORCE OVERRIDE FOR DISCOVER DROPDOWN TEXT ON ALL PAGES */
+#header-group .avyah-discover-popover *,
+.header .avyah-discover-popover *,
+header-component .avyah-discover-popover *,
+.menu-list .avyah-discover-popover *,
+.avyah-discover-popover *,
+.avyah-discover-link,
+.avyah-discover-link * {
   color: #000000 !important;
   -webkit-text-fill-color: #000000 !important;
   -webkit-background-clip: initial !important;
@@ -1784,20 +1788,32 @@ a.avyah-discover-link strong {
   font-weight: 700 !important;
   letter-spacing: 0.5px !important;
   text-transform: uppercase !important;
-  line-height: 1.1 !important;
   opacity: 1 !important;
   visibility: visible !important;
   display: inline-block !important;
-  transition: all 0.15s ease !important;
 }
 
-a.avyah-discover-link svg,
-a.avyah-discover-link svg *,
-a.avyah-discover-link svg path {
+#header-group .avyah-discover-link:hover *,
+.header .avyah-discover-link:hover *,
+header-component .avyah-discover-link:hover *,
+.avyah-discover-link:hover * {
+  color: #d52528 !important;
+  -webkit-text-fill-color: #d52528 !important;
+}
+
+.avyah-discover-link svg,
+.avyah-discover-link svg *,
+.avyah-discover-link svg path {
   stroke: #000000 !important;
   color: #000000 !important;
   fill: none !important;
-  transition: all 0.15s ease !important;
+}
+
+.avyah-discover-link:hover svg,
+.avyah-discover-link:hover svg *,
+.avyah-discover-link:hover svg path {
+  stroke: #d52528 !important;
+  color: #d52528 !important;
 }
 
 a.avyah-discover-link {
@@ -1812,25 +1828,9 @@ a.avyah-discover-link {
   box-sizing: border-box !important;
 }
 
-/* HOVER STATE: Icon and text turn to Crimson Red (#d52528) */
 a.avyah-discover-link:hover {
   background-color: #fff5f5 !important;
   background: #fff5f5 !important;
-}
-
-a.avyah-discover-link:hover,
-a.avyah-discover-link:hover *,
-a.avyah-discover-link:hover span,
-a.avyah-discover-link:hover strong {
-  color: #d52528 !important;
-  -webkit-text-fill-color: #d52528 !important;
-}
-
-a.avyah-discover-link:hover svg,
-a.avyah-discover-link:hover svg *,
-a.avyah-discover-link:hover svg path {
-  stroke: #d52528 !important;
-  color: #d52528 !important;
 }
 
 .menu-list__submenu a:hover,
