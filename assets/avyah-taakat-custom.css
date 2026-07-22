@@ -2031,13 +2031,18 @@ button[name="add"]:hover,
 }
 
 /* ========================================================
-   RECTANGULAR BUTTON STYLING (REPLACING PILL / ROUNDED SHAPE)
+   RECTANGULAR BUTTON & TAB STYLING (REPLACING PILL / ROUNDED SHAPE)
 ======================================================== */
 .split-contact-bottom .action-link,
 .action-link,
 a.action-link,
 .contact-button,
-[class*="action-link"] {
+[class*="action-link"],
+.bundle-tab,
+.bundle-tabs .bundle-tab,
+button.bundle-tab,
+.add-to-bundle-btn,
+.bundle-badge {
   border-radius: 4px !important; /* Crisp rectangular shape */
 }
 
