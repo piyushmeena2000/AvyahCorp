@@ -101,9 +101,9 @@
                     <div class="avyah-megamenu" id="avyah-megamenu-panel" style="background-color: #ffffff !important; background: #ffffff !important; color: #000000 !important; border-top: 1px solid #e5e7eb !important; box-shadow: 0 20px 50px rgba(0,0,0,0.15) !important;">
                       <div class="avyah-megamenu__inner" style="background-color: #ffffff !important; color: #000000 !important;">
                         <div class="avyah-megamenu__sidebar" style="background-color: #ffffff !important; color: #000000 !important; border-right: 1px solid #e5e7eb !important;">
-                          <a href="/collections/all" class="avyah-megamenu__sidebar-link avyah-tab-link active" data-tab="tab-all" style="color: #000000 !important;">SHOP ALL</a>
+                          <a href="/collections/all" class="avyah-megamenu__sidebar-link avyah-tab-link active" data-tab="tab-all">SHOP ALL</a>
                           {%- for childlink in link.links -%}
-                            <a href="{{ childlink.url }}" class="avyah-megamenu__sidebar-link avyah-tab-link" data-tab="tab-{{ forloop.index }}" style="color: #000000 !important;">{{ childlink.title | upcase }}</a>
+                            <a href="{{ childlink.url }}" class="avyah-megamenu__sidebar-link avyah-tab-link" data-tab="tab-{{ forloop.index }}">{{ childlink.title | upcase }}</a>
                           {%- endfor -%}
                         </div>
                         <div class="avyah-megamenu__content-area" style="background-color: #ffffff !important; color: #000000 !important;">
