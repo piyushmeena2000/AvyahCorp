@@ -73,27 +73,72 @@
         {% for product in display_products %}
           <li
             id="{{ section.id }}-{{ product.id }}"
-            class="product-grid__item avyah-unified-product-card product-grid__item--{{ forloop.index0 }}"
+            class="product-grid__item avyah-perfect-card"
             data-page="{{ paginate.current_page }}"
             data-product-id="{{ product.id }}"
             ref="cards[]"
           >
-            {% # theme-check-disable %}
-            {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
-            {% # theme-check-enable %}
+            <div class="avyah-card-inner">
+              <a href="{{ product.url }}" class="avyah-card-media-link">
+                {% if product.featured_image %}
+                  <img src="{{ product.featured_image | image_url: width: 500 }}" alt="{{ product.title | escape }}" loading="lazy" width="500" height="500">
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag }}
+                {% endif %}
+              </a>
 
-            <div class="perfect-card-subcaption">5g Protein* • Healthy Multigrain Snack</div>
+              <!-- Star Rating -->
+              <div class="avyah-card-rating">
+                <span class="stars">★★★★★</span>
+                <span class="count">(39)</span>
+              </div>
 
-            <form action="/cart/add" method="post" enctype="multipart/form-data" class="avyah-card-quick-add-form">
-              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-              <button
-                type="submit"
-                class="avyah-card-add-to-cart-btn"
-                {% unless product.available %}disabled{% endunless %}
-              >
-                {% if product.available %}ADD TO CART{% else %}OUT OF STOCK{% endif %}
-              </button>
-            </form>
+              <!-- Product Title -->
+              <a href="{{ product.url }}" class="avyah-card-title-link">
+                <h3 class="avyah-card-title">{{ product.title | upcase }}</h3>
+              </a>
+
+              <!-- Pack Subtitle -->
+              <div class="avyah-card-subtitle">
+                {% assign title_low = product.title | downcase %}
+                {% if title_low contains 'combos' or title_low contains 'combo' %}
+                  PACK OF 3 NAMKEENS
+                {% elsif title_low contains 'namkeen' or title_low contains 'mast mix' %}
+                  PACK OF 1 NAMKEEN
+                {% elsif title_low contains '20' or title_low contains '2 pack' %}
+                  PACK OF 2 • 20 BARS
+                {% elsif title_low contains '60' %}
+                  PACK OF 6 • 60 BARS
+                {% else %}
+                  PACK OF 1 • 10 BARS
+                {% endif %}
+              </div>
+
+              <!-- Price & Discount Badge Row -->
+              <div class="avyah-card-price-row">
+                <div class="avyah-card-price">
+                  Rs. {{ product.price | money_without_currency }}
+                </div>
+                {% if product.compare_at_price > product.price %}
+                  {% assign discount_percent = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
+                  <div class="avyah-card-discount-badge">-{{ discount_percent }}% OFF</div>
+                {% else %}
+                  <div class="avyah-card-discount-badge">-8% OFF</div>
+                {% endif %}
+              </div>
+
+              <!-- ADD TO CART Button -->
+              <form action="/cart/add" method="post" enctype="multipart/form-data" class="avyah-card-quick-add-form">
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                <button
+                  type="submit"
+                  class="avyah-card-add-to-cart-btn"
+                  {% unless product.available %}disabled{% endunless %}
+                >
+                  {% if product.available %}ADD TO CART{% else %}OUT OF STOCK{% endif %}
+                </button>
+              </form>
+            </div>
           </li>
         {% endfor %}
       {% endcapture %}

@@ -1887,221 +1887,154 @@ a.avyah-discover-link:hover {
 }
 
 /* ========================================================
-   MASTER UNIFIED SUPERYOU PRODUCT CARD DESIGN SYSTEM
-   (Exact Match to Image 2: Crisp Red Frame + Top Ribbon Tag + 
-    Centered Anton Title + Centered Rating + Centered Price +
-    Full Width Crimson Red ADD TO CART Button)
+   1-TO-1 IMAGE 2 MATCH: PERFECT COLLECTION PRODUCT CARD SYSTEM
 ======================================================== */
-
-/* 1. Outer Card Frame Container (Applies to Collections, Search & Grid Items) */
-.product-grid__item.avyah-unified-product-card,
-.product-grid__item,
-li.product-grid__item,
-.product-grid .product-grid__item {
-  border: 1.5px solid #d52528 !important;
-  border-radius: 4px !important;
-  padding: 12px 12px 0 12px !important;
+.product-grid__item.avyah-perfect-card,
+li.product-grid__item.avyah-perfect-card {
+  border: 1.5px solid #555555 !important;
+  border-radius: 12px !important;
+  padding: 16px !important;
   background-color: #ffffff !important;
+  background: #ffffff !important;
+  box-sizing: border-box !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
-  align-items: center !important;
   position: relative !important;
-  box-sizing: border-box !important;
   height: 100% !important;
   overflow: hidden !important;
-  box-shadow: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
   margin: 0 !important;
+  list-style: none !important;
 }
 
-/* Remove double inner border & padding from nested card elements */
-.product-grid__item .product-card,
-.product-grid__item .card-wrapper,
-.product-grid__item product-card,
-.product-grid__item product-card-link,
-.product-card,
-.card-wrapper,
-product-card-link product-card {
-  border: none !important;
-  padding: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  width: 100% !important;
-  margin: 0 !important;
-}
-
-/* Card Content Alignment - Centered */
-.product-card__content,
-[class*="ai-product-card-content"] {
-  text-align: center !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 100% !important;
-  padding: 0 !important;
+.avyah-card-inner {
   display: flex !important;
   flex-direction: column !important;
+  height: 100% !important;
+  width: 100% !important;
 }
 
-/* Top Ribbon Badge Tag ("JUST LAUNCHED" / "BESTSELLER" / "SALE") */
-.product-grid__item .badge,
-.product-card .badge,
-.product-card [class*="badge"],
-.product-card-badge {
-  position: absolute !important;
-  top: 0 !important;
-  right: 0 !important;
+/* Image */
+.avyah-card-media-link {
+  display: block !important;
+  width: 100% !important;
+  margin-bottom: 12px !important;
+  text-decoration: none !important;
+  background: #ffffff !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+.avyah-card-media-link img {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* Rating Stars */
+.avyah-card-rating {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 4px !important;
+  margin-bottom: 8px !important;
+  text-align: left !important;
+}
+
+.avyah-card-rating .stars {
+  color: #ffc107 !important;
+  font-size: 15px !important;
+  letter-spacing: 1px !important;
+}
+
+.avyah-card-rating .count {
+  color: #666666 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Title */
+.avyah-card-title-link {
+  text-decoration: none !important;
+  display: block !important;
+  width: 100% !important;
+  margin-bottom: 6px !important;
+}
+
+.avyah-card-title {
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 400 !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  text-transform: uppercase !important;
+  text-align: left !important;
+  line-height: 1.25 !important;
+  margin: 0 !important;
+  letter-spacing: 0.3px !important;
+}
+
+/* Subtitle */
+.avyah-card-subtitle {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #666666 !important;
+  text-transform: uppercase !important;
+  text-align: left !important;
+  margin-bottom: 12px !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* Price Row */
+.avyah-card-price-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  margin-top: auto !important;
+  margin-bottom: 14px !important;
+}
+
+.avyah-card-price {
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 22px !important;
+  font-weight: 400 !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  text-align: left !important;
+  letter-spacing: -0.3px !important;
+}
+
+.avyah-card-discount-badge {
   background-color: #d52528 !important;
   background: #d52528 !important;
   color: #ffffff !important;
-  font-family: 'Anton', Arial, sans-serif !important;
-  font-size: 11px !important;
-  font-weight: 400 !important;
-  letter-spacing: 0.5px !important;
-  text-transform: uppercase !important;
-  padding: 4px 10px !important;
-  border-radius: 0 0 0 4px !important;
-  z-index: 10 !important;
-  margin: 0 !important;
-}
-
-/* Image Container */
-.product-grid__item .card__media,
-.product-grid__item .media,
-.product-card .card__media,
-.product-card .media,
-.product-card-image-wrap {
-  background-color: #f2f3f5 !important;
-  border-radius: 2px !important;
-  overflow: hidden !important;
-  margin-bottom: 10px !important;
-  width: 100% !important;
-}
-
-/* Centered Anton Product Title */
-.product-grid__item product-title,
-.product-grid__item .product-title,
-.product-grid__item h3,
-.product-card product-title,
-.product-card .product-title,
-.product-card h3,
-.product-card__title {
-  font-family: 'Anton', Arial, sans-serif !important;
-  font-size: 16px !important;
-  font-weight: 400 !important;
-  text-transform: uppercase !important;
-  text-align: center !important;
-  color: #000000 !important;
-  line-height: 1.25 !important;
-  margin: 6px 0 !important;
-  width: 100% !important;
-}
-
-.product-grid__item product-title *,
-.product-card product-title * {
-  text-align: center !important;
-  font-family: 'Anton', Arial, sans-serif !important;
-  color: #000000 !important;
-}
-
-/* Centered Price & Discount Row */
-.product-grid__item .price,
-.product-grid__item product-price,
-.product-grid__item [ref="priceContainer"],
-.product-card .price,
-.product-card product-price,
-.product-card [ref="priceContainer"] {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-  margin-top: 4px !important;
-  margin-bottom: 6px !important;
-  text-align: center !important;
-}
-
-.product-grid__item .price *,
-.product-card .price * {
-  text-align: center !important;
-}
-
-.product-card .price-item--sale,
-.product-card .price-item--regular,
-.product-grid__item .current-price,
-.product-grid__item .price-item--sale,
-.product-grid__item .price-item--regular {
-  font-size: 18px !important;
-  font-weight: 800 !important;
-  color: #000000 !important;
-  font-family: 'Inter', sans-serif !important;
-  text-align: center !important;
-  margin: 0 !important;
-}
-
-.product-card .compare-at-price,
-.product-card s,
-.product-card .price-item--compare,
-.product-grid__item s {
-  color: #888888 !important;
-  text-decoration: line-through !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-}
-
-.product-card .discount-badge,
-.product-grid__item .discount-badge {
-  background-color: transparent !important;
-  color: #00b050 !important; /* Green percentage text as seen in Image 2 */
-  font-size: 14px !important;
-  font-weight: 800 !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  text-transform: uppercase !important;
-  margin: 0 !important;
-  font-family: 'Inter', sans-serif !important;
-}
-
-/* Subcaption line inside card */
-.perfect-card-subcaption {
+  -webkit-text-fill-color: #ffffff !important;
   font-family: 'Inter', sans-serif !important;
   font-size: 11px !important;
-  font-weight: 600 !important;
-  color: #666666 !important;
-  text-align: center !important;
-  margin: 4px 0 8px 0 !important;
-  width: 100% !important;
+  font-weight: 800 !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  text-transform: uppercase !important;
 }
 
-/* Form Container for ADD TO CART */
-.avyah-card-quick-add-form,
-.product-grid__item form,
-.product-grid__item quick-add-component,
-.product-grid__item .quick-add {
+/* ADD TO CART Form & Button */
+.avyah-card-quick-add-form {
   display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  width: calc(100% + 24px) !important;
-  margin-left: -12px !important;
-  margin-right: -12px !important;
-  margin-bottom: 0 !important;
-  margin-top: auto !important;
+  width: 100% !important;
+  margin: 0 !important;
 }
 
-/* FULL WIDTH SOLID CRIMSON RED ADD TO CART BUTTON */
-.avyah-card-add-to-cart-btn,
-.product-grid__item button[type="submit"],
-.product-grid__item .quick-add__button,
-.product-grid__item .quick-add__button--add,
-.product-grid__item .quick-add__button--choose,
-.product-card .quick-add__button,
-.product-card button[name="add"] {
+.avyah-card-add-to-cart-btn {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   width: 100% !important;
-  min-height: 46px !important;
+  min-height: 44px !important;
   background-color: #d52528 !important;
   background: #d52528 !important;
   color: #ffffff !important;
@@ -2111,26 +2044,15 @@ product-card-link product-card {
   font-weight: 400 !important;
   letter-spacing: 1px !important;
   text-transform: uppercase !important;
-  padding: 12px 16px !important;
-  border-radius: 0 0 2px 2px !important;
+  padding: 10px 16px !important;
+  border-radius: 6px !important;
   border: none !important;
-  box-shadow: inset 0 -2px 0 #a0181b !important;
   cursor: pointer !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  transition: background-color 0.2s ease !important;
   box-sizing: border-box !important;
-  margin: 0 !important;
 }
 
-.avyah-card-add-to-cart-btn *,
-.product-grid__item button[type="submit"] * {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  fill: #ffffff !important;
-}
-
-.avyah-card-add-to-cart-btn:hover,
-.product-grid__item button[type="submit"]:hover {
+.avyah-card-add-to-cart-btn:hover {
   background-color: #b01b1e !important;
   background: #b01b1e !important;
   color: #ffffff !important;
