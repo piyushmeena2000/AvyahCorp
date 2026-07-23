@@ -2121,4 +2121,40 @@ body.template-page-bulk-order main#MainContent,
   background: #d52528 !important;
 }
 
+/* ========================================================
+   DISCOVER DROPDOWN ITEMS (OUR BLOGS & CAREERS)
+   - Default text color: Solid Black (#000000)
+   - Hover state: Crimson Red (#d52528) with #fef2f2 background
+======================================================== */
+.avyah-discover-card a,
+.avyah-discover-card a *,
+.avyah-discover-card .avyah-discover-item-link,
+.avyah-discover-card .avyah-discover-item-text {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+.avyah-discover-card a:hover,
+.avyah-discover-card a:hover *,
+.avyah-discover-card a.avyah-discover-item-link:hover,
+.avyah-discover-card a:hover .avyah-discover-item-text {
+  background-color: #fef2f2 !important;
+  color: #d52528 !important;
+  -webkit-text-fill-color: #d52528 !important;
+}
+
+.avyah-discover-card a .dd-icon,
+.avyah-discover-card a .dd-icon * {
+  color: #000000 !important;
+  stroke: #000000 !important;
+  fill: none !important;
+}
+
+.avyah-discover-card a:hover .dd-icon,
+.avyah-discover-card a:hover .dd-icon * {
+  color: #d52528 !important;
+  stroke: #d52528 !important;
+}
+
+
 
