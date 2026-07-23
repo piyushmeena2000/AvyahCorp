@@ -42,10 +42,10 @@
             "card_border_radius": 12,
             "card_padding": 20,
             "image_aspect_ratio": 65,
-            "background_color": "#FFFFFF",
+            "background_color": "#D52528",
             "heading_color": "#000000",
             "text_color": "#666666",
-            "card_background": "#ffffff",
+            "card_background": "#FFFFFF",
             "card_title_color": "#000000",
             "meta_color": "#999999",
             "link_color": "#000000",
@@ -69,9 +69,7 @@
       "block_order": [
         "ai_gen_block_ea6d2bb_rdfB37"
       ],
-      "custom_css": [
-        "* {background: #d52528; color: #ffff;}"
-      ],
+      "custom_css": [],
       "name": "Latest blogs carousel",
       "settings": {
         "content_direction": "column",
