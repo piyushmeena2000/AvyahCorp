@@ -210,16 +210,16 @@
                       </div>
                     </div>
                     <div class="avyah-megamenu-backdrop"></div>
-                  {%- elsif link.links != blank or _dt contains 'discover' -%}
-                    {%- comment -%} Other links with children {%- endcomment -%}
+                  {%- elsif link.links != blank or _dt contains 'discover' or _dt contains 'blog' -%}
+                    {%- comment -%} DISCOVER dropdown popover with OUR BLOGS & CAREERS {%- endcomment -%}
                     <a
-                      href="{{ link.url }}"
+                      href="#"
                       class="menu-list__link{% if link.current %} menu-list__link--active{% endif %}"
                       aria-haspopup="true"
                       aria-expanded="false"
                       {% if link.current %}aria-current="page"{% endif %}
                     >
-                      <span class="menu-list__link-title">{{ link.title | escape }}</span>
+                      <span class="menu-list__link-title">DISCOVER</span>
                       <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none" aria-hidden="true" style="margin-left:4px;vertical-align:middle;">
                         <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
