@@ -6,263 +6,276 @@
 
 {% style %}
   .ai-blog-carousel-{{ ai_gen_id }} {
-    width: 100%;
-    background-color: {{ block.settings.background_color }};
-    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
+    width: 100% !important;
+    background-color: #faf7f2 !important;
+    background: #faf7f2 !important;
+    padding: {{ block.settings.section_padding_top | default: 80 }}px 0 {{ block.settings.section_padding_bottom | default: 80 }}px !important;
+    box-sizing: border-box !important;
   }
 
   .ai-blog-carousel-container-{{ ai_gen_id }} {
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 0 {{ block.settings.desktop_padding }}px;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    padding: 0 {{ block.settings.desktop_padding | default: 32 }}px !important;
   }
 
   .ai-blog-carousel-header-{{ ai_gen_id }} {
-    text-align: {{ block.settings.heading_alignment }};
-    margin-bottom: {{ block.settings.heading_spacing }}px;
+    text-align: center !important;
+    margin-bottom: 48px !important;
   }
 
   .ai-blog-carousel-title-{{ ai_gen_id }} {
-    color: {{ block.settings.heading_color }};
-    font-size: {{ block.settings.heading_size }}px;
-    margin: 0 0 {{ block.settings.subheading_spacing }}px;
+    color: #2b1e1b !important;
+    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: {{ block.settings.heading_size | default: 42 }}px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    margin: 0 0 10px 0 !important;
+    line-height: 1.1 !important;
   }
 
   .ai-blog-carousel-subtitle-{{ ai_gen_id }} {
-    color: {{ block.settings.text_color }};
-    font-size: {{ block.settings.subheading_size }}px;
-    margin: 0;
+    color: #524643 !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+    font-size: 16px !important;
+    margin: 0 !important;
   }
 
   .ai-blog-carousel-wrapper-{{ ai_gen_id }} {
-    position: relative;
-    overflow: hidden;
+    position: relative !important;
+    overflow: hidden !important;
   }
 
   .ai-blog-carousel-track-{{ ai_gen_id }} {
-    display: flex;
-    gap: {{ block.settings.card_gap }}px;
-    transition: transform 0.5s ease;
-    will-change: transform;
+    display: flex !important;
+    gap: 24px !important;
+    transition: transform 0.5s ease !important;
+    will-change: transform !important;
   }
 
   .ai-blog-carousel-slide-{{ ai_gen_id }} {
-    flex: 0 0 calc((100% - ({{ block.settings.slides_per_view_desktop | minus: 1 }} * {{ block.settings.card_gap }}px)) / {{ block.settings.slides_per_view_desktop }});
-    min-width: 0;
+    flex: 0 0 calc((100% - ({{ block.settings.slides_per_view_desktop | default: 4 | minus: 1 }} * 24px)) / {{ block.settings.slides_per_view_desktop | default: 4 }}) !important;
+    min-width: 0 !important;
   }
 
   .ai-blog-card-{{ ai_gen_id }} {
-    background-color: {{ block.settings.card_background }};
-    border-radius: {{ block.settings.card_border_radius }}px;
-    overflow: hidden;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04) !important;
+    border: 1px solid #f2ede4 !important;
   }
 
   .ai-blog-card-{{ ai_gen_id }}:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-6px) !important;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08) !important;
   }
 
   .ai-blog-card-image-wrapper-{{ ai_gen_id }} {
-    position: relative;
-    width: 100%;
-    padding-bottom: {{ block.settings.image_aspect_ratio }}%;
-    overflow: hidden;
-    background-color: #f5f5f5;
+    position: relative !important;
+    width: 100% !important;
+    height: 220px !important;
+    padding-bottom: 0 !important;
+    overflow: hidden !important;
+    border-radius: 20px 20px 0 0 !important;
+    background-color: #f7f4ed !important;
   }
 
   .ai-blog-card-image-{{ ai_gen_id }} {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transition: transform 0.5s ease !important;
+  }
+
+  .ai-blog-card-{{ ai_gen_id }}:hover .ai-blog-card-image-{{ ai_gen_id }} {
+    transform: scale(1.06) !important;
   }
 
   .ai-blog-card-image-placeholder-{{ ai_gen_id }} {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f4f4f4;
-  }
-
-  .ai-blog-card-image-placeholder-{{ ai_gen_id }} svg {
-    width: 60%;
-    height: 60%;
-    opacity: 0.3;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #f4efe6 !important;
   }
 
   .ai-blog-card-content-{{ ai_gen_id }} {
-    padding: {{ block.settings.card_padding }}px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
+    padding: 24px !important;
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
   .ai-blog-card-meta-{{ ai_gen_id }} {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-    font-size: 12px;
-    color: {{ block.settings.meta_color }};
-  }
-
-  .ai-blog-card-date-{{ ai_gen_id }} {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .ai-blog-card-author-{{ ai_gen_id }} {
-    display: flex;
-    align-items: center;
-    gap: 4px;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-bottom: 10px !important;
+    font-size: 13px !important;
+    color: #8c7d79 !important;
   }
 
   .ai-blog-card-title-{{ ai_gen_id }} {
-    color: {{ block.settings.card_title_color }};
-    font-size: {{ block.settings.card_title_size }}px;
-    margin: 0 0 12px;
-    line-height: 1.3;
+    color: #2b1e1b !important;
+    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: 21px !important;
+    line-height: 1.25 !important;
+    font-weight: 400 !important;
+    margin: 0 0 12px 0 !important;
+    text-transform: none !important;
   }
 
   .ai-blog-card-title-{{ ai_gen_id }} a {
-    color: inherit;
-    text-decoration: none;
+    color: #2b1e1b !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
   }
 
   .ai-blog-card-title-{{ ai_gen_id }} a:hover {
-    color: {{ block.settings.link_hover_color }};
+    color: #d52528 !important;
   }
 
   .ai-blog-card-excerpt-{{ ai_gen_id }} {
-    color: {{ block.settings.text_color }};
-    font-size: {{ block.settings.excerpt_size }}px;
-    line-height: 1.6;
-    margin: 0 0 16px;
-    flex-grow: 1;
+    color: #524643 !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.55 !important;
+    margin: 0 0 20px 0 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    flex-grow: 1 !important;
+  }
+
+  .ai-blog-card-footer-{{ ai_gen_id }} {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-top: auto !important;
+    padding-top: 14px !important;
+    border-top: 1px solid #f2ede4 !important;
   }
 
   .ai-blog-card-link-{{ ai_gen_id }} {
-    color: {{ block.settings.link_color }};
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: color 0.3s ease;
+    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: 15px !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    color: #2b1e1b !important;
+    text-decoration: underline !important;
+    text-underline-offset: 4px !important;
+    text-decoration-thickness: 2px !important;
+    transition: color 0.2s ease !important;
   }
 
   .ai-blog-card-link-{{ ai_gen_id }}:hover {
-    color: {{ block.settings.link_hover_color }};
+    color: #d52528 !important;
+  }
+
+  .ai-blog-badge-{{ ai_gen_id }} {
+    background-color: #ffe785 !important;
+    color: #2b1e1b !important;
+    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: 13px !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    padding: 6px 16px !important;
+    border-radius: 20px !important;
+    font-weight: 400 !important;
+    display: inline-block !important;
   }
 
   .ai-blog-carousel-controls-{{ ai_gen_id }} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    margin-top: {{ block.settings.controls_spacing }}px;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 16px !important;
+    margin-top: 36px !important;
   }
 
   .ai-blog-carousel-button-{{ ai_gen_id }} {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background-color: {{ block.settings.button_background }};
-    border: 1px solid {{ block.settings.button_border }};
-    color: {{ block.settings.button_color }};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    background-color: #ffffff !important;
+    border: 1px solid #e0d7c8 !important;
+    color: #2b1e1b !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
   }
 
   .ai-blog-carousel-button-{{ ai_gen_id }}:hover:not(:disabled) {
-    background-color: {{ block.settings.button_hover_background }};
-    color: {{ block.settings.button_hover_color }};
-    border-color: {{ block.settings.button_hover_border }};
+    background-color: #2b1e1b !important;
+    color: #ffffff !important;
+    border-color: #2b1e1b !important;
   }
 
   .ai-blog-carousel-button-{{ ai_gen_id }}:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
+    opacity: 0.3 !important;
+    cursor: not-allowed !important;
   }
 
   .ai-blog-carousel-dots-{{ ai_gen_id }} {
-    display: flex;
-    gap: 8px;
+    display: flex !important;
+    gap: 8px !important;
   }
 
   .ai-blog-carousel-dot-{{ ai_gen_id }} {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: {{ block.settings.dot_color }};
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 0;
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 50% !important;
+    background-color: #d6ccbe !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    padding: 0 !important;
   }
 
   .ai-blog-carousel-dot-{{ ai_gen_id }}.active {
-    background-color: {{ block.settings.dot_active_color }};
-    width: 24px;
-    border-radius: 4px;
+    background-color: #2b1e1b !important;
+    width: 24px !important;
+    border-radius: 4px !important;
   }
 
   @media screen and (max-width: 989px) {
-    .ai-blog-carousel-container-{{ ai_gen_id }} {
-      padding: 0 {{ block.settings.tablet_padding }}px;
-    }
-
     .ai-blog-carousel-slide-{{ ai_gen_id }} {
-      flex: 0 0 calc((100% - ({{ block.settings.slides_per_view_tablet | minus: 1 }} * {{ block.settings.card_gap }}px)) / {{ block.settings.slides_per_view_tablet }});
-    }
-
-    .ai-blog-carousel-title-{{ ai_gen_id }} {
-      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+      flex: 0 0 calc((100% - (1 * 24px)) / 2) !important;
     }
   }
 
   @media screen and (max-width: 749px) {
-    #shopify-block-AcGNwanNRbldNdzdEc__ai_gen_block_ea6d2bb_LPrxPM {
-      width:100%;
-    }
-
     .ai-blog-carousel-container-{{ ai_gen_id }} {
-      padding: 0 {{ block.settings.mobile_padding }}px;
+      padding: 0 16px !important;
     }
 
     .ai-blog-carousel-slide-{{ ai_gen_id }} {
-      flex: 0 0 calc(100% - 0px);
+      flex: 0 0 100% !important;
     }
 
     .ai-blog-carousel-title-{{ ai_gen_id }} {
-      font-size: {{ block.settings.heading_size | times: 0.6 }}px;
-      
+      font-size: 32px !important;
     }
 
     .ai-blog-card-title-{{ ai_gen_id }} {
-      font-size: {{ block.settings.card_title_size | times: 0.9 }}px;
-    }
-
-    .ai-blog-card-content-{{ ai_gen_id }} {
-      padding: {{ block.settings.card_padding | times: 0.8 }}px;
+      font-size: 19px !important;
     }
   }
 {% endstyle %}
@@ -343,19 +356,20 @@
                     </div>
                   {% endif %}
 
-                  <a href="{{ article.url }}" class="ai-blog-card-link-{{ ai_gen_id }}">
-                    {{ block.settings.read_more_text }}
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                  </a>
+                  <div class="ai-blog-card-footer-{{ ai_gen_id }}">
+                    <a href="{{ article.url }}" class="ai-blog-card-link-{{ ai_gen_id }}">
+                      READ MORE
+                    </a>
+                    <span class="ai-blog-badge-{{ ai_gen_id }}">
+                      {% if article.tags.size > 0 %}{{ article.tags[0] | upcase }}{% else %}RECIPES{% endif %}
+                    </span>
+                  </div>
                 </div>
               </article>
             </div>
           {% endfor %}
         {% else %}
-          {% for i in (1..6) %}
+          {% for i in (1..4) %}
             <div class="ai-blog-carousel-slide-{{ ai_gen_id }}">
               <article class="ai-blog-card-{{ ai_gen_id }}">
                 <div class="ai-blog-card-image-wrapper-{{ ai_gen_id }}">
@@ -364,30 +378,32 @@
                   </div>
                 </div>
                 <div class="ai-blog-card-content-{{ ai_gen_id }}">
-                  <div class="ai-blog-card-meta-{{ ai_gen_id }}">
-                    <span class="ai-blog-card-date-{{ ai_gen_id }}">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                        <line x1="16" y1="2" x2="16" y2="6"></line>
-                        <line x1="8" y1="2" x2="8" y2="6"></line>
-                        <line x1="3" y1="10" x2="21" y2="10"></line>
-                      </svg>
-                      Jan 1, 2025
-                    </span>
-                  </div>
                   <h3 class="ai-blog-card-title-{{ ai_gen_id }}">
-                    <a href="#">Healthy Eating Tips for a Better Lifestyle</a>
+                    <a href="#">
+                      {% case i %}
+                        {% when 1 %}No Bake Pumpkin Pie with Pumpkin Pie Perfect Bar Crust
+                        {% when 2 %}Peanut Butter Perfect Bar Cookies
+                        {% when 3 %}Gluten-Free Peanut Butter Paprika Snicker Doodle Recipe
+                        {% when 4 %}Chocolate Chip Peanut Butter Perfect Bar Cookies
+                      {% endcase %}
+                    </a>
                   </h3>
                   <div class="ai-blog-card-excerpt-{{ ai_gen_id }}">
-                    Discover the best practices for maintaining a healthy diet and improving your overall wellness.
+                    {% case i %}
+                      {% when 1 %}There’s nothing that says Fall quite like Pumpkin Pie! That’s why we whipped up this No Bake Pumpkin Pie with Pumpkin Pie Perfect Bar Crust...
+                      {% when 2 %}Dare we say, that we just made the perfect Peanut Butter Cookie recipe? We took your everyday Peanut Butter Cookie recipe, made it gluten free...
+                      {% when 3 %}If you're a peanut butter AND snickerdoodle lover than you are going to obsess over these delicious gluten-free peanut butter snickerdoodle cookies...
+                      {% when 4 %}We put our spin on a classic chocolate chip cookie recipe by topping it with our Dark Chocolate Chip Peanut Butter Perfect Bar...
+                    {% endcase %}
                   </div>
-                  <a href="#" class="ai-blog-card-link-{{ ai_gen_id }}">
-                    Read more
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                  </a>
+                  <div class="ai-blog-card-footer-{{ ai_gen_id }}">
+                    <a href="#" class="ai-blog-card-link-{{ ai_gen_id }}">
+                      READ MORE
+                    </a>
+                    <span class="ai-blog-badge-{{ ai_gen_id }}">
+                      RECIPES
+                    </span>
+                  </div>
                 </div>
               </article>
             </div>
