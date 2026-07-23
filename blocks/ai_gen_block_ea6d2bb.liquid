@@ -67,7 +67,8 @@
     flex-direction: column !important;
     transition: transform 0.3s ease, box-shadow 0.3s ease !important;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04) !important;
-    border: 1px solid #f2ede4 !important;
+    border: none !important;
+    outline: none !important;
   }
 
   .ai-blog-card-{{ ai_gen_id }}:hover {
@@ -83,6 +84,7 @@
     overflow: hidden !important;
     border-radius: 20px 20px 0 0 !important;
     background-color: #f7f4ed !important;
+    border: none !important;
   }
 
   .ai-blog-card-image-{{ ai_gen_id }} {
@@ -93,6 +95,7 @@
     height: 100% !important;
     object-fit: cover !important;
     transition: transform 0.5s ease !important;
+    border: none !important;
   }
 
   .ai-blog-card-{{ ai_gen_id }}:hover .ai-blog-card-image-{{ ai_gen_id }} {
@@ -164,10 +167,10 @@
   .ai-blog-card-footer-{{ ai_gen_id }} {
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
+    justify-content: flex-start !important;
     margin-top: auto !important;
-    padding-top: 14px !important;
-    border-top: 1px solid #f2ede4 !important;
+    padding-top: 10px !important;
+    border-top: none !important;
   }
 
   .ai-blog-card-link-{{ ai_gen_id }} {
@@ -184,19 +187,6 @@
 
   .ai-blog-card-link-{{ ai_gen_id }}:hover {
     color: #d52528 !important;
-  }
-
-  .ai-blog-badge-{{ ai_gen_id }} {
-    background-color: #ffe785 !important;
-    color: #2b1e1b !important;
-    font-family: 'Anton', Arial, sans-serif !important;
-    font-size: 13px !important;
-    letter-spacing: 1px !important;
-    text-transform: uppercase !important;
-    padding: 6px 16px !important;
-    border-radius: 20px !important;
-    font-weight: 400 !important;
-    display: inline-block !important;
   }
 
   .ai-blog-carousel-controls-{{ ai_gen_id }} {
@@ -360,9 +350,6 @@
                     <a href="{{ article.url }}" class="ai-blog-card-link-{{ ai_gen_id }}">
                       READ MORE
                     </a>
-                    <span class="ai-blog-badge-{{ ai_gen_id }}">
-                      {% if article.tags.size > 0 %}{{ article.tags[0] | upcase }}{% else %}RECIPES{% endif %}
-                    </span>
                   </div>
                 </div>
               </article>
@@ -381,28 +368,25 @@
                   <h3 class="ai-blog-card-title-{{ ai_gen_id }}">
                     <a href="#">
                       {% case i %}
-                        {% when 1 %}No Bake Pumpkin Pie with Pumpkin Pie Perfect Bar Crust
-                        {% when 2 %}Peanut Butter Perfect Bar Cookies
-                        {% when 3 %}Gluten-Free Peanut Butter Paprika Snicker Doodle Recipe
-                        {% when 4 %}Chocolate Chip Peanut Butter Perfect Bar Cookies
+                        {% when 1 %}7 benefits of Ragi(Millet) that you must know
+                        {% when 2 %}7 benefits of Jowar (Millet) that make it a great healthy choice
+                        {% when 3 %}Why is Jaggery better than refined Sugar?
+                        {% when 4 %}Taakat Hunger Bar: Your go-to snacks for small hunger
                       {% endcase %}
                     </a>
                   </h3>
                   <div class="ai-blog-card-excerpt-{{ ai_gen_id }}">
                     {% case i %}
-                      {% when 1 %}There’s nothing that says Fall quite like Pumpkin Pie! That’s why we whipped up this No Bake Pumpkin Pie with Pumpkin Pie Perfect Bar Crust...
-                      {% when 2 %}Dare we say, that we just made the perfect Peanut Butter Cookie recipe? We took your everyday Peanut Butter Cookie recipe, made it gluten free...
-                      {% when 3 %}If you're a peanut butter AND snickerdoodle lover than you are going to obsess over these delicious gluten-free peanut butter snickerdoodle cookies...
-                      {% when 4 %}We put our spin on a classic chocolate chip cookie recipe by topping it with our Dark Chocolate Chip Peanut Butter Perfect Bar...
+                      {% when 1 %}When you are looking for a packaged healthy snack, the first thing you look for is the ingredients in it. One of the ...
+                      {% when 2 %}Often millets are mentioned as a high-value ingredient and Jowar is one of them. Even in our Taakat Hunger Bar, Jowar...
+                      {% when 3 %}It is often debated since Jaggery is also a form of sugar, why is it considered to be better than refined sugar? Even...
+                      {% when 4 %}It is usual to feel moments of small hunger all through the day. Sometimes with either work or studies, our body feel...
                     {% endcase %}
                   </div>
                   <div class="ai-blog-card-footer-{{ ai_gen_id }}">
                     <a href="#" class="ai-blog-card-link-{{ ai_gen_id }}">
                       READ MORE
                     </a>
-                    <span class="ai-blog-badge-{{ ai_gen_id }}">
-                      RECIPES
-                    </span>
                   </div>
                 </div>
               </article>

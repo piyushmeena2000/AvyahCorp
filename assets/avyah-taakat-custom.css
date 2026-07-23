@@ -2226,5 +2226,29 @@ ticker-component,
   opacity: 0.95 !important;
 }
 
+/* ========================================================
+   REMOVE WHITE STROKE BORDERS & HIDE RECIPE BUTTON ON BLOG CARDS
+======================================================== */
+[class*="ai-blog-card"],
+[class*="blog-card"],
+.ai-blog-card-image-wrapper-ea6d2bbrdfb37,
+[class*="ai-blog-card-image-wrapper"] {
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04) !important;
+}
+
+[class*="ai-blog-card-footer"],
+[class*="blog-card-footer"] {
+  border-top: none !important;
+  border: none !important;
+}
+
+[class*="ai-blog-badge"],
+[class*="blog-badge"] {
+  display: none !important;
+  visibility: hidden !important;
+}
+
 
 
