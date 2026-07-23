@@ -624,6 +624,82 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "176275416535a5af93": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_193b272_PY9Kt7": {
+          "type": "ai_gen_block_193b272",
+          "disabled": true,
+          "settings": {
+            "heading": "Also Available At",
+            "heading_size": 40,
+            "heading_spacing": 40,
+            "heading_color": "#FFFFFF",
+            "logo_1": "shopify://shop_images/Amazon_logo_svg.webp",
+            "logo_2": "shopify://shop_images/flipkart-logo-png-transparent.png",
+            "logo_3": "shopify://shop_images/TATA_1mg_Logo_svg.png",
+            "logo_4": "shopify://shop_images/Zepto_Logo_svg.png",
+            "logo_5": "shopify://shop_images/download.png",
+            "logo_6": "shopify://shop_images/mystore-logo.avif",
+            "logo_7": "shopify://shop_images/dsFullLogo.f58deff6.png",
+            "logo_8": "shopify://shop_images/dmart.png",
+            "logo_9": "shopify://shop_images/meeshoLogo.svg",
+            "logo_width": 160,
+            "logo_height": 80,
+            "logo_spacing": 40,
+            "logo_padding": 16,
+            "logo_border_radius": 8,
+            "logo_background": "#ffffff",
+            "show_border": false,
+            "border_width": 1,
+            "border_color": "#e6e6e6",
+            "grayscale": false,
+            "scroll_speed": 0.1,
+            "background_color": "#ffffff",
+            "padding_top": 40,
+            "padding_bottom": 60
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_193b272_PY9Kt7"
+      ],
+      "custom_css": [
+        ".section-background {background-color: #d52528 !important; background: #d52528 !important;}",
+        ".section {background-color: #d52528 !important; background: #d52528 !important;}",
+        "div {background-color: #d52528 !important; background: #d52528 !important;}"
+      ],
+      "name": "Available At",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-1",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "retail_store_showcase_DtnQpq": {
       "type": "retail-store-showcase",
       "name": "Retail Store Showcase",
@@ -1028,6 +1104,7 @@
     "1761551169f8c757e1",
     "17615625630340cad8",
     "blocks_BCAYqP",
+    "176275416535a5af93",
     "retail_store_showcase_DtnQpq",
     "blocks_zFCw9K",
     "17764281650cbd88e1",
