@@ -692,7 +692,12 @@
         "gradient_direction": "to top",
         "padding-block-start": 0,
         "padding-block-end": 0
-      }
+      },
+      "custom_css": [
+        ".section-background { background-color: #d52528 !important; background: #d52528 !important; }",
+        ".section { background-color: #d52528 !important; background: #d52528 !important; }",
+        "div { background-color: #d52528 !important; background: #d52528 !important; }"
+      ]
     },
     "retail_store_showcase_DtnQpq": {
       "type": "retail-store-showcase",
