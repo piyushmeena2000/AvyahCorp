@@ -2198,58 +2198,5 @@ body.template-page-bulk-order main#MainContent,
   stroke: #d52528 !important;
 }
 
-/* ========================================================
-   AVAILABLE AT / LOGO CAROUSEL CRIMSON RED BG & WHITE LOGOS
-   - Forces entire section, section background, wrappers, & containers to #d52528
-   - Forces all logo icons/images to 100% Crisp Pure White (#ffffff)
-======================================================== */
-#shopify-section-176275416535a5af93,
-#shopify-section-template--index__176275416535a5af93,
-[data-section-id*="176275416535a5af93"],
-[id*="176275416535a5af93"],
-.section-wrapper:has([class*="ai-logo-carousel"]),
-.section-wrapper:has(logo-carousel),
-[class*="ai-logo-carousel"],
-logo-carousel,
-.ai-logo-carousel-193b272py9kt7 {
-  background-color: #d52528 !important;
-  background: #d52528 !important;
-}
-
-#shopify-section-176275416535a5af93 .section-background,
-#shopify-section-176275416535a5af93 .section,
-#shopify-section-176275416535a5af93 .section-content-wrapper,
-[id*="176275416535a5af93"] .section-background,
-[id*="176275416535a5af93"] .section,
-[id*="176275416535a5af93"] .section-content-wrapper,
-.section-wrapper:has([class*="ai-logo-carousel"]) .section-background,
-.section-wrapper:has([class*="ai-logo-carousel"]) .section,
-.section-wrapper:has(logo-carousel) .section-background,
-.section-wrapper:has(logo-carousel) .section {
-  background-color: #d52528 !important;
-  background: #d52528 !important;
-}
-
-/* Force all logo images inside the logo carousel section to be 100% white */
-#shopify-section-176275416535a5af93 img,
-[id*="176275416535a5af93"] img,
-[class*="ai-logo-carousel"] img,
-logo-carousel img,
-.ai-logo-carousel__image-193b272py9kt7,
-[class*="ai-logo-carousel__image"] {
-  filter: brightness(0) invert(1) !important;
-  -webkit-filter: brightness(0) invert(1) !important;
-  opacity: 0.95 !important;
-}
-
-#shopify-section-176275416535a5af93 img:hover,
-[id*="176275416535a5af93"] img:hover,
-[class*="ai-logo-carousel"] img:hover,
-logo-carousel img:hover,
-[class*="ai-logo-carousel__image"]:hover {
-  opacity: 1 !important;
-  transform: scale(1.08) !important;
-}
-
 
 
