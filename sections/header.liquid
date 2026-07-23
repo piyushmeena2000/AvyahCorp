@@ -872,42 +872,60 @@
     }
 
     function injectDiscover() {
-      // Find "OUR BLOGS" link in the nav
-      const allLinks = document.querySelectorAll('header-component a, #header-component a');
+      // Find candidate DISCOVER / BLOGS / OUR STORY link in navigation
+      const allLinks = Array.from(document.querySelectorAll('header-component a, #header-component a, .header a, nav a, .header__inline-menu a, .menu-list a'));
       let blogLink = null;
+
       allLinks.forEach(link => {
         const txt = link.textContent.trim().toUpperCase();
-        if ((txt === 'OUR BLOGS' || txt === 'BLOGS') && !link.dataset.discoverPatched) {
-          blogLink = link;
+        if ((txt === 'OUR BLOGS' || txt === 'BLOGS' || txt === 'BLOG' || txt === 'DISCOVER' || txt === 'OUR STORY') && !link.dataset.discoverPatched) {
+          if (!blogLink || txt === 'DISCOVER' || txt === 'OUR BLOGS' || txt === 'BLOGS') {
+            blogLink = link;
+          }
         }
       });
+
+      if (!blogLink) {
+        allLinks.forEach(link => {
+          const href = link.getAttribute('href') || '';
+          if ((href.includes('/blogs') || href.includes('/news')) && !link.dataset.discoverPatched) {
+            blogLink = link;
+          }
+        });
+      }
 
       if (!blogLink) return;
       blogLink.dataset.discoverPatched = 'true';
 
-      // Work with parent <li> so we don't disturb the <a> element's classes
       const li = blogLink.closest('li') || blogLink.parentElement;
       li.classList.add('avyah-discover-li');
 
-      // Mutate the existing <a> in-place — change its text and add chevron
       blogLink.innerHTML = 'DISCOVER <svg class="avyah-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
       blogLink.href = '#';
-      blogLink.addEventListener('click', e => {
-        e.preventDefault();
-        li.classList.toggle('open');
-      });
 
-      // Append dropdown to <li>
+      const existingDd = li.querySelector('.avyah-discover-dropdown');
+      if (existingDd) existingDd.remove();
+
       const dd = buildDropdown();
       li.appendChild(dd);
 
-      // Close on outside click
+      blogLink.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        li.classList.toggle('open');
+      });
+
+      li.addEventListener('mouseenter', () => {
+        li.classList.add('open');
+      });
+
+      li.addEventListener('mouseleave', () => {
+        li.classList.remove('open');
+      });
+
       document.addEventListener('click', e => {
         if (!li.contains(e.target)) li.classList.remove('open');
       });
-    }
-
-      document.addEventListener('shopify:section:load', () => setTimeout(injectDiscover, 400));
     }
 
     /* ========================================================
@@ -920,7 +938,7 @@
     let ticking = false;
 
     function handleHeadroomScroll() {
-      const header = document.querySelector('#header-component') || document.querySelector('header-component');
+      const header = document.querySelector('#header-component') || document.querySelector('header-component') || document.querySelector('.header-section');
       if (!header) {
         ticking = false;
         return;
@@ -965,20 +983,22 @@
 
     window.addEventListener('scroll', onWindowScroll, { passive: true });
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(injectDiscover, 400);
-        handleHeadroomScroll();
-      });
-    } else {
-      setTimeout(injectDiscover, 400);
+    function initAll() {
+      injectDiscover();
       handleHeadroomScroll();
     }
 
-    document.addEventListener('shopify:section:load', () => {
-      setTimeout(injectDiscover, 400);
-      handleHeadroomScroll();
-    });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(initAll, 100);
+        setTimeout(initAll, 500);
+      });
+    } else {
+      setTimeout(initAll, 100);
+      setTimeout(initAll, 500);
+    }
+
+    document.addEventListener('shopify:section:load', () => setTimeout(initAll, 100));
   })();
 </script>
 
