@@ -307,9 +307,13 @@
                     </div>
                   {%- else -%}
                     {%- comment -%} Simple links {%- endcomment -%}
+                    {%- assign _target_url = link.url -%}
+                    {%- if _dt contains 'ingredient' -%}
+                      {%- assign _target_url = '/pages/ingredients' -%}
+                    {%- endif -%}
                     <a
-                      href="{{ link.url }}"
-                      class="menu-list__link{% if link.current %} menu-list__link--active{% endif %}"
+                      href="{{ _target_url }}"
+                      class="menu-list__link{% if link.current or request.path contains 'ingredient' and _dt contains 'ingredient' %} menu-list__link--active{% endif %}"
                       {% if link.current %}aria-current="page"{% endif %}
                     >
                       <span class="menu-list__link-title">{{ link.title | escape }}</span>
