@@ -4,13 +4,15 @@
 {% endcomment %}
 
 {% liquid
-  assign ingredients_url = '/pages/how-its-made'
+  assign ingredients_url = '/pages/ingredients'
   assign explore_link = blank
 
   for link in linklists['main-menu'].links
     assign title_down = link.title | downcase
     if title_down contains 'ingredient' or title_down contains 'made'
-      assign ingredients_url = link.url
+      if link.url contains 'ingredient'
+        assign ingredients_url = link.url
+      endif
     elsif title_down contains 'explore'
       assign explore_link = link
     endif
