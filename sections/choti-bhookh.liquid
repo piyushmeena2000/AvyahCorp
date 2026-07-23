@@ -1,0 +1,244 @@
+{% schema %}
+{
+  "name": "Choti Bhookh Banner",
+  "tag": "section",
+  "class": "choti-bhookh-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_line1",
+      "label": "Heading Line 1",
+      "default": "Don't Ignore Your"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading Line 2",
+      "default": "Choti Bhookh"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "<p>Join 50k+ snack stars who stopped compromising.<br>Your first pack is waiting.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "GRAB YOUR PACK NOW"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left Burst Image (Choco Burst)"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right Burst Image (Berry Blast)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Choti Bhookh Banner"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .choti-bhookh-wrapper {
+    position: relative;
+    width: 100%;
+    background-color: #d52528; /* Signature Crimson Red */
+    background: #d52528;
+    color: #ffffff;
+    overflow: hidden;
+    padding: 70px 20px 80px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 520px;
+  }
+
+  .choti-bhookh-container {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .choti-bhookh-title {
+    font-family: 'Anton', 'Impact', sans-serif;
+    font-size: clamp(48px, 8.5vw, 115px);
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin: 0 0 24px 0;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+  }
+
+  .choti-bhookh-title span {
+    display: block;
+  }
+
+  .choti-bhookh-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(14px, 1.8vw, 18px);
+    line-height: 1.5;
+    color: #ffffff;
+    opacity: 0.95;
+    margin: 0 0 36px 0;
+    max-width: 650px;
+    font-weight: 400;
+  }
+
+  .choti-bhookh-subtitle p {
+    margin: 0;
+  }
+
+  .choti-bhookh-btn {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #d52528;
+    font-family: 'Anton', 'Impact', sans-serif;
+    font-size: clamp(18px, 2.2vw, 26px);
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 42px;
+    border-radius: 16px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.2s ease;
+    cursor: pointer;
+  }
+
+  .choti-bhookh-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    color: #b81c1f;
+  }
+
+  /* Side Flanker Images */
+  .choti-bhookh-flanker {
+    position: absolute;
+    bottom: -20px;
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .choti-bhookh-flanker--left {
+    left: -40px;
+    width: clamp(260px, 32vw, 480px);
+    transform: rotate(-3deg);
+  }
+
+  .choti-bhookh-flanker--right {
+    right: -40px;
+    width: clamp(260px, 32vw, 480px);
+    transform: rotate(3deg);
+  }
+
+  .choti-bhookh-flanker img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.25));
+  }
+
+  /* Responsive Adjustments */
+  @media screen and (max-width: 1100px) {
+    .choti-bhookh-flanker--left {
+      left: -80px;
+      opacity: 0.9;
+    }
+    .choti-bhookh-flanker--right {
+      right: -80px;
+      opacity: 0.9;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .choti-bhookh-wrapper {
+      padding: 60px 16px 70px;
+      min-height: 440px;
+    }
+    .choti-bhookh-flanker--left {
+      left: -100px;
+      width: 240px;
+      opacity: 0.85;
+    }
+    .choti-bhookh-flanker--right {
+      right: -100px;
+      width: 240px;
+      opacity: 0.85;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .choti-bhookh-flanker--left {
+      left: -120px;
+      width: 200px;
+      opacity: 0.6;
+    }
+    .choti-bhookh-flanker--right {
+      right: -120px;
+      width: 200px;
+      opacity: 0.6;
+    }
+  }
+</style>
+
+<div class="choti-bhookh-wrapper">
+  <!-- Left Burst Image: Choco Burst -->
+  <div class="choti-bhookh-flanker choti-bhookh-flanker--left">
+    {%- if section.settings.left_image != blank -%}
+      <img src="{{ section.settings.left_image | image_url: width: 800 }}" alt="Choco Burst" loading="lazy" width="800" height="800">
+    {%- else -%}
+      <img src="{{ 'ChocoBurst.png' | asset_url }}" alt="Choco Burst" loading="lazy" width="800" height="800">
+    {%- endif -%}
+  </div>
+
+  <!-- Center Content -->
+  <div class="choti-bhookh-container">
+    <h2 class="choti-bhookh-title">
+      <span>{{ section.settings.heading_line1 }}</span>
+      <span>{{ section.settings.heading_line2 }}</span>
+    </h2>
+
+    <div class="choti-bhookh-subtitle">
+      {{ section.settings.subtitle }}
+    </div>
+
+    <a href="{{ section.settings.button_link }}" class="choti-bhookh-btn">
+      {{ section.settings.button_label }}
+    </a>
+  </div>
+
+  <!-- Right Burst Image: Berry Blast -->
+  <div class="choti-bhookh-flanker choti-bhookh-flanker--right">
+    {%- if section.settings.right_image != blank -%}
+      <img src="{{ section.settings.right_image | image_url: width: 800 }}" alt="Berry Blast" loading="lazy" width="800" height="800">
+    {%- else -%}
+      <img src="{{ 'berryBlast.jpeg' | asset_url }}" alt="Berry Blast" loading="lazy" width="800" height="800">
+    {%- endif -%}
+  </div>
+</div>
