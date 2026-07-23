@@ -138,28 +138,36 @@ class HeaderComponent extends Component {
   #updateHeadroom = () => {
     const currentScrollY = Math.max(0, window.scrollY || document.documentElement.scrollTop || 0);
     const scrollDelta = currentScrollY - this.#lastScrollY;
-    const headerHeight = this.offsetHeight || 80;
-    const threshold = 6;
-    const topTolerance = 40;
+    const threshold = 8; // 8px threshold to prevent jitter
+    const topTolerance = 10; // scrollY <= 10 always fully visible
 
     const isMenuOpen = document.body.classList.contains('menu-open') || 
                        document.body.classList.contains('avyah-megamenu-active') ||
-                       Boolean(this.querySelector('.avyah-discover-li.open'));
+                       Boolean(document.querySelector('.avyah-discover-li.open')) ||
+                       Boolean(document.querySelector('.avyah-catalog-item:hover'));
+
+    const headerElements = Array.from(document.querySelectorAll('#header-group, .header-section, #header-component, header-component'));
 
     if (currentScrollY <= topTolerance) {
-      this.setAttribute('data-headroom-state', 'top');
-      this.classList.remove('headroom--unpinned');
-      this.classList.add('headroom--pinned', 'headroom--top');
-    } else if (scrollDelta > threshold && currentScrollY > headerHeight) {
-      if (!isMenuOpen) {
-        this.setAttribute('data-headroom-state', 'unpinned');
-        this.classList.remove('headroom--pinned', 'headroom--top');
-        this.classList.add('headroom--unpinned');
+      headerElements.forEach(el => {
+        el.setAttribute('data-headroom-state', 'top');
+        el.classList.remove('headroom--unpinned');
+        el.classList.add('headroom--pinned', 'headroom--top');
+      });
+    } else if (Math.abs(scrollDelta) >= threshold) {
+      if (scrollDelta > 0 && !isMenuOpen && currentScrollY > 60) {
+        headerElements.forEach(el => {
+          el.setAttribute('data-headroom-state', 'unpinned');
+          el.classList.remove('headroom--pinned', 'headroom--top');
+          el.classList.add('headroom--unpinned');
+        });
+      } else if (scrollDelta < 0) {
+        headerElements.forEach(el => {
+          el.setAttribute('data-headroom-state', 'pinned');
+          el.classList.remove('headroom--unpinned', 'headroom--top');
+          el.classList.add('headroom--pinned');
+        });
       }
-    } else if (scrollDelta < -threshold) {
-      this.setAttribute('data-headroom-state', 'pinned');
-      this.classList.remove('headroom--unpinned', 'headroom--top');
-      this.classList.add('headroom--pinned');
     }
 
     this.#lastScrollY = currentScrollY;

@@ -1717,8 +1717,12 @@ body:has(.avyah-megamenu:hover) #MainContent {
 #header-group {
   position: sticky !important;
   top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
   z-index: 100000 !important;
   background-color: #d52528 !important;
+  background: #d52528 !important;
 }
 
 #header-component,
@@ -1730,13 +1734,13 @@ header-component,
   width: 100% !important;
   z-index: 100000 !important;
   will-change: transform;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
   opacity: 1 !important;
   filter: none !important;
+  transform: translate3d(0, 0, 0);
   background-color: #d52528 !important;
   background: #d52528 !important;
   color: #ffffff !important;
-  transform: translateY(0);
 }
 
 .header__row,
@@ -1755,7 +1759,11 @@ header-component.headroom--top,
 .header-section[data-headroom-state="pinned"],
 .header-section[data-headroom-state="top"],
 .header-section.headroom--pinned,
-.header-section.headroom--top {
+.header-section.headroom--top,
+#header-group[data-headroom-state="pinned"],
+#header-group[data-headroom-state="top"],
+#header-group.headroom--pinned,
+#header-group.headroom--top {
   transform: translateY(0) !important;
 }
 
@@ -1763,7 +1771,9 @@ header-component[data-headroom-state="unpinned"],
 header-component.headroom--unpinned,
 #header-component[data-headroom-state="unpinned"],
 .header-section[data-headroom-state="unpinned"],
-.header-section.headroom--unpinned {
+.header-section.headroom--unpinned,
+#header-group[data-headroom-state="unpinned"],
+#header-group.headroom--unpinned {
   transform: translateY(-100%) !important;
 }
 
