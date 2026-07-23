@@ -285,23 +285,49 @@
                       
                       <div class="menu-list__submenu-inner" style="background-color: #ffffff !important; background: #ffffff !important;">
                         <div class="mega-menu__grid" style="display: flex !important; flex-direction: column !important; gap: 4px !important; background-color: #ffffff !important; background: #ffffff !important;">
-                          
-                          <!-- ITEM 1: OUR BLOGS -->
-                          <div class="mega-menu__column" style="width: 100% !important; background-color: #ffffff !important;">
-                            <a href="/blogs/news" class="avyah-discover-link" style="display: flex !important; align-items: center !important; gap: 14px !important; background-color: #ffffff !important; text-decoration: none !important; padding: 12px 16px !important; border-radius: 12px !important; width: 100% !important; box-sizing: border-box !important;">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0 !important;"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/></svg>
-                              <span class="avyah-discover-title-text" style="color: #000000 !important; -webkit-text-fill-color: #000000 !important; -webkit-background-clip: initial !important; background-clip: initial !important; mix-blend-mode: normal !important; font-family: 'Anton', Arial, sans-serif !important; font-size: 20px !important; font-weight: 700 !important; text-transform: uppercase !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; line-height: 1 !important;">OUR BLOGS</span>
-                            </a>
-                          </div>
+                          {%- if link.links != blank -%}
+                            {%- for childlink in link.links -%}
+                              {%- assign _child_url = childlink.url -%}
+                              {%- assign _cdt = childlink.title | downcase -%}
+                              {%- if _cdt contains 'blog' or _cdt contains 'news' -%}
+                                {%- assign _child_url = '/blogs/news' -%}
+                                {%- if childlink.url != blank and childlink.url != '#' -%}
+                                  {%- assign _child_url = childlink.url -%}
+                                {%- endif -%}
+                              {%- elsif _cdt contains 'career' or _cdt contains 'job' -%}
+                                {%- assign _child_url = '/pages/careers' -%}
+                                {%- if childlink.url != blank and childlink.url != '#' -%}
+                                  {%- assign _child_url = childlink.url -%}
+                                {%- endif -%}
+                              {%- endif -%}
+                              <div class="mega-menu__column" style="width: 100% !important; background-color: #ffffff !important;">
+                                <a href="{{ _child_url }}" class="avyah-discover-link" style="display: flex !important; align-items: center !important; gap: 14px !important; background-color: #ffffff !important; text-decoration: none !important; padding: 12px 16px !important; border-radius: 12px !important; width: 100% !important; box-sizing: border-box !important;">
+                                  {%- if _cdt contains 'blog' or _cdt contains 'news' -%}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0 !important;"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/></svg>
+                                  {%- else -%}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0 !important;"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                                  {%- endif -%}
+                                  <span class="avyah-discover-title-text" style="color: #000000 !important; -webkit-text-fill-color: #000000 !important; -webkit-background-clip: initial !important; background-clip: initial !important; mix-blend-mode: normal !important; font-family: 'Anton', Arial, sans-serif !important; font-size: 20px !important; font-weight: 700 !important; text-transform: uppercase !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; line-height: 1 !important;">{{ childlink.title | upcase }}</span>
+                                </a>
+                              </div>
+                            {%- endfor -%}
+                          {%- else -%}
+                            <!-- ITEM 1: OUR BLOGS -->
+                            <div class="mega-menu__column" style="width: 100% !important; background-color: #ffffff !important;">
+                              <a href="/blogs/news" class="avyah-discover-link" style="display: flex !important; align-items: center !important; gap: 14px !important; background-color: #ffffff !important; text-decoration: none !important; padding: 12px 16px !important; border-radius: 12px !important; width: 100% !important; box-sizing: border-box !important;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0 !important;"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/></svg>
+                                <span class="avyah-discover-title-text" style="color: #000000 !important; -webkit-text-fill-color: #000000 !important; -webkit-background-clip: initial !important; background-clip: initial !important; mix-blend-mode: normal !important; font-family: 'Anton', Arial, sans-serif !important; font-size: 20px !important; font-weight: 700 !important; text-transform: uppercase !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; line-height: 1 !important;">OUR BLOGS</span>
+                              </a>
+                            </div>
 
-                          <!-- ITEM 2: CAREERS -->
-                          <div class="mega-menu__column" style="width: 100% !important; background-color: #ffffff !important;">
-                            <a href="/pages/careers" class="avyah-discover-link" style="display: flex !important; align-items: center !important; gap: 14px !important; background-color: #ffffff !important; text-decoration: none !important; padding: 12px 16px !important; border-radius: 12px !important; width: 100% !important; box-sizing: border-box !important;">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0 !important;"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                              <span class="avyah-discover-title-text" style="color: #000000 !important; -webkit-text-fill-color: #000000 !important; -webkit-background-clip: initial !important; background-clip: initial !important; mix-blend-mode: normal !important; font-family: 'Anton', Arial, sans-serif !important; font-size: 20px !important; font-weight: 700 !important; text-transform: uppercase !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; line-height: 1 !important;">CAREERS</span>
-                            </a>
-                          </div>
-
+                            <!-- ITEM 2: CAREERS -->
+                            <div class="mega-menu__column" style="width: 100% !important; background-color: #ffffff !important;">
+                              <a href="/pages/careers" class="avyah-discover-link" style="display: flex !important; align-items: center !important; gap: 14px !important; background-color: #ffffff !important; text-decoration: none !important; padding: 12px 16px !important; border-radius: 12px !important; width: 100% !important; box-sizing: border-box !important;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0 !important;"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                                <span class="avyah-discover-title-text" style="color: #000000 !important; -webkit-text-fill-color: #000000 !important; -webkit-background-clip: initial !important; background-clip: initial !important; mix-blend-mode: normal !important; font-family: 'Anton', Arial, sans-serif !important; font-size: 20px !important; font-weight: 700 !important; text-transform: uppercase !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; line-height: 1 !important;">CAREERS</span>
+                              </a>
+                            </div>
+                          {%- endif -%}
                         </div>
                       </div>
                     </div>

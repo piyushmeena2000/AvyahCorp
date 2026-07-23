@@ -2,6 +2,10 @@
 
 {%- if request.path contains 'ingredient' -%}
   {% section 'custom-ingredients' %}
+{%- elsif request.path contains 'career' or request.path contains 'job' -%}
+  {% section 'custom-careers' %}
+{%- elsif request.path contains 'blog' or request.path contains 'news' -%}
+  {% section 'featured-blog-posts' %}
 {%- else -%}
   <div class="section-background color-{{ section.settings.color_scheme }}"></div>
   <div

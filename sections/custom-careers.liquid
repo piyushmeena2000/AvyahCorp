@@ -1,0 +1,572 @@
+{% schema %}
+{
+  "name": "Custom Careers Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "hero_badge",
+      "label": "Hero Badge Text",
+      "default": "WE ARE HIRING • JOIN THE TAAKAT REVOLUTION"
+    },
+    {
+      "type": "text",
+      "id": "hero_heading",
+      "label": "Hero Main Heading",
+      "default": "BUILD THE FUTURE OF CLEAN SNACKING."
+    },
+    {
+      "type": "richtext",
+      "id": "hero_subtext",
+      "label": "Hero Subtext",
+      "default": "<p>At Avyah, we are on a mission to rid India of junk snacks and palm-oil-loaded energy bars. We're looking for bold thinkers, fast executioners, and passionate food innovators to join our team.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Careers Page"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  #MainContent[data-template="page.careers"],
+  #MainContent[data-template="page.career"] {
+    display: block !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
+  .careers-page-wrapper {
+    background-color: #fdf7ee; /* Warm Cream Background */
+    color: #3d2b27;
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* 1. HERO SECTION */
+  .careers-hero {
+    background-color: #d52528; /* Primary Crimson Red Match */
+    color: #ffffff;
+    padding: 90px 20px 80px;
+    text-align: center;
+    position: relative;
+  }
+
+  .careers-hero-inner {
+    max-width: 920px;
+    margin: 0 auto;
+  }
+
+  .careers-badge {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #d52528;
+    font-family: 'Anton', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 22px;
+    border-radius: 4px;
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+
+  .careers-hero h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: 60px;
+    text-transform: uppercase;
+    line-height: 1.05;
+    margin: 0 0 22px;
+    letter-spacing: 1px;
+    color: #ffffff;
+  }
+
+  .careers-hero-subtext {
+    font-size: 19px;
+    line-height: 1.6;
+    margin: 0 auto 40px;
+    max-width: 780px;
+    opacity: 0.95;
+  }
+
+  .careers-hero-subtext p {
+    margin: 0;
+    color: #ffffff;
+  }
+
+  /* Quick Perks Bar */
+  .careers-perks-bar {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 35px;
+    margin-top: 20px;
+  }
+
+  .careers-perk-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.18);
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .careers-perk-icon {
+    font-size: 20px;
+  }
+
+  .careers-perk-text {
+    font-family: 'Anton', sans-serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+
+  /* 2. WHY JOIN US SECTION */
+  .careers-why-section {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 90px 20px;
+  }
+
+  .careers-section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .careers-section-header h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 46px;
+    text-transform: uppercase;
+    color: #3d2b27;
+    margin: 0 0 14px;
+    letter-spacing: 1px;
+  }
+
+  .careers-section-header p {
+    font-size: 18px;
+    color: #6a5e5c;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .careers-why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .careers-why-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 32px 24px;
+    border: 1px solid #efe6d9;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .careers-why-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(213, 37, 40, 0.1);
+  }
+
+  .careers-why-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background-color: #fff5f5;
+    color: #d52528;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .careers-why-card h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: #3d2b27;
+    margin: 0 0 10px;
+  }
+
+  .careers-why-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #6a5e5c;
+    margin: 0;
+  }
+
+  /* 3. OPEN POSITIONS GRID */
+  .careers-jobs-section {
+    background-color: #3d2b27; /* Dark Charcoal Brown */
+    color: #ffffff;
+    padding: 90px 20px;
+  }
+
+  .careers-jobs-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .careers-jobs-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .careers-jobs-header h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 48px;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin: 0 0 12px;
+    letter-spacing: 1px;
+  }
+
+  .careers-jobs-header p {
+    font-size: 17px;
+    color: #d1c5b8;
+    margin: 0;
+  }
+
+  .careers-jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .job-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+  }
+
+  .job-card:hover {
+    transform: translateY(-4px);
+    background-color: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .job-card-top {
+    margin-bottom: 20px;
+  }
+
+  .job-pills {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .job-pill {
+    font-family: 'Anton', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 4px;
+  }
+
+  .job-pill-type {
+    background-color: #d52528;
+    color: #ffffff;
+  }
+
+  .job-pill-loc {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+  }
+
+  .job-card h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 26px;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin: 0 0 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .job-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #d1c5b8;
+    margin: 0;
+  }
+
+  .job-apply-btn {
+    align-self: flex-start;
+    display: inline-block;
+    background-color: #ffffff;
+    color: #3d2b27;
+    font-family: 'Anton', sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
+    margin-top: 20px;
+  }
+
+  .job-apply-btn:hover {
+    background-color: #d52528;
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  /* 4. GENERAL APPLICATION CTA BANNER */
+  .careers-cta {
+    background-color: #d52528;
+    color: #ffffff;
+    text-align: center;
+    padding: 80px 20px;
+  }
+
+  .careers-cta h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 50px;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+    color: #ffffff;
+    letter-spacing: 1px;
+  }
+
+  .careers-cta p {
+    font-size: 19px;
+    margin: 0 0 36px;
+    color: #ffffff;
+    opacity: 0.95;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .careers-cta-btn {
+    display: inline-block;
+    padding: 16px 42px;
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #d52528;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+
+  .careers-cta-btn:hover {
+    background-color: #f5f5f5;
+    transform: translateY(-2px);
+  }
+
+  /* Responsive Design */
+  @media screen and (max-width: 992px) {
+    .careers-why-grid,
+    .careers-jobs-grid {
+      grid-template-columns: 1fr;
+    }
+    .careers-hero h1 {
+      font-size: 44px;
+    }
+    .careers-cta h2 {
+      font-size: 36px;
+    }
+  }
+</style>
+
+<div class="careers-page-wrapper" id="avyah-careers-page-root">
+  <!-- 1. HERO SECTION -->
+  <section class="careers-hero">
+    <div class="careers-hero-inner">
+      <span class="careers-badge">{{ section.settings.hero_badge }}</span>
+      <h1>{{ section.settings.hero_heading }}</h1>
+      <div class="careers-hero-subtext">
+        {{ section.settings.hero_subtext }}
+      </div>
+
+      <div class="careers-perks-bar">
+        <div class="careers-perk-item">
+          <span class="careers-perk-icon">🚀</span>
+          <span class="careers-perk-text">FAST-GROWING FMCG BRAND</span>
+        </div>
+        <div class="careers-perk-item">
+          <span class="careers-perk-icon">💡</span>
+          <span class="careers-perk-text">HIGH OWNERSHIP & IMPACT</span>
+        </div>
+        <div class="careers-perk-item">
+          <span class="careers-perk-icon">🥑</span>
+          <span class="careers-perk-text">FREE SNACKS FOREVER</span>
+        </div>
+        <div class="careers-perk-item">
+          <span class="careers-perk-icon">📈</span>
+          <span class="careers-perk-text">COMPETITIVE PAY & EQUITY</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. WHY JOIN AVYAH -->
+  <section class="careers-why-section">
+    <div class="careers-section-header">
+      <h2>WHY WORK AT AVYAH?</h2>
+      <p>We are building India's premier clean snacking company. Here is what life looks like inside our team.</p>
+    </div>
+
+    <div class="careers-why-grid">
+      <div class="careers-why-card">
+        <div class="careers-why-icon">⚡</div>
+        <h3>MOVE FAST & DISRUPT</h3>
+        <p>Zero corporate red tape. Test bold ideas, launch campaign experiments, and see your work reach thousands of customers nationwide.</p>
+      </div>
+
+      <div class="careers-why-card">
+        <div class="careers-why-icon">🏆</div>
+        <h3>BUILD ICONIC BRANDS</h3>
+        <p>Be part of scaling Taakat and Avyah across 50,000+ retail stores, national marketplaces, and quick-commerce platforms.</p>
+      </div>
+
+      <div class="careers-why-card">
+        <div class="careers-why-icon">🧠</div>
+        <h3>FOUNDER COLLABORATION</h3>
+        <p>Work directly alongside experienced brand builders, food technologists, and growth strategists in an open environment.</p>
+      </div>
+
+      <div class="careers-why-card">
+        <div class="careers-why-icon">🌿</div>
+        <h3>HIGH-ENERGY CULTURE</h3>
+        <p>Enjoy flexible schedules, team offsites, continuous learning budgets, and an unlimited supply of fresh roasted snacks.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. OPEN POSITIONS -->
+  <section class="careers-jobs-section">
+    <div class="careers-jobs-inner">
+      <div class="careers-jobs-header">
+        <h2>CURRENT OPENINGS</h2>
+        <p>Explore open roles across marketing, sales, product development, and operations.</p>
+      </div>
+
+      <div class="careers-jobs-grid">
+        <!-- Job 1 -->
+        <div class="job-card">
+          <div class="job-card-top">
+            <div class="job-pills">
+              <span class="job-pill job-pill-type">FULL-TIME</span>
+              <span class="job-pill job-pill-loc">REMOTE / HYBRID</span>
+            </div>
+            <h3>PERFORMANCE MARKETING MANAGER</h3>
+            <p>Scale our D2C revenue. Manage Meta & Google ad accounts, optimize CAC/ROAS, and lead creative experimentation.</p>
+          </div>
+          <a href="mailto:careers@avyahcorp.com?subject=Application:%20Performance%20Marketing%20Manager" class="job-apply-btn">APPLY NOW</a>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="job-card">
+          <div class="job-card-top">
+            <div class="job-pills">
+              <span class="job-pill job-pill-type">FULL-TIME</span>
+              <span class="job-pill job-pill-loc">ON-SITE</span>
+            </div>
+            <h3>FMCG AREA SALES MANAGER (RETAIL)</h3>
+            <p>Expand retail distribution across modern trade and general trade partners. Drive distributor relations and shelf presence.</p>
+          </div>
+          <a href="mailto:careers@avyahcorp.com?subject=Application:%20FMCG%20Area%20Sales%20Manager" class="job-apply-btn">APPLY NOW</a>
+        </div>
+
+        <!-- Job 3 -->
+        <div class="job-card">
+          <div class="job-card-top">
+            <div class="job-pills">
+              <span class="job-pill job-pill-type">FULL-TIME</span>
+              <span class="job-pill job-pill-loc">HYBRID</span>
+            </div>
+            <h3>CONTENT CREATOR & BRAND STORYTELLER</h3>
+            <p>Craft viral reels, shoot product visuals, and build an authentic community around clean snacking & active lifestyle.</p>
+          </div>
+          <a href="mailto:careers@avyahcorp.com?subject=Application:%20Content%20Creator" class="job-apply-btn">APPLY NOW</a>
+        </div>
+
+        <!-- Job 4 -->
+        <div class="job-card">
+          <div class="job-card-top">
+            <div class="job-pills">
+              <span class="job-pill job-pill-type">FULL-TIME</span>
+              <span class="job-pill job-pill-loc">LAB ON-SITE</span>
+            </div>
+            <h3>FOOD TECHNOLOGIST & R&D SPECIALIST</h3>
+            <p>Develop next-generation clean formulations, protein bar textures, and roasted cluster snacks with 0% palm oil.</p>
+          </div>
+          <a href="mailto:careers@avyahcorp.com?subject=Application:%20Food%20Technologist" class="job-apply-btn">APPLY NOW</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. CTA BANNER -->
+  <section class="careers-cta">
+    <h2>DON'T SEE YOUR ROLE?</h2>
+    <p>We are always looking for passionate talent. Send your resume and portfolio directly to our leadership team.</p>
+    <a href="mailto:careers@avyahcorp.com?subject=General%20Career%20Application" class="careers-cta-btn">SEND YOUR RESUME</a>
+  </section>
+</div>
+
+<!-- CLIENT-SIDE AUTOMATIC RENDER ENGINE FOR CAREERS PAGE -->
+<script>
+(function() {
+  function forceRenderCareersPage() {
+    const path = window.location.pathname.toLowerCase();
+    if (!path.includes('career') && !path.includes('job')) return;
+
+    const main = document.querySelector('#MainContent') || document.querySelector('main') || document.body;
+    if (!main) return;
+
+    const pageRoot = document.getElementById('avyah-careers-page-root');
+    
+    // Check if 404 block is currently displayed
+    const is404 = document.querySelector('.main-404') || 
+                  document.title.toLowerCase().includes('404') || 
+                  document.querySelector('h1')?.textContent.toLowerCase().includes('page not found') ||
+                  document.body.classList.contains('template-404');
+
+    if (is404) {
+      document.title = "Careers | Avyah Clean Hunger Bars";
+      // Hide 404 child elements
+      const elementsToHide = main.querySelectorAll('.section, .section-wrapper, .main-404, div[class*="section"]');
+      elementsToHide.forEach(el => {
+        if (el.id !== 'avyah-careers-page-root' && !el.contains(pageRoot)) {
+          el.style.display = 'none';
+        }
+      });
+
+      if (pageRoot) {
+        pageRoot.style.display = 'block';
+        if (pageRoot.parentElement !== main) {
+          main.appendChild(pageRoot);
+        }
+      }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', forceRenderCareersPage);
+  } else {
+    forceRenderCareersPage();
+  }
+  setTimeout(forceRenderCareersPage, 300);
+})();
+</script>

@@ -2,6 +2,8 @@
 
 {%- if page.handle == 'ingredients' or page.template_suffix == 'ingredients' or request.path contains 'ingredient' -%}
   {% section 'custom-ingredients' %}
+{%- elsif page.handle == 'careers' or page.handle == 'career' or page.template_suffix == 'careers' or request.path contains 'career' -%}
+  {% section 'custom-careers' %}
 {%- else -%}
   <div class="section-background color-{{ section.settings.color_scheme }}"></div>
   <div class="section page-width-content color-{{ section.settings.color_scheme }}">
