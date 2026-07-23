@@ -1,700 +1,268 @@
-{% doc %}
-  @prompt
-    create latest blogs section with carousel for healthy eating 
-{% enddoc %}
+{% comment %}
+  Retail Store & Fridge Showcase Block
+  Inspired by PerfectSnacks design layout.
+{% endcomment %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
-{% style %}
-  .ai-blog-carousel-{{ ai_gen_id }} {
-    padding: {{ block.settings.padding_top }}px 0 {{ block.settings.padding_bottom }}px;
-    background-color: {{ block.settings.background_color }};
+<style>
+  .avyah-store-showcase-block-{{ ai_gen_id }} {
+    width: 100% !important;
+    background-color: #ffffff !important;
+    padding: 60px 24px !important;
+    box-sizing: border-box !important;
   }
 
-  .ai-blog-carousel__container-{{ ai_gen_id }} {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+  .avyah-store-showcase-container-{{ ai_gen_id }} {
+    max-width: 1240px !important;
+    margin: 0 auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 50px !important;
+    align-items: center !important;
   }
 
-  .ai-blog-carousel__header-{{ ai_gen_id }} {
-    text-align: {{ block.settings.heading_alignment }};
-    margin-bottom: 40px;
+  .avyah-store-showcase-media-{{ ai_gen_id }} {
+    width: 100% !important;
+    border-radius: 24px !important;
+    overflow: hidden !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+    line-height: 0 !important;
   }
 
-  .ai-blog-carousel__heading-{{ ai_gen_id }} {
-    font-size: {{ block.settings.heading_size }}px;
-    color: {{ block.settings.heading_color }};
-    margin: 0 0 12px;
+  .avyah-store-showcase-img-{{ ai_gen_id }} {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 520px !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+    border-radius: 24px !important;
   }
 
-  .ai-blog-carousel__subheading-{{ ai_gen_id }} {
-    font-size: {{ block.settings.subheading_size }}px;
-    color: {{ block.settings.text_color }};
-    margin: 0;
+  .avyah-store-showcase-content-{{ ai_gen_id }} {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 10px 0 !important;
   }
 
-  .ai-blog-carousel__wrapper-{{ ai_gen_id }} {
-    position: relative;
+  .avyah-store-showcase-headline-{{ ai_gen_id }} {
+    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: 52px !important;
+    font-weight: 400 !important;
+    line-height: 1.1 !important;
+    color: #2b1e1b !important;
+    text-transform: uppercase !important;
+    margin: 0 0 20px 0 !important;
+    letter-spacing: 0.2px !important;
   }
 
-  .ai-blog-carousel__track-{{ ai_gen_id }} {
-    display: flex;
-    gap: {{ block.settings.card_gap }}px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding-bottom: 10px;
+  .avyah-store-showcase-tagline-{{ ai_gen_id }} {
+    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    color: #2b1e1b !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin-bottom: 16px !important;
   }
 
-  .ai-blog-carousel__track-{{ ai_gen_id }}::-webkit-scrollbar {
-    display: none;
+  .avyah-store-showcase-body-{{ ai_gen_id }} {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: #4a3e3b !important;
+    max-width: 480px !important;
+    margin: 0 0 32px 0 !important;
   }
 
-  .ai-blog-carousel__card-{{ ai_gen_id }} {
-    flex: 0 0 calc({{ block.settings.cards_per_view }}% - {{ block.settings.card_gap | times: 2 | divided_by: 3 }}px);
-    min-width: 280px;
-    background-color: {{ block.settings.card_background }};
-    border-radius: {{ block.settings.card_border_radius }}px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
+  .avyah-store-showcase-actions-{{ ai_gen_id }} {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 20px !important;
+    width: 100% !important;
   }
 
-  .ai-blog-carousel__card-{{ ai_gen_id }}:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  .avyah-store-primary-btn-{{ ai_gen_id }} {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 16px 36px !important;
+    background-color: #0b5e65 !important; /* Dark teal pill button */
+    background: #0b5e65 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    border-radius: 50px !important;
+    border: none !important;
+    transition: transform 0.2s ease, background-color 0.2s ease !important;
+    box-shadow: 0 4px 14px rgba(11, 94, 101, 0.25) !important;
   }
 
-  .ai-blog-carousel__image-wrapper-{{ ai_gen_id }} {
-    position: relative;
-    width: 100%;
-    padding-top: {{ block.settings.image_ratio }}%;
-    overflow: hidden;
-    background-color: #f5f5f5;
+  .avyah-store-primary-btn-{{ ai_gen_id }}:hover {
+    background-color: #08484e !important;
+    background: #08484e !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
   }
 
-  .ai-blog-carousel__image-{{ ai_gen_id }} {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .avyah-store-secondary-link-{{ ai_gen_id }} {
+    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: 17px !important;
+    font-weight: 400 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    color: #2b1e1b !important;
+    text-decoration: underline !important;
+    text-underline-offset: 4px !important;
+    text-decoration-thickness: 2px !important;
+    transition: color 0.2s ease !important;
   }
 
-  .ai-blog-carousel__image-placeholder-{{ ai_gen_id }} {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f4f4f4;
+  .avyah-store-secondary-link-{{ ai_gen_id }}:hover {
+    color: #d52528 !important;
   }
 
-  .ai-blog-carousel__image-placeholder-{{ ai_gen_id }} svg {
-    width: 60%;
-    height: 60%;
-    opacity: 0.3;
-  }
-
-  .ai-blog-carousel__content-{{ ai_gen_id }} {
-    padding: 24px;
-  }
-
-  .ai-blog-carousel__date-{{ ai_gen_id }} {
-    font-size: 12px;
-    color: {{ block.settings.date_color }};
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .ai-blog-carousel__title-{{ ai_gen_id }} {
-    font-size: {{ block.settings.title_size }}px;
-    color: {{ block.settings.heading_color }};
-    margin: 0 0 12px;
-    line-height: 1.3;
-  }
-
-  .ai-blog-carousel__title-link-{{ ai_gen_id }} {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .ai-blog-carousel__title-link-{{ ai_gen_id }}:hover {
-    color: {{ block.settings.link_hover_color }};
-  }
-
-  .ai-blog-carousel__excerpt-{{ ai_gen_id }} {
-    font-size: {{ block.settings.excerpt_size }}px;
-    color: {{ block.settings.text_color }};
-    line-height: 1.6;
-    margin-bottom: 16px;
-  }
-
-  .ai-blog-carousel__read-more-{{ ai_gen_id }} {
-    display: inline-block;
-    font-size: 14px;
-    color: {{ block.settings.link_color }};
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-  }
-
-  .ai-blog-carousel__read-more-{{ ai_gen_id }}:hover {
-    color: {{ block.settings.link_hover_color }};
-  }
-
-  .ai-blog-carousel__nav-{{ ai_gen_id }} {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 32px;
-  }
-
-  .ai-blog-carousel__nav-button-{{ ai_gen_id }} {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background-color: {{ block.settings.nav_button_background }};
-    border: 1px solid {{ block.settings.nav_button_border }};
-    color: {{ block.settings.nav_button_color }};
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-  }
-
-  .ai-blog-carousel__nav-button-{{ ai_gen_id }}:hover {
-    background-color: {{ block.settings.nav_button_hover_background }};
-    color: {{ block.settings.nav_button_hover_color }};
-  }
-
-  .ai-blog-carousel__nav-button-{{ ai_gen_id }}:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
-
-  .ai-blog-carousel__empty-state-{{ ai_gen_id }} {
-    text-align: center;
-    padding: 60px 20px;
-    color: {{ block.settings.text_color }};
-  }
-
-  .ai-blog-carousel__empty-state-{{ ai_gen_id }} h3 {
-    font-size: 20px;
-    margin-bottom: 8px;
-  }
-
-  .ai-blog-carousel__empty-state-{{ ai_gen_id }} p {
-    font-size: 14px;
-    opacity: 0.7;
-  }
-
-  @media screen and (max-width: 989px) {
-    .ai-blog-carousel__card-{{ ai_gen_id }} {
-      flex: 0 0 calc(50% - {{ block.settings.card_gap | divided_by: 2 }}px);
+  @media screen and (max-width: 900px) {
+    .avyah-store-showcase-block-{{ ai_gen_id }} {
+      padding: 40px 16px !important;
     }
-
-    .ai-blog-carousel__heading-{{ ai_gen_id }} {
-      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+    .avyah-store-showcase-container-{{ ai_gen_id }} {
+      grid-template-columns: 1fr !important;
+      gap: 32px !important;
+    }
+    .avyah-store-showcase-headline-{{ ai_gen_id }} {
+      font-size: 36px !important;
+    }
+    .avyah-store-showcase-tagline-{{ ai_gen_id }} {
+      font-size: 16px !important;
+    }
+    .avyah-store-showcase-body-{{ ai_gen_id }} {
+      font-size: 15px !important;
     }
   }
+</style>
 
-  @media screen and (max-width: 749px) {
-    .ai-blog-carousel__card-{{ ai_gen_id }} {
-      flex: 0 0 calc(100% - 20px);
-    }
+<div class="avyah-store-showcase-block-{{ ai_gen_id }}">
+  <div class="avyah-store-showcase-container-{{ ai_gen_id }}">
+    <!-- Left Column: Image -->
+    <div class="avyah-store-showcase-media-{{ ai_gen_id }}">
+      {%- if block.settings.image != blank -%}
+        <img
+          src="{{ block.settings.image | image_url: width: 1200 }}"
+          alt="{{ block.settings.headline | escape }}"
+          loading="lazy"
+          width="1200"
+          height="900"
+          class="avyah-store-showcase-img-{{ ai_gen_id }}"
+        >
+      {%- else -%}
+        <img
+          src="{{ 'contact_page_manufacturing.png' | asset_url }}"
+          alt="Avyah Retail Store Showcase"
+          width="1200"
+          height="900"
+          loading="lazy"
+          class="avyah-store-showcase-img-{{ ai_gen_id }}"
+        >
+      {%- endif -%}
+    </div>
 
-    .ai-blog-carousel__heading-{{ ai_gen_id }} {
-      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
-    }
+    <!-- Right Column: Content -->
+    <div class="avyah-store-showcase-content-{{ ai_gen_id }}">
+      <h2 class="avyah-store-showcase-headline-{{ ai_gen_id }}">
+        {{ block.settings.headline | default: "We're Proudly in 50,000+ Homes & Fridges Nationwide" }}
+      </h2>
 
-    .ai-blog-carousel__content-{{ ai_gen_id }} {
-      padding: 20px;
-    }
-  }
-{% endstyle %}
-
-<blog-carousel-{{ ai_gen_id }} class="ai-blog-carousel-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
-  <div class="ai-blog-carousel__container-{{ ai_gen_id }}">
-    {% if block.settings.heading != blank or block.settings.subheading != blank %}
-      <div class="ai-blog-carousel__header-{{ ai_gen_id }}">
-        {% if block.settings.heading != blank %}
-          <h2 class="ai-blog-carousel__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
-        {% endif %}
-        {% if block.settings.subheading != blank %}
-          <p class="ai-blog-carousel__subheading-{{ ai_gen_id }}">{{ block.settings.subheading }}</p>
-        {% endif %}
-      </div>
-    {% endif %}
-
-    {% if block.settings.blog != blank %}
-      {% assign articles = block.settings.blog.articles %}
-      {% if articles.size > 0 %}
-        <div class="ai-blog-carousel__wrapper-{{ ai_gen_id }}">
-          <div class="ai-blog-carousel__track-{{ ai_gen_id }}" data-carousel-track>
-            {% for article in articles limit: block.settings.articles_limit %}
-              <article class="ai-blog-carousel__card-{{ ai_gen_id }}">
-                <div class="ai-blog-carousel__image-wrapper-{{ ai_gen_id }}">
-                  {% if article.image %}
-                    <img
-                      src="{{ article.image | image_url: width: 600 }}"
-                      alt="{{ article.image.alt | escape }}"
-                      class="ai-blog-carousel__image-{{ ai_gen_id }}"
-                      loading="lazy"
-                      width="600"
-                      height="{{ 600 | times: block.settings.image_ratio | divided_by: 100 }}"
-                    >
-                  {% else %}
-                    <div class="ai-blog-carousel__image-placeholder-{{ ai_gen_id }}">
-                      {{ 'image' | placeholder_svg_tag }}
-                    </div>
-                  {% endif %}
-                </div>
-
-                <div class="ai-blog-carousel__content-{{ ai_gen_id }}">
-                  {% if block.settings.show_date %}
-                    <div class="ai-blog-carousel__date-{{ ai_gen_id }}">
-                      {{ article.published_at | date: '%B %d, %Y' }}
-                    </div>
-                  {% endif %}
-
-                  <h3 class="ai-blog-carousel__title-{{ ai_gen_id }}">
-                    <a href="{{ article.url }}" class="ai-blog-carousel__title-link-{{ ai_gen_id }}">
-                      {{ article.title }}
-                    </a>
-                  </h3>
-
-                  {% if block.settings.show_excerpt and article.excerpt != blank %}
-                    <div class="ai-blog-carousel__excerpt-{{ ai_gen_id }}">
-                      {{ article.excerpt | strip_html | truncate: block.settings.excerpt_length }}
-                    </div>
-                  {% endif %}
-
-                  {% if block.settings.show_read_more %}
-                    <a href="{{ article.url }}" class="ai-blog-carousel__read-more-{{ ai_gen_id }}">
-                      {{ block.settings.read_more_text }} →
-                    </a>
-                  {% endif %}
-                </div>
-              </article>
-            {% endfor %}
-          </div>
-
-          {% if block.settings.show_navigation %}
-            <div class="ai-blog-carousel__nav-{{ ai_gen_id }}">
-              <button
-                class="ai-blog-carousel__nav-button-{{ ai_gen_id }}"
-                data-carousel-prev
-                aria-label="Previous"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </button>
-              <button
-                class="ai-blog-carousel__nav-button-{{ ai_gen_id }}"
-                data-carousel-next
-                aria-label="Next"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </button>
-            </div>
-          {% endif %}
+      {%- if block.settings.tagline != blank -%}
+        <div class="avyah-store-showcase-tagline-{{ ai_gen_id }}">
+          {{ block.settings.tagline }}
         </div>
-      {% else %}
-        <div class="ai-blog-carousel__empty-state-{{ ai_gen_id }}">
-          <h3>No articles yet</h3>
-          <p>Add articles to your blog to see them here</p>
-        </div>
-      {% endif %}
-    {% else %}
-      <div class="ai-blog-carousel__empty-state-{{ ai_gen_id }}">
-        <h3>Select a blog</h3>
-        <p>Choose a blog from the settings to display articles</p>
+      {%- endif -%}
+
+      {%- if block.settings.body_text != blank -%}
+        <p class="avyah-store-showcase-body-{{ ai_gen_id }}">
+          {{ block.settings.body_text }}
+        </p>
+      {%- endif -%}
+
+      <div class="avyah-store-showcase-actions-{{ ai_gen_id }}">
+        {%- if block.settings.primary_button_text != blank -%}
+          <a href="{{ block.settings.primary_button_link | default: '/collections/all' }}" class="avyah-store-primary-btn-{{ ai_gen_id }}">
+            {{ block.settings.primary_button_text }}
+          </a>
+        {%- endif -%}
+
+        {%- if block.settings.secondary_button_text != blank -%}
+          <a href="{{ block.settings.secondary_button_link | default: '/pages/bulk-order' }}" class="avyah-store-secondary-link-{{ ai_gen_id }}">
+            {{ block.settings.secondary_button_text }}
+          </a>
+        {%- endif -%}
       </div>
-    {% endif %}
+    </div>
   </div>
-</blog-carousel-{{ ai_gen_id }}>
-
-<script>
-  (function() {
-    class BlogCarousel{{ ai_gen_id }} extends HTMLElement {
-      constructor() {
-        super();
-        this.track = this.querySelector('[data-carousel-track]');
-        this.prevButton = this.querySelector('[data-carousel-prev]');
-        this.nextButton = this.querySelector('[data-carousel-next]');
-      }
-
-      connectedCallback() {
-        if (!this.track) return;
-
-        this.setupNavigation();
-        this.updateButtonStates();
-
-        this.track.addEventListener('scroll', () => {
-          this.updateButtonStates();
-        });
-      }
-
-      setupNavigation() {
-        if (this.prevButton) {
-          this.prevButton.addEventListener('click', () => this.scroll('prev'));
-        }
-
-        if (this.nextButton) {
-          this.nextButton.addEventListener('click', () => this.scroll('next'));
-        }
-      }
-
-      scroll(direction) {
-        const scrollAmount = this.track.offsetWidth * 0.8;
-        const currentScroll = this.track.scrollLeft;
-
-        if (direction === 'prev') {
-          this.track.scrollLeft = currentScroll - scrollAmount;
-        } else {
-          this.track.scrollLeft = currentScroll + scrollAmount;
-        }
-      }
-
-      updateButtonStates() {
-        if (!this.prevButton || !this.nextButton) return;
-
-        const isAtStart = this.track.scrollLeft <= 0;
-        const isAtEnd = this.track.scrollLeft + this.track.offsetWidth >= this.track.scrollWidth - 10;
-
-        this.prevButton.disabled = isAtStart;
-        this.nextButton.disabled = isAtEnd;
-      }
-    }
-
-    customElements.define('blog-carousel-{{ ai_gen_id }}', BlogCarousel{{ ai_gen_id }});
-  })();
-</script>
+</div>
 
 {% schema %}
 {
-  "name": "Latest blogs carousel",
+  "name": "Retail Store Showcase",
   "settings": [
     {
-      "type": "header",
-      "content": "Content"
+      "type": "image_picker",
+      "id": "image",
+      "label": "Showcase Image"
     },
     {
-      "type": "blog",
-      "id": "blog",
-      "label": "Blog"
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "We're Proudly in 50,000+ Homes & Fridges Nationwide"
     },
     {
-      "type": "range",
-      "id": "articles_limit",
-      "min": 3,
-      "max": 12,
-      "step": 1,
-      "label": "Number of articles",
-      "default": 6
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "(WE'RE TOO FRESH FOR THE REGULAR SNACK AISLE)"
     },
     {
-      "type": "inline_richtext",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Latest Healthy Eating Tips"
+      "type": "textarea",
+      "id": "body_text",
+      "label": "Body Text",
+      "default": "Whether you're shopping for your weekly essentials or craving a convenient snack, we have you covered!"
     },
     {
-      "type": "inline_richtext",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "Discover nutrition advice and wellness insights"
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Primary Button Text",
+      "default": "FIND A STORE NEAR YOU"
     },
     {
-      "type": "select",
-      "id": "heading_alignment",
-      "label": "Heading alignment",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ],
-      "default": "center"
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Primary Button Link"
     },
     {
-      "type": "header",
-      "content": "Article display"
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Secondary Button Text",
+      "default": "BECOME A RETAILER"
     },
     {
-      "type": "checkbox",
-      "id": "show_date",
-      "label": "Show date",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_excerpt",
-      "label": "Show excerpt",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "excerpt_length",
-      "min": 50,
-      "max": 200,
-      "step": 10,
-      "label": "Excerpt length",
-      "default": 120
-    },
-    {
-      "type": "checkbox",
-      "id": "show_read_more",
-      "label": "Show read more link",
-      "default": true
-    },
-    {
-      "type": "inline_richtext",
-      "id": "read_more_text",
-      "label": "Read more text",
-      "default": "Read more"
-    },
-    {
-      "type": "header",
-      "content": "Carousel settings"
-    },
-    {
-      "type": "range",
-      "id": "cards_per_view",
-      "min": 30,
-      "max": 50,
-      "step": 5,
-      "unit": "%",
-      "label": "Card width",
-      "default": 30
-    },
-    {
-      "type": "range",
-      "id": "card_gap",
-      "min": 10,
-      "max": 40,
-      "step": 5,
-      "unit": "px",
-      "label": "Gap between cards",
-      "default": 20
-    },
-    {
-      "type": "checkbox",
-      "id": "show_navigation",
-      "label": "Show navigation arrows",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Card style"
-    },
-    {
-      "type": "range",
-      "id": "image_ratio",
-      "min": 50,
-      "max": 150,
-      "step": 5,
-      "unit": "%",
-      "label": "Image aspect ratio",
-      "default": 65
-    },
-    {
-      "type": "range",
-      "id": "card_border_radius",
-      "min": 0,
-      "max": 24,
-      "step": 2,
-      "unit": "px",
-      "label": "Card border radius",
-      "default": 8
-    },
-    {
-      "type": "range",
-      "id": "card_border_width",
-      "min": 0,
-      "max": 4,
-      "step": 1,
-      "unit": "px",
-      "label": "Card border width",
-      "default": 1
-    },
-    {
-      "type": "color",
-      "id": "card_background",
-      "label": "Card background",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "card_border_color",
-      "label": "Card border color",
-      "default": "#e6e6e6"
-    },
-    {
-      "type": "header",
-      "content": "Typography"
-    },
-    {
-      "type": "range",
-      "id": "heading_size",
-      "min": 20,
-      "max": 60,
-      "step": 2,
-      "unit": "px",
-      "label": "Heading size",
-      "default": 40
-    },
-    {
-      "type": "range",
-      "id": "subheading_size",
-      "min": 12,
-      "max": 24,
-      "step": 1,
-      "unit": "px",
-      "label": "Subheading size",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "title_size",
-      "min": 14,
-      "max": 28,
-      "step": 1,
-      "unit": "px",
-      "label": "Article title size",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "excerpt_size",
-      "min": 12,
-      "max": 18,
-      "step": 1,
-      "unit": "px",
-      "label": "Excerpt size",
-      "default": 14
-    },
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "date_color",
-      "label": "Date",
-      "default": "#666666"
-    },
-    {
-      "type": "color",
-      "id": "link_color",
-      "label": "Link",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "link_hover_color",
-      "label": "Link hover",
-      "default": "#333333"
-    },
-    {
-      "type": "header",
-      "content": "Navigation buttons"
-    },
-    {
-      "type": "color",
-      "id": "nav_button_background",
-      "label": "Background",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "nav_button_border",
-      "label": "Border",
-      "default": "#e6e6e6"
-    },
-    {
-      "type": "color",
-      "id": "nav_button_color",
-      "label": "Icon",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "nav_button_hover_background",
-      "label": "Hover background",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "nav_button_hover_color",
-      "label": "Hover icon",
-      "default": "#ffffff"
-    },
-    {
-      "type": "header",
-      "content": "Spacing"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "label": "Top padding",
-      "default": 60
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "label": "Bottom padding",
-      "default": 60
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary Button Link"
     }
   ],
   "presets": [
     {
-      "name": "Latest blogs carousel"
+      "name": "Retail Store Showcase"
     }
   ]
 }
