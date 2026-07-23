@@ -1120,15 +1120,41 @@
       }
     },
     "retail_store_showcase": {
-      "type": "retail-store-showcase",
+      "type": "_blocks",
+      "blocks": {
+        "showcase_block_1": {
+          "type": "ai_gen_block_store_showcase",
+          "settings": {
+            "headline": "We're Proudly in 50,000+ Homes & Fridges Nationwide",
+            "tagline": "(WE'RE TOO FRESH FOR THE REGULAR SNACK AISLE)",
+            "body_text": "Whether you're shopping for your weekly essentials or craving a convenient snack, we have you covered!",
+            "primary_button_text": "FIND A STORE NEAR YOU",
+            "primary_button_link": "shopify://collections/all",
+            "secondary_button_text": "BECOME A RETAILER",
+            "secondary_button_link": "shopify://pages/bulk-order"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "showcase_block_1"
+      ],
+      "name": "Retail Store Showcase",
       "settings": {
-        "headline": "We're Proudly in 50,000+ Homes & Fridges Nationwide",
-        "tagline": "(WE'RE TOO FRESH FOR THE REGULAR SNACK AISLE)",
-        "body_text": "Whether you're shopping for your weekly essentials or craving a convenient snack, we have you covered!",
-        "primary_button_text": "FIND A STORE NEAR YOU",
-        "primary_button_link": "shopify://collections/all",
-        "secondary_button_text": "BECOME A RETAILER",
-        "secondary_button_link": "shopify://pages/bulk-order"
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "",
+        "color_scheme": "",
+        "background_media": "none",
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     }
   },
