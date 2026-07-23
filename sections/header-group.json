@@ -1,4 +1,13 @@
-﻿{
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
   "type": "header",
   "name": "Header",
   "sections": {
@@ -21,7 +30,7 @@
           "type": "_header-menu",
           "static": true,
           "settings": {
-            "menu": "main-menu",
+            "menu": "main-menuv2",
             "color_scheme": "scheme-1",
             "type_font_primary_size": "1rem",
             "menu_font_style": "regular",
