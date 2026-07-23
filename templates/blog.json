@@ -1,4 +1,13 @@
-﻿{
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
   "sections": {
     "main": {
       "type": "main-blog",
@@ -75,6 +84,23 @@
               },
               "blocks": {}
             },
+            "content": {
+              "type": "_blog-post-description",
+              "static": true,
+              "settings": {
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 16,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
             "image": {
               "type": "_blog-post-image",
               "static": true,
@@ -94,14 +120,105 @@
       "block_order": [
         "title"
       ],
+      "disabled": true,
       "settings": {
         "color_scheme": "",
         "padding-block-start": 0,
         "padding-block-end": 48
       }
+    },
+    "blocks_6GJaCr": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_ea6d2bb_RMXFJE": {
+          "type": "ai_gen_block_ea6d2bb",
+          "settings": {
+            "blog": "",
+            "articles_limit": 6,
+            "heading": "Latest Healthy Eating Tips",
+            "subheading": "Discover nutrition advice and wellness insights",
+            "heading_alignment": "center",
+            "show_date": true,
+            "show_author": true,
+            "show_excerpt": true,
+            "excerpt_length": 120,
+            "read_more_text": "Read more",
+            "slides_per_view_desktop": 3,
+            "slides_per_view_tablet": 2,
+            "autoplay": true,
+            "autoplay_speed": 5,
+            "show_controls": true,
+            "section_padding_top": 60,
+            "section_padding_bottom": 60,
+            "desktop_padding": 40,
+            "tablet_padding": 32,
+            "mobile_padding": 16,
+            "card_gap": 24,
+            "heading_spacing": 40,
+            "subheading_spacing": 8,
+            "controls_spacing": 32,
+            "card_border_radius": 12,
+            "card_padding": 20,
+            "image_aspect_ratio": 65,
+            "background_color": "#ffffff",
+            "heading_color": "#000000",
+            "text_color": "#666666",
+            "card_background": "#ffffff",
+            "card_title_color": "#000000",
+            "meta_color": "#999999",
+            "link_color": "#000000",
+            "link_hover_color": "#666666",
+            "button_background": "#ffffff",
+            "button_color": "#000000",
+            "button_border": "#e6e6e6",
+            "button_hover_background": "#000000",
+            "button_hover_color": "#ffffff",
+            "button_hover_border": "#000000",
+            "dot_color": "#e6e6e6",
+            "dot_active_color": "#000000",
+            "heading_size": 40,
+            "subheading_size": 16,
+            "card_title_size": 20,
+            "excerpt_size": 14
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_ea6d2bb_RMXFJE"
+      ],
+      "name": "Latest blogs carousel",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 100
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "blocks_6GJaCr"
   ]
 }
