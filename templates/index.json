@@ -1118,6 +1118,18 @@
         "padding-block-start": 20,
         "padding-block-end": 40
       }
+    },
+    "retail_store_showcase": {
+      "type": "retail-store-showcase",
+      "settings": {
+        "headline": "We're Proudly in 50,000+ Homes & Fridges Nationwide",
+        "tagline": "(WE'RE TOO FRESH FOR THE REGULAR SNACK AISLE)",
+        "body_text": "Whether you're shopping for your weekly essentials or craving a convenient snack, we have you covered!",
+        "primary_button_text": "FIND A STORE NEAR YOU",
+        "primary_button_link": "shopify://collections/all",
+        "secondary_button_text": "BECOME A RETAILER",
+        "secondary_button_link": "shopify://pages/bulk-order"
+      }
     }
   },
   "order": [
@@ -1127,6 +1139,7 @@
     "1761551169f8c757e1",
     "17615625630340cad8",
     "blocks_BCAYqP",
+    "retail_store_showcase",
     "blocks_zFCw9K",
     "17764281650cbd88e1",
     "section_nhYFxg",

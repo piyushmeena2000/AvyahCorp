@@ -1,0 +1,271 @@
+{% comment %}
+  Retail Store & Fridge Showcase Section
+  Bespoke section inspired by PerfectSnacks layout.
+{% endcomment %}
+
+<div class="avyah-store-showcase-section">
+  <div class="avyah-store-showcase-container">
+    <!-- Left Column: Image -->
+    <div class="avyah-store-showcase-media">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 1200
+          | image_tag:
+            loading: 'lazy',
+            width: 1200,
+            class: 'avyah-store-showcase-img',
+            alt: section.settings.headline | escape
+        }}
+      {%- else -%}
+        <img
+          src="{{ 'contact_page_manufacturing.png' | asset_url }}"
+          alt="Avyah Retail Store Showcase"
+          width="1200"
+          height="900"
+          loading="lazy"
+          class="avyah-store-showcase-img"
+        >
+      {%- endif -%}
+    </div>
+
+    <!-- Right Column: Content -->
+    <div class="avyah-store-showcase-content">
+      <h2 class="avyah-store-showcase-headline">
+        {{ section.settings.headline | default: "We're Proudly in 50,000+ Homes & Fridges Nationwide" }}
+      </h2>
+
+      {%- if section.settings.tagline != blank -%}
+        <div class="avyah-store-showcase-tagline">
+          {{ section.settings.tagline }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.body_text != blank -%}
+        <p class="avyah-store-showcase-body">
+          {{ section.settings.body_text }}
+        </p>
+      {%- endif -%}
+
+      <div class="avyah-store-showcase-actions">
+        {%- if section.settings.primary_button_text != blank -%}
+          <a href="{{ section.settings.primary_button_link | default: '/collections/all' }}" class="avyah-store-primary-btn">
+            {{ section.settings.primary_button_text }}
+          </a>
+        {%- endif -%}
+
+        {%- if section.settings.secondary_button_text != blank -%}
+          <a href="{{ section.settings.secondary_button_link | default: '/pages/bulk-order' }}" class="avyah-store-secondary-link">
+            {{ section.settings.secondary_button_text }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .avyah-store-showcase-section {
+    width: 100% !important;
+    background-color: #ffffff !important;
+    padding: 80px 24px !important;
+    box-sizing: border-box !important;
+  }
+
+  .avyah-store-showcase-container {
+    max-width: 1240px !important;
+    margin: 0 auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 50px !important;
+    align-items: center !important;
+  }
+
+  .avyah-store-showcase-media {
+    width: 100% !important;
+    border-radius: 24px !important;
+    overflow: hidden !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
+    line-height: 0 !important;
+  }
+
+  .avyah-store-showcase-img {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 540px !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+    border-radius: 24px !important;
+  }
+
+  .avyah-store-showcase-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 20px 0 !important;
+  }
+
+  .avyah-store-showcase-headline {
+    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: 52px !important;
+    font-weight: 400 !important;
+    line-height: 1.1 !important;
+    color: #2b1e1b !important;
+    text-transform: uppercase !important;
+    margin: 0 0 20px 0 !important;
+    letter-spacing: 0.2px !important;
+  }
+
+  .avyah-store-showcase-tagline {
+    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    color: #2b1e1b !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .avyah-store-showcase-body {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: #4a3e3b !important;
+    max-width: 480px !important;
+    margin: 0 0 32px 0 !important;
+  }
+
+  .avyah-store-showcase-actions {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 20px !important;
+    width: 100% !important;
+  }
+
+  .avyah-store-primary-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 16px 36px !important;
+    background-color: #0b5e65 !important; /* Dark teal pill button */
+    background: #0b5e65 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    border-radius: 50px !important;
+    border: none !important;
+    transition: transform 0.2s ease, background-color 0.2s ease !important;
+    box-shadow: 0 4px 14px rgba(11, 94, 101, 0.25) !important;
+  }
+
+  .avyah-store-primary-btn:hover {
+    background-color: #08484e !important;
+    background: #08484e !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+  }
+
+  .avyah-store-secondary-link {
+    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: 17px !important;
+    font-weight: 400 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    color: #2b1e1b !important;
+    text-decoration: underline !important;
+    text-underline-offset: 4px !important;
+    text-decoration-thickness: 2px !important;
+    transition: color 0.2s ease !important;
+  }
+
+  .avyah-store-secondary-link:hover {
+    color: #d52528 !important;
+  }
+
+  @media screen and (max-width: 900px) {
+    .avyah-store-showcase-section {
+      padding: 50px 16px !important;
+    }
+    .avyah-store-showcase-container {
+      grid-template-columns: 1fr !important;
+      gap: 32px !important;
+    }
+    .avyah-store-showcase-headline {
+      font-size: 36px !important;
+    }
+    .avyah-store-showcase-tagline {
+      font-size: 16px !important;
+    }
+    .avyah-store-showcase-body {
+      font-size: 15px !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Retail Store Showcase",
+  "tag": "section",
+  "class": "section-retail-store-showcase",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Showcase Image"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "We're Proudly in 50,000+ Homes & Fridges Nationwide"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "(WE'RE TOO FRESH FOR THE REGULAR SNACK AISLE)"
+    },
+    {
+      "type": "textarea",
+      "id": "body_text",
+      "label": "Body Text",
+      "default": "Whether you're shopping for your weekly essentials or craving a convenient snack, we have you covered!"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Primary Button Text",
+      "default": "FIND A STORE NEAR YOU"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Secondary Button Text",
+      "default": "BECOME A RETAILER"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Retail Store Showcase"
+    }
+  ]
+}
+{% endschema %}
