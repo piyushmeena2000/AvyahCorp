@@ -8,8 +8,9 @@
   .ai-logo-carousel-{{ ai_gen_id }} {
     width: 100%;
     overflow: hidden;
-    padding: {{ block.settings.padding_top }}px 0 {{ block.settings.padding_bottom }}px;
-    background-color: #ffffff !important; /* Pure White background */
+    padding: {{ block.settings.padding_top | default: 40 }}px 0 {{ block.settings.padding_bottom | default: 40 }}px;
+    background-color: #d52528 !important; /* Dark Crimson Red Background */
+    background: #d52528 !important;
   }
 
   .ai-logo-carousel__container-{{ ai_gen_id }} {
@@ -18,7 +19,14 @@
   }
 
   .ai-logo-carousel__heading-{{ ai_gen_id }} {
-    display: none !important;
+    display: block !important;
+    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: 32px !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    color: #ffffff !important;
+    text-align: center !important;
+    margin: 0 0 24px 0 !important;
   }
 
   .ai-logo-carousel__track-wrapper-{{ ai_gen_id }} {
@@ -31,6 +39,7 @@
     display: flex;
     gap: {{ block.settings.logo_spacing }}px;
     width: max-content;
+    align-items: center;
   }
 
   .ai-logo-carousel__slide-{{ ai_gen_id }} {
@@ -42,7 +51,7 @@
     align-items: center;
     justify-content: center;
     padding: {{ block.settings.logo_padding }}px;
-    background-color: transparent !important; /* Transparent logo slides on white bg */
+    background-color: transparent !important;
     border-radius: {{ block.settings.logo_border_radius }}px;
     border: none !important;
   }
@@ -53,17 +62,15 @@
     width: auto;
     height: auto;
     object-fit: contain;
-    {% if block.settings.grayscale %}
-      filter: grayscale(100%);
-      transition: filter 0.3s ease;
-    {% endif %}
+    filter: brightness(0) invert(1) !important; /* Crisp Pure White Icons */
+    opacity: 0.95;
+    transition: transform 0.25s ease, opacity 0.25s ease;
   }
 
-  {% if block.settings.grayscale %}
-    .ai-logo-carousel__slide-{{ ai_gen_id }}:hover .ai-logo-carousel__image-{{ ai_gen_id }} {
-      filter: grayscale(0%);
-    }
-  {% endif %}
+  .ai-logo-carousel__image-{{ ai_gen_id }}:hover {
+    opacity: 1;
+    transform: scale(1.08);
+  }
 
   .ai-logo-carousel__placeholder-{{ ai_gen_id }} {
     width: 100%;
@@ -71,14 +78,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f5f5f5;
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: {{ block.settings.logo_border_radius }}px;
   }
 
   .ai-logo-carousel__placeholder-{{ ai_gen_id }} svg {
     width: 60%;
     height: 60%;
-    opacity: 0.3;
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
   }
 
   @media screen and (max-width: 749px) {
@@ -88,7 +96,8 @@
     }
 
     .ai-logo-carousel__heading-{{ ai_gen_id }} {
-      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+      font-size: 24px !important;
+      margin-bottom: 16px !important;
     }
   }
 {% endstyle %}
