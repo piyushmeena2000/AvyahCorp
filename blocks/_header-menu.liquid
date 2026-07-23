@@ -319,17 +319,6 @@
                       <span class="menu-list__link-title">{{ link.title | escape }}</span>
                     </a>
                   {%- endif -%}
-                {%- comment -%} Inject INGREDIENTS link right beside BULK ORDER {%- endcomment -%}
-                {%- if _dt contains 'bulk' -%}
-                  <li role="presentation" class="menu-list__list-item">
-                    <a
-                      href="/pages/ingredients"
-                      class="menu-list__link{% if request.path contains 'ingredient' or request.path contains 'made' %} menu-list__link--active{% endif %}"
-                    >
-                      <span class="menu-list__link-title">INGREDIENTS</span>
-                    </a>
-                  </li>
-                {%- endif -%}
                 </li>
               {%- endfor -%}
             </ul>
