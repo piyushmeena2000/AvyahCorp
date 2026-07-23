@@ -2198,5 +2198,33 @@ body.template-page-bulk-order main#MainContent,
   stroke: #d52528 !important;
 }
 
+/* ========================================================
+   BENEFITS TICKER MARQUEE - SEAMLESS CRIMSON RED & WHITE ICONS
+   - Transparent item backgrounds (0% white blocks)
+   - Filtered pure white inverted icons
+======================================================== */
+[class*="ai-ticker"],
+ticker-component,
+[data-section-type="benefits"] {
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+}
+
+[class*="ai-ticker"] *,
+[class*="ai-ticker-item"],
+[class*="ai-ticker-icon"] {
+  background-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+[class*="ai-ticker-icon"] img {
+  filter: brightness(0) invert(1) !important;
+  -webkit-filter: brightness(0) invert(1) !important;
+  mix-blend-mode: multiply !important;
+  opacity: 0.95 !important;
+}
+
 
 

@@ -41,28 +41,37 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
   }
 
   .ai-ticker-icon-{{ ai_gen_id }} img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    background: transparent !important;
+    background-color: transparent !important;
+    mix-blend-mode: multiply !important;
+    filter: brightness(0) invert(1) !important;
+    -webkit-filter: brightness(0) invert(1) !important;
   }
 
   .ai-ticker-icon-placeholder-{{ ai_gen_id }} {
     width: 100%;
     height: 100%;
-    background-color: {{ block.settings.text_color }};
-    opacity: 0.2;
-    border-radius: 50%;
+    background-color: transparent;
+    opacity: 0.8;
   }
 
   .ai-ticker-text-{{ ai_gen_id }} {
-    color: {{ block.settings.text_color }};
+    color: #ffffff !important;
     font-size: {{ block.settings.text_size }}px;
-    font-weight: {{ block.settings.text_weight }};
-    font-family: anton;
-    text-transform: {{ block.settings.text_transform }};
+    font-weight: 700;
+    font-family: 'Anton', Arial, sans-serif !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
   }
 
   @keyframes ai-ticker-scroll-{{ ai_gen_id }} {
