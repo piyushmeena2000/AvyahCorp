@@ -85,6 +85,7 @@
         "text_Ua9XAW",
         "button_PAQMwR"
       ],
+      "disabled": true,
       "custom_css": [
         "* {background-color: #d52528; color: white;}",
         "*button {background-color: white;}"
@@ -99,6 +100,15 @@
         "color_scheme": "scheme-1",
         "padding-block-start": 100,
         "padding-block-end": 100
+      }
+    },
+    "custom_careers_fbGK9j": {
+      "type": "custom-careers",
+      "name": "Custom Careers Page",
+      "settings": {
+        "hero_badge": "WE ARE HIRING • JOIN THE TAAKAT REVOLUTION",
+        "hero_heading": "BUILD THE FUTURE OF CLEAN SNACKING.",
+        "hero_subtext": "<p>At Avyah, we are on a mission to rid India of junk snacks and palm-oil-loaded energy bars. We're looking for bold thinkers, fast executioners, and passionate food innovators to join our team.</p>"
       }
     },
     "17847863622cfd6e9b": {
@@ -134,6 +144,7 @@
   },
   "order": [
     "main",
+    "custom_careers_fbGK9j",
     "17847863622cfd6e9b"
   ]
 }
