@@ -42,10 +42,10 @@
             "card_border_radius": 12,
             "card_padding": 20,
             "image_aspect_ratio": 65,
-            "background_color": "#D52528",
+            "background_color": "#d52528",
             "heading_color": "#000000",
             "text_color": "#666666",
-            "card_background": "#FFFFFF",
+            "card_background": "#ffffff",
             "card_title_color": "#000000",
             "meta_color": "#999999",
             "link_color": "#000000",
@@ -69,6 +69,7 @@
       "block_order": [
         "ai_gen_block_ea6d2bb_rdfB37"
       ],
+      "disabled": true,
       "custom_css": [],
       "name": "Latest blogs carousel",
       "settings": {
@@ -97,6 +98,15 @@
         "gradient_direction": "to top",
         "padding-block-start": 20,
         "padding-block-end": 50
+      }
+    },
+    "custom_ingredients_qXiT6m": {
+      "type": "custom-ingredients",
+      "name": "Custom Ingredients Page",
+      "settings": {
+        "hero_badge": "100% CLEAN & HONEST FORMULATION",
+        "hero_heading": "REAL INGREDIENTS. ZERO NONSENSE.",
+        "hero_subtext": "<p>At Avyah, we believe food should fuel you, not slow you down. Every Hunger Bar is packed with whole grains, slow-roasted nuts, natural seeds, and unrefined sweeteners. No palm oil, zero artificial flavor enhancers, and 0% chemical preservatives.</p>"
       }
     },
     "main": {
@@ -150,6 +160,7 @@
   },
   "order": [
     "blocks_wNBzLm",
+    "custom_ingredients_qXiT6m",
     "main"
   ]
 }
