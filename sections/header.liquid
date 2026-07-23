@@ -907,13 +907,78 @@
       });
     }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => setTimeout(injectDiscover, 400));
-    } else {
-      setTimeout(injectDiscover, 400);
+      document.addEventListener('shopify:section:load', () => setTimeout(injectDiscover, 400));
     }
 
-    document.addEventListener('shopify:section:load', () => setTimeout(injectDiscover, 400));
+    /* ========================================================
+       HEADROOM STICKY HEADER CONTROLLER
+       - Scroll DOWN -> Translate header upward (-100%)
+       - Scroll UP -> Slide header back into view (0)
+       - Top of page -> Stay pinned (0)
+    ======================================================== */
+    let lastScrollY = window.scrollY || 0;
+    let ticking = false;
+
+    function handleHeadroomScroll() {
+      const header = document.querySelector('#header-component') || document.querySelector('header-component');
+      if (!header) {
+        ticking = false;
+        return;
+      }
+
+      const currentScrollY = Math.max(0, window.scrollY || document.documentElement.scrollTop || 0);
+      const scrollDelta = currentScrollY - lastScrollY;
+      const headerHeight = header.offsetHeight || 80;
+      const threshold = 6;
+      const topTolerance = 40;
+
+      const isMenuOpen = document.body.classList.contains('menu-open') || 
+                         document.body.classList.contains('avyah-megamenu-active') ||
+                         Boolean(document.querySelector('.avyah-discover-li.open'));
+
+      if (currentScrollY <= topTolerance) {
+        header.setAttribute('data-headroom-state', 'top');
+        header.classList.remove('headroom--unpinned');
+        header.classList.add('headroom--pinned', 'headroom--top');
+      } else if (scrollDelta > threshold && currentScrollY > headerHeight) {
+        if (!isMenuOpen) {
+          header.setAttribute('data-headroom-state', 'unpinned');
+          header.classList.remove('headroom--pinned', 'headroom--top');
+          header.classList.add('headroom--unpinned');
+        }
+      } else if (scrollDelta < -threshold) {
+        header.setAttribute('data-headroom-state', 'pinned');
+        header.classList.remove('headroom--unpinned', 'headroom--top');
+        header.classList.add('headroom--pinned');
+      }
+
+      lastScrollY = currentScrollY;
+      ticking = false;
+    }
+
+    function onWindowScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(handleHeadroomScroll);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onWindowScroll, { passive: true });
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(injectDiscover, 400);
+        handleHeadroomScroll();
+      });
+    } else {
+      setTimeout(injectDiscover, 400);
+      handleHeadroomScroll();
+    }
+
+    document.addEventListener('shopify:section:load', () => {
+      setTimeout(injectDiscover, 400);
+      handleHeadroomScroll();
+    });
   })();
 </script>
 

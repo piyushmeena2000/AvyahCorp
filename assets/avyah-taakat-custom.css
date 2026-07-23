@@ -1705,42 +1705,58 @@ body:has(.avyah-megamenu:hover) #MainContent {
 }
 
 /* ========================================================
-   SCROLL-LINKED PROGRESSIVE REVEAL HEADER SYSTEM
-   SuperYou & Perfect Snack 1-to-1 Physical Scroll Tracking
-   - Header vertical position is directly linked to scroll distance
-   - 1-to-1 pixel tracking via translateY
-   - NO transitions, NO delays, NO keyframes, NO opacity changes
+   HEADROOM STICKY HEADER SYSTEM (SUPERYOU & PERFECT SNACK STYLE)
+   - Sticky header attached to viewport top
+   - Translates upward (translateY(-100%)) when scrolling DOWN
+   - Slides back down into view (translateY(0)) when scrolling UP
+   - Smooth cubic-bezier transform animation
+   - Pure transform — NO fade, NO scale, NO opacity changes
 ======================================================== */
 
-.header-section,
-#header-group,
-#header-component,
-header-component,
-.header,
-.header__row,
-.header__row--top,
-.header__top-row,
-[class*="header__row"],
-.header__inner,
-header-menu,
-.header-menu,
-.menu-list,
-.menu-list__scroll-container {
+.header-section {
   position: sticky !important;
   top: 0 !important;
   z-index: 10000 !important;
-  transition: none !important; /* Zero transition delay or animation */
+  background-color: #d52528 !important;
+}
+
+#header-component,
+header-component {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  z-index: 10000 !important;
   will-change: transform;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  opacity: 1 !important;
+  filter: none !important;
   background-color: #d52528 !important;
   background: #d52528 !important;
   color: #ffffff !important;
+  transform: translateY(0);
 }
 
-header-component.header[data-sticky-state],
-header-component [class*="header__row"] {
-  transition: none !important;
+.header__row,
+[class*="header__row"] {
   background-color: #d52528 !important;
   background: #d52528 !important;
+}
+
+/* Headroom State Classes & Attributes */
+header-component[data-headroom-state="pinned"],
+header-component[data-headroom-state="top"],
+header-component.headroom--pinned,
+header-component.headroom--top,
+#header-component[data-headroom-state="pinned"],
+#header-component[data-headroom-state="top"] {
+  transform: translateY(0) !important;
+}
+
+header-component[data-headroom-state="unpinned"],
+header-component.headroom--unpinned,
+#header-component[data-headroom-state="unpinned"] {
+  transform: translateY(-100%) !important;
 }
 
 /* Force all header menu links, titles & icons to WHITE (#ffffff) */

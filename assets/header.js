@@ -125,11 +125,45 @@ class HeaderComponent extends Component {
     }
   }
 
-  #scrollLock = false;
+  #lastScrollY = 0;
+  #ticking = false;
 
   #handleWindowScroll = () => {
-    // Handled by 1-to-1 scroll-linked physical tracking system
-    return;
+    if (!this.#ticking) {
+      window.requestAnimationFrame(this.#updateHeadroom);
+      this.#ticking = true;
+    }
+  };
+
+  #updateHeadroom = () => {
+    const currentScrollY = Math.max(0, window.scrollY || document.documentElement.scrollTop || 0);
+    const scrollDelta = currentScrollY - this.#lastScrollY;
+    const headerHeight = this.offsetHeight || 80;
+    const threshold = 6;
+    const topTolerance = 40;
+
+    const isMenuOpen = document.body.classList.contains('menu-open') || 
+                       document.body.classList.contains('avyah-megamenu-active') ||
+                       Boolean(this.querySelector('.avyah-discover-li.open'));
+
+    if (currentScrollY <= topTolerance) {
+      this.setAttribute('data-headroom-state', 'top');
+      this.classList.remove('headroom--unpinned');
+      this.classList.add('headroom--pinned', 'headroom--top');
+    } else if (scrollDelta > threshold && currentScrollY > headerHeight) {
+      if (!isMenuOpen) {
+        this.setAttribute('data-headroom-state', 'unpinned');
+        this.classList.remove('headroom--pinned', 'headroom--top');
+        this.classList.add('headroom--unpinned');
+      }
+    } else if (scrollDelta < -threshold) {
+      this.setAttribute('data-headroom-state', 'pinned');
+      this.classList.remove('headroom--unpinned', 'headroom--top');
+      this.classList.add('headroom--pinned');
+    }
+
+    this.#lastScrollY = currentScrollY;
+    this.#ticking = false;
   };
 
   connectedCallback() {
@@ -137,14 +171,8 @@ class HeaderComponent extends Component {
     this.#resizeObserver.observe(this);
     this.addEventListener('overflowMinimum', this.#handleOverflowMinimum);
 
-    const stickyMode = this.getAttribute('sticky');
-    if (stickyMode) {
-      this.#observeStickyPosition(stickyMode === 'always');
-
-      if (stickyMode === 'scroll-up' || stickyMode === 'always') {
-        document.addEventListener('scroll', this.#handleWindowScroll);
-      }
-    }
+    document.addEventListener('scroll', this.#handleWindowScroll, { passive: true });
+    this.#updateHeadroom();
   }
 
   disconnectedCallback() {
