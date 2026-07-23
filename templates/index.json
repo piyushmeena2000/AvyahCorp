@@ -153,80 +153,6 @@
         "padding-block-end": 0
       }
     },
-    "176301326056e85bde": {
-      "type": "_blocks",
-      "blocks": {
-        "button_hADLwy": {
-          "type": "button",
-          "name": "t:names.button",
-          "settings": {
-            "label": "GRAB YOUR SNACK",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
-        },
-        "button_eGKtLq": {
-          "type": "button",
-          "name": "t:names.button",
-          "settings": {
-            "label": "EXPLORE FLAVOURS",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "button_hADLwy",
-        "button_eGKtLq"
-      ],
-      "disabled": true,
-      "custom_css": [
-        ".button {font-family: \"Anton\", sans-serif !important; letter-spacing: 1px; border-radius: 8px; padding: 14px 28px; font-size: 20px;}",
-        ".button:first-of-type {background-color: #ffffff !important; color: #c8102e !important; /* crimson red */ border: none !important;}",
-        ".button:last-of-type {background-color: transparent !important; color: #ffffff !important; border: 2px solid #ffffff !important;}",
-        "@media screen and (max-width: 768px) {.button {padding: 12px 20px; font-size: 14px; }}"
-      ],
-      "name": "Hero-Buttons",
-      "settings": {
-        "content_direction": "row",
-        "vertical_on_mobile": false,
-        "horizontal_alignment": "center",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 18,
-        "section_width": "full-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "scheme-1",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 20,
-        "padding-block-end": 20
-      }
-    },
     "blocks_iCdxRh": {
       "type": "_blocks",
       "blocks": {
@@ -1167,7 +1093,6 @@
   },
   "order": [
     "1763012598ae0f747e",
-    "176301326056e85bde",
     "blocks_iCdxRh",
     "whats_inside_section",
     "1761551169f8c757e1",
