@@ -30,6 +30,60 @@
   }
 
   /* ========================================================
+     COLLECTION SUB-NAVIGATION PILL SYSTEM (IMAGE 2 MATCH)
+  ======================================================== */
+  .perfect-collection-subnav {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 14px !important;
+    margin: 24px 0 44px 0 !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+  }
+
+  .perfect-collection-subnav a {
+    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background-color: #91181b !important; /* Darker Crimson Red for Inactive */
+    background: #91181b !important;
+    padding: 12px 28px !important;
+    border-radius: 14px !important;
+    text-decoration: none !important;
+    border: none !important;
+    border-bottom: none !important;
+    outline: none !important;
+    transition: all 0.2s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .perfect-collection-subnav a:hover {
+    background-color: #b01c1f !important;
+    background: #b01c1f !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    border-bottom: none !important;
+  }
+
+  .perfect-collection-subnav a.active {
+    background-color: #d52528 !important; /* Crimson Red for Active */
+    background: #d52528 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    border-bottom: none !important;
+    box-shadow: 0 4px 14px rgba(213, 37, 40, 0.35) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* ========================================================
      1-TO-1 IMAGE 2 MATCH: PERFECT COLLECTION PRODUCT CARD SYSTEM
   ======================================================== */
   .main-collection-grid .product-grid {
