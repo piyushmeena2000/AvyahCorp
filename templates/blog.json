@@ -133,7 +133,7 @@
         "ai_gen_block_ea6d2bb_RMXFJE": {
           "type": "ai_gen_block_ea6d2bb",
           "settings": {
-            "blog": "",
+            "blog": "blogs",
             "articles_limit": 6,
             "heading": "Latest Healthy Eating Tips",
             "subheading": "Discover nutrition advice and wellness insights",
