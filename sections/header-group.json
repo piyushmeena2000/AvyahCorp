@@ -49,12 +49,7 @@
           "blocks": {}
         }
       },
-      "custom_css": [
-        "/* Header */.vertical-mega-menu > .buddha-menu-item > .mm-submenu.height-transition {background-color: black !important;}",
-        ".vertical-mega-menu ul.mm-submenu li a span {color: black !important; font-size: 10px !important; font-weight: 600 !important; letter-spacing: 0px !important;}",
-        ".horizontal-mega-menu ul.mm-submenu.tree li {padding: 10px 20px !important;}",
-        ".horizontal-mega-menu ul.mm-submenu li a span {font-family: anton !important; font-size: 15px !important; color: black !important; font-weight: 200 !important; letter-spacing: 0px !important;}"
-      ],
+      "custom_css": [],
       "settings": {
         "logo_position": "left",
         "menu_position": "center",
