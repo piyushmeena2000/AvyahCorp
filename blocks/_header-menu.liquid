@@ -99,6 +99,52 @@
                       </svg>
                     </a>
                     <div class="avyah-megamenu" id="avyah-megamenu-panel" style="background-color: #d52528 !important; background: #d52528 !important; color: #ffffff !important; border-top: 1px solid rgba(255,255,255,0.2) !important; box-shadow: 0 20px 50px rgba(0,0,0,0.3) !important;">
+                      <style>
+                        .avyah-megamenu a.avyah-megamenu__sidebar-link {
+                          display: block !important;
+                          visibility: visible !important;
+                          opacity: 1 !important;
+                          color: #ffffff !important;
+                          -webkit-text-fill-color: #ffffff !important;
+                          -webkit-background-clip: initial !important;
+                          background-clip: initial !important;
+                          mix-blend-mode: normal !important;
+                          font-family: 'Anton', Arial, sans-serif !important;
+                          font-size: 20px !important;
+                          font-weight: 400 !important;
+                          text-transform: uppercase !important;
+                          text-decoration: none !important;
+                          padding: 10px 16px !important;
+                          border-radius: 4px !important;
+                          margin-bottom: 6px !important;
+                          background-color: transparent !important;
+                          background: transparent !important;
+                          transition: all 0.15s ease !important;
+                        }
+                        .avyah-megamenu a.avyah-megamenu__sidebar-link.active,
+                        .avyah-megamenu a.avyah-megamenu__sidebar-link:hover {
+                          color: #d52528 !important;
+                          -webkit-text-fill-color: #d52528 !important;
+                          background-color: #ffffff !important;
+                          background: #ffffff !important;
+                        }
+                        .avyah-megamenu .avyah-megamenu__card-title {
+                          color: #ffffff !important;
+                          -webkit-text-fill-color: #ffffff !important;
+                          font-family: 'Anton', Arial, sans-serif !important;
+                          font-size: 16px !important;
+                          font-weight: 400 !important;
+                          text-transform: uppercase !important;
+                          text-align: center !important;
+                          display: block !important;
+                          margin-top: 10px !important;
+                        }
+                        .avyah-megamenu .avyah-megamenu__card:hover .avyah-megamenu__card-title {
+                          color: #ffffff !important;
+                          -webkit-text-fill-color: #ffffff !important;
+                          opacity: 0.9 !important;
+                        }
+                      </style>
                       <div class="avyah-megamenu__inner" style="background-color: #d52528 !important; color: #ffffff !important;">
                         <div class="avyah-megamenu__sidebar" style="background-color: #d52528 !important; color: #ffffff !important; border-right: 1px solid rgba(255,255,255,0.2) !important; min-width: 180px !important;">
                           <a href="/collections/all" class="avyah-megamenu__sidebar-link avyah-tab-link active" data-tab="tab-all">SHOP ALL</a>
@@ -164,12 +210,12 @@
                       </div>
                     </div>
                     <div class="avyah-megamenu-backdrop"></div>
-                  {%- elsif _dt contains 'discover' or _dt contains 'blog' -%}
+                  {%- elsif link.links != blank or _dt contains 'discover' or _dt contains 'blog' -%}
                     {%- comment -%} DISCOVER dropdown popover with OUR BLOGS & CAREERS {%- endcomment -%}
                     <a
                       href="#"
                       class="menu-list__link{% if link.current %} menu-list__link--active{% endif %}"
-                      aria-haspopup="false"
+                      aria-haspopup="true"
                       aria-expanded="false"
                       {% if link.current %}aria-current="page"{% endif %}
                     >
@@ -179,25 +225,109 @@
                       </svg>
                     </a>
                     <div class="menu-list__submenu avyah-discover-popover" style="position: absolute !important; top: calc(100% + 8px) !important; left: 50% !important; transform: translateX(-50%) !important; background-color: #ffffff !important; background: #ffffff !important; border-radius: 16px !important; box-shadow: 0 12px 35px rgba(0,0,0,0.2) !important; padding: 10px !important; min-width: 220px !important; box-sizing: border-box !important; z-index: 999999 !important;">
+                      <style>
+                        a.avyah-discover-link {
+                          display: flex !important;
+                          align-items: center !important;
+                          gap: 14px !important;
+                          padding: 12px 16px !important;
+                          border-radius: 12px !important;
+                          text-decoration: none !important;
+                          background-color: #ffffff !important;
+                          background: #ffffff !important;
+                          color: #000000 !important;
+                          -webkit-text-fill-color: #000000 !important;
+                          transition: all 0.15s ease !important;
+                          width: 100% !important;
+                          box-sizing: border-box !important;
+                        }
+                        a.avyah-discover-link span {
+                          color: #000000 !important;
+                          -webkit-text-fill-color: #000000 !important;
+                          -webkit-background-clip: initial !important;
+                          background-clip: initial !important;
+                          mix-blend-mode: normal !important;
+                          font-family: 'Anton', Arial, sans-serif !important;
+                          font-size: 20px !important;
+                          font-weight: 700 !important;
+                          letter-spacing: 0.5px !important;
+                          text-transform: uppercase !important;
+                          line-height: 1 !important;
+                          display: inline-block !important;
+                          visibility: visible !important;
+                          opacity: 1 !important;
+                          margin: 0 !important;
+                          padding: 0 !important;
+                          transition: color 0.15s ease, -webkit-text-fill-color 0.15s ease !important;
+                        }
+                        a.avyah-discover-link svg {
+                          stroke: #000000 !important;
+                          color: #000000 !important;
+                          fill: none !important;
+                          flex-shrink: 0 !important;
+                          transition: stroke 0.15s ease, color 0.15s ease !important;
+                        }
+                        a.avyah-discover-link:hover {
+                          background-color: #fff5f5 !important;
+                          background: #fff5f5 !important;
+                        }
+                        a.avyah-discover-link:hover span {
+                          color: #d52528 !important;
+                          -webkit-text-fill-color: #d52528 !important;
+                        }
+                        a.avyah-discover-link:hover svg {
+                          stroke: #d52528 !important;
+                          color: #d52528 !important;
+                        }
+                      </style>
+
                       <div class="avyah-discover-arrow" style="position: absolute !important; top: -8px !important; left: 50% !important; transform: translateX(-50%) !important; width: 0 !important; height: 0 !important; border-left: 8px solid transparent !important; border-right: 8px solid transparent !important; border-bottom: 8px solid #ffffff !important; z-index: 100000 !important;"></div>
                       
                       <div class="menu-list__submenu-inner" style="background-color: #ffffff !important; background: #ffffff !important;">
                         <div class="mega-menu__grid" style="display: flex !important; flex-direction: column !important; gap: 4px !important; background-color: #ffffff !important; background: #ffffff !important;">
-                          <!-- ITEM 1: OUR BLOGS -->
-                          <div class="mega-menu__column" style="width: 100% !important; background-color: #ffffff !important;">
-                            <a href="/blogs/news" class="avyah-discover-link">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="avyah-discover-icon"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                              <span class="avyah-discover-title-text">OUR BLOGS</span>
-                            </a>
-                          </div>
+                          {%- if link.links != blank -%}
+                            {%- for childlink in link.links -%}
+                              {%- assign _child_url = childlink.url -%}
+                              {%- assign _cdt = childlink.title | downcase -%}
+                              {%- if _cdt contains 'blog' or _cdt contains 'news' -%}
+                                {%- assign _child_url = '/blogs/news' -%}
+                                {%- if childlink.url != blank and childlink.url != '#' -%}
+                                  {%- assign _child_url = childlink.url -%}
+                                {%- endif -%}
+                              {%- elsif _cdt contains 'career' or _cdt contains 'job' -%}
+                                {%- assign _child_url = '/pages/careers' -%}
+                                {%- if childlink.url != blank and childlink.url != '#' -%}
+                                  {%- assign _child_url = childlink.url -%}
+                                {%- endif -%}
+                              {%- endif -%}
+                              <div class="mega-menu__column" style="width: 100% !important; background-color: #ffffff !important;">
+                                <a href="{{ _child_url }}" class="avyah-discover-link" style="display: flex !important; align-items: center !important; gap: 14px !important; background-color: #ffffff !important; text-decoration: none !important; padding: 12px 16px !important; border-radius: 12px !important; width: 100% !important; box-sizing: border-box !important;">
+                                  {%- if _cdt contains 'blog' or _cdt contains 'news' -%}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0 !important;"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/></svg>
+                                  {%- else -%}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0 !important;"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                                  {%- endif -%}
+                                  <span class="avyah-discover-title-text" style="color: #000000 !important; -webkit-text-fill-color: #000000 !important; -webkit-background-clip: initial !important; background-clip: initial !important; mix-blend-mode: normal !important; font-family: 'Anton', Arial, sans-serif !important; font-size: 20px !important; font-weight: 700 !important; text-transform: uppercase !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; line-height: 1 !important;">{{ childlink.title | upcase }}</span>
+                                </a>
+                              </div>
+                            {%- endfor -%}
+                          {%- else -%}
+                            <!-- ITEM 1: OUR BLOGS -->
+                            <div class="mega-menu__column" style="width: 100% !important; background-color: #ffffff !important;">
+                              <a href="/blogs/news" class="avyah-discover-link" style="display: flex !important; align-items: center !important; gap: 14px !important; background-color: #ffffff !important; text-decoration: none !important; padding: 12px 16px !important; border-radius: 12px !important; width: 100% !important; box-sizing: border-box !important;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0 !important;"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/></svg>
+                                <span class="avyah-discover-title-text" style="color: #000000 !important; -webkit-text-fill-color: #000000 !important; -webkit-background-clip: initial !important; background-clip: initial !important; mix-blend-mode: normal !important; font-family: 'Anton', Arial, sans-serif !important; font-size: 20px !important; font-weight: 700 !important; text-transform: uppercase !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; line-height: 1 !important;">OUR BLOGS</span>
+                              </a>
+                            </div>
 
-                          <!-- ITEM 2: CAREERS -->
-                          <div class="mega-menu__column" style="width: 100% !important; background-color: #ffffff !important;">
-                            <a href="/pages/careers" class="avyah-discover-link">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="avyah-discover-icon"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                              <span class="avyah-discover-title-text">CAREERS</span>
-                            </a>
-                          </div>
+                            <!-- ITEM 2: CAREERS -->
+                            <div class="mega-menu__column" style="width: 100% !important; background-color: #ffffff !important;">
+                              <a href="/pages/careers" class="avyah-discover-link" style="display: flex !important; align-items: center !important; gap: 14px !important; background-color: #ffffff !important; text-decoration: none !important; padding: 12px 16px !important; border-radius: 12px !important; width: 100% !important; box-sizing: border-box !important;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0 !important;"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                                <span class="avyah-discover-title-text" style="color: #000000 !important; -webkit-text-fill-color: #000000 !important; -webkit-background-clip: initial !important; background-clip: initial !important; mix-blend-mode: normal !important; font-family: 'Anton', Arial, sans-serif !important; font-size: 20px !important; font-weight: 700 !important; text-transform: uppercase !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; line-height: 1 !important;">CAREERS</span>
+                              </a>
+                            </div>
+                          {%- endif -%}
                         </div>
                       </div>
                     </div>
