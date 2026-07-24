@@ -515,9 +515,7 @@
         "spacer_gaqnmB",
         "ai_gen_block_17686ae_aXgj4U"
       ],
-      "custom_css": [
-        "h1 {font-size: 23vh; color: black;}"
-      ],
+      "custom_css": [],
       "name": "Healthy",
       "settings": {
         "content_direction": "column",
@@ -657,11 +655,7 @@
       "block_order": [
         "ai_gen_block_193b272_PY9Kt7"
       ],
-      "custom_css": [
-        ".section-background {background-color: #d52528 !important; background: #d52528 !important;}",
-        ".section {background-color: #d52528 !important; background: #d52528 !important;}",
-        "div {background-color: #d52528 !important; background: #d52528 !important;}"
-      ],
+      "custom_css": [],
       "name": "Available At",
       "settings": {
         "content_direction": "column",
