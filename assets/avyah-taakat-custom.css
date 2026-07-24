@@ -2190,10 +2190,10 @@ body.template-page-bulk-order main#MainContent,
 .avyah-discover-card a:hover *,
 .avyah-discover-card a.avyah-discover-item-link:hover,
 .avyah-discover-card a:hover .avyah-discover-item-text {
-  background-color: #fef2f2 !important;
-  background: #fef2f2 !important;
-  color: #d52528 !important;
-  -webkit-text-fill-color: #d52528 !important;
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
 
 .avyah-discover-card a .dd-icon,
@@ -2207,8 +2207,9 @@ body.template-page-bulk-order main#MainContent,
 
 .avyah-discover-card a:hover .dd-icon,
 .avyah-discover-card a:hover .dd-icon * {
-  color: #d52528 !important;
-  stroke: #d52528 !important;
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  fill: none !important;
 }
 
 /* ========================================================

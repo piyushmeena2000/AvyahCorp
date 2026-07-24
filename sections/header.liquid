@@ -704,18 +704,35 @@
     flex-shrink: 0;
   }
 
-  /* Dropdown panel — uses padding-top as an invisible hover bridge */
+  /* Dropdown panel container */
   .avyah-discover-dropdown {
     position: absolute;
     top: 100%;
     left: 50%;
-    padding-top: 14px; /* invisible bridge so mouse can travel to menu */
+    padding-top: 12px;
     min-width: 210px;
     z-index: 9999;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.18s ease, transform 0.18s ease;
     transform: translateX(-50%) translateY(-4px);
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  /* Solid white triangle notch at top center */
+  .avyah-discover-dropdown::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent !important;
+    border-right: 9px solid transparent !important;
+    border-bottom: 9px solid #ffffff !important;
+    z-index: 10001;
   }
 
   .avyah-discover-li:hover .avyah-discover-dropdown,
@@ -731,41 +748,33 @@
     transform: rotate(180deg);
   }
 
-  /* The visible white card */
+  /* Pure white rounded card container */
   .avyah-discover-card {
+    position: relative;
     background: #ffffff !important;
     background-color: #ffffff !important;
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-    border: 1px solid rgba(0,0,0,0.07);
-    padding: 6px 0;
-    overflow: hidden;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.25) !important;
+    border: none !important;
+    padding: 0 !important;
+    overflow: hidden !important;
   }
 
-  /* Arrow notch */
   .avyah-discover-card::before {
-    content: '';
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    width: 12px;
-    height: 12px;
-    background: #ffffff !important;
-    border-left: 1px solid rgba(0,0,0,0.07);
-    border-top: 1px solid rgba(0,0,0,0.07);
-    transform: translateX(-50%) rotate(45deg);
+    display: none !important;
   }
 
+  /* Non-hovered items: Pure White background, Black text, Black icon */
   .avyah-discover-card a,
   .avyah-discover-card a:not(:hover),
   .avyah-discover-card a.avyah-discover-item-link,
   .avyah-discover-card a.avyah-discover-item-link:not(:hover) {
     display: flex !important;
     align-items: center !important;
-    gap: 10px !important;
-    padding: 11px 20px !important;
+    gap: 14px !important;
+    padding: 14px 22px !important;
     font-family: 'Anton', sans-serif !important;
-    font-size: 14px !important;
+    font-size: 18px !important;
     font-weight: 400 !important;
     background-color: #ffffff !important;
     background: #ffffff !important;
@@ -773,8 +782,8 @@
     -webkit-text-fill-color: #000000 !important;
     text-decoration: none !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.8px !important;
-    transition: background 0.15s, color 0.15s !important;
+    letter-spacing: 0.5px !important;
+    transition: background 0.15s ease, color 0.15s ease !important;
     white-space: nowrap !important;
   }
 
@@ -785,35 +794,40 @@
     -webkit-text-fill-color: #000000 !important;
   }
 
-  .avyah-discover-card a:hover,
-  .avyah-discover-card a.avyah-discover-item-link:hover {
-    background: #fef2f2 !important;
-    color: #d52528 !important;
-    -webkit-text-fill-color: #d52528 !important;
-  }
-
-  .avyah-discover-card a:hover *,
-  .avyah-discover-card a:hover .avyah-discover-item-text {
-    color: #d52528 !important;
-    -webkit-text-fill-color: #d52528 !important;
-  }
-
   .avyah-discover-card a .dd-icon,
-  .avyah-discover-card a .dd-icon * {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
+  .avyah-discover-card a .dd-icon *,
+  .avyah-discover-card a:not(:hover) .dd-icon,
+  .avyah-discover-card a:not(:hover) .dd-icon * {
+    width: 22px !important;
+    height: 22px !important;
+    flex-shrink: 0 !important;
     opacity: 1 !important;
     color: #000000 !important;
     stroke: #000000 !important;
     fill: none !important;
-    transition: color 0.15s, stroke 0.15s;
+    transition: color 0.15s ease, stroke 0.15s ease !important;
+  }
+
+  /* Hovered items: Crimson Red background (#d52528), Pure White text, Pure White icon */
+  .avyah-discover-card a:hover,
+  .avyah-discover-card a.avyah-discover-item-link:hover {
+    background-color: #d52528 !important;
+    background: #d52528 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+
+  .avyah-discover-card a:hover *,
+  .avyah-discover-card a:hover .avyah-discover-item-text {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
   }
 
   .avyah-discover-card a:hover .dd-icon,
   .avyah-discover-card a:hover .dd-icon * {
-    color: #d52528 !important;
-    stroke: #d52528 !important;
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+    fill: none !important;
   }
 
   /* Mobile */
@@ -830,14 +844,15 @@
       border: none;
       border-radius: 0;
       padding: 4px 0 4px 12px;
-      background: transparent;
+      background: transparent !important;
     }
-    .avyah-discover-card::before { display: none; }
+    .avyah-discover-card::before,
+    .avyah-discover-dropdown::before { display: none !important; }
     .avyah-discover-card a {
       color: inherit !important;
       padding: 8px 0 !important;
-      font-size: 13px !important;
-      border-left: 2px solid #700a0c;
+      font-size: 14px !important;
+      border-left: 2px solid #ffffff;
       padding-left: 10px !important;
     }
   }
