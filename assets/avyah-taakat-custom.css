@@ -1,5 +1,9 @@
 /* ========== TAAKAT BESPOKE OVERRIDES CSS ========== */
 
+style, script {
+  display: none !important;
+}
+
 /* Force Section Background to White and text to Charcoal Dark Brown */
 .taakat-custom-product-page .product-information {
   background-color: #ffffff !important;
