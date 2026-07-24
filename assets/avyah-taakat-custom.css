@@ -2410,6 +2410,92 @@ body.template-page-bulk-order main#MainContent,
   stroke: #d52528 !important;
 }
 
+/* Megamenu & Discover Dropdown Styles */
+.avyah-megamenu a.avyah-megamenu__sidebar-link {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  padding: 10px 16px !important;
+  border-radius: 4px !important;
+  margin-bottom: 6px !important;
+  background-color: transparent !important;
+  transition: all 0.15s ease !important;
+}
+
+.avyah-megamenu a.avyah-megamenu__sidebar-link.active,
+.avyah-megamenu a.avyah-megamenu__sidebar-link:hover {
+  color: #d52528 !important;
+  -webkit-text-fill-color: #d52528 !important;
+  background-color: #ffffff !important;
+}
+
+.avyah-megamenu .avyah-megamenu__card-title {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+  display: block !important;
+  margin-top: 10px !important;
+}
+
+a.avyah-discover-link {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  padding: 12px 16px !important;
+  border-radius: 12px !important;
+  text-decoration: none !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  transition: all 0.15s ease !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+a.avyah-discover-link span {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
+  display: inline-block !important;
+}
+
+a.avyah-discover-link svg {
+  stroke: #000000 !important;
+  color: #000000 !important;
+  fill: none !important;
+  flex-shrink: 0 !important;
+}
+
+a.avyah-discover-link:hover {
+  background-color: #fff5f5 !important;
+}
+
+a.avyah-discover-link:hover span {
+  color: #d52528 !important;
+  -webkit-text-fill-color: #d52528 !important;
+}
+
+a.avyah-discover-link:hover svg {
+  stroke: #d52528 !important;
+  color: #d52528 !important;
+}
+
 /* ========================================================
    BENEFITS TICKER MARQUEE - SEAMLESS CRIMSON RED & WHITE ICONS
    - Transparent item backgrounds (0% white blocks)
