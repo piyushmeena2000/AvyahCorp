@@ -143,24 +143,24 @@
     flex: 0 0 calc((100% - ({{ block.settings.desktop_cards_visible | minus: 1 }} * {{ block.settings.card_gap }}px)) / {{ block.settings.desktop_cards_visible }});
     max-width: 420px !important;
     min-width: 310px !important;
-    min-height: 520px !important;
-    background-color: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    overflow: visible;
+    min-height: 490px !important;
+    background-color: #ffffff !important;
+    border-radius: 20px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+    border: 1px solid #eeeeee !important;
+    overflow: hidden !important;
     position: relative;
-    padding: 16px;
+    padding: 14px !important;
     margin-bottom: 30px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: none; /* Removed black stroke */
   }
 
   .ai-product-card-{{ ai_gen_id }}:hover {
     transform: translateY(-4px); /* Soft lift hover */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08) !important;
   }
 
   .ai-product-card-image-{{ ai_gen_id }} {
@@ -173,38 +173,70 @@
     width: 100%;
     aspect-ratio: 1 / 1 !important;
     overflow: hidden;
-    border-radius: 12px;
+    border-radius: 16px !important;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
     position: relative;
-    border: none; /* Removed black stroke */
+    border: none;
   }
 
   .ai-product-card-image-{{ ai_gen_id }} img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain !important;
+    padding: 6px !important;
+    mix-blend-mode: multiply !important;
     transition: transform 0.3s ease;
   }
 
-  /* Retro BESTSELLER badge */
+  /* Flame BESTSELLER badge */
   .ai-product-badge-{{ ai_gen_id }} {
     position: absolute;
     top: 10px;
     left: 10px;
-    background-color: #a72023;
-    color: #ffffff;
-    padding: 4px 10px;
-    font-family: 'Anton', sans-serif;
+    background-color: #d52528 !important;
+    color: #ffffff !important;
+    padding: 6px 12px;
+    font-family: 'Anton', 'Inter', sans-serif;
     font-size: 11px;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     z-index: 10;
-    border-radius: 4px;
-    border: none; /* Removed black stroke */
-    box-shadow: none; /* Removed shadow */
+    border-radius: 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  }
+
+  .ai-product-quick-view-btn-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.95);
+    color: #222222;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    transition: all 0.2s ease;
+  }
+
+  .ai-product-quick-view-btn-{{ ai_gen_id }}:hover {
+    background: #ffffff;
+    transform: scale(1.05);
   }
 
   .ai-product-card-content-{{ ai_gen_id }} {
@@ -248,40 +280,37 @@
     font-family: 'Inter', sans-serif;
   }
 
-  /* Title: bold Anton font */
-  .ai-product-card-title-{{ ai_gen_id }} {
-    font-size: 20px;
-    font-weight: 400;
-    color: #000000 !important;
-    margin: 0 0 6px;
-    line-height: 1.15;
-    min-height: calc(20px * 1.15 * 2);
+  /* Title: bold uppercase font matching reference image */
+  .ai-product-card-title-{{ ai_gen_id }},
+  .ai-product-card-title-{{ ai_gen_id }} a {
+    font-size: 17px !important;
+    font-weight: 400 !important;
+    color: #111111 !important;
+    -webkit-text-fill-color: #111111 !important;
+    margin: 4px 0 4px;
+    line-height: 1.2 !important;
+    min-height: calc(17px * 1.2 * 2);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    font-family: 'Anton', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-family: 'Anton', Arial, sans-serif !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.4px !important;
     text-align: left !important;
+    text-decoration: none !important;
     width: 100% !important;
   }
 
-  .ai-product-card-title-{{ ai_gen_id }} a {
-    color: #000000 !important;
-    text-decoration: none;
-    text-align: left !important;
-  }
-
   .ai-product-card-specs-{{ ai_gen_id }} {
-    font-size: 12px;
-    font-weight: 700;
-    color: #666666 !important;
-    margin: 4px 0 10px;
-    font-family: 'Inter', sans-serif;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: #8c7f7c !important;
+    margin: 2px 0 12px 0 !important;
+    font-family: 'Inter', sans-serif !important;
     text-align: left !important;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
     width: 100% !important;
     margin-left: 0 !important;
   }
@@ -291,16 +320,15 @@
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    justify-content: flex-start !important;
+    justify-content: space-between !important;
     align-self: flex-start !important;
     text-align: left !important;
     flex-wrap: wrap;
     gap: 8px;
-    margin: 4px 0 10px 0 !important;
+    margin: 4px 0 14px 0 !important;
     margin-left: 0 !important;
-    margin-right: auto !important;
     width: 100% !important;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif !important;
   }
 
   .ai-product-card-price-row-{{ ai_gen_id }} .compare-price {
@@ -311,57 +339,68 @@
   }
 
   .ai-product-card-price-row-{{ ai_gen_id }} .current-price {
-    color: #000000;
-    font-size: 18px;
-    font-weight: 900;
+    color: #111111 !important;
+    font-size: 21px !important;
+    font-weight: 900 !important;
+    letter-spacing: -0.3px !important;
+    font-family: 'Inter', sans-serif !important;
   }
 
   .ai-product-card-price-row-{{ ai_gen_id }} .discount-badge {
-    background-color: #d52528 !important; /* Crimson Red discount badge */
-    color: #ffffff !important;
-    font-size: 11px;
-    font-weight: 800;
-    padding: 4px 8px;
-    border-radius: 4px;
-    text-transform: uppercase;
+    background-color: #fde8e8 !important;
+    color: #d52528 !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    padding: 4px 10px !important;
+    border-radius: 6px !important;
+    text-transform: uppercase !important;
     letter-spacing: 0.5px;
-    border: none;
-    margin-left: 0 !important;
+    border: none !important;
+    margin-left: auto !important;
+    font-family: 'Inter', sans-serif !important;
   }
 
-  /* Bold button with solid outline and pop shadow */
+  /* Action Buttons Row (ADD TO CART + WISHLIST HEART) */
+  .ai-product-card-actions-{{ ai_gen_id }} {
+    display: flex !important;
+    gap: 8px !important;
+    width: 100% !important;
+    align-items: center !important;
+    margin-top: auto !important;
+  }
+
   .ai-product-card-button-{{ ai_gen_id }} {
-    position: relative;
-    display: block;
-    width: 100%;
-    background-color: #8B0000 !important; /* Dark Crimson Red button */
-    background: #8B0000 !important;
+    flex: 1 !important;
+    height: 46px !important;
+    background-color: #d52528 !important;
+    background: #d52528 !important;
     color: #ffffff !important;
-    padding: 12px 6px;
-    border-radius: 8px;
-    font-size: 18px !important;
-    font-weight: 400;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    text-align: center;
-    font-family: 'Anton', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 5px;
+    border-radius: 10px !important;
+    padding: 0 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    font-family: 'Anton', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 4px 12px rgba(213, 37, 40, 0.2) !important;
+    margin-top: 0 !important;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
-    border: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   }
 
   .ai-product-card-button-{{ ai_gen_id }}:hover {
-    background-color: #6d0000 !important; /* Darker Crimson Red on Hover */
-    background: #6d0000 !important;
+    background-color: #b01b1e !important;
+    background: #b01b1e !important;
     color: #ffffff !important;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(139, 0, 0, 0.4);
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 16px rgba(213, 37, 40, 0.35) !important;
   }
 
   .ai-product-card-button-{{ ai_gen_id }}:active {
@@ -369,11 +408,39 @@
   }
 
   .ai-product-card-button-{{ ai_gen_id }}:disabled {
-    background-color: #cccccc;
-    color: #666666;
+    background-color: #cccccc !important;
+    color: #666666 !important;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
+  }
+
+  .ai-product-wishlist-btn-{{ ai_gen_id }} {
+    width: 46px !important;
+    height: 46px !important;
+    flex-shrink: 0 !important;
+    border-radius: 10px !important;
+    border: 1.5px solid #e0e0e0 !important;
+    background: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .ai-product-wishlist-btn-{{ ai_gen_id }}:hover {
+    border-color: #d52528 !important;
+  }
+
+  .ai-product-wishlist-btn-{{ ai_gen_id }}.active {
+    border-color: #d52528 !important;
+    background: #fff5f5 !important;
+  }
+
+  .ai-product-wishlist-btn-{{ ai_gen_id }}.active svg {
+    fill: #d52528 !important;
+    stroke: #d52528 !important;
   }
 
   .ai-product-slider-dots-{{ ai_gen_id }} {
@@ -560,7 +627,7 @@
     <div class="ai-product-slider-track-{{ ai_gen_id }}" data-track>
       {% if block.settings.product_list != blank %}
         {% for product in block.settings.product_list %}
-          {% assign colors = "#d1ebd8,#fedeb2,#f7f4ea,#fef0b3,#d8f3f5" | split: "," %}
+          {% assign colors = "#f5ede4,#f4ece1,#eee6dc,#f6efe6,#f2eae0" | split: "," %}
           {% assign color_index = forloop.index0 | modulo: 5 %}
           {% assign card_bg_color = colors[color_index] %}
           
@@ -575,7 +642,12 @@
           <div class="ai-product-card-{{ ai_gen_id }}" data-category="{{ product_category }}">
             <a href="{{ product.url }}" class="ai-product-card-image-{{ ai_gen_id }}">
               <div class="ai-product-card-image-wrapper-{{ ai_gen_id }}" style="background-color: {{ card_bg_color }};">
-                <span class="ai-product-badge-{{ ai_gen_id }}">BESTSELLER</span>
+                <span class="ai-product-badge-{{ ai_gen_id }}">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#ffffff" style="margin-right: 3px; vertical-align: -1px;">
+                    <path d="M12 23c-4.97 0-9-3.58-9-8 0-4.19 3.03-7.6 7-8.77.56-.17 1.09.24 1.09.81 0 1.25.75 2.37 1.88 2.82.72.29 1.48.11 2-.43C16.59 7.71 18 5.48 18 3c0-.46.47-.78.9-.61C21.41 3.46 23 6.54 23 10c0 7.18-5.82 13-11 13z"/>
+                  </svg>
+                  BESTSELLER
+                </span>
                 {% if product.featured_image %}
                   <img
                     src="{{ product.featured_image | image_url: width: 600 }}"
@@ -589,18 +661,17 @@
                     {{ 'product-1' | placeholder_svg_tag }}
                   </div>
                 {% endif %}
+
+                <button type="button" class="ai-product-quick-view-btn-{{ ai_gen_id }}" onclick="window.location.href='{{ product.url }}'; return false;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                  Quick View
+                </button>
               </div>
             </a>
             <div class="ai-product-card-content-{{ ai_gen_id }}">
-              <div class="ai-product-card-reviews-{{ ai_gen_id }}">
-                <span class="stars">★★★★★</span>
-                <span class="rating-num">4.9</span>
-                <span class="count">
-                  {% assign ratings = "1,420,2,172,934,1,850,3,110" | split: "," %}
-                  {% assign rating_index = forloop.index0 | modulo: 5 %}
-                  ({{ ratings[rating_index] }})
-                </span>
-              </div>
               <h3 class="ai-product-card-title-{{ ai_gen_id }}">
                 <a href="{{ product.url }}">{{ product.title }}</a>
               </h3>
@@ -662,38 +733,51 @@
                   endif
                 endif
               %}
-              <p class="ai-product-card-specs-{{ ai_gen_id }}" style="text-align: left !important; margin-left: 0 !important; color: #666666 !important; font-weight: 600 !important; text-transform: uppercase !important; font-size: 12px !important; margin-top: 4px !important; margin-bottom: 8px !important;">{{ qty_text }}</p>
+              <p class="ai-product-card-specs-{{ ai_gen_id }}">{{ qty_text }}</p>
               
               <!-- Pricing Row -->
-              <div class="ai-product-card-price-row-{{ ai_gen_id }}" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; margin-top: 8px !important; margin-bottom: 12px !important;">
-                <span class="current-price" style="font-size: 24px !important; font-weight: 900 !important; color: #000000 !important; font-family: 'Inter', sans-serif !important; letter-spacing: -0.5px !important; text-align: left !important; margin-left: 0 !important; float: left !important;">{{ product.price | money }}</span>
+              <div class="ai-product-card-price-row-{{ ai_gen_id }}">
+                <span class="current-price">{{ product.price | money }}</span>
                 {% if product.compare_at_price > product.price %}
-                  <span class="discount-badge" style="background-color: #d52528 !important; color: #ffffff !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 4px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">
+                  <span class="discount-badge">
                     -{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}% OFF
                   </span>
                 {% else %}
-                  <span class="discount-badge" style="background-color: #d52528 !important; color: #ffffff !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 4px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">-8% OFF</span>
+                  <span class="discount-badge">-5% OFF</span>
                 {% endif %}
               </div>
             </div>
-            <button
-              class="ai-product-card-button-{{ ai_gen_id }}"
-              style="background-color: #8B0000 !important; background: #8B0000 !important; color: #ffffff !important; border-color: #8B0000 !important;"
-              data-product-id="{{ product.id }}"
-              data-variant-id="{{ product.selected_or_first_available_variant.id }}"
-              {% unless product.available %}disabled{% endunless %}
-            >
-              {% if product.available %}
-                ADD TO CART
-              {% else %}
-                SOLD OUT
-              {% endif %}
-            </button>
+
+            <!-- Action Row (ADD TO CART + WISHLIST HEART) -->
+            <div class="ai-product-card-actions-{{ ai_gen_id }}">
+              <button
+                class="ai-product-card-button-{{ ai_gen_id }}"
+                data-product-id="{{ product.id }}"
+                data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                {% unless product.available %}disabled{% endunless %}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="9" cy="21" r="1"></circle>
+                  <circle cx="20" cy="21" r="1"></circle>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                {% if product.available %}
+                  ADD TO CART
+                {% else %}
+                  SOLD OUT
+                {% endif %}
+              </button>
+              <button type="button" class="ai-product-wishlist-btn-{{ ai_gen_id }}" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('active');">
+                <svg class="wishlist-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              </button>
+            </div>
           </div>
         {% endfor %}
       {% else %}
         {% for i in (1..8) %}
-          {% assign colors = "#d1ebd8,#fedeb2,#f7f4ea,#fef0b3,#d8f3f5" | split: "," %}
+          {% assign colors = "#f5ede4,#f4ece1,#eee6dc,#f6efe6,#f2eae0" | split: "," %}
           {% assign color_index = forloop.index0 | modulo: 5 %}
           {% assign card_bg_color = colors[color_index] %}
           
@@ -707,31 +791,47 @@
           <div class="ai-product-card-{{ ai_gen_id }}" data-category="{{ product_category }}">
             <div class="ai-product-card-image-{{ ai_gen_id }}">
               <div class="ai-product-card-image-wrapper-{{ ai_gen_id }}" style="background-color: {{ card_bg_color }};">
-                <span class="ai-product-badge-{{ ai_gen_id }}">BESTSELLER</span>
+                <span class="ai-product-badge-{{ ai_gen_id }}">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#ffffff" style="margin-right: 3px; vertical-align: -1px;">
+                    <path d="M12 23c-4.97 0-9-3.58-9-8 0-4.19 3.03-7.6 7-8.77.56-.17 1.09.24 1.09.81 0 1.25.75 2.37 1.88 2.82.72.29 1.48.11 2-.43C16.59 7.71 18 5.48 18 3c0-.46.47-.78.9-.61C21.41 3.46 23 6.54 23 10c0 7.18-5.82 13-11 13z"/>
+                  </svg>
+                  BESTSELLER
+                </span>
                 <div class="ai-product-card-image-placeholder-{{ ai_gen_id }}">
                   {{ 'product-1' | placeholder_svg_tag }}
                 </div>
+                <button type="button" class="ai-product-quick-view-btn-{{ ai_gen_id }}">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                  Quick View
+                </button>
               </div>
             </div>
             <div class="ai-product-card-content-{{ ai_gen_id }}">
-              <div class="ai-product-card-reviews-{{ ai_gen_id }}">
-                <span class="stars">★★★★★</span>
-                <span class="rating-num">4.9</span>
-                <span class="count">({{ i | times: 184 | plus: 120 }})</span>
-              </div>
-              <h3 class="ai-product-card-title-{{ ai_gen_id }}">Sample Product Title</h3>
-              <p class="ai-product-card-specs-{{ ai_gen_id }}" style="text-align: left !important; margin-left: 0 !important; color: #666666 !important; font-weight: 600 !important; text-transform: uppercase !important; font-size: 12px !important; margin-top: 4px !important; margin-bottom: 8px !important;">PACK OF 1 • 10 BARS</p>
-              <div class="ai-product-card-price-row-{{ ai_gen_id }}" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; margin-top: 8px !important; margin-bottom: 12px !important;">
-                <span class="current-price" style="font-size: 24px !important; font-weight: 900 !important; color: #000000 !important; font-family: 'Inter', sans-serif !important; letter-spacing: -0.5px !important; text-align: left !important; margin-left: 0 !important; float: left !important;">Rs. 550.00</span>
-                <span class="discount-badge" style="background-color: #d52528 !important; color: #ffffff !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 4px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">-8% OFF</span>
+              <h3 class="ai-product-card-title-{{ ai_gen_id }}">TAAKAT HUNGER BAR | CHOCO BURST | MULTIGRAIN | CLEAN CHOCOLATE</h3>
+              <p class="ai-product-card-specs-{{ ai_gen_id }}">PACK OF 1 • 10 BARS</p>
+              <div class="ai-product-card-price-row-{{ ai_gen_id }}">
+                <span class="current-price">Rs. 570.00</span>
+                <span class="discount-badge">-5% OFF</span>
               </div>
             </div>
-            <button
-              class="ai-product-card-button-{{ ai_gen_id }}"
-              style="background-color: #8B0000 !important; background: #8B0000 !important; color: #ffffff !important; border-color: #8B0000 !important;"
-            >
-              ADD TO CART
-            </button>
+            <div class="ai-product-card-actions-{{ ai_gen_id }}">
+              <button class="ai-product-card-button-{{ ai_gen_id }}">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="9" cy="21" r="1"></circle>
+                  <circle cx="20" cy="21" r="1"></circle>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                ADD TO CART
+              </button>
+              <button type="button" class="ai-product-wishlist-btn-{{ ai_gen_id }}" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('active');">
+                <svg class="wishlist-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              </button>
+            </div>
           </div>
         {% endfor %}
       {% endif %}

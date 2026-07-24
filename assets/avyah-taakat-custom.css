@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap');
+
 /* ========== TAAKAT BESPOKE OVERRIDES CSS ========== */
 
 /* Force Section Background to White and text to Charcoal Dark Brown */
@@ -616,6 +618,8 @@ facets-form,
 .facet-filters__summary {
   color: #000000 !important;
   font-weight: 600 !important;
+}
+
 /* Completely Hide Filter & Sort Bar (Availability, Price, Sort) */
 .facets-container,
 .facets,
@@ -909,6 +913,8 @@ results-list .product-card .jdgm-prev-badge__text,
   font-size: 13px !important;
   font-weight: 600 !important;
   color: #333333 !important;
+}
+
 /* Product Card Star Rating & Reviews above title */
 body.template-index [class*="ai-product-card-reviews"],
 body.template-index [class*="product-card-reviews"],
@@ -979,28 +985,30 @@ body.template-index [class*="ai-product-card"] .compare-price {
   margin-right: 6px !important;
 }
 
-/* Discount Badge - Crimson Red (#d52528) with WHITE Text */
-body.template-index [class*="discount-badge"],
-body.template-index [class*="discount"],
-body.template-index [class*="badge--sale"],
-body.template-index [class*="price__badge-sale"],
-body.template-index [class*="product-card"] [class*="discount"],
-body.template-index [class*="ai-product-card"] [class*="discount-badge"],
-body.template-index [class*="product-card"] .discount-badge,
-body.template-index [class*="ai-product-card"] .discount-badge {
-  background-color: #d52528 !important;
-  background: #d52528 !important;
-  color: #ffffff !important;
-  border-radius: 4px !important;
-  padding: 3px 8px !important;
+/* Discount Badge - Soft Pink Pill (#fde8e8) with Crimson Red Text (#d52528) */
+[class*="discount-badge"],
+[class*="discount"],
+[class*="badge--sale"],
+[class*="price__badge-sale"],
+.product-card .discount-badge,
+[class*="ai-product-card"] .discount-badge {
+  background-color: #fde8e8 !important;
+  background: #fde8e8 !important;
+  color: #d52528 !important;
+  border-radius: 6px !important;
+  padding: 4px 10px !important;
   font-weight: 800 !important;
+  font-size: 12px !important;
+  font-family: 'Inter', sans-serif !important;
+  text-transform: uppercase !important;
+  border: none !important;
 }
 
-body.template-index [class*="discount-badge"] *,
-body.template-index [class*="discount"] *,
-body.template-index [class*="product-card"] .discount-badge *,
-body.template-index [class*="ai-product-card"] .discount-badge * {
-  color: #ffffff !important;
+[class*="discount-badge"] *,
+[class*="discount"] *,
+.product-card .discount-badge *,
+[class*="ai-product-card"] .discount-badge * {
+  color: #d52528 !important;
 }
 
 /* 5. ADD TO CART Pill Button */
@@ -1267,11 +1275,14 @@ body.template-index dialog.cart-drawer__dialog button#checkout:hover {
 /* ========================================================
    UNIFIED COLLECTION PRODUCT CARD FRAME (IMAGE 2 MATCH)
 ======================================================== */
+/* ========================================================
+   UNIFIED PRODUCT CARD FRAME (IMAGE 2 MATCH)
+======================================================== */
 .product-grid__item.avyah-unified-product-card,
 .product-grid__item {
-  border: 1.5px solid #d52528 !important;
-  border-radius: 4px !important;
-  padding: 12px 12px 0 12px !important;
+  border: 1px solid #eeeeee !important;
+  border-radius: 20px !important;
+  padding: 14px !important;
   background-color: #ffffff !important;
   display: flex !important;
   flex-direction: column !important;
@@ -1280,7 +1291,13 @@ body.template-index dialog.cart-drawer__dialog button#checkout:hover {
   box-sizing: border-box !important;
   height: 100% !important;
   overflow: hidden !important;
-  box-shadow: none !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.product-grid__item:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08) !important;
 }
 
 .product-grid__item .product-card,
@@ -1293,19 +1310,21 @@ body.template-index dialog.cart-drawer__dialog button#checkout:hover {
 
 .perfect-card-subcaption {
   font-family: 'Inter', sans-serif !important;
-  font-size: 11px !important;
-  font-weight: 600 !important;
-  color: #666666 !important;
-  text-align: center !important;
-  margin: 4px 0 8px 0 !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: #8c7f7c !important;
+  text-align: left !important;
+  margin: 2px 0 12px 0 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
   width: 100% !important;
 }
 
 .avyah-card-quick-add-form {
   display: block !important;
-  width: calc(100% + 24px) !important;
-  margin-left: -12px !important;
-  margin-right: -12px !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
   margin-bottom: 0 !important;
   margin-top: auto !important;
 }
@@ -1315,29 +1334,32 @@ body.template-index dialog.cart-drawer__dialog button#checkout:hover {
   align-items: center !important;
   justify-content: center !important;
   width: 100% !important;
-  min-height: 44px !important;
+  height: 46px !important;
+  min-height: 46px !important;
   background-color: #d52528 !important;
   background: #d52528 !important;
   color: #ffffff !important;
   font-family: 'Anton', Arial, sans-serif !important;
   font-size: 16px !important;
   font-weight: 400 !important;
-  letter-spacing: 1px !important;
+  letter-spacing: 0.5px !important;
   text-transform: uppercase !important;
-  padding: 12px 16px !important;
-  border-radius: 0 0 2px 2px !important;
+  padding: 0 14px !important;
+  border-radius: 10px !important;
   border: none !important;
-  box-shadow: inset 0 -2px 0 #a0181b !important;
+  box-shadow: 0 4px 12px rgba(213, 37, 40, 0.2) !important;
   cursor: pointer !important;
   visibility: visible !important;
   opacity: 1 !important;
   box-sizing: border-box !important;
+  transition: all 0.2s ease !important;
 }
 
 .avyah-card-add-to-cart-btn:hover {
   background-color: #b01b1e !important;
   background: #b01b1e !important;
   color: #ffffff !important;
+  box-shadow: 0 6px 16px rgba(213, 37, 40, 0.35) !important;
 }
 
 results-list .product-card .price--on-sale .price-item--regular,
@@ -1378,34 +1400,34 @@ ul.mm-submenu span:not(.avyah-discover-popover span):not(.avyah-discover-link sp
 }
 
 /* ==========================================================================
-   HOMEPAGE CRIMSON RED OVERRIDE - EXCLUDING CART DRAWER & DIALOGS
+   HOMEPAGE CRIMSON RED OVERRIDE - EXCLUDING CART DRAWER, DIALOGS & PRODUCT CARDS
    ========================================================================== */
 body.template-index main#MainContent,
 body.template-index .content-for-layout,
 body.template-index .shopify-section:not(:has(dialog)):not(:has(.cart-drawer)),
 body.template-index section:not(dialog *):not(.cart-drawer *),
 body.template-index .section:not(dialog *):not(.cart-drawer *),
-body.template-index div:not(dialog *):not(.cart-drawer *):not(cart-drawer-component *):not(.cart-drawer__inner *):not(.cart-drawer__content *),
-body.template-index [class*="section"]:not(dialog *):not(.cart-drawer *),
-body.template-index [class*="block"]:not(dialog *):not(.cart-drawer *),
-body.template-index [class*="container"]:not(dialog *):not(.cart-drawer *),
-body.template-index [class*="color-scheme"]:not(dialog *):not(.cart-drawer *),
-body.template-index [class*="scheme-"]:not(dialog *):not(.cart-drawer *) {
+body.template-index div:not(dialog *):not(.cart-drawer *):not(cart-drawer-component *):not(.cart-drawer__inner *):not(.cart-drawer__content *):not([class*="product"]):not([class*="card"]):not([class*="image-wrapper"]):not([class*="price"]):not([class*="badge"]),
+body.template-index [class*="section"]:not(dialog *):not(.cart-drawer *):not([class*="product"]):not([class*="card"]),
+body.template-index [class*="block"]:not(dialog *):not(.cart-drawer *):not([class*="product"]):not([class*="card"]),
+body.template-index [class*="container"]:not(dialog *):not(.cart-drawer *):not([class*="product"]):not([class*="card"]),
+body.template-index [class*="color-scheme"]:not(dialog *):not(.cart-drawer *):not([class*="product"]):not([class*="card"]),
+body.template-index [class*="scheme-"]:not(dialog *):not(.cart-drawer *):not([class*="product"]):not([class*="card"]) {
   background-color: #d52528 !important;
   background: #d52528 !important;
 }
 
-/* Force Text inside homepage to White (EXCEPT inside Cart Drawer) */
-body.template-index p:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
-body.template-index h1:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
-body.template-index h2:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
-body.template-index h3:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
-body.template-index h4:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
-body.template-index h5:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
-body.template-index h6:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
-body.template-index li:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
-body.template-index .rte:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
-body.template-index .rte *:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *) {
+/* Force Text inside homepage sections to White (EXCEPT inside Product Cards & Cart Drawer) */
+body.template-index p:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *):not([class*="ai-product-card"] *):not([class*="product-card"] *),
+body.template-index h1:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *):not([class*="ai-product-card"] *):not([class*="product-card"] *),
+body.template-index h2:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *):not([class*="ai-product-card"] *):not([class*="product-card"] *):not([class*="ai-product-slider-heading"]),
+body.template-index h3:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *):not([class*="ai-product-card"] *):not([class*="product-card"] *),
+body.template-index h4:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *):not([class*="ai-product-card"] *):not([class*="product-card"] *),
+body.template-index h5:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *):not([class*="ai-product-card"] *):not([class*="product-card"] *),
+body.template-index h6:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *):not([class*="ai-product-card"] *):not([class*="product-card"] *),
+body.template-index li:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *):not([class*="ai-product-card"] *):not([class*="product-card"] *),
+body.template-index .rte:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *):not([class*="ai-product-card"] *):not([class*="product-card"] *),
+body.template-index .rte *:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *):not([class*="ai-product-card"] *):not([class*="product-card"] *) {
   color: #ffffff !important;
 }
 
@@ -1470,6 +1492,128 @@ body.template-index .product-card a,
 body.template-index .product-card h3,
 body.template-index .product-card .price {
   color: #111111 !important;
+}
+
+/* ==========================================================================
+   HOMEPAGE PRODUCT LISTING CARD DESIGN (EXACT MATCH TO REFERENCE MOCKUP)
+   ========================================================================== */
+body.template-index [class*="ai-product-card"],
+[class*="ai-product-card"] {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid #eeeeee !important;
+  padding: 14px !important;
+}
+
+body.template-index [class*="ai-product-card-image-wrapper"],
+[class*="ai-product-card-image-wrapper"] {
+  background-color: #f5ede4 !important;
+  border-radius: 16px !important;
+  aspect-ratio: 1 / 1 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+body.template-index [class*="ai-product-badge"],
+[class*="ai-product-badge"] {
+  background-color: #d52528 !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+  font-family: 'Anton', 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+body.template-index [class*="ai-product-quick-view-btn"],
+[class*="ai-product-quick-view-btn"] {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #222222 !important;
+  border-radius: 20px !important;
+  padding: 6px 14px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+}
+
+body.template-index [class*="ai-product-card-title"],
+body.template-index [class*="ai-product-card-title"] a,
+[class*="ai-product-card-title"],
+[class*="ai-product-card-title"] a {
+  font-family: 'Anton', 'Inter', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.2px !important;
+  line-height: 1.25 !important;
+}
+
+body.template-index [class*="ai-product-card-specs"],
+[class*="ai-product-card-specs"] {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: #8c7f7c !important;
+  -webkit-text-fill-color: #8c7f7c !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+body.template-index [class*="ai-product-card-price-row"] .current-price,
+[class*="ai-product-card-price-row"] .current-price {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 21px !important;
+  font-weight: 900 !important;
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
+  letter-spacing: -0.3px !important;
+}
+
+body.template-index [class*="ai-product-card-price-row"] .discount-badge,
+[class*="ai-product-card-price-row"] .discount-badge {
+  background-color: #fde8e8 !important;
+  color: #d52528 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  padding: 4px 10px !important;
+  border-radius: 6px !important;
+  text-transform: uppercase !important;
+}
+
+body.template-index [class*="ai-product-card-button"],
+[class*="ai-product-card-button"] {
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+  color: #ffffff !important;
+  border-radius: 10px !important;
+  height: 46px !important;
+  font-family: 'Anton', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(213, 37, 40, 0.2) !important;
+}
+
+body.template-index [class*="ai-product-card-button"]:hover,
+[class*="ai-product-card-button"]:hover {
+  background-color: #b01b1e !important;
+  background: #b01b1e !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 16px rgba(213, 37, 40, 0.35) !important;
 }
 
 body.template-index .product-grid__item:nth-child(5n+1) .card-gallery { background-color: #dceef2 !important; }
@@ -2055,8 +2199,110 @@ li.product-grid__item.avyah-perfect-card {
   letter-spacing: 0.5px !important;
 }
 
+/* ========================================================
+   EXACT MATCH TO REFERENCE MOCKUP (IMAGE 2 DESIGN)
+======================================================== */
+.product-card,
+[class*="product-card"],
+[class*="ai-product-card"],
+.product-grid__item {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid #eeeeee !important;
+  padding: 14px !important;
+}
+
+.avyah-card-media-link,
+[class*="ai-product-card-image-wrapper"],
+.card-gallery,
+.product-media-container {
+  background-color: #f5ede4 !important;
+  background: #f5ede4 !important;
+  border-radius: 16px !important;
+  aspect-ratio: 1 / 1 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.avyah-card-media-link img,
+[class*="ai-product-card-image-wrapper"] img,
+.card-gallery img,
+.product-media-container img {
+  object-fit: contain !important;
+  mix-blend-mode: multiply !important;
+  padding: 6px !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* Flame BESTSELLER badge */
+.ai-product-badge-fe61fd7pcviak,
+[class*="ai-product-badge"],
+.product-badges__badge {
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+  font-family: 'Anton', 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* Quick View pill button */
+[class*="ai-product-quick-view-btn"] {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #222222 !important;
+  -webkit-text-fill-color: #222222 !important;
+  border-radius: 20px !important;
+  padding: 6px 14px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Title */
+[class*="ai-product-card-title"],
+[class*="ai-product-card-title"] a,
+.avyah-card-title {
+  font-family: 'Anton', 'Inter', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.2px !important;
+  line-height: 1.25 !important;
+}
+
+/* Pack specs subtitle */
+.perfect-card-subcaption,
+.avyah-card-subtitle,
+[class*="ai-product-card-specs"] {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: #8c7f7c !important;
+  -webkit-text-fill-color: #8c7f7c !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
 /* Price Row */
-.avyah-card-price-row {
+.avyah-card-price-row,
+[class*="ai-product-card-price-row"] {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
@@ -2065,42 +2311,36 @@ li.product-grid__item.avyah-perfect-card {
   margin-bottom: 14px !important;
 }
 
-.avyah-card-price {
-  font-family: 'Anton', Arial, sans-serif !important;
-  font-size: 22px !important;
-  font-weight: 400 !important;
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  text-align: left !important;
+.avyah-card-price,
+.current-price {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 21px !important;
+  font-weight: 900 !important;
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
   letter-spacing: -0.3px !important;
 }
 
-.avyah-card-discount-badge {
-  background-color: #d52528 !important;
-  background: #d52528 !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+/* Soft Light Pink Discount Badge */
+.avyah-card-discount-badge,
+.discount-badge,
+[class*="discount-badge"] {
+  background-color: #fde8e8 !important;
+  background: #fde8e8 !important;
+  color: #d52528 !important;
+  -webkit-text-fill-color: #d52528 !important;
   font-family: 'Inter', sans-serif !important;
   font-size: 11px !important;
   font-weight: 800 !important;
-  padding: 4px 8px !important;
-  border-radius: 4px !important;
+  padding: 4px 10px !important;
+  border-radius: 6px !important;
   text-transform: uppercase !important;
+  border: none !important;
 }
 
-/* ADD TO CART Form & Button */
-.avyah-card-quick-add-form {
-  display: block !important;
-  width: 100% !important;
-  margin: 0 !important;
-}
-
-.avyah-card-add-to-cart-btn {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 100% !important;
-  min-height: 44px !important;
+/* ADD TO CART & WISHLIST BUTTONS */
+.avyah-card-add-to-cart-btn,
+[class*="ai-product-card-button"] {
   background-color: #d52528 !important;
   background: #d52528 !important;
   color: #ffffff !important;
@@ -2108,50 +2348,22 @@ li.product-grid__item.avyah-perfect-card {
   font-family: 'Anton', Arial, sans-serif !important;
   font-size: 16px !important;
   font-weight: 400 !important;
-  letter-spacing: 1px !important;
+  letter-spacing: 0.5px !important;
   text-transform: uppercase !important;
-  padding: 10px 16px !important;
-  border-radius: 6px !important;
+  height: 46px !important;
+  min-height: 46px !important;
+  border-radius: 10px !important;
   border: none !important;
   cursor: pointer !important;
-  transition: background-color 0.2s ease !important;
-  box-sizing: border-box !important;
+  box-shadow: 0 4px 12px rgba(213, 37, 40, 0.2) !important;
 }
 
-.avyah-card-add-to-cart-btn:hover {
+.avyah-card-add-to-cart-btn:hover,
+[class*="ai-product-card-button"]:hover {
   background-color: #b01b1e !important;
   background: #b01b1e !important;
   color: #ffffff !important;
-}
-
-/* RECTANGULAR BUTTON & TAB STYLING */
-.split-contact-bottom .action-link,
-.action-link,
-a.action-link,
-.contact-button,
-[class*="action-link"],
-.bundle-tab,
-.bundle-tabs .bundle-tab,
-button.bundle-tab,
-.add-to-bundle-btn,
-.bundle-badge {
-  border-radius: 4px !important;
-}
-
-/* REMOVE HOVER LIFT & TRANSFORM EFFECTS */
-.bundle-card:hover,
-.product-card:hover,
-.card:hover,
-.card-wrapper:hover,
-[class*="product-card"]:hover,
-[class*="ai-product-card"]:hover,
-.bundle-card-image-wrap:hover img,
-.bundle-card-image-wrap img:hover,
-.product-card .media img:hover,
-[class*="product-card"] img:hover {
-  transform: none !important;
-  box-shadow: none !important;
-  filter: none !important;
+  box-shadow: 0 6px 16px rgba(213, 37, 40, 0.35) !important;
 }
 
 /* BULK ORDER PAGE CRIMSON RED BACKGROUND MATCH */
