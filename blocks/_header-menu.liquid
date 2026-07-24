@@ -36,29 +36,11 @@
             class="menu-list__list list-unstyled"
             role="list"
           >
-            {% for link in block_settings.menu.links %}
-              {% assign link_title_clean = link.title | downcase | strip %}
-              {% if link_title_clean == 'home' or link_title_clean == 'store locator' or link_title_clean == 'our story' or link_title_clean == 'our blogs' or link_title_clean == 'discover' %}
-                {% continue %}
-              {% endif %}
-              <li>
-                <a
-                  href="{{ link.url }}"
-                  id="MenuItem-{{ link.handle }}"
-                  class="menu-list__item"
-                  {% if link.current %}
-                    aria-current="page"
-                  {% endif %}
-                >
-                  {{- link.title -}}
-                </a>
-              </li>
-            {% endfor %}
-            <li>
-              <a href="#" id="MenuItem-discover" class="menu-list__item">
-                Discover
-              </a>
-            </li>
+            <li><a href="/collections/all" id="MenuItem-catalog" class="menu-list__item">CATALOG</a></li>
+            <li><a href="/pages/ingredients" id="MenuItem-ingredients" class="menu-list__item">INGREDIENTS</a></li>
+            <li><a href="/pages/contact" id="MenuItem-contact" class="menu-list__item">CONTACT US</a></li>
+            <li><a href="/pages/bulk-order" id="MenuItem-bulk-order" class="menu-list__item">BULK ORDER</a></li>
+            <li><a href="#" id="MenuItem-discover" class="menu-list__item">DISCOVER</a></li>
           </ul>
         </div>
       </div>

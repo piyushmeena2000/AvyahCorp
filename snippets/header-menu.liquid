@@ -24,88 +24,78 @@
 %}
 
 {% capture children %}
-  {% assign has_custom_items = false %}
-  {% for link in block_settings.menu.links %}
-    {% assign link_title_clean = link.title | downcase | strip %}
-    {% if link_title_clean == 'home' or link_title_clean == 'store locator' or link_title_clean == 'our story' or link_title_clean == 'our blogs' or link_title_clean == 'discover' %}
-      {% continue %}
-    {% endif %}
-    {% assign has_custom_items = true %}
-    <li
-      role="presentation"
-      class="menu-list__list-item"
-      on:focus="/activate"
-      on:blur="/deactivate"
-      on:pointerenter="/activate"
-      on:pointerleave="/deactivate"
+  {%- comment -%} 1. CATALOG {%- endcomment -%}
+  {% assign catalog_link = block_settings.menu.links | where: 'title', 'Catalog' | first %}
+  {% if catalog_link == blank %}
+    {% assign catalog_link = block_settings.menu.links | where: 'title', 'CATALOG' | first %}
+  {% endif %}
+
+  <li
+    role="presentation"
+    class="menu-list__list-item"
+    on:focus="/activate"
+    on:blur="/deactivate"
+    on:pointerenter="/activate"
+    on:pointerleave="/deactivate"
+  >
+    <a
+      href="{{ catalog_link.url | default: '/collections/all' }}"
+      data-skip-node-update="true"
+      class="menu-list__link"
+      {% if catalog_link.links != blank %}
+        aria-controls="submenu-catalog"
+        aria-haspopup="true"
+        aria-expanded="false"
+      {% endif %}
+      ref="menuitem"
     >
-      <a
-        href="{{ link.url }}"
-        data-skip-node-update="true"
-        class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
-        {%- if link.links != blank -%}
-          aria-controls="submenu-{{ forloop.index }}"
-          aria-haspopup="true"
-          aria-expanded="false"
-        {%- endif -%}
-        ref="menuitem"
-      >
-        <span class="menu-list__link-title">{{- link.title | uppercase -}}</span>
-        {%- if link.links != blank -%}
-          <svg class="header-menu__caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        {%- endif -%}
-      </a>
-      {%- if link.links != blank -%}
-        <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">
-          <div
-            id="submenu-{{ forloop.index }}"
-            class="menu-list__submenu-inner"
-            style="{% render 'submenu-font-styles', settings: block_settings %}"
-          >
-            {% assign list_id = 'MegaMenuList-' | append: forloop.index %}
-            {% render 'mega-menu',
-              section: section,
-              parent_link: link,
-              id: list_id,
-              menu_content_type: menu_content_type,
-              content_aspect_ratio: ratio,
-              image_border_radius: image_border_radius
-            %}
-          </div>
+      <span class="menu-list__link-title">CATALOG</span>
+      <svg class="header-menu__caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    {% if catalog_link.links != blank %}
+      <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">
+        <div
+          id="submenu-catalog"
+          class="menu-list__submenu-inner"
+          style="{% render 'submenu-font-styles', settings: block_settings %}"
+        >
+          {% render 'mega-menu',
+            section: section,
+            parent_link: catalog_link,
+            id: 'MegaMenuList-catalog',
+            menu_content_type: menu_content_type,
+            content_aspect_ratio: ratio,
+            image_border_radius: image_border_radius
+          %}
         </div>
-      {%- endif -%}
-    </li>
-  {% endfor %}
+      </div>
+    {% endif %}
+  </li>
 
-  {% unless has_custom_items %}
-    <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
-      <a href="/collections/all" data-skip-node-update="true" class="menu-list__link" ref="menuitem">
-        <span class="menu-list__link-title">CATALOG</span>
-        <svg class="header-menu__caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </li>
-    <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
-      <a href="/pages/ingredients" data-skip-node-update="true" class="menu-list__link" ref="menuitem">
-        <span class="menu-list__link-title">INGREDIENTS</span>
-      </a>
-    </li>
-    <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
-      <a href="/pages/contact" data-skip-node-update="true" class="menu-list__link" ref="menuitem">
-        <span class="menu-list__link-title">CONTACT US</span>
-      </a>
-    </li>
-    <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
-      <a href="/pages/bulk-order" data-skip-node-update="true" class="menu-list__link" ref="menuitem">
-        <span class="menu-list__link-title">BULK ORDER</span>
-      </a>
-    </li>
-  {% endunless %}
+  {%- comment -%} 2. INGREDIENTS {%- endcomment -%}
+  <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
+    <a href="/pages/ingredients" data-skip-node-update="true" class="menu-list__link" ref="menuitem">
+      <span class="menu-list__link-title">INGREDIENTS</span>
+    </a>
+  </li>
 
-  {% comment %} Discover Dropdown Menu Item {% endcomment %}
+  {%- comment -%} 3. CONTACT US {%- endcomment -%}
+  <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
+    <a href="/pages/contact" data-skip-node-update="true" class="menu-list__link" ref="menuitem">
+      <span class="menu-list__link-title">CONTACT US</span>
+    </a>
+  </li>
+
+  {%- comment -%} 4. BULK ORDER {%- endcomment -%}
+  <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
+    <a href="/pages/bulk-order" data-skip-node-update="true" class="menu-list__link" ref="menuitem">
+      <span class="menu-list__link-title">BULK ORDER</span>
+    </a>
+  </li>
+
+  {%- comment -%} 5. DISCOVER Dropdown Menu Item {%- endcomment -%}
   <li
     role="presentation"
     class="menu-list__list-item menu-list__list-item--discover"
