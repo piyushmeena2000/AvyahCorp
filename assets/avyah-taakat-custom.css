@@ -2649,12 +2649,16 @@ a.avyah-discover-link:hover {
 }
 
 a.avyah-discover-link:hover span,
-a.avyah-discover-link:hover .avyah-discover-title-text {
+a.avyah-discover-link:hover .avyah-discover-title-text,
+.avyah-discover-link:hover * {
   color: #d52528 !important;
   -webkit-text-fill-color: #d52528 !important;
 }
 
-a.avyah-discover-link:hover svg {
+a.avyah-discover-link:hover svg,
+a.avyah-discover-link:hover svg path,
+a.avyah-discover-link:hover svg rect,
+a.avyah-discover-link:hover svg * {
   stroke: #d52528 !important;
   color: #d52528 !important;
 }
