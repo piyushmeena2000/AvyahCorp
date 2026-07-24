@@ -190,19 +190,32 @@
     color: #ffffff !important;
   }
 
-  /* ADD TO CART Button - BLACK naturally, Crimson Red (#700a0c) on hover */
-  body.template-index [class*="product-card"] button,
+  /* ADD TO CART Button - Crimson Red (#d52528) */
+  body.template-index [class*="product-card"] button[class*="add-to-cart"],
+  body.template-index [class*="product-card"] button.button,
   body.template-index [class*="ai-product-card-button"] {
-    background-color: #000000 !important;
-    background: #000000 !important;
+    background-color: #d52528 !important;
+    background: #d52528 !important;
     color: #ffffff !important;
   }
 
-  body.template-index [class*="product-card"] button:hover,
+  body.template-index [class*="product-card"] button[class*="add-to-cart"]:hover,
+  body.template-index [class*="product-card"] button.button:hover,
   body.template-index [class*="ai-product-card-button"]:hover {
     background-color: #700a0c !important;
     background: #700a0c !important;
     color: #ffffff !important;
+  }
+
+  /* Quick View Button - Solid White Pill (#ffffff) */
+  body.template-index [class*="quick-view"],
+  body.template-index [class*="quick-view-btn"],
+  body.template-index [class*="ai-product-quick-view-btn"] {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
   }
 
   /* Header Cart Trigger Button - NO white background */

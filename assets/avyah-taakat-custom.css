@@ -2307,7 +2307,8 @@ ticker-component,
 }
 
 /* ========================================================
-   PRODUCT LISTING CARDS - 100% PURE WHITE BACKGROUND
+   PRODUCT LISTING CARDS - 100% PURE WHITE BACKGROUND (COMPACT SLEEK PROPORTIONS)
+   - Reduced height by 40%
    - Matches 1-to-1 with User Reference Image
    - Zero crimson red inside the card
    - Zero stroke outlines/borders inside or around the card
@@ -2326,15 +2327,16 @@ li.product-grid__item,
 [class*="product-grid__card"] {
   background-color: #ffffff !important;
   background: #ffffff !important;
-  border-radius: 20px !important;
+  border-radius: 18px !important;
   border: none !important;
   outline: none !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07) !important;
   overflow: hidden !important;
-  padding: 14px !important;
+  padding: 10px !important;
   box-sizing: border-box !important;
   min-height: auto !important;
   height: auto !important;
+  max-height: 410px !important;
 }
 
 /* Force all inner groups, flex panels & child divs to Pure White background */
@@ -2373,7 +2375,7 @@ product-card-link *,
 [class*="product-card-gallery"],
 [class*="card-gallery"],
 [class*="ai-product-card-image-wrapper"] {
-  border-radius: 14px !important;
+  border-radius: 12px !important;
   overflow: hidden !important;
 }
 
@@ -2396,14 +2398,15 @@ product-title a,
   color: #111111 !important;
   -webkit-text-fill-color: #111111 !important;
   font-family: 'Anton', Arial, sans-serif !important;
-  font-size: 16px !important;
+  font-size: 14px !important;
+  line-height: 1.25 !important;
   font-weight: 400 !important;
   text-transform: uppercase !important;
   text-decoration: none !important;
   background: transparent !important;
   background-color: transparent !important;
-  margin-top: 8px !important;
-  margin-bottom: 3px !important;
+  margin-top: 6px !important;
+  margin-bottom: 2px !important;
 }
 
 /* Subtitle / Meta / Pack Info */
@@ -2418,12 +2421,12 @@ product-title a,
 [class*="ai-product-card"] p {
   color: #777777 !important;
   -webkit-text-fill-color: #777777 !important;
-  font-size: 12px !important;
+  font-size: 11px !important;
   font-weight: 600 !important;
   text-transform: uppercase !important;
   background: transparent !important;
   background-color: transparent !important;
-  margin-bottom: 6px !important;
+  margin-bottom: 4px !important;
 }
 
 /* Prices - Bold Solid Black */
@@ -2437,7 +2440,7 @@ price-component *,
 [class*="ai-product-card"] .current-price {
   color: #000000 !important;
   -webkit-text-fill-color: #000000 !important;
-  font-size: 19px !important;
+  font-size: 17px !important;
   font-weight: 800 !important;
   background: transparent !important;
   background-color: transparent !important;
@@ -2456,8 +2459,8 @@ price-component *,
   -webkit-text-fill-color: #d52528 !important;
   border-radius: 6px !important;
   font-weight: 800 !important;
-  font-size: 12px !important;
-  padding: 3px 8px !important;
+  font-size: 11px !important;
+  padding: 2px 6px !important;
 }
 
 /* ADD TO CART Crimson Red Pill Button (Exact Reference Match) */
@@ -2471,17 +2474,17 @@ price-component *,
   background: #d52528 !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
-  border-radius: 10px !important;
-  padding: 11px 14px !important;
+  border-radius: 8px !important;
+  padding: 8px 10px !important;
   font-family: 'Anton', Arial, sans-serif !important;
-  font-size: 15px !important;
+  font-size: 14px !important;
   text-transform: uppercase !important;
   border: none !important;
   cursor: pointer !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 8px !important;
+  gap: 6px !important;
 }
 
 .product-card button[class*="add-to-cart"] *,
@@ -2493,7 +2496,7 @@ price-component *,
   -webkit-text-fill-color: #ffffff !important;
 }
 
-/* Quick View Clean White Pill Button (Removes Black Spot) */
+/* Quick View Clean Solid White Pill Button (Removes Black Spot) */
 .product-card [class*="quick-view"],
 .product-card .quick-view-button,
 .product-grid__item [class*="quick-view"],
@@ -2505,7 +2508,8 @@ button[class*="quick-view-btn"] {
   -webkit-text-fill-color: #111111 !important;
   border-radius: 20px !important;
   font-weight: 700 !important;
-  font-size: 12px !important;
+  font-size: 11px !important;
+  padding: 4px 10px !important;
   border: 1px solid rgba(0, 0, 0, 0.12) !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
   opacity: 1 !important;
@@ -2534,6 +2538,8 @@ button[class*="quick-view-btn"] * {
   font-weight: 700 !important;
   border-radius: 6px !important;
   font-family: 'Anton', sans-serif !important;
+  font-size: 11px !important;
+  padding: 3px 8px !important;
 }
 
 .product-card [class*="badge"] *,
@@ -2553,13 +2559,10 @@ button[class*="quick-view-btn"] * {
   background: #ffffff !important;
   border: 1.5px solid #e0e0e0 !important;
   color: #000000 !important;
-  border-radius: 10px !important;
-  width: 44px !important;
-  height: 46px !important;
+  border-radius: 8px !important;
+  width: 36px !important;
+  height: 36px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
-
-
-
