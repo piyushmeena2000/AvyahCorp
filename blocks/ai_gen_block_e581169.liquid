@@ -41,37 +41,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent !important;
-    background-color: transparent !important;
-    border: none !important;
-    border-radius: 0 !important;
   }
 
   .ai-ticker-icon-{{ ai_gen_id }} img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    background: transparent !important;
-    background-color: transparent !important;
-    mix-blend-mode: multiply !important;
-    filter: brightness(0) invert(1) !important;
-    -webkit-filter: brightness(0) invert(1) !important;
   }
 
   .ai-ticker-icon-placeholder-{{ ai_gen_id }} {
     width: 100%;
     height: 100%;
-    background-color: transparent;
-    opacity: 0.8;
+    background-color: {{ block.settings.text_color }};
+    opacity: 0.2;
+    border-radius: 50%;
   }
 
   .ai-ticker-text-{{ ai_gen_id }} {
-    color: #ffffff !important;
+    color: {{ block.settings.text_color }};
     font-size: {{ block.settings.text_size }}px;
-    font-weight: 700;
-    font-family: 'Anton', Arial, sans-serif !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
+    font-weight: {{ block.settings.text_weight }};
+    font-family: anton;
+    text-transform: {{ block.settings.text_transform }};
   }
 
   @keyframes ai-ticker-scroll-{{ ai_gen_id }} {
@@ -303,7 +294,7 @@
       "type": "range",
       "id": "text_size",
       "min": 12,
-      "max": 64,
+      "max": 32,
       "step": 1,
       "unit": "px",
       "label": "Text size",
@@ -313,7 +304,7 @@
       "type": "range",
       "id": "text_size_mobile",
       "min": 10,
-      "max": 48,
+      "max": 24,
       "step": 1,
       "unit": "px",
       "label": "Text size mobile",
@@ -367,7 +358,7 @@
       "type": "range",
       "id": "icon_size",
       "min": 16,
-      "max": 80,
+      "max": 48,
       "step": 2,
       "unit": "px",
       "label": "Icon size",
@@ -377,7 +368,7 @@
       "type": "range",
       "id": "icon_size_mobile",
       "min": 12,
-      "max": 64,
+      "max": 32,
       "step": 2,
       "unit": "px",
       "label": "Icon size mobile",

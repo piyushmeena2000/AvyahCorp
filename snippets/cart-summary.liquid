@@ -58,45 +58,16 @@
     endif
   -%}
 
-  <!-- Sleek Discount Code Box -->
-  <div class="perfect-cart-discount-wrapper" style="width: 100% !important; margin-bottom: 12px !important; background-color: #ffffff !important; background: #ffffff !important;">
-    <div style="display: flex !important; gap: 8px !important; width: 100% !important; background-color: #ffffff !important; background: #ffffff !important;">
-      <input
-        type="text"
-        id="cart-discount-code"
-        placeholder="Discount code"
-        style="flex: 1 !important; height: 40px !important; border: 1px solid #d5d5d5 !important; border-radius: 6px !important; padding: 0 12px !important; font-family: 'Inter', sans-serif !important; font-size: 13px !important; color: #111111 !important; background-color: #ffffff !important; background: #ffffff !important; outline: none !important;"
-      >
-      <button
-        type="button"
-        id="cart-discount-apply"
-        style="height: 40px !important; padding: 0 16px !important; background-color: #111111 !important; color: #ffffff !important; border: none !important; border-radius: 6px !important; font-family: 'Inter', sans-serif !important; font-size: 13px !important; font-weight: 600 !important; cursor: pointer !important; white-space: nowrap !important; transition: all 0.25s ease !important;"
-        onclick="applyCartDiscountCode()"
-      >
-        Apply
-      </button>
-    </div>
-  </div>
-  <script>
-    function applyCartDiscountCode() {
-      const input = document.getElementById('cart-discount-code');
-      const code = input ? input.value.trim() : '';
-      if (!code) return;
-      window.location.href = `/discount/${encodeURIComponent(code)}?redirect=${encodeURIComponent(window.location.pathname)}`;
-    }
-  </script>
-
   <div class="cart__total-container">
     <span
       class="cart__summary-item cart__total"
       role="status"
     >
-      <span class="cart__total-label cart-primary-typography" style="color: #111111 !important;">{{ 'content.cart_estimated_total' | t }}</span>
+      <span class="cart__total-label cart-primary-typography">{{ 'content.cart_estimated_total' | t }}</span>
       <text-component
         ref="cartTotal"
         value="{{ total_price | strip_html }}"
         class="cart__total-value cart-secondary-typography"
-        style="color: #111111 !important; font-weight: 800;"
         {% comment %} Used by payment_terms web component {% endcomment %}
         data-cart-subtotal
       >
@@ -104,19 +75,19 @@
       </text-component>
     </span>
     {% if settings.show_installments %}
-      <span class="cart__summary-item cart__installments" style="color: #111111 !important;">
+      <span class="cart__summary-item cart__installments">
         {% form 'cart', cart %}
           {{ form | payment_terms }}
         {% endform %}
       </span>
     {% endif %}
-    <div class="cart__summary-item tax-note cart-primary-typography" style="color: #666666 !important;">
+    <div class="cart__summary-item tax-note cart-primary-typography">
       {% render 'tax-info', has_discounts_enabled: settings.show_add_discount_code %}
     </div>
   </div>
 </div>
 
-<div class="cart__ctas" style="margin-top: 4px !important;">
+<div class="cart__ctas">
   <button
     type="submit"
     id="checkout"

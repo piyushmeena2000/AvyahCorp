@@ -1,9 +1,17 @@
+# Windows system files
+desktop.ini
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+
+# Archives / temporary files
+*.rar
+*.zip
+*.tar.gz
+
 # OS generated files
 .DS_Store
-Thumbs.db
-desktop.ini
-
-# Shopify CLI config
-.shopify/
-config/settings_data.json.bak
-*.log
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes

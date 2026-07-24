@@ -125,8 +125,7 @@
     position: relative;
     margin-inline: auto;
     align-items: center;
-    background-color: #ffffff !important;
-    color: #111111 !important;
+    background-color: var(--color-background);
     z-index: var(--layer-heightened);
   }
 
@@ -165,7 +164,7 @@
   .predictive-search-form__content {
     max-height: 50dvh;
     overflow-y: auto;
-    background-color: #ffffff !important;
+    background-color: var(--color-background);
 
     /* Firefox */
     scrollbar-width: none;
@@ -206,9 +205,9 @@
   }
 
   .predictive-search-form__header-inner {
-    background: #ffffff !important;
-    border: 1px solid #eeeeee !important;
-    color: #111111 !important;
+    background: var(--color-background);
+    border: var(--search-border-width) solid var(--color-border);
+    color: var(--color-foreground);
     border-radius: var(--style-border-radius-popover);
     display: flex;
     align-items: center;
@@ -236,8 +235,8 @@
     z-index: var(--layer-heightened);
     width: 100%;
     align-items: center;
-    background-color: #ffffff !important;
-    border: 1px solid #eeeeee !important;
+    background-color: var(--color-input-background);
+    border: var(--search-border-width) solid var(--color-border);
     border-radius: var(--style-border-radius-inputs);
 
     @media screen and (max-width: 749px) {
@@ -271,7 +270,7 @@
     padding-block: var(--padding-sm);
     font-size: var(--font-size--md);
     width: 100%;
-    color: #111111 !important;
+    color: var(--color-foreground);
     padding-inline: calc(var(--margin-lg) + var(--icon-size-lg)) 0;
     background: transparent;
     text-overflow: ellipsis;
@@ -281,7 +280,7 @@
   }
 
   .search-input::placeholder {
-    color: #777777 !important;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
   }
 
   .search-input,
@@ -323,7 +322,7 @@
     padding: 0;
     margin-inline-end: var(--margin-md);
     background: transparent;
-    color: #111111 !important;
+    color: var(--color-foreground);
     opacity: 0.68;
     transition: opacity var(--animation-speed-medium) var(--animation-timing-fade-out),
       visibility var(--animation-speed-medium) var(--animation-timing-fade-out);
@@ -398,7 +397,7 @@
   }
 
   .predictive-search__close-modal-button {
-    --button-color: #111111 !important;
+    --button-color: var(--color-foreground);
     --button-background-color: transparent;
 
     display: flex;

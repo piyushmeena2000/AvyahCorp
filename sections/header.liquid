@@ -188,7 +188,6 @@
 <header-component
   id="header-component"
   class="{{ class }}"
-  style="background-color: #700a0c !important; background: #700a0c !important; color: #ffffff !important;"
   {% if transparent %}
     transparent="{{ transparent }}"
   {% endif %}
@@ -226,7 +225,7 @@
           assign border_bottom_setting_id = 'border_width'
       endcase
 
-      assign style = 'background-color: #700a0c !important; background: #700a0c !important; color: #ffffff !important; --border-bottom-width: [width]px; ' | replace: '[width]', section.settings[border_bottom_setting_id]
+      assign style = '--border-bottom-width: [width]px; ' | replace: '[width]', section.settings[border_bottom_setting_id]
 
       if row == 'top'
         assign style = style | append: '--border-bottom-width-mobile: [width]px; ' | replace: '[width]', section.settings.border_width
@@ -281,37 +280,6 @@
     --header-height: 0px;
     --header-group-height: var(--header-height);
     --transparent-header-offset-boolean: 0; /* stylelint-disable-line declaration-property-value-disallowed-list */
-  }
-
-  /* =============================================
-     AVYAH SPLIT HEADER — Right column alignment
-     Shows: [right-nav links] [search] [cart]
-  ============================================= */
-  .header__column--right {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    flex-wrap: nowrap;
-  }
-
-  /* Ensure right-nav, search, and header-actions sit inline in correct order */
-  .header__column--right .avyah-right-nav {
-    order: 1;
-  }
-
-  .header__column--right .search-action {
-    order: 2;
-    margin-inline: 0 !important;
-  }
-
-  .header__column--right header-actions {
-    order: 3;
-    margin-inline-start: 0 !important;
-  }
-
-  /* Center column logo alignment */
-  .header__column--center .header-logo {
-    justify-content: center;
   }
 
   body:has(> #header-group > header) {
@@ -415,15 +383,17 @@
   }
 
   .header-section:has(> #header-component[sticky='always']),
-  .header-section:has(> #header-component[sticky='scroll-up']) {
+  .header-section:has(> #header-component[sticky='scroll-up'][data-sticky-state='active']) {
     position: sticky;
-    top: 0;
+
+    /* Use -1 instead of 0 so intersection observer can track sticky state */
+    top: -1px;
     z-index: var(--layer-sticky);
   }
 
   .header[data-sticky-state] {
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    transform: translateY(0);
+    transition: opacity var(--animation-speed) var(--animation-easing);
+    opacity: 1;
   }
 
   .header[data-sticky-state='active'] {
@@ -432,7 +402,7 @@
 
   .header[data-sticky-state='idle'],
   .header[data-sticky-state='active'][data-animating] {
-    transform: translateY(-100%);
+    opacity: 0;
   }
 
   .header__row {
@@ -680,334 +650,6 @@
     hydrate('{{ section.id }}', url);
   </script>
 {% endunless %}
-
-<style>
-  /* ========== DISCOVER DROPDOWN ========== */
-
-  /* The parent <li> becomes the positioning context */
-  .avyah-discover-li {
-    position: relative !important;
-  }
-
-  /* The existing nav <a> tag is mutated — no wrapper needed */
-  .avyah-discover-li > a {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 5px !important;
-    font-family: 'Anton', sans-serif !important;
-  }
-
-  .avyah-discover-li > a svg.avyah-chevron {
-    width: 10px;
-    height: 10px;
-    transition: transform 0.2s ease;
-    flex-shrink: 0;
-  }
-
-  /* Dropdown panel — uses padding-top as an invisible hover bridge */
-  .avyah-discover-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    padding-top: 14px; /* invisible bridge so mouse can travel to menu */
-    min-width: 210px;
-    z-index: 9999;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.18s ease, transform 0.18s ease;
-    transform: translateX(-50%) translateY(-4px);
-  }
-
-  .avyah-discover-li:hover .avyah-discover-dropdown,
-  .avyah-discover-li.open .avyah-discover-dropdown {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
-  }
-
-  /* Rotate chevron on open */
-  .avyah-discover-li:hover > a svg.avyah-chevron,
-  .avyah-discover-li.open > a svg.avyah-chevron {
-    transform: rotate(180deg);
-  }
-
-  /* The visible white card */
-  .avyah-discover-card {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-    border: 1px solid rgba(0,0,0,0.07);
-    padding: 6px 0;
-    overflow: hidden;
-  }
-
-  /* Arrow notch */
-  .avyah-discover-card::before {
-    content: '';
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    width: 12px;
-    height: 12px;
-    background: #fff;
-    border-left: 1px solid rgba(0,0,0,0.07);
-    border-top: 1px solid rgba(0,0,0,0.07);
-    transform: translateX(-50%) rotate(45deg);
-  }
-
-  .avyah-discover-card a,
-  .avyah-discover-card a.avyah-discover-item-link {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    padding: 11px 20px !important;
-    font-family: 'Anton', sans-serif !important;
-    font-size: 14px !important;
-    font-weight: 400 !important;
-    color: #000000 !important;
-    -webkit-text-fill-color: #000000 !important;
-    text-decoration: none !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.8px !important;
-    transition: background 0.15s, color 0.15s !important;
-    white-space: nowrap !important;
-  }
-
-  .avyah-discover-card a *,
-  .avyah-discover-card .avyah-discover-item-text {
-    color: #000000 !important;
-    -webkit-text-fill-color: #000000 !important;
-  }
-
-  .avyah-discover-card a:hover,
-  .avyah-discover-card a.avyah-discover-item-link:hover {
-    background: #fef2f2 !important;
-    color: #700a0c !important;
-    -webkit-text-fill-color: #700a0c !important;
-  }
-
-  .avyah-discover-card a:hover *,
-  .avyah-discover-card a:hover .avyah-discover-item-text {
-    color: #700a0c !important;
-    -webkit-text-fill-color: #700a0c !important;
-  }
-
-  .avyah-discover-card a .dd-icon,
-  .avyah-discover-card a .dd-icon * {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-    opacity: 1 !important;
-    color: #000000 !important;
-    stroke: #000000 !important;
-    fill: none !important;
-    transition: color 0.15s, stroke 0.15s;
-  }
-
-  .avyah-discover-card a:hover .dd-icon,
-  .avyah-discover-card a:hover .dd-icon * {
-    color: #700a0c !important;
-    stroke: #700a0c !important;
-  }
-
-  /* Mobile */
-  @media (max-width: 749px) {
-    .avyah-discover-dropdown {
-      position: static;
-      opacity: 1 !important;
-      pointer-events: auto !important;
-      transform: none !important;
-      padding-top: 0;
-    }
-    .avyah-discover-card {
-      box-shadow: none;
-      border: none;
-      border-radius: 0;
-      padding: 4px 0 4px 12px;
-      background: transparent;
-    }
-    .avyah-discover-card::before { display: none; }
-    .avyah-discover-card a {
-      color: inherit !important;
-      padding: 8px 0 !important;
-      font-size: 13px !important;
-      border-left: 2px solid #700a0c;
-      padding-left: 10px !important;
-    }
-  }
-</style>
-
-<script>
-  (function () {
-    const DISCOVER_ITEMS = [
-      {
-        label: 'Our Blogs',
-        url: '/blogs/news',
-        icon: '<svg class="dd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>'
-      },
-      {
-        label: 'Careers',
-        url: '/pages/careers',
-        icon: '<svg class="dd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>'
-      }
-    ];
-
-    function buildDropdown() {
-      const wrap = document.createElement('div');
-      wrap.className = 'avyah-discover-dropdown';
-
-      const card = document.createElement('div');
-      card.className = 'avyah-discover-card';
-
-      DISCOVER_ITEMS.forEach(item => {
-        const a = document.createElement('a');
-        a.href = item.url;
-        a.className = 'avyah-discover-item-link';
-        a.innerHTML = item.icon + '<span class="avyah-discover-item-text">' + item.label + '</span>';
-        card.appendChild(a);
-      });
-
-      wrap.appendChild(card);
-      return wrap;
-    }
-
-    function injectDiscover() {
-      // Find candidate DISCOVER / BLOGS / OUR STORY link in navigation
-      const allLinks = Array.from(document.querySelectorAll('header-component a, #header-component a, .header a, nav a, .header__inline-menu a, .menu-list a'));
-      let blogLink = null;
-
-      allLinks.forEach(link => {
-        const txt = link.textContent.trim().toUpperCase();
-        if ((txt === 'OUR BLOGS' || txt === 'BLOGS' || txt === 'BLOG' || txt === 'DISCOVER' || txt === 'OUR STORY') && !link.dataset.discoverPatched) {
-          if (!blogLink || txt === 'DISCOVER' || txt === 'OUR BLOGS' || txt === 'BLOGS') {
-            blogLink = link;
-          }
-        }
-      });
-
-      if (!blogLink) {
-        allLinks.forEach(link => {
-          const href = link.getAttribute('href') || '';
-          if ((href.includes('/blogs') || href.includes('/news')) && !link.dataset.discoverPatched) {
-            blogLink = link;
-          }
-        });
-      }
-
-      if (!blogLink) return;
-      blogLink.dataset.discoverPatched = 'true';
-
-      const li = blogLink.closest('li') || blogLink.parentElement;
-      li.classList.add('avyah-discover-li');
-
-      blogLink.innerHTML = 'DISCOVER <svg class="avyah-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
-      blogLink.href = '#';
-
-      const existingDd = li.querySelector('.avyah-discover-dropdown');
-      if (existingDd) existingDd.remove();
-
-      const dd = buildDropdown();
-      li.appendChild(dd);
-
-      blogLink.addEventListener('click', e => {
-        e.preventDefault();
-        e.stopPropagation();
-        li.classList.toggle('open');
-      });
-
-      li.addEventListener('mouseenter', () => {
-        li.classList.add('open');
-      });
-
-      li.addEventListener('mouseleave', () => {
-        li.classList.remove('open');
-      });
-
-      document.addEventListener('click', e => {
-        if (!li.contains(e.target)) li.classList.remove('open');
-      });
-    }
-
-    /* ========================================================
-       HEADROOM STICKY HEADER CONTROLLER
-       - Scroll DOWN -> Translate header upward (-100%)
-       - Scroll UP -> Slide header back into view (0)
-       - Top of page -> Stay pinned (0)
-    ======================================================== */
-    let lastScrollY = window.scrollY || 0;
-    let ticking = false;
-
-    function handleHeadroomScroll() {
-      const headerElements = Array.from(document.querySelectorAll('#header-group, .header-section, #header-component, header-component'));
-      if (!headerElements.length) {
-        ticking = false;
-        return;
-      }
-
-      const currentScrollY = Math.max(0, window.scrollY || document.documentElement.scrollTop || 0);
-      const scrollDelta = currentScrollY - lastScrollY;
-      const threshold = 8; // 8px threshold to prevent jitter
-      const topTolerance = 10; // scrollY <= 10 always fully visible
-
-      const isMenuOpen = document.body.classList.contains('menu-open') || 
-                         document.body.classList.contains('avyah-megamenu-active') ||
-                         Boolean(document.querySelector('.avyah-discover-li.open')) ||
-                         Boolean(document.querySelector('.avyah-catalog-item:hover'));
-
-      if (currentScrollY <= topTolerance) {
-        headerElements.forEach(el => {
-          el.setAttribute('data-headroom-state', 'top');
-          el.classList.remove('headroom--unpinned');
-          el.classList.add('headroom--pinned', 'headroom--top');
-        });
-      } else if (Math.abs(scrollDelta) >= threshold) {
-        if (scrollDelta > 0 && !isMenuOpen && currentScrollY > 60) {
-          headerElements.forEach(el => {
-            el.setAttribute('data-headroom-state', 'unpinned');
-            el.classList.remove('headroom--pinned', 'headroom--top');
-            el.classList.add('headroom--unpinned');
-          });
-        } else if (scrollDelta < 0) {
-          headerElements.forEach(el => {
-            el.setAttribute('data-headroom-state', 'pinned');
-            el.classList.remove('headroom--unpinned', 'headroom--top');
-            el.classList.add('headroom--pinned');
-          });
-        }
-      }
-
-      lastScrollY = currentScrollY;
-      ticking = false;
-    }
-
-    function onWindowScroll() {
-      if (!ticking) {
-        window.requestAnimationFrame(handleHeadroomScroll);
-        ticking = true;
-      }
-    }
-
-    window.addEventListener('scroll', onWindowScroll, { passive: true });
-    document.addEventListener('scroll', onWindowScroll, { passive: true });
-
-    function initAll() {
-      injectDiscover();
-      handleHeadroomScroll();
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(initAll, 100);
-        setTimeout(initAll, 500);
-      });
-    } else {
-      setTimeout(initAll, 100);
-      setTimeout(initAll, 500);
-    }
-
-    document.addEventListener('shopify:section:load', () => setTimeout(initAll, 100));
-  })();
-</script>
 
 {% schema %}
 {

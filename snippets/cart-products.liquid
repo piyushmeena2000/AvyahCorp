@@ -40,338 +40,294 @@
       id="cart-form"
       method="post"
     >
-      <div class="perfect-cart-items-wrapper">
-        {% for item in cart.items %}
-          <div class="perfect-cart-item-row" data-key="{{ item.key }}" ref="cartItemRows[]">
-            <!-- Left: Pastel Image Container (Covered Rounded Box) -->
-            <div class="perfect-cart-item-image-box" style="border-radius: 14px !important; overflow: hidden !important; padding: 0 !important; width: 90px !important; height: 90px !important; min-width: 90px !important;">
-              {% if item.image %}
-                <a href="{{ item.url }}" style="display: block !important; width: 100% !important; height: 100% !important;">
-                  <img src="{{ item.image | image_url: width: 250 }}" alt="{{ item.product.title | escape }}" loading="lazy" style="width: 100% !important; height: 100% !important; object-fit: cover !important; border-radius: 14px !important;">
-                </a>
-              {% endif %}
-            </div>
+      <div
+        class="cart-items spacing-style{% if block_settings.dividers %} cart-items--dividers{% endif %}"
+        style="{%  render 'spacing-style', settings: block_settings %} --cart-items-gap:{{ block_settings.gap | append: "px" }};"
+      >
+        <table
+          class="cart-items__table"
+          role="table"
+        >
+          <caption
+            class="visually-hidden"
+            role="caption"
+          >
+            {{ 'content.cart_total' | t }}
+            <span>{{ cart.total_price | money_with_currency }}</span>
+          </caption>
 
-            <!-- Right: Content & Controls -->
-            <div class="perfect-cart-item-info">
-              <!-- Row 1: Product Title in Regular Anton font -->
-              <a href="{{ item.url }}" class="perfect-cart-item-title" style="font-family: 'Anton', sans-serif !important; font-weight: 400 !important; font-size: 16px !important; color: #111111 !important; text-decoration: none !important; text-transform: uppercase !important; line-height: 1.25 !important; margin: 0 0 2px 0 !important; display: block !important;">
-                {{ item.product.title }}
-              </a>
+          <thead
+            class="visually-hidden"
+            role="rowgroup"
+          >
+            <tr
+              role="row"
+              class="cart-items__table-row"
+            >
+              <th
+                id="productImage"
+                scope="col"
+                role="columnheader"
+              >
+                {{ 'content.product_image' | t }}
+              </th>
+              <th
+                id="productInformation"
+                scope="col"
+                role="columnheader"
+              >
+                {{ 'content.product_information' | t }}
+              </th>
+              <th
+                id="quantity"
+                scope="col"
+                role="columnheader"
+              >
+                {{ 'content.quantity' | t }}
+              </th>
+              <th
+                id="productTotal"
+                scope="col"
+                role="columnheader"
+              >
+                {{ 'content.product_total' | t }}
+              </th>
+            </tr>
+          </thead>
 
-              <!-- Row 2: Dynamic Subtitle / Pack Info -->
-              <div class="perfect-cart-item-subtitle" style="font-family: 'Inter', sans-serif !important; font-size: 12px !important; font-weight: 500 !important; color: #666666 !important; margin-bottom: 4px !important;">
-                {%- if item.product.has_only_default_variant == false -%}
-                  {%- for option in item.options_with_values -%}
-                    {{ option.value }}{%- if forloop.last != true %}, {% endif -%}
-                  {%- endfor -%}
-                {%- else -%}
-                  {%- assign title_lower = item.product.title | downcase -%}
-                  {%- if title_lower contains 'pack of 10' or title_lower contains '10 pack' -%}
-                    10 Pack
-                  {%- elsif title_lower contains 'pack of 24' or title_lower contains '24 pack' -%}
-                    24 Pack
-                  {%- elsif title_lower contains '20 bars' -%}
-                    20 Bars
-                  {%- elsif title_lower contains '30 bars' -%}
-                    30 Bars
-                  {%- elsif title_lower contains 'bars' or title_lower contains 'bar' -%}
-                    Energy Bars
-                  {%- elsif title_lower contains 'mast mix' or title_lower contains 'namkeen' -%}
-                    Roasted Namkeen Pack
-                  {%- else -%}
-                    {{ item.product.type | default: 'Healthy Snack Pack' }}
-                  {%- endif -%}
-                {%- endif -%}
-              </div>
-
-              <!-- Row 3: Single Price Row -->
-              <div class="perfect-cart-item-price-row" style="display: flex !important; justify-content: flex-start !important; align-items: center !important; width: 100% !important; margin: 2px 0 6px 0 !important;">
-                <div class="perfect-cart-item-prices">
-                  {% if item.original_price != item.final_price %}
-                    <span class="perfect-price-sale" style="font-family: 'Inter', sans-serif !important; color: #111111 !important; font-weight: 700 !important; font-size: 15px !important;">{{ item.final_price | money }}</span>
-                    <s class="perfect-price-compare" style="font-family: 'Inter', sans-serif !important; color: #888888 !important; text-decoration: line-through !important; font-size: 13px !important; margin-left: 6px !important;">
-                      {% if item.variant.compare_at_price > item.original_price %}
-                        {{ item.variant.compare_at_price | money }}
-                      {% else %}
-                        {{ item.original_price | money }}
-                      {% endif %}
-                    </s>
-                  {% else %}
-                    <span class="perfect-price-sale" style="font-family: 'Inter', sans-serif !important; color: #111111 !important; font-weight: 700 !important; font-size: 15px !important;">{{ item.original_price | money }}</span>
-                    {% if item.variant.compare_at_price > item.original_price %}
-                      <s class="perfect-price-compare" style="font-family: 'Inter', sans-serif !important; color: #888888 !important; text-decoration: line-through !important; font-size: 13px !important; margin-left: 6px !important;">{{ item.variant.compare_at_price | money }}</s>
-                    {% endif %}
-                  {% endif %}
-                </div>
-              </div>
-
-              <!-- Row 4: Quantity Stepper [ - 1 + ] on Left & Solid Black Recycle Icon right beside it -->
-              <div class="perfect-cart-item-controls" style="display: flex !important; flex-direction: row !important; justify-content: flex-start !important; align-items: center !important; gap: 12px !important; width: 100% !important; margin-top: 6px !important;">
-                <div class="perfect-qty-pill" style="display: inline-flex !important; align-items: center !important; justify-content: space-between !important; border: 1px solid #cccccc !important; border-radius: 50px !important; height: 32px !important; width: 88px !important; min-width: 88px !important; background-color: #ffffff !important; padding: 0 4px !important; box-sizing: border-box !important;">
-                  <button
-                    type="button"
-                    class="perfect-qty-ajax-btn"
-                    data-key="{{ item.key }}"
-                    data-action="minus"
-                    style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 16px !important; font-weight: 700 !important; background: transparent !important; border: none !important; width: 26px !important; height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; user-select: none !important;"
-                    aria-label="Decrease quantity"
-                  >-</button>
-                  
-                  <span style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 13px !important; font-weight: 700 !important; width: 24px !important; text-align: center !important; display: block !important;">
-                    {{ item.quantity }}
-                  </span>
-
-                  <button
-                    type="button"
-                    class="perfect-qty-ajax-btn"
-                    data-key="{{ item.key }}"
-                    data-action="plus"
-                    style="color: #111111 !important; font-family: 'Inter', sans-serif !important; font-size: 16px !important; font-weight: 700 !important; background: transparent !important; border: none !important; width: 26px !important; height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; user-select: none !important;"
-                    aria-label="Increase quantity"
-                  >+</button>
-                </div>
-
-                <!-- Solid Black Recycle / Trash Delete Button -->
-                <button
-                  type="button"
-                  class="perfect-qty-ajax-btn perfect-recycle-btn"
-                  data-key="{{ item.key }}"
-                  data-action="remove"
-                  title="Remove item"
-                  aria-label="Remove item"
-                  style="background: transparent !important; border: none !important; padding: 4px !important; cursor: pointer !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; color: #111111 !important;"
+          <tbody role="rowgroup">
+            {% for item in cart.items %}
+              <tr
+                role="row"
+                class="cart-items__table-row{% if item.parent_relationship.parent != null %} cart-items__nested-line{% endif %}"
+                ref="cartItemRows[]"
+                data-parent-key="{{ item.parent_relationship.parent.key }}"
+                data-key="{{ item.key }}"
+              >
+                <td
+                  class="cart-items__media"
+                  role="cell"
+                  headers="productImage"
                 >
-                  <svg class="recycle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px !important; height: 20px !important; color: #111111 !important; stroke: #111111 !important; display: block !important; transition: transform 0.4s ease !important;">
-                    <polyline points="3 6 5 6 21 6"></polyline>
-                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                    <line x1="10" y1="11" x2="10" y2="17"></line>
-                    <line x1="14" y1="11" x2="14" y2="17"></line>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
+                  {% if item.image -%}
+                    {% liquid
+                      assign ratio = 1
+                      assign border_opacity = settings.cart_thumbnail_border_opacity | divided_by: 100.0
+                      assign border_override = '--border-width: [cart_thumbnail_border_width]px; --border-style: [cart_thumbnail_border_style]; --border-color: rgb(var(--color-border-rgb) / [cart_thumbnail_border_opacity]); --border-radius: [cart_thumbnail_border_radius]px;' | replace: '[cart_thumbnail_border_width]', settings.cart_thumbnail_border_width | replace: '[cart_thumbnail_border_style]', settings.cart_thumbnail_border | replace: '[cart_thumbnail_border_opacity]', border_opacity | replace: '[cart_thumbnail_border_radius]', settings.cart_thumbnail_border_radius
+
+                      if settings.cart_thumbnail_border_radius > 0
+                        assign border_override = border_override | append: ' overflow: hidden;'
+                      endif
+                      if block_settings.image_ratio == 'portrait'
+                        assign ratio = 0.8
+                      elsif block_settings.image_ratio == 'adapt'
+                        assign ratio = item.image.aspect_ratio
+                      endif
+                    %}
+                    <a
+                      href="{{ item.url }}"
+                      class="cart-items__media-container"
+                      style="--ratio:{{ ratio }};"
+                    >
+                      {%- liquid
+                        echo item.image | image_url: width: 250 | image_tag: class: 'cart-items__media-image border-style', style: border_override
+                      -%}
+                    </a>
+                  {%- endif %}
+                </td>
+                <td
+                  class="cart-items__details cart-primary-typography"
+                  role="cell"
+                  headers="productInformation"
+                >
+                  <p>
+                    <a
+                      href="{{ item.url }}"
+                      class="cart-items__title"
+                      {% if item.parent_relationship.parent != null %}
+                        aria-label="{{ 'accessibility.nested_product' | t: product_title: item.product.title, parent_title: item.parent_relationship.parent.title | escape }}"
+                      {% endif %}
+                    >
+                      {{- item.product.title -}}
+                    </a>
+                  </p>
+                  {% if item.product.vendor and block_settings.vendor %}
+                    <p>
+                      {{ item.product.vendor }}
+                    </p>
+                  {% endif %}
+
+                  {%- if item.item_components.size != 0 -%}
+                    <ul class="cart-items__bundle list-unstyled">
+                      {%- for component in item.item_components -%}
+                        <li>
+                          {{- component.title -}}
+                          {%- if component.quantity > 1 -%}
+                            <span> × {{ component.quantity }}</span>
+                          {%- endif -%}
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+
+                  {%- if item.product.has_only_default_variant == false
+                    or item.properties.size != 0
+                    or item.selling_plan_allocation != null
+                  -%}
+                    <dl class="cart-items__variants">
+                      {%- if item.product.has_only_default_variant == false and item.item_components.size == 0 -%}
+                        {%- for option in item.options_with_values -%}
+                          <div class="cart-items__variant">
+                            <dt class="visually-hidden">{{ option.name }}:</dt>
+                            <dd>
+                              {{- option.value -}}
+                              {%- if forloop.last != true %},&nbsp;{% endif -%}
+                            </dd>
+                          </div>
+                        {%- endfor -%}
+                      {%- endif -%}
+
+                      {%- for property in item.properties -%}
+                        {%- assign property_first_char = property.first | slice: 0 -%}
+                        {%- if property.last != blank and property_first_char != '_' -%}
+                          <div class="cart-items__properties">
+                            <dt>{{ property.first }}:</dt>
+                            <dd>
+                              {%- if property.last contains '/uploads/' -%}
+                                <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
+                              {%- else -%}
+                                {{ property.last }}
+                              {%- endif -%}
+                            </dd>
+                          </div>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </dl>
+
+                    {% if item.selling_plan_allocation %}
+                      <p>{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                    {% endif %}
+                  {%- endif -%}
+
+                  {% if item.line_level_discount_allocations.size > 0 %}
+                    <ul
+                      class="list-unstyled"
+                      role="list"
+                    >
+                      {%- for discount in item.line_level_discount_allocations -%}
+                        <li>{{ discount.discount_application.title | escape }}</li>
+                      {%- endfor -%}
+                    </ul>
+                  {% endif %}
+
+                  <div>
+                    {% if item.original_price != item.final_price %}
+                      <span class="visually-hidden">{{ 'content.price_sale' | t }}</span>
+                      <span>{{ item.final_price | money }}</span>
+                      <span class="visually-hidden">{{ 'content.price_regular' | t }}</span>
+                      <s class="compare-at-price">
+                        {% if item.variant.compare_at_price > item.original_price %}
+                          {{ item.variant.compare_at_price | money }}
+                        {% else %}
+                          {{ item.original_price | money }}
+                        {% endif %}
+                      </s>
+                    {% else %}
+                      {% if item.variant.compare_at_price > item.original_price %}
+                        <span class="visually-hidden">{{ 'content.price_sale' | t }}</span>
+                      {% else %}
+                        <span class="visually-hidden">{{ 'content.price' | t }}</span>
+                      {% endif %}
+
+                      <span>{{ item.original_price | money }}</span>
+
+                      {% if item.variant.compare_at_price > item.original_price %}
+                        <span class="visually-hidden">{{ 'content.price_regular' | t }}</span>
+                        <s class="compare-at-price">{{ item.variant.compare_at_price | money }}</s>
+                      {% endif %}
+                    {% endif %}
+                  </div>
+                </td>
+                <td
+                  class="cart-items__quantity"
+                  role="cell"
+                  headers="quantity"
+                >
+                  {% # Here I want to pass some arguments to the quantity block so it knows which value should the input be set to. Though quantity block could be a snippet instead %}
+                  {% assign can_update_quantity = item.instructions.can_update_quantity
+                    | default: true, allow_false: true
+                  %}
+                  {% render 'quantity-selector',
+                    product: item.product,
+                    in_cart_quantity: item.quantity,
+                    line_index: item.index,
+                    min: 0,
+                    class: 'cart-primary-typography',
+                    can_update_quantity: can_update_quantity
+                  %}
+
+                  <button
+                    class="button button--tertiary cart-items__remove"
+                    type="button"
+                    aria-label="{{ 'accessibility.remove_item' | t: title: item.title | escape }}"
+                    on:click="/onLineItemRemove/{{ item.index | plus: 1 }}"
+                    {% assign can_remove = item.instructions.can_remove | default: true, allow_false: true %}
+                    {% if can_remove == false %}
+                      hidden
+                    {% endif %}
+                  >
+                    {{- 'icon-delete.svg' | inline_asset_content -}}
+                    <span class="visually-hidden">Remove</span>
+                  </button>
+                </td>
+                <td
+                  class="cart-items__error hidden"
+                  role="cell"
+                  ref="cartItemErrorContainer-{{ item.index | plus: 1 }}"
+                  headers="quantity"
+                >
+                  <div
+                    class="cart-item__error"
+                    role="alert"
+                  >
+                    <span class="svg-wrapper">
+                      {{- 'icon-error.svg' | inline_asset_content -}}
+                    </span>
+                    <small
+                      class="cart-item__error-text cart-primary-typography"
+                      ref="cartItemError-{{ item.index | plus: 1 }}"
+                    ></small>
+                  </div>
+                </td>
+                <td
+                  class="cart-items__price cart-secondary-typography"
+                  role="cell"
+                  headers="productTotal"
+                >
+                  {%- liquid
+                    if settings.currency_code_enabled_cart_items
+                      assign price = item.final_line_price | money_with_currency
+                      assign unit_price = item.unit_price | money_with_currency
+                    else
+                      assign price = item.final_line_price | money
+                      assign unit_price = item.unit_price | money
+                    endif
+                  -%}
+                  <text-component value="{{ price | strip_html }}">{{ price }}</text-component>
+                  {%- if item.unit_price_measurement -%}
+                    <div class="cart-items__price-unit cart-secondary-typography">
+                      {% render 'unit-price', price: unit_price, measurement: item.unit_price_measurement %}
+                    </div>
+                  {%- endif -%}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
     </form>
   {%- endif -%}
 </div>
-
-<script>
-  (function() {
-    if (window.perfectCartQtyInit) return;
-    window.perfectCartQtyInit = true;
-
-    let pendingUpdates = {};
-    let debounceTimer = null;
-
-    document.addEventListener('click', function(e) {
-      const btn = e.target.closest('.perfect-qty-ajax-btn');
-      if (!btn) return;
-
-      e.preventDefault();
-      e.stopPropagation();
-
-      const itemKey = btn.dataset.key;
-      const action = btn.dataset.action;
-      const row = btn.closest('.perfect-cart-item-row');
-      if (!row || !itemKey) return;
-
-      const qtySpan = row.querySelector('.perfect-qty-pill span');
-      let currentQty = parseInt(qtySpan ? qtySpan.textContent.trim() : '1', 10);
-      if (isNaN(currentQty)) currentQty = 1;
-
-      // Track active quantity state
-      if (pendingUpdates[itemKey] === undefined) {
-        pendingUpdates[itemKey] = currentQty;
-      }
-
-      if (action === 'plus') {
-        pendingUpdates[itemKey] += 1;
-      } else if (action === 'minus') {
-        pendingUpdates[itemKey] = Math.max(0, pendingUpdates[itemKey] - 1);
-      } else if (action === 'remove') {
-        pendingUpdates[itemKey] = 0;
-      }
-
-      const newQty = pendingUpdates[itemKey];
-
-      // Optimistic Instant UI Update
-      if (newQty <= 0) {
-        const currentHeight = row.offsetHeight;
-        row.style.maxHeight = currentHeight + 'px';
-        row.style.overflow = 'hidden';
-        row.style.boxSizing = 'border-box';
-        row.style.transition = 'max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, margin 0.25s ease, padding 0.25s ease';
-        
-        void row.offsetHeight;
-        
-        row.style.maxHeight = '0px';
-        row.style.opacity = '0';
-        row.style.marginTop = '0px';
-        row.style.marginBottom = '0px';
-        row.style.paddingTop = '0px';
-        row.style.paddingBottom = '0px';
-        row.style.borderBottom = 'none';
-
-        setTimeout(() => {
-          row.remove();
-        }, 260);
-      } else if (qtySpan) {
-        qtySpan.textContent = newQty;
-      }
-
-      // Debounce background server sync
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(() => {
-        syncCartWithServer();
-      }, 200);
-    });
-
-    async function syncCartWithServer() {
-      const keysToSync = Object.keys(pendingUpdates);
-      if (keysToSync.length === 0) return;
-
-      const itemKey = keysToSync[0];
-      const qty = pendingUpdates[itemKey];
-      delete pendingUpdates[itemKey];
-
-      try {
-        const res = await fetch('/cart/change.js', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({
-            id: itemKey,
-            quantity: qty
-          })
-        });
-
-        if (res.ok) {
-          const data = await res.json();
-
-          // Dispatch theme cart update event
-          document.dispatchEvent(new CustomEvent('cart:update', {
-            bubbles: true,
-            detail: { resource: data }
-          }));
-
-          // 1. Verify item quantities
-          if (data.items) {
-            const updatedItem = data.items.find(i => i.key === itemKey);
-            const row = document.querySelector(`.perfect-cart-item-row[data-key="${itemKey}"]`);
-            if (updatedItem && row) {
-              const qtySpan = row.querySelector('.perfect-qty-pill span');
-              if (qtySpan) qtySpan.textContent = updatedItem.quantity;
-            }
-          }
-
-          // 2. Calculate & update Total Price DOM accurately
-          if (data.total_price !== undefined) {
-            const formattedPrice = 'Rs. ' + (data.total_price / 100).toLocaleString('en-IN', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
-            });
-            document.querySelectorAll('.cart__total-value, [data-cart-subtotal]').forEach(el => {
-              el.textContent = formattedPrice;
-            });
-          }
-
-          // 3. Update cart drawer count heading
-          const totalCount = data.item_count;
-          document.querySelectorAll('.cart-drawer__heading, [data-testid="cart-drawer-trigger"]').forEach(el => {
-            if (totalCount !== undefined) {
-              el.innerHTML = el.innerHTML.replace(/\(\d+\)/, `(${totalCount})`);
-            }
-          });
-
-          // 4. Handle Empty Cart state when item_count === 0
-          if (totalCount === 0) {
-            const summary = document.querySelector('.cart-drawer__summary');
-            if (summary) summary.style.setProperty('display', 'none', 'important');
-
-            const upsell = document.querySelector('.cart-drawer-upsell-container');
-            if (upsell) upsell.style.setProperty('display', 'none', 'important');
-
-            const itemsView = document.querySelector('.cart-drawer__items');
-            if (itemsView) itemsView.style.setProperty('display', 'none', 'important');
-
-            const emptyView = document.querySelector('.empty-cart-custom');
-            if (emptyView) emptyView.style.setProperty('display', 'flex', 'important');
-          }
-        }
-      } catch (err) {
-        console.error('AJAX cart quantity update error:', err);
-      }
-
-      if (Object.keys(pendingUpdates).length > 0) {
-        syncCartWithServer();
-      }
-    }
-
-    // Automatically update cart drawer when products are added from homepage/product grid ADD TO CART buttons
-    document.addEventListener('cart:update', async function(e) {
-      if (e.detail && e.detail.sourceId === 'cart-items-component') return;
-
-      try {
-        const cacheBuster = '?ts=' + Date.now();
-        const cartRes = await fetch('/cart.js' + cacheBuster, { cache: 'reload', headers: { 'Cache-Control': 'no-cache' } });
-        const cart = await cartRes.json();
-
-        document.querySelectorAll('.cart-drawer__heading, [data-testid="cart-drawer-trigger"]').forEach(el => {
-          if (cart.item_count !== undefined) {
-            el.innerHTML = el.innerHTML.replace(/\(\d+\)/, `(${cart.item_count})`);
-          }
-        });
-
-        const emptyView = document.querySelector('.empty-cart-custom');
-        const itemsView = document.querySelector('.cart-drawer__items');
-        const summaryView = document.querySelector('.cart-drawer__summary');
-        const upsellView = document.querySelector('.cart-drawer-upsell-container');
-
-        if (cart.item_count > 0) {
-          if (emptyView) emptyView.style.setProperty('display', 'none', 'important');
-          if (itemsView) itemsView.style.setProperty('display', 'block', 'important');
-          if (summaryView) summaryView.style.setProperty('display', 'flex', 'important');
-          if (upsellView) upsellView.style.setProperty('display', 'block', 'important');
-
-          // Fetch fresh section HTML bypassing browser HTTP cache using timestamp
-          const htmlRes = await fetch(window.location.pathname + cacheBuster, { cache: 'reload', headers: { 'Cache-Control': 'no-cache' } });
-          const htmlText = await htmlRes.text();
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(htmlText, 'text/html');
-
-          const newItems = doc.querySelector('.perfect-cart-items-wrapper');
-          const currentItems = document.querySelector('.perfect-cart-items-wrapper');
-          if (newItems && currentItems) {
-            currentItems.innerHTML = newItems.innerHTML;
-          }
-
-          const newSummary = doc.querySelector('.cart__summary-totals, .cart__total-container, .cart-drawer__summary');
-          if (newSummary && summaryView) {
-            summaryView.innerHTML = newSummary.innerHTML;
-          }
-
-          // Open drawer if not already open
-          const drawerComponent = document.querySelector('cart-drawer-component');
-          if (drawerComponent && typeof drawerComponent.open === 'function') {
-            drawerComponent.open();
-          } else {
-            const dialog = document.querySelector('dialog.cart-drawer__dialog');
-            if (dialog && !dialog.open && typeof dialog.showModal === 'function') {
-              dialog.showModal();
-            }
-          }
-        }
-      } catch (err) {
-        console.error('Error handling cart add update:', err);
-      }
-    });
-  })();
-</script>
 
 {% stylesheet %}
   .cart-items {

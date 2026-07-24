@@ -1,38 +1,30 @@
 
 
-{%- if request.path contains 'ingredient' -%}
-  {% section 'custom-ingredients' %}
-{%- elsif request.path contains 'career' or request.path contains 'job' -%}
-  {% section 'custom-careers' %}
-{%- elsif request.path contains 'blog' or request.path contains 'news' -%}
-  {% section 'featured-blog-posts' %}
-{%- else -%}
-  <div class="section-background color-{{ section.settings.color_scheme }}"></div>
-  <div
-    class="
-      section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}
-      {% if section.settings.section_height != "" %} {{ section.settings.section_height | prepend: "section--height-" }}{% endif %}
-    "
-  >
-    <div>
-      <div
-        class="
-          spacing-style
-          layout-panel-flex
-          layout-panel-flex--column
-          section-content-wrapper
-          mobile-column
-        "
-        style="
-          {% render 'layout-panel-style', settings: section.settings %}
-          {% render 'spacing-style', settings: section.settings %}
-        "
-      >
-        {% content_for 'blocks' %}
-      </div>
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="
+    section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}
+    {% if section.settings.section_height != "" %} {{ section.settings.section_height | prepend: "section--height-" }}{% endif %}
+  "
+>
+  <div>
+    <div
+      class="
+        spacing-style
+        layout-panel-flex
+        layout-panel-flex--column
+        section-content-wrapper
+        mobile-column
+      "
+      style="
+        {% render 'layout-panel-style', settings: section.settings %}
+        {% render 'spacing-style', settings: section.settings %}
+      "
+    >
+      {% content_for 'blocks' %}
     </div>
   </div>
-{%- endif -%}
+</div>
 
 {% schema %}
 {
