@@ -2165,18 +2165,39 @@ body.template-page-bulk-order main#MainContent,
    - Hover state: Crimson Red (#d52528) with #fef2f2 background
 ======================================================== */
 .avyah-discover-card {
+  position: relative !important;
   background-color: #ffffff !important;
   background: #ffffff !important;
+  border-radius: 18px !important;
+  box-shadow: 0 14px 45px rgba(0, 0, 0, 0.28), 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  border: none !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  min-width: 250px !important;
 }
 
 .avyah-discover-card a,
 .avyah-discover-card a:not(:hover),
 .avyah-discover-card .avyah-discover-item-link,
 .avyah-discover-card a.avyah-discover-item-link:not(:hover) {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  padding: 16px 26px !important;
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.8px !important;
   background-color: #ffffff !important;
   background: #ffffff !important;
   color: #000000 !important;
   -webkit-text-fill-color: #000000 !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+  transition: background 0.18s ease, color 0.18s ease !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
 }
 
 .avyah-discover-card a *,
@@ -2184,6 +2205,10 @@ body.template-page-bulk-order main#MainContent,
 .avyah-discover-card .avyah-discover-item-text {
   color: #000000 !important;
   -webkit-text-fill-color: #000000 !important;
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.8px !important;
 }
 
 .avyah-discover-card a:hover,
@@ -2200,9 +2225,15 @@ body.template-page-bulk-order main#MainContent,
 .avyah-discover-card a .dd-icon *,
 .avyah-discover-card a:not(:hover) .dd-icon,
 .avyah-discover-card a:not(:hover) .dd-icon * {
+  width: 28px !important;
+  height: 28px !important;
+  flex-shrink: 0 !important;
+  opacity: 1 !important;
   color: #000000 !important;
   stroke: #000000 !important;
+  stroke-width: 2.8px !important;
   fill: none !important;
+  transition: color 0.18s ease, stroke 0.18s ease !important;
 }
 
 .avyah-discover-card a:hover .dd-icon,
