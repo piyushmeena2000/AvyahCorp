@@ -1397,10 +1397,10 @@ body.template-index section:not(dialog *):not(.cart-drawer *):not(#footer-group 
 body.template-index .section:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *),
 body.template-index div:not(dialog *):not(.cart-drawer *):not(cart-drawer-component *):not(.cart-drawer__inner *):not(.cart-drawer__content *):not(#footer-group *):not(footer *):not(.custom-footer *),
 body.template-index [class*="section"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *),
-body.template-index [class*="block"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *),
-body.template-index [class*="container"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *),
-body.template-index [class*="color-scheme"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *),
-body.template-index [class*="scheme-"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *) {
+body.template-index [class*="block"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *):not([class*="product-card"]):not([class*="product-grid"]):not([class*="card"]):not(product-card *):not(product-card-link *):not(.product-card *):not([class*="ai-product-card"]),
+body.template-index [class*="container"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *):not([class*="product-card"]):not([class*="product-grid"]):not([class*="card"]):not(product-card *):not(product-card-link *):not(.product-card *):not([class*="ai-product-card"]),
+body.template-index [class*="color-scheme"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *):not([class*="product-card"]):not([class*="product-grid"]):not([class*="card"]):not(product-card *):not(product-card-link *):not(.product-card *):not([class*="ai-product-card"]),
+body.template-index [class*="scheme-"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *):not([class*="product-card"]):not([class*="product-grid"]):not([class*="card"]):not(product-card *):not(product-card-link *):not(.product-card *):not([class*="ai-product-card"]) {
   background-color: #d52528 !important;
   background: #d52528 !important;
 }
@@ -2308,6 +2308,7 @@ ticker-component,
 
 /* ========================================================
    PRODUCT LISTING CARDS - 100% PURE WHITE BACKGROUND
+   - Matches 1-to-1 with User Reference Image
    - Zero crimson red inside the card
    - Zero stroke outlines/borders inside or around the card
 ======================================================== */
@@ -2321,15 +2322,16 @@ li.product-grid__item,
 .product-grid > div,
 .card-wrapper,
 [class*="product-card"],
+[class*="ai-product-card"],
 [class*="product-grid__card"] {
   background-color: #ffffff !important;
   background: #ffffff !important;
-  border-radius: 16px !important;
+  border-radius: 20px !important;
   border: none !important;
   outline: none !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
   overflow: hidden !important;
-  padding: 14px !important;
+  padding: 16px !important;
   box-sizing: border-box !important;
 }
 
@@ -2338,8 +2340,8 @@ li.product-grid__item,
 .product-card__content div:not([class*="badge"]):not([class*="button"]):not([class*="quick-add"]):not([class*="discount"]):not([class*="sale"]),
 .product-grid__card div:not([class*="badge"]):not([class*="button"]):not([class*="quick-add"]):not([class*="discount"]):not([class*="sale"]),
 .product-grid__item div:not([class*="badge"]):not([class*="button"]):not([class*="quick-add"]):not([class*="discount"]):not([class*="sale"]),
-.product-card [class*="group-block"],
-.product-grid__item [class*="group-block"],
+[class*="ai-product-card"] div:not([class*="badge"]):not([class*="button"]):not([class*="quick-add"]):not([class*="discount"]):not([class*="sale"]):not([class*="image-wrapper"]),
+[class*="ai-product-card-content"],
 [class*="group-block"] {
   background-color: #ffffff !important;
   background: #ffffff !important;
@@ -2354,7 +2356,8 @@ li.product-grid__item,
 .product-grid__card *,
 product-card *,
 .product-grid__item *,
-product-card-link * {
+product-card-link *,
+[class*="ai-product-card"] * {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
@@ -2366,10 +2369,9 @@ product-card-link * {
 .card-gallery,
 .product-card__image,
 [class*="product-card-gallery"],
-[class*="card-gallery"] {
-  background-color: #ffffff !important;
-  background: #ffffff !important;
-  border-radius: 12px !important;
+[class*="card-gallery"],
+[class*="ai-product-card-image-wrapper"] {
+  border-radius: 14px !important;
   overflow: hidden !important;
 }
 
@@ -2386,14 +2388,20 @@ product-card-link * {
 .product-grid__item a,
 .product-card a,
 product-title,
-product-title a {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+product-title a,
+[class*="ai-product-card-title"],
+[class*="ai-product-card-title"] a {
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
   font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 17px !important;
   font-weight: 400 !important;
+  text-transform: uppercase !important;
   text-decoration: none !important;
   background: transparent !important;
   background-color: transparent !important;
+  margin-top: 10px !important;
+  margin-bottom: 4px !important;
 }
 
 /* Subtitle / Meta / Pack Info */
@@ -2403,97 +2411,124 @@ product-title a {
 .product-grid__card p,
 .product-grid__card span:not([class*="badge"]):not([class*="button"]),
 .product-grid__item p,
-.product-grid__item span:not([class*="badge"]):not([class*="button"]) {
-  color: #333333 !important;
-  -webkit-text-fill-color: #333333 !important;
+.product-grid__item span:not([class*="badge"]):not([class*="button"]),
+[class*="ai-product-card-specs"],
+[class*="ai-product-card"] p {
+  color: #777777 !important;
+  -webkit-text-fill-color: #777777 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
   background: transparent !important;
   background-color: transparent !important;
 }
 
-/* Price Text */
+/* Prices - Bold Solid Black */
 .product-card [class*="price"],
 .product-card .price *,
 .product-grid__card .price,
 .product-grid__card .price *,
 .product-grid__item [class*="price"],
 price-component,
-price-component * {
+price-component *,
+[class*="ai-product-card"] .current-price {
   color: #000000 !important;
   -webkit-text-fill-color: #000000 !important;
-  font-weight: 700 !important;
+  font-size: 20px !important;
+  font-weight: 800 !important;
   background: transparent !important;
   background-color: transparent !important;
 }
 
-/* Discount Pill / Savings Badge (e.g. -5% OFF) */
+/* Discount Pill (-5% OFF) */
 .product-card [class*="discount"],
 .product-card [class*="sale-badge"],
 .product-card [class*="percent-off"],
 .product-grid__item [class*="percent-off"],
-[class*="percent-off"] {
-  background-color: #fef2f2 !important;
-  background: #fef2f2 !important;
+[class*="percent-off"],
+[class*="ai-product-card"] .discount-badge {
+  background-color: #fde8e8 !important;
+  background: #fde8e8 !important;
   color: #d52528 !important;
   -webkit-text-fill-color: #d52528 !important;
   border-radius: 6px !important;
-  font-weight: 700 !important;
-  padding: 4px 8px !important;
+  font-weight: 800 !important;
+  font-size: 13px !important;
+  padding: 4px 10px !important;
 }
 
-/* Add To Cart & Action Buttons */
+/* ADD TO CART Crimson Red Pill Button (Exact Reference Match) */
 .product-card button[class*="add-to-cart"],
 .product-card .button,
 .product-card [class*="quick-add"] button,
 .product-grid__item button[class*="add-to-cart"],
-.product-grid__item .button {
-  background-color: #700a0c !important;
-  background: #700a0c !important;
+.product-grid__item .button,
+[class*="ai-product-card-button"] {
+  background-color: #d52528 !important;
+  background: #d52528 !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
-  border-radius: 8px !important;
+  border-radius: 10px !important;
+  padding: 12px 16px !important;
   font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 16px !important;
+  text-transform: uppercase !important;
+  border: none !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
 }
 
 .product-card button[class*="add-to-cart"] *,
 .product-card .button *,
 .product-card [class*="quick-add"] button *,
-.product-grid__item button * {
+.product-grid__item button *,
+[class*="ai-product-card-button"] * {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
 }
 
-/* Quick View Button */
+/* Quick View Translucent Pill Button */
 .product-card [class*="quick-view"],
 .product-card .quick-view-button,
-.product-grid__item [class*="quick-view"] {
-  background-color: #d52528 !important;
-  background: #d52528 !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+.product-grid__item [class*="quick-view"],
+[class*="ai-product-quick-view-btn"] {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
   border-radius: 20px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
 }
 
 .product-card [class*="quick-view"] *,
-.product-card .quick-view-button * {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+.product-card .quick-view-button *,
+[class*="ai-product-quick-view-btn"] * {
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
 }
 
-/* Bestseller Badge */
+/* BESTSELLER Red Badge */
 .product-card [class*="badge"],
 .product-card .badge,
 .product-grid__card .badge,
-.product-grid__item .badge {
+.product-grid__item .badge,
+[class*="ai-product-badge"] {
   background-color: #d52528 !important;
   background: #d52528 !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   font-weight: 700 !important;
   border-radius: 6px !important;
+  font-family: 'Anton', sans-serif !important;
 }
 
 .product-card [class*="badge"] *,
-.product-card .badge * {
+.product-card .badge *,
+[class*="ai-product-badge"] * {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
 }
@@ -2502,12 +2537,18 @@ price-component * {
 .product-card [class*="wishlist"],
 .product-card [class*="heart"],
 .product-grid__item [class*="heart"],
-.product-grid__item [class*="wishlist"] {
+.product-grid__item [class*="wishlist"],
+[class*="ai-product-wishlist-btn"] {
   background-color: #ffffff !important;
   background: #ffffff !important;
-  border: 1px solid #e2e8f0 !important;
+  border: 1.5px solid #e0e0e0 !important;
   color: #000000 !important;
-  border-radius: 8px !important;
+  border-radius: 10px !important;
+  width: 44px !important;
+  height: 46px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 
