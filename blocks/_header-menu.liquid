@@ -210,58 +210,13 @@
                       </div>
                     </div>
                     <div class="avyah-megamenu-backdrop"></div>
-                  {%- elsif link.links != blank or _dt contains 'discover' or _dt contains 'blog' -%}
-                    {%- comment -%} DISCOVER dropdown popover with OUR BLOGS & CAREERS {%- endcomment -%}
-                    <a
-                      href="#"
-                      class="menu-list__link{% if link.current %} menu-list__link--active{% endif %}"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                      {% if link.current %}aria-current="page"{% endif %}
-                    >
-                      <span class="menu-list__link-title">DISCOVER</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none" aria-hidden="true" style="margin-left:4px;vertical-align:middle;">
-                        <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    </a>
-                    <div class="menu-list__submenu avyah-discover-popover" style="position: absolute !important; top: calc(100% + 8px) !important; left: 50% !important; transform: translateX(-50%) !important; background: #d52528 !important; background-color: #d52528 !important; border: 1px solid rgba(255,255,255,0.25) !important; border-radius: 14px !important; box-shadow: 0 14px 35px rgba(0,0,0,0.4) !important; padding: 8px !important; min-width: 220px !important; box-sizing: border-box !important; z-index: 999999 !important;">
-                      <div class="avyah-discover-arrow" style="position: absolute !important; top: -8px !important; left: 50% !important; transform: translateX(-50%) !important; width: 0 !important; height: 0 !important; border-left: 8px solid transparent !important; border-right: 8px solid transparent !important; border-bottom: 8px solid #d52528 !important; z-index: 100000 !important;"></div>
-                      
-                      <div class="menu-list__submenu-inner" style="background: transparent !important; background-color: transparent !important;">
-                        <div class="mega-menu__grid" style="display: flex !important; flex-direction: column !important; gap: 4px !important; background: transparent !important; background-color: transparent !important;">
-                          
-                          <!-- ITEM 1: OUR STORY -->
-                          <div class="mega-menu__column" style="width: 100% !important; background: transparent !important; background-color: transparent !important;">
-                            <a href="/pages/our-story" class="avyah-discover-link" style="display: flex !important; align-items: center !important; gap: 12px !important; background: transparent !important; background-color: transparent !important; text-decoration: none !important; padding: 10px 14px !important; border-radius: 8px !important; width: 100% !important; box-sizing: border-box !important;">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0 !important;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                              <span class="avyah-discover-title-text" style="color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; font-family: 'Anton', Arial, sans-serif !important; font-size: 16px !important; font-weight: 500 !important; letter-spacing: 0.5px !important; text-transform: uppercase !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; line-height: 1 !important;">OUR STORY</span>
-                            </a>
-                          </div>
-
-                          <!-- ITEM 2: OUR BLOGS -->
-                          <div class="mega-menu__column" style="width: 100% !important; background: transparent !important; background-color: transparent !important;">
-                            <a href="/blogs/news" class="avyah-discover-link" style="display: flex !important; align-items: center !important; gap: 12px !important; background: transparent !important; background-color: transparent !important; text-decoration: none !important; padding: 10px 14px !important; border-radius: 8px !important; width: 100% !important; box-sizing: border-box !important;">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0 !important;"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/></svg>
-                              <span class="avyah-discover-title-text" style="color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; font-family: 'Anton', Arial, sans-serif !important; font-size: 16px !important; font-weight: 500 !important; letter-spacing: 0.5px !important; text-transform: uppercase !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; line-height: 1 !important;">OUR BLOGS</span>
-                            </a>
-                          </div>
-
-                          <!-- ITEM 3: CAREERS -->
-                          <div class="mega-menu__column" style="width: 100% !important; background: transparent !important; background-color: transparent !important;">
-                            <a href="/pages/careers" class="avyah-discover-link" style="display: flex !important; align-items: center !important; gap: 12px !important; background: transparent !important; background-color: transparent !important; text-decoration: none !important; padding: 10px 14px !important; border-radius: 8px !important; width: 100% !important; box-sizing: border-box !important;">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0 !important;"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                              <span class="avyah-discover-title-text" style="color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; font-family: 'Anton', Arial, sans-serif !important; font-size: 16px !important; font-weight: 500 !important; letter-spacing: 0.5px !important; text-transform: uppercase !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; line-height: 1 !important;">CAREERS</span>
-                            </a>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
                   {%- else -%}
                     {%- comment -%} Simple links {%- endcomment -%}
                     {%- assign _target_url = link.url -%}
                     {%- if _dt contains 'ingredient' -%}
                       {%- assign _target_url = '/pages/ingredients' -%}
+                    {%- elsif _dt contains 'discover' -%}
+                      {%- assign _target_url = '/pages/our-story' -%}
                     {%- endif -%}
                     <a
                       href="{{ _target_url }}"

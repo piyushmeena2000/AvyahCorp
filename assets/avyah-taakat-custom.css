@@ -1869,44 +1869,15 @@ header-component svg line:not(.dd-icon *),
    - Default Text & Icons: Solid Black (#000000)
    - Hover State: Text & Icon turn Crimson Red (#700a0c) with #fff5f5 background
 ======================================================== */
+/* Hide DISCOVER dropdown popovers and floating secondary nav below the menu */
 .avyah-discover-popover,
-.avyah-discover-popover .menu-list__submenu-inner,
-.avyah-discover-popover .mega-menu__grid,
-.avyah-discover-popover .mega-menu__column {
-  background-color: #d52528 !important;
-  background: #d52528 !important;
-}
-
-.avyah-discover-popover {
-  border-radius: 14px !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  box-shadow: 0 14px 35px rgba(0,0,0,0.4) !important;
-  padding: 8px !important;
-  min-width: 220px !important;
-  box-sizing: border-box !important;
-}
-
+.avyah-right-nav,
+.avyah-right-nav__dropdown,
 .avyah-discover-arrow {
-  position: absolute !important;
-  top: -8px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 0 !important;
-  height: 0 !important;
-  border-left: 8px solid transparent !important;
-  border-right: 8px solid transparent !important;
-  border-bottom: 8px solid #d52528 !important;
-  z-index: 100001 !important;
-}
-
-/* Enable DISCOVER hover dropdown popover */
-.menu-list__list-item:hover .menu-list__submenu,
-.menu-list__list-item:focus-within .menu-list__submenu,
-.menu-list__submenu:hover {
-  display: block !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  pointer-events: auto !important;
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 /* White text for DISCOVER menu links */
