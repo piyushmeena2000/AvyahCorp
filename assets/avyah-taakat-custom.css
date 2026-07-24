@@ -1873,8 +1873,8 @@ header-component svg line:not(.dd-icon *),
 .avyah-discover-popover .menu-list__submenu-inner,
 .avyah-discover-popover .mega-menu__grid,
 .avyah-discover-popover .mega-menu__column {
-  background-color: #700a0c !important;
-  background: #700a0c !important;
+  background-color: #d52528 !important;
+  background: #d52528 !important;
 }
 
 .avyah-discover-popover {
@@ -1895,7 +1895,7 @@ header-component svg line:not(.dd-icon *),
   height: 0 !important;
   border-left: 8px solid transparent !important;
   border-right: 8px solid transparent !important;
-  border-bottom: 8px solid #700a0c !important;
+  border-bottom: 8px solid #d52528 !important;
   z-index: 100001 !important;
 }
 
