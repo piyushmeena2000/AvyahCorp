@@ -5,7 +5,7 @@
     SECTION LAYOUT:
     
     * Full width section touching both left and right edges of the screen
-    * Background color: deep crimson red (#D52528)
+    * Background color: deep crimson red (#700a0c)
     * Smooth horizontal draggable product slider/carousel
     * Show 5 product cards at a time on desktop
     * Additional cards continue horizontally with drag/swipe interaction
@@ -121,7 +121,7 @@
     width: 100%;
     overflow: hidden;
     position: relative;
-    padding: 40px 0 80px;
+    padding: 60px 0 20px;
   }
 
   .ai-product-slider-track-{{ ai_gen_id }} {
@@ -138,148 +138,272 @@
     transition: none;
   }
 
+  /* Modern Clean Card Container */
   .ai-product-card-{{ ai_gen_id }} {
     flex: 0 0 calc((100% - ({{ block.settings.desktop_cards_visible | minus: 1 }} * {{ block.settings.card_gap }}px)) / {{ block.settings.desktop_cards_visible }});
-    max-width: {{ block.settings.desktop_card_max_width }}px;
-    background-color: {{ block.settings.card_background }};
-    border-radius: {{ block.settings.card_border_radius }}px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    overflow: visible;
+    max-width: 420px !important;
+    min-width: 310px !important;
+    min-height: 500px !important;
+    background-color: #ffffff !important;
+    border-radius: 20px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04) !important;
+    border: 1px solid #f0e6e4 !important;
+    overflow: hidden !important;
     position: relative;
-    padding-bottom: 30px;
+    padding: 12px !important;
     margin-bottom: 30px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .ai-product-card-{{ ai_gen_id }}:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-    z-index: 5;
+    transform: translateY(-4px); /* Soft lift hover */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
   }
 
   .ai-product-card-image-{{ ai_gen_id }} {
     width: 100%;
-    padding: {{ block.settings.image_padding }}px;
-    padding-bottom: 0;
+    display: block;
+    text-decoration: none;
   }
 
   .ai-product-card-image-wrapper-{{ ai_gen_id }} {
     width: 100%;
-    aspect-ratio: {{ block.settings.desktop_image_ratio }};
+    aspect-ratio: 1 / 1 !important;
     overflow: hidden;
-    border-radius: {{ block.settings.card_border_radius | divided_by: 2 }}px;
-    background: #f4f4f4;
+    border-radius: 16px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    position: relative;
+    border: none;
   }
 
   .ai-product-card-image-{{ ai_gen_id }} img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
   }
 
-  .ai-product-card-image-placeholder-{{ ai_gen_id }} {
-    width: 100%;
-    height: 100%;
-    display: flex;
+  /* Flame BESTSELLER badge */
+  .ai-product-badge-{{ ai_gen_id }} {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #700a0c !important;
+    color: #ffffff !important;
+    padding: 5px 10px;
+    font-family: 'Anton', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 10;
+    border-radius: 6px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 3px;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+
+  .ai-product-quick-view-btn-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.95);
+    color: #111111;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    transition: all 0.2s ease;
   }
 
-  .ai-product-card-image-placeholder-{{ ai_gen_id }} svg {
-    width: 60%;
-    height: 60%;
+  .ai-product-quick-view-btn-{{ ai_gen_id }}:hover {
+    background: #ffffff;
+    transform: scale(1.05);
   }
 
   .ai-product-card-content-{{ ai_gen_id }} {
-    padding: {{ block.settings.content_padding }}px;
-    padding-bottom: 0;
+    padding: 14px 0 0;
+    text-align: left !important;
+    flex-grow: 1;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
   }
 
-  .ai-product-card-title-{{ ai_gen_id }} {
-    font-size: {{ block.settings.title_font_size }}px;
+  .ai-product-card-reviews-{{ ai_gen_id }} {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 6px;
+    margin-bottom: 8px;
+    width: 100% !important;
+  }
+
+  .ai-product-card-reviews-{{ ai_gen_id }} .stars {
+    color: #ffb800 !important; /* Vivid Gold Stars */
+    font-size: 18px !important;
+    letter-spacing: 1.5px;
+    line-height: 1;
+  }
+
+  .ai-product-card-reviews-{{ ai_gen_id }} .rating-num {
+    color: #111111 !important;
+    font-size: 14px !important;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .ai-product-card-reviews-{{ ai_gen_id }} .count {
+    color: #666666 !important;
+    font-size: 14px !important;
     font-weight: 600;
-    color: {{ block.settings.title_color }};
-    margin: 0 0 {{ block.settings.title_spacing }}px;
-    line-height: 1.3;
-    min-height: calc({{ block.settings.title_font_size }}px * 1.3 * 2);
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Title: bold Anton font */
+  .ai-product-card-title-{{ ai_gen_id }} {
+    font-size: 20px;
+    font-weight: 400;
+    color: #000000 !important;
+    margin: 0 0 6px;
+    line-height: 1.15;
+    min-height: calc(20px * 1.15 * 2);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: left !important;
+    width: 100% !important;
   }
 
-  .ai-product-card-price-wrapper-{{ ai_gen_id }} {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: {{ block.settings.price_spacing }}px;
-    flex-wrap: wrap;
-  }
-
-  .ai-product-card-prices-{{ ai_gen_id }} {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .ai-product-card-price-original-{{ ai_gen_id }} {
-    font-size: {{ block.settings.price_font_size | times: 0.85 }}px;
-    color: {{ block.settings.price_color }};
-    text-decoration: line-through;
-    opacity: 0.6;
-  }
-
-  .ai-product-card-price-sale-{{ ai_gen_id }} {
-    font-size: {{ block.settings.price_font_size }}px;
-    font-weight: 700;
-    color: {{ block.settings.price_color }};
-  }
-
-  .ai-product-card-price-regular-{{ ai_gen_id }} {
-    font-size: {{ block.settings.price_font_size }}px;
-    font-weight: 700;
-    color: {{ block.settings.price_color }};
-  }
-
-  .ai-product-card-badge-{{ ai_gen_id }} {
-    background-color: {{ block.settings.badge_background }};
-    color: {{ block.settings.badge_text_color }};
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: {{ block.settings.badge_font_size }}px;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
-  .ai-product-card-button-{{ ai_gen_id }} {
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: {{ block.settings.button_background }};
-    color: {{ block.settings.button_text_color }};
-    padding: 12px 28px;
-    border-radius: 50px;
-    font-size: {{ block.settings.button_font_size }}px;
-    font-weight: 600;
+  .ai-product-card-title-{{ ai_gen_id }} a {
+    color: #000000 !important;
     text-decoration: none;
+    text-align: left !important;
+  }
+
+  .ai-product-card-specs-{{ ai_gen_id }} {
+    font-size: 12px;
+    font-weight: 700;
+    color: #666666 !important;
+    margin: 4px 0 10px;
+    font-family: 'Inter', sans-serif;
+    text-align: left !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  /* Pricing Row */
+  .ai-product-card-price-row-{{ ai_gen_id }} {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    align-self: flex-start !important;
+    text-align: left !important;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 4px 0 10px 0 !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    width: 100% !important;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .ai-product-card-price-row-{{ ai_gen_id }} .compare-price {
+    text-decoration: line-through;
+    color: #888888;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .ai-product-card-price-row-{{ ai_gen_id }} .current-price {
+    color: #000000;
+    font-size: 18px;
+    font-weight: 900;
+  }
+
+  .ai-product-card-price-row-{{ ai_gen_id }} .discount-badge {
+    background-color: #700a0c !important; /* Crimson Red discount badge */
+    color: #ffffff !important;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     border: none;
+    margin-left: 0 !important;
+  }
+
+  /* Bold button with solid outline and pop shadow */
+  .ai-product-card-button-{{ ai_gen_id }} {
+    position: relative;
+    display: block;
+    width: 100%;
+    background-color: #8B0000 !important; /* Dark Crimson Red button */
+    background: #8B0000 !important;
+    color: #ffffff !important;
+    padding: 12px 6px;
+    border-radius: 8px;
+    font-size: 18px !important;
+    font-weight: 400;
+    text-decoration: none;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 5px;
     white-space: nowrap;
-    z-index: 10;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   }
 
   .ai-product-card-button-{{ ai_gen_id }}:hover {
-    background-color: {{ block.settings.button_hover_background }};
-    transform: translateX(-50%) translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    background-color: #6d0000 !important; /* Darker Crimson Red on Hover */
+    background: #6d0000 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(139, 0, 0, 0.4);
+  }
+
+  .ai-product-card-button-{{ ai_gen_id }}:active {
+    transform: none;
   }
 
   .ai-product-card-button-{{ ai_gen_id }}:disabled {
-    opacity: 0.5;
+    background-color: #cccccc;
+    color: #666666;
     cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
   }
 
   .ai-product-slider-dots-{{ ai_gen_id }} {
@@ -331,78 +455,162 @@
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   }
 
+  .ai-product-slider-heading-{{ ai_gen_id }} {
+    font-family: 'anton', sans-serif;
+    font-size: 100px;
+    font-weight: 400;
+    color: #ffffff;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 40px auto 50px;
+    letter-spacing: -2px;
+    line-height: 0.9;
+  }
+
+  /* SuperYou style filter buttons */
+  .ai-product-tabs-container-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .ai-product-tab-btn-{{ ai_gen_id }} {
+    background-color: #500708 !important; /* Dark Crimson Red default */
+    background: #500708 !important;
+    border: none !important;
+    border-radius: 8px;
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #ffffff !important; /* White text default */
+    cursor: pointer;
+    padding: 8px 24px;
+    transition: all 0.25s ease;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-product-tab-btn-{{ ai_gen_id }}:hover {
+    background-color: #921b1e !important;
+    background: #921b1e !important;
+    color: #ffffff !important;
+  }
+
+  .ai-product-tab-btn-{{ ai_gen_id }}.active {
+    background-color: #ffffff !important; /* Active White background */
+    background: #ffffff !important;
+    color: #000000 !important; /* Active Black font */
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  }
+
   @media screen and (max-width: 749px) {
     .ai-product-slider-container-{{ ai_gen_id }} {
-      padding: 30px 0 70px;
+      padding: 0 0 15px;
+    }
+
+    .ai-product-slider-heading-{{ ai_gen_id }} {
+      font-size: 48px;
+      margin: 20px auto 20px;
+      letter-spacing: -1px;
+      line-height: 0.95;
     }
 
     .ai-product-slider-track-{{ ai_gen_id }} {
-      display: grid;
-      {% if block.settings.mobile_columns == '1' %}
-        grid-template-columns: 1fr;
-      {% else %}
-        grid-template-columns: repeat(2, 1fr);
-      {% endif %}
+      display: flex;
+      flex-wrap: nowrap;
       gap: {{ block.settings.card_gap | times: 0.7 }}px;
       padding: 0 15px;
-      cursor: default;
+      cursor: grab;
+      transition: transform 0.3s ease;
     }
 
     .ai-product-card-{{ ai_gen_id }} {
-      flex: none;
-      width: 100%;
-      max-width: {{ block.settings.mobile_card_max_width }}px;
-      margin: 0 auto 25px;
-    }
-
-    .ai-product-card-image-wrapper-{{ ai_gen_id }} {
-      aspect-ratio: {{ block.settings.mobile_image_ratio }};
-    }
-
-    .ai-product-card-{{ ai_gen_id }}:nth-child(n+{{ block.settings.mobile_initial_products | plus: 1 }}) {
-      display: none;
-    }
-
-    .ai-product-card-{{ ai_gen_id }}.show-more {
-      display: block;
+      flex: 0 0 75%;
+      max-width: none;
+      min-width: 250px !important;
+      min-height: 440px !important;
+      background-color: #ffffff;
+      border-radius: 16px;
+      padding: 12px;
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+      border: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     }
 
     .ai-product-slider-dots-{{ ai_gen_id }} {
-      display: none;
+      display: flex;
+      margin-top: 20px;
     }
 
     .ai-product-slider-mobile-more-{{ ai_gen_id }} {
-      display: block;
+      display: none !important;
     }
 
     .ai-product-card-title-{{ ai_gen_id }} {
-      font-size: {{ block.settings.title_font_size | times: 0.9 }}px;
-    }
-
-    .ai-product-card-price-sale-{{ ai_gen_id }},
-    .ai-product-card-price-regular-{{ ai_gen_id }} {
-      font-size: {{ block.settings.price_font_size | times: 0.9 }}px;
-    }
-
-    .ai-product-card-price-original-{{ ai_gen_id }} {
-      font-size: {{ block.settings.price_font_size | times: 0.75 }}px;
+      font-size: 16px;
+      min-height: calc(16px * 1.15 * 2);
     }
 
     .ai-product-card-button-{{ ai_gen_id }} {
-      font-size: {{ block.settings.button_font_size | times: 0.9 }}px;
-      padding: 10px 24px;
+      font-size: 16px !important;
+      padding: 10px 12px;
+      box-shadow: 0 3px 8px rgba(167, 32, 35, 0.15);
+    }
+
+    .ai-product-tabs-container-{{ ai_gen_id }} {
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .ai-product-tab-btn-{{ ai_gen_id }} {
+      font-size: 16px;
+      padding: 6px 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
     }
   }
 {% endstyle %}
 
 <product-slider-{{ ai_gen_id }} class="ai-product-slider-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
   <div class="ai-product-slider-container-{{ ai_gen_id }}">
+    <h2 class="ai-product-slider-heading-{{ ai_gen_id }}">BEST SELLER</h2>
+    
+    <div class="ai-product-tabs-container-{{ ai_gen_id }}">
+      <button class="ai-product-tab-btn-{{ ai_gen_id }} active" data-tab-btn="range">Range</button>
+      <button class="ai-product-tab-btn-{{ ai_gen_id }}" data-tab-btn="snackbox">Snackbox</button>
+      <button class="ai-product-tab-btn-{{ ai_gen_id }}" data-tab-btn="combo">Combo</button>
+    </div>
+
     <div class="ai-product-slider-track-{{ ai_gen_id }}" data-track>
       {% if block.settings.product_list != blank %}
         {% for product in block.settings.product_list %}
-          <div class="ai-product-card-{{ ai_gen_id }}">
+          {% assign colors = "#d1ebd8,#fedeb2,#f7f4ea,#fef0b3,#d8f3f5" | split: "," %}
+          {% assign color_index = forloop.index0 | modulo: 5 %}
+          {% assign card_bg_color = colors[color_index] %}
+          
+          {% assign product_category = "range" %}
+          {% assign handle_down = product.handle | downcase %}
+          {% if handle_down contains 'combo' or handle_down contains 'king' or handle_down contains 'variety' or handle_down contains 'pack-of-80' or handle_down contains 'x-8' %}
+            {% assign product_category = "combo" %}
+          {% elsif handle_down contains 'wholesome' or handle_down contains 'pack-24' or handle_down contains 'snackbox' %}
+            {% assign product_category = "snackbox" %}
+          {% endif %}
+          
+          <div class="ai-product-card-{{ ai_gen_id }}" data-category="{{ product_category }}">
             <a href="{{ product.url }}" class="ai-product-card-image-{{ ai_gen_id }}">
-              <div class="ai-product-card-image-wrapper-{{ ai_gen_id }}">
+              <div class="ai-product-card-image-wrapper-{{ ai_gen_id }}" style="background-color: {{ card_bg_color }};">
+                <span class="ai-product-badge-{{ ai_gen_id }}">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#ffffff" style="margin-right: 3px; vertical-align: -1px;">
+                    <path d="M12 23c-4.97 0-9-3.58-9-8 0-4.19 3.03-7.6 7-8.77.56-.17 1.09.24 1.09.81 0 1.25.75 2.37 1.88 2.82.72.29 1.48.11 2-.43C16.59 7.71 18 5.48 18 3c0-.46.47-.78.9-.61C21.41 3.46 23 6.54 23 10c0 7.18-5.82 13-11 13z"/>
+                  </svg>
+                  BESTSELLER
+                </span>
                 {% if product.featured_image %}
                   <img
                     src="{{ product.featured_image | image_url: width: 600 }}"
@@ -416,62 +624,181 @@
                     {{ 'product-1' | placeholder_svg_tag }}
                   </div>
                 {% endif %}
+
+                <button type="button" class="ai-product-quick-view-btn-{{ ai_gen_id }}" onclick="window.location.href='{{ product.url }}'; return false;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                  Quick View
+                </button>
               </div>
             </a>
             <div class="ai-product-card-content-{{ ai_gen_id }}">
-              <h3 class="ai-product-card-title-{{ ai_gen_id }}">{{ product.title }}</h3>
-              <div class="ai-product-card-price-wrapper-{{ ai_gen_id }}">
-                <div class="ai-product-card-prices-{{ ai_gen_id }}">
-                  {% if product.compare_at_price > product.price %}
-                    <span class="ai-product-card-price-original-{{ ai_gen_id }}">{{ product.compare_at_price | money }}</span>
-                    <span class="ai-product-card-price-sale-{{ ai_gen_id }}">{{ product.price | money }}</span>
-                  {% else %}
-                    <span class="ai-product-card-price-regular-{{ ai_gen_id }}">{{ product.price | money }}</span>
-                  {% endif %}
-                </div>
+              <h3 class="ai-product-card-title-{{ ai_gen_id }}">
+                <a href="{{ product.url }}">{{ product.title }}</a>
+              </h3>
+              {% liquid
+                assign title_u = product.title | upcase
+                assign handle_u = product.handle | upcase
+                assign desc_u = product.description | strip_html | upcase
+                
+                assign qty_text = ""
+                
+                if title_u contains "MAST MIX" or title_u contains "MASTMIX" or handle_u contains "MAST-MIX" or handle_u contains "MASTMIX" or title_u contains "NAMKEEN"
+                  if title_u contains "12" or handle_u contains "12"
+                    assign qty_text = "PACK OF 12 NAMKEENS"
+                  elsif title_u contains "6" or handle_u contains "6"
+                    assign qty_text = "PACK OF 6 NAMKEENS"
+                  elsif title_u contains "3" or handle_u contains "3"
+                    assign qty_text = "PACK OF 3 NAMKEENS"
+                  elsif title_u contains "2" or handle_u contains "2"
+                    assign qty_text = "PACK OF 2 NAMKEENS"
+                  else
+                    assign qty_text = "PACK OF 1 NAMKEEN"
+                  endif
+
+                elsif title_u contains "COMBO" or handle_u contains "COMBO" or title_u contains "SNACK BOX" or title_u contains "SNACKBOX" or handle_u contains "SNACKBOX"
+                  if title_u contains "KING" or handle_u contains "KING" or desc_u contains "KING"
+                    if title_u contains "NAMKEEN" or desc_u contains "NAMKEEN" or desc_u contains "MAST MIX" or title_u contains "MASTMIX"
+                      assign qty_text = "10 BARS • 2 NAMKEENS • 1 KING PACK"
+                    else
+                      assign qty_text = "30 BARS • 1 KING PACK"
+                    endif
+                  elsif title_u contains "NAMKEEN" or desc_u contains "NAMKEEN" or desc_u contains "MAST MIX" or title_u contains "MASTMIX"
+                    assign qty_text = "10 BARS • 2 NAMKEENS"
+                  elsif title_u contains "3 PACK" or title_u contains "COMBO 3" or handle_u contains "COMBO-3" or title_u contains "30 BARS"
+                    assign qty_text = "3 PACKS • 30 BARS"
+                  elsif title_u contains "2 PACK" or title_u contains "COMBO 2" or handle_u contains "COMBO-2" or title_u contains "20 BARS"
+                    assign qty_text = "2 PACKS • 20 BARS"
+                  else
+                    assign qty_text = "2 PACKS • 10 BARS"
+                  endif
+
+                elsif title_u contains "KING" or handle_u contains "KING"
+                  assign qty_text = "80 BARS • 1 KING PACK"
+
+                else
+                  if title_u contains "80" or handle_u contains "80" or handle_u contains "PACK-OF-80" or handle_u contains "X-8" or handle_u contains "80-BAR"
+                    assign qty_text = "8 PACKS • 80 BARS"
+                  elsif title_u contains "24" or handle_u contains "24" or handle_u contains "PACK-24"
+                    assign qty_text = "24 BARS"
+                  elsif title_u contains "30" or handle_u contains "30"
+                    assign qty_text = "3 PACKS • 30 BARS"
+                  elsif title_u contains "20" or handle_u contains "20"
+                    assign qty_text = "2 PACKS • 20 BARS"
+                  elsif title_u contains "10 BARS" or title_u contains "PACK OF 10" or handle_u contains "PACK-OF-10" or handle_u contains "10-BARS"
+                    assign qty_text = "PACK OF 1 • 10 BARS"
+                  elsif title_u contains "5 BARS" or title_u contains "PACK OF 5" or handle_u contains "PACK-OF-5"
+                    assign qty_text = "PACK OF 1 • 5 BARS"
+                  else
+                    assign qty_text = "PACK OF 1 • 10 BARS"
+                  endif
+                endif
+              %}
+              <p class="ai-product-card-specs-{{ ai_gen_id }}" style="text-align: left !important; margin-left: 0 !important; color: #888888 !important; font-weight: 700 !important; text-transform: uppercase !important; font-size: 12px !important; margin-top: 4px !important; margin-bottom: 10px !important;">{{ qty_text }}</p>
+              
+              <!-- Pricing Row -->
+              <div class="ai-product-card-price-row-{{ ai_gen_id }}" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; margin-top: 4px !important; margin-bottom: 12px !important;">
+                <span class="current-price" style="font-size: 22px !important; font-weight: 900 !important; color: #111111 !important; font-family: 'Inter', sans-serif !important; letter-spacing: -0.5px !important; text-align: left !important; margin-left: 0 !important; float: left !important;">{{ product.price | money }}</span>
                 {% if product.compare_at_price > product.price %}
-                  {% assign discount_percentage = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
-                  <span class="ai-product-card-badge-{{ ai_gen_id }}">{{ discount_percentage }}% OFF</span>
+                  <span class="discount-badge" style="background-color: #fde8e8 !important; color: #700a0c !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 6px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">
+                    -{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}% OFF
+                  </span>
+                {% else %}
+                  <span class="discount-badge" style="background-color: #fde8e8 !important; color: #700a0c !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 6px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">-5% OFF</span>
                 {% endif %}
               </div>
             </div>
-            <button
-              class="ai-product-card-button-{{ ai_gen_id }}"
-              data-product-id="{{ product.id }}"
-              data-variant-id="{{ product.selected_or_first_available_variant.id }}"
-              {% unless product.available %}disabled{% endunless %}
-            >
-              {% if product.available %}
-                {{ block.settings.button_text }}
-              {% else %}
-                Sold Out
-              {% endif %}
-            </button>
+
+            <!-- Action Row (ADD TO CART + WISHLIST HEART) -->
+            <div class="ai-product-card-actions-{{ ai_gen_id }}" style="display: flex !important; gap: 8px !important; width: 100% !important; align-items: center !important; margin-top: 4px !important;">
+              <button
+                class="ai-product-card-button-{{ ai_gen_id }}"
+                style="flex: 1 !important; margin-top: 0 !important; background-color: #700a0c !important; background: #700a0c !important; color: #ffffff !important; border-radius: 10px !important; padding: 12px 14px !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 8px !important; font-family: 'Anton', sans-serif !important; font-size: 16px !important; text-transform: uppercase !important; border: none !important; cursor: pointer !important;"
+                data-product-id="{{ product.id }}"
+                data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                {% unless product.available %}disabled{% endunless %}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="9" cy="21" r="1"></circle>
+                  <circle cx="20" cy="21" r="1"></circle>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                {% if product.available %}
+                  ADD TO CART
+                {% else %}
+                  SOLD OUT
+                {% endif %}
+              </button>
+              <button type="button" class="ai-product-wishlist-btn-{{ ai_gen_id }}" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('active');" style="width: 44px !important; height: 46px !important; flex-shrink: 0 !important; border-radius: 10px !important; border: 1.5px solid #e0e0e0 !important; background: #ffffff !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important;">
+                <svg class="wishlist-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              </button>
+            </div>
           </div>
         {% endfor %}
       {% else %}
         {% for i in (1..8) %}
-          <div class="ai-product-card-{{ ai_gen_id }}">
+          {% assign colors = "#d1ebd8,#fedeb2,#f7f4ea,#fef0b3,#d8f3f5" | split: "," %}
+          {% assign color_index = forloop.index0 | modulo: 5 %}
+          {% assign card_bg_color = colors[color_index] %}
+          
+          {% assign product_category = "range" %}
+          {% if i == 3 or i == 6 %}
+            {% assign product_category = "snackbox" %}
+          {% elsif i == 4 or i == 7 or i == 8 %}
+            {% assign product_category = "combo" %}
+          {% endif %}
+          
+          <div class="ai-product-card-{{ ai_gen_id }}" data-category="{{ product_category }}">
             <div class="ai-product-card-image-{{ ai_gen_id }}">
-              <div class="ai-product-card-image-wrapper-{{ ai_gen_id }}">
+              <div class="ai-product-card-image-wrapper-{{ ai_gen_id }}" style="background-color: {{ card_bg_color }};">
+                <span class="ai-product-badge-{{ ai_gen_id }}">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#ffffff" style="margin-right: 3px; vertical-align: -1px;">
+                    <path d="M12 23c-4.97 0-9-3.58-9-8 0-4.19 3.03-7.6 7-8.77.56-.17 1.09.24 1.09.81 0 1.25.75 2.37 1.88 2.82.72.29 1.48.11 2-.43C16.59 7.71 18 5.48 18 3c0-.46.47-.78.9-.61C21.41 3.46 23 6.54 23 10c0 7.18-5.82 13-11 13z"/>
+                  </svg>
+                  BESTSELLER
+                </span>
                 <div class="ai-product-card-image-placeholder-{{ ai_gen_id }}">
                   {{ 'product-1' | placeholder_svg_tag }}
                 </div>
+                <button type="button" class="ai-product-quick-view-btn-{{ ai_gen_id }}">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                  Quick View
+                </button>
               </div>
             </div>
             <div class="ai-product-card-content-{{ ai_gen_id }}">
               <h3 class="ai-product-card-title-{{ ai_gen_id }}">Sample Product Title</h3>
-              <div class="ai-product-card-price-wrapper-{{ ai_gen_id }}">
-                <div class="ai-product-card-prices-{{ ai_gen_id }}">
-                  <span class="ai-product-card-price-original-{{ ai_gen_id }}">₹999</span>
-                  <span class="ai-product-card-price-sale-{{ ai_gen_id }}">₹699</span>
-                </div>
-                <span class="ai-product-card-badge-{{ ai_gen_id }}">30% OFF</span>
+              <p class="ai-product-card-specs-{{ ai_gen_id }}" style="text-align: left !important; margin-left: 0 !important; color: #888888 !important; font-weight: 700 !important; text-transform: uppercase !important; font-size: 12px !important; margin-top: 4px !important; margin-bottom: 10px !important;">PACK OF 1 • 10 BARS</p>
+              <div class="ai-product-card-price-row-{{ ai_gen_id }}" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; margin-top: 4px !important; margin-bottom: 12px !important;">
+                <span class="current-price" style="font-size: 22px !important; font-weight: 900 !important; color: #111111 !important; font-family: 'Inter', sans-serif !important; letter-spacing: -0.5px !important; text-align: left !important; margin-left: 0 !important; float: left !important;">Rs. 570.00</span>
+                <span class="discount-badge" style="background-color: #fde8e8 !important; color: #700a0c !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 6px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">-5% OFF</span>
               </div>
             </div>
-            <button class="ai-product-card-button-{{ ai_gen_id }}">
-              {{ block.settings.button_text }}
-            </button>
+            <div class="ai-product-card-actions-{{ ai_gen_id }}" style="display: flex !important; gap: 8px !important; width: 100% !important; align-items: center !important; margin-top: 4px !important;">
+              <button
+                class="ai-product-card-button-{{ ai_gen_id }}"
+                style="flex: 1 !important; margin-top: 0 !important; background-color: #700a0c !important; background: #700a0c !important; color: #ffffff !important; border-radius: 10px !important; padding: 12px 14px !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 8px !important; font-family: 'Anton', sans-serif !important; font-size: 16px !important; text-transform: uppercase !important; border: none !important; cursor: pointer !important;"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="9" cy="21" r="1"></circle>
+                  <circle cx="20" cy="21" r="1"></circle>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                ADD TO CART
+              </button>
+              <button type="button" class="ai-product-wishlist-btn-{{ ai_gen_id }}" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('active');" style="width: 44px !important; height: 46px !important; flex-shrink: 0 !important; border-radius: 10px !important; border: 1.5px solid #e0e0e0 !important; background: #ffffff !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important;">
+                <svg class="wishlist-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              </button>
+            </div>
           </div>
         {% endfor %}
       {% endif %}
@@ -494,37 +821,60 @@
     class ProductSlider{{ ai_gen_id }} extends HTMLElement {
       constructor() {
         super();
-        this.track = this.querySelector('[data-track]');
-        this.dotsContainer = this.querySelector('[data-dots]');
-        this.moreButton = this.querySelector('[data-more-button]');
-        this.cards = this.querySelectorAll('.ai-product-card-{{ ai_gen_id }}');
-        this.addToCartButtons = this.querySelectorAll('.ai-product-card-button-{{ ai_gen_id }}[data-variant-id]');
         this.isDragging = false;
         this.startPos = 0;
         this.currentTranslate = 0;
         this.prevTranslate = 0;
         this.currentIndex = 0;
-        this.cardsVisible = {{ block.settings.desktop_cards_visible }};
-        this.totalCards = this.cards.length;
-        this.maxIndex = Math.max(0, this.totalCards - this.cardsVisible);
       }
 
       connectedCallback() {
-        if (window.innerWidth > 749) {
-          this.initDesktopSlider();
-        } else {
-          this.initMobileView();
-        }
+        this.track = this.querySelector('[data-track]');
+        this.dotsContainer = this.querySelector('[data-dots]');
+        this.moreButton = this.querySelector('[data-more-button]');
+        this.allCards = Array.from(this.querySelectorAll('.ai-product-card-{{ ai_gen_id }}'));
+        this.cards = this.allCards;
+        this.addToCartButtons = this.querySelectorAll('.ai-product-card-button-{{ ai_gen_id }}[data-variant-id]');
+        this.totalCards = this.cards.length;
 
+        this.updateSliderSettings();
+        this.initSlider();
         this.initAddToCart();
+        this.initTabs();
+        this.initTouchpad();
 
         window.addEventListener('resize', () => {
-          if (window.innerWidth > 749) {
-            this.initDesktopSlider();
-          } else {
-            this.initMobileView();
-          }
+          this.updateSliderSettings();
+          this.setPositionByIndex();
+          this.createDots();
         });
+      }
+
+      initTouchpad() {
+        this.addEventListener('wheel', (e) => {
+          if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+            return;
+          }
+          
+          e.preventDefault();
+          
+          if (!this.wheelTimeout) {
+            if (e.deltaX > 20 && this.currentIndex < this.maxIndex) {
+              this.goToSlide(this.currentIndex + 1);
+            } else if (e.deltaX < -20 && this.currentIndex > 0) {
+              this.goToSlide(this.currentIndex - 1);
+            }
+            this.wheelTimeout = setTimeout(() => {
+              this.wheelTimeout = null;
+            }, 300);
+          }
+        }, { passive: false });
+      }
+
+      updateSliderSettings() {
+        this.cardsVisible = window.innerWidth > 749 ? {{ block.settings.desktop_cards_visible }} : 1.33;
+        this.maxIndex = Math.max(0, this.totalCards - Math.ceil(this.cardsVisible));
+        this.currentIndex = Math.min(this.currentIndex, this.maxIndex);
       }
 
       initAddToCart() {
@@ -542,22 +892,34 @@
             button.textContent = 'Adding...';
 
             try {
+              const cartItemsComponents = document.querySelectorAll('cart-items-component');
+              const cartItemComponentsSectionIds = [];
+              cartItemsComponents.forEach((item) => {
+                if (item instanceof HTMLElement && item.dataset.sectionId) {
+                  cartItemComponentsSectionIds.push(item.dataset.sectionId);
+                }
+              });
+
               const response = await fetch('/cart/add.js', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
+                  'Accept': 'application/json'
                 },
                 body: JSON.stringify({
                   items: [{
                     id: variantId,
                     quantity: 1
-                  }]
+                  }],
+                  sections: cartItemComponentsSectionIds.join(',')
                 })
               });
 
               if (!response.ok) {
                 throw new Error('Failed to add to cart');
               }
+
+              const responseData = await response.json();
 
               button.textContent = 'Added!';
 
@@ -566,16 +928,31 @@
                 button.disabled = false;
               }, 2000);
 
-              const cartResponse = await fetch('/cart.js');
-              const cart = await cartResponse.json();
+              const cartEvent = new CustomEvent('cart:update', {
+                bubbles: true,
+                detail: {
+                  resource: responseData,
+                  sourceId: variantId,
+                  data: {
+                    source: 'product-form-component',
+                    itemCount: 1,
+                    productId: button.dataset.productId,
+                    sections: responseData.sections,
+                  }
+                }
+              });
+              
+              document.dispatchEvent(cartEvent);
 
-              if (window.theme && window.theme.cart) {
-                window.theme.cart.refresh();
+              const drawerComponent = document.querySelector('cart-drawer-component');
+              if (drawerComponent && typeof drawerComponent.open === 'function') {
+                drawerComponent.open();
+              } else {
+                const dialog = document.querySelector('dialog.cart-drawer__dialog');
+                if (dialog && !dialog.open && typeof dialog.showModal === 'function') {
+                  dialog.showModal();
+                }
               }
-
-              document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
-                bubbles: true
-              }));
 
             } catch (error) {
               console.error('Error adding to cart:', error);
@@ -589,34 +966,67 @@
         });
       }
 
-      initDesktopSlider() {
+      initSlider() {
         if (!this.track) return;
 
         this.track.addEventListener('mousedown', this.dragStart.bind(this));
-        this.track.addEventListener('touchstart', this.dragStart.bind(this));
+        this.track.addEventListener('touchstart', this.dragStart.bind(this), { passive: true });
         this.track.addEventListener('mouseup', this.dragEnd.bind(this));
         this.track.addEventListener('touchend', this.dragEnd.bind(this));
         this.track.addEventListener('mousemove', this.drag.bind(this));
-        this.track.addEventListener('touchmove', this.drag.bind(this));
+        this.track.addEventListener('touchmove', this.drag.bind(this), { passive: false });
         this.track.addEventListener('mouseleave', this.dragEnd.bind(this));
 
-        if (this.dotsContainer && {{ block.settings.show_dots | json }}) {
-          this.createDots();
-        }
+        this.createDots();
+        this.setPositionByIndex();
       }
 
-      initMobileView() {
-        if (!this.moreButton) return;
-
-        this.moreButton.addEventListener('click', () => {
-          this.cards.forEach(card => {
-            card.classList.add('show-more');
+      initTabs() {
+        const tabs = this.querySelectorAll('[data-tab-btn]');
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            const category = tab.dataset.tabBtn;
+            this.filterCategory(category);
           });
-          this.moreButton.style.display = 'none';
         });
+
+        // Trigger initial filter for "range"
+        this.filterCategory('range');
+      }
+
+      filterCategory(category) {
+        this.allCards.forEach(card => {
+          if (card.dataset.category === category) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        this.cards = this.allCards.filter(card => card.style.display !== 'none');
+        this.totalCards = this.cards.length;
+        this.currentIndex = 0;
+
+        if (this.track) {
+          this.track.style.transition = 'none';
+          this.currentTranslate = 0;
+          this.prevTranslate = 0;
+          this.track.style.transform = `translateX(0px)`;
+          setTimeout(() => {
+            this.track.style.transition = 'transform 0.3s ease';
+          }, 50);
+        }
+
+        this.updateSliderSettings();
+        this.setPositionByIndex();
+        this.createDots();
       }
 
       createDots() {
+        if (!this.dotsContainer) return;
         this.dotsContainer.innerHTML = '';
         const dotsCount = this.maxIndex + 1;
 
@@ -659,9 +1069,14 @@
 
       drag(event) {
         if (!this.isDragging) return;
-        event.preventDefault();
+        
+        if (event.type.includes('touch')) {
+          event.preventDefault();
+        }
+        
         const currentPosition = this.getPositionX(event);
         this.currentTranslate = this.prevTranslate + currentPosition - this.startPos;
+        this.track.style.transform = `translateX(${this.currentTranslate}px)`;
       }
 
       dragEnd() {
@@ -670,13 +1085,11 @@
         this.track.classList.remove('dragging');
 
         const movedBy = this.currentTranslate - this.prevTranslate;
-        const cardWidth = this.track.offsetWidth / this.cardsVisible;
+        const cardWidth = this.cards[0] ? this.cards[0].offsetWidth : (this.track.offsetWidth / this.cardsVisible);
 
-        if (movedBy < -cardWidth / 3 && this.currentIndex < this.maxIndex) {
+        if (movedBy < -cardWidth / 5 && this.currentIndex < this.maxIndex) {
           this.currentIndex += 1;
-        }
-
-        if (movedBy > cardWidth / 3 && this.currentIndex > 0) {
+        } else if (movedBy > cardWidth / 5 && this.currentIndex > 0) {
           this.currentIndex -= 1;
         }
 
@@ -689,8 +1102,9 @@
       }
 
       setPositionByIndex() {
-        const cardWidth = this.track.offsetWidth / this.cardsVisible;
-        const gap = {{ block.settings.card_gap }};
+        if (!this.track) return;
+        const cardWidth = this.cards[0] ? this.cards[0].offsetWidth : (this.track.offsetWidth / this.cardsVisible);
+        const gap = window.innerWidth > 749 ? {{ block.settings.card_gap }} : {{ block.settings.card_gap | times: 0.7 }};
         this.currentTranslate = -(this.currentIndex * (cardWidth + gap));
         this.prevTranslate = this.currentTranslate;
         this.track.style.transform = `translateX(${this.currentTranslate}px)`;
@@ -713,7 +1127,7 @@
       "type": "product_list",
       "id": "product_list",
       "label": "Products",
-      "limit": 12
+      "limit": 50
     },
     {
       "type": "header",
@@ -723,7 +1137,7 @@
       "type": "color",
       "id": "background_color",
       "label": "Background color",
-      "default": "#D52528"
+      "default": "#700a0c"
     },
     {
       "type": "range",
@@ -960,7 +1374,7 @@
       "type": "color",
       "id": "badge_background",
       "label": "Badge background",
-      "default": "#D52528"
+      "default": "#700a0c"
     },
     {
       "type": "color",

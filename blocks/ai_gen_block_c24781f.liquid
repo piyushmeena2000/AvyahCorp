@@ -5,71 +5,126 @@
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
+  /* Force parent section backgrounds to brand crimson red */
+  .shopify-section:has(.ai-testimonial-carousel-{{ ai_gen_id }}),
+  .section:has(.ai-testimonial-carousel-{{ ai_gen_id }}),
+  .section-background:has(+ .section .ai-testimonial-carousel-{{ ai_gen_id }}),
+  .section-background:has(.ai-testimonial-carousel-{{ ai_gen_id }}) {
+    background-color: #700a0c !important;
+    background: #700a0c !important;
+  }
+
+  /* Prevent any wrapper element from clipping the marquee or shadows */
+  .section:has(.ai-testimonial-carousel-{{ ai_gen_id }}) .custom-section-content,
+  .section:has(.ai-testimonial-carousel-{{ ai_gen_id }}) .section-content-wrapper,
+  .section:has(.ai-testimonial-carousel-{{ ai_gen_id }}) .border-style,
+  .section:has(.ai-testimonial-carousel-{{ ai_gen_id }}) .spacing-style {
+    overflow: visible !important;
+  }
+
   .ai-testimonial-carousel-{{ ai_gen_id }} {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
-    background-color: {{ block.settings.background_color }};
-    overflow: hidden;
+    width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px !important;
+    background-color: #700a0c !important; /* Crimson Red background */
+    overflow: hidden !important;
   }
 
   .ai-testimonial-carousel__container-{{ ai_gen_id }} {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .ai-testimonial-carousel__header-{{ ai_gen_id }} {
-    text-align: center;
-    margin-bottom: 40px;
+    text-align: center !important;
+    margin-bottom: 50px !important;
+    max-width: 1400px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 0 20px !important;
   }
 
   .ai-testimonial-carousel__title-{{ ai_gen_id }} {
-    font-size: {{ block.settings.heading_size }}px;
-    color: {{ block.settings.heading_color }};
-    margin: 0 0 12px;
+    font-family: 'Anton', sans-serif !important;
+    font-size: {{ block.settings.heading_size }}px !important;
+    color: #ffffff !important; /* White heading */
+    margin: 0 0 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: -1px !important;
+    line-height: 1.1 !important;
   }
 
   .ai-testimonial-carousel__subtitle-{{ ai_gen_id }} {
-    font-size: {{ block.settings.subheading_size }}px;
-    color: {{ block.settings.text_color }};
-    margin: 0;
+    font-family: 'Inter', sans-serif !important;
+    font-size: {{ block.settings.subheading_size }}px !important;
+    color: rgba(255, 255, 255, 0.8) !important; /* White subtitle */
+    margin: 0 !important;
   }
 
   .ai-testimonial-carousel__track-wrapper-{{ ai_gen_id }} {
-    position: relative;
-    overflow: hidden;
+    position: relative !important;
+    overflow: hidden !important;
+    padding: 20px 0 60px 0 !important; /* padding top/bottom only to prevent side clipping */
+    margin: -20px 0 -60px 0 !important;
+    width: 100vw !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
   }
 
   .ai-testimonial-carousel__track-{{ ai_gen_id }} {
     display: flex;
     gap: 24px;
-    transition: transform 0.5s ease;
+    width: max-content;
+    animation: ai-testimonial-marquee-{{ ai_gen_id }} 35s linear infinite;
+  }
+
+  .ai-testimonial-carousel__track-{{ ai_gen_id }}:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes ai-testimonial-marquee-{{ ai_gen_id }} {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-50%, 0, 0);
+    }
   }
 
   .ai-testimonial-carousel__slide-{{ ai_gen_id }} {
-    flex: 0 0 calc(33.333% - 16px);
-    min-width: 0;
+    flex: 0 0 380px;
+    width: 380px;
+    min-width: 380px;
   }
 
   .ai-testimonial-carousel__card-{{ ai_gen_id }} {
-    background-color: {{ block.settings.card_background_color }};
-    border-radius: {{ block.settings.card_border_radius }}px;
+    background-color: #ffffff !important; /* White card background */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05); /* subtle shadow */
     padding: 32px;
     height: 100%;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .ai-testimonial-carousel__card-{{ ai_gen_id }}:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.12); /* darker shadow on hover */
   }
 
   .ai-testimonial-carousel__stars-{{ ai_gen_id }} {
     display: flex;
     gap: 4px;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
 
   .ai-testimonial-carousel__star-{{ ai_gen_id }} {
@@ -79,10 +134,11 @@
   }
 
   .ai-testimonial-carousel__quote-{{ ai_gen_id }} {
+    font-family: 'Inter', sans-serif;
     font-size: {{ block.settings.quote_size }}px;
-    color: {{ block.settings.text_color }};
+    color: #333333 !important; /* Dark charcoal quote text for white cards */
     line-height: 1.6;
-    margin: 0 0 24px;
+    margin: 0 0 28px;
     flex-grow: 1;
   }
 
@@ -90,15 +146,18 @@
     display: flex;
     align-items: center;
     gap: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08); /* Dark divider line */
+    padding-top: 20px;
   }
 
   .ai-testimonial-carousel__image-wrapper-{{ ai_gen_id }} {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
     background-color: #f5f5f5;
+    border: 2px solid #700a0c; /* Crimson red border for avatar */
   }
 
   .ai-testimonial-carousel__image-{{ ai_gen_id }} {
@@ -125,47 +184,47 @@
   }
 
   .ai-testimonial-carousel__name-{{ ai_gen_id }} {
-    font-size: 16px;
-    font-weight: 600;
-    color: {{ block.settings.heading_color }};
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #700a0c !important; /* Crimson red reviewer name */
+    text-transform: uppercase;
     margin: 0 0 4px;
+    letter-spacing: 0.5px;
   }
 
   .ai-testimonial-carousel__role-{{ ai_gen_id }} {
-    font-size: 14px;
-    color: {{ block.settings.text_color }};
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.6) !important; /* Dark grey reviewer role */
+    text-transform: uppercase;
     margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
 
   .ai-testimonial-carousel__controls-{{ ai_gen_id }} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    margin-top: 40px;
+    display: none !important;
   }
 
   .ai-testimonial-carousel__button-{{ ai_gen_id }} {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: {{ block.settings.button_background }};
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease;
-    color: {{ block.settings.button_color }};
+    display: none !important;
   }
 
   .ai-testimonial-carousel__button-{{ ai_gen_id }}:hover {
     background-color: {{ block.settings.button_hover_background }};
+    color: #ffffff;
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px #000000;
   }
 
   .ai-testimonial-carousel__button-{{ ai_gen_id }}:disabled {
     opacity: 0.3;
     cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
   }
 
   .ai-testimonial-carousel__button-{{ ai_gen_id }} svg {
@@ -175,7 +234,7 @@
 
   .ai-testimonial-carousel__dots-{{ ai_gen_id }} {
     display: flex;
-    gap: 8px;
+    gap: 10px;
   }
 
   .ai-testimonial-carousel__dot-{{ ai_gen_id }} {
@@ -186,22 +245,27 @@
     border: none;
     cursor: pointer;
     padding: 0;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
   }
 
   .ai-testimonial-carousel__dot-{{ ai_gen_id }}.active {
     background-color: {{ block.settings.dot_active_color }};
+    transform: scale(1.2);
   }
 
   @media screen and (max-width: 989px) {
     .ai-testimonial-carousel__slide-{{ ai_gen_id }} {
-      flex: 0 0 calc(50% - 12px);
+      flex: 0 0 320px !important;
+      width: 320px !important;
+      min-width: 320px !important;
     }
   }
 
   @media screen and (max-width: 749px) {
     .ai-testimonial-carousel__slide-{{ ai_gen_id }} {
-      flex: 0 0 100%;
+      flex: 0 0 280px !important;
+      width: 280px !important;
+      min-width: 280px !important;
     }
 
     .ai-testimonial-carousel__track-{{ ai_gen_id }} {
@@ -240,66 +304,90 @@
 
     <div class="ai-testimonial-carousel__track-wrapper-{{ ai_gen_id }}">
       <div class="ai-testimonial-carousel__track-{{ ai_gen_id }}">
-        {% for i in (1..6) %}
-          {% liquid
-            assign testimonial_enabled_key = 'testimonial_' | append: i | append: '_enabled'
-            assign testimonial_image_key = 'testimonial_' | append: i | append: '_image'
-            assign testimonial_name_key = 'testimonial_' | append: i | append: '_name'
-            assign testimonial_role_key = 'testimonial_' | append: i | append: '_role'
-            assign testimonial_quote_key = 'testimonial_' | append: i | append: '_quote'
-            assign testimonial_rating_key = 'testimonial_' | append: i | append: '_rating'
+        {% for repeat in (1..2) %}
+          {% for i in (1..6) %}
+            {% liquid
+              assign testimonial_enabled_key = 'testimonial_' | append: i | append: '_enabled'
+              assign testimonial_image_key = 'testimonial_' | append: i | append: '_image'
+              assign testimonial_name_key = 'testimonial_' | append: i | append: '_name'
+              assign testimonial_role_key = 'testimonial_' | append: i | append: '_role'
+              assign testimonial_quote_key = 'testimonial_' | append: i | append: '_quote'
+              assign testimonial_rating_key = 'testimonial_' | append: i | append: '_rating'
 
-            assign testimonial_enabled = block.settings[testimonial_enabled_key]
-            assign testimonial_image = block.settings[testimonial_image_key]
-            assign testimonial_name = block.settings[testimonial_name_key]
-            assign testimonial_role = block.settings[testimonial_role_key]
-            assign testimonial_quote = block.settings[testimonial_quote_key]
-            assign testimonial_rating = block.settings[testimonial_rating_key]
-          %}
+              assign testimonial_enabled = block.settings[testimonial_enabled_key]
+              assign testimonial_image = block.settings[testimonial_image_key]
+              assign testimonial_name = block.settings[testimonial_name_key]
+              assign testimonial_role = block.settings[testimonial_role_key]
+              assign testimonial_quote = block.settings[testimonial_quote_key]
+              assign testimonial_rating = block.settings[testimonial_rating_key]
 
-          {% if testimonial_enabled %}
-            <div class="ai-testimonial-carousel__slide-{{ ai_gen_id }}">
-              <div class="ai-testimonial-carousel__card-{{ ai_gen_id }}">
-                <div class="ai-testimonial-carousel__stars-{{ ai_gen_id }}">
-                  {% for star in (1..testimonial_rating) %}
-                    <svg
-                      class="ai-testimonial-carousel__star-{{ ai_gen_id }}"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                  {% endfor %}
-                </div>
+              assign clean_quote = testimonial_quote
+              if clean_quote contains 'Ã' or clean_quote contains 'â' or clean_quote contains 'Æ' or clean_quote contains '¢' or clean_quote contains '€'
+                if i == 1
+                  assign clean_quote = "<b>Taakat is a  Perfect Hunger  Buddy</b> <br>Taakat Hunger Bar actually delivers. Super filling, and there's no guilt because its so clean."
+                elsif i == 2
+                  assign clean_quote = "<b>Finally, a bar that keeps its promises </b><br>I couldn't believe when I first heard about it, but wow Taakat really walks the talk. Multigrain crunch is really good. Loved the taste too."
+                elsif i == 3
+                  assign clean_quote = "<b>Real Ingredients, Full Satisfaction</b><br>The ingredient list reads like a homemade snack. It's rare to find a bar with no palm oil and no refined sugar that still tastes this good. Strongly recommended for anyone trying to snack smarter."
+                elsif i == 4
+                  assign clean_quote = "<b>Ideal for Busy Work Days </b><br>It's honestly a lifesaver for professionals like me because we keep missing small meals due to meetings and deadlines. So easy to carry and the price points are just unbelievable"
+                elsif i == 5
+                  assign clean_quote = "<b>My commute snack savior</b> <br>I travel for 2 hours almost daily using metros. I use to often wonder when hungry during commute what can I have that's healthier because at the stations you get only crap. But taakat is a game changer. It is not only nutritious but so filling that I could travel for hours"
+                elsif i == 6
+                  assign clean_quote = "<b>Tastes legit, keeps hunger quiet</b><br>This bar is not a lip service. It is no fancy lable product. It's genuinely healthy. Multigrain protein, No palm oil, no nonsense. The flavors are fantastic. My favorite one is Chocolate wala"
+                endif
+              endif
+            %}
 
-                <p class="ai-testimonial-carousel__quote-{{ ai_gen_id }}">{{ testimonial_quote }}</p>
-
-                <div class="ai-testimonial-carousel__author-{{ ai_gen_id }}">
-                  <div class="ai-testimonial-carousel__image-wrapper-{{ ai_gen_id }}">
-                    {% if testimonial_image %}
-                      <img
-                        src="{{ testimonial_image | image_url: width: 120 }}"
-                        alt="{{ testimonial_name | escape }}"
-                        class="ai-testimonial-carousel__image-{{ ai_gen_id }}"
-                        loading="lazy"
-                        width="120"
-                        height="120"
+            {% if testimonial_enabled %}
+              <div class="ai-testimonial-carousel__slide-{{ ai_gen_id }}">
+                <div class="ai-testimonial-carousel__card-{{ ai_gen_id }}">
+                  <div class="ai-testimonial-carousel__stars-{{ ai_gen_id }}">
+                    {% for star in (1..testimonial_rating) %}
+                      <svg
+                        class="ai-testimonial-carousel__star-{{ ai_gen_id }}"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
                       >
-                    {% else %}
-                      <div class="ai-testimonial-carousel__image-placeholder-{{ ai_gen_id }}">
-                        {{ 'image' | placeholder_svg_tag }}
-                      </div>
-                    {% endif %}
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                      </svg>
+                    {% endfor %}
                   </div>
-                  <div class="ai-testimonial-carousel__author-info-{{ ai_gen_id }}">
-                    <p class="ai-testimonial-carousel__name-{{ ai_gen_id }}">{{ testimonial_name }}</p>
-                    <p class="ai-testimonial-carousel__role-{{ ai_gen_id }}">{{ testimonial_role }}</p>
+
+                  <p class="ai-testimonial-carousel__quote-{{ ai_gen_id }}">{{ clean_quote }}</p>
+
+                  <div class="ai-testimonial-carousel__author-{{ ai_gen_id }}">
+                    <div class="ai-testimonial-carousel__image-wrapper-{{ ai_gen_id }}">
+                      {% if testimonial_image %}
+                        <img
+                          src="{{ testimonial_image | image_url: width: 120 }}"
+                          alt="{{ testimonial_name | escape }}"
+                          class="ai-testimonial-carousel__image-{{ ai_gen_id }}"
+                          loading="lazy"
+                          width="120"
+                          height="120"
+                        >
+                      {% else %}
+                        <div class="ai-testimonial-carousel__image-placeholder-{{ ai_gen_id }}">
+                          {{ 'image' | placeholder_svg_tag }}
+                        </div>
+                      {% endif %}
+                    </div>
+                    <div class="ai-testimonial-carousel__author-info-{{ ai_gen_id }}">
+                      <p class="ai-testimonial-carousel__name-{{ ai_gen_id }}">{{ testimonial_name }}</p>
+                      <p class="ai-testimonial-carousel__role-{{ ai_gen_id }}">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="#008a00" style="display:inline-block; vertical-align:middle; margin-right:4px;">
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                        {{ testimonial_role }}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          {% endif %}
+            {% endif %}
+          {% endfor %}
         {% endfor %}
       </div>
     </div>
@@ -354,22 +442,7 @@
       }
 
       connectedCallback() {
-        this.track = this.querySelector('.ai-testimonial-carousel__track-{{ ai_gen_id }}');
-        this.slides = this.querySelectorAll('.ai-testimonial-carousel__slide-{{ ai_gen_id }}');
-        this.prevButton = this.querySelector('.ai-testimonial-carousel__prev-{{ ai_gen_id }}');
-        this.nextButton = this.querySelector('.ai-testimonial-carousel__next-{{ ai_gen_id }}');
-        this.dotsContainer = this.querySelector('.ai-testimonial-carousel__dots-{{ ai_gen_id }}');
-
-        this.updateSlidesPerView();
-        this.createDots();
-        this.updateCarousel();
-        this.setupEventListeners();
-
-        window.addEventListener('resize', () => {
-          this.updateSlidesPerView();
-          this.createDots();
-          this.updateCarousel();
-        });
+        // Carousel functions disabled to allow seamless CSS infinite scroll.
       }
 
       updateSlidesPerView() {
@@ -403,15 +476,86 @@
       }
 
       setupEventListeners() {
-        this.prevButton.addEventListener('click', () => {
-          this.currentIndex = Math.max(0, this.currentIndex - 1);
-          this.updateCarousel();
-        });
+        if (this.prevButton) {
+          this.prevButton.addEventListener('click', () => {
+            this.currentIndex = Math.max(0, this.currentIndex - 1);
+            this.updateCarousel();
+          });
+        }
 
-        this.nextButton.addEventListener('click', () => {
+        if (this.nextButton) {
+          this.nextButton.addEventListener('click', () => {
+            const maxIndex = Math.ceil(this.slides.length / this.slidesPerView) - 1;
+            this.currentIndex = Math.min(maxIndex, this.currentIndex + 1);
+            this.updateCarousel();
+          });
+        }
+      }
+
+      setupDragging() {
+        let isDragging = false;
+        let startX = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+
+        const getPositionX = (event) => {
+          return event.type.includes('mouse') ? event.clientX : event.touches[0].clientX;
+        };
+
+        const dragStart = (event) => {
+          isDragging = true;
+          startX = getPositionX(event);
+          this.track.style.transition = 'none';
+          
+          const slideWidth = this.slides[0].offsetWidth;
+          const gap = 24;
+          prevTranslate = -this.currentIndex * (slideWidth + gap) * this.slidesPerView;
+          
+          if (event.type !== 'touchstart') {
+            event.preventDefault();
+          }
+        };
+
+        const dragMove = (event) => {
+          if (!isDragging) return;
+          const currentX = getPositionX(event);
+          const diffX = currentX - startX;
+          currentTranslate = prevTranslate + diffX;
+          this.track.style.transform = `translateX(${currentTranslate}px)`;
+        };
+
+        const dragEnd = () => {
+          if (!isDragging) return;
+          isDragging = false;
+          this.track.style.transition = 'transform 0.5s ease';
+          
+          const movedBy = currentTranslate - prevTranslate;
+          const threshold = 80; // pixels to trigger slide change
+          
           const maxIndex = Math.ceil(this.slides.length / this.slidesPerView) - 1;
-          this.currentIndex = Math.min(maxIndex, this.currentIndex + 1);
+          if (movedBy < -threshold && this.currentIndex < maxIndex) {
+            this.currentIndex += 1;
+          } else if (movedBy > threshold && this.currentIndex > 0) {
+            this.currentIndex -= 1;
+          }
+          
           this.updateCarousel();
+        };
+
+        // Touch events
+        this.track.addEventListener('touchstart', dragStart, { passive: true });
+        this.track.addEventListener('touchmove', dragMove, { passive: true });
+        this.track.addEventListener('touchend', dragEnd);
+
+        // Mouse events
+        this.track.addEventListener('mousedown', dragStart);
+        this.track.addEventListener('mousemove', dragMove);
+        this.track.addEventListener('mouseup', dragEnd);
+        this.track.addEventListener('mouseleave', dragEnd);
+        
+        // Prevent image dragging inside cards
+        this.track.querySelectorAll('img').forEach(img => {
+          img.addEventListener('dragstart', (e) => e.preventDefault());
         });
       }
 
@@ -423,8 +567,8 @@
         this.track.style.transform = 'translateX(-' + offset + 'px)';
 
         const maxIndex = Math.ceil(this.slides.length / this.slidesPerView) - 1;
-        this.prevButton.disabled = this.currentIndex === 0;
-        this.nextButton.disabled = this.currentIndex === maxIndex;
+        if (this.prevButton) this.prevButton.disabled = this.currentIndex === 0;
+        if (this.nextButton) this.nextButton.disabled = this.currentIndex === maxIndex;
 
         const dots = this.dotsContainer.querySelectorAll('.ai-testimonial-carousel__dot-{{ ai_gen_id }}');
         dots.forEach((dot, index) => {

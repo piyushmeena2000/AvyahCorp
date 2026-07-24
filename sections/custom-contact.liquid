@@ -1,0 +1,300 @@
+{% schema %}
+{
+  "name": "Split Contact Page",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Left Column Image"
+    },
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "Contact Us"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_text",
+      "label": "Introductory Text",
+      "default": "<p>Our customer service team is all about you. Just as we strive for every bite to be delicious, we want to ensure every interaction is Perfect.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "links_text",
+      "label": "Secondary Links Text",
+      "default": "<p>Check out our <a href=\"/pages/faq\">FAQ page</a> for common questions.</p>"
+    },
+    {
+      "type": "text",
+      "id": "action_heading",
+      "label": "Action Heading",
+      "default": "Want to chat?"
+    },
+    {
+      "type": "text",
+      "id": "office_hours",
+      "label": "Office Hours",
+      "default": "Office Hours: Mon-Fri. 9AM-5PM IST"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone Number",
+      "default": "Phone: +91 98765 43210"
+    },
+    {
+      "type": "text",
+      "id": "email_link_text",
+      "label": "Email Link Text",
+      "default": "SEND US AN EMAIL"
+    },
+    {
+      "type": "url",
+      "id": "email_url",
+      "label": "Email URL"
+    },
+    {
+      "type": "text",
+      "id": "chat_link_text",
+      "label": "Chat Link Text",
+      "default": "CHAT WITH AN AGENT"
+    },
+    {
+      "type": "url",
+      "id": "chat_url",
+      "label": "Chat URL (optional)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Split Contact Page"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  #MainContent[data-template="page.contact"] {
+    display: block !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
+  .split-contact-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 85vh;
+  }
+
+  /* Left Half: Image */
+  .split-contact-image-col {
+    width: 50%;
+    flex: 0 0 50%;
+    background-size: cover;
+    background-position: center center; /* Center-aligned for manufacturing line view */
+    background-repeat: no-repeat;
+  }
+
+  /* Right Half: Content */
+  .split-contact-content-col {
+    width: 50%;
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .split-contact-top, .split-contact-bottom {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10% 15%;
+  }
+
+  .split-contact-top {
+    background-color: #fdf7ee; /* Cream */
+    color: #333333;
+  }
+
+  .split-contact-bottom {
+    background-color: #500708; /* Primary Crimson Red */
+    color: #ffffff;
+  }
+
+  /* Typography */
+  .split-contact-content-col h1 {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    font-size: 64px;
+    font-weight: 400;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+    line-height: 1.1;
+  }
+
+  .split-contact-content-col h2 {
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+  }
+
+  .split-contact-top h1 {
+    color: #333333;
+  }
+
+  .split-contact-bottom h2 {
+    color: #ffffff;
+  }
+
+  .split-contact-intro {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+
+  .split-contact-links {
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  .split-contact-top a {
+    color: #333333;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    transition: opacity 0.2s;
+  }
+  .split-contact-top a:hover {
+    opacity: 0.7;
+  }
+
+  /* Action Section */
+  .split-contact-bottom .info-line {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    opacity: 0.9;
+  }
+
+  .split-contact-bottom .action-link {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 14px 36px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #500708; /* Primary Crimson Red text */
+    background-color: #ffffff; /* White background */
+    border-radius: 4px; /* Crisp rectangular shape */
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  .split-contact-bottom .action-link:hover {
+    background-color: #f5f5f5;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+
+  /* Responsive Design */
+  @media screen and (max-width: 900px) {
+    .split-contact-wrapper {
+      flex-direction: column;
+    }
+    .split-contact-image-col {
+      width: 100%;
+      flex: 0 0 auto;
+      min-height: 400px;
+    }
+    .split-contact-content-col {
+      width: 100%;
+      flex: 0 0 auto;
+    }
+    .split-contact-top, .split-contact-bottom {
+      padding: 60px 20px;
+    }
+    .split-contact-content-col h1,
+    .split-contact-content-col h2 {
+      font-size: 48px;
+    }
+  }
+</style>
+
+<div class="split-contact-wrapper">
+  
+  {%- liquid 
+    assign bg_image_url = 'contact_page_manufacturing.png' | asset_url
+    if section.settings.image != blank
+      assign bg_image_url = section.settings.image | img_url: 'master'
+    endif
+  -%}
+  
+  <!-- Left Side: Image -->
+  <div class="split-contact-image-col" style="background-image: url('{{ bg_image_url }}');">
+  </div>
+
+  <!-- Right Side: Content -->
+  <div class="split-contact-content-col">
+    
+    <!-- Top Block -->
+    <div class="split-contact-top">
+      {%- if section.settings.main_heading != blank -%}
+        <h1>{{ section.settings.main_heading }}</h1>
+      {%- endif -%}
+      
+      {%- if section.settings.intro_text != blank -%}
+        <div class="split-contact-intro">
+          {{ section.settings.intro_text }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.links_text != blank -%}
+        <div class="split-contact-links">
+          {{ section.settings.links_text }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Bottom Block -->
+    <div class="split-contact-bottom">
+      {%- if section.settings.action_heading != blank -%}
+        <h2>{{ section.settings.action_heading }}</h2>
+      {%- endif -%}
+      
+      {%- if section.settings.office_hours != blank -%}
+        <div class="info-line">{{ section.settings.office_hours }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.phone_number != blank -%}
+        <div class="info-line">{{ section.settings.phone_number }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.email_link_text != blank -%}
+        <a href="{{ section.settings.email_url | default: '#' }}" class="action-link">
+          {{ section.settings.email_link_text }}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.chat_link_text != blank -%}
+        <a href="{{ section.settings.chat_url | default: '#' }}" class="action-link">
+          {{ section.settings.chat_link_text }}
+        </a>
+      {%- endif -%}
+    </div>
+    
+  </div>
+</div>

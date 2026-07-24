@@ -89,11 +89,32 @@
     opacity: {{ block.settings.card_bg_opacity | divided_by: 100.0 }};
     border-radius: {{ block.settings.border_radius }}px;
     z-index: 0;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
   }
 
   .ai-feature-card-{{ ai_gen_id }}:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+  }
+
+  .ai-feature-card-{{ ai_gen_id }}:hover::before {
+    background-color: #ffffff !important;
+    opacity: 1 !important;
+  }
+
+  .ai-feature-card-{{ ai_gen_id }}:hover .ai-feature-card-title-{{ ai_gen_id }} {
+    color: #700a0c !important;
+    background: transparent !important;
+  }
+
+  .ai-feature-card-{{ ai_gen_id }}:hover .ai-feature-card-description-{{ ai_gen_id }} {
+    color: #700a0c !important;
+    opacity: 1 !important;
+    background: transparent !important;
+  }
+
+  .ai-feature-card-{{ ai_gen_id }}:hover .ai-feature-card-icon-{{ ai_gen_id }} img,
+  .ai-feature-card-{{ ai_gen_id }}:hover .ai-feature-card-icon-placeholder-{{ ai_gen_id }} svg {
+    filter: brightness(0) saturate(100%) invert(21%) sepia(85%) saturate(2462%) hue-rotate(345deg) brightness(91%) contrast(92%) !important;
   }
 
   .ai-feature-card-icon-{{ ai_gen_id }} {
@@ -112,6 +133,7 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+    transition: filter 0.3s ease;
   }
 
   .ai-feature-card-icon-placeholder-{{ ai_gen_id }} {
@@ -126,6 +148,7 @@
     width: 50%;
     height: 50%;
     opacity: 0.3;
+    transition: filter 0.3s ease;
   }
 
   .ai-feature-card-title-{{ ai_gen_id }} {
@@ -137,6 +160,7 @@
     color: {{ block.settings.text_color }};
     margin: 0 0 {{ block.settings.title_spacing }}px;
     line-height: 1.2;
+    transition: color 0.3s ease;
   }
 
   .ai-feature-card-description-{{ ai_gen_id }} {
@@ -149,6 +173,7 @@
     margin: 0;
     line-height: 1.5;
     opacity: 0.9;
+    transition: color 0.3s ease, opacity 0.3s ease;
   }
 
   @media screen and (max-width: 1199px) {
@@ -329,7 +354,7 @@
       "type": "color",
       "id": "card_bg_color",
       "label": "Card background",
-      "default": "#A72023"
+      "default": "#500708"
     },
     {
       "type": "range",

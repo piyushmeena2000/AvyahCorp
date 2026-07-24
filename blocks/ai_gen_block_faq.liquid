@@ -1,0 +1,503 @@
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-faq-section-{{ ai_gen_id }} {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: {{ block.settings.background_color | default: '#f8edd9' }};
+  }
+
+  .ai-faq-left-{{ ai_gen_id }} {
+    padding: {{ block.settings.padding_top }}px 80px {{ block.settings.padding_bottom }}px 10vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .ai-faq-right-{{ ai_gen_id }} {
+    background-color: #700a0c;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .ai-faq-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-faq-header-{{ ai_gen_id }} {
+    text-align: left;
+    margin-bottom: 40px;
+  }
+
+  .ai-faq-title-{{ ai_gen_id }} {
+    font-family: 'Anton', sans-serif;
+    font-size: {{ block.settings.title_size_desktop }}px;
+    line-height: 1.1;
+    color: {{ block.settings.title_color }};
+    text-transform: uppercase;
+    margin: 0;
+    letter-spacing: -1px;
+  }
+
+  .ai-faq-subtitle-{{ ai_gen_id }} {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: #555555;
+    margin: 12px 0 0 0;
+    line-height: 1.5;
+  }
+
+  .ai-faq-accordion-{{ ai_gen_id }} {
+    width: 100%;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ai-faq-card-{{ ai_gen_id }} {
+    background-color: #eeddbf;
+    border: none;
+    padding: 18px 24px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-faq-card-{{ ai_gen_id }}:hover {
+    background-color: #e5d2b1;
+  }
+
+  .ai-faq-question-row-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .ai-faq-question-{{ ai_gen_id }} {
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #111111;
+    margin: 0;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-faq-icon-{{ ai_gen_id }} {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #000;
+    background-color: #000;
+    border-radius: 50%;
+  }
+
+  .ai-faq-icon-{{ ai_gen_id }} svg {
+    width: 14px;
+    height: 14px;
+    stroke: #eeddbf;
+    transition: transform 0.3s ease;
+  }
+  
+  .ai-faq-icon-{{ ai_gen_id }} .icon-minus {
+    display: none;
+  }
+
+  .ai-faq-card-{{ ai_gen_id }}.active .ai-faq-icon-{{ ai_gen_id }} .icon-plus {
+    display: none;
+  }
+  
+  .ai-faq-card-{{ ai_gen_id }}.active .ai-faq-icon-{{ ai_gen_id }} .icon-minus {
+    display: block;
+  }
+
+  .ai-faq-answer-{{ ai_gen_id }} {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0, 1, 0, 1), padding-top 0.3s ease;
+    padding-top: 0;
+  }
+
+  .ai-faq-answer-inner-{{ ai_gen_id }} {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #333333;
+    font-weight: 500;
+  }
+
+  .ai-faq-answer-inner-{{ ai_gen_id }} p {
+    margin: 0 0 10px 0;
+  }
+  .ai-faq-answer-inner-{{ ai_gen_id }} p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-faq-btn-{{ ai_gen_id }} {
+    display: inline-block;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    font-family: 'Anton', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    text-decoration: none;
+    border: 2px solid #000;
+    box-shadow: 4px 4px 0px #000;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    letter-spacing: 1px;
+    width: fit-content;
+  }
+
+  .ai-faq-btn-{{ ai_gen_id }}:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000;
+  }
+  
+  .ai-faq-btn-{{ ai_gen_id }}:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px #000;
+  }
+
+  @media screen and (max-width: 900px) {
+    .ai-faq-section-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+    .ai-faq-left-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding_top_mobile }}px 20px {{ block.settings.padding_bottom_mobile }}px;
+    }
+    .ai-faq-right-{{ ai_gen_id }} {
+      height: 400px;
+    }
+    .ai-faq-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size_mobile }}px;
+    }
+    .ai-faq-question-{{ ai_gen_id }} {
+      font-size: 16px;
+    }
+  }
+{% endstyle %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+<div class="ai-faq-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-faq-left-{{ ai_gen_id }}">
+    <div class="ai-faq-header-{{ ai_gen_id }}">
+      <h2 class="ai-faq-title-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+      {% if block.settings.subheading != blank %}
+        <p class="ai-faq-subtitle-{{ ai_gen_id }}">{{ block.settings.subheading }}</p>
+      {% endif %}
+    </div>
+    
+    <faq-branded-accordion class="ai-faq-accordion-{{ ai_gen_id }}">
+      {% for i in (1..6) %}
+        {% liquid
+          assign q_key = 'faq_' | append: i | append: '_question'
+          assign a_key = 'faq_' | append: i | append: '_answer'
+          assign question = block.settings[q_key]
+          assign answer = block.settings[a_key]
+        %}
+        
+        {% if question != blank %}
+          <div class="ai-faq-card-{{ ai_gen_id }} ai-faq-card">
+            <div class="ai-faq-question-row-{{ ai_gen_id }} ai-faq-question-row">
+              <h3 class="ai-faq-question-{{ ai_gen_id }}">{{ question }}</h3>
+              <div class="ai-faq-icon-{{ ai_gen_id }} ai-faq-icon">
+                <svg class="icon-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <svg class="icon-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </div>
+            </div>
+            <div class="ai-faq-answer-{{ ai_gen_id }} ai-faq-answer">
+              <div class="ai-faq-answer-inner-{{ ai_gen_id }}">
+                {{ answer }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </faq-branded-accordion>
+    
+    {% if block.settings.button_text != blank %}
+      <a href="{{ block.settings.button_link }}" class="ai-faq-btn-{{ ai_gen_id }}">
+        {{ block.settings.button_text }}
+      </a>
+    {% endif %}
+  </div>
+  <div class="ai-faq-right-{{ ai_gen_id }}">
+    <img src="{{ 'genz_kid_taakat.png' | asset_url }}" alt="FAQ Image" class="ai-faq-image-{{ ai_gen_id }}" loading="lazy">
+  </div>
+</div>
+
+<script>
+  (function() {
+    class FAQBrandedAccordion extends HTMLElement {
+      connectedCallback() {
+        const cards = this.querySelectorAll('.ai-faq-card');
+        cards.forEach(card => {
+          const row = card.querySelector('.ai-faq-question-row');
+          row.addEventListener('click', () => {
+            const isActive = card.classList.contains('active');
+            
+            // Close all cards
+            cards.forEach(c => {
+              c.classList.remove('active');
+              const ans = c.querySelector('.ai-faq-answer');
+              ans.style.maxHeight = null;
+              ans.style.paddingTop = '0px';
+            });
+
+            // Open current card if not active
+            if (!isActive) {
+              card.classList.add('active');
+              const answer = card.querySelector('.ai-faq-answer');
+              answer.style.paddingTop = '16px';
+              answer.style.maxHeight = (answer.scrollHeight + 16) + 'px';
+            }
+          });
+        });
+      }
+    }
+    
+    if (!customElements.get('faq-branded-accordion')) {
+      customElements.define('faq-branded-accordion', FAQBrandedAccordion);
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Custom Branded FAQ",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top Desktop",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom Desktop",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Branded Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FREQUENTLY ASKED QUESTIONS"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Have questions? We've got answers."
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "label": "Title Size Desktop",
+      "min": 32,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Title Size Mobile",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Heading Color",
+      "default": "#700a0c"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Branded Accent Color (Active highlight)",
+      "default": "#700a0c"
+    },
+    {
+      "type": "header",
+      "content": "Button settings"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Label",
+      "default": "EXPLORE ALL FAQS"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "default": "shopify://collections/all"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button BG Color",
+      "default": "#700a0c"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg",
+      "label": "Button Hover BG Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "FAQ Items (Real Store Content)"
+    },
+    {
+      "type": "text",
+      "id": "faq_1_question",
+      "label": "Q1 Question",
+      "default": "Are any purchases final sale?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_1_answer",
+      "label": "Q1 Answer",
+      "default": "We are unable to accept returns on certain items. These will be carefully marked before purchase."
+    },
+    {
+      "type": "text",
+      "id": "faq_2_question",
+      "label": "Q2 Question",
+      "default": "When will I get my order?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_2_answer",
+      "label": "Q2 Answer",
+      "default": "We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location."
+    },
+    {
+      "type": "text",
+      "id": "faq_3_question",
+      "label": "Q3 Question",
+      "default": "Where are your products manufactured?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_3_answer",
+      "label": "Q3 Answer",
+      "default": "Our products are manufactured both locally and globally. We carefully select our manufacturing partners to ensure our products are high quality and a fair value."
+    },
+    {
+      "type": "text",
+      "id": "faq_4_question",
+      "label": "Q4 Question",
+      "default": "How much does shipping cost?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_4_answer",
+      "label": "Q4 Answer",
+      "default": "Shipping is calculated based on your location and the items in your order. You will always know the shipping price before you purchase."
+    },
+    {
+      "type": "text",
+      "id": "faq_5_question",
+      "label": "Q5 Question"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_5_answer",
+      "label": "Q5 Answer"
+    },
+    {
+      "type": "text",
+      "id": "faq_6_question",
+      "label": "Q6 Question"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_6_answer",
+      "label": "Q6 Answer"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Branded FAQ"
+    }
+  ]
+}
+{% endschema %}

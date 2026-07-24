@@ -56,7 +56,7 @@ class HeaderComponent extends Component {
    * The duration to wait for hiding animation, when sticky behavior is 'scroll-up'
    * @constant {number}
    */
-  #animationDelay = 150;
+  #animationDelay = 300;
 
   /**
    * Keeps the global `--header-height` custom property up to date,
@@ -125,60 +125,53 @@ class HeaderComponent extends Component {
     }
   }
 
+  #lastScrollY = 0;
+  #ticking = false;
+
   #handleWindowScroll = () => {
-    const stickyMode = this.getAttribute('sticky');
-    if (!this.#offscreen && stickyMode !== 'always') return;
-
-    const scrollTop = document.scrollingElement?.scrollTop ?? 0;
-    const isScrollingUp = scrollTop < this.#lastScrollTop;
-    if (this.#timeout) {
-      clearTimeout(this.#timeout);
-      this.#timeout = null;
+    if (!this.#ticking) {
+      window.requestAnimationFrame(this.#updateHeadroom);
+      this.#ticking = true;
     }
+  };
 
-    if (stickyMode === 'always') {
-      const isAtTop = this.getBoundingClientRect().top >= 0;
+  #updateHeadroom = () => {
+    const currentScrollY = Math.max(0, window.scrollY || document.documentElement.scrollTop || 0);
+    const scrollDelta = currentScrollY - this.#lastScrollY;
+    const threshold = 8; // 8px threshold to prevent jitter
+    const topTolerance = 10; // scrollY <= 10 always fully visible
 
-      if (isAtTop) {
-        this.dataset.scrollDirection = 'none';
-      } else if (isScrollingUp) {
-        this.dataset.scrollDirection = 'up';
-      } else {
-        this.dataset.scrollDirection = 'down';
+    const isMenuOpen = document.body.classList.contains('menu-open') || 
+                       document.body.classList.contains('avyah-megamenu-active') ||
+                       Boolean(document.querySelector('.avyah-discover-li.open')) ||
+                       Boolean(document.querySelector('.avyah-catalog-item:hover'));
+
+    const headerElements = Array.from(document.querySelectorAll('#header-group, .header-section, #header-component, header-component'));
+
+    if (currentScrollY <= topTolerance) {
+      headerElements.forEach(el => {
+        el.setAttribute('data-headroom-state', 'top');
+        el.classList.remove('headroom--unpinned');
+        el.classList.add('headroom--pinned', 'headroom--top');
+      });
+    } else if (Math.abs(scrollDelta) >= threshold) {
+      if (scrollDelta > 0 && !isMenuOpen && currentScrollY > 60) {
+        headerElements.forEach(el => {
+          el.setAttribute('data-headroom-state', 'unpinned');
+          el.classList.remove('headroom--pinned', 'headroom--top');
+          el.classList.add('headroom--unpinned');
+        });
+      } else if (scrollDelta < 0) {
+        headerElements.forEach(el => {
+          el.setAttribute('data-headroom-state', 'pinned');
+          el.classList.remove('headroom--unpinned', 'headroom--top');
+          el.classList.add('headroom--pinned');
+        });
       }
-
-      this.#lastScrollTop = scrollTop;
-      return;
     }
 
-    if (isScrollingUp) {
-      this.removeAttribute('data-animating');
-
-      if (this.getBoundingClientRect().top >= 0) {
-        // reset sticky state when header is scrolled up to natural position
-        this.#offscreen = false;
-        this.dataset.stickyState = 'inactive';
-        this.dataset.scrollDirection = 'none';
-      } else {
-        // show sticky header when scrolling up
-        this.dataset.stickyState = 'active';
-        this.dataset.scrollDirection = 'up';
-      }
-    } else if (this.dataset.stickyState === 'active') {
-      this.dataset.scrollDirection = 'none';
-      // delay transitioning to idle hidden state for hiding animation
-      this.setAttribute('data-animating', '');
-
-      this.#timeout = setTimeout(() => {
-        this.dataset.stickyState = 'idle';
-        this.removeAttribute('data-animating');
-      }, this.#animationDelay);
-    } else {
-      this.dataset.scrollDirection = 'none';
-      this.dataset.stickyState = 'idle';
-    }
-
-    this.#lastScrollTop = scrollTop;
+    this.#lastScrollY = currentScrollY;
+    this.#ticking = false;
   };
 
   connectedCallback() {
@@ -186,14 +179,8 @@ class HeaderComponent extends Component {
     this.#resizeObserver.observe(this);
     this.addEventListener('overflowMinimum', this.#handleOverflowMinimum);
 
-    const stickyMode = this.getAttribute('sticky');
-    if (stickyMode) {
-      this.#observeStickyPosition(stickyMode === 'always');
-
-      if (stickyMode === 'scroll-up' || stickyMode === 'always') {
-        document.addEventListener('scroll', this.#handleWindowScroll);
-      }
-    }
+    document.addEventListener('scroll', this.#handleWindowScroll, { passive: true });
+    this.#updateHeadroom();
   }
 
   disconnectedCallback() {

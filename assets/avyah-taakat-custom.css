@@ -1,0 +1,2297 @@
+/* ========== TAAKAT BESPOKE OVERRIDES CSS ========== */
+
+style, script {
+  display: none !important;
+}
+
+/* Force Section Background to White and text to Charcoal Dark Brown */
+.taakat-custom-product-page .product-information {
+  background-color: #ffffff !important;
+  color: #3d2b27 !important;
+}
+
+.taakat-custom-product-page .product-information .section-background {
+  background-color: #ffffff !important;
+}
+
+/* Force details text, headers, and content to match */
+.taakat-custom-product-page .product-details,
+.taakat-custom-product-page .product-details * {
+  color: #3d2b27 !important;
+}
+
+.taakat-custom-product-page .product-details a {
+  color: #700a0c !important;
+}
+
+/* Custom Header Font */
+.taakat-custom-product-page .product-details .group-block h3, 
+.taakat-custom-product-page .product-details .group-block h3 * {
+  font-family: 'Anton', sans-serif !important;
+  font-size: 46px !important;
+  line-height: 1.1 !important;
+  color: #3d2b27 !important;
+  text-transform: uppercase !important;
+  margin-bottom: 5px !important;
+  font-weight: 400 !important;
+}
+
+.taakat-subtitle-badge {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1.5px !important;
+  color: #8c7f7c !important;
+  text-transform: uppercase !important;
+  margin-bottom: 20px !important;
+  display: block;
+}
+
+/* Description text color */
+.taakat-custom-product-page .product-details [data-testid="product-information-details"] p,
+.taakat-custom-product-page .product-details .custom-footer-text,
+.taakat-custom-product-page .product-details .custom-footer-text * {
+  color: #6a5e5c !important;
+}
+
+/* 1. Media Gallery Sidebar Layout */
+@media screen and (min-width: 750px) {
+  .taakat-custom-product-page media-gallery {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+    gap: 20px !important;
+    align-items: flex-start !important;
+  }
+
+  .taakat-custom-product-page media-gallery slideshow {
+    flex: 1 !important;
+    width: auto !important;
+  }
+
+  .taakat-custom-product-page media-gallery slideshow-controls {
+    width: 90px !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+  }
+
+  .taakat-custom-product-page .slideshow-controls__thumbnails-container {
+    height: 520px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .taakat-custom-product-page .slideshow-controls__thumbnails {
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding-right: 5px !important;
+  }
+
+  .taakat-custom-product-page .slideshow-controls__thumbnail {
+    width: 72px !important;
+    height: 72px !important;
+    border-radius: 12px !important;
+    border: 2px solid #e1dcd7 !important;
+    overflow: hidden !important;
+    background-color: #fff !important;
+  }
+
+  .taakat-custom-product-page .slideshow-controls__thumbnail[aria-selected="true"] {
+    border-color: #700a0c !important;
+  }
+}
+
+/* Rounded cream container for the main product image */
+.taakat-custom-product-page .product-media-container {
+  background-color: #fcf4e4 !important; /* Warm yellow/cream container background */
+  border-radius: 24px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(0,0,0,0.02) !important;
+}
+
+.taakat-custom-product-page .product-media-container img {
+  border-radius: 24px !important;
+  padding: 15px !important;
+}
+
+/* Hide theme's default controls */
+.taakat-custom-product-page .product-details variant-picker,
+.taakat-custom-product-page .product-details buy-buttons quantity,
+.taakat-custom-product-page .product-details buy-buttons .payment-buttons,
+.taakat-custom-product-page .product-details price,
+.taakat-custom-product-page .product-details .divider-block {
+  display: none !important;
+}
+
+/* FLAVOR dropdown mockup styling */
+.taakat-flavor-section {
+  margin-bottom: 20px;
+}
+
+.taakat-flavor-label,
+.taakat-variant-label {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  color: #3d2b27 !important;
+  margin-bottom: 8px !important;
+  display: block;
+}
+
+.taakat-flavor-dropdown {
+  width: 100%;
+  border: 2px solid #e1dcd7;
+  border-radius: 30px;
+  padding: 14px 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #3d2b27 !important;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+
+.taakat-flavor-dropdown-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tfd-dot {
+  width: 12px;
+  height: 12px;
+  background-color: #e2ab54;
+  border-radius: 50%;
+}
+
+.taakat-flavor-dropdown svg {
+  width: 12px;
+  height: 12px;
+  stroke: #3d2b27;
+}
+
+/* 2. Custom Quantity Box Cards (Perfect snacks duplicate) */
+.taakat-box-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.taakat-box-card {
+  border: 2px solid #e1dcd7;
+  border-radius: 12px;
+  padding: 22px 10px 14px 10px;
+  text-align: center;
+  cursor: pointer;
+  background: #fff;
+  transition: all 0.2s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 110px;
+}
+
+.taakat-box-card.active {
+  border-color: #700a0c !important; /* Crimson active border */
+  background-color: #fffbfb !important;
+}
+
+.taakat-box-discount-label {
+  color: #700a0c !important; /* Red discount text */
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  position: absolute;
+  top: 8px;
+  width: 100%;
+  left: 0;
+  text-align: center;
+}
+
+.taakat-box-title {
+  font-family: 'Anton', sans-serif !important;
+  font-size: 18px !important;
+  text-transform: uppercase !important;
+  color: #3d2b27 !important;
+  letter-spacing: 0.5px !important;
+  line-height: 1 !important;
+  margin-bottom: 4px !important;
+}
+
+.taakat-box-price {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #3d2b27 !important;
+  margin-bottom: 2px !important;
+}
+
+.taakat-box-perbar {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  color: #8c7f7c !important;
+}
+
+.taakat-popular-badge {
+  background-color: #700a0c !important; /* Crimson Popular badge */
+  color: #fff !important;
+  font-family: 'Anton', sans-serif !important;
+  font-size: 10px !important;
+  padding: 3px 12px !important;
+  border-radius: 20px !important;
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  font-weight: 400 !important;
+}
+
+/* Size section */
+.taakat-size-section {
+  margin-bottom: 25px;
+}
+
+.taakat-size-pill {
+  display: inline-block;
+  background-color: #faf6f0;
+  border: 1px solid #e1dcd7;
+  border-radius: 20px;
+  padding: 8px 24px;
+  font-family: 'Anton', sans-serif !important;
+  font-size: 13px !important;
+  letter-spacing: 0.5px !important;
+  color: #3d2b27 !important;
+  text-transform: uppercase;
+}
+
+/* 3. Subscribe & Save Option Switchers */
+.taakat-purchase-options {
+  border: 2px solid #e1dcd7;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 25px;
+  background: #fff;
+}
+
+.taakat-purchase-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  cursor: pointer;
+  background: #fff;
+  transition: background 0.15s;
+  border: none;
+}
+
+.taakat-purchase-option:not(:last-child) {
+  border-bottom: 2px solid #e1dcd7;
+}
+
+.taakat-purchase-option.active {
+  background-color: #faf6f0;
+}
+
+.tpo-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.tpo-radio {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #e1dcd7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+
+.tpo-radio::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-color: #700a0c; /* Crimson active dot */
+  border-radius: 50%;
+  display: block;
+  transform: scale(0);
+  transition: transform 0.15s ease;
+}
+
+.taakat-purchase-option.active .tpo-radio {
+  border-color: #700a0c !important;
+}
+
+.taakat-purchase-option.active .tpo-radio::after {
+  transform: scale(1);
+}
+
+.tpo-label {
+  font-family: 'Anton', sans-serif !important;
+  font-size: 16px !important;
+  text-transform: uppercase !important;
+  color: #3d2b27 !important;
+  letter-spacing: 0.5px !important;
+  font-weight: 400 !important;
+}
+
+.tpo-price {
+  font-family: 'Anton', sans-serif !important;
+  font-size: 16px !important;
+  color: #3d2b27 !important;
+  font-weight: 400 !important;
+}
+
+/* 4. Action CTA Button (large bold red) */
+.taakat-submit-btn {
+  width: 100%;
+  background-color: #700a0c !important; /* Perfect Bar Dark Red/Crimson button */
+  color: #ffffff !important;
+  border: none;
+  border-radius: 30px !important;
+  padding: 16px 32px !important;
+  font-family: 'Anton', sans-serif !important;
+  font-size: 19px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 4px 16px rgba(213, 37, 40, 0.15);
+  font-weight: 400 !important;
+}
+
+.taakat-submit-btn:hover {
+  background-color: #500708 !important;
+}
+
+.taakat-shipping-note {
+  display: block;
+  text-align: center;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  color: #8c7f7c !important;
+  margin-top: 12px !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase;
+}
+
+/* 5. Accreditations Badges Bar */
+.taakat-badges-bar {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+  padding: 20px 0;
+  border-top: 1px solid #e1dcd7;
+  border-bottom: 1px solid #e1dcd7;
+}
+
+.taakat-badge-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.taakat-badge-item span {
+  font-family: 'Anton', sans-serif !important;
+  font-size: 13px !important;
+  color: #3d2b27 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  font-weight: 400 !important;
+}
+
+.taakat-badge-icon {
+  font-size: 22px;
+}
+
+/* 6. Clean Accordion Styling Overrides */
+.taakat-custom-product-page .product-details accordion .accordion-row {
+  border-bottom: 1px solid #e1dcd7 !important;
+}
+
+.taakat-custom-product-page .product-details accordion .accordion-row__title {
+  font-family: 'Anton', sans-serif !important;
+  font-size: 16px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  color: #3d2b27 !important;
+}
+
+@media screen and (max-width: 749px) {
+  .taakat-box-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+
+
+/* ==========================================================================
+   PERFECTSNACKS COLLECTION LISTING OVERRIDES (PURE WHITE CLEAN THEME)
+   ========================================================================== */
+
+/* Force Collection Page Background & Container to Clean Pure White with Black Typography */
+body:has(.product-grid-container),
+.product-grid-container,
+.collection-wrapper,
+results-list,
+.section-background:has(+ results-list),
+.main-collection-grid,
+.section:has(+ results-list),
+.section:has(.collection-wrapper),
+[data-section-type="collection-hero"],
+.collection-hero,
+.collection-header {
+  --color-foreground: 0 0 0 !important;
+  --color-foreground-heading: 0 0 0 !important;
+  --color-body-text: #000000 !important;
+  --color-heading-text: #000000 !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Ensure section backgrounds on collection templates are white */
+.section-background.color-scheme-1,
+.section-background.color-scheme-2,
+.section-background.color-scheme-3,
+.section-background.color-scheme-4,
+.section-background.color-scheme-5 {
+  background-color: #ffffff !important;
+}
+
+/* Collection Hero Header & Titles Centering (Header Only) */
+.section:has(+ results-list),
+.section-background:has(+ results-list) + .section,
+.collection-hero,
+[data-section-type="collection-hero"],
+.collection-header {
+  background-color: #ffffff !important;
+  text-align: center !important;
+  padding: 40px 20px 20px 20px !important;
+  color: #000000 !important;
+}
+
+/* Force pure solid black on all text elements inside the top header section */
+.section:has(+ results-list) *,
+.section:has(.collection-wrapper) > .text-block *,
+.collection-hero *,
+.collection-header *,
+rte-formatter *,
+[data-block-id="text_tqQTNE"],
+[data-block-id="text_tqQTNE"] *,
+[data-block-id="text_twGGkJ"],
+[data-block-id="text_twGGkJ"] *,
+.collection-title,
+.collection-title *,
+.collection-heading-text,
+.collection-heading-text * {
+  color: #000000 !important;
+  fill: #000000 !important;
+}
+
+.section:has(+ results-list) .text-block,
+.section:has(+ results-list) [class*="text-block"],
+.collection-hero h1,
+.collection-hero__title,
+.collection-title,
+.collection-heading-text,
+[data-block-id="text_tqQTNE"] {
+  font-family: 'Anton', sans-serif !important;
+  font-size: 52px !important;
+  text-transform: uppercase !important;
+  color: #000000 !important;
+  text-align: center !important;
+  letter-spacing: 0.5px !important;
+  margin: 0 auto 10px auto !important;
+  line-height: 1.1 !important;
+}
+
+.section:has(+ results-list) .text-block *,
+.section:has(+ results-list) .text-block p,
+.section:has(+ results-list) .text-block h1,
+.section:has(+ results-list) .text-block h2,
+[data-block-id="text_tqQTNE"] p,
+[data-block-id="text_tqQTNE"] h1,
+[data-block-id="text_tqQTNE"] h2,
+[data-block-id="text_tqQTNE"] * {
+  font-family: 'Anton', sans-serif !important;
+  font-size: 52px !important;
+  text-transform: uppercase !important;
+  color: #000000 !important;
+  text-align: center !important;
+  letter-spacing: 0.5px !important;
+  margin: 0 auto 10px auto !important;
+}
+
+.section:has(+ results-list) .text-block:has(.rte),
+.section:has(+ results-list) .rte,
+.collection-hero__description,
+.collection-description,
+[data-block-id="text_twGGkJ"],
+[data-block-id="text_twGGkJ"] p,
+[data-block-id="text_twGGkJ"] * {
+  display: none !important;
+}
+
+/* Sub-Navigation Links Bar under Collection Title (ALL SIZES | FULL SIZE | SNACK SIZE | MINI SIZE) */
+.perfect-collection-subnav {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 14px !important;
+  margin: 24px 0 44px 0 !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
+}
+
+.perfect-collection-subnav a {
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.8px !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-color: #91181b !important; /* Darker Crimson Red for Inactive */
+  background: #91181b !important;
+  padding: 12px 28px !important;
+  border-radius: 14px !important;
+  text-decoration: none !important;
+  border: none !important;
+  border-bottom: none !important;
+  outline: none !important;
+  transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+.perfect-collection-subnav a:hover {
+  background-color: #b01c1f !important;
+  background: #b01c1f !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-bottom: none !important;
+}
+
+.perfect-collection-subnav a.active {
+  background-color: #700a0c !important; /* Crimson Red for Active */
+  background: #700a0c !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-bottom: none !important;
+  box-shadow: 0 4px 14px rgba(213, 37, 40, 0.35) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Collection Filter Bar (Availability, Price, Sort) */
+facets-form,
+.facets-container,
+.facets__wrapper,
+.facets-block-wrapper,
+.facets {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+.facets__label,
+.facet-checkbox,
+.facets__summary,
+.facets__item,
+.facet-filters__label,
+.facet-filters__summary {
+  color: #000000 !important;
+  font-weight: 600 !important;
+}
+
+/* Completely Hide Filter & Sort Bar (Availability, Price, Sort) */
+.facets-container,
+.facets,
+.facet-filters,
+.facets-wrapper,
+[data-block-id="filters"] {
+  display: none !important;
+}
+
+/* Product Grid Gap & Cards Layout */
+results-list .product-grid,
+.collection-wrapper .product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
+  gap: 36px 24px !important;
+  width: 100% !important;
+}
+
+@media screen and (min-width: 990px) {
+  results-list .product-grid,
+  .collection-wrapper .product-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+results-list .product-grid__item,
+.collection-wrapper .product-grid__item {
+  background: transparent !important;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+/* Product Card Gallery Image Containers (Pastel Rounded Cards) */
+results-list .card-gallery,
+.collection-wrapper .card-gallery {
+  border-radius: 24px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  aspect-ratio: 1 / 1 !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03) !important;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease !important;
+}
+
+results-list .card-gallery:hover,
+.collection-wrapper .card-gallery:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Alternating Pastel Background Colors matching PerfectSnacks collection cards */
+results-list .product-grid__item:nth-child(5n+1) .card-gallery,
+.collection-wrapper .product-grid__item:nth-child(5n+1) .card-gallery {
+  background-color: #d2ebed !important; /* Soft Pastel Teal / Blue */
+}
+
+results-list .product-grid__item:nth-child(5n+2) .card-gallery,
+.collection-wrapper .product-grid__item:nth-child(5n+2) .card-gallery {
+  background-color: #e2dcf2 !important; /* Soft Pastel Lavender */
+}
+
+results-list .product-grid__item:nth-child(5n+3) .card-gallery,
+.collection-wrapper .product-grid__item:nth-child(5n+3) .card-gallery {
+  background-color: #d8edd8 !important; /* Soft Pastel Mint Green */
+}
+
+results-list .product-grid__item:nth-child(5n+4) .card-gallery,
+.collection-wrapper .product-grid__item:nth-child(5n+4) .card-gallery {
+  background-color: #fef0d7 !important; /* Soft Golden Cream */
+}
+
+results-list .product-grid__item:nth-child(5n+5) .card-gallery,
+.collection-wrapper .product-grid__item:nth-child(5n+5) .card-gallery {
+  background-color: #fce4ec !important; /* Soft Rose Coral */
+}
+
+/* Zero top gap between header and full-bleed collection banner */
+results-list.product-grid-container,
+results-list.section,
+.product-grid-container,
+main-collection,
+.main-collection {
+  --padding-block-start: 0px !important;
+  padding-top: 0 !important;
+  padding-block-start: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Completely Hide Collection Hero Banner */
+.avyah-collection-hero-banner {
+  display: none !important;
+}
+
+.avyah-shopify-collection-banner__img {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  height: auto !important;
+  max-height: 520px !important;
+  object-fit: cover !important;
+}
+
+.perfect-collection-subnav {
+  margin-top: 36px !important;
+  margin-bottom: 28px !important;
+}
+
+/* /* ==========================================================================
+   PERFECTSNACKS PRODUCT CARD CLONE STYLES
+   ========================================================================== */
+
+/* Pastel Card Background Cycle (Exact PerfectSnacks Pastel Palette) */
+.product-grid__item:nth-child(5n+1) .card-gallery,
+.product-grid__item:nth-child(5n+1) .product-media-container,
+.product-grid__item:nth-child(5n+1) [class*="card-gallery"] {
+  background-color: #dceef2 !important; /* Soft Pastel Cyan */
+}
+
+.product-grid__item:nth-child(5n+2) .card-gallery,
+.product-grid__item:nth-child(5n+2) .product-media-container,
+.product-grid__item:nth-child(5n+2) [class*="card-gallery"] {
+  background-color: #e5e4f4 !important; /* Soft Pastel Lavender */
+}
+
+.product-grid__item:nth-child(5n+3) .card-gallery,
+.product-grid__item:nth-child(5n+3) .product-media-container,
+.product-grid__item:nth-child(5n+3) [class*="card-gallery"] {
+  background-color: #d8f2f2 !important; /* Soft Pastel Aqua */
+}
+
+.product-grid__item:nth-child(5n+4) .card-gallery,
+.product-grid__item:nth-child(5n+4) .product-media-container,
+.product-grid__item:nth-child(5n+4) [class*="card-gallery"] {
+  background-color: #e0f2e7 !important; /* Soft Pastel Mint */
+}
+
+.product-grid__item:nth-child(5n+5) .card-gallery,
+.product-grid__item:nth-child(5n+5) .product-media-container,
+.product-grid__item:nth-child(5n+5) [class*="card-gallery"] {
+  background-color: #f7e6e7 !important; /* Soft Pastel Rose */
+}
+
+/* Product Card Gallery Containers & Rounded Corners */
+results-list .card-gallery,
+.collection-wrapper .card-gallery,
+.product-grid__item .card-gallery,
+.product-card .card-gallery,
+.product-media-container {
+  border-radius: 24px !important;
+  overflow: hidden !important;
+  aspect-ratio: 1 / 1 !important;
+  padding: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Product Card Image Fit & Hover Animation */
+results-list .card-gallery img,
+.collection-wrapper .card-gallery img,
+results-list .card-gallery .product-media-container img,
+.collection-wrapper .card-gallery .product-media-container img,
+.product-grid__item img {
+  position: relative !important;
+  max-width: 88% !important;
+  max-height: 88% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  margin: auto !important;
+  display: block !important;
+  border-radius: 12px !important;
+  transition: transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
+
+.product-grid__item:hover .card-gallery img,
+.product-grid__item:hover img {
+  transform: scale(1.08) translateY(-4px) !important;
+}
+
+/* Product Card Information Alignment & Ordering (Below Image) */
+results-list .product-card__content,
+.collection-wrapper .product-card__content,
+.product-grid__item .product-card__content,
+.product-card {
+  background: transparent !important;
+  padding: 12px 0 8px 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+  overflow: visible !important;
+}
+
+/* 1. Force Anton Font for Product Titles */
+results-list .product-card [class*="product-title"],
+.collection-wrapper .product-card [class*="product-title"],
+results-list .product-card .product-title,
+.collection-wrapper .product-card .product-title,
+results-list .product-card h3,
+.collection-wrapper .product-card h3,
+results-list .product-card a,
+.collection-wrapper .product-card a,
+.product-card [class*="title"],
+.product-card h3,
+.product-card h2,
+.product-card a,
+.product-card p,
+.product-grid__item [class*="title"],
+.product-grid__item h3,
+.product-grid__item a,
+.product-title-block,
+[data-block-id*="title"] * {
+  order: 1 !important;
+  font-family: 'Anton', sans-serif !important;
+  font-size: 19px !important;
+  line-height: 1.25 !important;
+  color: #111111 !important;
+  text-transform: uppercase !important;
+  text-align: left !important;
+  margin: 12px 0 2px 0 !important;
+  letter-spacing: 0.3px !important;
+  font-weight: 400 !important;
+  word-break: break-word !important;
+  white-space: normal !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+/* 2. Sub-caption Subtitle (8g Protein* • 12 Bars) */
+.perfect-card-subcaption {
+  order: 2 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #555555 !important;
+  text-align: left !important;
+  margin: 0 0 10px 0 !important;
+  line-height: 1.3 !important;
+}
+
+/* 3. Review Rating Stars */
+results-list .product-card .jdgm-widget,
+.collection-wrapper .product-card .jdgm-widget,
+results-list .product-card .jdgm-prev-badge,
+.collection-wrapper .product-card .jdgm-prev-badge,
+results-list .product-card [data-block-id*="review"],
+.collection-wrapper .product-card [data-block-id*="review"],
+results-list .product-card [class*="review"],
+.collection-wrapper .product-card [class*="review"],
+results-list .product-card [class*="rating"],
+.collection-wrapper .product-card [class*="rating"],
+.product-card .jdgm-prev-badge,
+.product-grid__item .jdgm-widget,
+.product-grid__item .jdgm-prev-badge,
+.product-grid__item [class*="rating"],
+.product-grid__item [class*="review"],
+.jdgm-prev-badge {
+  order: 3 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: left !important;
+  margin: 2px 0 8px 0 !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  width: 100% !important;
+  float: none !important;
+}
+
+results-list .product-card .jdgm-prev-badge__stars,
+.collection-wrapper .product-card .jdgm-prev-badge__stars,
+.product-grid__item .jdgm-prev-badge__stars,
+.jdgm-prev-badge__stars {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin-right: 6px !important;
+  color: #f59e0b !important;
+}
+
+results-list .product-card .jdgm-prev-badge__text,
+.collection-wrapper .product-card .jdgm-prev-badge__text,
+.product-grid__item .jdgm-prev-badge__text,
+.jdgm-prev-badge__text {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #333333 !important;
+}
+
+/* Product Card Star Rating & Reviews above title */
+body.template-index [class*="ai-product-card-reviews"],
+body.template-index [class*="product-card-reviews"],
+[class*="ai-product-card-reviews"] {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-bottom: 8px !important;
+}
+
+body.template-index [class*="ai-product-card-reviews"] .stars,
+body.template-index [class*="product-card-reviews"] .stars,
+[class*="ai-product-card-reviews"] .stars {
+  color: #ffb800 !important; /* Bright Gold Stars */
+  font-size: 18px !important;
+  letter-spacing: 1.5px !important;
+  line-height: 1 !important;
+}
+
+body.template-index [class*="ai-product-card-reviews"] .rating-num,
+body.template-index [class*="product-card-reviews"] .rating-num,
+[class*="ai-product-card-reviews"] .rating-num {
+  color: #111111 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+body.template-index [class*="ai-product-card-reviews"] .count,
+body.template-index [class*="product-card-reviews"] .count,
+[class*="ai-product-card-reviews"] .count {
+  color: #666666 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+/* 4. Price - Anton / Inter Font 18-20px BLACK */
+results-list .product-card .price,
+.collection-wrapper .product-card .price,
+results-list .product-card .price *,
+.collection-wrapper .product-card .price *,
+.product-card .price,
+.product-grid__item .price,
+.price-item,
+.price-item--sale,
+.price-item--regular,
+body.template-index [class*="product-card"] .current-price,
+body.template-index [class*="product-card"] [class*="price-row"] span.current-price,
+body.template-index [class*="ai-product-card"] .current-price,
+body.template-index [class*="ai-product-card"] [class*="price-row"] span.current-price,
+body.template-index [class*="product-card"] [class*="price"] *,
+body.template-index [class*="ai-product-card"] [class*="price"] * {
+  order: 4 !important;
+  color: #111111 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+}
+
+results-list .product-card .price--on-sale .price-item--regular,
+.collection-wrapper .product-card .price--on-sale .price-item--regular,
+.price--on-sale .price-item--regular,
+body.template-index [class*="product-card"] .compare-price,
+body.template-index [class*="ai-product-card"] .compare-price {
+  color: #888888 !important;
+  font-size: 14px !important;
+  text-decoration: line-through !important;
+  margin-right: 6px !important;
+}
+
+/* Discount Badge - Soft Pink Pill (#fde8e8) with Crimson Red Text (#700a0c) */
+[class*="discount-badge"],
+[class*="discount"],
+[class*="badge--sale"],
+[class*="price__badge-sale"],
+.product-card .discount-badge,
+[class*="ai-product-card"] .discount-badge {
+  background-color: #fde8e8 !important;
+  background: #fde8e8 !important;
+  color: #700a0c !important;
+  border-radius: 6px !important;
+  padding: 4px 10px !important;
+  font-weight: 800 !important;
+  font-size: 12px !important;
+  font-family: 'Inter', sans-serif !important;
+  text-transform: uppercase !important;
+  border: none !important;
+}
+
+[class*="discount-badge"] *,
+[class*="discount"] *,
+.product-card .discount-badge *,
+[class*="ai-product-card"] .discount-badge * {
+  color: #700a0c !important;
+}
+
+/* 5. ADD TO CART Pill Button */
+/* Product Filter Category Tabs (RANGE, SNACKBOX, COMBO) */
+body.template-index [class*="ai-product-tab-btn"] {
+  background-color: #500708 !important;
+  background: #500708 !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+body.template-index [class*="ai-product-tab-btn"]:hover {
+  background-color: #921b1e !important;
+  background: #921b1e !important;
+  color: #ffffff !important;
+}
+
+body.template-index [class*="ai-product-tab-btn"].active {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ==========================================================================
+   HEADER CART ICON TRIGGER BUTTON - TRANSPARENT BACKGROUND & WHITE ICON
+   ========================================================================== */
+header [data-testid="cart-drawer-trigger"],
+.header-actions__action {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+header [data-testid="cart-drawer-trigger"] *,
+.header-actions__action * {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+
+header [data-testid="cart-drawer-trigger"] svg,
+.header-actions__action svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+}
+
+/* ==========================================================================
+   SLIDE-OUT CART DRAWER PANEL (MODAL ONLY) - PURE WHITE BACKGROUND & BLACK FONT
+   ========================================================================== */
+dialog.cart-drawer__dialog,
+.cart-drawer__dialog,
+cart-drawer-component dialog {
+  --color-background: 255, 255, 255 !important;
+  --color-background-rgb: 255, 255, 255 !important;
+  --gradient-background: #ffffff !important;
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+}
+
+dialog.cart-drawer__dialog *,
+.cart-drawer__dialog *,
+.cart-drawer__content *,
+.perfect-cart-items-wrapper *,
+.perfect-cart-item-row *,
+.empty-cart-custom,
+.empty-cart-custom *,
+.cart-drawer__heading,
+.cart-drawer__heading * {
+  color: #111111 !important;
+}
+
+.empty-cart-custom svg,
+.cart-drawer__close-button svg {
+  color: #111111 !important;
+  stroke: #111111 !important;
+}
+
+/* Specific button / badge overrides */
+dialog.cart-drawer__dialog .cart__checkout-button,
+.cart__checkout-button {
+  color: #ffffff !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
+  border-radius: 6px !important;
+}
+
+dialog.cart-drawer__dialog .cart__checkout-button * {
+  color: #ffffff !important;
+}
+
+/* White background for discount code wrapper */
+.perfect-cart-discount-wrapper {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+}
+
+#cart-discount-code {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #111111 !important;
+}
+
+#cart-discount-apply {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+  border-radius: 6px !important;
+  transition: all 0.25s ease !important;
+}
+
+#cart-discount-apply:hover {
+  background-color: #700a0c !important;
+  color: #ffffff !important;
+}
+
+/* Reduced gap between Estimated total and Checkout button */
+.cart-drawer__summary {
+  gap: 8px !important;
+  padding-top: 10px !important;
+  padding-bottom: 16px !important;
+}
+
+.cart__summary-totals {
+  gap: 8px !important;
+  margin-bottom: 4px !important;
+}
+
+.cart__ctas {
+  margin-top: 6px !important;
+  width: 100% !important;
+}
+
+dialog.cart-drawer__dialog .upsell-add-btn,
+dialog.cart-drawer__dialog .upsell-add-btn *,
+.upsell-add-btn,
+.upsell-add-btn * {
+  color: #ffffff !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
+}
+
+dialog.cart-drawer__dialog .perfect-cart-progress-status,
+dialog.cart-drawer__dialog .perfect-cart-progress-status *,
+dialog.cart-drawer__dialog .perfect-cart-step-label,
+dialog.cart-drawer__dialog .perfect-cart-step-badge {
+  color: #700a0c !important;
+}
+
+.cart-drawer-upsell-heading,
+.cart-drawer-upsell-heading *,
+.upsell-title,
+.upsell-title *,
+.upsell-price,
+.upsell-price * {
+  color: #111111 !important;
+}
+
+dialog.cart-drawer__dialog .perfect-cart-step-circle {
+  color: #ffffff !important;
+  background-color: #700a0c !important;
+  border-color: #700a0c !important;
+}
+
+body.template-index dialog.cart-drawer__dialog,
+body.template-index .cart-drawer__dialog,
+body.template-index dialog.cart-drawer__dialog div,
+body.template-index dialog.cart-drawer__dialog form,
+body.template-index dialog.cart-drawer__dialog .cart-drawer__inner,
+body.template-index dialog.cart-drawer__dialog .cart-drawer__content,
+body.template-index dialog.cart-drawer__dialog .cart-drawer__header,
+body.template-index dialog.cart-drawer__dialog .cart__summary-container {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+}
+
+.cart-drawer__summary {
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+  box-shadow: none !important;
+}
+
+/* Animated Recycle Trash Icon Button */
+.perfect-recycle-btn {
+  transition: color 0.3s ease !important;
+}
+
+.perfect-recycle-btn:hover {
+  color: #700a0c !important;
+}
+
+.perfect-recycle-btn:hover .recycle-icon {
+  transform: rotate(180deg) scale(1.15) !important;
+  color: #700a0c !important;
+}
+
+/* Compare-at prices -> Grey */
+body.template-index dialog.cart-drawer__dialog .compare-at-price,
+body.template-index dialog.cart-drawer__dialog s {
+  color: #888888 !important;
+  text-decoration: line-through !important;
+}
+
+/* Tax note -> Grey */
+body.template-index dialog.cart-drawer__dialog .tax-note,
+body.template-index dialog.cart-drawer__dialog .tax-note * {
+  color: #666666 !important;
+}
+
+/* Close & Delete Icons -> Black */
+body.template-index dialog.cart-drawer__dialog .cart-drawer__close-button svg,
+body.template-index dialog.cart-drawer__dialog .cart-items__remove svg {
+  color: #111111 !important;
+  fill: #111111 !important;
+  stroke: #111111 !important;
+}
+
+/* Quantity selector */
+body.template-index dialog.cart-drawer__dialog .quantity-selector {
+  border: 1px solid #d5d5d5 !important;
+  background-color: #ffffff !important;
+}
+
+body.template-index dialog.cart-drawer__dialog .quantity-selector button,
+body.template-index dialog.cart-drawer__dialog .quantity-selector input {
+  color: #111111 !important;
+  background-color: transparent !important;
+}
+
+/* Checkout Button - Crimson Red CTA */
+body.template-index dialog.cart-drawer__dialog .cart__checkout-button,
+body.template-index dialog.cart-drawer__dialog button#checkout {
+  background-color: #700a0c !important;
+  background: #700a0c !important;
+  color: #ffffff !important;
+  border-radius: 50px !important;
+  height: 52px !important;
+  font-family: 'Anton', sans-serif !important;
+  font-size: 19px !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.8px !important;
+  box-shadow: 0 4px 15px rgba(213, 37, 40, 0.25) !important;
+  border: none !important;
+  transition: all 0.25s ease !important;
+  width: 100% !important;
+}
+
+body.template-index dialog.cart-drawer__dialog .cart__checkout-button *,
+body.template-index dialog.cart-drawer__dialog button#checkout * {
+  color: #ffffff !important;
+}
+
+body.template-index dialog.cart-drawer__dialog .cart__checkout-button:hover,
+body.template-index dialog.cart-drawer__dialog button#checkout:hover {
+  background-color: #c01b1e !important;
+  background: #c01b1e !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(213, 37, 40, 0.4) !important;
+}
+
+/* ========================================================
+   UNIFIED COLLECTION PRODUCT CARD FRAME (IMAGE 2 MATCH)
+======================================================== */
+.product-grid__item.avyah-unified-product-card,
+.product-grid__item {
+  border: 1.5px solid #700a0c !important;
+  border-radius: 4px !important;
+  padding: 12px 12px 0 12px !important;
+  background-color: #ffffff !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  box-shadow: none !important;
+}
+
+.product-grid__item .product-card,
+.product-grid__item .card-wrapper {
+  border: none !important;
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.perfect-card-subcaption {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: #666666 !important;
+  text-align: center !important;
+  margin: 4px 0 8px 0 !important;
+  width: 100% !important;
+}
+
+.avyah-card-quick-add-form {
+  display: block !important;
+  width: calc(100% + 24px) !important;
+  margin-left: -12px !important;
+  margin-right: -12px !important;
+  margin-bottom: 0 !important;
+  margin-top: auto !important;
+}
+
+.avyah-card-add-to-cart-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 44px !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
+  color: #ffffff !important;
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  padding: 12px 16px !important;
+  border-radius: 0 0 2px 2px !important;
+  border: none !important;
+  box-shadow: inset 0 -2px 0 #a0181b !important;
+  cursor: pointer !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  box-sizing: border-box !important;
+}
+
+.avyah-card-add-to-cart-btn:hover {
+  background-color: #500708 !important;
+  background: #500708 !important;
+  color: #ffffff !important;
+}
+
+results-list .product-card .price--on-sale .price-item--regular,
+.collection-wrapper .product-card .price--on-sale .price-item--regular {
+  color: #888888 !important;
+  text-decoration: line-through !important;
+  margin-right: 6px !important;
+}
+
+/* Badge Overrides on Collection Cards */
+results-list .product-badges__badge,
+.collection-wrapper .product-badges__badge {
+  background-color: #700a0c !important;
+  color: #ffffff !important;
+  font-family: 'Anton', sans-serif !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  border-radius: 50px !important;
+  padding: 4px 12px !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* ==========================================================================
+   HEADER NAVIGATION MENU TEXT - WHITE
+   ========================================================================== */
+#header-group *:not(.menu-list__submenu *):not(.avyah-discover-card *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
+.header *:not(.menu-list__submenu *):not(.avyah-discover-card *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
+.header__inline-menu *:not(.menu-list__submenu *):not(.avyah-discover-card *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
+.header__menu-item:not(.menu-list__submenu *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
+.header__menu-item *:not(.menu-list__submenu *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
+header nav *:not(.menu-list__submenu *):not(.avyah-discover-card *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
+.buddha-menu-item *:not(.avyah-discover-popover *):not(.avyah-discover-link *),
+.buddha-menu-item > a:not(.avyah-discover-popover a):not(.avyah-discover-link),
+.buddha-menu-item span:not(.avyah-discover-popover span):not(.avyah-discover-link span),
+ul.mm-submenu a:not(.avyah-discover-popover a):not(.avyah-discover-link),
+ul.mm-submenu span:not(.avyah-discover-popover span):not(.avyah-discover-link span) {
+  color: #ffffff !important;
+}
+
+/* ==========================================================================
+   HOMEPAGE PRIMARY CRIMSON RED OVERRIDE - EXCLUDING CART DRAWER, DIALOGS & FOOTER
+   ========================================================================== */
+body.template-index main#MainContent,
+body.template-index .content-for-layout,
+body.template-index .shopify-section:not(:has(dialog)):not(:has(.cart-drawer)):not(#shopify-section-footer-group),
+body.template-index section:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *),
+body.template-index .section:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *),
+body.template-index div:not(dialog *):not(.cart-drawer *):not(cart-drawer-component *):not(.cart-drawer__inner *):not(.cart-drawer__content *):not(#footer-group *):not(footer *):not(.custom-footer *),
+body.template-index [class*="section"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *),
+body.template-index [class*="block"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *),
+body.template-index [class*="container"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *),
+body.template-index [class*="color-scheme"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *),
+body.template-index [class*="scheme-"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *) {
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+}
+
+/* ==========================================================================
+   FOOTER DARK CRIMSON RED OVERRIDE (#7b1616)
+   ========================================================================== */
+#footer-group,
+#footer-group *,
+#shopify-section-footer-group,
+#shopify-section-footer-group *,
+footer,
+footer *,
+.footer,
+.footer *,
+.custom-footer,
+.custom-footer div,
+.custom-footer-top,
+.custom-footer-bottom,
+.custom-footer-column {
+  background-color: #7b1616 !important;
+  background: #7b1616 !important;
+}
+
+.custom-footer input.footer-subscribe-input,
+.footer-subscribe-input {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.custom-footer button.footer-subscribe-btn,
+.footer-subscribe-btn {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #7b1616 !important;
+}
+
+/* Force Text inside homepage to White (EXCEPT inside Cart Drawer) */
+body.template-index p:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index h1:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index h2:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index h3:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index h4:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index h5:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index h6:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index li:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index .rte:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *),
+body.template-index .rte *:not(.cart-drawer *):not(dialog *):not(cart-drawer-component *) {
+  color: #ffffff !important;
+}
+
+/* ==========================================================================
+   FEATURE BENEFIT CARDS (NORMAL & HOVER STATES)
+   ========================================================================== */
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"],
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"],
+body.template-index [class*="ai_gen_block_200d848"] > div > div {
+  background-color: #500708 !important;
+  background: #500708 !important;
+  color: #ffffff !important;
+}
+
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"] *,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"] *,
+body.template-index [class*="ai_gen_block_200d848"] > div > div * {
+  color: #ffffff !important;
+  transition: color 0.3s ease !important;
+}
+
+/* HOVER STATE FOR FEATURE BENEFIT CARDS: White Background + Crimson Red Text & Icon */
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+}
+
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover::before,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover::before,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover::before {
+  background-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover *,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover *,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover *,
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover h3,
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover p {
+  color: #700a0c !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover img,
+body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover img,
+body.template-index [class*="ai_gen_block_200d848"] > div > div:hover img {
+  filter: brightness(0) saturate(100%) invert(21%) sepia(85%) saturate(2462%) hue-rotate(345deg) brightness(91%) contrast(92%) !important;
+}
+
+/* Exception for product cards */
+body.template-index .product-card,
+body.template-index .product-card__content {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+body.template-index .product-card *,
+body.template-index .product-card a,
+body.template-index .product-card h3,
+body.template-index .product-card .price {
+  color: #111111 !important;
+}
+
+body.template-index .product-grid__item:nth-child(5n+1) .card-gallery { background-color: #dceef2 !important; }
+body.template-index .product-grid__item:nth-child(5n+2) .card-gallery { background-color: #e5e4f4 !important; }
+body.template-index .product-grid__item:nth-child(5n+3) .card-gallery { background-color: #d8f2f2 !important; }
+body.template-index .product-grid__item:nth-child(5n+4) .card-gallery { background-color: #e0f2e7 !important; }
+body.template-index .product-grid__item:nth-child(5n+5) .card-gallery { background-color: #f7e6e7 !important; }
+
+/* ==========================================================================
+   CUSTOMER REVIEWS SECTION - RED SECTION BG, SOLID PURE WHITE CARDS
+   ========================================================================== */
+body.template-index #shopify-section-blocks_zFCw9K,
+body.template-index .shopify-section:has([class*="c24781f"]),
+body.template-index .section:has([class*="c24781f"]),
+body.template-index [class*="c24781f"],
+body.template-index [class*="c24781f"] [class*="container"],
+body.template-index [class*="c24781f"] [class*="header"],
+body.template-index [class*="c24781f"] [class*="track-wrapper"] {
+  background-color: #700a0c !important;
+  background: #700a0c !important;
+}
+
+/* Section Title & Subtitle - WHITE text */
+body.template-index [class*="c24781f"] [class*="title"],
+body.template-index [class*="c24781f"] [class*="subtitle"],
+body.template-index [class*="c24781f"] h2,
+body.template-index [class*="c24781f"] [class*="header"] * {
+  color: #ffffff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* ONLY Review Cards & all elements inside them - 100% SOLID WHITE BACKGROUND */
+body.template-index [class*="c24781f"] [class*="card"],
+body.template-index [class*="c24781f"] [class*="card"] *,
+body.template-index [class*="c24781f"] [class*="slide"] > div,
+body.template-index [class*="c24781f"] [class*="slide"] > div * {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+}
+
+/* Text colors inside cards */
+body.template-index [class*="c24781f"] [class*="card"] p,
+body.template-index [class*="c24781f"] [class*="card"] span,
+body.template-index [class*="c24781f"] [class*="card"] b,
+body.template-index [class*="c24781f"] [class*="card"] strong,
+body.template-index [class*="c24781f"] [class*="card"] div,
+body.template-index [class*="c24781f"] [class*="quote"],
+body.template-index [class*="c24781f"] [class*="quote"] * {
+  color: #333333 !important;
+}
+
+body.template-index [class*="c24781f"] [class*="card"] [class*="name"] {
+  color: #700a0c !important;
+}
+
+body.template-index [class*="c24781f"] [class*="card"] [class*="role"],
+body.template-index [class*="c24781f"] [class*="card"] [class*="role"] * {
+  color: #666666 !important;
+}
+body.template-index [class*="partner"],
+body.template-index [class*="available"],
+body.template-index [class*="logo-list"],
+body.template-index [class*="logos"],
+body.template-index [class*="193b272"],
+body.template-index [class*="ai-logo-carousel"],
+body.template-index .shopify-section:has([class*="193b272"]),
+body.template-index .section:has([class*="193b272"]) {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+}
+
+body.template-index [class*="193b272"] h2,
+body.template-index [class*="ai-logo-carousel"] h2,
+body.template-index [class*="193b272"] [class*="heading"],
+body.template-index [class*="ai-logo-carousel"] [class*="heading"] {
+  color: #700a0c !important;
+}
+
+/* =============================================
+   MEGA MENU NORMAL CRIMSON RED DESIGN (#700a0c)
+============================================= */
+.avyah-megamenu,
+.avyah-catalog-megamenu {
+  left: 0 !important;
+  right: 0 !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  transform: none !important;
+  border-radius: 0 !important;
+  padding: 36px 60px !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3) !important;
+  color: #ffffff !important;
+}
+
+.avyah-megamenu .avyah-megamenu__sidebar {
+  border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
+}
+
+#header-group .avyah-megamenu a.avyah-megamenu__sidebar-link,
+.header .avyah-megamenu a.avyah-megamenu__sidebar-link,
+header-component .avyah-megamenu a.avyah-megamenu__sidebar-link,
+.avyah-megamenu a.avyah-megamenu__sidebar-link {
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 20px !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+  text-decoration: none !important;
+  transition: all 0.15s ease !important;
+  padding: 10px 16px !important;
+  border-radius: 4px !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin-bottom: 6px !important;
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+#header-group .avyah-megamenu a.avyah-megamenu__sidebar-link.active,
+#header-group .avyah-megamenu a.avyah-megamenu__sidebar-link:hover,
+.header .avyah-megamenu a.avyah-megamenu__sidebar-link.active,
+.header .avyah-megamenu a.avyah-megamenu__sidebar-link:hover,
+header-component .avyah-megamenu a.avyah-megamenu__sidebar-link.active,
+header-component .avyah-megamenu a.avyah-megamenu__sidebar-link:hover,
+.avyah-megamenu a.avyah-megamenu__sidebar-link.active,
+.avyah-megamenu a.avyah-megamenu__sidebar-link:hover {
+  color: #700a0c !important;
+  -webkit-text-fill-color: #700a0c !important;
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  font-weight: 400 !important;
+}
+
+.avyah-megamenu__card-title {
+  font-family: 'Anton', sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+}
+
+.avyah-megamenu__card-img {
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  transition: border-color 0.15s ease !important;
+}
+
+.avyah-megamenu__card:hover .avyah-megamenu__card-img {
+  border-color: #ffffff !important;
+}
+
+.avyah-megamenu__card:hover .avyah-megamenu__card-title {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 0.9 !important;
+}
+
+.avyah-megamenu__inner,
+.avyah-catalog-megamenu__inner {
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+/* ========================================================
+   GLOBAL DARK BACKDROP OVERLAY FOR CATALOG MEGA MENU
+   Pure CSS + JS Dimming Focus Effect
+======================================================== */
+
+.avyah-global-menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75) !important;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 9990 !important;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.avyah-global-menu-backdrop.is-visible,
+body:has(.avyah-catalog-item:hover) .avyah-global-menu-backdrop,
+body:has(.avyah-megamenu:hover) .avyah-global-menu-backdrop {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+header-component,
+.header,
+.header__inner,
+header-menu,
+.avyah-megamenu,
+.avyah-catalog-megamenu,
+.avyah-catalog-item {
+  z-index: 10005 !important;
+}
+
+.avyah-megamenu,
+.avyah-catalog-megamenu {
+  z-index: 10010 !important;
+}
+
+body.avyah-megamenu-active main,
+body.avyah-megamenu-active #MainContent,
+body.avyah-megamenu-active .shopify-section:not(:has(header-component)),
+body.avyah-megamenu-active footer,
+body.avyah-megamenu-active .footer,
+body:has(.avyah-catalog-item:hover) main,
+body:has(.avyah-catalog-item:hover) #MainContent,
+body:has(.avyah-megamenu:hover) main,
+body:has(.avyah-megamenu:hover) #MainContent {
+  filter: brightness(0.25) contrast(1.1) !important;
+  transition: filter 0.25s ease !important;
+}
+
+/* ========================================================
+   HEADROOM STICKY HEADER SYSTEM (SUPERYOU & PERFECT SNACK STYLE)
+   - Sticky header attached to viewport top
+   - Translates upward (translateY(-100%)) when scrolling DOWN
+   - Slides back down into view (translateY(0)) when scrolling UP
+   - Smooth cubic-bezier transform animation
+   - Pure transform — NO fade, NO scale, NO opacity changes
+======================================================== */
+
+html, body {
+  overflow-x: clip !important;
+}
+
+body {
+  padding-top: 75px !important;
+}
+
+.header-section,
+#header-group {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 100000 !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
+  will-change: transform;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+#header-component,
+header-component {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  z-index: 100000 !important;
+  will-change: transform;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  opacity: 1 !important;
+  filter: none !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
+  color: #ffffff !important;
+}
+
+.header__row,
+[class*="header__row"] {
+  background-color: #700a0c !important;
+  background: #700a0c !important;
+}
+
+/* Headroom State Classes & Attributes */
+header-component[data-headroom-state="pinned"],
+header-component[data-headroom-state="top"],
+header-component.headroom--pinned,
+header-component.headroom--top,
+#header-component[data-headroom-state="pinned"],
+#header-component[data-headroom-state="top"],
+.header-section[data-headroom-state="pinned"],
+.header-section[data-headroom-state="top"],
+.header-section.headroom--pinned,
+.header-section.headroom--top,
+#header-group[data-headroom-state="pinned"],
+#header-group[data-headroom-state="top"],
+#header-group.headroom--pinned,
+#header-group.headroom--top {
+  transform: translate3d(0, 0, 0) !important;
+}
+
+header-component[data-headroom-state="unpinned"],
+header-component.headroom--unpinned,
+#header-component[data-headroom-state="unpinned"],
+.header-section[data-headroom-state="unpinned"],
+.header-section.headroom--unpinned,
+#header-group[data-headroom-state="unpinned"],
+#header-group.headroom--unpinned {
+  transform: translate3d(0, -100%, 0) !important;
+}
+
+/* Force all header menu links, titles & icons to WHITE (#ffffff) */
+#header-group a:not(.menu-list__submenu a):not(.avyah-discover-card a):not(.avyah-discover-popover a):not(.avyah-discover-link),
+#header-group span:not(.menu-list__submenu span):not(.avyah-discover-card span):not(.cart-count):not(.avyah-discover-popover span),
+#header-group p:not(.menu-list__submenu p):not(.avyah-discover-card p):not(.avyah-discover-popover p),
+#header-group li:not(.menu-list__submenu li):not(.avyah-discover-card li):not(.avyah-discover-popover li),
+.header a:not(.menu-list__submenu a):not(.avyah-discover-card a):not(.avyah-discover-popover a):not(.avyah-discover-link),
+.header span:not(.menu-list__submenu span):not(.avyah-discover-card span):not(.cart-count):not(.avyah-discover-popover span),
+.header__inline-menu *:not(.menu-list__submenu *):not(.avyah-discover-card *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
+.header__menu-item:not(.menu-list__submenu *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
+.menu-list__link,
+.menu-list__link-title,
+header nav *:not(.menu-list__submenu *):not(.avyah-discover-card *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
+.header-actions__action,
+.header-actions__action *:not(.cart-count),
+header-component a:not(.menu-list__submenu a):not(.avyah-discover-card a):not(.avyah-discover-popover a):not(.avyah-discover-link),
+header-component span:not(.menu-list__submenu span):not(.avyah-discover-card span):not(.cart-count):not(.avyah-discover-popover span) {
+  color: #ffffff !important;
+}
+
+header-component svg:not(.dd-icon),
+header-component svg path:not(.dd-icon *),
+header-component svg circle:not(.dd-icon *),
+header-component svg polyline:not(.dd-icon *),
+header-component svg line:not(.dd-icon *),
+#header-group svg:not(.dd-icon),
+#header-group svg path:not(.dd-icon *),
+.header svg:not(.dd-icon),
+.header svg path:not(.dd-icon *),
+.header-actions__action svg,
+.header-actions__action svg path {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+  color: #ffffff !important;
+}
+
+/* ========================================================
+   DISCOVER DROPDOWN — PERFECT STYLING & HOVER STATE
+   - Background: Pure White (#ffffff)
+   - Default Text & Icons: Solid Black (#000000)
+   - Hover State: Text & Icon turn Crimson Red (#700a0c) with #fff5f5 background
+======================================================== */
+.avyah-discover-popover,
+.avyah-discover-popover *,
+.avyah-discover-popover .menu-list__submenu-inner,
+.avyah-discover-popover .mega-menu__grid,
+.avyah-discover-popover .mega-menu__column {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+}
+
+.avyah-discover-popover {
+  border-radius: 18px !important;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.2) !important;
+  padding: 10px !important;
+  min-width: 230px !important;
+  box-sizing: border-box !important;
+}
+
+.avyah-discover-arrow {
+  position: absolute !important;
+  top: -8px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 0 !important;
+  height: 0 !important;
+  border-left: 8px solid transparent !important;
+  border-right: 8px solid transparent !important;
+  border-bottom: 8px solid #ffffff !important;
+  z-index: 100001 !important;
+}
+
+/* Enable DISCOVER hover dropdown popover */
+.menu-list__list-item:hover .menu-list__submenu,
+.menu-list__list-item:focus-within .menu-list__submenu,
+.menu-list__submenu:hover {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* Default state for DISCOVER menu links (Solid Black #000000) */
+/* ABSOLUTE FORCE OVERRIDE FOR DISCOVER DROPDOWN TEXT ON ALL PAGES */
+#header-group .avyah-discover-popover *,
+.header .avyah-discover-popover *,
+header-component .avyah-discover-popover *,
+.menu-list .avyah-discover-popover *,
+.buddha-menu-item .avyah-discover-popover *,
+ul.mm-submenu .avyah-discover-popover *,
+.avyah-discover-popover *,
+.avyah-discover-link,
+.avyah-discover-link *,
+.avyah-discover-title-text {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  background-image: none !important;
+  mix-blend-mode: normal !important;
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: inline-block !important;
+}
+
+#header-group .avyah-discover-link:hover *,
+.header .avyah-discover-link:hover *,
+header-component .avyah-discover-link:hover *,
+.buddha-menu-item .avyah-discover-link:hover *,
+ul.mm-submenu .avyah-discover-link:hover *,
+.avyah-discover-link:hover * {
+  color: #700a0c !important;
+  -webkit-text-fill-color: #700a0c !important;
+}
+
+.avyah-discover-link svg,
+.avyah-discover-link svg *,
+.avyah-discover-link svg path {
+  stroke: #000000 !important;
+  color: #000000 !important;
+  fill: none !important;
+}
+
+.avyah-discover-link:hover svg,
+.avyah-discover-link:hover svg *,
+.avyah-discover-link:hover svg path {
+  stroke: #700a0c !important;
+  color: #700a0c !important;
+}
+
+a.avyah-discover-link {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  background-color: transparent !important;
+  text-decoration: none !important;
+  padding: 12px 16px !important;
+  border-radius: 12px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+a.avyah-discover-link:hover {
+  background-color: #fff5f5 !important;
+  background: #fff5f5 !important;
+}
+
+.menu-list__submenu a:hover,
+.menu-list__submenu a:hover span,
+.mega-menu__link:hover,
+.avyah-discover-dropdown a:hover {
+  background-color: #fef2f2 !important;
+  color: #700a0c !important;
+}
+
+.menu-list__submenu a:hover *,
+.mega-menu__link:hover *,
+.avyah-discover-card a:hover *,
+.avyah-discover-dropdown a:hover * {
+  color: #700a0c !important;
+  stroke: #700a0c !important;
+}
+
+/* ========================================================
+   1-TO-1 IMAGE 2 MATCH: PERFECT COLLECTION PRODUCT CARD SYSTEM
+======================================================== */
+.product-grid__item.avyah-perfect-card,
+li.product-grid__item.avyah-perfect-card {
+  border: 1.5px solid #555555 !important;
+  border-radius: 12px !important;
+  padding: 16px !important;
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  position: relative !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+  margin: 0 !important;
+  list-style: none !important;
+}
+
+.avyah-card-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* Image */
+.avyah-card-media-link {
+  display: block !important;
+  width: 100% !important;
+  margin-bottom: 12px !important;
+  text-decoration: none !important;
+  background: #ffffff !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+.avyah-card-media-link img {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* Rating Stars */
+.avyah-card-rating {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 4px !important;
+  margin-bottom: 8px !important;
+  text-align: left !important;
+}
+
+.avyah-card-rating .stars {
+  color: #ffc107 !important;
+  font-size: 15px !important;
+  letter-spacing: 1px !important;
+}
+
+.avyah-card-rating .count {
+  color: #666666 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Title */
+.avyah-card-title-link {
+  text-decoration: none !important;
+  display: block !important;
+  width: 100% !important;
+  margin-bottom: 6px !important;
+}
+
+.avyah-card-title {
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 400 !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  text-transform: uppercase !important;
+  text-align: left !important;
+  line-height: 1.25 !important;
+  margin: 0 !important;
+  letter-spacing: 0.3px !important;
+}
+
+/* Subtitle */
+.avyah-card-subtitle {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #666666 !important;
+  text-transform: uppercase !important;
+  text-align: left !important;
+  margin-bottom: 12px !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* Price Row */
+.avyah-card-price-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  margin-top: auto !important;
+  margin-bottom: 14px !important;
+}
+
+.avyah-card-price {
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 22px !important;
+  font-weight: 400 !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  text-align: left !important;
+  letter-spacing: -0.3px !important;
+}
+
+.avyah-card-discount-badge {
+  background-color: #700a0c !important;
+  background: #700a0c !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  text-transform: uppercase !important;
+}
+
+/* ADD TO CART Form & Button */
+.avyah-card-quick-add-form {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.avyah-card-add-to-cart-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 44px !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  padding: 10px 16px !important;
+  border-radius: 6px !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease !important;
+  box-sizing: border-box !important;
+}
+
+.avyah-card-add-to-cart-btn:hover {
+  background-color: #500708 !important;
+  background: #500708 !important;
+  color: #ffffff !important;
+}
+
+/* RECTANGULAR BUTTON & TAB STYLING */
+.split-contact-bottom .action-link,
+.action-link,
+a.action-link,
+.contact-button,
+[class*="action-link"],
+.bundle-tab,
+.bundle-tabs .bundle-tab,
+button.bundle-tab,
+.add-to-bundle-btn,
+.bundle-badge {
+  border-radius: 4px !important;
+}
+
+/* REMOVE HOVER LIFT & TRANSFORM EFFECTS */
+.bundle-card:hover,
+.product-card:hover,
+.card:hover,
+.card-wrapper:hover,
+[class*="product-card"]:hover,
+[class*="ai-product-card"]:hover,
+.bundle-card-image-wrap:hover img,
+.bundle-card-image-wrap img:hover,
+.product-card .media img:hover,
+[class*="product-card"] img:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* BULK ORDER PAGE CRIMSON RED BACKGROUND MATCH */
+.bundle-page-wrapper,
+#MainContent[data-template="page.bulk-order"],
+body.template-page-bulk-order main#MainContent,
+[class*="bundle-page"] {
+  background-color: #700a0c !important;
+  background: #700a0c !important;
+}
+
+/* ========================================================
+   DISCOVER DROPDOWN ITEMS (OUR BLOGS & CAREERS)
+   - Default text color: Solid Black (#000000)
+   - Hover state: Crimson Red (#700a0c) with #fef2f2 background
+======================================================== */
+.avyah-discover-card a,
+.avyah-discover-card a *,
+.avyah-discover-card .avyah-discover-item-link,
+.avyah-discover-card .avyah-discover-item-text {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+.avyah-discover-card a:hover,
+.avyah-discover-card a:hover *,
+.avyah-discover-card a.avyah-discover-item-link:hover,
+.avyah-discover-card a:hover .avyah-discover-item-text {
+  background-color: #fef2f2 !important;
+  color: #700a0c !important;
+  -webkit-text-fill-color: #700a0c !important;
+}
+
+.avyah-discover-card a .dd-icon,
+.avyah-discover-card a .dd-icon * {
+  color: #000000 !important;
+  stroke: #000000 !important;
+  fill: none !important;
+}
+
+.avyah-discover-card a:hover .dd-icon,
+.avyah-discover-card a:hover .dd-icon * {
+  color: #700a0c !important;
+  stroke: #700a0c !important;
+}
+
+/* ========================================================
+   BENEFITS TICKER MARQUEE - SEAMLESS CRIMSON RED & WHITE ICONS
+   - Transparent item backgrounds (0% white blocks)
+   - Filtered pure white inverted icons
+======================================================== */
+[class*="ai-ticker"],
+ticker-component,
+[data-section-type="benefits"] {
+  background-color: #700a0c !important;
+  background: #700a0c !important;
+}
+
+[class*="ai-ticker"] *,
+[class*="ai-ticker-item"],
+[class*="ai-ticker-icon"] {
+  background-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+[class*="ai-ticker-icon"] img {
+  filter: brightness(0) invert(1) !important;
+  -webkit-filter: brightness(0) invert(1) !important;
+  mix-blend-mode: multiply !important;
+  opacity: 0.95 !important;
+}
+
+/* ========================================================
+   REMOVE WHITE STROKE BORDERS & HIDE RECIPE BUTTON ON BLOG CARDS
+======================================================== */
+[class*="ai-blog-card"],
+[class*="blog-card"],
+.ai-blog-card-image-wrapper-ea6d2bbrdfb37,
+[class*="ai-blog-card-image-wrapper"] {
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04) !important;
+}
+
+[class*="ai-blog-card-footer"],
+[class*="blog-card-footer"] {
+  border-top: none !important;
+  border: none !important;
+}
+
+[class*="ai-blog-badge"],
+[class*="blog-badge"] {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+
+

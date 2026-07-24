@@ -1,4 +1,262 @@
 {% style %}
+  :root,
+  body.template-index #MainContent,
+  body.template-index main,
+  body.template-index .content-for-layout,
+  body.template-index .shopify-section:not(:has(dialog)):not(:has(.cart-drawer)),
+  body.template-index .shopify-section > div:not(dialog *):not(.cart-drawer *),
+  body.template-index section:not(dialog *):not(.cart-drawer *),
+  body.template-index .section:not(dialog *):not(.cart-drawer *),
+  body.template-index [class*="section"]:not(dialog *):not(.cart-drawer *),
+  body.template-index .section-background:not(dialog *):not(.cart-drawer *),
+  body.template-index [class*="color-scheme"]:not(dialog *):not(.cart-drawer *),
+  body.template-index [class*="color-scheme"] > div:not(dialog *):not(.cart-drawer *),
+  body.template-index [class*="scheme-"]:not(dialog *):not(.cart-drawer *),
+  body.template-index [class*="ai_gen_block"]:not(dialog *):not(.cart-drawer *),
+  body.template-index .text-block:not(dialog *):not(.cart-drawer *),
+  body.template-index .rich-text:not(dialog *):not(.cart-drawer *) {
+    --color-background: 213, 37, 40 !important;
+    --color-background-rgb: 213, 37, 40 !important;
+    --gradient-background: #700a0c !important;
+    background-color: #700a0c !important;
+    background: #700a0c !important;
+  }
+
+  body.template-index h1:not(dialog *):not(.cart-drawer *):not(cart-drawer-component *),
+  body.template-index h2:not(dialog *):not(.cart-drawer *):not(cart-drawer-component *),
+  body.template-index h3:not(dialog *):not(.cart-drawer *):not(cart-drawer-component *),
+  body.template-index h4:not(dialog *):not(.cart-drawer *):not(cart-drawer-component *),
+  body.template-index h5:not(dialog *):not(.cart-drawer *):not(cart-drawer-component *),
+  body.template-index h6:not(dialog *):not(.cart-drawer *):not(cart-drawer-component *),
+  body.template-index p:not(dialog *):not(.cart-drawer *):not(cart-drawer-component *),
+  body.template-index span:not(.jdgm-prev-badge__text):not(dialog *):not(.cart-drawer *):not(cart-drawer-component *),
+  body.template-index .rte:not(dialog *):not(.cart-drawer *):not(cart-drawer-component *),
+  body.template-index .rte *:not(dialog *):not(.cart-drawer *):not(cart-drawer-component *) {
+    color: #ffffff !important;
+  }
+
+  body.template-index [class*="ai_gen_block_200d848"] [class*="card"],
+  body.template-index [class*="ai_gen_block_200d848"] div[class*="item"],
+  body.template-index [class*="ai_gen_block_200d848"] > div > div {
+    background-color: #500708 !important;
+    background: #500708 !important;
+    color: #ffffff !important;
+    transition: background-color 0.3s ease, color 0.3s ease !important;
+  }
+
+  body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover,
+  body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover,
+  body.template-index [class*="ai_gen_block_200d848"] > div > div:hover {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+  }
+
+  body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover::before,
+  body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover::before,
+  body.template-index [class*="ai_gen_block_200d848"] > div > div:hover::before {
+    background-color: #ffffff !important;
+    opacity: 1 !important;
+  }
+
+  body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover *,
+  body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover *,
+  body.template-index [class*="ai_gen_block_200d848"] > div > div:hover *,
+  body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover h3,
+  body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover p {
+    color: #700a0c !important;
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover img,
+  body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover img,
+  body.template-index [class*="ai_gen_block_200d848"] > div > div:hover img {
+    filter: brightness(0) saturate(100%) invert(21%) sepia(85%) saturate(2462%) hue-rotate(345deg) brightness(91%) contrast(92%) !important;
+  }
+
+/* ==========================================================================
+   CUSTOMER REVIEWS SECTION - RED SECTION BG, SOLID PURE WHITE CARDS
+   ========================================================================== */
+  body.template-index #shopify-section-blocks_zFCw9K,
+  body.template-index .shopify-section:has([class*="c24781f"]),
+  body.template-index .section:has([class*="c24781f"]),
+  body.template-index [class*="c24781f"],
+  body.template-index [class*="c24781f"] [class*="container"],
+  body.template-index [class*="c24781f"] [class*="header"],
+  body.template-index [class*="c24781f"] [class*="track-wrapper"] {
+    background-color: #700a0c !important;
+    background: #700a0c !important;
+  }
+
+  /* Section Title & Subtitle - WHITE text */
+  body.template-index [class*="c24781f"] [class*="title"],
+  body.template-index [class*="c24781f"] [class*="subtitle"],
+  body.template-index [class*="c24781f"] h2,
+  body.template-index [class*="c24781f"] [class*="header"] * {
+    color: #ffffff !important;
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  /* ONLY Review Cards & all elements inside them - 100% SOLID WHITE BACKGROUND */
+  body.template-index [class*="c24781f"] [class*="card"],
+  body.template-index [class*="c24781f"] [class*="card"] *,
+  body.template-index [class*="c24781f"] [class*="slide"] > div,
+  body.template-index [class*="c24781f"] [class*="slide"] > div * {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+  }
+
+  /* Text colors inside cards */
+  body.template-index [class*="c24781f"] [class*="card"] p,
+  body.template-index [class*="c24781f"] [class*="card"] span,
+  body.template-index [class*="c24781f"] [class*="card"] b,
+  body.template-index [class*="c24781f"] [class*="card"] strong,
+  body.template-index [class*="c24781f"] [class*="card"] div,
+  body.template-index [class*="c24781f"] [class*="quote"],
+  body.template-index [class*="c24781f"] [class*="quote"] * {
+    color: #333333 !important;
+  }
+
+  body.template-index [class*="c24781f"] [class*="card"] [class*="name"] {
+    color: #700a0c !important;
+  }
+
+  body.template-index [class*="partner"],
+  body.template-index [class*="available"],
+  body.template-index [class*="logo-list"],
+  body.template-index [class*="logos"],
+  body.template-index [class*="193b272"],
+  body.template-index [class*="ai-logo-carousel"],
+  body.template-index .shopify-section:has([class*="193b272"]),
+  body.template-index .section:has([class*="193b272"]) {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+  }
+
+  /* Product Card Star Rating & Reviews above title */
+  body.template-index [class*="ai-product-card-reviews"] .stars,
+  body.template-index [class*="product-card-reviews"] .stars {
+    color: #ffb800 !important;
+    font-size: 18px !important;
+  }
+
+  body.template-index [class*="ai-product-card-reviews"] .rating-num,
+  body.template-index [class*="product-card-reviews"] .rating-num {
+    color: #111111 !important;
+    font-size: 14px !important;
+  }
+
+  body.template-index [class*="ai-product-card-reviews"] .count,
+  body.template-index [class*="product-card-reviews"] .count {
+    color: #666666 !important;
+    font-size: 14px !important;
+  }
+
+  /* Product listing price font color - BLACK (#111111) */
+  body.template-index [class*="product-card"] .current-price,
+  body.template-index [class*="product-card"] [class*="price-row"] span.current-price,
+  body.template-index [class*="ai-product-card"] .current-price,
+  body.template-index [class*="ai-product-card"] [class*="price-row"] span.current-price,
+  body.template-index [class*="product-card"] [class*="price"] *,
+  body.template-index [class*="ai-product-card"] [class*="price"] * {
+    color: #111111 !important;
+  }
+
+  body.template-index [class*="product-card"] .compare-price,
+  body.template-index [class*="ai-product-card"] .compare-price {
+    color: #888888 !important;
+    text-decoration: line-through !important;
+  }
+
+  /* Discount Badge - Crimson Red (#700a0c) with White Text */
+  body.template-index [class*="discount-badge"],
+  body.template-index [class*="discount"],
+  body.template-index [class*="badge--sale"],
+  body.template-index [class*="price__badge-sale"],
+  body.template-index [class*="product-card"] [class*="discount"],
+  body.template-index [class*="ai-product-card"] [class*="discount-badge"],
+  body.template-index [class*="product-card"] .discount-badge,
+  body.template-index [class*="ai-product-card"] .discount-badge {
+    background-color: #700a0c !important;
+    background: #700a0c !important;
+    color: #ffffff !important;
+  }
+
+  body.template-index [class*="discount-badge"] *,
+  body.template-index [class*="discount"] *,
+  body.template-index [class*="product-card"] .discount-badge *,
+  body.template-index [class*="ai-product-card"] .discount-badge * {
+    color: #ffffff !important;
+  }
+
+  /* ADD TO CART Button - BLACK naturally, Crimson Red (#700a0c) on hover */
+  body.template-index [class*="product-card"] button,
+  body.template-index [class*="ai-product-card-button"] {
+    background-color: #000000 !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  body.template-index [class*="product-card"] button:hover,
+  body.template-index [class*="ai-product-card-button"]:hover {
+    background-color: #700a0c !important;
+    background: #700a0c !important;
+    color: #ffffff !important;
+  }
+
+  /* Header Cart Trigger Button - NO white background */
+  body.template-index cart-drawer-component:not(dialog *),
+  body.template-index .cart-drawer:not(dialog *),
+  body.template-index [data-testid="cart-drawer-trigger"],
+  body.template-index .header-actions__action {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  body.template-index cart-drawer-component:not(dialog *) svg,
+  body.template-index .cart-drawer:not(dialog *) svg,
+  body.template-index [data-testid="cart-drawer-trigger"] svg {
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+    fill: none !important;
+  }
+
+  /* Slide-Out Cart Drawer Modal Only - PURE WHITE BACKGROUND & BLACK FONT */
+  body.template-index dialog.cart-drawer__dialog,
+  body.template-index .cart-drawer__dialog {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  body.template-index dialog.cart-drawer__dialog * {
+    --color-background: #ffffff !important;
+  }
+
+  /* Product Filter Category Tabs (RANGE, SNACKBOX, COMBO) */
+  body.template-index [class*="ai-product-tab-btn"] {
+    background-color: #500708 !important;
+    background: #500708 !important;
+    color: #ffffff !important;
+    border: none !important;
+  }
+
+  body.template-index [class*="ai-product-tab-btn"]:hover {
+    background-color: #921b1e !important;
+    background: #921b1e !important;
+    color: #ffffff !important;
+  }
+
+  body.template-index [class*="ai-product-tab-btn"].active {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: none !important;
+  }
+
   {% for scheme in settings.color_schemes -%}
     {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
     {% if forloop.index == 1 %}
@@ -19,18 +277,18 @@
       {% assign opacity_30_60 = 0.30 %}
     {% endif %}
     .color-{{ scheme.id }} {
-        --color-background: rgb({{ scheme.settings.background.rgba }});
-        /* RGB values only to apply different opacities - Relative color values are not supported in iOS < 16.4 */
-        --color-background-rgb: {{ scheme.settings.background.rgb }};
+        --color-background: 213, 37, 40;
+        --color-background-rgb: 213, 37, 40;
+        --gradient-background: #700a0c;
         --opacity-5-15: {{ opacity_5_15 }};
         --opacity-10-25: {{ opacity_10_25 }};
         --opacity-35-55: {{ opacity_35_55 }};
         --opacity-40-60: {{ opacity_40_60 }};
         --opacity-30-60: {{ opacity_30_60 }};
-        --color-foreground: rgb({{ scheme.settings.foreground.rgba }});
-        --color-foreground-rgb: {{ scheme.settings.foreground.rgb }};
-        --color-foreground-heading: rgb({{ scheme.settings.foreground_heading.rgba }});
-        --color-foreground-heading-rgb: {{ scheme.settings.foreground_heading.rgb }};
+        --color-foreground: 255, 255, 255;
+        --color-foreground-rgb: 255, 255, 255;
+        --color-foreground-heading: 255, 255, 255;
+        --color-foreground-heading-rgb: 255, 255, 255;
         --color-primary: rgb({{ scheme.settings.primary.rgba }});
         --color-primary-rgb: {{ scheme.settings.primary.rgb }};
         --color-primary-hover: rgb({{ scheme.settings.primary_hover.rgba }});

@@ -23,19 +23,65 @@
   endif
 %}
 
+{% comment %} Render the catalog mega-menu panel (hidden by default) {% endcomment %}
+{% render 'catalog-mega-menu' %}
+
+{% liquid
+  assign shop_url = '/collections/all'
+  assign subscribe_url = '/pages/bulk-order'
+  assign bundle_url = '/collections/combo'
+
+  for link in block_settings.menu.links
+    assign title_down = link.title | downcase
+    if title_down contains 'catalog' or title_down contains 'shop'
+      assign shop_url = link.url
+    elsif title_down contains 'bulk' or title_down contains 'subscribe'
+      assign subscribe_url = link.url
+    elsif title_down contains 'bundle' or title_down contains 'combo'
+      assign bundle_url = link.url
+    endif
+  endfor
+%}
+
 {% capture children %}
-  {% assign has_valid_links = false %}
-  {% for link in block_settings.menu.links %}
-    {% assign link_title_clean = link.title | downcase | strip %}
-    {% if link_title_clean == 'home' or link_title_clean == 'store locator' or link_title_clean == 'our-stores' %}
-      {% continue %}
-    {% endif %}
-    on:pointerenter="/activate"
-    on:pointerleave="/deactivate"
+  {% comment %} 1. SHOP dropdown megamenu {% endcomment %}
+  <li
+    role="presentation"
+    class="menu-list__list-item avyah-catalog-trigger"
+    id="avyah-catalog-trigger-li"
   >
-    <button role="menuitem" class="button menu-list__link button-unstyled">
-      <span class="menu-list__link-title">{{ 'actions.more' | t }}</span>
-    </button>
+    <a
+      href="{{ shop_url }}"
+      class="menu-list__link{% if request.path == shop_url %} menu-list__link--active{% endif %}"
+      id="avyah-catalog-trigger"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      <span class="menu-list__link-title">SHOP</span>
+      <svg class="avyah-catalog-chevron" xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none" aria-hidden="true">
+        <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </li>
+
+  {% comment %} 2. SUBSCRIBE & SAVE {% endcomment %}
+  <li role="presentation" class="menu-list__list-item">
+    <a
+      href="{{ subscribe_url }}"
+      class="menu-list__link{% if request.path == subscribe_url %} menu-list__link--active{% endif %}"
+    >
+      <span class="menu-list__link-title">SUBSCRIBE & SAVE</span>
+    </a>
+  </li>
+
+  {% comment %} 3. BUILD A BUNDLE {% endcomment %}
+  <li role="presentation" class="menu-list__list-item">
+    <a
+      href="{{ bundle_url }}"
+      class="menu-list__link{% if request.path == bundle_url %} menu-list__link--active{% endif %}"
+    >
+      <span class="menu-list__link-title">BUILD A BUNDLE</span>
+    </a>
   </li>
 {% endcapture %}
 
@@ -48,3 +94,125 @@
     {% render 'overflow-list', class: class, ref: 'overflowMenu', children: children, minimum-items: 2, defer: true %}
   </div>
 </nav>
+
+{% stylesheet %}
+  /* =========================================
+     AVYAH CATALOG TRIGGER & CHEVRON
+  ========================================= */
+  .avyah-catalog-chevron {
+    display: inline-block;
+    margin-left: 4px;
+    vertical-align: middle;
+    transition: transform 0.2s ease;
+  }
+
+  .avyah-catalog-trigger[aria-expanded="true"] .avyah-catalog-chevron,
+  .avyah-explore-trigger:hover .avyah-catalog-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* =========================================
+     AVYAH EXPLORE DROPDOWN
+  ========================================= */
+  .avyah-explore-dropdown {
+    min-width: 200px;
+  }
+
+  .avyah-explore-dropdown__inner {
+    padding: 12px 0;
+  }
+
+  .avyah-explore-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .avyah-explore-link {
+    display: block;
+    padding: 10px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #111111;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: color 0.2s ease, background 0.2s ease;
+  }
+
+  .avyah-explore-link:hover {
+    color: #700a0c;
+    background: #fef5f5;
+  }
+{% endstylesheet %}
+
+<script>
+(function() {
+  'use strict';
+
+  function initCatalogMenu() {
+    var trigger = document.getElementById('avyah-catalog-trigger');
+    var panel = document.getElementById('avyah-catalog-panel');
+
+    if (!trigger || !panel) return;
+
+    var triggerLi = document.getElementById('avyah-catalog-trigger-li');
+    var closeTimer = null;
+
+    function openMenu() {
+      clearTimeout(closeTimer);
+      positionPanel();
+      panel.classList.add('avyah-catalog-megamenu--visible');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMenu() {
+      closeTimer = setTimeout(function() {
+        panel.classList.remove('avyah-catalog-megamenu--visible');
+        trigger.setAttribute('aria-expanded', 'false');
+      }, 120);
+    }
+
+    function positionPanel() {
+      var headerEl = document.querySelector('header-component') || document.querySelector('.header');
+      if (headerEl) {
+        var rect = headerEl.getBoundingClientRect();
+        panel.style.top = (rect.bottom) + 'px';
+      }
+    }
+
+    // Trigger li hover
+    if (triggerLi) {
+      triggerLi.addEventListener('mouseenter', openMenu);
+      triggerLi.addEventListener('mouseleave', closeMenu);
+    }
+
+    // Panel hover — keep open while cursor is inside
+    panel.addEventListener('mouseenter', function() {
+      clearTimeout(closeTimer);
+    });
+    panel.addEventListener('mouseleave', closeMenu);
+
+    // Click outside to close
+    document.addEventListener('click', function(e) {
+      if (!panel.contains(e.target) && !trigger.contains(e.target)) {
+        panel.classList.remove('avyah-catalog-megamenu--visible');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Reposition on scroll/resize
+    window.addEventListener('scroll', positionPanel, { passive: true });
+    window.addEventListener('resize', positionPanel, { passive: true });
+
+    // Initial position
+    positionPanel();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCatalogMenu);
+  } else {
+    initCatalogMenu();
+  }
+})();
+</script>

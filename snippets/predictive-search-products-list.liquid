@@ -59,8 +59,8 @@
                 resource_type: 'product',
                 resource: product,
                 image_width: 500,
-                image_hover: true,
-                image_aspect_ratio: '4 / 5'
+                image_hover: false,
+                image_aspect_ratio: '1 / 1'
               %}
             </li>
           {% endfor %}
@@ -74,8 +74,8 @@
                 resource_type: 'product',
                 resource: product,
                 image_width: 500,
-                image_hover: true,
-                image_aspect_ratio: '4 / 5'
+                image_hover: false,
+                image_aspect_ratio: '1 / 1'
               %}
             </li>
           {% endfor %}
@@ -103,8 +103,8 @@
             resource_type: 'product',
             resource: product,
             image_width: 500,
-            image_hover: true,
-            image_aspect_ratio: '4 / 5'
+            image_hover: false,
+            image_aspect_ratio: '1 / 1'
           %}
         </li>
       {% endfor %}
@@ -115,6 +115,49 @@
 {% stylesheet %}
   .predictive-search-results__products {
     padding-inline: var(--padding-xl);
+  }
+
+  .predictive-search-results__title {
+    color: #111111 !important;
+    font-weight: 700;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 8px;
+  }
+
+  .predictive-search-results__wrapper-products {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+  }
+
+  .predictive-search-results__card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 8px;
+    border: 1px solid #eeeeee;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /* Force dark text and proper image fitting */
+  .predictive-search-results__card * {
+    color: #111111 !important;
+    transition: color 0.2s ease;
+  }
+
+  .predictive-search-results__card img {
+    object-fit: contain !important;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+  }
+
+  .predictive-search-results__card:hover {
+    background-color: #700a0c !important;
+    border-color: #700a0c !important;
+  }
+  
+  .predictive-search-results__card:hover * {
+    color: #ffffff !important;
   }
 
   .recently-viewed-wrapper {

@@ -5,50 +5,121 @@
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
+  /* Force parent Shopify section wrappers to stretch full-width without any gaps or borders */
+  .shopify-section:has(.ai-story-section-{{ ai_gen_id }}) {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    background-color: #700a0c !important; /* Match section bg to prevent black gaps */
+  }
+
+  .shopify-section:has(.ai-story-section-{{ ai_gen_id }}) .section {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    display: block !important;
+  }
+
+  .shopify-section:has(.ai-story-section-{{ ai_gen_id }}) .custom-section-content {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .shopify-section:has(.ai-story-section-{{ ai_gen_id }}) .section-content-wrapper {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    min-height: auto !important;
+  }
+
   .ai-story-section-{{ ai_gen_id }} {
     display: block;
-    width: {{ block.settings.desktop_width_percent }}%;
-    max-width: 100%;
-    background-color: {{ block.settings.background_color }};
+    width: 100%;
+    background-color: #700a0c; /* Match the crimson red background */
+    padding: 0;
+    overflow: hidden;
   }
 
   .ai-story-container-{{ ai_gen_id }} {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: {{ block.settings.column_gap }}px;
     align-items: stretch;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: {{ block.settings.section_padding }}px 0 {{ block.settings.section_padding }}px 20px;
-    min-height: 500px;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   .ai-story-content-{{ ai_gen_id }} {
+    background-color: #700a0c; /* Normal Crimson Red background */
     display: flex;
     flex-direction: column;
-    gap: {{ block.settings.text_spacing }}px;
+    gap: 24px;
     justify-content: center;
-    padding-left: {{ block.settings.content_padding_left }}px;
+    align-items: center;
+    text-align: center; /* Centered text */
+    padding: 80px 8%;
+    min-height: 600px;
   }
 
   .ai-story-heading-{{ ai_gen_id }} {
-    font-size: {{ block.settings.heading_size }}px;
-    color: {{ block.settings.heading_color }};
+    font-family: 'Anton', sans-serif;
+    font-size: 52px;
+    color: #ffffff; /* White font color */
     margin: 0;
-    line-height: 1.2;
+    line-height: 1.15;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    max-width: 500px;
   }
 
   .ai-story-text-{{ ai_gen_id }} {
     font-family: 'Inter', sans-serif;
-    font-size: {{ block.settings.text_size }}px;
-    color: {{ block.settings.text_color }};
-    line-height: 1.6;
+    font-weight: 400;
+    font-size: 17px;
+    color: #ffffff; /* White font color */
+    line-height: 1.65;
+    max-width: 500px;
+  }
+
+  .ai-story-text-{{ ai_gen_id }} p {
+    margin: 0 0 16px;
+  }
+
+  .ai-story-text-{{ ai_gen_id }} p:last-child {
+    margin: 0;
   }
 
   .ai-story-image-wrapper-{{ ai_gen_id }} {
     width: 100%;
     height: 100%;
+    padding: 60px; /* Elegant padding around the image card */
     display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .ai-story-image-container-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    max-height: 480px; /* Restrict max height to keep it compact */
+    border-radius: 24px; /* Rounded corners */
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* Soft premium shadow */
+    aspect-ratio: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .ai-story-image-{{ ai_gen_id }} {
@@ -56,62 +127,35 @@
     height: 100%;
     display: block;
     object-fit: cover;
-    border-radius: {{ block.settings.image_border_radius }}px;
-  }
-
-  .ai-story-image-placeholder-{{ ai_gen_id }} {
-    width: 100%;
-    height: 100%;
-    background-color: #f4f4f4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: {{ block.settings.image_border_radius }}px;
-    position: relative;
-  }
-
-  .ai-story-image-placeholder-{{ ai_gen_id }} svg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .ai-story-empty-state-{{ ai_gen_id }} {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 20px;
-    font-size: 14px;
-    color: #666;
-    text-align: center;
-    pointer-events: none;
   }
 
   @media screen and (max-width: 749px) {
     .ai-story-container-{{ ai_gen_id }} {
       grid-template-columns: 1fr;
-      gap: {{ block.settings.mobile_gap }}px;
-      min-height: auto;
-      padding: {{ block.settings.section_padding }}px 20px;
     }
 
     .ai-story-content-{{ ai_gen_id }} {
-      order: {{ block.settings.mobile_content_order }};
-      padding-left: 0;
-    }
-
-    .ai-story-image-wrapper-{{ ai_gen_id }} {
-      order: {{ block.settings.mobile_image_order }};
-      min-height: 300px;
+      padding: 60px 24px;
+      order: 2;
+      min-height: auto;
     }
 
     .ai-story-heading-{{ ai_gen_id }} {
-      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+      font-size: 36px;
     }
 
     .ai-story-text-{{ ai_gen_id }} {
-      font-size: {{ block.settings.text_size | times: 0.9 }}px;
+      font-size: 15px;
+    }
+
+    .ai-story-image-wrapper-{{ ai_gen_id }} {
+      padding: 30px 24px;
+      height: auto;
+      order: 1;
+    }
+
+    .ai-story-image-container-{{ ai_gen_id }} {
+      max-height: 320px;
     }
   }
 {% endstyle %}
@@ -128,23 +172,27 @@
     </div>
 
     <div class="ai-story-image-wrapper-{{ ai_gen_id }}">
-      {% if block.settings.image %}
-        <img
-          src="{{ block.settings.image | image_url: width: 1200 }}"
-          alt="{{ block.settings.image.alt | escape }}"
-          loading="lazy"
-          width="{{ block.settings.image.width }}"
-          height="{{ block.settings.image.height }}"
-          class="ai-story-image-{{ ai_gen_id }}"
-        >
-      {% else %}
-        <div class="ai-story-image-placeholder-{{ ai_gen_id }}">
-          {{ 'image' | placeholder_svg_tag }}
-          <div class="ai-story-empty-state-{{ ai_gen_id }}">
-            Next, add an image
-          </div>
-        </div>
-      {% endif %}
+      <div class="ai-story-image-container-{{ ai_gen_id }}">
+        {% if block.settings.image %}
+          <img
+            src="{{ block.settings.image | image_url: width: 1200 }}"
+            alt="{{ block.settings.image.alt | escape }}"
+            loading="lazy"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.height }}"
+            class="ai-story-image-{{ ai_gen_id }}"
+          >
+        {% else %}
+          <img
+            src="{{ 'discover-our-story.webp' | asset_url }}"
+            alt="Avyah Founders"
+            loading="lazy"
+            width="1200"
+            height="900"
+            class="ai-story-image-{{ ai_gen_id }}"
+          >
+        {% endif %}
+      </div>
     </div>
   </div>
 </div>
