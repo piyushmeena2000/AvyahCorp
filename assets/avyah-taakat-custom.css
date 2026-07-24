@@ -2606,6 +2606,24 @@ li.menu-list__list-item:hover .avyah-discover-popover,
   pointer-events: auto !important;
 }
 
+/* Hide native theme submenus, extra buttons, details/summary inside Discover popover */
+.avyah-discover-popover a:not(.avyah-discover-link),
+.avyah-discover-popover button,
+.avyah-discover-popover details,
+.avyah-discover-popover summary,
+.avyah-discover-popover ul,
+.avyah-discover-popover li:not(.mega-menu__column),
+.avyah-discover-popover [class*="menu-list__link"]:not(.avyah-discover-link) {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  opacity: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+}
+
 a.avyah-discover-link {
   display: flex !important;
   align-items: center !important;

@@ -164,12 +164,12 @@
                       </div>
                     </div>
                     <div class="avyah-megamenu-backdrop"></div>
-                  {%- elsif link.links != blank or _dt contains 'discover' or _dt contains 'blog' -%}
+                  {%- elsif _dt contains 'discover' or _dt contains 'blog' -%}
                     {%- comment -%} DISCOVER dropdown popover with OUR BLOGS & CAREERS {%- endcomment -%}
                     <a
                       href="#"
                       class="menu-list__link{% if link.current %} menu-list__link--active{% endif %}"
-                      aria-haspopup="true"
+                      aria-haspopup="false"
                       aria-expanded="false"
                       {% if link.current %}aria-current="page"{% endif %}
                     >
