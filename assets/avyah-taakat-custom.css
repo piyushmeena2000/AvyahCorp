@@ -2179,12 +2179,12 @@ body.template-page-bulk-order main#MainContent,
   position: relative !important;
   background-color: #ffffff !important;
   background: #ffffff !important;
-  border-radius: 14px !important;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.22), 0 4px 10px rgba(0, 0, 0, 0.08) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.25), 0 4px 10px rgba(0, 0, 0, 0.08) !important;
   border: none !important;
   padding: 0 !important;
   overflow: hidden !important;
-  min-width: 200px !important;
+  min-width: 220px !important;
 }
 
 .avyah-discover-card a,
@@ -2193,13 +2193,13 @@ body.template-page-bulk-order main#MainContent,
 .avyah-discover-card a.avyah-discover-item-link:not(:hover) {
   display: flex !important;
   align-items: center !important;
-  gap: 12px !important;
-  padding: 12px 20px !important;
+  gap: 14px !important;
+  padding: 14px 22px !important;
   font-family: 'Anton', Arial, sans-serif !important;
-  font-size: 20px !important;
+  font-size: 24px !important;
   font-weight: 400 !important;
   line-height: 1 !important;
-  letter-spacing: 0.5px !important;
+  letter-spacing: 0.6px !important;
   background-color: #ffffff !important;
   background: #ffffff !important;
   color: #000000 !important;
@@ -2217,9 +2217,9 @@ body.template-page-bulk-order main#MainContent,
   color: #000000 !important;
   -webkit-text-fill-color: #000000 !important;
   font-family: 'Anton', Arial, sans-serif !important;
-  font-size: 20px !important;
+  font-size: 24px !important;
   font-weight: 400 !important;
-  letter-spacing: 0.5px !important;
+  letter-spacing: 0.6px !important;
 }
 
 .avyah-discover-card a:hover,
@@ -2236,13 +2236,13 @@ body.template-page-bulk-order main#MainContent,
 .avyah-discover-card a .dd-icon *,
 .avyah-discover-card a:not(:hover) .dd-icon,
 .avyah-discover-card a:not(:hover) .dd-icon * {
-  width: 22px !important;
-  height: 22px !important;
+  width: 26px !important;
+  height: 26px !important;
   flex-shrink: 0 !important;
   opacity: 1 !important;
   color: #000000 !important;
   stroke: #000000 !important;
-  stroke-width: 2.2px !important;
+  stroke-width: 2.6px !important;
   fill: none !important;
   transition: color 0.18s ease, stroke 0.18s ease !important;
 }
