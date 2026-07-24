@@ -188,7 +188,7 @@
 <header-component
   id="header-component"
   class="{{ class }}"
-  style="background-color: #d52528 !important; background: #d52528 !important; color: #ffffff !important;"
+  style="background-color: #700a0c !important; background: #700a0c !important; color: #ffffff !important;"
   {% if transparent %}
     transparent="{{ transparent }}"
   {% endif %}
@@ -226,7 +226,7 @@
           assign border_bottom_setting_id = 'border_width'
       endcase
 
-      assign style = 'background-color: #d52528 !important; background: #d52528 !important; color: #ffffff !important; --border-bottom-width: [width]px; ' | replace: '[width]', section.settings[border_bottom_setting_id]
+      assign style = 'background-color: #700a0c !important; background: #700a0c !important; color: #ffffff !important; --border-bottom-width: [width]px; ' | replace: '[width]', section.settings[border_bottom_setting_id]
 
       if row == 'top'
         assign style = style | append: '--border-bottom-width-mobile: [width]px; ' | replace: '[width]', section.settings.border_width
@@ -782,14 +782,14 @@
   .avyah-discover-card a:hover,
   .avyah-discover-card a.avyah-discover-item-link:hover {
     background: #fef2f2 !important;
-    color: #d52528 !important;
-    -webkit-text-fill-color: #d52528 !important;
+    color: #700a0c !important;
+    -webkit-text-fill-color: #700a0c !important;
   }
 
   .avyah-discover-card a:hover *,
   .avyah-discover-card a:hover .avyah-discover-item-text {
-    color: #d52528 !important;
-    -webkit-text-fill-color: #d52528 !important;
+    color: #700a0c !important;
+    -webkit-text-fill-color: #700a0c !important;
   }
 
   .avyah-discover-card a .dd-icon,
@@ -806,8 +806,8 @@
 
   .avyah-discover-card a:hover .dd-icon,
   .avyah-discover-card a:hover .dd-icon * {
-    color: #d52528 !important;
-    stroke: #d52528 !important;
+    color: #700a0c !important;
+    stroke: #700a0c !important;
   }
 
   /* Mobile */
@@ -831,7 +831,7 @@
       color: inherit !important;
       padding: 8px 0 !important;
       font-size: 13px !important;
-      border-left: 2px solid #d52528;
+      border-left: 2px solid #700a0c;
       padding-left: 10px !important;
     }
   }

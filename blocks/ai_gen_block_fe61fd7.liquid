@@ -5,7 +5,7 @@
     SECTION LAYOUT:
     
     * Full width section touching both left and right edges of the screen
-    * Background color: deep crimson red (#D52528)
+    * Background color: deep crimson red (#700a0c)
     * Smooth horizontal draggable product slider/carousel
     * Show 5 product cards at a time on desktop
     * Additional cards continue horizontally with drag/swipe interaction
@@ -194,7 +194,7 @@
     position: absolute;
     top: 10px;
     left: 10px;
-    background-color: #d52528 !important;
+    background-color: #700a0c !important;
     color: #ffffff !important;
     padding: 5px 10px;
     font-family: 'Anton', sans-serif;
@@ -347,7 +347,7 @@
   }
 
   .ai-product-card-price-row-{{ ai_gen_id }} .discount-badge {
-    background-color: #d52528 !important; /* Crimson Red discount badge */
+    background-color: #700a0c !important; /* Crimson Red discount badge */
     color: #ffffff !important;
     font-size: 11px;
     font-weight: 800;
@@ -479,8 +479,8 @@
   }
 
   .ai-product-tab-btn-{{ ai_gen_id }} {
-    background-color: #a72023 !important; /* Dark Crimson Red default */
-    background: #a72023 !important;
+    background-color: #500708 !important; /* Dark Crimson Red default */
+    background: #500708 !important;
     border: none !important;
     border-radius: 8px;
     font-family: 'Anton', sans-serif;
@@ -702,11 +702,11 @@
               <div class="ai-product-card-price-row-{{ ai_gen_id }}" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; margin-top: 4px !important; margin-bottom: 12px !important;">
                 <span class="current-price" style="font-size: 22px !important; font-weight: 900 !important; color: #111111 !important; font-family: 'Inter', sans-serif !important; letter-spacing: -0.5px !important; text-align: left !important; margin-left: 0 !important; float: left !important;">{{ product.price | money }}</span>
                 {% if product.compare_at_price > product.price %}
-                  <span class="discount-badge" style="background-color: #fde8e8 !important; color: #d52528 !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 6px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">
+                  <span class="discount-badge" style="background-color: #fde8e8 !important; color: #700a0c !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 6px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">
                     -{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}% OFF
                   </span>
                 {% else %}
-                  <span class="discount-badge" style="background-color: #fde8e8 !important; color: #d52528 !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 6px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">-5% OFF</span>
+                  <span class="discount-badge" style="background-color: #fde8e8 !important; color: #700a0c !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 6px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">-5% OFF</span>
                 {% endif %}
               </div>
             </div>
@@ -715,7 +715,7 @@
             <div class="ai-product-card-actions-{{ ai_gen_id }}" style="display: flex !important; gap: 8px !important; width: 100% !important; align-items: center !important; margin-top: 4px !important;">
               <button
                 class="ai-product-card-button-{{ ai_gen_id }}"
-                style="flex: 1 !important; margin-top: 0 !important; background-color: #d52528 !important; background: #d52528 !important; color: #ffffff !important; border-radius: 10px !important; padding: 12px 14px !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 8px !important; font-family: 'Anton', sans-serif !important; font-size: 16px !important; text-transform: uppercase !important; border: none !important; cursor: pointer !important;"
+                style="flex: 1 !important; margin-top: 0 !important; background-color: #700a0c !important; background: #700a0c !important; color: #ffffff !important; border-radius: 10px !important; padding: 12px 14px !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 8px !important; font-family: 'Anton', sans-serif !important; font-size: 16px !important; text-transform: uppercase !important; border: none !important; cursor: pointer !important;"
                 data-product-id="{{ product.id }}"
                 data-variant-id="{{ product.selected_or_first_available_variant.id }}"
                 {% unless product.available %}disabled{% endunless %}
@@ -778,13 +778,13 @@
               <p class="ai-product-card-specs-{{ ai_gen_id }}" style="text-align: left !important; margin-left: 0 !important; color: #888888 !important; font-weight: 700 !important; text-transform: uppercase !important; font-size: 12px !important; margin-top: 4px !important; margin-bottom: 10px !important;">PACK OF 1 • 10 BARS</p>
               <div class="ai-product-card-price-row-{{ ai_gen_id }}" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; margin-top: 4px !important; margin-bottom: 12px !important;">
                 <span class="current-price" style="font-size: 22px !important; font-weight: 900 !important; color: #111111 !important; font-family: 'Inter', sans-serif !important; letter-spacing: -0.5px !important; text-align: left !important; margin-left: 0 !important; float: left !important;">Rs. 570.00</span>
-                <span class="discount-badge" style="background-color: #fde8e8 !important; color: #d52528 !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 6px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">-5% OFF</span>
+                <span class="discount-badge" style="background-color: #fde8e8 !important; color: #700a0c !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 6px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">-5% OFF</span>
               </div>
             </div>
             <div class="ai-product-card-actions-{{ ai_gen_id }}" style="display: flex !important; gap: 8px !important; width: 100% !important; align-items: center !important; margin-top: 4px !important;">
               <button
                 class="ai-product-card-button-{{ ai_gen_id }}"
-                style="flex: 1 !important; margin-top: 0 !important; background-color: #d52528 !important; background: #d52528 !important; color: #ffffff !important; border-radius: 10px !important; padding: 12px 14px !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 8px !important; font-family: 'Anton', sans-serif !important; font-size: 16px !important; text-transform: uppercase !important; border: none !important; cursor: pointer !important;"
+                style="flex: 1 !important; margin-top: 0 !important; background-color: #700a0c !important; background: #700a0c !important; color: #ffffff !important; border-radius: 10px !important; padding: 12px 14px !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 8px !important; font-family: 'Anton', sans-serif !important; font-size: 16px !important; text-transform: uppercase !important; border: none !important; cursor: pointer !important;"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="9" cy="21" r="1"></circle>
@@ -1137,7 +1137,7 @@
       "type": "color",
       "id": "background_color",
       "label": "Background color",
-      "default": "#D52528"
+      "default": "#700a0c"
     },
     {
       "type": "range",
@@ -1374,7 +1374,7 @@
       "type": "color",
       "id": "badge_background",
       "label": "Badge background",
-      "default": "#D52528"
+      "default": "#700a0c"
     },
     {
       "type": "color",

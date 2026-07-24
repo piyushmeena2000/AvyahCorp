@@ -1,4 +1,4 @@
-ï»¿{
+{
   "accessibility": {
     "account": "Account",
     "cart": "Cart",
@@ -120,7 +120,7 @@
         "one": "{{ count }} comment",
         "other": "{{ count }} comments"
       },
-      "comment_author_separator": "â€¢"
+      "comment_author_separator": "•"
     },
     "comment_form": {
       "email": "Email",
@@ -259,7 +259,7 @@
     "wrong_password": "Wrong password",
     // Legend text for gift card delivery options
     "recipient_form_send_to": "Send to",
-    "recipient_form_email_label": "Recipientâ€™s email",
+    "recipient_form_email_label": "Recipient’s email",
     "recipient_form_email_label_my_email": "My email",
     "recipient_form_email_address": "Recipient email address",
     "recipient_form_name_label": "Recipient name (optional)",
@@ -283,7 +283,7 @@
       "subtext": "Your gift card",
       "shop_link": "Visit online store",
       "add_to_apple_wallet": "Add to Apple Wallet",
-      "qr_image_alt": "QR code â€” scan to redeem gift card",
+      "qr_image_alt": "QR code — scan to redeem gift card",
       "copy_code": "Copy gift card code",
       "expiration_date": "Expires {{ expires_on }}",
       "copy_code_success": "Code copied successfully",

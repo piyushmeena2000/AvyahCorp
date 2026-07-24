@@ -87,7 +87,7 @@
       ],
       "disabled": true,
       "custom_css": [
-        "* {background-color: #d52528; color: white;}",
+        "* {background-color: #700a0c; color: white;}",
         "*button {background-color: white;}"
       ],
       "settings": {

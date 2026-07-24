@@ -21,7 +21,7 @@ style, script {
 }
 
 .taakat-custom-product-page .product-details a {
-  color: #d52528 !important;
+  color: #700a0c !important;
 }
 
 /* Custom Header Font */
@@ -96,7 +96,7 @@ style, script {
   }
 
   .taakat-custom-product-page .slideshow-controls__thumbnail[aria-selected="true"] {
-    border-color: #d52528 !important;
+    border-color: #700a0c !important;
   }
 }
 
@@ -200,12 +200,12 @@ style, script {
 }
 
 .taakat-box-card.active {
-  border-color: #d52528 !important; /* Crimson active border */
+  border-color: #700a0c !important; /* Crimson active border */
   background-color: #fffbfb !important;
 }
 
 .taakat-box-discount-label {
-  color: #d52528 !important; /* Red discount text */
+  color: #700a0c !important; /* Red discount text */
   font-family: 'Inter', sans-serif !important;
   font-size: 11px !important;
   font-weight: 800 !important;
@@ -243,7 +243,7 @@ style, script {
 }
 
 .taakat-popular-badge {
-  background-color: #d52528 !important; /* Crimson Popular badge */
+  background-color: #700a0c !important; /* Crimson Popular badge */
   color: #fff !important;
   font-family: 'Anton', sans-serif !important;
   font-size: 10px !important;
@@ -326,7 +326,7 @@ style, script {
   content: '';
   width: 12px;
   height: 12px;
-  background-color: #d52528; /* Crimson active dot */
+  background-color: #700a0c; /* Crimson active dot */
   border-radius: 50%;
   display: block;
   transform: scale(0);
@@ -334,7 +334,7 @@ style, script {
 }
 
 .taakat-purchase-option.active .tpo-radio {
-  border-color: #d52528 !important;
+  border-color: #700a0c !important;
 }
 
 .taakat-purchase-option.active .tpo-radio::after {
@@ -360,7 +360,7 @@ style, script {
 /* 4. Action CTA Button (large bold red) */
 .taakat-submit-btn {
   width: 100%;
-  background-color: #d52528 !important; /* Perfect Bar Dark Red/Crimson button */
+  background-color: #700a0c !important; /* Perfect Bar Dark Red/Crimson button */
   color: #ffffff !important;
   border: none;
   border-radius: 30px !important;
@@ -376,7 +376,7 @@ style, script {
 }
 
 .taakat-submit-btn:hover {
-  background-color: #b01b1e !important;
+  background-color: #500708 !important;
 }
 
 .taakat-shipping-note {
@@ -593,8 +593,8 @@ rte-formatter *,
 }
 
 .perfect-collection-subnav a.active {
-  background-color: #d52528 !important; /* Crimson Red for Active */
-  background: #d52528 !important;
+  background-color: #700a0c !important; /* Crimson Red for Active */
+  background: #700a0c !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   border-bottom: none !important;
@@ -987,7 +987,7 @@ body.template-index [class*="ai-product-card"] .compare-price {
   margin-right: 6px !important;
 }
 
-/* Discount Badge - Soft Pink Pill (#fde8e8) with Crimson Red Text (#d52528) */
+/* Discount Badge - Soft Pink Pill (#fde8e8) with Crimson Red Text (#700a0c) */
 [class*="discount-badge"],
 [class*="discount"],
 [class*="badge--sale"],
@@ -996,7 +996,7 @@ body.template-index [class*="ai-product-card"] .compare-price {
 [class*="ai-product-card"] .discount-badge {
   background-color: #fde8e8 !important;
   background: #fde8e8 !important;
-  color: #d52528 !important;
+  color: #700a0c !important;
   border-radius: 6px !important;
   padding: 4px 10px !important;
   font-weight: 800 !important;
@@ -1010,14 +1010,14 @@ body.template-index [class*="ai-product-card"] .compare-price {
 [class*="discount"] *,
 .product-card .discount-badge *,
 [class*="ai-product-card"] .discount-badge * {
-  color: #d52528 !important;
+  color: #700a0c !important;
 }
 
 /* 5. ADD TO CART Pill Button */
 /* Product Filter Category Tabs (RANGE, SNACKBOX, COMBO) */
 body.template-index [class*="ai-product-tab-btn"] {
-  background-color: #a72023 !important;
-  background: #a72023 !important;
+  background-color: #500708 !important;
+  background: #500708 !important;
   color: #ffffff !important;
   border: none !important;
 }
@@ -1096,8 +1096,8 @@ dialog.cart-drawer__dialog *,
 dialog.cart-drawer__dialog .cart__checkout-button,
 .cart__checkout-button {
   color: #ffffff !important;
-  background-color: #d52528 !important;
-  background: #d52528 !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
   border-radius: 6px !important;
 }
 
@@ -1125,7 +1125,7 @@ dialog.cart-drawer__dialog .cart__checkout-button * {
 }
 
 #cart-discount-apply:hover {
-  background-color: #d52528 !important;
+  background-color: #700a0c !important;
   color: #ffffff !important;
 }
 
@@ -1151,15 +1151,15 @@ dialog.cart-drawer__dialog .upsell-add-btn *,
 .upsell-add-btn,
 .upsell-add-btn * {
   color: #ffffff !important;
-  background-color: #d52528 !important;
-  background: #d52528 !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
 }
 
 dialog.cart-drawer__dialog .perfect-cart-progress-status,
 dialog.cart-drawer__dialog .perfect-cart-progress-status *,
 dialog.cart-drawer__dialog .perfect-cart-step-label,
 dialog.cart-drawer__dialog .perfect-cart-step-badge {
-  color: #d52528 !important;
+  color: #700a0c !important;
 }
 
 .cart-drawer-upsell-heading,
@@ -1173,8 +1173,8 @@ dialog.cart-drawer__dialog .perfect-cart-step-badge {
 
 dialog.cart-drawer__dialog .perfect-cart-step-circle {
   color: #ffffff !important;
-  background-color: #d52528 !important;
-  border-color: #d52528 !important;
+  background-color: #700a0c !important;
+  border-color: #700a0c !important;
 }
 
 body.template-index dialog.cart-drawer__dialog,
@@ -1201,12 +1201,12 @@ body.template-index dialog.cart-drawer__dialog .cart__summary-container {
 }
 
 .perfect-recycle-btn:hover {
-  color: #d52528 !important;
+  color: #700a0c !important;
 }
 
 .perfect-recycle-btn:hover .recycle-icon {
   transform: rotate(180deg) scale(1.15) !important;
-  color: #d52528 !important;
+  color: #700a0c !important;
 }
 
 /* Compare-at prices -> Grey */
@@ -1245,8 +1245,8 @@ body.template-index dialog.cart-drawer__dialog .quantity-selector input {
 /* Checkout Button - Crimson Red CTA */
 body.template-index dialog.cart-drawer__dialog .cart__checkout-button,
 body.template-index dialog.cart-drawer__dialog button#checkout {
-  background-color: #d52528 !important;
-  background: #d52528 !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
   color: #ffffff !important;
   border-radius: 50px !important;
   height: 52px !important;
@@ -1279,7 +1279,7 @@ body.template-index dialog.cart-drawer__dialog button#checkout:hover {
 ======================================================== */
 .product-grid__item.avyah-unified-product-card,
 .product-grid__item {
-  border: 1.5px solid #d52528 !important;
+  border: 1.5px solid #700a0c !important;
   border-radius: 4px !important;
   padding: 12px 12px 0 12px !important;
   background-color: #ffffff !important;
@@ -1326,8 +1326,8 @@ body.template-index dialog.cart-drawer__dialog button#checkout:hover {
   justify-content: center !important;
   width: 100% !important;
   min-height: 44px !important;
-  background-color: #d52528 !important;
-  background: #d52528 !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
   color: #ffffff !important;
   font-family: 'Anton', Arial, sans-serif !important;
   font-size: 16px !important;
@@ -1345,8 +1345,8 @@ body.template-index dialog.cart-drawer__dialog button#checkout:hover {
 }
 
 .avyah-card-add-to-cart-btn:hover {
-  background-color: #b01b1e !important;
-  background: #b01b1e !important;
+  background-color: #500708 !important;
+  background: #500708 !important;
   color: #ffffff !important;
 }
 
@@ -1360,7 +1360,7 @@ results-list .product-card .price--on-sale .price-item--regular,
 /* Badge Overrides on Collection Cards */
 results-list .product-badges__badge,
 .collection-wrapper .product-badges__badge {
-  background-color: #d52528 !important;
+  background-color: #700a0c !important;
   color: #ffffff !important;
   font-family: 'Anton', sans-serif !important;
   font-size: 11px !important;
@@ -1401,8 +1401,8 @@ body.template-index [class*="block"]:not(dialog *):not(.cart-drawer *),
 body.template-index [class*="container"]:not(dialog *):not(.cart-drawer *),
 body.template-index [class*="color-scheme"]:not(dialog *):not(.cart-drawer *),
 body.template-index [class*="scheme-"]:not(dialog *):not(.cart-drawer *) {
-  background-color: #d52528 !important;
-  background: #d52528 !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
 }
 
 /* Force Text inside homepage to White (EXCEPT inside Cart Drawer) */
@@ -1425,8 +1425,8 @@ body.template-index .rte *:not(.cart-drawer *):not(dialog *):not(cart-drawer-com
 body.template-index [class*="ai_gen_block_200d848"] [class*="card"],
 body.template-index [class*="ai_gen_block_200d848"] div[class*="item"],
 body.template-index [class*="ai_gen_block_200d848"] > div > div {
-  background-color: #a72023 !important;
-  background: #a72023 !important;
+  background-color: #500708 !important;
+  background: #500708 !important;
   color: #ffffff !important;
 }
 
@@ -1457,7 +1457,7 @@ body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover *,
 body.template-index [class*="ai_gen_block_200d848"] > div > div:hover *,
 body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover h3,
 body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover p {
-  color: #d52528 !important;
+  color: #700a0c !important;
   background: transparent !important;
   background-color: transparent !important;
 }
@@ -1498,8 +1498,8 @@ body.template-index [class*="c24781f"],
 body.template-index [class*="c24781f"] [class*="container"],
 body.template-index [class*="c24781f"] [class*="header"],
 body.template-index [class*="c24781f"] [class*="track-wrapper"] {
-  background-color: #d52528 !important;
-  background: #d52528 !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
 }
 
 /* Section Title & Subtitle - WHITE text */
@@ -1533,7 +1533,7 @@ body.template-index [class*="c24781f"] [class*="quote"] * {
 }
 
 body.template-index [class*="c24781f"] [class*="card"] [class*="name"] {
-  color: #d52528 !important;
+  color: #700a0c !important;
 }
 
 body.template-index [class*="c24781f"] [class*="card"] [class*="role"],
@@ -1556,11 +1556,11 @@ body.template-index [class*="193b272"] h2,
 body.template-index [class*="ai-logo-carousel"] h2,
 body.template-index [class*="193b272"] [class*="heading"],
 body.template-index [class*="ai-logo-carousel"] [class*="heading"] {
-  color: #d52528 !important;
+  color: #700a0c !important;
 }
 
 /* =============================================
-   MEGA MENU NORMAL CRIMSON RED DESIGN (#d52528)
+   MEGA MENU NORMAL CRIMSON RED DESIGN (#700a0c)
 ============================================= */
 .avyah-megamenu,
 .avyah-catalog-megamenu {
@@ -1571,8 +1571,8 @@ body.template-index [class*="ai-logo-carousel"] [class*="heading"] {
   transform: none !important;
   border-radius: 0 !important;
   padding: 36px 60px !important;
-  background-color: #d52528 !important;
-  background: #d52528 !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
   border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3) !important;
   color: #ffffff !important;
@@ -1580,8 +1580,8 @@ body.template-index [class*="ai-logo-carousel"] [class*="heading"] {
 
 .avyah-megamenu .avyah-megamenu__sidebar {
   border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
-  background-color: #d52528 !important;
-  background: #d52528 !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
 }
 
 #header-group .avyah-megamenu a.avyah-megamenu__sidebar-link,
@@ -1616,8 +1616,8 @@ header-component .avyah-megamenu a.avyah-megamenu__sidebar-link.active,
 header-component .avyah-megamenu a.avyah-megamenu__sidebar-link:hover,
 .avyah-megamenu a.avyah-megamenu__sidebar-link.active,
 .avyah-megamenu a.avyah-megamenu__sidebar-link:hover {
-  color: #d52528 !important;
-  -webkit-text-fill-color: #d52528 !important;
+  color: #700a0c !important;
+  -webkit-text-fill-color: #700a0c !important;
   background-color: #ffffff !important;
   background: #ffffff !important;
   font-weight: 400 !important;
@@ -1739,8 +1739,8 @@ body {
   right: 0 !important;
   width: 100% !important;
   z-index: 100000 !important;
-  background-color: #d52528 !important;
-  background: #d52528 !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
   will-change: transform;
   transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
@@ -1756,15 +1756,15 @@ header-component {
   transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
   opacity: 1 !important;
   filter: none !important;
-  background-color: #d52528 !important;
-  background: #d52528 !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
   color: #ffffff !important;
 }
 
 .header__row,
 [class*="header__row"] {
-  background-color: #d52528 !important;
-  background: #d52528 !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
 }
 
 /* Headroom State Classes & Attributes */
@@ -1834,7 +1834,7 @@ header-component svg line:not(.dd-icon *),
    DISCOVER DROPDOWN — PERFECT STYLING & HOVER STATE
    - Background: Pure White (#ffffff)
    - Default Text & Icons: Solid Black (#000000)
-   - Hover State: Text & Icon turn Crimson Red (#d52528) with #fff5f5 background
+   - Hover State: Text & Icon turn Crimson Red (#700a0c) with #fff5f5 background
 ======================================================== */
 .avyah-discover-popover,
 .avyah-discover-popover *,
@@ -1910,8 +1910,8 @@ header-component .avyah-discover-link:hover *,
 .buddha-menu-item .avyah-discover-link:hover *,
 ul.mm-submenu .avyah-discover-link:hover *,
 .avyah-discover-link:hover * {
-  color: #d52528 !important;
-  -webkit-text-fill-color: #d52528 !important;
+  color: #700a0c !important;
+  -webkit-text-fill-color: #700a0c !important;
 }
 
 .avyah-discover-link svg,
@@ -1925,8 +1925,8 @@ ul.mm-submenu .avyah-discover-link:hover *,
 .avyah-discover-link:hover svg,
 .avyah-discover-link:hover svg *,
 .avyah-discover-link:hover svg path {
-  stroke: #d52528 !important;
-  color: #d52528 !important;
+  stroke: #700a0c !important;
+  color: #700a0c !important;
 }
 
 a.avyah-discover-link {
@@ -1951,15 +1951,15 @@ a.avyah-discover-link:hover {
 .mega-menu__link:hover,
 .avyah-discover-dropdown a:hover {
   background-color: #fef2f2 !important;
-  color: #d52528 !important;
+  color: #700a0c !important;
 }
 
 .menu-list__submenu a:hover *,
 .mega-menu__link:hover *,
 .avyah-discover-card a:hover *,
 .avyah-discover-dropdown a:hover * {
-  color: #d52528 !important;
-  stroke: #d52528 !important;
+  color: #700a0c !important;
+  stroke: #700a0c !important;
 }
 
 /* ========================================================
@@ -2086,8 +2086,8 @@ li.product-grid__item.avyah-perfect-card {
 }
 
 .avyah-card-discount-badge {
-  background-color: #d52528 !important;
-  background: #d52528 !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   font-family: 'Inter', sans-serif !important;
@@ -2111,8 +2111,8 @@ li.product-grid__item.avyah-perfect-card {
   justify-content: center !important;
   width: 100% !important;
   min-height: 44px !important;
-  background-color: #d52528 !important;
-  background: #d52528 !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   font-family: 'Anton', Arial, sans-serif !important;
@@ -2129,8 +2129,8 @@ li.product-grid__item.avyah-perfect-card {
 }
 
 .avyah-card-add-to-cart-btn:hover {
-  background-color: #b01b1e !important;
-  background: #b01b1e !important;
+  background-color: #500708 !important;
+  background: #500708 !important;
   color: #ffffff !important;
 }
 
@@ -2169,14 +2169,14 @@ button.bundle-tab,
 #MainContent[data-template="page.bulk-order"],
 body.template-page-bulk-order main#MainContent,
 [class*="bundle-page"] {
-  background-color: #d52528 !important;
-  background: #d52528 !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
 }
 
 /* ========================================================
    DISCOVER DROPDOWN ITEMS (OUR BLOGS & CAREERS)
    - Default text color: Solid Black (#000000)
-   - Hover state: Crimson Red (#d52528) with #fef2f2 background
+   - Hover state: Crimson Red (#700a0c) with #fef2f2 background
 ======================================================== */
 .avyah-discover-card a,
 .avyah-discover-card a *,
@@ -2191,8 +2191,8 @@ body.template-page-bulk-order main#MainContent,
 .avyah-discover-card a.avyah-discover-item-link:hover,
 .avyah-discover-card a:hover .avyah-discover-item-text {
   background-color: #fef2f2 !important;
-  color: #d52528 !important;
-  -webkit-text-fill-color: #d52528 !important;
+  color: #700a0c !important;
+  -webkit-text-fill-color: #700a0c !important;
 }
 
 .avyah-discover-card a .dd-icon,
@@ -2204,8 +2204,8 @@ body.template-page-bulk-order main#MainContent,
 
 .avyah-discover-card a:hover .dd-icon,
 .avyah-discover-card a:hover .dd-icon * {
-  color: #d52528 !important;
-  stroke: #d52528 !important;
+  color: #700a0c !important;
+  stroke: #700a0c !important;
 }
 
 /* ========================================================
@@ -2216,8 +2216,8 @@ body.template-page-bulk-order main#MainContent,
 [class*="ai-ticker"],
 ticker-component,
 [data-section-type="benefits"] {
-  background-color: #d52528 !important;
-  background: #d52528 !important;
+  background-color: #700a0c !important;
+  background: #700a0c !important;
 }
 
 [class*="ai-ticker"] *,
