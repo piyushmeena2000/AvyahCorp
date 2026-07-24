@@ -598,6 +598,142 @@
     /* preserves the inherited grid layout when this submenu wrapper is used */
     display: contents;
   }
+
+  /* --- Custom Header Menu & DISCOVER Card Styles --- */
+  .menu-list__link {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: var(--menu-top-level-font-size-desktop, 1.1rem);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--menu-top-level-font-color, #ffffff);
+    text-decoration: none;
+    line-height: 1.2;
+  }
+
+  .header-menu__caret {
+    width: 10px;
+    height: 6px;
+    margin-inline-start: 4px;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  .menu-list__list-item:has([aria-expanded='true']) .header-menu__caret,
+  .menu-list__list-item:hover .header-menu__caret {
+    transform: rotate(180deg);
+  }
+
+  .menu-list__list-item--discover {
+    position: relative;
+  }
+
+  .menu-list__list-item--discover > .menu-list__submenu.menu-list__submenu--discover-card {
+    position: absolute !important;
+    top: calc(100% + 4px) !important;
+    left: auto !important;
+    right: 0 !important;
+    width: auto !important;
+    min-width: 180px !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    clip-path: none !important;
+    padding: 8px 0 0 0 !important;
+    z-index: 999 !important;
+    overflow: visible !important;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s ease;
+  }
+
+  .menu-list__list-item--discover:has([aria-expanded='true']) > .menu-list__submenu--discover-card,
+  .menu-list__list-item--discover:hover > .menu-list__submenu--discover-card,
+  .menu-list__submenu--discover-card:hover {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+  }
+
+  .discover-popover-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+    overflow: visible;
+    min-width: 175px;
+  }
+
+  .discover-popover-arrow {
+    position: absolute;
+    top: -8px;
+    right: 24px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #d31327;
+    z-index: 10;
+  }
+
+  .discover-popover-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .discover-popover-item {
+    margin: 0;
+    padding: 0;
+  }
+
+  .discover-popover-item--blogs {
+    background-color: #d31327;
+  }
+
+  .discover-popover-item--blogs .discover-popover-link {
+    color: #ffffff;
+  }
+
+  .discover-popover-item--blogs:hover {
+    background-color: #bb0e20;
+  }
+
+  .discover-popover-item--career {
+    background-color: #ffffff;
+  }
+
+  .discover-popover-item--career .discover-popover-link {
+    color: #000000;
+  }
+
+  .discover-popover-item--career:hover {
+    background-color: #f4f4f4;
+  }
+
+  .discover-popover-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    transition: background-color 0.15s ease;
+  }
+
+  .discover-popover-icon {
+    flex-shrink: 0;
+  }
 {% endstylesheet %}
 
 {% schema %}
