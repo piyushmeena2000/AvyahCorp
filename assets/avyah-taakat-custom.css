@@ -2306,5 +2306,138 @@ ticker-component,
   visibility: hidden !important;
 }
 
+/* ========================================================
+   PRODUCT CARDS PURE WHITE BACKGROUND THEME
+======================================================== */
+product-card,
+.product-card,
+.product-card__content,
+.product-grid__card,
+.card-wrapper,
+[class*="product-card"],
+[class*="product-grid__card"] {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  padding: 12px !important;
+  box-sizing: border-box !important;
+}
+
+/* Product Card Media / Gallery Containers */
+.product-card__media,
+.product-card-gallery,
+.card-gallery,
+[class*="product-card-gallery"],
+[class*="card-gallery"] {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+/* Titles, Subtitles, Meta & Prices inside Product Cards */
+.product-card [class*="product-title"],
+.product-card [class*="title"],
+.product-card h3,
+.product-card h4,
+.product-card .h3,
+.product-card .h4,
+.product-grid__card [class*="product-title"],
+.product-grid__card h3,
+.product-grid__card h4 {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-weight: 400 !important;
+}
+
+/* Subtitle / Meta / Pack Info */
+.product-card p,
+.product-card span:not([class*="badge"]):not([class*="button"]):not(.cart-count),
+.product-card .text,
+.product-grid__card p,
+.product-grid__card span:not([class*="badge"]):not([class*="button"]) {
+  color: #333333 !important;
+  -webkit-text-fill-color: #333333 !important;
+}
+
+/* Price Text */
+.product-card [class*="price"],
+.product-card .price *,
+.product-grid__card .price,
+.product-grid__card .price * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+/* Discount Pill / Savings Badge (e.g. -5% OFF) */
+.product-card [class*="discount"],
+.product-card [class*="sale-badge"],
+.product-card [class*="percent-off"] {
+  background-color: #fef2f2 !important;
+  color: #d52528 !important;
+  -webkit-text-fill-color: #d52528 !important;
+  border: 1px solid rgba(213, 37, 40, 0.3) !important;
+  font-weight: 700 !important;
+}
+
+/* Add To Cart & Action Buttons */
+.product-card button[class*="add-to-cart"],
+.product-card .button,
+.product-card [class*="quick-add"] button {
+  background-color: #700a0c !important;
+  background: #700a0c !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-radius: 8px !important;
+  font-family: 'Anton', Arial, sans-serif !important;
+}
+
+.product-card button[class*="add-to-cart"] *,
+.product-card .button *,
+.product-card [class*="quick-add"] button * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Quick View Badge */
+.product-card [class*="quick-view"],
+.product-card .quick-view-button {
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Bestseller Badge */
+.product-card [class*="badge"],
+.product-card .badge,
+.product-grid__card .badge {
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-weight: 700 !important;
+  border-radius: 6px !important;
+}
+
+.product-card [class*="badge"] *,
+.product-card .badge * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Wishlist Heart Icon Container */
+.product-card [class*="wishlist"],
+.product-card [class*="heart"] {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #000000 !important;
+}
+
 
 
