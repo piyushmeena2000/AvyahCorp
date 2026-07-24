@@ -1717,15 +1717,15 @@ header-menu,
 
 body.avyah-megamenu-active main,
 body.avyah-megamenu-active #MainContent,
-body.avyah-megamenu-active .shopify-section:not(:has(header-component)),
+body.avyah-megamenu-active .shopify-section,
 body.avyah-megamenu-active footer,
 body.avyah-megamenu-active .footer,
 body:has(.avyah-catalog-item:hover) main,
 body:has(.avyah-catalog-item:hover) #MainContent,
 body:has(.avyah-megamenu:hover) main,
 body:has(.avyah-megamenu:hover) #MainContent {
-  filter: brightness(0.25) contrast(1.1) !important;
-  transition: filter 0.25s ease !important;
+  filter: none !important;
+  opacity: 1 !important;
 }
 
 /* ========================================================
