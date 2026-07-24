@@ -102,6 +102,10 @@
             {% assign first_accordion_open = false %}
             {% assign animation_index = 0 %}
             {%- for link in linklist.links -%}
+              {% assign link_title_clean = link.title | downcase | strip %}
+              {% if link_title_clean == 'home' or link_title_clean == 'store locator' or link_title_clean == 'our story' or link_title_clean == 'our blogs' or link_title_clean == 'discover' %}
+                {% continue %}
+              {% endif %}
               {% assign animation_index = animation_index | plus: 1 %}
               <li
                 style="--menu-drawer-animation-index: {{ animation_index }};"
@@ -242,6 +246,59 @@
                 {% endif %}
               </li>
             {%- endfor -%}
+
+            {% assign animation_index = animation_index | plus: 1 %}
+            <li
+              style="--menu-drawer-animation-index: {{ animation_index }};"
+              class="{%- if block_settings.drawer_accordion -%}menu-drawer__list-item--deep{%- else -%}menu-drawer__list-item--flat{%- endif -%}{% if block_settings.drawer_dividers %} menu-drawer__list-item--divider{% endif %}"
+            >
+              <accordion-custom>
+                <details id="Details-menu-drawer-discover">
+                  <summary
+                    id="HeaderDrawer-discover"
+                    class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset"
+                  >
+                    <span class="menu-drawer__menu-item-text wrap-text">Discover</span>
+                    <span class="svg-wrapper icon-plus">
+                      {{- 'icon-plus.svg' | inline_asset_content -}}
+                    </span>
+                  </summary>
+                  <ul
+                    class="menu-drawer__menu menu-drawer__menu--childlist menu-drawer__animated-element details-content"
+                    role="list"
+                    tabindex="-1"
+                  >
+                    <li class="menu-drawer__list-item" style="--menu-drawer-animation-index: 1;">
+                      <a
+                        id="HeaderDrawer-discover-our-story"
+                        href="/pages/our-story"
+                        class="menu-drawer__menu-item menu-drawer__menu-item--child focus-inset"
+                      >
+                        <span class="menu-drawer__menu-item-text wrap-text">Our Story</span>
+                      </a>
+                    </li>
+                    <li class="menu-drawer__list-item" style="--menu-drawer-animation-index: 2;">
+                      <a
+                        id="HeaderDrawer-discover-our-blogs"
+                        href="/blogs/news"
+                        class="menu-drawer__menu-item menu-drawer__menu-item--child focus-inset"
+                      >
+                        <span class="menu-drawer__menu-item-text wrap-text">Our Blogs</span>
+                      </a>
+                    </li>
+                    <li class="menu-drawer__list-item" style="--menu-drawer-animation-index: 3;">
+                      <a
+                        id="HeaderDrawer-discover-career"
+                        href="/pages/career"
+                        class="menu-drawer__menu-item menu-drawer__menu-item--child focus-inset"
+                      >
+                        <span class="menu-drawer__menu-item-text wrap-text">Career</span>
+                      </a>
+                    </li>
+                  </ul>
+                </details>
+              </accordion-custom>
+            </li>
           {% else %}
             {%- comment -%}
               Handle menus with 3 levels of links

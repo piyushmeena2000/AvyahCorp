@@ -24,7 +24,13 @@
 %}
 
 {% capture children %}
+  {% assign has_custom_items = false %}
   {% for link in block_settings.menu.links %}
+    {% assign link_title_clean = link.title | downcase | strip %}
+    {% if link_title_clean == 'home' or link_title_clean == 'store locator' or link_title_clean == 'our story' or link_title_clean == 'our blogs' or link_title_clean == 'discover' %}
+      {% continue %}
+    {% endif %}
+    {% assign has_custom_items = true %}
     <li
       role="presentation"
       class="menu-list__list-item"
@@ -67,6 +73,82 @@
       {%- endif -%}
     </li>
   {% endfor %}
+
+  {% unless has_custom_items %}
+    <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
+      <a href="/collections/all" data-skip-node-update="true" class="menu-list__link" ref="menuitem">
+        <span class="menu-list__link-title">Catalog</span>
+      </a>
+    </li>
+    <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
+      <a href="/pages/contact" data-skip-node-update="true" class="menu-list__link" ref="menuitem">
+        <span class="menu-list__link-title">Contact</span>
+      </a>
+    </li>
+    <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
+      <a href="/pages/bulk-order" data-skip-node-update="true" class="menu-list__link" ref="menuitem">
+        <span class="menu-list__link-title">Bulk Order</span>
+      </a>
+    </li>
+  {% endunless %}
+
+  {% comment %} Discover Dropdown Menu Item {% endcomment %}
+  <li
+    role="presentation"
+    class="menu-list__list-item"
+    on:focus="/activate"
+    on:blur="/deactivate"
+    on:pointerenter="/activate"
+    on:pointerleave="/deactivate"
+  >
+    <a
+      href="#"
+      data-skip-node-update="true"
+      class="menu-list__link"
+      aria-controls="submenu-discover"
+      aria-haspopup="true"
+      aria-expanded="false"
+      ref="menuitem"
+    >
+      <span class="menu-list__link-title">Discover</span>
+    </a>
+    <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">
+      <div
+        id="submenu-discover"
+        class="menu-list__submenu-inner"
+        style="{% render 'submenu-font-styles', settings: block_settings %}"
+      >
+        <div class="mega-menu section section--full-width-margin section--{{ section.settings.section_width }}">
+          <div class="mega-menu__grid" data-menu-grid-id="MegaMenuList-discover">
+            <ul data-menu-list-id="MegaMenuList-discover" class="mega-menu__list list-unstyled" style="--menu-columns-desktop: 6; --menu-columns-tablet: 4;">
+              <li class="mega-menu__column mega-menu__column--span-1">
+                <div>
+                  <a href="/pages/our-story" class="mega-menu__link">
+                    <span class="mega-menu__link-title wrap-text">Our Story</span>
+                  </a>
+                </div>
+              </li>
+              <li class="mega-menu__column mega-menu__column--span-1">
+                <div>
+                  <a href="/blogs/news" class="mega-menu__link">
+                    <span class="mega-menu__link-title wrap-text">Our Blogs</span>
+                  </a>
+                </div>
+              </li>
+              <li class="mega-menu__column mega-menu__column--span-1">
+                <div>
+                  <a href="/pages/career" class="mega-menu__link">
+                    <span class="mega-menu__link-title wrap-text">Career</span>
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+
   <li
     class="menu-list__list-item"
     role="presentation"

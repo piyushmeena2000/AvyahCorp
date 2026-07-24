@@ -37,6 +37,10 @@
             role="list"
           >
             {% for link in block_settings.menu.links %}
+              {% assign link_title_clean = link.title | downcase | strip %}
+              {% if link_title_clean == 'home' or link_title_clean == 'store locator' or link_title_clean == 'our story' or link_title_clean == 'our blogs' or link_title_clean == 'discover' %}
+                {% continue %}
+              {% endif %}
               <li>
                 <a
                   href="{{ link.url }}"
@@ -50,6 +54,11 @@
                 </a>
               </li>
             {% endfor %}
+            <li>
+              <a href="#" id="MenuItem-discover" class="menu-list__item">
+                Discover
+              </a>
+            </li>
           </ul>
         </div>
       </div>
