@@ -635,7 +635,7 @@
             "heading": "Also Available At",
             "heading_size": 40,
             "heading_spacing": 40,
-            "heading_color": "#FFFFFF",
+            "heading_color": "#ffffff",
             "logo_1": "shopify://shop_images/Amazon_logo_svg.webp",
             "logo_2": "shopify://shop_images/flipkart-logo-png-transparent.png",
             "logo_3": "shopify://shop_images/TATA_1mg_Logo_svg.png",
@@ -983,7 +983,11 @@
         "faq_2",
         "faq_3"
       ],
+      "custom_css": [
+        "*{padding-bottom: 100px;}"
+      ],
       "settings": {
+        "image": "shopify://shop_images/BERRYBLAST_F_1X1_ebbe7dd0-6069-4386-a0bf-b41e0eb24639.jpg",
         "button_text": "EXPLORE ALL FAQS",
         "button_link": "shopify://collections/all"
       }
@@ -1024,7 +1028,7 @@
             "background_color": "#ffffff",
             "heading_color": "#000000",
             "text_color": "#666666",
-            "card_background": "#F6F6F6",
+            "card_background": "#f6f6f6",
             "card_title_color": "#000000",
             "meta_color": "#999999",
             "link_color": "#000000",
