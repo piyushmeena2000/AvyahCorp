@@ -143,14 +143,14 @@
     flex: 0 0 calc((100% - ({{ block.settings.desktop_cards_visible | minus: 1 }} * {{ block.settings.card_gap }}px)) / {{ block.settings.desktop_cards_visible }});
     max-width: 420px !important;
     min-width: 310px !important;
-    min-height: 490px !important;
+    min-height: 500px !important;
     background-color: #ffffff !important;
     border-radius: 20px !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
-    border: 1px solid #eeeeee !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04) !important;
+    border: 1px solid #f0e6e4 !important;
     overflow: hidden !important;
     position: relative;
-    padding: 14px !important;
+    padding: 12px !important;
     margin-bottom: 30px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
@@ -160,7 +160,7 @@
 
   .ai-product-card-{{ ai_gen_id }}:hover {
     transform: translateY(-4px); /* Soft lift hover */
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
   }
 
   .ai-product-card-image-{{ ai_gen_id }} {
@@ -185,9 +185,7 @@
   .ai-product-card-image-{{ ai_gen_id }} img {
     width: 100%;
     height: 100%;
-    object-fit: contain !important;
-    padding: 6px !important;
-    mix-blend-mode: multiply !important;
+    object-fit: cover;
     transition: transform 0.3s ease;
   }
 
@@ -198,19 +196,19 @@
     left: 10px;
     background-color: #d52528 !important;
     color: #ffffff !important;
-    padding: 6px 12px;
-    font-family: 'Anton', 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
+    padding: 5px 10px;
+    font-family: 'Anton', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     z-index: 10;
-    border-radius: 8px !important;
+    border-radius: 6px !important;
     display: inline-flex !important;
     align-items: center !important;
-    gap: 4px;
+    gap: 3px;
     border: none;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   }
 
   .ai-product-quick-view-btn-{{ ai_gen_id }} {
@@ -219,11 +217,11 @@
     right: 10px;
     z-index: 10;
     background: rgba(255, 255, 255, 0.95);
-    color: #222222;
+    color: #111111;
     border-radius: 20px;
     padding: 6px 14px;
     font-family: 'Inter', sans-serif;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     border: none;
     cursor: pointer;
@@ -280,37 +278,40 @@
     font-family: 'Inter', sans-serif;
   }
 
-  /* Title: bold uppercase font matching reference image */
-  .ai-product-card-title-{{ ai_gen_id }},
-  .ai-product-card-title-{{ ai_gen_id }} a {
-    font-size: 17px !important;
-    font-weight: 400 !important;
-    color: #111111 !important;
-    -webkit-text-fill-color: #111111 !important;
-    margin: 4px 0 4px;
-    line-height: 1.2 !important;
-    min-height: calc(17px * 1.2 * 2);
+  /* Title: bold Anton font */
+  .ai-product-card-title-{{ ai_gen_id }} {
+    font-size: 20px;
+    font-weight: 400;
+    color: #000000 !important;
+    margin: 0 0 6px;
+    line-height: 1.15;
+    min-height: calc(20px * 1.15 * 2);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    font-family: 'Anton', Arial, sans-serif !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.4px !important;
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     text-align: left !important;
-    text-decoration: none !important;
     width: 100% !important;
   }
 
-  .ai-product-card-specs-{{ ai_gen_id }} {
-    font-size: 12px !important;
-    font-weight: 700 !important;
-    color: #8c7f7c !important;
-    margin: 2px 0 12px 0 !important;
-    font-family: 'Inter', sans-serif !important;
+  .ai-product-card-title-{{ ai_gen_id }} a {
+    color: #000000 !important;
+    text-decoration: none;
     text-align: left !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
+  }
+
+  .ai-product-card-specs-{{ ai_gen_id }} {
+    font-size: 12px;
+    font-weight: 700;
+    color: #666666 !important;
+    margin: 4px 0 10px;
+    font-family: 'Inter', sans-serif;
+    text-align: left !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     width: 100% !important;
     margin-left: 0 !important;
   }
@@ -320,15 +321,16 @@
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    justify-content: space-between !important;
+    justify-content: flex-start !important;
     align-self: flex-start !important;
     text-align: left !important;
     flex-wrap: wrap;
     gap: 8px;
-    margin: 4px 0 14px 0 !important;
+    margin: 4px 0 10px 0 !important;
     margin-left: 0 !important;
+    margin-right: auto !important;
     width: 100% !important;
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Inter', sans-serif;
   }
 
   .ai-product-card-price-row-{{ ai_gen_id }} .compare-price {
@@ -339,68 +341,57 @@
   }
 
   .ai-product-card-price-row-{{ ai_gen_id }} .current-price {
-    color: #111111 !important;
-    font-size: 21px !important;
-    font-weight: 900 !important;
-    letter-spacing: -0.3px !important;
-    font-family: 'Inter', sans-serif !important;
+    color: #000000;
+    font-size: 18px;
+    font-weight: 900;
   }
 
   .ai-product-card-price-row-{{ ai_gen_id }} .discount-badge {
-    background-color: #fde8e8 !important;
-    color: #d52528 !important;
-    font-size: 11px !important;
-    font-weight: 800 !important;
-    padding: 4px 10px !important;
-    border-radius: 6px !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px;
-    border: none !important;
-    margin-left: auto !important;
-    font-family: 'Inter', sans-serif !important;
-  }
-
-  /* Action Buttons Row (ADD TO CART + WISHLIST HEART) */
-  .ai-product-card-actions-{{ ai_gen_id }} {
-    display: flex !important;
-    gap: 8px !important;
-    width: 100% !important;
-    align-items: center !important;
-    margin-top: auto !important;
-  }
-
-  .ai-product-card-button-{{ ai_gen_id }} {
-    flex: 1 !important;
-    height: 46px !important;
-    background-color: #d52528 !important;
-    background: #d52528 !important;
+    background-color: #d52528 !important; /* Crimson Red discount badge */
     color: #ffffff !important;
-    border-radius: 10px !important;
-    padding: 0 14px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    font-family: 'Anton', sans-serif !important;
-    font-size: 16px !important;
-    font-weight: 400 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-    border: none !important;
-    cursor: pointer !important;
-    transition: all 0.2s ease !important;
-    box-shadow: 0 4px 12px rgba(213, 37, 40, 0.2) !important;
-    margin-top: 0 !important;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+    margin-left: 0 !important;
+  }
+
+  /* Bold button with solid outline and pop shadow */
+  .ai-product-card-button-{{ ai_gen_id }} {
+    position: relative;
+    display: block;
+    width: 100%;
+    background-color: #8B0000 !important; /* Dark Crimson Red button */
+    background: #8B0000 !important;
+    color: #ffffff !important;
+    padding: 12px 6px;
+    border-radius: 8px;
+    font-size: 18px !important;
+    font-weight: 400;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 5px;
     white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   }
 
   .ai-product-card-button-{{ ai_gen_id }}:hover {
-    background-color: #b01b1e !important;
-    background: #b01b1e !important;
+    background-color: #6d0000 !important; /* Darker Crimson Red on Hover */
+    background: #6d0000 !important;
     color: #ffffff !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 6px 16px rgba(213, 37, 40, 0.35) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(139, 0, 0, 0.4);
   }
 
   .ai-product-card-button-{{ ai_gen_id }}:active {
@@ -408,39 +399,11 @@
   }
 
   .ai-product-card-button-{{ ai_gen_id }}:disabled {
-    background-color: #cccccc !important;
-    color: #666666 !important;
+    background-color: #cccccc;
+    color: #666666;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
-  }
-
-  .ai-product-wishlist-btn-{{ ai_gen_id }} {
-    width: 46px !important;
-    height: 46px !important;
-    flex-shrink: 0 !important;
-    border-radius: 10px !important;
-    border: 1.5px solid #e0e0e0 !important;
-    background: #ffffff !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer !important;
-    transition: all 0.2s ease !important;
-  }
-
-  .ai-product-wishlist-btn-{{ ai_gen_id }}:hover {
-    border-color: #d52528 !important;
-  }
-
-  .ai-product-wishlist-btn-{{ ai_gen_id }}.active {
-    border-color: #d52528 !important;
-    background: #fff5f5 !important;
-  }
-
-  .ai-product-wishlist-btn-{{ ai_gen_id }}.active svg {
-    fill: #d52528 !important;
-    stroke: #d52528 !important;
   }
 
   .ai-product-slider-dots-{{ ai_gen_id }} {
@@ -627,7 +590,7 @@
     <div class="ai-product-slider-track-{{ ai_gen_id }}" data-track>
       {% if block.settings.product_list != blank %}
         {% for product in block.settings.product_list %}
-          {% assign colors = "#f5ede4,#f4ece1,#eee6dc,#f6efe6,#f2eae0" | split: "," %}
+          {% assign colors = "#d1ebd8,#fedeb2,#f7f4ea,#fef0b3,#d8f3f5" | split: "," %}
           {% assign color_index = forloop.index0 | modulo: 5 %}
           {% assign card_bg_color = colors[color_index] %}
           
@@ -733,25 +696,26 @@
                   endif
                 endif
               %}
-              <p class="ai-product-card-specs-{{ ai_gen_id }}">{{ qty_text }}</p>
+              <p class="ai-product-card-specs-{{ ai_gen_id }}" style="text-align: left !important; margin-left: 0 !important; color: #888888 !important; font-weight: 700 !important; text-transform: uppercase !important; font-size: 12px !important; margin-top: 4px !important; margin-bottom: 10px !important;">{{ qty_text }}</p>
               
               <!-- Pricing Row -->
-              <div class="ai-product-card-price-row-{{ ai_gen_id }}">
-                <span class="current-price">{{ product.price | money }}</span>
+              <div class="ai-product-card-price-row-{{ ai_gen_id }}" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; margin-top: 4px !important; margin-bottom: 12px !important;">
+                <span class="current-price" style="font-size: 22px !important; font-weight: 900 !important; color: #111111 !important; font-family: 'Inter', sans-serif !important; letter-spacing: -0.5px !important; text-align: left !important; margin-left: 0 !important; float: left !important;">{{ product.price | money }}</span>
                 {% if product.compare_at_price > product.price %}
-                  <span class="discount-badge">
+                  <span class="discount-badge" style="background-color: #fde8e8 !important; color: #d52528 !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 6px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">
                     -{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}% OFF
                   </span>
                 {% else %}
-                  <span class="discount-badge">-5% OFF</span>
+                  <span class="discount-badge" style="background-color: #fde8e8 !important; color: #d52528 !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 6px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">-5% OFF</span>
                 {% endif %}
               </div>
             </div>
 
             <!-- Action Row (ADD TO CART + WISHLIST HEART) -->
-            <div class="ai-product-card-actions-{{ ai_gen_id }}">
+            <div class="ai-product-card-actions-{{ ai_gen_id }}" style="display: flex !important; gap: 8px !important; width: 100% !important; align-items: center !important; margin-top: 4px !important;">
               <button
                 class="ai-product-card-button-{{ ai_gen_id }}"
+                style="flex: 1 !important; margin-top: 0 !important; background-color: #d52528 !important; background: #d52528 !important; color: #ffffff !important; border-radius: 10px !important; padding: 12px 14px !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 8px !important; font-family: 'Anton', sans-serif !important; font-size: 16px !important; text-transform: uppercase !important; border: none !important; cursor: pointer !important;"
                 data-product-id="{{ product.id }}"
                 data-variant-id="{{ product.selected_or_first_available_variant.id }}"
                 {% unless product.available %}disabled{% endunless %}
@@ -767,7 +731,7 @@
                   SOLD OUT
                 {% endif %}
               </button>
-              <button type="button" class="ai-product-wishlist-btn-{{ ai_gen_id }}" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('active');">
+              <button type="button" class="ai-product-wishlist-btn-{{ ai_gen_id }}" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('active');" style="width: 44px !important; height: 46px !important; flex-shrink: 0 !important; border-radius: 10px !important; border: 1.5px solid #e0e0e0 !important; background: #ffffff !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important;">
                 <svg class="wishlist-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                 </svg>
@@ -777,7 +741,7 @@
         {% endfor %}
       {% else %}
         {% for i in (1..8) %}
-          {% assign colors = "#f5ede4,#f4ece1,#eee6dc,#f6efe6,#f2eae0" | split: "," %}
+          {% assign colors = "#d1ebd8,#fedeb2,#f7f4ea,#fef0b3,#d8f3f5" | split: "," %}
           {% assign color_index = forloop.index0 | modulo: 5 %}
           {% assign card_bg_color = colors[color_index] %}
           
@@ -810,15 +774,18 @@
               </div>
             </div>
             <div class="ai-product-card-content-{{ ai_gen_id }}">
-              <h3 class="ai-product-card-title-{{ ai_gen_id }}">TAAKAT HUNGER BAR | CHOCO BURST | MULTIGRAIN | CLEAN CHOCOLATE</h3>
-              <p class="ai-product-card-specs-{{ ai_gen_id }}">PACK OF 1 • 10 BARS</p>
-              <div class="ai-product-card-price-row-{{ ai_gen_id }}">
-                <span class="current-price">Rs. 570.00</span>
-                <span class="discount-badge">-5% OFF</span>
+              <h3 class="ai-product-card-title-{{ ai_gen_id }}">Sample Product Title</h3>
+              <p class="ai-product-card-specs-{{ ai_gen_id }}" style="text-align: left !important; margin-left: 0 !important; color: #888888 !important; font-weight: 700 !important; text-transform: uppercase !important; font-size: 12px !important; margin-top: 4px !important; margin-bottom: 10px !important;">PACK OF 1 • 10 BARS</p>
+              <div class="ai-product-card-price-row-{{ ai_gen_id }}" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; margin-top: 4px !important; margin-bottom: 12px !important;">
+                <span class="current-price" style="font-size: 22px !important; font-weight: 900 !important; color: #111111 !important; font-family: 'Inter', sans-serif !important; letter-spacing: -0.5px !important; text-align: left !important; margin-left: 0 !important; float: left !important;">Rs. 570.00</span>
+                <span class="discount-badge" style="background-color: #fde8e8 !important; color: #d52528 !important; font-size: 12px !important; font-weight: 800 !important; padding: 4px 10px !important; border-radius: 6px !important; text-transform: uppercase !important; margin-left: auto !important; float: right !important; font-family: 'Inter', sans-serif !important;">-5% OFF</span>
               </div>
             </div>
-            <div class="ai-product-card-actions-{{ ai_gen_id }}">
-              <button class="ai-product-card-button-{{ ai_gen_id }}">
+            <div class="ai-product-card-actions-{{ ai_gen_id }}" style="display: flex !important; gap: 8px !important; width: 100% !important; align-items: center !important; margin-top: 4px !important;">
+              <button
+                class="ai-product-card-button-{{ ai_gen_id }}"
+                style="flex: 1 !important; margin-top: 0 !important; background-color: #d52528 !important; background: #d52528 !important; color: #ffffff !important; border-radius: 10px !important; padding: 12px 14px !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 8px !important; font-family: 'Anton', sans-serif !important; font-size: 16px !important; text-transform: uppercase !important; border: none !important; cursor: pointer !important;"
+              >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="9" cy="21" r="1"></circle>
                   <circle cx="20" cy="21" r="1"></circle>
@@ -826,7 +793,7 @@
                 </svg>
                 ADD TO CART
               </button>
-              <button type="button" class="ai-product-wishlist-btn-{{ ai_gen_id }}" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('active');">
+              <button type="button" class="ai-product-wishlist-btn-{{ ai_gen_id }}" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('active');" style="width: 44px !important; height: 46px !important; flex-shrink: 0 !important; border-radius: 10px !important; border: 1.5px solid #e0e0e0 !important; background: #ffffff !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important;">
                 <svg class="wishlist-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                 </svg>
