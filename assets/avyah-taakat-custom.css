@@ -2179,12 +2179,12 @@ body.template-page-bulk-order main#MainContent,
   position: relative !important;
   background-color: #ffffff !important;
   background: #ffffff !important;
-  border-radius: 18px !important;
-  box-shadow: 0 14px 45px rgba(0, 0, 0, 0.28), 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.22), 0 4px 10px rgba(0, 0, 0, 0.08) !important;
   border: none !important;
   padding: 0 !important;
   overflow: hidden !important;
-  min-width: 250px !important;
+  min-width: 200px !important;
 }
 
 .avyah-discover-card a,
@@ -2193,13 +2193,13 @@ body.template-page-bulk-order main#MainContent,
 .avyah-discover-card a.avyah-discover-item-link:not(:hover) {
   display: flex !important;
   align-items: center !important;
-  gap: 16px !important;
-  padding: 16px 26px !important;
+  gap: 12px !important;
+  padding: 12px 20px !important;
   font-family: 'Anton', Arial, sans-serif !important;
-  font-size: 24px !important;
-  font-weight: 700 !important;
+  font-size: 20px !important;
+  font-weight: 400 !important;
   line-height: 1 !important;
-  letter-spacing: 0.8px !important;
+  letter-spacing: 0.5px !important;
   background-color: #ffffff !important;
   background: #ffffff !important;
   color: #000000 !important;
@@ -2217,9 +2217,9 @@ body.template-page-bulk-order main#MainContent,
   color: #000000 !important;
   -webkit-text-fill-color: #000000 !important;
   font-family: 'Anton', Arial, sans-serif !important;
-  font-size: 24px !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.8px !important;
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.5px !important;
 }
 
 .avyah-discover-card a:hover,
@@ -2236,13 +2236,13 @@ body.template-page-bulk-order main#MainContent,
 .avyah-discover-card a .dd-icon *,
 .avyah-discover-card a:not(:hover) .dd-icon,
 .avyah-discover-card a:not(:hover) .dd-icon * {
-  width: 28px !important;
-  height: 28px !important;
+  width: 22px !important;
+  height: 22px !important;
   flex-shrink: 0 !important;
   opacity: 1 !important;
   color: #000000 !important;
   stroke: #000000 !important;
-  stroke-width: 2.8px !important;
+  stroke-width: 2.2px !important;
   fill: none !important;
   transition: color 0.18s ease, stroke 0.18s ease !important;
 }
