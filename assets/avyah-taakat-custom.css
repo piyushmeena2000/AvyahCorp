@@ -1388,21 +1388,54 @@ ul.mm-submenu span:not(.avyah-discover-popover span):not(.avyah-discover-link sp
 }
 
 /* ==========================================================================
-   HOMEPAGE CRIMSON RED OVERRIDE - EXCLUDING CART DRAWER & DIALOGS
+   HOMEPAGE PRIMARY CRIMSON RED OVERRIDE - EXCLUDING CART DRAWER, DIALOGS & FOOTER
    ========================================================================== */
 body.template-index main#MainContent,
 body.template-index .content-for-layout,
-body.template-index .shopify-section:not(:has(dialog)):not(:has(.cart-drawer)),
-body.template-index section:not(dialog *):not(.cart-drawer *),
-body.template-index .section:not(dialog *):not(.cart-drawer *),
-body.template-index div:not(dialog *):not(.cart-drawer *):not(cart-drawer-component *):not(.cart-drawer__inner *):not(.cart-drawer__content *),
-body.template-index [class*="section"]:not(dialog *):not(.cart-drawer *),
-body.template-index [class*="block"]:not(dialog *):not(.cart-drawer *),
-body.template-index [class*="container"]:not(dialog *):not(.cart-drawer *),
-body.template-index [class*="color-scheme"]:not(dialog *):not(.cart-drawer *),
-body.template-index [class*="scheme-"]:not(dialog *):not(.cart-drawer *) {
-  background-color: #700a0c !important;
-  background: #700a0c !important;
+body.template-index .shopify-section:not(:has(dialog)):not(:has(.cart-drawer)):not(#shopify-section-footer-group),
+body.template-index section:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *),
+body.template-index .section:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *),
+body.template-index div:not(dialog *):not(.cart-drawer *):not(cart-drawer-component *):not(.cart-drawer__inner *):not(.cart-drawer__content *):not(#footer-group *):not(footer *):not(.custom-footer *),
+body.template-index [class*="section"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *),
+body.template-index [class*="block"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *),
+body.template-index [class*="container"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *),
+body.template-index [class*="color-scheme"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *),
+body.template-index [class*="scheme-"]:not(dialog *):not(.cart-drawer *):not(#footer-group *):not(footer *):not(.custom-footer *) {
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+}
+
+/* ==========================================================================
+   FOOTER DARK CRIMSON RED OVERRIDE (#7b1616)
+   ========================================================================== */
+#footer-group,
+#footer-group *,
+#shopify-section-footer-group,
+#shopify-section-footer-group *,
+footer,
+footer *,
+.footer,
+.footer *,
+.custom-footer,
+.custom-footer div,
+.custom-footer-top,
+.custom-footer-bottom,
+.custom-footer-column {
+  background-color: #7b1616 !important;
+  background: #7b1616 !important;
+}
+
+.custom-footer input.footer-subscribe-input,
+.footer-subscribe-input {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.custom-footer button.footer-subscribe-btn,
+.footer-subscribe-btn {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #7b1616 !important;
 }
 
 /* Force Text inside homepage to White (EXCEPT inside Cart Drawer) */
