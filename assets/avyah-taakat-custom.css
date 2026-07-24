@@ -2548,5 +2548,358 @@ ticker-component,
   visibility: hidden !important;
 }
 
+/* ==========================================================================
+   MASTER OVERRIDES FIXING ALL 9 ISSUES
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   ISSUE 1: SEARCH ICON FIX
+   -------------------------------------------------------------------------- */
+.header .header__icon--search,
+.header [class*="search-input"],
+.header [class*="header__icon"],
+header svg,
+.header svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+}
+
+header button,
+.header button {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   ISSUE 2: DISCOVER MENU DROPDOWN & ICONS FIX (NO STICKY)
+   -------------------------------------------------------------------------- */
+li.menu-list__list-item {
+  position: relative !important;
+}
+
+.avyah-discover-popover {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  top: calc(100% + 4px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25) !important;
+  padding: 10px !important;
+  min-width: 220px !important;
+  box-sizing: border-box !important;
+  z-index: 999999 !important;
+  transition: opacity 0.2s ease, visibility 0.2s ease !important;
+}
+
+li.menu-list__list-item:hover .avyah-discover-popover,
+.avyah-discover-popover:hover {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+a.avyah-discover-link {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  padding: 12px 16px !important;
+  border-radius: 12px !important;
+  text-decoration: none !important;
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  transition: all 0.15s ease !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+a.avyah-discover-link span,
+.avyah-discover-title-text {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 19px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
+}
+
+a.avyah-discover-link svg {
+  stroke: #000000 !important;
+  color: #000000 !important;
+  fill: none !important;
+  flex-shrink: 0 !important;
+  width: 22px !important;
+  height: 22px !important;
+}
+
+a.avyah-discover-link:hover {
+  background-color: #fff5f5 !important;
+  background: #fff5f5 !important;
+}
+
+a.avyah-discover-link:hover span,
+a.avyah-discover-link:hover .avyah-discover-title-text {
+  color: #d52528 !important;
+  -webkit-text-fill-color: #d52528 !important;
+}
+
+a.avyah-discover-link:hover svg {
+  stroke: #d52528 !important;
+  color: #d52528 !important;
+}
+
+/* --------------------------------------------------------------------------
+   ISSUE 3: CART POPUP / DRAWER STYLING (BLACK BACKGROUND, RED TEXT)
+   -------------------------------------------------------------------------- */
+.cart-drawer,
+.cart-drawer__inner,
+cart-drawer-component,
+.cart-drawer__content,
+.cart-drawer__header,
+.cart-drawer__footer,
+.cart-drawer-items,
+.cart-drawer__item,
+.cart-notification {
+  background-color: #000000 !important;
+  background: #000000 !important;
+  color: #d52528 !important;
+  -webkit-text-fill-color: #d52528 !important;
+}
+
+.cart-drawer *,
+.cart-drawer__inner *,
+cart-drawer-component *,
+.cart-drawer__content *,
+.cart-notification * {
+  color: #d52528 !important;
+  -webkit-text-fill-color: #d52528 !important;
+}
+
+.cart-drawer h2,
+.cart-drawer h3,
+.cart-drawer p,
+.cart-drawer span,
+.cart-drawer div,
+.cart-drawer a:not(.button) {
+  color: #d52528 !important;
+  -webkit-text-fill-color: #d52528 !important;
+}
+
+.cart-drawer .button,
+.cart-drawer button:not(.cart-drawer__close),
+.cart-drawer a.button {
+  background-color: #d52528 !important;
+  background: #d52528 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-radius: 8px !important;
+  font-family: 'Anton', Arial, sans-serif !important;
+  font-size: 16px !important;
+}
+
+/* --------------------------------------------------------------------------
+   ISSUE 4: MARQUEE TICKER ICONS INVERT FIX (WHITE ICONS, NO MULTIPLY BLEND)
+   -------------------------------------------------------------------------- */
+[class*="ai-ticker-icon"] img,
+.ticker-icon img,
+.marquee-icon img {
+  filter: brightness(0) invert(1) !important;
+  -webkit-filter: brightness(0) invert(1) !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+  display: inline-block !important;
+  visibility: visible !important;
+  width: 26px !important;
+  height: 26px !important;
+}
+
+/* --------------------------------------------------------------------------
+   ISSUE 5: PRODUCT CARD LISTING FIX (REMOVE WEIRD INNER WHITE TEXT BOXES)
+   -------------------------------------------------------------------------- */
+/* Unify Card as a single clean white container */
+.product-card,
+[class*="product-card"],
+[class*="ai-product-card"],
+.product-grid__item {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid #eeeeee !important;
+  padding: 14px !important;
+}
+
+/* Purge inner text boxes */
+.ai-product-card-title-fe61fd7pcviak,
+[class*="ai-product-card-title"],
+.ai-product-card-specs-fe61fd7pcviak,
+[class*="ai-product-card-specs"],
+.ai-product-card-price-row-fe61fd7pcviak,
+[class*="ai-product-card-price-row"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+}
+
+.ai-product-card-title-fe61fd7pcviak a,
+[class*="ai-product-card-title"] a {
+  background: transparent !important;
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
+}
+
+/* --------------------------------------------------------------------------
+   ISSUE 6: "FINALLY, HEALTHY ISN'T BORING" CARD HOVER FIX (TEXT TURNS RED)
+   -------------------------------------------------------------------------- */
+[class*="ai-card-200d848"],
+.ai-card-200d848,
+[class*="feature-card"] {
+  background-color: #a72023 !important;
+  background: #a72023 !important;
+  color: #ffffff !important;
+  transition: all 0.3s ease !important;
+}
+
+[class*="ai-card-200d848"]:hover,
+.ai-card-200d848:hover,
+[class*="feature-card"]:hover {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #d52528 !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+}
+
+[class*="ai-card-200d848"]:hover *,
+.ai-card-200d848:hover *,
+[class*="feature-card"]:hover * {
+  color: #d52528 !important;
+  -webkit-text-fill-color: #d52528 !important;
+}
+
+[class*="ai-card-200d848"]:hover svg,
+[class*="ai-card-200d848"]:hover img {
+  filter: brightness(0) saturate(100%) invert(21%) sepia(85%) saturate(2462%) hue-rotate(345deg) !important;
+  -webkit-filter: brightness(0) saturate(100%) invert(21%) sepia(85%) saturate(2462%) hue-rotate(345deg) !important;
+}
+
+/* --------------------------------------------------------------------------
+   ISSUE 7: "WHAT OUR CUSTOMER SAY" TESTIMONIAL CARDS FIX (PURE WHITE CARDS)
+   -------------------------------------------------------------------------- */
+[class*="ai-testimonial-card"],
+[class*="testimonial-card"],
+.ai-testimonial-card,
+[class*="testimonial"] [class*="card"] {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #111111 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+[class*="ai-testimonial-card"] *,
+[class*="testimonial-card"] *,
+.ai-testimonial-card * {
+  background-color: transparent !important;
+  background: transparent !important;
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
+}
+
+[class*="ai-testimonial-card"] [class*="star"],
+[class*="ai-testimonial-card"] .rating {
+  color: #ffb800 !important;
+  -webkit-text-fill-color: #ffb800 !important;
+}
+
+/* --------------------------------------------------------------------------
+   ISSUE 8: FAQ SECTION FIX (DARK CRIMSON RED BG + ACTIVE TEXT TURNS CRIMSON)
+   -------------------------------------------------------------------------- */
+.custom-faq-section,
+[data-section-type="faq"],
+#shopify-section-section_nhYFxg,
+.faq-section {
+  background-color: #7a1518 !important;
+  background: #7a1518 !important;
+}
+
+.faq-item,
+[class*="faq-item"],
+.accordion__item {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  margin-bottom: 12px !important;
+}
+
+.faq-item.active .faq-question,
+.faq-item[open] .faq-question,
+.accordion__item[open] summary,
+.accordion__item.active summary {
+  color: #d52528 !important;
+  -webkit-text-fill-color: #d52528 !important;
+}
+
+.faq-item.active .faq-question *,
+.faq-item[open] .faq-question *,
+.accordion__item[open] summary *,
+.accordion__item.active summary * {
+  color: #d52528 !important;
+  -webkit-text-fill-color: #d52528 !important;
+}
+
+/* --------------------------------------------------------------------------
+   ISSUE 9: FOOTER SECTION FIX (DARK CRIMSON RED BACKGROUND)
+   -------------------------------------------------------------------------- */
+footer,
+.footer,
+#shopify-section-footer-group,
+#shopify-section-custom-footer,
+.custom-footer,
+.footer-group,
+.footer__content {
+  background-color: #7a1518 !important;
+  background: #7a1518 !important;
+  color: #ffffff !important;
+}
+
+footer *,
+.footer *,
+.custom-footer *,
+.footer-group * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+footer a:hover,
+.footer a:hover {
+  color: #ffcccc !important;
+  -webkit-text-fill-color: #ffcccc !important;
+}
+
+footer .button,
+.footer .button {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #7a1518 !important;
+  -webkit-text-fill-color: #7a1518 !important;
+}
+
 
 
