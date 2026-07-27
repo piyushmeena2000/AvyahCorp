@@ -5,16 +5,7 @@
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
-  /* Force parent section backgrounds to brand crimson red */
-  .shopify-section:has(.ai-testimonial-carousel-{{ ai_gen_id }}),
-  .section:has(.ai-testimonial-carousel-{{ ai_gen_id }}),
-  .section-background:has(+ .section .ai-testimonial-carousel-{{ ai_gen_id }}),
-  .section-background:has(.ai-testimonial-carousel-{{ ai_gen_id }}) {
-    background-color: #700a0c !important;
-    background: #700a0c !important;
-  }
-
-  /* Prevent any wrapper element from clipping the marquee or shadows */
+  /* Section overflow fix */
   .section:has(.ai-testimonial-carousel-{{ ai_gen_id }}) .custom-section-content,
   .section:has(.ai-testimonial-carousel-{{ ai_gen_id }}) .section-content-wrapper,
   .section:has(.ai-testimonial-carousel-{{ ai_gen_id }}) .border-style,
@@ -355,7 +346,7 @@
 
             {% if testimonial_enabled %}
               <div class="ai-testimonial-carousel__slide-{{ ai_gen_id }}">
-                <div class="ai-testimonial-carousel__card-{{ ai_gen_id }}">
+                <div class="ai-testimonial-carousel__card-{{ ai_gen_id }}" style="background-color:#ffffff !important;background:#ffffff !important;color:#111111 !important;">
                   <div class="ai-testimonial-carousel__stars-{{ ai_gen_id }}">
                     {% for star in (1..testimonial_rating) %}
                       <svg
