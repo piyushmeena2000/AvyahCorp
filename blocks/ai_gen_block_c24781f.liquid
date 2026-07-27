@@ -105,20 +105,34 @@
   }
 
   .ai-testimonial-carousel__card-{{ ai_gen_id }} {
-    background-color: #ffffff !important; /* White card background */
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05); /* subtle shadow */
-    padding: 32px;
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    --color-background: 255 255 255 !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10) !important;
+    padding: 32px !important;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex !important;
+    flex-direction: column !important;
+    transition: none !important;
+    color: #111111 !important;
+  }
+
+  /* Force all text inside the card to be dark/black */
+  .ai-testimonial-carousel__card-{{ ai_gen_id }} *,
+  .ai-testimonial-carousel__card-{{ ai_gen_id }} p,
+  .ai-testimonial-carousel__card-{{ ai_gen_id }} span,
+  .ai-testimonial-carousel__card-{{ ai_gen_id }} b,
+  .ai-testimonial-carousel__card-{{ ai_gen_id }} strong {
+    color: #111111 !important;
   }
 
   .ai-testimonial-carousel__card-{{ ai_gen_id }}:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.12); /* darker shadow on hover */
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.14) !important;
   }
 
   .ai-testimonial-carousel__stars-{{ ai_gen_id }} {
@@ -134,11 +148,11 @@
   }
 
   .ai-testimonial-carousel__quote-{{ ai_gen_id }} {
-    font-family: 'Inter', sans-serif;
-    font-size: {{ block.settings.quote_size }}px;
-    color: #333333 !important; /* Dark charcoal quote text for white cards */
-    line-height: 1.6;
-    margin: 0 0 28px;
+    font-family: 'Inter', sans-serif !important;
+    font-size: {{ block.settings.quote_size }}px !important;
+    color: #111111 !important;
+    line-height: 1.6 !important;
+    margin: 0 0 28px !important;
     flex-grow: 1;
   }
 
@@ -184,25 +198,25 @@
   }
 
   .ai-testimonial-carousel__name-{{ ai_gen_id }} {
-    font-family: 'Anton', sans-serif;
-    font-size: 18px;
-    font-weight: 400;
-    color: #111111 !important; /* Black reviewer name */
-    text-transform: uppercase;
-    margin: 0 0 4px;
-    letter-spacing: 0.5px;
+    font-family: 'Anton', sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    color: #111111 !important;
+    text-transform: uppercase !important;
+    margin: 0 0 4px !important;
+    letter-spacing: 0.5px !important;
   }
 
   .ai-testimonial-carousel__role-{{ ai_gen_id }} {
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    color: rgba(0, 0, 0, 0.6) !important; /* Dark grey reviewer role */
-    text-transform: uppercase;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: #444444 !important;
+    text-transform: uppercase !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
   }
 
   .ai-testimonial-carousel__controls-{{ ai_gen_id }} {
