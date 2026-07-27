@@ -1014,26 +1014,61 @@ body.template-index [class*="ai-product-card"] .compare-price {
 }
 
 /* 5. ADD TO CART Pill Button */
-/* Product Filter Category Tabs (RANGE, SNACKBOX, COMBO) */
+/* Product Filter Category Tabs (SINGLE, SHAREBOX, COMBO) */
 body.template-index [class*="ai-product-tab-btn"] {
-  background-color: #500708 !important;
-  background: #500708 !important;
-  color: #ffffff !important;
-  border: none !important;
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #111111 !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 10px !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  padding: 10px 32px !important;
 }
 
 body.template-index [class*="ai-product-tab-btn"]:hover {
-  background-color: #921b1e !important;
-  background: #921b1e !important;
-  color: #ffffff !important;
+  border-color: #d32f2f !important;
+  color: #d32f2f !important;
+  background-color: #ffffff !important;
 }
 
 body.template-index [class*="ai-product-tab-btn"].active {
-  background-color: #ffffff !important;
-  background: #ffffff !important;
-  color: #000000 !important;
-  border: none !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  background-color: #d32f2f !important;
+  background: #d32f2f !important;
+  color: #ffffff !important;
+  border: 1px solid #d32f2f !important;
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.25) !important;
+}
+
+/* Increased Card Height & Spacing Safeguard */
+[class*="ai-product-card"] {
+  min-height: 540px !important;
+  height: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  overflow: visible !important;
+  padding: 16px !important;
+}
+
+[class*="ai-product-card-content"] {
+  min-height: 180px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  flex-grow: 1 !important;
+  padding: 16px 0 10px !important;
+}
+
+[class*="ai-product-card-title"] {
+  min-height: 44px !important;
+  line-height: 1.35 !important;
+  margin-bottom: 8px !important;
+}
+
+[class*="ai-product-card-price-row"] {
+  margin-top: auto !important;
+  margin-bottom: 14px !important;
 }
 
 /* ==========================================================================

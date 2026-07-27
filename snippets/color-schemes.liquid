@@ -75,11 +75,12 @@
   }
 
 /* ==========================================================================
-   CUSTOMER REVIEWS SECTION - RED SECTION BG, SOLID PURE WHITE CARDS
+   CUSTOMER REVIEWS SECTION - RED SECTION BG, SOLID PURE WHITE CARDS & BLACK TEXT
    ========================================================================== */
   body.template-index #shopify-section-blocks_zFCw9K,
-  body.template-index .shopify-section:has([class*="c24781f"]),
-  body.template-index .section:has([class*="c24781f"]),
+  body.template-index .shopify-section:has([class*="ai-testimonial-carousel"]),
+  body.template-index .section:has([class*="ai-testimonial-carousel"]),
+  body.template-index [class*="ai-testimonial-carousel"],
   body.template-index [class*="c24781f"],
   body.template-index [class*="c24781f"] [class*="container"],
   body.template-index [class*="c24781f"] [class*="header"],
@@ -89,37 +90,52 @@
   }
 
   /* Section Title & Subtitle - WHITE text */
+  body.template-index [class*="ai-testimonial-carousel"] [class*="title"],
+  body.template-index [class*="ai-testimonial-carousel"] [class*="subtitle"],
+  body.template-index [class*="ai-testimonial-carousel"] h2,
   body.template-index [class*="c24781f"] [class*="title"],
   body.template-index [class*="c24781f"] [class*="subtitle"],
-  body.template-index [class*="c24781f"] h2,
-  body.template-index [class*="c24781f"] [class*="header"] * {
+  body.template-index [class*="c24781f"] h2 {
     color: #ffffff !important;
     background: transparent !important;
     background-color: transparent !important;
   }
 
   /* ONLY Review Cards & all elements inside them - 100% SOLID WHITE BACKGROUND */
+  body.template-index [class*="ai-testimonial-carousel"] [class*="card"],
+  body.template-index [class*="ai-testimonial-carousel"] [class*="slide"] > div,
   body.template-index [class*="c24781f"] [class*="card"],
-  body.template-index [class*="c24781f"] [class*="card"] *,
-  body.template-index [class*="c24781f"] [class*="slide"] > div,
-  body.template-index [class*="c24781f"] [class*="slide"] > div * {
+  body.template-index [class*="c24781f"] [class*="slide"] > div {
     background-color: #ffffff !important;
     background: #ffffff !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
   }
 
-  /* Text colors inside cards */
+  /* Text colors inside cards - BLACK & DARK CHARCOAL */
+  body.template-index [class*="ai-testimonial-carousel"] [class*="card"] p,
+  body.template-index [class*="ai-testimonial-carousel"] [class*="card"] span,
+  body.template-index [class*="ai-testimonial-carousel"] [class*="card"] b,
+  body.template-index [class*="ai-testimonial-carousel"] [class*="card"] strong,
+  body.template-index [class*="ai-testimonial-carousel"] [class*="quote"],
+  body.template-index [class*="ai-testimonial-carousel"] [class*="quote"] *,
   body.template-index [class*="c24781f"] [class*="card"] p,
   body.template-index [class*="c24781f"] [class*="card"] span,
   body.template-index [class*="c24781f"] [class*="card"] b,
   body.template-index [class*="c24781f"] [class*="card"] strong,
-  body.template-index [class*="c24781f"] [class*="card"] div,
   body.template-index [class*="c24781f"] [class*="quote"],
   body.template-index [class*="c24781f"] [class*="quote"] * {
-    color: #333333 !important;
+    color: #111111 !important;
   }
 
-  body.template-index [class*="c24781f"] [class*="card"] [class*="name"] {
+  body.template-index [class*="ai-testimonial-carousel"] [class*="name"],
+  body.template-index [class*="c24781f"] [class*="name"] {
     color: #700a0c !important;
+  }
+
+  body.template-index [class*="ai-testimonial-carousel"] [class*="role"],
+  body.template-index [class*="c24781f"] [class*="role"] {
+    color: #666666 !important;
   }
 
   body.template-index [class*="partner"],
@@ -249,25 +265,36 @@
     --color-background: #ffffff !important;
   }
 
-  /* Product Filter Category Tabs (RANGE, SNACKBOX, COMBO) */
+  /* Product Filter Category Tabs (SINGLE, SHAREBOX, COMBO) */
   body.template-index [class*="ai-product-tab-btn"] {
-    background-color: #500708 !important;
-    background: #500708 !important;
-    color: #ffffff !important;
-    border: none !important;
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 10px !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    padding: 10px 32px !important;
   }
 
   body.template-index [class*="ai-product-tab-btn"]:hover {
-    background-color: #921b1e !important;
-    background: #921b1e !important;
-    color: #ffffff !important;
+    border-color: #d32f2f !important;
+    color: #d32f2f !important;
+    background-color: #ffffff !important;
   }
 
   body.template-index [class*="ai-product-tab-btn"].active {
-    background-color: #ffffff !important;
-    background: #ffffff !important;
-    color: #000000 !important;
-    border: none !important;
+    background-color: #d32f2f !important;
+    background: #d32f2f !important;
+    color: #ffffff !important;
+    border: 1px solid #d32f2f !important;
+    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.25) !important;
+  }
+
+  body.template-index [class*="ai-product-slider"],
+  body.template-index .shopify-section:has([class*="ai-product-slider"]) {
+    background-color: #f6f6f6 !important;
+    background: #f6f6f6 !important;
   }
 
   {% for scheme in settings.color_schemes -%}

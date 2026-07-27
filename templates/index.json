@@ -286,7 +286,7 @@
               "crunchy-coconut",
               "choco-burst"
             ],
-            "background_color": "#700a0c",
+            "background_color": "#f6f6f6",
             "section_padding_top": 0,
             "section_padding_bottom": 10,
             "desktop_cards_visible": 4,
@@ -356,6 +356,7 @@
         "padding-block-end": 20
       }
     },
+
     "17615625630340cad8": {
       "type": "_blocks",
       "blocks": {
@@ -720,8 +721,8 @@
             "section_padding_bottom": 48,
             "background_color": "#700a0c",
             "heading_color": "#ffffff",
-            "text_color": "#ffffff",
-            "card_background_color": "#86252b",
+            "text_color": "#111111",
+            "card_background_color": "#ffffff",
             "star_color": "#ffd700",
             "heading_size": 48,
             "subheading_size": 19,
