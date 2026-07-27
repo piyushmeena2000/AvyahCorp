@@ -347,7 +347,7 @@
             {% if testimonial_enabled %}
               <div class="ai-testimonial-carousel__slide-{{ ai_gen_id }}">
                 <div class="ai-testimonial-carousel__card-{{ ai_gen_id }}" style="background-color:#ffffff !important;background:#ffffff !important;color:#111111 !important;">
-                  <div class="ai-testimonial-carousel__stars-{{ ai_gen_id }}">
+                  <div class="ai-testimonial-carousel__stars-{{ ai_gen_id }}" style="background:transparent !important;">
                     {% for star in (1..testimonial_rating) %}
                       <svg
                         class="ai-testimonial-carousel__star-{{ ai_gen_id }}"
@@ -360,10 +360,10 @@
                     {% endfor %}
                   </div>
 
-                  <p class="ai-testimonial-carousel__quote-{{ ai_gen_id }}">{{ clean_quote }}</p>
+                  <p class="ai-testimonial-carousel__quote-{{ ai_gen_id }}" style="background:transparent !important;color:#111111 !important;">{{ clean_quote }}</p>
 
-                  <div class="ai-testimonial-carousel__author-{{ ai_gen_id }}">
-                    <div class="ai-testimonial-carousel__image-wrapper-{{ ai_gen_id }}">
+                  <div class="ai-testimonial-carousel__author-{{ ai_gen_id }}" style="background:transparent !important;border-top:1px solid rgba(0,0,0,0.1) !important;">
+                    <div class="ai-testimonial-carousel__image-wrapper-{{ ai_gen_id }}" style="background:#f5f5f5 !important;">
                       {% if testimonial_image %}
                         <img
                           src="{{ testimonial_image | image_url: width: 120 }}"
@@ -379,9 +379,9 @@
                         </div>
                       {% endif %}
                     </div>
-                    <div class="ai-testimonial-carousel__author-info-{{ ai_gen_id }}">
-                      <p class="ai-testimonial-carousel__name-{{ ai_gen_id }}">{{ testimonial_name }}</p>
-                      <p class="ai-testimonial-carousel__role-{{ ai_gen_id }}">
+                    <div class="ai-testimonial-carousel__author-info-{{ ai_gen_id }}" style="background:transparent !important;">
+                      <p class="ai-testimonial-carousel__name-{{ ai_gen_id }}" style="background:transparent !important;color:#111111 !important;">{{ testimonial_name }}</p>
+                      <p class="ai-testimonial-carousel__role-{{ ai_gen_id }}" style="background:transparent !important;color:#444444 !important;">
                         <svg viewBox="0 0 24 24" width="14" height="14" fill="#008a00" style="display:inline-block; vertical-align:middle; margin-right:4px;">
                           <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
                         </svg>
