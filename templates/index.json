@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "1763012598ae0f747e": {
@@ -285,9 +294,9 @@
             "card_background": "rgba(0,0,0,0)",
             "card_border_radius": 10,
             "content_padding": 10,
-            "desktop_card_max_width": 290,
-            "desktop_image_ratio": "1 / 1",
-            "mobile_card_max_width": 200,
+            "desktop_card_max_width": 380,
+            "desktop_image_ratio": "4 / 5",
+            "mobile_card_max_width": 260,
             "mobile_image_ratio": "1 / 1",
             "image_padding": 0,
             "title_color": "#ffffff",
@@ -425,10 +434,10 @@
             "number_of_cards": 4,
             "desktop_width_percent": 100,
             "text_alignment": "center",
-            "section_bg_color": "#700a0c",
+            "section_bg_color": "#D52528",
             "section_padding_desktop": 20,
             "section_padding_mobile": 20,
-            "card_bg_color": "#500708",
+            "card_bg_color": "#942222",
             "card_bg_opacity": 30,
             "text_color": "#ffffff",
             "border_radius": 12,
@@ -624,7 +633,7 @@
             "heading": "Also Available At",
             "heading_size": 40,
             "heading_spacing": 40,
-            "heading_color": "#FFFFFF",
+            "heading_color": "#ffffff",
             "logo_1": "shopify://shop_images/Amazon_logo_svg.webp",
             "logo_2": "shopify://shop_images/flipkart-logo-png-transparent.png",
             "logo_3": "shopify://shop_images/TATA_1mg_Logo_svg.png",
@@ -1009,7 +1018,7 @@
             "background_color": "#ffffff",
             "heading_color": "#000000",
             "text_color": "#666666",
-            "card_background": "#F6F6F6",
+            "card_background": "#f6f6f6",
             "card_title_color": "#000000",
             "meta_color": "#999999",
             "link_color": "#000000",
