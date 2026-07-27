@@ -214,6 +214,99 @@
         "gradient_direction": "to top",
         "padding-block-start": 0,
         "padding-block-end": 0
+    },
+    "1761551169f8c757e1": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_fe61fd7_pcViak": {
+          "type": "ai_gen_block_fe61fd7",
+          "settings": {
+            "product_list": [
+              "taakat-hunger-bar-berry-blast-pack-of-10-bars",
+              "taakat-hunger-bar-choco-burst-pack-of-10-free-shipping-copy",
+              "sugar-free",
+              "taakat-hunger-bar-value-pack-combo-3-pack-of-10-almond-delight-coconut-crunchy-fruit-nut",
+              "taakat-hunger-bar-fruit-nut-wholesome-pack-24-pack-of-10-free-shipping-copy-1",
+              "taakat-hunger-bar-fruit-nut-pack-of-10-bars-x-8",
+              "taakat-hunger-bar-crunchy-coconut-wholesome-pack-24-pack-of-10-free-shipping-copy",
+              "coconut-pack-of-80-bar",
+              "almond-delight-pack-of-80-bar",
+              "king-money-saver-pack",
+              "fruit-nut",
+              "berry-blast",
+              "coconut",
+              "almond-delight",
+              "crunchy-coconut",
+              "choco-burst"
+            ],
+            "background_color": "#f6f6f6",
+            "section_padding_top": 0,
+            "section_padding_bottom": 10,
+            "desktop_cards_visible": 4,
+            "card_gap": 20,
+            "card_background": "rgba(0,0,0,0)",
+            "card_border_radius": 10,
+            "content_padding": 10,
+            "desktop_card_max_width": 380,
+            "desktop_image_ratio": "4 / 5",
+            "mobile_card_max_width": 260,
+            "mobile_image_ratio": "1 / 1",
+            "image_padding": 0,
+            "title_color": "#ffffff",
+            "title_font_size": 19,
+            "title_spacing": 30,
+            "price_color": "#ffffff",
+            "price_font_size": 18,
+            "price_spacing": 20,
+            "badge_background": "#700a0c",
+            "badge_text_color": "#ffffff",
+            "badge_font_size": 12,
+            "button_text": "Add to Cart",
+            "button_background": "#000000",
+            "button_hover_background": "#700a0c",
+            "button_text_color": "#ffffff",
+            "button_font_size": 14,
+            "show_dots": true,
+            "mobile_columns": "2",
+            "mobile_initial_products": 4,
+            "more_button_text": "More"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_fe61fd7_pcViak"
+      ],
+      "custom_css": [
+        "h1 {font-size: 20px;}"
+      ],
+      "name": "Product",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 20
       }
     },
     "17615625630340cad8": {
@@ -1044,6 +1137,7 @@
   "order": [
     "1763012598ae0f747e",
     "blocks_iCdxRh",
+    "1761551169f8c757e1",
     "whats_inside_section",
     "17615625630340cad8",
     "blocks_BCAYqP",
