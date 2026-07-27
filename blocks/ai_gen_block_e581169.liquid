@@ -7,11 +7,13 @@
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
+  @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
   .ai-ticker-{{ ai_gen_id }} {
     width: 100%;
     overflow: hidden;
     background-color: {{ block.settings.background_color }};
-    padding: {{ block.settings.padding_vertical }}px 0;
+    padding: 16px 0;
     position: relative;
   }
 
@@ -19,6 +21,7 @@
     display: flex;
     width: max-content;
     animation: ai-ticker-scroll-{{ ai_gen_id }} {{ block.settings.animation_speed }}s linear infinite;
+    align-items: center;
   }
 
   .ai-ticker-{{ ai_gen_id }}:hover .ai-ticker-wrapper-{{ ai_gen_id }} {
@@ -28,50 +31,38 @@
   .ai-ticker-item-{{ ai_gen_id }} {
     display: flex;
     align-items: center;
-    gap: {{ block.settings.icon_text_gap }}px;
-    padding: 0 {{ block.settings.item_spacing }}px;
+    gap: 12px;
+    padding: 0 24px;
     white-space: nowrap;
     flex-shrink: 0;
   }
 
   .ai-ticker-icon-{{ ai_gen_id }} {
-    width: {{ block.settings.icon_size }}px;
-    height: {{ block.settings.icon_size }}px;
+    width: 28px;
+    height: 28px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     background: transparent !important;
-    background-color: transparent !important;
-    border: none !important;
-    border-radius: 0 !important;
   }
 
   .ai-ticker-icon-{{ ai_gen_id }} img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    background: transparent !important;
-    background-color: transparent !important;
-    mix-blend-mode: multiply !important;
     filter: brightness(0) invert(1) !important;
     -webkit-filter: brightness(0) invert(1) !important;
   }
 
-  .ai-ticker-icon-placeholder-{{ ai_gen_id }} {
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    opacity: 0.8;
-  }
-
   .ai-ticker-text-{{ ai_gen_id }} {
     color: #ffffff !important;
-    font-size: {{ block.settings.text_size }}px;
-    font-weight: 700;
-    font-family: 'Anton', Arial, sans-serif !important;
+    font-size: 26px !important;
+    font-weight: 400 !important;
+    font-family: 'Anton', 'Impact', sans-serif !important;
     text-transform: uppercase !important;
-    letter-spacing: 1px !important;
+    letter-spacing: 1.5px !important;
+    line-height: 1 !important;
   }
 
   @keyframes ai-ticker-scroll-{{ ai_gen_id }} {
@@ -85,28 +76,28 @@
 
   @media screen and (max-width: 749px) {
     .ai-ticker-{{ ai_gen_id }} {
-      padding: {{ block.settings.padding_vertical_mobile }}px 0;
+      padding: 12px 0;
     }
 
     .ai-ticker-icon-{{ ai_gen_id }} {
-      width: {{ block.settings.icon_size_mobile }}px;
-      height: {{ block.settings.icon_size_mobile }}px;
+      width: 22px;
+      height: 22px;
     }
 
     .ai-ticker-text-{{ ai_gen_id }} {
-      font-size: {{ block.settings.text_size_mobile }}px;
+      font-size: 18px !important;
     }
 
     .ai-ticker-item-{{ ai_gen_id }} {
-      gap: {{ block.settings.icon_text_gap_mobile }}px;
-      padding: 0 {{ block.settings.item_spacing_mobile }}px;
+      gap: 8px;
+      padding: 0 16px;
     }
   }
 {% endstyle %}
 
 <ticker-component-{{ ai_gen_id }} class="ai-ticker-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
   <div class="ai-ticker-wrapper-{{ ai_gen_id }}">
-    {% for i in (1..2) %}
+    {% for i in (1..3) %}
       {% for j in (1..10) %}
         {% liquid
           assign text_key = 'text_' | append: j
@@ -117,17 +108,21 @@
         
         {% if text_value != blank %}
           <div class="ai-ticker-item-{{ ai_gen_id }}">
-            {% if icon_value != blank %}
-              <div class="ai-ticker-icon-{{ ai_gen_id }}">
+            <div class="ai-ticker-icon-{{ ai_gen_id }}">
+              {% if icon_value != blank %}
                 <img
                   src="{{ icon_value | image_url: width: 100 }}"
                   alt="{{ text_value | escape }}"
                   loading="lazy"
                   width="100"
                   height="100"
+                  onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='inline-block';"
                 >
-              </div>
-            {% endif %}
+              {% endif %}
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="#ffffff" style="display: {% if icon_value == blank %}inline-block{% else %}none{% endif %}; flex-shrink: 0;">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
             <span class="ai-ticker-text-{{ ai_gen_id }}">{{ text_value }}</span>
           </div>
         {% endif %}
