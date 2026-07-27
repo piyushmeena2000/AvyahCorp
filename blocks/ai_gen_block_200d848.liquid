@@ -102,19 +102,19 @@
   }
 
   .ai-feature-card-{{ ai_gen_id }}:hover .ai-feature-card-title-{{ ai_gen_id }} {
-    color: #700a0c !important;
+    color: #000000 !important;
     background: transparent !important;
   }
 
   .ai-feature-card-{{ ai_gen_id }}:hover .ai-feature-card-description-{{ ai_gen_id }} {
-    color: #700a0c !important;
+    color: #000000 !important;
     opacity: 1 !important;
     background: transparent !important;
   }
 
   .ai-feature-card-{{ ai_gen_id }}:hover .ai-feature-card-icon-{{ ai_gen_id }} img,
   .ai-feature-card-{{ ai_gen_id }}:hover .ai-feature-card-icon-placeholder-{{ ai_gen_id }} svg {
-    filter: brightness(0) saturate(100%) invert(21%) sepia(85%) saturate(2462%) hue-rotate(345deg) brightness(91%) contrast(92%) !important;
+    filter: brightness(0) !important;
   }
 
   .ai-feature-card-icon-{{ ai_gen_id }} {
@@ -127,6 +127,7 @@
     justify-content: center;
     margin: 0 auto {{ block.settings.icon_spacing }}px;
     overflow: hidden;
+    border-radius: 16px !important;
   }
 
   .ai-feature-card-icon-{{ ai_gen_id }} img {
@@ -134,6 +135,7 @@
     height: 100%;
     object-fit: contain;
     transition: filter 0.3s ease;
+    border-radius: 16px !important;
   }
 
   .ai-feature-card-icon-placeholder-{{ ai_gen_id }} {
