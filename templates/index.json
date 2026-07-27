@@ -156,7 +156,7 @@
     "blocks_iCdxRh": {
       "type": "_blocks",
       "blocks": {
-        "ai_gen_block_e581169_RqgeCk": {
+        "ai_gen_block_e581169_fRRrxX": {
           "type": "ai_gen_block_e581169",
           "name": "Benefits",
           "settings": {
@@ -178,14 +178,14 @@
             "icon_8": "shopify://shop_images/Logo_affordable_everyday.svg",
             "text_9": "",
             "text_10": "",
-            "background_color": "#700a0c",
+            "background_color": "#a72023",
             "text_color": "#ffffff",
-            "text_size": 22,
-            "text_size_mobile": 16,
-            "text_weight": "400",
+            "text_size": 16,
+            "text_size_mobile": 14,
+            "text_weight": "500",
             "text_transform": "none",
-            "icon_size": 34,
-            "icon_size_mobile": 24,
+            "icon_size": 30,
+            "icon_size_mobile": 20,
             "icon_text_gap": 12,
             "icon_text_gap_mobile": 8,
             "padding_vertical": 24,
@@ -193,13 +193,13 @@
             "item_spacing": 40,
             "item_spacing_mobile": 40,
             "animation_speed": 50,
-            "pause_on_hover": true
+            "pause_on_hover": false
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "ai_gen_block_e581169_RqgeCk"
+        "ai_gen_block_e581169_fRRrxX"
       ],
       "custom_css": [],
       "name": "Benefits-Animation",
@@ -340,7 +340,7 @@
             "number_of_cards": 4,
             "desktop_width_percent": 100,
             "text_alignment": "center",
-            "section_bg_color": "#D52528",
+            "section_bg_color": "#d52528",
             "section_padding_desktop": 20,
             "section_padding_mobile": 20,
             "card_bg_color": "#942222",
