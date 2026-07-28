@@ -130,12 +130,16 @@
     display: flex;
     gap: 4px;
     margin-bottom: 18px;
+    background: transparent !important;
+    background-color: transparent !important;
   }
 
   .ai-testimonial-carousel__star-{{ ai_gen_id }} {
     width: 20px;
     height: 20px;
-    color: {{ block.settings.star_color }};
+    color: #D52528 !important;
+    background: transparent !important;
+    background-color: transparent !important;
   }
 
   .ai-testimonial-carousel__quote-{{ ai_gen_id }} {
@@ -663,7 +667,7 @@
       "type": "color",
       "id": "star_color",
       "label": "Star",
-      "default": "#FFD700"
+      "default": "#D52528"
     },
     {
       "type": "header",
