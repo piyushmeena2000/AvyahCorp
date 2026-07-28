@@ -138,6 +138,19 @@
     color: #666666 !important;
   }
 
+  /* Remove red background from stars in testimonial reviews */
+  body.template-index [class*="ai-testimonial-carousel"] [class*="stars"],
+  body.template-index [class*="ai-testimonial-carousel"] [class*="star"],
+  body.template-index [class*="c24781f"] [class*="stars"],
+  body.template-index [class*="c24781f"] [class*="star"],
+  body.template-index div[class*="c24781f"][class*="stars"],
+  body.template-index svg[class*="c24781f"][class*="star"],
+  body.template-index div[class*="ai-testimonial-carousel"][class*="stars"],
+  body.template-index svg[class*="ai-testimonial-carousel"][class*="star"] {
+    background-color: transparent !important;
+    background: transparent !important;
+  }
+
   body.template-index [class*="partner"],
   body.template-index [class*="available"],
   body.template-index [class*="logo-list"],

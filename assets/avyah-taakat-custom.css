@@ -1082,8 +1082,8 @@ header [data-testid="cart-drawer-trigger"],
   border: none !important;
 }
 
-header [data-testid="cart-drawer-trigger"] *,
-.header-actions__action * {
+header [data-testid="cart-drawer-trigger"] *:not(.cart-bubble):not(.cart-bubble__background):not(.cart-bubble__text):not(.cart-bubble__text-count),
+.header-actions__action *:not(.cart-bubble):not(.cart-bubble__background):not(.cart-bubble__text):not(.cart-bubble__text-count) {
   background: transparent !important;
   background-color: transparent !important;
   color: #ffffff !important;
@@ -1607,6 +1607,17 @@ body.template-index [class*="c24781f"] [class*="card"] [class*="name"] {
 body.template-index [class*="c24781f"] [class*="card"] [class*="role"],
 body.template-index [class*="c24781f"] [class*="card"] [class*="role"] * {
   color: #666666 !important;
+}
+
+/* Remove red background from stars in testimonial reviews */
+body.template-index [class*="c24781f"] [class*="card"] [class*="stars"],
+body.template-index [class*="c24781f"] [class*="card"] [class*="star"],
+body.template-index div[class*="c24781f"][class*="stars"],
+body.template-index svg[class*="c24781f"][class*="star"],
+body.template-index div[class*="ai-testimonial-carousel"][class*="stars"],
+body.template-index svg[class*="ai-testimonial-carousel"][class*="star"] {
+  background-color: transparent !important;
+  background: transparent !important;
 }
 body.template-index [class*="partner"],
 body.template-index [class*="available"],
@@ -2601,3 +2612,33 @@ button[class*="quick-view-btn"] * {
   align-items: center !important;
   justify-content: center !important;
 }
+
+/* ========== AVYAH HEADER FIXES ========== */
+/* Fix header action icons (search, account, cart) getting filled with white */
+.header-actions__action svg,
+.header-actions__action svg *,
+.search-action svg,
+.search-action svg * {
+  fill: none !important;
+}
+
+/* Style cart bubble background as black, text count as white */
+.header-actions__cart-icon .cart-bubble__background {
+  background-color: #000000 !important;
+  background: #000000 !important;
+}
+
+.header-actions__cart-icon .cart-bubble__text,
+.header-actions__cart-icon .cart-bubble__text-count {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Subtle hover feedback for header icons */
+.header-actions__action:hover svg,
+.search-action button:hover svg {
+  opacity: 0.8 !important;
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+
