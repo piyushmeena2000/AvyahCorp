@@ -2665,3 +2665,19 @@ ul.mm-submenu li span,
   letter-spacing: 0.5px !important;
 }
 
+/* Discover Dropdown visible black icons */
+.avyah-discover-card a .dd-icon,
+.avyah-discover-card a .dd-icon *,
+.avyah-discover-card a:not(:hover) .dd-icon,
+.avyah-discover-card a:not(:hover) .dd-icon * {
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0 !important;
+  opacity: 1 !important;
+  color: #000000 !important;
+  stroke: #000000 !important;
+  stroke-width: 2px !important;
+  fill: none !important;
+  transition: color 0.18s ease, stroke 0.18s ease !important;
+}
+
