@@ -2642,3 +2642,26 @@ button[class*="quick-view-btn"] * {
   transition: all 0.2s ease;
 }
 
+/* Catalog & Submenu dropdown font size matching Discover dropdown */
+.vertical-mega-menu ul.mm-submenu a,
+.vertical-mega-menu ul.mm-submenu span,
+.buddha-menu-item ul.mm-submenu a,
+.buddha-menu-item ul.mm-submenu span,
+ul.mm-submenu a,
+ul.mm-submenu span,
+ul.mm-submenu li a,
+ul.mm-submenu li span,
+.header__submenu a,
+.header__submenu span,
+.mega-menu__list a,
+.mega-menu__list span,
+[class*="mm-submenu"] a,
+[class*="mm-submenu"] span,
+[class*="buddha-menu"] ul a,
+[class*="buddha-menu"] ul span {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+}
+
