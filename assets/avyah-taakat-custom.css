@@ -1055,8 +1055,8 @@ body.template-index [class*="ai-product-tab-btn"]:hover {
 }
 
 body.template-index [class*="ai-product-tab-btn"].active {
-  background-color: #d32f2f !important;
-  background: #d32f2f !important;
+  /*background-color: #d32f2f !important;
+  background: #d32f2f !important;*/
   color: #ffffff !important;
   border: 1px solid #d32f2f !important;
   box-shadow: 0 4px 12px rgba(211, 47, 47, 0.25) !important;
