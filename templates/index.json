@@ -250,8 +250,79 @@
     "blocks_bPRij3": {
       "type": "_blocks",
       "blocks": {
+        "ai_gen_block_ef04a14_9DtWFD": {
+          "type": "ai_gen_block_ef04a14",
+          "settings": {
+            "collection": "best-selling-products",
+            "heading": "BEST SELLERS",
+            "button_text": "ADD TO CART",
+            "show_rating": true,
+            "show_review_count": true,
+            "show_compare_price": true,
+            "show_discount": true,
+            "show_offer_badge": true,
+            "offer_badge_text": "FREE SHIPPING + 3% PREPAID BONUS",
+            "background_color": "#FFFFFF",
+            "card_background_color": "#FFFFFF",
+            "text_color": "#000000",
+            "heading_color": "#000000",
+            "button_color": "#8B0000",
+            "button_text_color": "#FFFFFF",
+            "border_color": "#E6E6E6",
+            "heading_size_desktop": 64,
+            "heading_size_tablet": 48,
+            "heading_size_mobile": 42,
+            "card_gap": 20,
+            "card_padding": 16,
+            "image_height": 280
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_f37f158_qn3q9j": {
+          "type": "ai_gen_block_f37f158",
+          "disabled": true,
+          "settings": {
+            "heading": "BEST SELLERS",
+            "collection": "",
+            "products_to_show": 8,
+            "section_padding_top": 60,
+            "section_padding_bottom": 60,
+            "heading_size": 64,
+            "header_spacing": 40,
+            "nav_bg_color": "#FFFFFF",
+            "nav_border_color": "#E0E0E0",
+            "nav_icon_color": "#000000",
+            "nav_hover_bg_color": "#F5F5F5",
+            "nav_hover_border_color": "#000000",
+            "grid_gap": 20,
+            "card_padding": 16,
+            "image_height": 300,
+            "rating_size": 13,
+            "star_color": "#FFB800",
+            "rating_spacing": 8,
+            "title_size": 16,
+            "title_spacing": 10,
+            "compare_price_size": 14,
+            "sale_price_size": 18,
+            "discount_size": 14,
+            "price_spacing": 10,
+            "offer_badge_text": "FREE SHIPPING + 3% PREPAID BONUS",
+            "badge_size": 11,
+            "badge_bg_color": "#F0F0F0",
+            "badge_border_radius": 20,
+            "badge_padding_vertical": 6,
+            "badge_padding_horizontal": 12,
+            "badge_spacing": 12,
+            "button_text": "ADD TO CART",
+            "button_size": 14,
+            "button_height": 48,
+            "button_padding": 12
+          },
+          "blocks": {}
+        },
         "ai_gen_block_1387b32_wMRLAr": {
           "type": "ai_gen_block_1387b32",
+          "disabled": true,
           "settings": {
             "collection": "best-selling-products",
             "heading": "BEST SELLERS",
@@ -314,7 +385,12 @@
         }
       },
       "block_order": [
+        "ai_gen_block_ef04a14_9DtWFD",
+        "ai_gen_block_f37f158_qn3q9j",
         "ai_gen_block_1387b32_wMRLAr"
+      ],
+      "custom_css": [
+        "* {}"
       ],
       "name": "Listing",
       "settings": {
@@ -329,7 +405,7 @@
         "section_width": "full-width",
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
