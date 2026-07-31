@@ -1,6 +1,620 @@
+{% doc %}
+  @prompt
+    Create a Shopify OS 2.0 Featured Product Listing section. Focus only on the visual design. Do not add any slider or functionality yet.
+    
+    The section should look like a premium ecommerce product listing similar to top D2C brands.
+    
+    Layout
+    Full-width section with a white background.
+    Large centered heading "BEST SELLERS" using the Anton font.
+    Heading should be bold, uppercase, and around 60–70px on desktop.
+    Keep the spacing between the heading and product cards very small.
+    Product Grid
+    
+    Display 4 product cards in one row on desktop.
+    
+    The cards should be:
+    
+    White background
+    Thin light-grey border
+    Small border radius (6–8px)
+    Premium clean look
+    Equal width and height
+    Consistent spacing between cards
+    Product Card Layout
+    
+    The layout inside every card should follow exactly this order:
+    
+    Product Image
+    Rating & Review Count
+    Product Title
+    Price Row
+    Offer Badge (optional)
+    Add to Cart Button
+    Product Image
+    
+    The product image is the hero element.
+    
+    Requirements:
+    
+    Occupy about 65% of the card height.
+    Large image.
+    Perfectly centered.
+    Never crop the product.
+    Never zoom.
+    Keep original aspect ratio using object-fit: contain.
+    Fixed image container so every card has identical image height.
+    Product Title
+    Center aligned.
+    Maximum 2 lines.
+    Bold.
+    Anton font.
+    Equal height on every card.
+    Price
+    
+    Display on one line:
+    
+    Compare-at price (grey, struck through)
+    Sale price (large and bold)
+    Discount percentage (green)
+    
+    Everything aligned horizontally.
+    
+    Offer Badge
+    
+    Optional rounded pill below the price.
+    
+    Add to Cart Button
+    Full width.
+    Fixed at the bottom.
+    Same height on every card.
+    Crimson red background.
+    White Anton text.
+    Important
+    
+    Do not redesign this section in your own style.
+    
+    Avoid oversized white spaces.
+    
+    The product image must dominate the card.
+    
+    The content must be compact below the image.
+    
+    Every card must have identical proportions and look like a professional ecommerce product listing rather than a generic Shopify card.
+    
+    Only build the visual layout. Do not add carousel functionality, animations, scrolling, navigation, or JavaScript yet.
+    
+    This prompt is intentionally short because Shopify AI tends to produce much better UI when it's only responsible for the layout. Once you're happy with the design, I'll give you Part 2, which will add:
+    
+    Horizontal carousel
+    Touchpad drag
+    Mouse drag
+    Mobile swipe
+    Navigation arrows
+    AJAX Add to Cart
+    All Theme Editor settings
+    
+    without changing the design., The current product card layout is incorrect. Keep the existing section, but rebuild the product card layout to match a professional ecommerce product listing. Do not change the overall section.
+    
+    Requirements:
+    
+    Remove the rounded corners from the cards. Use square cards with only a 1px light grey border.
+    Remove the large empty white space inside each card.
+    Increase the product image size so it occupies 60–65% of the card height.
+    Keep the entire product image visible using object-fit: contain. Never crop or stretch the image.
+    Center the image at the top of the card.
+    
+    Rebuild the content below the image in this exact order:
+    
+    Rating + Review Count (left aligned directly below the image)
+    Product Title (left aligned, bold, maximum 2 lines)
+    Price Row:
+    Compare-at price (grey with strikethrough)
+    Sale price (larger and bold)
+    Discount percentage (green)
+    All on a single line
+    Offer Badge (optional, full width)
+    Add to Cart Button fixed at the bottom of the card.
+    
+    Card rules:
+    
+    Every card must have the same height.
+    Every image container must have the same height.
+    Every title must reserve the same space (2 lines).
+    Every Add to Cart button must align perfectly across all cards.
+    Reduce vertical spacing between every element.
+    Increase horizontal padding slightly.
+    Make the layout compact like a premium Shopify product listing.
+    
+    Typography:
+    
+    Product Title: Anton, bold.
+    Price: larger than title.
+    Compare Price: smaller and grey.
+    Discount: green and bold.
+    Rating and review count: small and left aligned.
+    Add to Cart button: Anton, uppercase.
+    
+    Do not change the heading, carousel, or functionality. Only rebuild the internal product card layout to look like a premium ecommerce product listing., The current product cards are incorrect. Do not redesign the entire section. Rebuild only the product card layout using a standard Shopify ecommerce product card. Remove the current centered layout completely.
+    
+    Product Card Layout
+    
+    Rebuild every card in this exact order:
+    
+    Product Image
+    Rating + Review Count
+    Product Title
+    Price Row
+    Offer Badge
+    Add to Cart Button
+    Product Image
+    Place the product image at the very top of the card.
+    The image should occupy approximately 65% of the card height.
+    Use a fixed image container.
+    Use object-fit: contain.
+    Never crop, zoom, or stretch the image.
+    Remove all empty white space above the image.
+    The image should be centered inside the image container while remaining aligned to the top of the card.
+    Rating
+    
+    Place directly below the image.
+    
+    Left aligned.
+    Show star rating followed by review count.
+    Example: ⭐ 4.8 | 120 Reviews
+    Product Title
+    
+    Place directly below the rating.
+    
+    Requirements:
+    
+    Left aligned
+    Anton font
+    Bold
+    Maximum 2 lines
+    Same reserved height on every card
+    Do not vertically center the title
+    Price Row
+    
+    Display everything on one line.
+    
+    Example:
+    
+    ₹2,899 ₹2,499 -14% OFF
+    
+    Requirements:
+    
+    Compare-at price: grey and strikethrough.
+    Sale price: bold and larger.
+    Discount: green and bold.
+    Offer Badge
+    
+    Display directly below the price.
+    
+    Example:
+    
+    FREE SHIPPING + 3% PREPAID BONUS
+    
+    Full-width rounded pill.
+    
+    Add to Cart Button
+    
+    Place at the very bottom of the card.
+    
+    Requirements:
+    
+    Full width
+    Crimson red background
+    White Anton text
+    Same height on every card
+    Same bottom spacing on every card
+    Card Design
+    White background
+    Square corners (no border radius)
+    1px light grey border
+    No shadow
+    Compact spacing
+    Equal height cards
+    Spacing
+    
+    Reduce all unnecessary white space.
+    
+    The content should flow naturally from top to bottom.
+    
+    Nothing should be vertically centered.
+    
+    Important
+    
+    Do not use flexbox vertical centering (align-items:center or justify-content:center) for the card layout.
+    
+    Use a traditional ecommerce structure where the content stacks from top to bottom.
+    
+    Do not use placeholder or demo card markup. Use Shopify's native product card structure and only restyle it.
+    
+    The final result should look like a professional Shopify product listing, with the product image at the top, all information below it, and the Add to Cart button fixed at the bottom.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+  .ai-featured-products-{{ ai_gen_id }} {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 40px 20px;
+    display: block;
+  }
+
+  .ai-featured-products-heading-{{ ai_gen_id }} {
+    font-family: 'Anton', sans-serif;
+    font-size: 60px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 0 20px 0;
+    letter-spacing: 1px;
+  }
+
+  .ai-featured-products-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .ai-product-card-{{ ai_gen_id }} {
+    background-color: #ffffff;
+    border: 1px solid #d0d0d0;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 600px;
+  }
+
+  .ai-product-image-container-{{ ai_gen_id }} {
+    width: 100%;
+    height: 380px;
+    display: block;
+    padding: 0;
+    background-color: #ffffff;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .ai-product-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .ai-product-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+  }
+
+  .ai-product-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-product-content-{{ ai_gen_id }} {
+    padding: 12px 16px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .ai-product-rating-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #666666;
+    margin-bottom: 6px;
+    text-align: left;
+  }
+
+  .ai-product-stars-{{ ai_gen_id }} {
+    color: #ffa500;
+    font-size: 14px;
+  }
+
+  .ai-product-title-{{ ai_gen_id }} {
+    font-family: 'Anton', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: left;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 42px;
+    text-transform: uppercase;
+  }
+
+  .ai-product-price-row-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+    margin-bottom: 8px;
+    text-align: left;
+  }
+
+  .ai-product-compare-price-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: #999999;
+    text-decoration: line-through;
+  }
+
+  .ai-product-sale-price-{{ ai_gen_id }} {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  .ai-product-discount-{{ ai_gen_id }} {
+    font-size: 13px;
+    font-weight: 700;
+    color: #00a651;
+  }
+
+  .ai-product-offer-badge-{{ ai_gen_id }} {
+    background-color: #f0f0f0;
+    color: #333333;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 8px;
+    width: 100%;
+    text-transform: uppercase;
+  }
+
+  .ai-product-add-to-cart-{{ ai_gen_id }} {
+    background-color: #dc143c;
+    color: #ffffff;
+    font-family: 'Anton', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0;
+    padding: 14px 20px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: auto;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-product-add-to-cart-{{ ai_gen_id }}:hover {
+    background-color: #b8112f;
+  }
+
+  @media screen and (max-width: 1200px) {
+    .ai-featured-products-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-featured-products-heading-{{ ai_gen_id }} {
+      font-size: 40px;
+    }
+
+    .ai-featured-products-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .ai-product-card-{{ ai_gen_id }} {
+      height: 480px;
+    }
+
+    .ai-product-image-container-{{ ai_gen_id }} {
+      height: 280px;
+    }
+
+    .ai-product-title-{{ ai_gen_id }} {
+      font-size: 14px;
+      height: 38px;
+    }
+
+    .ai-product-sale-price-{{ ai_gen_id }} {
+      font-size: 20px;
+    }
+
+    .ai-product-add-to-cart-{{ ai_gen_id }} {
+      font-size: 13px;
+      padding: 12px 16px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .ai-featured-products-heading-{{ ai_gen_id }} {
+      font-size: 32px;
+    }
+
+    .ai-featured-products-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+
+    .ai-product-card-{{ ai_gen_id }} {
+      height: auto;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-featured-products-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <h2 class="ai-featured-products-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+
+  <div class="ai-featured-products-grid-{{ ai_gen_id }}">
+    {% if block.settings.collection != blank %}
+      {% for product in block.settings.collection.products limit: 4 %}
+        <div class="ai-product-card-{{ ai_gen_id }}">
+          <div class="ai-product-image-container-{{ ai_gen_id }}">
+            {% if product.featured_image %}
+              <img
+                src="{{ product.featured_image | image_url: width: 600 }}"
+                alt="{{ product.featured_image.alt | escape }}"
+                class="ai-product-image-{{ ai_gen_id }}"
+                loading="lazy"
+                width="600"
+                height="600"
+              >
+            {% else %}
+              <div class="ai-product-image-placeholder-{{ ai_gen_id }}">
+                {{ 'product-1' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="ai-product-content-{{ ai_gen_id }}">
+            {% if block.settings.show_ratings %}
+              <div class="ai-product-rating-{{ ai_gen_id }}">
+                <span class="ai-product-stars-{{ ai_gen_id }}">⭐</span>
+                <span>{{ block.settings.rating_value }} | {{ block.settings.review_count }} Reviews</span>
+              </div>
+            {% endif %}
+
+            <h3 class="ai-product-title-{{ ai_gen_id }}">{{ product.title }}</h3>
+
+            <div class="ai-product-price-row-{{ ai_gen_id }}">
+              {% if product.compare_at_price > product.price %}
+                <span class="ai-product-compare-price-{{ ai_gen_id }}">{{ product.compare_at_price | money }}</span>
+                <span class="ai-product-sale-price-{{ ai_gen_id }}">{{ product.price | money }}</span>
+                {% assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
+                <span class="ai-product-discount-{{ ai_gen_id }}">-{{ discount }}% OFF</span>
+              {% else %}
+                <span class="ai-product-sale-price-{{ ai_gen_id }}">{{ product.price | money }}</span>
+              {% endif %}
+            </div>
+
+            {% if block.settings.offer_text != blank %}
+              <div class="ai-product-offer-badge-{{ ai_gen_id }}">{{ block.settings.offer_text }}</div>
+            {% endif %}
+
+            <button class="ai-product-add-to-cart-{{ ai_gen_id }}">
+              {{ block.settings.button_text }}
+            </button>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      {% for i in (1..4) %}
+        <div class="ai-product-card-{{ ai_gen_id }}">
+          <div class="ai-product-image-container-{{ ai_gen_id }}">
+            <div class="ai-product-image-placeholder-{{ ai_gen_id }}">
+              {{ 'product-1' | placeholder_svg_tag }}
+            </div>
+          </div>
+
+          <div class="ai-product-content-{{ ai_gen_id }}">
+            {% if block.settings.show_ratings %}
+              <div class="ai-product-rating-{{ ai_gen_id }}">
+                <span class="ai-product-stars-{{ ai_gen_id }}">⭐</span>
+                <span>{{ block.settings.rating_value }} | {{ block.settings.review_count }} Reviews</span>
+              </div>
+            {% endif %}
+
+            <h3 class="ai-product-title-{{ ai_gen_id }}">SAMPLE PRODUCT TITLE HERE</h3>
+
+            <div class="ai-product-price-row-{{ ai_gen_id }}">
+              <span class="ai-product-compare-price-{{ ai_gen_id }}">₹2,899</span>
+              <span class="ai-product-sale-price-{{ ai_gen_id }}">₹2,499</span>
+              <span class="ai-product-discount-{{ ai_gen_id }}">-14% OFF</span>
+            </div>
+
+            {% if block.settings.offer_text != blank %}
+              <div class="ai-product-offer-badge-{{ ai_gen_id }}">{{ block.settings.offer_text }}</div>
+            {% endif %}
+
+            <button class="ai-product-add-to-cart-{{ ai_gen_id }}">
+              {{ block.settings.button_text }}
+            </button>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Featured products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "BEST SELLERS"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Ratings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ratings",
+      "label": "Show ratings",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Rating value",
+      "default": "4.8"
+    },
+    {
+      "type": "range",
+      "id": "review_count",
+      "label": "Review count",
+      "min": 0,
+      "max": 1000,
+      "step": 10,
+      "default": 120
+    },
+    {
+      "type": "header",
+      "content": "Offer badge"
+    },
+    {
+      "type": "text",
+      "id": "offer_text",
+      "label": "Offer text",
+      "default": "FREE SHIPPING + 3% PREPAID BONUS"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "ADD TO CART"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured products"
+    }
+  ]
+}
 {% endschema %}
