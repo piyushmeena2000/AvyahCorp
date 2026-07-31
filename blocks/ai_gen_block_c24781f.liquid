@@ -111,9 +111,8 @@
   }
 
   /* Force all text inside the card to be dark/black */
-  .ai-testimonial-carousel__card-{{ ai_gen_id }} *,
   .ai-testimonial-carousel__card-{{ ai_gen_id }} p,
-  .ai-testimonial-carousel__card-{{ ai_gen_id }} span,
+  .ai-testimonial-carousel__card-{{ ai_gen_id }} span:not([class*="star"]),
   .ai-testimonial-carousel__card-{{ ai_gen_id }} b,
   .ai-testimonial-carousel__card-{{ ai_gen_id }} strong {
     color: #111111 !important;
@@ -126,17 +125,28 @@
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.14) !important;
   }
 
-  .ai-testimonial-carousel__stars-{{ ai_gen_id }} {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 18px;
+  .ai-testimonial-carousel__stars-{{ ai_gen_id }},
+  .ai-testimonial-carousel__card-{{ ai_gen_id }} .ai-testimonial-carousel__stars-{{ ai_gen_id }} {
+    display: flex !important;
+    gap: 4px !important;
+    margin-bottom: 18px !important;
     background: transparent !important;
     background-color: transparent !important;
   }
 
-  .ai-testimonial-carousel__star-{{ ai_gen_id }} {
-    width: 20px;
-    height: 20px;
+  .ai-testimonial-carousel__star-{{ ai_gen_id }},
+  .ai-testimonial-carousel__card-{{ ai_gen_id }} .ai-testimonial-carousel__star-{{ ai_gen_id }} {
+    width: 20px !important;
+    height: 20px !important;
+    color: #D52528 !important;
+    fill: #D52528 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  .ai-testimonial-carousel__star-{{ ai_gen_id }} path,
+  .ai-testimonial-carousel__card-{{ ai_gen_id }} .ai-testimonial-carousel__star-{{ ai_gen_id }} path {
+    fill: #D52528 !important;
     color: #D52528 !important;
     background: transparent !important;
     background-color: transparent !important;
@@ -351,15 +361,16 @@
             {% if testimonial_enabled %}
               <div class="ai-testimonial-carousel__slide-{{ ai_gen_id }}">
                 <div class="ai-testimonial-carousel__card-{{ ai_gen_id }}" style="background-color:#ffffff !important;background:#ffffff !important;color:#111111 !important;">
-                  <div class="ai-testimonial-carousel__stars-{{ ai_gen_id }}" style="background:transparent !important;">
+                  <div class="ai-testimonial-carousel__stars-{{ ai_gen_id }}" style="background:transparent !important;background-color:transparent !important;">
                     {% for star in (1..testimonial_rating) %}
                       <svg
                         class="ai-testimonial-carousel__star-{{ ai_gen_id }}"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
-                        fill="currentColor"
+                        fill="#D52528"
+                        style="background:transparent !important;background-color:transparent !important;fill:#D52528 !important;color:#D52528 !important;"
                       >
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                        <path fill="#D52528" style="fill:#D52528 !important;background:transparent !important;" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                       </svg>
                     {% endfor %}
                   </div>

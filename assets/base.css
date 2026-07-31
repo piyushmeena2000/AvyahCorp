@@ -4277,6 +4277,7 @@ button.shopify-payment-button__button--unbranded:hover:not([disabled]) {
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
 }
 
 /* Product card title truncation - applied on mobile regardless of view */
@@ -4287,6 +4288,7 @@ button.shopify-payment-button__button--unbranded:hover:not([disabled]) {
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
   }
 }
 

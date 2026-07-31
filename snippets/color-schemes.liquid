@@ -146,10 +146,30 @@
   body.template-index div[class*="c24781f"][class*="stars"],
   body.template-index svg[class*="c24781f"][class*="star"],
   body.template-index div[class*="ai-testimonial-carousel"][class*="stars"],
-  body.template-index svg[class*="ai-testimonial-carousel"][class*="star"] {
+  body.template-index svg[class*="ai-testimonial-carousel"][class*="star"],
+  body.template-index [class*="c24781f"] [class*="card"] [class*="stars"],
+  body.template-index [class*="c24781f"] [class*="card"] [class*="star"],
+  body.template-index [class*="ai-testimonial-carousel"] [class*="card"] [class*="stars"],
+  body.template-index [class*="ai-testimonial-carousel"] [class*="card"] [class*="star"],
+  body.template-index [class*="c24781f"] [class*="stars"] *,
+  body.template-index [class*="c24781f"] [class*="star"] * {
     background-color: transparent !important;
     background: transparent !important;
     color: #D52528 !important;
+    fill: #D52528 !important;
+    box-shadow: none !important;
+  }
+
+  body.template-index [class*="c24781f"] [class*="star"] path,
+  body.template-index [class*="ai-testimonial-carousel"] [class*="star"] path,
+  body.template-index svg[class*="c24781f"][class*="star"] path,
+  body.template-index svg[class*="ai-testimonial-carousel"][class*="star"] path,
+  body.template-index [class*="c24781f"] [class*="card"] svg path,
+  body.template-index [class*="ai-testimonial-carousel"] [class*="card"] svg path {
+    fill: #D52528 !important;
+    color: #D52528 !important;
+    background-color: transparent !important;
+    background: transparent !important;
   }
 
   body.template-index [class*="partner"],

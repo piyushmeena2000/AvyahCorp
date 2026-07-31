@@ -1,6 +1,7 @@
 /* ========== TAAKAT BESPOKE OVERRIDES CSS ========== */
 
-style, script {
+style,
+script {
   display: none !important;
 }
 
@@ -25,7 +26,7 @@ style, script {
 }
 
 /* Custom Header Font */
-.taakat-custom-product-page .product-details .group-block h3, 
+.taakat-custom-product-page .product-details .group-block h3,
 .taakat-custom-product-page .product-details .group-block h3 * {
   font-family: 'Anton', sans-serif !important;
   font-size: 46px !important;
@@ -102,10 +103,11 @@ style, script {
 
 /* Rounded cream container for the main product image */
 .taakat-custom-product-page .product-media-container {
-  background-color: #fcf4e4 !important; /* Warm yellow/cream container background */
+  background-color: #fcf4e4 !important;
+  /* Warm yellow/cream container background */
   border-radius: 24px !important;
   overflow: hidden !important;
-  border: 1px solid rgba(0,0,0,0.02) !important;
+  border: 1px solid rgba(0, 0, 0, 0.02) !important;
 }
 
 .taakat-custom-product-page .product-media-container img {
@@ -153,7 +155,7 @@ style, script {
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
 }
 
 .taakat-flavor-dropdown-left {
@@ -200,12 +202,14 @@ style, script {
 }
 
 .taakat-box-card.active {
-  border-color: #700a0c !important; /* Crimson active border */
+  border-color: #700a0c !important;
+  /* Crimson active border */
   background-color: #fffbfb !important;
 }
 
 .taakat-box-discount-label {
-  color: #700a0c !important; /* Red discount text */
+  color: #700a0c !important;
+  /* Red discount text */
   font-family: 'Inter', sans-serif !important;
   font-size: 11px !important;
   font-weight: 800 !important;
@@ -243,7 +247,8 @@ style, script {
 }
 
 .taakat-popular-badge {
-  background-color: #700a0c !important; /* Crimson Popular badge */
+  background-color: #700a0c !important;
+  /* Crimson Popular badge */
   color: #fff !important;
   font-family: 'Anton', sans-serif !important;
   font-size: 10px !important;
@@ -326,7 +331,8 @@ style, script {
   content: '';
   width: 12px;
   height: 12px;
-  background-color: #700a0c; /* Crimson active dot */
+  background-color: #700a0c;
+  /* Crimson active dot */
   border-radius: 50%;
   display: block;
   transform: scale(0);
@@ -360,7 +366,8 @@ style, script {
 /* 4. Action CTA Button (large bold red) */
 .taakat-submit-btn {
   width: 100%;
-  background-color: #700a0c !important; /* Perfect Bar Dark Red/Crimson button */
+  background-color: #700a0c !important;
+  /* Perfect Bar Dark Red/Crimson button */
   color: #ffffff !important;
   border: none;
   border-radius: 30px !important;
@@ -478,7 +485,7 @@ results-list,
 
 /* Collection Hero Header & Titles Centering (Header Only) */
 .section:has(+ results-list),
-.section-background:has(+ results-list) + .section,
+.section-background:has(+ results-list)+.section,
 .collection-hero,
 [data-section-type="collection-hero"],
 .collection-header {
@@ -490,7 +497,7 @@ results-list,
 
 /* Force pure solid black on all text elements inside the top header section */
 .section:has(+ results-list) *,
-.section:has(.collection-wrapper) > .text-block *,
+.section:has(.collection-wrapper)>.text-block *,
 .collection-hero *,
 .collection-header *,
 rte-formatter *,
@@ -569,7 +576,8 @@ rte-formatter *,
   letter-spacing: 0.8px !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
-  background-color: #91181b !important; /* Darker Crimson Red for Inactive */
+  background-color: #91181b !important;
+  /* Darker Crimson Red for Inactive */
   background: #91181b !important;
   padding: 12px 28px !important;
   border-radius: 14px !important;
@@ -593,7 +601,8 @@ rte-formatter *,
 }
 
 .perfect-collection-subnav a.active {
-  background-color: #700a0c !important; /* Crimson Red for Active */
+  background-color: #700a0c !important;
+  /* Crimson Red for Active */
   background: #700a0c !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
@@ -641,6 +650,7 @@ results-list .product-grid,
 }
 
 @media screen and (min-width: 990px) {
+
   results-list .product-grid,
   .collection-wrapper .product-grid {
     grid-template-columns: repeat(4, 1fr) !important;
@@ -681,27 +691,32 @@ results-list .card-gallery:hover,
 /* Alternating Pastel Background Colors matching PerfectSnacks collection cards */
 results-list .product-grid__item:nth-child(5n+1) .card-gallery,
 .collection-wrapper .product-grid__item:nth-child(5n+1) .card-gallery {
-  background-color: #d2ebed !important; /* Soft Pastel Teal / Blue */
+  background-color: #d2ebed !important;
+  /* Soft Pastel Teal / Blue */
 }
 
 results-list .product-grid__item:nth-child(5n+2) .card-gallery,
 .collection-wrapper .product-grid__item:nth-child(5n+2) .card-gallery {
-  background-color: #e2dcf2 !important; /* Soft Pastel Lavender */
+  background-color: #e2dcf2 !important;
+  /* Soft Pastel Lavender */
 }
 
 results-list .product-grid__item:nth-child(5n+3) .card-gallery,
 .collection-wrapper .product-grid__item:nth-child(5n+3) .card-gallery {
-  background-color: #d8edd8 !important; /* Soft Pastel Mint Green */
+  background-color: #d8edd8 !important;
+  /* Soft Pastel Mint Green */
 }
 
 results-list .product-grid__item:nth-child(5n+4) .card-gallery,
 .collection-wrapper .product-grid__item:nth-child(5n+4) .card-gallery {
-  background-color: #fef0d7 !important; /* Soft Golden Cream */
+  background-color: #fef0d7 !important;
+  /* Soft Golden Cream */
 }
 
 results-list .product-grid__item:nth-child(5n+5) .card-gallery,
 .collection-wrapper .product-grid__item:nth-child(5n+5) .card-gallery {
-  background-color: #fce4ec !important; /* Soft Rose Coral */
+  background-color: #fce4ec !important;
+  /* Soft Rose Coral */
 }
 
 /* Zero top gap between header and full-bleed collection banner */
@@ -742,31 +757,36 @@ main-collection,
 .product-grid__item:nth-child(5n+1) .card-gallery,
 .product-grid__item:nth-child(5n+1) .product-media-container,
 .product-grid__item:nth-child(5n+1) [class*="card-gallery"] {
-  background-color: #dceef2 !important; /* Soft Pastel Cyan */
+  background-color: #dceef2 !important;
+  /* Soft Pastel Cyan */
 }
 
 .product-grid__item:nth-child(5n+2) .card-gallery,
 .product-grid__item:nth-child(5n+2) .product-media-container,
 .product-grid__item:nth-child(5n+2) [class*="card-gallery"] {
-  background-color: #e5e4f4 !important; /* Soft Pastel Lavender */
+  background-color: #e5e4f4 !important;
+  /* Soft Pastel Lavender */
 }
 
 .product-grid__item:nth-child(5n+3) .card-gallery,
 .product-grid__item:nth-child(5n+3) .product-media-container,
 .product-grid__item:nth-child(5n+3) [class*="card-gallery"] {
-  background-color: #d8f2f2 !important; /* Soft Pastel Aqua */
+  background-color: #d8f2f2 !important;
+  /* Soft Pastel Aqua */
 }
 
 .product-grid__item:nth-child(5n+4) .card-gallery,
 .product-grid__item:nth-child(5n+4) .product-media-container,
 .product-grid__item:nth-child(5n+4) [class*="card-gallery"] {
-  background-color: #e0f2e7 !important; /* Soft Pastel Mint */
+  background-color: #e0f2e7 !important;
+  /* Soft Pastel Mint */
 }
 
 .product-grid__item:nth-child(5n+5) .card-gallery,
 .product-grid__item:nth-child(5n+5) .product-media-container,
 .product-grid__item:nth-child(5n+5) [class*="card-gallery"] {
-  background-color: #f7e6e7 !important; /* Soft Pastel Rose */
+  background-color: #f7e6e7 !important;
+  /* Soft Pastel Rose */
 }
 
 /* Product Card Gallery Containers & Rounded Corners */
@@ -895,6 +915,7 @@ results-list .product-card [class*="rating"],
   margin-right: auto !important;
   width: 100% !important;
   float: none !important;
+  color: #c01b1e !important;
 }
 
 results-list .product-card .jdgm-prev-badge__stars,
@@ -930,7 +951,8 @@ body.template-index [class*="product-card-reviews"],
 body.template-index [class*="ai-product-card-reviews"] .stars,
 body.template-index [class*="product-card-reviews"] .stars,
 [class*="ai-product-card-reviews"] .stars {
-  color: #ffb800 !important; /* Bright Gold Stars */
+  color: #ffb800 !important;
+  /* Bright Gold Stars */
   font-size: 18px !important;
   letter-spacing: 1.5px !important;
   line-height: 1 !important;
@@ -1415,7 +1437,7 @@ results-list .product-badges__badge,
 .header__menu-item *:not(.menu-list__submenu *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
 header nav *:not(.menu-list__submenu *):not(.avyah-discover-card *):not(.avyah-discover-popover *):not(.avyah-discover-link *),
 .buddha-menu-item *:not(.avyah-discover-popover *):not(.avyah-discover-link *),
-.buddha-menu-item > a:not(.avyah-discover-popover a):not(.avyah-discover-link),
+.buddha-menu-item>a:not(.avyah-discover-popover a):not(.avyah-discover-link),
 .buddha-menu-item span:not(.avyah-discover-popover span):not(.avyah-discover-link span),
 ul.mm-submenu a:not(.avyah-discover-popover a):not(.avyah-discover-link),
 ul.mm-submenu span:not(.avyah-discover-popover span):not(.avyah-discover-link span) {
@@ -1492,7 +1514,7 @@ body.template-index .rte *:not(.cart-drawer *):not(dialog *):not(cart-drawer-com
    ========================================================================== */
 body.template-index [class*="ai_gen_block_200d848"] [class*="card"],
 body.template-index [class*="ai_gen_block_200d848"] div[class*="item"],
-body.template-index [class*="ai_gen_block_200d848"] > div > div {
+body.template-index [class*="ai_gen_block_200d848"]>div>div {
   background-color: #500708 !important;
   background: #500708 !important;
   color: #ffffff !important;
@@ -1500,7 +1522,7 @@ body.template-index [class*="ai_gen_block_200d848"] > div > div {
 
 body.template-index [class*="ai_gen_block_200d848"] [class*="card"] *,
 body.template-index [class*="ai_gen_block_200d848"] div[class*="item"] *,
-body.template-index [class*="ai_gen_block_200d848"] > div > div * {
+body.template-index [class*="ai_gen_block_200d848"]>div>div * {
   color: #ffffff !important;
   transition: color 0.3s ease !important;
 }
@@ -1508,21 +1530,21 @@ body.template-index [class*="ai_gen_block_200d848"] > div > div * {
 /* HOVER STATE FOR FEATURE BENEFIT CARDS: White Background + Crimson Red Text & Icon */
 body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover,
 body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover,
-body.template-index [class*="ai_gen_block_200d848"] > div > div:hover {
+body.template-index [class*="ai_gen_block_200d848"]>div>div:hover {
   background-color: #ffffff !important;
   background: #ffffff !important;
 }
 
 body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover::before,
 body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover::before,
-body.template-index [class*="ai_gen_block_200d848"] > div > div:hover::before {
+body.template-index [class*="ai_gen_block_200d848"]>div>div:hover::before {
   background-color: #ffffff !important;
   opacity: 1 !important;
 }
 
 body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover *,
 body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover *,
-body.template-index [class*="ai_gen_block_200d848"] > div > div:hover *,
+body.template-index [class*="ai_gen_block_200d848"]>div>div:hover *,
 body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover h3,
 body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover p {
   color: #700a0c !important;
@@ -1532,7 +1554,7 @@ body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover p {
 
 body.template-index [class*="ai_gen_block_200d848"] [class*="card"]:hover img,
 body.template-index [class*="ai_gen_block_200d848"] div[class*="item"]:hover img,
-body.template-index [class*="ai_gen_block_200d848"] > div > div:hover img {
+body.template-index [class*="ai_gen_block_200d848"]>div>div:hover img {
   filter: brightness(0) saturate(100%) invert(21%) sepia(85%) saturate(2462%) hue-rotate(345deg) brightness(91%) contrast(92%) !important;
 }
 
@@ -1550,27 +1572,38 @@ body.template-index .product-card .price {
   color: #111111 !important;
 }
 
-body.template-index .product-grid__item:nth-child(5n+1) .card-gallery { background-color: #dceef2 !important; }
-body.template-index .product-grid__item:nth-child(5n+2) .card-gallery { background-color: #e5e4f4 !important; }
-body.template-index .product-grid__item:nth-child(5n+3) .card-gallery { background-color: #d8f2f2 !important; }
-body.template-index .product-grid__item:nth-child(5n+4) .card-gallery { background-color: #e0f2e7 !important; }
-body.template-index .product-grid__item:nth-child(5n+5) .card-gallery { background-color: #f7e6e7 !important; }
+body.template-index .product-grid__item:nth-child(5n+1) .card-gallery {
+  background-color: #dceef2 !important;
+}
+
+body.template-index .product-grid__item:nth-child(5n+2) .card-gallery {
+  background-color: #e5e4f4 !important;
+}
+
+body.template-index .product-grid__item:nth-child(5n+3) .card-gallery {
+  background-color: #d8f2f2 !important;
+}
+
+body.template-index .product-grid__item:nth-child(5n+4) .card-gallery {
+  background-color: #e0f2e7 !important;
+}
+
+body.template-index .product-grid__item:nth-child(5n+5) .card-gallery {
+  background-color: #f7e6e7 !important;
+}
 
 /* ==========================================================================
    CUSTOMER REVIEWS SECTION - RED SECTION BG, SOLID PURE WHITE CARDS
-   ========================================================================== */
+   ========================================================================== 
 body.template-index #shopify-section-blocks_zFCw9K,
 body.template-index .shopify-section:has([class*="c24781f"]),
 body.template-index .section:has([class*="c24781f"]),
 body.template-index [class*="c24781f"],
 body.template-index [class*="c24781f"] [class*="container"],
 body.template-index [class*="c24781f"] [class*="header"],
-body.template-index [class*="c24781f"] [class*="track-wrapper"] {
-  background-color: #700a0c !important;
-  background: #700a0c !important;
-}
+body.template-index [class*="c24781f"] [class*="track-wrapper"]
 
-/* Section Title & Subtitle - WHITE text */
+/* Section Title & Subtitle - WHITE text 
 body.template-index [class*="c24781f"] [class*="title"],
 body.template-index [class*="c24781f"] [class*="subtitle"],
 body.template-index [class*="c24781f"] h2,
@@ -1580,28 +1613,28 @@ body.template-index [class*="c24781f"] [class*="header"] * {
   background-color: transparent !important;
 }
 
-/* ONLY Review Cards & all elements inside them - 100% SOLID WHITE BACKGROUND */
+/* ONLY Review Cards - 100% SOLID WHITE BACKGROUND 
 body.template-index [class*="c24781f"] [class*="card"],
-body.template-index [class*="c24781f"] [class*="card"] *,
-body.template-index [class*="c24781f"] [class*="slide"] > div,
-body.template-index [class*="c24781f"] [class*="slide"] > div * {
+body.template-index [class*="c24781f"] [class*="slide"]>div,
+body.template-index [class*="ai-testimonial-carousel"] [class*="card"],
+body.template-index [class*="ai-testimonial-carousel"] [class*="slide"]>div {
   background-color: #ffffff !important;
   background: #ffffff !important;
 }
+  */
 
-/* Text colors inside cards */
+/* Text colors inside cards 
 body.template-index [class*="c24781f"] [class*="card"] p,
-body.template-index [class*="c24781f"] [class*="card"] span,
+body.template-index [class*="c24781f"] [class*="card"] span:not([class*="star"]),
 body.template-index [class*="c24781f"] [class*="card"] b,
 body.template-index [class*="c24781f"] [class*="card"] strong,
-body.template-index [class*="c24781f"] [class*="card"] div,
 body.template-index [class*="c24781f"] [class*="quote"],
 body.template-index [class*="c24781f"] [class*="quote"] * {
   color: #333333 !important;
 }
 
 body.template-index [class*="c24781f"] [class*="card"] [class*="name"] {
-  color: #700a0c !important;
+  color: #ffffff !important;
 }
 
 body.template-index [class*="c24781f"] [class*="card"] [class*="role"],
@@ -1609,17 +1642,36 @@ body.template-index [class*="c24781f"] [class*="card"] [class*="role"] * {
   color: #666666 !important;
 }
 
-/* Testimonial rating stars: transparent background & Crimson Red color #D52528 */
-body.template-index [class*="c24781f"] [class*="card"] [class*="stars"],
-body.template-index [class*="c24781f"] [class*="card"] [class*="star"],
+/* Testimonial rating stars: transparent background & Crimson Red color #D52528 
+body.template-index [class*="c24781f"] [class*="stars"],
+body.template-index [class*="c24781f"] [class*="star"],
+body.template-index [class*="ai-testimonial-carousel"] [class*="stars"],
+body.template-index [class*="ai-testimonial-carousel"] [class*="star"],
 body.template-index div[class*="c24781f"][class*="stars"],
 body.template-index svg[class*="c24781f"][class*="star"],
 body.template-index div[class*="ai-testimonial-carousel"][class*="stars"],
-body.template-index svg[class*="ai-testimonial-carousel"][class*="star"] {
+body.template-index svg[class*="ai-testimonial-carousel"][class*="star"],
+body.template-index [class*="c24781f"] [class*="card"] [class*="stars"],
+body.template-index [class*="c24781f"] [class*="card"] [class*="star"],
+body.template-index [class*="ai-testimonial-carousel"] [class*="card"] [class*="stars"],
+body.template-index [class*="ai-testimonial-carousel"] [class*="card"] [class*="star"],
+body.template-index [class*="c24781f"] [class*="stars"] *,
+body.template-index [class*="c24781f"] [class*="star"] * {
   background-color: transparent !important;
   background: transparent !important;
-  color: #D52528 !important;
+  box-shadow: none !important;
 }
+
+body.template-index [class*="c24781f"] [class*="star"] path,
+body.template-index [class*="ai-testimonial-carousel"] [class*="star"] path,
+body.template-index svg[class*="c24781f"][class*="star"] path,
+body.template-index svg[class*="ai-testimonial-carousel"][class*="star"] path,
+body.template-index [class*="c24781f"] [class*="card"] svg path,
+body.template-index [class*="ai-testimonial-carousel"] [class*="card"] svg path {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
 body.template-index [class*="partner"],
 body.template-index [class*="available"],
 body.template-index [class*="logo-list"],
@@ -1636,9 +1688,9 @@ body.template-index [class*="193b272"] h2,
 body.template-index [class*="ai-logo-carousel"] h2,
 body.template-index [class*="193b272"] [class*="heading"],
 body.template-index [class*="ai-logo-carousel"] [class*="heading"] {
-  color: #700a0c !important;
+  color: #ffffff !important;
 }
-
+*/
 /* =============================================
    MEGA MENU NORMAL CRIMSON RED DESIGN (#d52528)
 ============================================= */
@@ -1784,7 +1836,8 @@ body:has(.avyah-megamenu:hover) #MainContent {
    - Pure transform — NO fade, NO scale, NO opacity changes
 ======================================================== */
 
-html, body {
+html,
+body {
   overflow-x: clip !important;
 }
 
@@ -2367,7 +2420,7 @@ product-card,
 .product-grid__card,
 .product-grid__item,
 li.product-grid__item,
-.product-grid > div,
+.product-grid>div,
 .card-wrapper,
 [class*="product-card"],
 [class*="ai-product-card"],
@@ -2681,4 +2734,3 @@ ul.mm-submenu li span,
   fill: none !important;
   transition: color 0.18s ease, stroke 0.18s ease !important;
 }
-
