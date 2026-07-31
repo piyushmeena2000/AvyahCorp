@@ -1,6 +1,875 @@
+{% doc %}
+  @prompt
+    Create a Shopify OS 2.0 Featured Products Carousel section from scratch.
+    
+    Do not use placeholder cards, demo markup, or generic AI card layouts. Build a real Shopify product carousel using Shopify's native product objects.
+    
+    The goal is a premium D2C ecommerce product slider similar to brands like MyProtein, Optimum Nutrition, or SuperYou.
+    
+    Section
+    Full-width section.
+    White background.
+    Large centered heading BEST SELLERS.
+    Font: Anton.
+    Bold uppercase.
+    Desktop size: 64px.
+    Mobile size: 42px.
+    Previous and Next navigation buttons in the top-right.
+    Carousel
+    
+    The products must appear in one horizontal row only.
+    
+    Never wrap to another row.
+    
+    Desktop:
+    
+    4 products.
+    
+    Tablet:
+    
+    2 products.
+    
+    Mobile:
+    
+    1.2 products.
+    
+    Leave consistent spacing between cards.
+    
+    Product Card
+    
+    Every product card must follow this exact structure.
+    
+    ┌───────────────────────────────┐
+    │                               │
+    │        Product Image          │
+    │                               │
+    ├───────────────────────────────┤
+    │ ⭐ 4.8 | 120 Reviews          │
+    │                               │
+    │ PRODUCT TITLE                 │
+    │ PRODUCT TITLE                 │
+    │                               │
+    │ ₹2,899  ₹2,499  -14% OFF      │
+    │                               │
+    │ FREE SHIPPING BADGE           │
+    │                               │
+    │      ADD TO CART              │
+    └───────────────────────────────┘
+    
+    Do not change this hierarchy.
+    
+    Product Card Style
+    White background.
+    1px light grey border.
+    Square corners.
+    No shadow.
+    Equal height.
+    Equal width.
+    Equal padding.
+    Premium ecommerce appearance.
+    Product Image
+    
+    The product image is the hero element.
+    
+    Requirements:
+    
+    Place at the top of the card.
+    Occupy about 55–60% of the card height.
+    Use the full available width while keeping 16px left and right padding.
+    Use Shopify featured image.
+    Use object-fit: contain.
+    Never crop.
+    Never zoom.
+    Never stretch.
+    Same image height on every card.
+    Rating
+    
+    Display immediately below the image.
+    
+    Example:
+    
+    ⭐ 4.8 | 120 Reviews
+    
+    Requirements:
+    
+    Left aligned.
+    Small font.
+    Black.
+    Same position on every card.
+    Product Title
+    
+    Immediately below the rating.
+    
+    Requirements:
+    
+    Anton font.
+    Bold.
+    Black.
+    Left aligned.
+    Maximum 2 lines.
+    Reserve space for 2 lines so titles never overlap or jump.
+    Price
+    
+    Display on one line.
+    
+    Example:
+    
+    ₹2,899 ₹2,499 -14% OFF
+    
+    Requirements:
+    
+    Compare price grey with strike-through.
+    Sale price bold.
+    Sale price larger.
+    Discount green.
+    Everything aligned horizontally.
+    Offer Badge
+    
+    Display below price.
+    
+    Rounded pill.
+    
+    Example:
+    
+    FREE SHIPPING + 3% PREPAID BONUS
+    
+    Add to Cart
+    
+    Always remain at the bottom.
+    
+    Requirements:
+    
+    Height: 56px.
+    Width: 100%.
+    Dark Crimson Red (#8B0000).
+    White Anton text.
+    Square corners.
+    Equal bottom padding.
+    Typography
+    
+    Heading:
+    
+    Anton
+    
+    Title:
+    
+    Anton
+    
+    Button:
+    
+    Anton
+    
+    Everything else:
+    
+    Shopify default sans-serif.
+    Responsive
+    
+    Desktop:
+    
+    4 cards.
+    
+    Tablet:
+    
+    2 cards.
+    
+    Mobile:
+    
+    1.2 cards.
+    
+    Cards must resize smoothly.
+    
+    Theme Editor Settings
+    
+    Create settings for:
+    
+    Collection Picker
+    Heading
+    Show Rating
+    Show Review Count
+    Show Compare Price
+    Show Discount
+    Show Offer Badge
+    Offer Badge Text
+    Button Text
+    Background Color
+    Card Background Color
+    Text Color
+    Button Color
+    Button Text Color
+    Heading Color
+    Border Color
+    Font Sizes (Desktop, Tablet, Mobile)
+    Card Gap
+    Card Padding
+    Image Height
+    Cards Per Row
+    Important
+    
+    Do not vertically center content.
+    
+    Do not use placeholder HTML.
+    
+    Do not hide any Shopify product information.
+    
+    Do not stack products vertically.
+    
+    Do not collapse spacing.
+    
+    Every card must use the hierarchy:
+    
+    Image → Rating → Title → Price → Badge → Add to Cart
+    
+    The final result should look like a clean, premium Shopify ecommerce product carousel with consistent spacing, equal-height cards, large product images, readable titles, and perfectly aligned buttons.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+  .ai-featured-carousel-{{ ai_gen_id }} {
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: 60px 0;
+    display: block;
+  }
+
+  .ai-featured-carousel-container-{{ ai_gen_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-featured-carousel-header-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  .ai-featured-carousel-heading-{{ ai_gen_id }} {
+    font-family: 'Anton', sans-serif;
+    font-size: {{ block.settings.heading_size_desktop }}px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: {{ block.settings.heading_color }};
+    margin: 0;
+    letter-spacing: 1px;
+  }
+
+  .ai-featured-carousel-nav-{{ ai_gen_id }} {
+    display: flex;
+    gap: 12px;
+  }
+
+  .ai-featured-carousel-nav-btn-{{ ai_gen_id }} {
+    width: 48px;
+    height: 48px;
+    border: 1px solid {{ block.settings.border_color }};
+    background-color: {{ block.settings.card_background_color }};
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+  }
+
+  .ai-featured-carousel-nav-btn-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.border_color }};
+  }
+
+  .ai-featured-carousel-nav-btn-{{ ai_gen_id }} svg {
+    width: 20px;
+    height: 20px;
+    stroke: {{ block.settings.text_color }};
+    stroke-width: 2;
+  }
+
+  .ai-featured-carousel-track-wrapper-{{ ai_gen_id }} {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ai-featured-carousel-track-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.card_gap }}px;
+    transition: transform 0.4s ease;
+  }
+
+  .ai-featured-carousel-card-{{ ai_gen_id }} {
+    flex: 0 0 calc((100% - ({{ block.settings.card_gap }}px * 3)) / 4);
+    background-color: {{ block.settings.card_background_color }};
+    border: 1px solid {{ block.settings.border_color }};
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .ai-featured-carousel-image-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    height: {{ block.settings.image_height }}px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .ai-featured-carousel-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .ai-featured-carousel-content-{{ ai_gen_id }} {
+    padding: {{ block.settings.card_padding }}px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .ai-featured-carousel-rating-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: {{ block.settings.text_color }};
+    margin-bottom: 8px;
+  }
+
+  .ai-featured-carousel-star-{{ ai_gen_id }} {
+    color: #FFD700;
+  }
+
+  .ai-featured-carousel-title-{{ ai_gen_id }} {
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 12px 0;
+    line-height: 1.3;
+    height: 47px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .ai-featured-carousel-price-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .ai-featured-carousel-compare-price-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: #999;
+    text-decoration: line-through;
+  }
+
+  .ai-featured-carousel-price-{{ ai_gen_id }} {
+    font-size: 18px;
+    font-weight: 700;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-featured-carousel-discount-{{ ai_gen_id }} {
+    font-size: 13px;
+    font-weight: 600;
+    color: #28a745;
+  }
+
+  .ai-featured-carousel-badge-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #28a745;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .ai-featured-carousel-button-{{ ai_gen_id }} {
+    width: 100%;
+    height: 56px;
+    background-color: {{ block.settings.button_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    font-family: 'Anton', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: auto;
+    transition: opacity 0.2s ease;
+  }
+
+  .ai-featured-carousel-button-{{ ai_gen_id }}:hover {
+    opacity: 0.9;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-featured-carousel-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size_tablet }}px;
+    }
+
+    .ai-featured-carousel-card-{{ ai_gen_id }} {
+      flex: 0 0 calc((100% - {{ block.settings.card_gap }}px) / 2);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-featured-carousel-{{ ai_gen_id }} {
+      padding: 40px 0;
+    }
+
+    .ai-featured-carousel-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size_mobile }}px;
+    }
+
+    .ai-featured-carousel-header-{{ ai_gen_id }} {
+      margin-bottom: 24px;
+    }
+
+    .ai-featured-carousel-nav-{{ ai_gen_id }} {
+      display: none;
+    }
+
+    .ai-featured-carousel-card-{{ ai_gen_id }} {
+      flex: 0 0 83.33%;
+    }
+
+    .ai-featured-carousel-image-wrapper-{{ ai_gen_id }} {
+      height: {{ block.settings.image_height | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<featured-carousel-{{ ai_gen_id }} class="ai-featured-carousel-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-featured-carousel-container-{{ ai_gen_id }}">
+    <div class="ai-featured-carousel-header-{{ ai_gen_id }}">
+      {% if block.settings.heading != blank %}
+        <h2 class="ai-featured-carousel-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+      {% endif %}
+      <div class="ai-featured-carousel-nav-{{ ai_gen_id }}">
+        <button class="ai-featured-carousel-nav-btn-{{ ai_gen_id }} ai-carousel-prev-{{ ai_gen_id }}" aria-label="Previous">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <button class="ai-featured-carousel-nav-btn-{{ ai_gen_id }} ai-carousel-next-{{ ai_gen_id }}" aria-label="Next">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="ai-featured-carousel-track-wrapper-{{ ai_gen_id }}">
+      <div class="ai-featured-carousel-track-{{ ai_gen_id }}">
+        {% if block.settings.collection != blank %}
+          {% for product in block.settings.collection.products limit: 12 %}
+            <div class="ai-featured-carousel-card-{{ ai_gen_id }}">
+              <div class="ai-featured-carousel-image-wrapper-{{ ai_gen_id }}">
+                {% if product.featured_image %}
+                  <img
+                    src="{{ product.featured_image | image_url: width: 600 }}"
+                    alt="{{ product.featured_image.alt | escape }}"
+                    class="ai-featured-carousel-image-{{ ai_gen_id }}"
+                    loading="lazy"
+                    width="600"
+                    height="600"
+                  >
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag }}
+                {% endif %}
+              </div>
+
+              <div class="ai-featured-carousel-content-{{ ai_gen_id }}">
+                {% if block.settings.show_rating %}
+                  <div class="ai-featured-carousel-rating-{{ ai_gen_id }}">
+                    <span class="ai-featured-carousel-star-{{ ai_gen_id }}">⭐</span>
+                    <span>4.8</span>
+                    {% if block.settings.show_review_count %}
+                      <span>| 120 Reviews</span>
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+                <h3 class="ai-featured-carousel-title-{{ ai_gen_id }}">
+                  {{ product.title }}
+                </h3>
+
+                <div class="ai-featured-carousel-price-wrapper-{{ ai_gen_id }}">
+                  {% if block.settings.show_compare_price and product.compare_at_price > product.price %}
+                    <span class="ai-featured-carousel-compare-price-{{ ai_gen_id }}">
+                      {{ product.compare_at_price | money }}
+                    </span>
+                  {% endif %}
+                  <span class="ai-featured-carousel-price-{{ ai_gen_id }}">
+                    {{ product.price | money }}
+                  </span>
+                  {% if block.settings.show_discount and product.compare_at_price > product.price %}
+                    {% assign discount = product.compare_at_price | minus: product.price %}
+                    {% assign discount_percent = discount | times: 100 | divided_by: product.compare_at_price %}
+                    <span class="ai-featured-carousel-discount-{{ ai_gen_id }}">
+                      -{{ discount_percent }}% OFF
+                    </span>
+                  {% endif %}
+                </div>
+
+                {% if block.settings.show_offer_badge and block.settings.offer_badge_text != blank %}
+                  <div class="ai-featured-carousel-badge-{{ ai_gen_id }}">
+                    {{ block.settings.offer_badge_text }}
+                  </div>
+                {% endif %}
+
+                <button
+                  class="ai-featured-carousel-button-{{ ai_gen_id }}"
+                  data-product-id="{{ product.id }}"
+                  data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                >
+                  {{ block.settings.button_text }}
+                </button>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          {% for i in (1..8) %}
+            <div class="ai-featured-carousel-card-{{ ai_gen_id }}">
+              <div class="ai-featured-carousel-image-wrapper-{{ ai_gen_id }}">
+                {{ 'product-1' | placeholder_svg_tag }}
+              </div>
+              <div class="ai-featured-carousel-content-{{ ai_gen_id }}">
+                {% if block.settings.show_rating %}
+                  <div class="ai-featured-carousel-rating-{{ ai_gen_id }}">
+                    <span class="ai-featured-carousel-star-{{ ai_gen_id }}">⭐</span>
+                    <span>4.8</span>
+                    {% if block.settings.show_review_count %}
+                      <span>| 120 Reviews</span>
+                    {% endif %}
+                  </div>
+                {% endif %}
+                <h3 class="ai-featured-carousel-title-{{ ai_gen_id }}">
+                  Select a collection to display products
+                </h3>
+                <div class="ai-featured-carousel-price-wrapper-{{ ai_gen_id }}">
+                  <span class="ai-featured-carousel-price-{{ ai_gen_id }}">₹0</span>
+                </div>
+                {% if block.settings.show_offer_badge and block.settings.offer_badge_text != blank %}
+                  <div class="ai-featured-carousel-badge-{{ ai_gen_id }}">
+                    {{ block.settings.offer_badge_text }}
+                  </div>
+                {% endif %}
+                <button class="ai-featured-carousel-button-{{ ai_gen_id }}">
+                  {{ block.settings.button_text }}
+                </button>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</featured-carousel-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class FeaturedCarousel{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentIndex = 0;
+        this.track = this.querySelector('.ai-featured-carousel-track-{{ ai_gen_id }}');
+        this.prevBtn = this.querySelector('.ai-carousel-prev-{{ ai_gen_id }}');
+        this.nextBtn = this.querySelector('.ai-carousel-next-{{ ai_gen_id }}');
+        this.cards = this.querySelectorAll('.ai-featured-carousel-card-{{ ai_gen_id }}');
+        this.addToCartButtons = this.querySelectorAll('.ai-featured-carousel-button-{{ ai_gen_id }}');
+      }
+
+      connectedCallback() {
+        this.setupNavigation();
+        this.setupAddToCart();
+        this.updateCarousel();
+      }
+
+      setupNavigation() {
+        if (this.prevBtn) {
+          this.prevBtn.addEventListener('click', () => this.prev());
+        }
+        if (this.nextBtn) {
+          this.nextBtn.addEventListener('click', () => this.next());
+        }
+      }
+
+      setupAddToCart() {
+        this.addToCartButtons.forEach(button => {
+          button.addEventListener('click', (e) => {
+            const variantId = e.target.dataset.variantId;
+            if (variantId) {
+              this.addToCart(variantId, button);
+            }
+          });
+        });
+      }
+
+      addToCart(variantId, button) {
+        const originalText = button.textContent;
+        button.textContent = 'ADDING...';
+        button.disabled = true;
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: variantId,
+            quantity: 1
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          button.textContent = 'ADDED!';
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+          }, 2000);
+
+          if (window.theme && window.theme.cart) {
+            window.theme.cart.refresh();
+          }
+          document.dispatchEvent(new CustomEvent('cart:refresh'));
+        })
+        .catch(error => {
+          button.textContent = originalText;
+          button.disabled = false;
+        });
+      }
+
+      getCardsPerView() {
+        if (window.innerWidth <= 749) {
+          return 1.2;
+        }
+        if (window.innerWidth <= 989) {
+          return 2;
+        }
+        return 4;
+      }
+
+      prev() {
+        const cardsPerView = this.getCardsPerView();
+        this.currentIndex = Math.max(0, this.currentIndex - 1);
+        this.updateCarousel();
+      }
+
+      next() {
+        const cardsPerView = this.getCardsPerView();
+        const maxIndex = Math.max(0, this.cards.length - Math.floor(cardsPerView));
+        this.currentIndex = Math.min(maxIndex, this.currentIndex + 1);
+        this.updateCarousel();
+      }
+
+      updateCarousel() {
+        if (!this.track || this.cards.length === 0) return;
+
+        const cardWidth = this.cards[0].offsetWidth;
+        const gap = {{ block.settings.card_gap }};
+        const offset = this.currentIndex * (cardWidth + gap);
+        this.track.style.transform = `translateX(-${offset}px)`;
+      }
+    }
+
+    customElements.define('featured-carousel-{{ ai_gen_id }}', FeaturedCarousel{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Product carousel",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "BEST SELLERS"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "ADD TO CART"
+    },
+    {
+      "type": "header",
+      "content": "Display options"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show rating",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_review_count",
+      "label": "Show review count",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_compare_price",
+      "label": "Show compare price",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_discount",
+      "label": "Show discount",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_offer_badge",
+      "label": "Show offer badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_badge_text",
+      "label": "Offer badge text",
+      "default": "FREE SHIPPING + 3% PREPAID BONUS"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button background",
+      "default": "#8B0000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#E6E6E6"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size desktop",
+      "min": 24,
+      "max": 88,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "heading_size_tablet",
+      "label": "Heading size tablet",
+      "min": 20,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size mobile",
+      "min": 20,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Card gap",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Card padding",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Image height",
+      "min": 150,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 280
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product carousel"
+    }
+  ]
+}
 {% endschema %}
