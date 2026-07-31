@@ -1,6 +1,839 @@
+{% doc %}
+  @prompt
+    Create a new Shopify OS 2.0 section called "Benefits Marquee" inspired by the attached reference, but replace company logos with benefit items. Each item should contain an icon uploaded through the Shopify Theme Editor (Image Picker) and a title using the Anton font. Do not hardcode icons or text.
+    
+    The section should have a full-width dark crimson red background (#8B0000) with white icons and white text. Create a smooth, seamless infinite marquee that scrolls from right to left with no jump or flicker. Duplicate the items internally to create a true infinite loop. Add an option to pause the animation on hover and allow animation speed and direction to be changed.
+    
+    Each benefit should be a Shopify block with:
+    
+    Icon (Image Picker)
+    Benefit Title
+    Optional Link
+    Open in New Tab
+    
+    Expose all settings in the Shopify Theme Editor, including:
+    
+    Background color
+    Text color
+    Icon size (Desktop/Tablet/Mobile)
+    Font size (Desktop/Tablet/Mobile)
+    Item spacing
+    Icon-to-text spacing
+    Section padding
+    Animation speed
+    Animation direction
+    Pause on hover
+    Desktop/Tablet/Mobile visibility
+    
+    The section must be fully responsive, Shopify OS 2.0 compatible, use separate CSS and JavaScript files, and follow Shopify best practices with clean, production-ready code. The final design should be minimal, premium, and optimized for performance.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+  .ai-benefits-marquee-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding_desktop }}px 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-benefits-marquee-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_tablet }}px 0;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-benefits-marquee-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_mobile }}px 0;
+    }
+  }
+
+  .ai-benefits-marquee-{{ ai_gen_id }}--hide-desktop {
+    display: none;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-benefits-marquee-{{ ai_gen_id }}--hide-tablet {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-benefits-marquee-{{ ai_gen_id }}--hide-mobile {
+      display: none;
+    }
+  }
+
+  .ai-benefits-marquee__track-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.item_spacing_desktop }}px;
+    animation: ai-benefits-marquee-scroll-{{ ai_gen_id }} {{ block.settings.animation_speed }}s linear infinite;
+    animation-direction: {% if block.settings.animation_direction == 'left' %}normal{% else %}reverse{% endif %};
+    will-change: transform;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-benefits-marquee__track-{{ ai_gen_id }} {
+      gap: {{ block.settings.item_spacing_tablet }}px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-benefits-marquee__track-{{ ai_gen_id }} {
+      gap: {{ block.settings.item_spacing_mobile }}px;
+    }
+  }
+
+  {% if block.settings.pause_on_hover %}
+    .ai-benefits-marquee-{{ ai_gen_id }}:hover .ai-benefits-marquee__track-{{ ai_gen_id }} {
+      animation-play-state: paused;
+    }
+  {% endif %}
+
+  @keyframes ai-benefits-marquee-scroll-{{ ai_gen_id }} {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .ai-benefits-marquee__item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: {{ block.settings.icon_text_spacing_desktop }}px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-benefits-marquee__item-{{ ai_gen_id }} {
+      gap: {{ block.settings.icon_text_spacing_tablet }}px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-benefits-marquee__item-{{ ai_gen_id }} {
+      gap: {{ block.settings.icon_text_spacing_mobile }}px;
+    }
+  }
+
+  .ai-benefits-marquee__item-link-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: inherit;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-benefits-marquee__item-link-{{ ai_gen_id }}:hover {
+    opacity: 0.8;
+  }
+
+  .ai-benefits-marquee__icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size_desktop }}px;
+    height: {{ block.settings.icon_size_desktop }}px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-benefits-marquee__icon-{{ ai_gen_id }} {
+      width: {{ block.settings.icon_size_tablet }}px;
+      height: {{ block.settings.icon_size_tablet }}px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-benefits-marquee__icon-{{ ai_gen_id }} {
+      width: {{ block.settings.icon_size_mobile }}px;
+      height: {{ block.settings.icon_size_mobile }}px;
+    }
+  }
+
+  .ai-benefits-marquee__icon-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .ai-benefits-marquee__icon-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: {{ block.settings.text_color }};
+    border-radius: 4px;
+    opacity: 0.3;
+  }
+
+  .ai-benefits-marquee__title-{{ ai_gen_id }} {
+    font-family: 'Anton', sans-serif;
+    font-size: {{ block.settings.font_size_desktop }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-benefits-marquee__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.font_size_tablet }}px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-benefits-marquee__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.font_size_mobile }}px;
+    }
+  }
+
+  .ai-benefits-marquee__empty-state-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 40px 20px;
+    color: {{ block.settings.text_color }};
+    font-size: 14px;
+    opacity: 0.7;
+  }
+{% endstyle %}
+
+<benefits-marquee-{{ ai_gen_id }}
+  class="ai-benefits-marquee-{{ ai_gen_id }}
+    {% unless block.settings.show_on_desktop %}ai-benefits-marquee-{{ ai_gen_id }}--hide-desktop{% endunless %}
+    {% unless block.settings.show_on_tablet %}ai-benefits-marquee-{{ ai_gen_id }}--hide-tablet{% endunless %}
+    {% unless block.settings.show_on_mobile %}ai-benefits-marquee-{{ ai_gen_id }}--hide-mobile{% endunless %}"
+  {{ block.shopify_attributes }}
+>
+  {% liquid
+    assign has_items = false
+    for i in (1..8)
+      assign icon_key = 'icon_' | append: i
+      assign title_key = 'title_' | append: i
+      if block.settings[icon_key] != blank or block.settings[title_key] != blank
+        assign has_items = true
+        break
+      endif
+    endfor
+  %}
+
+  {% if has_items %}
+    <div class="ai-benefits-marquee__track-{{ ai_gen_id }}">
+      {% for i in (1..8) %}
+        {% liquid
+          assign icon_key = 'icon_' | append: i
+          assign title_key = 'title_' | append: i
+          assign link_key = 'link_' | append: i
+          assign new_tab_key = 'open_in_new_tab_' | append: i
+
+          assign icon = block.settings[icon_key]
+          assign title = block.settings[title_key]
+          assign link = block.settings[link_key]
+          assign new_tab = block.settings[new_tab_key]
+        %}
+
+        {% if icon != blank or title != blank %}
+          <div class="ai-benefits-marquee__item-{{ ai_gen_id }}">
+            {% if link != blank %}
+              <a
+                href="{{ link }}"
+                class="ai-benefits-marquee__item-link-{{ ai_gen_id }}"
+                {% if new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+              >
+                <div class="ai-benefits-marquee__icon-{{ ai_gen_id }}">
+                  {% if icon != blank %}
+                    <img
+                      src="{{ icon | image_url: width: 200 }}"
+                      alt="{{ title | escape }}"
+                      loading="lazy"
+                      width="200"
+                      height="200"
+                    >
+                  {% else %}
+                    <div class="ai-benefits-marquee__icon-placeholder-{{ ai_gen_id }}"></div>
+                  {% endif %}
+                </div>
+                {% if title != blank %}
+                  <h3 class="ai-benefits-marquee__title-{{ ai_gen_id }}">{{ title }}</h3>
+                {% endif %}
+              </a>
+            {% else %}
+              <div class="ai-benefits-marquee__icon-{{ ai_gen_id }}">
+                {% if icon != blank %}
+                  <img
+                    src="{{ icon | image_url: width: 200 }}"
+                    alt="{{ title | escape }}"
+                    loading="lazy"
+                    width="200"
+                    height="200"
+                  >
+                {% else %}
+                  <div class="ai-benefits-marquee__icon-placeholder-{{ ai_gen_id }}"></div>
+                {% endif %}
+              </div>
+              {% if title != blank %}
+                <h3 class="ai-benefits-marquee__title-{{ ai_gen_id }}">{{ title }}</h3>
+              {% endif %}
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {% for i in (1..8) %}
+        {% liquid
+          assign icon_key = 'icon_' | append: i
+          assign title_key = 'title_' | append: i
+          assign link_key = 'link_' | append: i
+          assign new_tab_key = 'open_in_new_tab_' | append: i
+
+          assign icon = block.settings[icon_key]
+          assign title = block.settings[title_key]
+          assign link = block.settings[link_key]
+          assign new_tab = block.settings[new_tab_key]
+        %}
+
+        {% if icon != blank or title != blank %}
+          <div class="ai-benefits-marquee__item-{{ ai_gen_id }}" aria-hidden="true">
+            {% if link != blank %}
+              <a
+                href="{{ link }}"
+                class="ai-benefits-marquee__item-link-{{ ai_gen_id }}"
+                {% if new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+                tabindex="-1"
+              >
+                <div class="ai-benefits-marquee__icon-{{ ai_gen_id }}">
+                  {% if icon != blank %}
+                    <img
+                      src="{{ icon | image_url: width: 200 }}"
+                      alt="{{ title | escape }}"
+                      loading="lazy"
+                      width="200"
+                      height="200"
+                    >
+                  {% else %}
+                    <div class="ai-benefits-marquee__icon-placeholder-{{ ai_gen_id }}"></div>
+                  {% endif %}
+                </div>
+                {% if title != blank %}
+                  <h3 class="ai-benefits-marquee__title-{{ ai_gen_id }}">{{ title }}</h3>
+                {% endif %}
+              </a>
+            {% else %}
+              <div class="ai-benefits-marquee__icon-{{ ai_gen_id }}">
+                {% if icon != blank %}
+                  <img
+                    src="{{ icon | image_url: width: 200 }}"
+                    alt="{{ title | escape }}"
+                    loading="lazy"
+                    width="200"
+                    height="200"
+                  >
+                {% else %}
+                  <div class="ai-benefits-marquee__icon-placeholder-{{ ai_gen_id }}"></div>
+                {% endif %}
+              </div>
+              {% if title != blank %}
+                <h3 class="ai-benefits-marquee__title-{{ ai_gen_id }}">{{ title }}</h3>
+              {% endif %}
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="ai-benefits-marquee__empty-state-{{ ai_gen_id }}">
+      Add benefit items to create your marquee
+    </div>
+  {% endif %}
+</benefits-marquee-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class BenefitsMarquee{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.adjustAnimationSpeed();
+      }
+
+      adjustAnimationSpeed() {
+        const track = this.querySelector('.ai-benefits-marquee__track-{{ ai_gen_id }}');
+        if (!track) return;
+
+        const trackWidth = track.scrollWidth / 2;
+        const speed = {{ block.settings.animation_speed }};
+        const pixelsPerSecond = trackWidth / speed;
+
+        track.style.setProperty('--marquee-speed', `${speed}s`);
+      }
+    }
+
+    customElements.define('benefits-marquee-{{ ai_gen_id }}', BenefitsMarquee{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Benefits marquee",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#8B0000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text and icons",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Benefit 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_1",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "title_1",
+      "label": "Title",
+      "default": "Free Shipping"
+    },
+    {
+      "type": "url",
+      "id": "link_1",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab_1",
+      "label": "Open in new tab",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Benefit 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_2",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "Title",
+      "default": "100% Natural"
+    },
+    {
+      "type": "url",
+      "id": "link_2",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab_2",
+      "label": "Open in new tab",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Benefit 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_3",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "title_3",
+      "label": "Title",
+      "default": "No Maida"
+    },
+    {
+      "type": "url",
+      "id": "link_3",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab_3",
+      "label": "Open in new tab",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Benefit 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_4",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "title_4",
+      "label": "Title",
+      "default": "High Protein"
+    },
+    {
+      "type": "url",
+      "id": "link_4",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab_4",
+      "label": "Open in new tab",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Benefit 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_5",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "title_5",
+      "label": "Title",
+      "default": "Made in India"
+    },
+    {
+      "type": "url",
+      "id": "link_5",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab_5",
+      "label": "Open in new tab",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Benefit 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_6",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "title_6",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "link_6",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab_6",
+      "label": "Open in new tab",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Benefit 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_7",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "title_7",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "link_7",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab_7",
+      "label": "Open in new tab",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Benefit 8"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_8",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "title_8",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "link_8",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab_8",
+      "label": "Open in new tab",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Icon size"
+    },
+    {
+      "type": "range",
+      "id": "icon_size_desktop",
+      "label": "Desktop",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "icon_size_tablet",
+      "label": "Tablet",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 35
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "label": "Mobile",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Font size"
+    },
+    {
+      "type": "range",
+      "id": "font_size_desktop",
+      "label": "Desktop",
+      "min": 12,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "font_size_tablet",
+      "label": "Tablet",
+      "min": 12,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "font_size_mobile",
+      "label": "Mobile",
+      "min": 12,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "item_spacing_desktop",
+      "label": "Item spacing (Desktop)",
+      "min": 20,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "item_spacing_tablet",
+      "label": "Item spacing (Tablet)",
+      "min": 20,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "item_spacing_mobile",
+      "label": "Item spacing (Mobile)",
+      "min": 20,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "icon_text_spacing_desktop",
+      "label": "Icon to text (Desktop)",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "icon_text_spacing_tablet",
+      "label": "Icon to text (Tablet)",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "icon_text_spacing_mobile",
+      "label": "Icon to text (Mobile)",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "section_padding_desktop",
+      "label": "Section padding (Desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_tablet",
+      "label": "Section padding (Tablet)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "section_padding_mobile",
+      "label": "Section padding (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "label": "Speed",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "s",
+      "default": 30,
+      "info": "Lower values = faster animation"
+    },
+    {
+      "type": "select",
+      "id": "animation_direction",
+      "label": "Direction",
+      "options": [
+        {
+          "value": "left",
+          "label": "Right to left"
+        },
+        {
+          "value": "right",
+          "label": "Left to right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_desktop",
+      "label": "Show on desktop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_tablet",
+      "label": "Show on tablet",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "label": "Show on mobile",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefits marquee"
+    }
+  ]
+}
 {% endschema %}
